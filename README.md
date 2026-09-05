@@ -1,6 +1,4 @@
-# PLLDN
-
-**Programming Language & Licensing Decision Navigator**
+# PLLDN - Programming Language & Licensing Decision Navigator
 
 A faceted decision navigator for programming languages, software licenses and architecture constraints.
 
