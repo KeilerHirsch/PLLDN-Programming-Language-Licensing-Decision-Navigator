@@ -3,8 +3,8 @@
 Public identity: PLLDN — Programming Language & Licensing Decision Navigator.
 
 Read docs/architecture.md and docs/verification.md before changes.
-Stage 0 includes contracts and verification tooling only.
-Do not add an engine, frontend, parser, backend or authentication without a scoped decision.
+Stage 0 established contracts and verification tooling; Stage 1 adds the deterministic decision/facet core.
+Do not add a frontend, free-text parser, backend or authentication without a scoped decision.
 
 Use schemas/ as the contract authority. Do not maintain duplicate domain interfaces.
 Keep all technical documentation, comments and messages in English.

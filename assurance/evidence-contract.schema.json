@@ -15,7 +15,7 @@
       "const": "0.1"
     },
     "scope": {
-      "const": "stage-0-foundation"
+      "const": "stage-1-decision-core"
     },
     "subject_sha256": {
       "type": "string",

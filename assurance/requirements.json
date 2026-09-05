@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "scope": "stage-0-foundation",
+  "scope": "stage-1-decision-core",
   "requirements": [
     {
       "id": "PLLDN-C01",
@@ -21,7 +21,44 @@
       "id": "PLLDN-C04",
       "invariant": "Candidate content cannot approve itself",
       "tests": ["tests/trust-boundary.test.ts"]
+    },
+    {
+      "id": "PLLDN-C05",
+      "invariant": "Hard constraints and conflicts are resolved before preference ranking",
+      "tests": [
+        "tests/decision-selection.test.ts",
+        "tests/decision-rules.test.ts"
+      ]
+    },
+    {
+      "id": "PLLDN-C06",
+      "invariant": "Unknown and inapplicable conditional evidence never become fabricated negative facts",
+      "tests": [
+        "tests/decision-selection.test.ts",
+        "tests/decision-invariants.test.ts"
+      ]
+    },
+    {
+      "id": "PLLDN-C07",
+      "invariant": "Decision conditions consume factual state with component and project scope isolation",
+      "tests": [
+        "tests/decision-invariants.test.ts",
+        "tests/decision-effects.test.ts"
+      ]
+    },
+    {
+      "id": "PLLDN-C08",
+      "invariant": "Facet previews reuse the deterministic decision core without mutating project facts",
+      "tests": ["tests/facets.test.ts"]
+    },
+    {
+      "id": "PLLDN-C09",
+      "invariant": "Supersession cannot silently rewrite the active decision surface",
+      "tests": [
+        "tests/decision-rules.test.ts",
+        "tests/decision-invariants.test.ts"
+      ]
     }
   ],
-  "release_scope": "No beta recommendation coverage is claimed"
+  "release_scope": "No v0.0.1 Beta candidate-knowledge coverage is claimed"
 }

@@ -31,7 +31,20 @@ export function claim(): Record<string, unknown> {
     supersedes: [],
   };
 }
-export function project() {
+interface MutableFactFixture extends Record<string, unknown> {
+  fact_id: string;
+  dimension_id: string;
+  scope: { kind: string; component_id?: string };
+  kind: string;
+  lifecycle: string;
+  state: string;
+  value?: unknown;
+  strength?: string;
+  operator?: string;
+}
+export function project(): Record<string, unknown> & {
+  facts: MutableFactFixture[];
+} {
   return {
     schema_version: "0.1",
     project_id: "project.fixture",

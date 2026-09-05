@@ -10,9 +10,11 @@ Unknown and not-applicable assertions cannot carry a value; conditional
 assertions require conditions. These are representation checks, not inference.
 
 Project lifecycle, fact kind and constraint strength are separate dimensions.
-Global and component facts do not imply an automatic precedence rule.
-Component and boundary IDs must resolve. License identifiers name exact supported
-variants; listing an identifier does not assert license compatibility.
+Constraints may carry explicit `EQ`, `NEQ`, `IN`, `GTE` or `LTE` operators;
+plain facts may not. Operator/value types are checked against their dimension.
+Global and component facts do not imply an automatic precedence rule. Component
+and boundary IDs must resolve. License identifiers name exact supported variants;
+listing an identifier does not assert license compatibility.
 
 Entity scopes bound versions and targets. Relations carry separate from_scope
 and to_scope, each checked against its own endpoint. Evidence references identify
@@ -22,7 +24,9 @@ Promotion must assess that evidence independently.
 Volatile evidence requires an expiry. Evaluation time must be an explicit
 timezone-bearing date-time; future evidence and expired assertions fail.
 Replaying historical decisions requires their original evaluation time, schema
-version and tooling, rather than silently substituting today's context.
+version and tooling, rather than silently substituting today's context. Decision
+traces may separately name unresolved fact IDs and unresolved dimension IDs so a
+missing fact is not fabricated merely to explain an `ASK` result.
 
 Canonicalization is project-specific, not an RFC 8785 implementation: object keys
 use JavaScript string ordering, arrays retain order, and output is UTF-8 with LF.
