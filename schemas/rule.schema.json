@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://plldn.invalid/schemas/rule.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "rule_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+    },
+    "effect": {
+      "enum": [
+        "EXCLUDE",
+        "REQUIRE",
+        "PREFER",
+        "PENALIZE",
+        "WARN",
+        "ASK",
+        "NO_EFFECT"
+      ]
+    },
+    "applies_to": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "browser-ui",
+          "backend-api",
+          "worker",
+          "cli",
+          "library",
+          "datastore",
+          "desktop",
+          "mobile",
+          "firmware",
+          "trusted-core"
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "dimension_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+          },
+          "operator": {
+            "enum": ["EQ", "NEQ", "IN", "GTE", "LTE"]
+          },
+          "value": {
+            "$ref": "common.schema.json#/$defs/value"
+          }
+        },
+        "required": ["dimension_id", "operator", "value"],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "claim_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+      },
+      "minItems": 1,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "relation_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "risk": {
+      "enum": ["low", "medium", "high", "very-high"]
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+      },
+      "minItems": 1,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "verified_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "world_freshness_class": {
+      "enum": ["normative", "version-bound", "volatile"]
+    },
+    "review_status": {
+      "enum": [
+        "Reviewed",
+        "Partial",
+        "Preview",
+        "Review due",
+        "Unknown",
+        "Unsupported"
+      ]
+    },
+    "test_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "supersedes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "valid_until": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "schema_version",
+    "rule_id",
+    "effect",
+    "applies_to",
+    "conditions",
+    "claim_ids",
+    "relation_ids",
+    "risk",
+    "source_ids",
+    "verified_at",
+    "world_freshness_class",
+    "review_status",
+    "test_refs",
+    "supersedes"
+  ],
+  "additionalProperties": false
+}

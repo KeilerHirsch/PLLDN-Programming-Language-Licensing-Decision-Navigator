@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://plldn.invalid/schemas/dimension.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "dimension_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+    },
+    "canonical_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "value_type": {
+      "enum": ["boolean", "integer", "string", "enum", "set", "quantity"]
+    },
+    "category": {
+      "enum": [
+        "product-form",
+        "platform",
+        "deployment",
+        "distribution",
+        "security-privacy",
+        "safety-regulatory",
+        "performance",
+        "availability-concurrency",
+        "data-persistence",
+        "integration",
+        "existing-technology",
+        "license-legal",
+        "team-maintenance",
+        "assurance",
+        "artifact-class",
+        "exclusion"
+      ]
+    },
+    "unit": {
+      "type": ["string", "null"]
+    },
+    "allowed_values": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "dimension_id",
+    "canonical_name",
+    "value_type",
+    "category",
+    "unit",
+    "allowed_values"
+  ],
+  "additionalProperties": false
+}

@@ -8,11 +8,8 @@
     "exactOptionalPropertyTypes": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "types": ["node"]
   },
-  "include": [
-    "src/**/*.ts",
-    "tests/**/*.ts",
-    "tools/**/*.ts"
-  ]
+  "include": ["src/**/*.ts", "tests/**/*.ts", "tools/**/*.ts"]
 }

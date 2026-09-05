@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://plldn.invalid/schemas/decision-trace.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "analysis_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+    },
+    "evaluated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "project_facts_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "snapshot_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "knowledge_snapshot": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+    },
+    "rules_snapshot": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+    },
+    "state": {
+      "enum": [
+        "RECOMMEND",
+        "ALTERNATIVES",
+        "NEEDS_ONE_FACT",
+        "INSUFFICIENT_INFORMATION",
+        "CONFLICT",
+        "UNSUPPORTED"
+      ]
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "component_id": {
+            "type": ["string", "null"]
+          },
+          "candidate_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+            },
+            "minItems": 0,
+            "maxItems": 10000,
+            "uniqueItems": true
+          },
+          "rule_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+            },
+            "minItems": 0,
+            "maxItems": 10000,
+            "uniqueItems": true
+          },
+          "claim_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+            },
+            "minItems": 0,
+            "maxItems": 10000,
+            "uniqueItems": true
+          },
+          "relation_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+            },
+            "minItems": 0,
+            "maxItems": 10000,
+            "uniqueItems": true
+          },
+          "source_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+            },
+            "minItems": 0,
+            "maxItems": 10000,
+            "uniqueItems": true
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "component_id",
+          "candidate_ids",
+          "rule_ids",
+          "claim_ids",
+          "relation_ids",
+          "source_ids",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "unresolved_fact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "tie_breaker_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "analysis_id",
+    "evaluated_at",
+    "project_facts_sha256",
+    "snapshot_sha256",
+    "knowledge_snapshot",
+    "rules_snapshot",
+    "state",
+    "results",
+    "unresolved_fact_ids",
+    "tie_breaker_ids"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://plldn.invalid/schemas/project-facts.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "project_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "component_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+          },
+          "form": {
+            "enum": [
+              "browser-ui",
+              "backend-api",
+              "worker",
+              "cli",
+              "library",
+              "datastore",
+              "desktop",
+              "mobile",
+              "firmware",
+              "trusted-core"
+            ]
+          }
+        },
+        "required": ["component_id", "form"],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fact_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+          },
+          "dimension_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+          },
+          "scope": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "global"
+                  }
+                },
+                "required": ["kind"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "const": "component"
+                  },
+                  "component_id": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+                  }
+                },
+                "required": ["kind", "component_id"],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "kind": {
+            "enum": ["fact", "constraint"]
+          },
+          "lifecycle": {
+            "enum": [
+              "current",
+              "target",
+              "future",
+              "optional",
+              "rejected",
+              "unknown"
+            ]
+          },
+          "state": {
+            "enum": [
+              "TRUE",
+              "FALSE",
+              "CONDITIONAL",
+              "UNKNOWN",
+              "NOT_APPLICABLE"
+            ]
+          },
+          "value": {
+            "$ref": "common.schema.json#/$defs/value"
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dimension_id": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+                },
+                "operator": {
+                  "enum": ["EQ", "NEQ", "IN", "GTE", "LTE"]
+                },
+                "value": {
+                  "$ref": "common.schema.json#/$defs/value"
+                }
+              },
+              "required": ["dimension_id", "operator", "value"],
+              "additionalProperties": false
+            },
+            "minItems": 0,
+            "maxItems": 10000,
+            "uniqueItems": true
+          },
+          "strength": {
+            "enum": ["MUST", "PREFER", "NEUTRAL", "AVOID", "FORBIDDEN"]
+          }
+        },
+        "required": [
+          "fact_id",
+          "dimension_id",
+          "scope",
+          "kind",
+          "lifecycle",
+          "state"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "enum": ["UNKNOWN", "NOT_APPLICABLE"]
+                }
+              },
+              "required": ["state"]
+            },
+            "then": {
+              "not": {
+                "required": ["value"],
+                "properties": {
+                  "value": {}
+                }
+              }
+            },
+            "else": {
+              "required": ["value"],
+              "properties": {
+                "value": {}
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "state": {
+                  "const": "CONDITIONAL"
+                }
+              },
+              "required": ["state"]
+            },
+            "then": {
+              "required": ["conditions"],
+              "properties": {
+                "conditions": {
+                  "minItems": 1,
+                  "type": "array"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "constraint"
+                }
+              },
+              "required": ["kind"]
+            },
+            "then": {
+              "required": ["strength"],
+              "properties": {
+                "strength": {}
+              }
+            },
+            "else": {
+              "not": {
+                "required": ["strength"],
+                "properties": {
+                  "strength": {}
+                }
+              }
+            }
+          }
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "boundaries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "boundary_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+          },
+          "from_component": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+          },
+          "to_component": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+          },
+          "boundary_type": {
+            "enum": [
+              "native-abi-ffi",
+              "process",
+              "network-api",
+              "trust-security",
+              "persistence-schema",
+              "deployment",
+              "ownership-maintenance"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          }
+        },
+        "required": [
+          "boundary_id",
+          "from_component",
+          "to_component",
+          "boundary_type",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "project_id",
+    "components",
+    "facts",
+    "boundaries"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://plldn.invalid/schemas/entity.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "entity_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+    },
+    "entity_type": {
+      "enum": [
+        "language",
+        "runtime",
+        "platform",
+        "license",
+        "artifact-class",
+        "ecosystem"
+      ]
+    },
+    "canonical_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2048
+          },
+          "ambiguity": {
+            "enum": ["unambiguous", "context-required"]
+          },
+          "context": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 2048
+            },
+            "minItems": 0,
+            "maxItems": 10000,
+            "uniqueItems": true
+          }
+        },
+        "required": ["text", "ambiguity", "context"],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "version_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2048
+      },
+      "minItems": 1,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "target_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+      },
+      "minItems": 1,
+      "maxItems": 10000,
+      "uniqueItems": true
+    },
+    "license_id": {
+      "enum": [
+        "EUPL-1.2",
+        "MIT",
+        "Apache-2.0",
+        "BSD-3-Clause",
+        "MPL-2.0",
+        "GPL-2.0-only",
+        "GPL-2.0-or-later",
+        "GPL-3.0-only",
+        "GPL-3.0-or-later",
+        "LGPL-3.0-only",
+        "LGPL-3.0-or-later",
+        "AGPL-3.0-only",
+        "AGPL-3.0-or-later",
+        "0BSD",
+        "CC0-1.0"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "entity_id",
+    "entity_type",
+    "canonical_name",
+    "aliases",
+    "version_scope",
+    "target_scope"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "entity_type": {
+            "const": "license"
+          }
+        },
+        "required": ["entity_type"]
+      },
+      "then": {
+        "required": ["license_id"],
+        "properties": {
+          "license_id": {}
+        }
+      },
+      "else": {
+        "not": {
+          "required": ["license_id"],
+          "properties": {
+            "license_id": {}
+          }
+        }
+      }
+    }
+  ]
+}

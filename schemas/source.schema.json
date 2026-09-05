@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://plldn.invalid/schemas/source.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+    },
+    "source_class": {
+      "enum": [
+        "normative",
+        "official-documentation",
+        "reproducible-test",
+        "peer-reviewed",
+        "community"
+      ]
+    },
+    "reference": {
+      "type": "string",
+      "format": "uri"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2048
+    },
+    "retrieved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "content_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  },
+  "required": [
+    "schema_version",
+    "source_id",
+    "source_class",
+    "reference",
+    "title",
+    "retrieved_at",
+    "content_sha256"
+  ],
+  "additionalProperties": false
+}
