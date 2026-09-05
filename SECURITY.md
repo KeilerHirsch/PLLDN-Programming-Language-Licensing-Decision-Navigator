@@ -3,7 +3,7 @@
 Stage 0 has no supported application release. Security fixes target the main branch.
 
 Report vulnerabilities through GitHub's private vulnerability reporting:
-https://github.com/KeilerHirsch/PLLDN/security/advisories/new
+https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/security/advisories/new
 
 Do not disclose secrets or an unpatched vulnerability in a public issue.
 If the private form is unavailable, wait for a private reporting channel to be restored.
