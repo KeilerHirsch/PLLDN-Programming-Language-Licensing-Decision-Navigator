@@ -1,0 +1,12 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "language.rust",
+    "entity_type": "language",
+    "canonical_name": "Rust",
+    "aliases": [],
+    "version_scope": ["1.98.1"],
+    "target_scope": ["general"]
+  }
+}

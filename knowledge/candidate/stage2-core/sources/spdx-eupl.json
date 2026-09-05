@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.spdx-eupl",
+    "source_class": "normative",
+    "reference": "https://spdx.org/licenses/EUPL-1.2",
+    "title": "European Union Public License 1.2 — SPDX",
+    "retrieved_at": "2026-09-05T20:50:00Z",
+    "content_sha256": "2daa7f4637a9ba8b64d5a13946b8527057c06afe23a868bf8b402c01031cdabf"
+  }
+}

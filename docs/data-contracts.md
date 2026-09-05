@@ -19,12 +19,16 @@ listing an identifier does not assert license compatibility.
 Entity scopes bound versions and targets. Relations carry separate from_scope
 and to_scope, each checked against its own endpoint. Evidence references identify
 sources and tests but do not prove that a source is accurate or a test meaningful.
-Promotion must assess that evidence independently.
+Candidate assertions remain non-Reviewed. A separate `review` record binds human
+approval to the exact candidate manifest and supplies non-empty regression references.
+Promotion materializes a distinct immutable snapshot in which the approved assertions
+are `Reviewed` and the review record is retained. Runtime acceptance still requires
+a trusted manifest digest supplied outside the snapshot itself.
 
 Volatile evidence requires an expiry. Evaluation time must be an explicit
 timezone-bearing date-time; future evidence and expired assertions fail.
 Replaying historical decisions requires their original evaluation time, schema
-version and tooling, rather than silently substituting today's context. Decision
+version and tooling rather than silently substituting today's context. Decision
 traces may separately name unresolved fact IDs and unresolved dimension IDs so a
 missing fact is not fabricated merely to explain an `ASK` result.
 
@@ -33,4 +37,5 @@ use JavaScript string ordering, arrays retain order, and output is UTF-8 with LF
 Unsafe keys, duplicate decoded JSON keys, non-finite or unsafe numbers, unpaired
 surrogates and unsupported JavaScript values fail. Parsing is bounded to 1 MiB
 and depth 64. Schema digest and exact file hashes bind snapshot interpretation.
-Breaking contract changes require an explicit version and migration decision.
+Immutable reviewed snapshot bytes are excluded from formatting. Breaking contract
+changes require an explicit version and migration decision.

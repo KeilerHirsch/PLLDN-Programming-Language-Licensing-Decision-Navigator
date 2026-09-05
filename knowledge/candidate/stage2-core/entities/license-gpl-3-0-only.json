@@ -1,0 +1,13 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "license.gpl-3.0-only",
+    "entity_type": "license",
+    "canonical_name": "GNU General Public License v3.0 only",
+    "aliases": [],
+    "version_scope": ["GPL-3.0-only"],
+    "target_scope": ["general"],
+    "license_id": "GPL-3.0-only"
+  }
+}

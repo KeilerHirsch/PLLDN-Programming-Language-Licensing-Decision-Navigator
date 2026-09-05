@@ -1,0 +1,13 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "license.eupl-1.2",
+    "entity_type": "license",
+    "canonical_name": "European Union Public License 1.2",
+    "aliases": [],
+    "version_scope": ["EUPL-1.2"],
+    "target_scope": ["general"],
+    "license_id": "EUPL-1.2"
+  }
+}

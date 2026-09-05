@@ -1,0 +1,26 @@
+{
+  "kind": "claim",
+  "record": {
+    "schema_version": "0.1",
+    "claim_id": "claim.python-current-version",
+    "entity_id": "language.python",
+    "dimension_id": "dimension.current-stable-version",
+    "value": {
+      "type": "string",
+      "value": "3.14.7"
+    },
+    "state": "TRUE",
+    "conditions": [],
+    "scope": {
+      "versions": ["3.14.7"],
+      "targets": ["general"]
+    },
+    "source_ids": ["source.python-release", "source.python-downloads"],
+    "verified_at": "2026-09-05T21:31:00Z",
+    "world_freshness_class": "volatile",
+    "review_status": "Partial",
+    "test_refs": [],
+    "supersedes": [],
+    "valid_until": "2026-09-06T20:50:00Z"
+  }
+}

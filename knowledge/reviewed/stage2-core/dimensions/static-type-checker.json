@@ -1,0 +1,1 @@
+{"kind":"dimension","record":{"allowed_values":[],"canonical_name":"Static type checker","category":"assurance","dimension_id":"dimension.static-type-checker","schema_version":"0.1","unit":null,"value_type":"boolean"}}

@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.typescript-handbook",
+    "source_class": "official-documentation",
+    "reference": "https://www.typescriptlang.org/docs/handbook/typescript-from-scratch",
+    "title": "TypeScript for the New Programmer",
+    "retrieved_at": "2026-09-05T20:50:00Z",
+    "content_sha256": "3dde384db42e0ab2ff50e32b785a8b89f42725ff928917fe7433e5c162b0c3f2"
+  }
+}

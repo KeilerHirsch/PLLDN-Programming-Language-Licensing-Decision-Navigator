@@ -1,0 +1,1 @@
+{"kind":"entity","record":{"aliases":[{"ambiguity":"context-required","context":["typescript","javascript","programming"],"text":"TS"}],"canonical_name":"TypeScript","entity_id":"language.typescript","entity_type":"language","schema_version":"0.1","target_scope":["general"],"version_scope":["7.0"]}}

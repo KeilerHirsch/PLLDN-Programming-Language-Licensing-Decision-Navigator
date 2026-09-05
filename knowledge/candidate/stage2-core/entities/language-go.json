@@ -1,0 +1,18 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "language.go",
+    "entity_type": "language",
+    "canonical_name": "Go",
+    "aliases": [
+      {
+        "text": "Golang",
+        "ambiguity": "unambiguous",
+        "context": []
+      }
+    ],
+    "version_scope": ["1.27.1"],
+    "target_scope": ["general"]
+  }
+}
