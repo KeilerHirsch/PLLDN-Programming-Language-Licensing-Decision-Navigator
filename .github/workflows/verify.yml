@@ -1,0 +1,46 @@
+name: Verify
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    name: Verify (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+      - run: npm install --global npm@11.12.1 --ignore-scripts
+      - run: npm ci --ignore-scripts
+      - run: npm run verify
+      - run: npm run evidence
+      - run: node tools/replay-fixture.ts
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: verification-${{ matrix.os }}
+          path: reports/
+          if-no-files-found: error
+          retention-days: 30
+  replay:
+    name: Cross-platform replay
+    needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          pattern: verification-*
+          path: evidence
+      - name: Compare the same synthetic snapshot bytes
+        run: cmp evidence/verification-ubuntu-24.04/fixture-snapshot.json evidence/verification-windows-2025/fixture-snapshot.json

@@ -1,0 +1,27 @@
+{
+  "schema_version": "0.1",
+  "scope": "stage-0-foundation",
+  "requirements": [
+    {
+      "id": "PLLDN-C01",
+      "invariant": "Explicit states and strict typed contracts",
+      "tests": ["tests/contracts.test.ts"]
+    },
+    {
+      "id": "PLLDN-C02",
+      "invariant": "Scoped references and evidence freshness",
+      "tests": ["tests/references.test.ts"]
+    },
+    {
+      "id": "PLLDN-C03",
+      "invariant": "Deterministic exact-byte snapshot binding",
+      "tests": ["tests/snapshots.test.ts"]
+    },
+    {
+      "id": "PLLDN-C04",
+      "invariant": "Candidate content cannot approve itself",
+      "tests": ["tests/trust-boundary.test.ts"]
+    }
+  ],
+  "release_scope": "No beta recommendation coverage is claimed"
+}

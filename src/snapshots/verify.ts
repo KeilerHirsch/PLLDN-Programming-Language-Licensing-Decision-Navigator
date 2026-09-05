@@ -32,10 +32,14 @@ export async function verifySnapshot(
     throw new Error("Snapshot file set mismatch");
   const documents: Document[] = [];
   for (const ref of manifest.documents) {
-    const content = files[ref.path]!;
+    const content = files[ref.path];
+    if (typeof content !== "string")
+      throw new Error("Snapshot document missing");
     if ((await sha256(content)) !== ref.sha256)
       throw new Error("Snapshot document digest mismatch");
     const doc = parseDocument(content);
+    if (["project-facts", "decision-trace", "snapshot"].includes(doc.kind))
+      throw new Error("Non-knowledge snapshot document");
     if (
       ["claim", "relation", "rule"].includes(doc.kind) &&
       doc.record.review_status !== "Reviewed"

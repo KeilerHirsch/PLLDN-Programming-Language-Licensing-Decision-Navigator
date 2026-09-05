@@ -8,7 +8,9 @@ import { bundle, now, project } from "./fixtures.ts";
 test("synthetic graph resolves", () => validateReferences(bundle(), now));
 test("duplicate ID", () => {
   const b = bundle();
-  b.push(b[0]!);
+  const first = b[0];
+  assert(first);
+  b.push(first);
   assert.throws(() => validateReferences(b, now));
 });
 for (const [name, change] of Object.entries({
@@ -20,7 +22,9 @@ for (const [name, change] of Object.entries({
 })) {
   test(`reject graph: ${name}`, () => {
     const b = bundle();
-    Object.assign(b[3]!.record, change);
+    const record = b[3];
+    assert(record);
+    Object.assign(record.record, change);
     assert.throws(() => validateReferences(b, now));
   });
 }
@@ -31,7 +35,9 @@ test("component facts resolve", () =>
   ));
 test("component cannot escape project", () => {
   const p = project();
-  p.facts[0]!.scope.component_id = "component.missing";
+  const fact = p.facts[0];
+  assert(fact);
+  fact.scope.component_id = "component.missing";
   assert.throws(() =>
     validateReferences(
       [...bundle(), { kind: "project-facts", record: p }],

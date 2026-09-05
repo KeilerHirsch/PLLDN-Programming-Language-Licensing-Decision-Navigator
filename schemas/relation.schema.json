@@ -84,9 +84,6 @@
       "maxItems": 10000,
       "uniqueItems": true
     },
-    "scope": {
-      "$ref": "common.schema.json#/$defs/scope"
-    },
     "source_ids": {
       "type": "array",
       "items": {
@@ -137,6 +134,12 @@
     "valid_until": {
       "type": "string",
       "format": "date-time"
+    },
+    "from_scope": {
+      "$ref": "common.schema.json#/$defs/scope"
+    },
+    "to_scope": {
+      "$ref": "common.schema.json#/$defs/scope"
     }
   },
   "required": [
@@ -150,13 +153,14 @@
     "artifact_class",
     "state",
     "conditions",
-    "scope",
     "source_ids",
     "verified_at",
     "world_freshness_class",
     "review_status",
     "test_refs",
-    "supersedes"
+    "supersedes",
+    "from_scope",
+    "to_scope"
   ],
   "additionalProperties": false,
   "allOf": [

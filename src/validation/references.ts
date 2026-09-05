@@ -1,6 +1,10 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
-import { type Document, validateDocument } from "./documents.ts";
+import {
+  type Document,
+  evaluationTime,
+  validateDocument,
+} from "./documents.ts";
 import { asObject } from "./json.ts";
 
 const idFields: Record<string, string> = {
@@ -11,7 +15,6 @@ const idFields: Record<string, string> = {
   relation: "relation_id",
   rule: "rule_id",
   "project-facts": "project_id",
-  "decision-trace": "analysis_id",
 };
 function list(value: unknown): string[] {
   return value as string[];
@@ -30,8 +33,7 @@ export function validateReferences(
   documents: readonly Document[],
   at: string,
 ): void {
-  const now = Date.parse(at);
-  if (!Number.isFinite(now)) fail("Explicit valid evaluation time required");
+  const now = evaluationTime(at);
   const index = new Map<string, Document>();
   for (const doc of documents) {
     validateDocument(doc.kind, doc.record);
@@ -87,8 +89,19 @@ export function validateReferences(
         fail("Claim scope exceeds entity scope");
     }
     if (kind === "relation") {
-      requireRef(r.from_entity, "entity");
-      requireRef(r.to_entity, "entity");
+      for (const side of ["from", "to"]) {
+        const entity = requireRef(r[`${side}_entity`], "entity");
+        const scope = asObject(r[`${side}_scope`]);
+        if (
+          !list(scope.versions).every((x) =>
+            list(entity.version_scope).includes(x),
+          ) ||
+          !list(scope.targets).every((x) =>
+            list(entity.target_scope).includes(x),
+          )
+        )
+          fail("Relation scope exceeds endpoint scope");
+      }
       if (r.relation_type === "license-combination") {
         for (const id of [r.from_entity, r.to_entity])
           if (requireRef(id, "entity").entity_type !== "license")
@@ -120,6 +133,11 @@ function checkProject(
     if (seen.has(fact.fact_id)) fail("Duplicate fact ID");
     seen.add(fact.fact_id);
     typed(fact);
+    for (const condition of (fact.conditions ?? []) as Record<
+      string,
+      unknown
+    >[])
+      typed(condition);
     const scope = asObject(fact.scope);
     if (scope.kind === "component" && !ids.has(scope.component_id))
       fail("Unknown component scope");

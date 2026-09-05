@@ -26,8 +26,8 @@ test("same keys in separate objects are valid", () =>
     b: { x: 2 },
   }));
 test("input limits", () => {
-  assert.throws(() => parseStrictJson('"' + "x".repeat(1048577) + '"'));
-  assert.throws(() => parseStrictJson("[".repeat(65) + "0" + "]".repeat(65)));
+  assert.throws(() => parseStrictJson(`"${"x".repeat(1048577)}"`));
+  assert.throws(() => parseStrictJson(`${"[".repeat(65)}0${"]".repeat(65)}`));
 });
 test("UNKNOWN survives and cannot carry a value", () => {
   const c = claim();
@@ -63,7 +63,9 @@ test("reject unknown fields and coercion without mutation", () => {
 test("facts need no strength; constraints do", () => {
   validateDocument("project-facts", project());
   const p = project();
-  p.facts[0]!.kind = "constraint";
+  const fact = p.facts[0];
+  assert(fact);
+  fact.kind = "constraint";
   assert.throws(() => validateDocument("project-facts", p));
 });
 test("license identity retains only/or-later", () => {

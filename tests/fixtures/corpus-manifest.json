@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.1",
+  "data_class": "synthetic-test-only",
+  "suites": {
+    "contracts": {
+      "status": "implemented",
+      "files": [
+        "tests/contracts.test.ts",
+        "tests/references.test.ts",
+        "tests/review-regressions.test.ts"
+      ]
+    },
+    "snapshots": {
+      "status": "implemented",
+      "files": ["tests/snapshots.test.ts", "tests/trust-boundary.test.ts"]
+    },
+    "extraction": {
+      "status": "not-implemented",
+      "required_cases": [
+        "DE/EN",
+        "typos",
+        "aliases",
+        "negation",
+        "lifecycle",
+        "contradictions",
+        "noise",
+        "paraphrases",
+        "Go vs go live",
+        "C vs C drive",
+        "Java vs JavaScript",
+        ".NET vs C#",
+        "realtime",
+        "embedded",
+        "adversarial-near-match"
+      ]
+    },
+    "decision": {
+      "status": "not-implemented",
+      "required_cases": [
+        "hard-constraints",
+        "unknown",
+        "only-or-later",
+        "high-risk-triggers",
+        "unsupported",
+        "multi-component",
+        "rule-order",
+        "Pareto-alternatives"
+      ]
+    },
+    "e2e": {
+      "status": "not-implemented",
+      "required_cases": [
+        "filter-only",
+        "manual-text-equivalence",
+        "trace-replay"
+      ]
+    }
+  }
+}
