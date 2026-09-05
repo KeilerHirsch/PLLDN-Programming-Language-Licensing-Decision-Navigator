@@ -2,9 +2,10 @@
 
 A faceted decision navigator for programming languages, software licenses and architecture constraints.
 
-PLLDN is in Stage 0: repository foundations. It provides strict data contracts,
-reference validation and digest-bound snapshot checks. It does not yet provide
-a recommendation engine, user interface or reviewed technology catalogue.
+PLLDN is in active pre-release development. Stage 0 established the trust and
+data-contract foundation; Stage 1 adds the deterministic decision and facet core.
+The repository still has no end-user interface, free-text parser or reviewed
+technology catalogue, and **v0.0.1 Beta has not been released**.
 
 ## Run the checks
 

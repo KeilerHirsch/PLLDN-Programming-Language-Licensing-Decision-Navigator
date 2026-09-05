@@ -22,4 +22,4 @@ hashes identify package archives; they do not certify publisher trustworthiness.
 
 This source repository does not vendor node_modules or ship an application bundle.
 Future redistribution must preserve the notices required by the actual included
-dependencies. Stage 0's package is private and cannot be published to npm accidentally.
+dependencies. The current pre-release package remains private and cannot be published to npm accidentally.

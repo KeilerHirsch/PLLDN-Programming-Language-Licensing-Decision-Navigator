@@ -14,5 +14,5 @@ Describe the concrete behavior and affected records.
 
 Changed record IDs:
 Changed corpus cases:
-Recommendation effects: unavailable in Stage 0 / describe when implemented.
+Recommendation effects: describe observed effects; if not evaluated, say so explicitly.
 Risk tier and human review needed:

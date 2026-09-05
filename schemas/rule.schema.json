@@ -34,7 +34,8 @@
           "desktop",
           "mobile",
           "firmware",
-          "trusted-core"
+          "trusted-core",
+          "project"
         ]
       },
       "minItems": 1,

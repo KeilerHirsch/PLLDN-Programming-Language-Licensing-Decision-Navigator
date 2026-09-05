@@ -1,6 +1,6 @@
 # Security policy
 
-Stage 0 has no supported application release. Security fixes target the main branch.
+PLLDN is still pre-release and has no supported application release. Security fixes target the main branch.
 
 Report vulnerabilities through GitHub's private vulnerability reporting:
 https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/security/advisories/new

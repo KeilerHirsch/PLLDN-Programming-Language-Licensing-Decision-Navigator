@@ -88,3 +88,58 @@ test("license identity retains only/or-later", () => {
 });
 test("unknown schema kind", () =>
   assert.throws(() => validateDocument("alien", {})));
+
+test("constraint operators are explicit while facts stay exact", () => {
+  const p = project();
+  const fact = p.facts[0];
+  assert(fact);
+  fact.kind = "constraint";
+  fact.strength = "MUST";
+  fact.operator = "GTE";
+  validateDocument("project-facts", p);
+  fact.kind = "fact";
+  delete fact.strength;
+  assert.throws(() => validateDocument("project-facts", p));
+});
+
+test("rules may target project-level decisions", () => {
+  const rule = {
+    schema_version: "0.1",
+    rule_id: "rule.project",
+    effect: "WARN",
+    applies_to: ["project"],
+    conditions: [
+      {
+        dimension_id: "dimension.capability",
+        operator: "EQ",
+        value: { type: "boolean", value: true },
+      },
+    ],
+    claim_ids: ["claim.fixture"],
+    relation_ids: [],
+    risk: "low",
+    source_ids: ["source.fixture"],
+    verified_at: "2026-09-01T00:00:00Z",
+    world_freshness_class: "version-bound",
+    review_status: "Reviewed",
+    test_refs: ["test.fixture"],
+    supersedes: [],
+  };
+  validateDocument("rule", rule);
+});
+test("decision traces may name unresolved dimensions separately from facts", () => {
+  validateDocument("decision-trace", {
+    schema_version: "0.1",
+    analysis_id: "analysis.missing-dimension",
+    evaluated_at: "2026-09-05T12:00:00Z",
+    project_facts_sha256: "a".repeat(64),
+    snapshot_sha256: "b".repeat(64),
+    knowledge_snapshot: "knowledge.fixture",
+    rules_snapshot: "rules.fixture",
+    state: "NEEDS_ONE_FACT",
+    results: [],
+    unresolved_fact_ids: [],
+    unresolved_dimension_ids: ["dimension.fast"],
+    tie_breaker_ids: [],
+  });
+});

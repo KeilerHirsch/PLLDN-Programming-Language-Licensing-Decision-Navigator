@@ -1,4 +1,4 @@
-# Stage 0 threat model
+# Current pre-release threat model
 
 Assets: canonical project facts, reviewed knowledge integrity, source identity,
 review authority, dependency provenance and private contributor data.
@@ -23,5 +23,5 @@ CI evidence is a report, not a signature or certification.
 Report export requires a matching verified source tree, but a compromised trusted
 runner or administrator remains outside this library's protection.
 
-No user roadmap ingestion, authentication, hosting or parser exists in Stage 0.
-Do not infer that their future threat models are already covered.
+No user roadmap ingestion, authentication, hosting or free-text parser exists yet.
+Stage 1 decision evaluation does not imply that future UI/integration threat models are already covered.
