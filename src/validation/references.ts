@@ -14,6 +14,7 @@ const idFields: Record<string, string> = {
   claim: "claim_id",
   relation: "relation_id",
   rule: "rule_id",
+  review: "review_id",
   "project-facts": "project_id",
 };
 function list(value: unknown): string[] {
@@ -72,6 +73,7 @@ export function validateReferences(
   for (const { kind, record: r } of documents) {
     checkTime(r.verified_at, now);
     checkTime(r.retrieved_at, now);
+    checkTime(r.reviewed_at, now);
     checkTime(r.valid_until, now, true);
     for (const source of list(r.source_ids ?? [])) requireRef(source, "source");
     for (const condition of (r.conditions ?? []) as Record<string, unknown>[])
@@ -90,6 +92,18 @@ export function validateReferences(
       fail("Reviewed assertion requires tests");
     if (r.world_freshness_class === "volatile" && r.valid_until === undefined)
       fail("Volatile assertion requires expiry");
+    if (kind === "review") {
+      const assertions = r.assertions as Record<string, unknown>[];
+      const seen = new Set<string>();
+      for (const item of assertions) {
+        const id = item.assertion_id as string;
+        if (seen.has(id)) fail("Duplicate reviewed assertion");
+        seen.add(id);
+        const target = index.get(id);
+        if (!target || !["claim", "relation", "rule"].includes(target.kind))
+          fail("Missing reviewed assertion reference");
+      }
+    }
     if (kind === "claim") {
       const entity = requireRef(r.entity_id, "entity");
       typed(r);

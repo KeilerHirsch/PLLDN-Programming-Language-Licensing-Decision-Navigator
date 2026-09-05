@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.rust-release",
+    "source_class": "official-documentation",
+    "reference": "https://blog.rust-lang.org/2026/09/03/Rust-1.98.1/",
+    "title": "Announcing Rust 1.98.1",
+    "retrieved_at": "2026-09-05T20:50:00Z",
+    "content_sha256": "875746e7e619ee77e719778af60eafb73051f03023934144b0f67be36489ca12"
+  }
+}

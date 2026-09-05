@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.typescript-release",
+    "source_class": "official-documentation",
+    "reference": "https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/",
+    "title": "Announcing TypeScript 7.0",
+    "retrieved_at": "2026-09-05T20:50:00Z",
+    "content_sha256": "d8064f4dae983d3a1c938212e03c5b9cb493cc86379ea8635ebab4b2ff94dd2f"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "kind": "claim",
+  "record": {
+    "schema_version": "0.1",
+    "claim_id": "claim.go-runtime-gc",
+    "entity_id": "language.go",
+    "dimension_id": "dimension.runtime-garbage-collection",
+    "value": {
+      "type": "boolean",
+      "value": true
+    },
+    "state": "TRUE",
+    "conditions": [],
+    "scope": {
+      "versions": ["1.27.1"],
+      "targets": ["general"]
+    },
+    "source_ids": ["source.go-faq"],
+    "verified_at": "2026-09-05T20:50:00Z",
+    "world_freshness_class": "version-bound",
+    "review_status": "Partial",
+    "test_refs": [],
+    "supersedes": []
+  }
+}

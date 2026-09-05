@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.spdx-gpl-only",
+    "source_class": "normative",
+    "reference": "https://spdx.org/licenses/GPL-3.0-only",
+    "title": "GNU General Public License v3.0 only — SPDX",
+    "retrieved_at": "2026-09-05T20:50:00Z",
+    "content_sha256": "fdeee9e507ae094596017947c5d2b3ee41736b272dce6dcd31b6dd3c02451f5b"
+  }
+}

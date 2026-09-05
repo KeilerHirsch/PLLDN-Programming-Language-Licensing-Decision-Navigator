@@ -1,0 +1,12 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.safe-code-memory-safety-without-gc",
+    "canonical_name": "Safe-code memory safety without garbage collection",
+    "value_type": "boolean",
+    "category": "assurance",
+    "unit": null,
+    "allowed_values": []
+  }
+}

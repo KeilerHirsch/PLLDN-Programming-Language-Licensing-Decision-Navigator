@@ -1,0 +1,1 @@
+{"kind":"dimension","record":{"allowed_values":[],"canonical_name":"Safe-code memory safety without garbage collection","category":"assurance","dimension_id":"dimension.safe-code-memory-safety-without-gc","schema_version":"0.1","unit":null,"value_type":"boolean"}}

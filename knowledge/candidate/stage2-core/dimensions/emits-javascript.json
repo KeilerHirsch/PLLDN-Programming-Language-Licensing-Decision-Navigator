@@ -1,0 +1,12 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.emits-javascript",
+    "canonical_name": "Emits JavaScript",
+    "value_type": "boolean",
+    "category": "integration",
+    "unit": null,
+    "allowed_values": []
+  }
+}

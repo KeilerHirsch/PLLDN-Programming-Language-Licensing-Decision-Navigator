@@ -1,0 +1,18 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "language.typescript",
+    "entity_type": "language",
+    "canonical_name": "TypeScript",
+    "aliases": [
+      {
+        "text": "TS",
+        "ambiguity": "context-required",
+        "context": ["typescript", "javascript", "programming"]
+      }
+    ],
+    "version_scope": ["7.0"],
+    "target_scope": ["general"]
+  }
+}

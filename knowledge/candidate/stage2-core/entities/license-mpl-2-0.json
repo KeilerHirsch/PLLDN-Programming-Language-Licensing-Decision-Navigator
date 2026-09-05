@@ -1,0 +1,13 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "license.mpl-2.0",
+    "entity_type": "license",
+    "canonical_name": "Mozilla Public License 2.0",
+    "aliases": [],
+    "version_scope": ["MPL-2.0"],
+    "target_scope": ["general"],
+    "license_id": "MPL-2.0"
+  }
+}

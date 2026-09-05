@@ -1,0 +1,25 @@
+{
+  "kind": "claim",
+  "record": {
+    "schema_version": "0.1",
+    "claim_id": "claim.rust-safe-memory-without-gc",
+    "entity_id": "language.rust",
+    "dimension_id": "dimension.safe-code-memory-safety-without-gc",
+    "value": {
+      "type": "boolean",
+      "value": true
+    },
+    "state": "TRUE",
+    "conditions": [],
+    "scope": {
+      "versions": ["1.98.1"],
+      "targets": ["general"]
+    },
+    "source_ids": ["source.rust-ownership", "source.rust-safe-unsafe"],
+    "verified_at": "2026-09-05T21:26:00Z",
+    "world_freshness_class": "version-bound",
+    "review_status": "Partial",
+    "test_refs": [],
+    "supersedes": []
+  }
+}

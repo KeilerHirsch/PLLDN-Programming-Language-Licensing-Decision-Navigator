@@ -1,0 +1,25 @@
+{
+  "kind": "claim",
+  "record": {
+    "schema_version": "0.1",
+    "claim_id": "claim.typescript-emits-javascript",
+    "entity_id": "language.typescript",
+    "dimension_id": "dimension.emits-javascript",
+    "value": {
+      "type": "boolean",
+      "value": true
+    },
+    "state": "TRUE",
+    "conditions": [],
+    "scope": {
+      "versions": ["7.0"],
+      "targets": ["general"]
+    },
+    "source_ids": ["source.typescript-handbook"],
+    "verified_at": "2026-09-05T20:50:00Z",
+    "world_freshness_class": "version-bound",
+    "review_status": "Partial",
+    "test_refs": [],
+    "supersedes": []
+  }
+}

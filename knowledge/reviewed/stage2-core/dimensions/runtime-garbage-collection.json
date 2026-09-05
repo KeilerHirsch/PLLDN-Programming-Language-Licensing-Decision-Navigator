@@ -1,0 +1,1 @@
+{"kind":"dimension","record":{"allowed_values":[],"canonical_name":"Runtime garbage collection","category":"performance","dimension_id":"dimension.runtime-garbage-collection","schema_version":"0.1","unit":null,"value_type":"boolean"}}

@@ -1,0 +1,1 @@
+{"kind":"dimension","record":{"allowed_values":[],"canonical_name":"Current stable version","category":"existing-technology","dimension_id":"dimension.current-stable-version","schema_version":"0.1","unit":null,"value_type":"string"}}

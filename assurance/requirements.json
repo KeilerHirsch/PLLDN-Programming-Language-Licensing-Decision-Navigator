@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "scope": "stage-1-decision-core",
+  "scope": "stage-2-reviewed-knowledge",
   "requirements": [
     {
       "id": "PLLDN-C01",
@@ -58,7 +58,27 @@
         "tests/decision-rules.test.ts",
         "tests/decision-invariants.test.ts"
       ]
+    },
+    {
+      "id": "PLLDN-C10",
+      "invariant": "Candidate knowledge is source-backed, scoped, deterministic and cannot self-promote to Reviewed",
+      "tests": ["tests/knowledge-stage2.test.ts"]
+    },
+    {
+      "id": "PLLDN-C11",
+      "invariant": "License identities preserve exact only/or-later semantics",
+      "tests": ["tests/knowledge-stage2.test.ts"]
+    },
+    {
+      "id": "PLLDN-C12",
+      "invariant": "Knowledge promotion requires complete hash-bound external human review",
+      "tests": ["tests/knowledge-promotion.test.ts"]
+    },
+    {
+      "id": "PLLDN-C13",
+      "invariant": "Checked-in Reviewed knowledge exactly reproduces the hash-approved candidate and still requires caller-supplied snapshot approval",
+      "tests": ["tests/reviewed-stage2.test.ts"]
     }
   ],
-  "release_scope": "No v0.0.1 Beta candidate-knowledge coverage is claimed"
+  "release_scope": "A human-reviewed Stage 2 snapshot exists; no default runtime approval pin or v0.0.1 Beta release is claimed"
 }

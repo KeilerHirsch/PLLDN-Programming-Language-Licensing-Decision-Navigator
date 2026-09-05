@@ -1,0 +1,25 @@
+{
+  "kind": "claim",
+  "record": {
+    "schema_version": "0.1",
+    "claim_id": "claim.eupl-1-2-spdx-id",
+    "entity_id": "license.eupl-1.2",
+    "dimension_id": "dimension.license-spdx-identifier",
+    "value": {
+      "type": "string",
+      "value": "EUPL-1.2"
+    },
+    "state": "TRUE",
+    "conditions": [],
+    "scope": {
+      "versions": ["EUPL-1.2"],
+      "targets": ["general"]
+    },
+    "source_ids": ["source.spdx-eupl"],
+    "verified_at": "2026-09-05T20:50:00Z",
+    "world_freshness_class": "normative",
+    "review_status": "Partial",
+    "test_refs": [],
+    "supersedes": []
+  }
+}

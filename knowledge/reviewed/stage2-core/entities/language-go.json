@@ -1,0 +1,1 @@
+{"kind":"entity","record":{"aliases":[{"ambiguity":"unambiguous","context":[],"text":"Golang"}],"canonical_name":"Go","entity_id":"language.go","entity_type":"language","schema_version":"0.1","target_scope":["general"],"version_scope":["1.27.1"]}}
