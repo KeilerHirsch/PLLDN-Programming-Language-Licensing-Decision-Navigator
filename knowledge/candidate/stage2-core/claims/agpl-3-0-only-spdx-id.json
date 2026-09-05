@@ -1,0 +1,25 @@
+{
+  "kind": "claim",
+  "record": {
+    "schema_version": "0.1",
+    "claim_id": "claim.agpl-3-0-only-spdx-id",
+    "entity_id": "license.agpl-3.0-only",
+    "dimension_id": "dimension.license-spdx-identifier",
+    "value": {
+      "type": "string",
+      "value": "AGPL-3.0-only"
+    },
+    "state": "TRUE",
+    "conditions": [],
+    "scope": {
+      "versions": ["AGPL-3.0-only"],
+      "targets": ["general"]
+    },
+    "source_ids": ["source.spdx-agpl-only"],
+    "verified_at": "2026-09-05T20:50:00Z",
+    "world_freshness_class": "normative",
+    "review_status": "Partial",
+    "test_refs": [],
+    "supersedes": []
+  }
+}

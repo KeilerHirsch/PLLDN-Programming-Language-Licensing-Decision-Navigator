@@ -12,6 +12,7 @@ export const kinds = [
   "claim",
   "relation",
   "rule",
+  "review",
   "snapshot",
   "decision-trace",
 ] as const;

@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.spdx-mit",
+    "source_class": "normative",
+    "reference": "https://spdx.org/licenses/MIT.html",
+    "title": "MIT License — SPDX",
+    "retrieved_at": "2026-09-05T20:50:00Z",
+    "content_sha256": "3db711f63789056edd0bcae09d52763d11e5154e332f4d7b60b9ddff43e793f6"
+  }
+}

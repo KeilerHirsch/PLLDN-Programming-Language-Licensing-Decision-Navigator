@@ -1,0 +1,13 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "license.mit",
+    "entity_type": "license",
+    "canonical_name": "MIT License",
+    "aliases": [],
+    "version_scope": ["MIT"],
+    "target_scope": ["general"],
+    "license_id": "MIT"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.rust-ownership",
+    "source_class": "official-documentation",
+    "reference": "https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html",
+    "title": "What Is Ownership? — The Rust Programming Language",
+    "retrieved_at": "2026-09-05T20:50:00Z",
+    "content_sha256": "d9c8d249ca1f968b407ac99e721dd6b5799ee784a8c673d262c142a4162973ec"
+  }
+}

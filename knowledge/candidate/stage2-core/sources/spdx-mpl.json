@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.spdx-mpl",
+    "source_class": "normative",
+    "reference": "https://spdx.org/licenses/MPL-2.0",
+    "title": "Mozilla Public License 2.0 — SPDX",
+    "retrieved_at": "2026-09-05T20:50:00Z",
+    "content_sha256": "a4be8a2743b9fb5e8e62e7ce655cfe30e1b703c37fe2a93e515dec26970ea800"
+  }
+}

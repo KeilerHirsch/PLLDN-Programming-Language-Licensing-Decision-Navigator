@@ -1,0 +1,1 @@
+{"kind":"dimension","record":{"allowed_values":[],"canonical_name":"Emits JavaScript","category":"integration","dimension_id":"dimension.emits-javascript","schema_version":"0.1","unit":null,"value_type":"boolean"}}

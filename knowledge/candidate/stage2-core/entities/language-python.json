@@ -1,0 +1,12 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "language.python",
+    "entity_type": "language",
+    "canonical_name": "Python",
+    "aliases": [],
+    "version_scope": ["3.14.7"],
+    "target_scope": ["general"]
+  }
+}

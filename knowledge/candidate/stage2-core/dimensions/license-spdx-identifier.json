@@ -1,0 +1,12 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.license-spdx-identifier",
+    "canonical_name": "SPDX license identifier",
+    "value_type": "string",
+    "category": "license-legal",
+    "unit": null,
+    "allowed_values": []
+  }
+}

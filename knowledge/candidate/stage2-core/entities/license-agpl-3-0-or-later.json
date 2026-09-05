@@ -1,0 +1,13 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "license.agpl-3.0-or-later",
+    "entity_type": "license",
+    "canonical_name": "GNU Affero General Public License v3.0 or later",
+    "aliases": [],
+    "version_scope": ["AGPL-3.0-or-later"],
+    "target_scope": ["general"],
+    "license_id": "AGPL-3.0-or-later"
+  }
+}

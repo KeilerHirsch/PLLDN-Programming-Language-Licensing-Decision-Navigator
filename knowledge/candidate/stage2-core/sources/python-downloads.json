@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.python-downloads",
+    "source_class": "official-documentation",
+    "reference": "https://www.python.org/downloads/",
+    "title": "Download Python \u2014 Python.org",
+    "retrieved_at": "2026-09-05T21:30:18Z",
+    "content_sha256": "74c9dff2c81f6f9305e11d6a3094184837117816bbcfb771e42929343c535e84"
+  }
+}

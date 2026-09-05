@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.spdx-agpl-only",
+    "source_class": "normative",
+    "reference": "https://spdx.org/licenses/AGPL-3.0-only",
+    "title": "GNU Affero General Public License v3.0 only — SPDX",
+    "retrieved_at": "2026-09-05T20:50:00Z",
+    "content_sha256": "44f7ecc762c0151361fe0e1276d27bec6f5e6b615c2ead0ab17ac05013e6f000"
+  }
+}

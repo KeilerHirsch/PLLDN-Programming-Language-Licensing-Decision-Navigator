@@ -1,0 +1,26 @@
+{
+  "kind": "claim",
+  "record": {
+    "schema_version": "0.1",
+    "claim_id": "claim.typescript-current-version",
+    "entity_id": "language.typescript",
+    "dimension_id": "dimension.current-stable-version",
+    "value": {
+      "type": "string",
+      "value": "7.0"
+    },
+    "state": "TRUE",
+    "conditions": [],
+    "scope": {
+      "versions": ["7.0"],
+      "targets": ["general"]
+    },
+    "source_ids": ["source.typescript-release"],
+    "verified_at": "2026-09-05T20:50:00Z",
+    "world_freshness_class": "volatile",
+    "review_status": "Partial",
+    "test_refs": [],
+    "supersedes": [],
+    "valid_until": "2026-09-06T20:50:00Z"
+  }
+}
