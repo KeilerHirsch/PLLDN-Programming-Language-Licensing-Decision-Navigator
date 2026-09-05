@@ -44,7 +44,7 @@ for (const mutation of ["tamper", "missing", "extra"]) {
 test("manifest exact-byte approval", async () => {
   const s = await subject();
   await assert.rejects(() =>
-    verifySnapshot(s.manifest + " ", s.files, s.trusted, now),
+    verifySnapshot(`${s.manifest} `, s.files, s.trusted, now),
   );
 });
 test("schema baseline mismatch", async () => {

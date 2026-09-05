@@ -1,0 +1,21 @@
+name: Knowledge proposal
+description: Propose an evidence-backed record change
+body:
+  - type: input
+    id: records
+    attributes:
+      label: Record IDs or missing entity
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Version, target, scenario and claim
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Primary sources, provenance and reproducible tests
+    validations:
+      required: true

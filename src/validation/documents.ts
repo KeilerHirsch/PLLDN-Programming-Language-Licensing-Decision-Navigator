@@ -43,8 +43,17 @@ export function validateDocument(kind: string, data: unknown): void {
   const validate = ajv.getSchema(
     `https://plldn.invalid/schemas/${kind}.schema.json`,
   );
-  if (!validate || !validate(data))
+  if (!validate?.(data))
     throw new Error(`Invalid ${kind}: ${ajv.errorsText(validate?.errors)}`);
+}
+const validateTimestamp = ajv.compile({ type: "string", format: "date-time" });
+/** Require an offset-bearing RFC3339 instant before using the host clock parser. */
+export function evaluationTime(at: string): number {
+  if (!validateTimestamp(at) || !/(?:Z|[+-]\d{2}:\d{2})$/i.test(at))
+    throw new Error("Explicit valid evaluation time required");
+  const time = Date.parse(at);
+  if (!Number.isFinite(time)) throw new Error("Unsupported evaluation time");
+  return time;
 }
 export interface Document {
   kind: string;

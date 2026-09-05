@@ -1,0 +1,16 @@
+name: Defect
+description: Report an implementation or contract defect
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include version, expected behavior and a minimal non-sensitive example.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Observed result and evidence
+    validations:
+      required: true

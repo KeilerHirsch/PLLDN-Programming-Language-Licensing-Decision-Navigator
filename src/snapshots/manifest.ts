@@ -32,7 +32,7 @@ export function encodeCanonical(data: unknown): string {
       throw new Error("Non-canonical number");
     return value;
   };
-  const encoded = JSON.stringify(normalize(data)) + "\n";
+  const encoded = `${JSON.stringify(normalize(data))}\n`;
   parseStrictJson(encoded);
   return encoded;
 }
@@ -69,9 +69,12 @@ export async function createManifest(
   rules: string,
 ): Promise<Manifest> {
   const documents = await Promise.all(
-    Object.keys(files)
-      .sort()
-      .map(async (path) => ({ path, sha256: await sha256(files[path]!) })),
+    Object.entries(files)
+      .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+      .map(async ([path, content]) => ({
+        path,
+        sha256: await sha256(content),
+      })),
   );
   const manifest = {
     schema_version: "0.1",
