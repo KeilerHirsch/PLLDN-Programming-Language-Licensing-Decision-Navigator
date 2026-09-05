@@ -50,6 +50,14 @@ export function validateReferences(
   };
   const typed = (r: Record<string, unknown>) => {
     const d = requireRef(r.dimension_id, "dimension");
+    const operator = r.operator as string | undefined;
+    if (
+      ["GTE", "LTE"].includes(operator ?? "") &&
+      !["integer", "quantity"].includes(d.value_type as string)
+    )
+      fail("Ordered operator requires an integer or quantity dimension");
+    if (operator === "IN" && d.value_type !== "set")
+      fail("IN operator requires a set dimension");
     if (r.value === undefined) return;
     const v = asObject(r.value);
     if (v.type !== d.value_type) fail("Dimension value type mismatch");
@@ -71,6 +79,12 @@ export function validateReferences(
     for (const old of list(r.supersedes ?? [])) {
       const prior = requireRef(old, kind);
       if (prior === r) fail("Self supersession");
+      if (
+        kind === "claim" &&
+        (prior.entity_id !== r.entity_id ||
+          prior.dimension_id !== r.dimension_id)
+      )
+        fail("Claim supersession must preserve entity and dimension");
     }
     if (r.review_status === "Reviewed" && list(r.test_refs).length === 0)
       fail("Reviewed assertion requires tests");
@@ -120,6 +134,7 @@ export function validateReferences(
     if (kind === "project-facts") checkProject(r, typed);
   }
   checkSupersession(index);
+  checkActiveRuleReferences(index);
 }
 function checkProject(
   r: Record<string, unknown>,
@@ -165,4 +180,19 @@ function checkSupersession(index: Map<string, Document>): void {
     complete.add(id);
   };
   for (const id of index.keys()) visit(id, new Set());
+}
+
+function checkActiveRuleReferences(index: Map<string, Document>): void {
+  const superseded = new Set<string>();
+  for (const doc of index.values())
+    for (const id of list(doc.record.supersedes ?? [])) superseded.add(id);
+  for (const [id, doc] of index) {
+    if (doc.kind !== "rule" || superseded.has(id)) continue;
+    for (const ref of [
+      ...list(doc.record.claim_ids ?? []),
+      ...list(doc.record.relation_ids ?? []),
+    ])
+      if (superseded.has(ref))
+        fail("Active rule references superseded assertion");
+  }
 }

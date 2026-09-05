@@ -132,6 +132,9 @@
           },
           "strength": {
             "enum": ["MUST", "PREFER", "NEUTRAL", "AVOID", "FORBIDDEN"]
+          },
+          "operator": {
+            "enum": ["EQ", "NEQ", "IN", "GTE", "LTE"]
           }
         },
         "required": [
@@ -207,6 +210,24 @@
                 "required": ["strength"],
                 "properties": {
                   "strength": {}
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "fact"
+                }
+              },
+              "required": ["kind"]
+            },
+            "then": {
+              "not": {
+                "required": ["operator"],
+                "properties": {
+                  "operator": {}
                 }
               }
             }

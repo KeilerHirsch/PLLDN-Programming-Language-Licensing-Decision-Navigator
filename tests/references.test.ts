@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { validateReferences } from "../src/validation/references.ts";
-import { bundle, now, project } from "./fixtures.ts";
+import { bundle, entity, now, project } from "./fixtures.ts";
 
 test("synthetic graph resolves", () => validateReferences(bundle(), now));
 test("duplicate ID", () => {
@@ -44,4 +44,34 @@ test("component cannot escape project", () => {
       now,
     ),
   );
+});
+
+test("constraint operators must match the dimension value type", () => {
+  for (const operator of ["GTE", "LTE", "IN"]) {
+    const p = project();
+    const fact = p.facts[0];
+    assert(fact);
+    fact.kind = "constraint";
+    fact.strength = "MUST";
+    fact.operator = operator;
+    assert.throws(() =>
+      validateReferences(
+        [...bundle(), { kind: "project-facts", record: p }],
+        now,
+      ),
+    );
+  }
+});
+
+test("claim supersession cannot erase a different entity or dimension", () => {
+  const b = bundle();
+  b.push({ kind: "entity", record: entity("language.other") });
+  const original = b[3];
+  assert(original);
+  const replacement = structuredClone(original);
+  replacement.record.claim_id = "claim.other";
+  replacement.record.entity_id = "language.other";
+  replacement.record.supersedes = ["claim.fixture"];
+  b.push(replacement);
+  assert.throws(() => validateReferences(b, now), /supersession/i);
 });
