@@ -15,6 +15,7 @@ function paragraph(text: string): HTMLParagraphElement {
 }
 
 export function renderUnavailable(root: HTMLElement, message: string): void {
+  root.removeAttribute("aria-busy");
   const shell = document.createElement("main");
   shell.className = "app-shell";
   shell.append(heading(1, "PLLDN"));
@@ -156,6 +157,7 @@ function renderTrace(model: UiViewModel): HTMLElement {
   return details;
 }
 export function renderApp(root: HTMLElement, model: UiViewModel): void {
+  root.removeAttribute("aria-busy");
   const shell = document.createElement("main");
   shell.className = "app-shell";
   shell.append(

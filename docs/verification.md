@@ -14,24 +14,33 @@ deterministic snapshot bytes.
 Reports are ignored working outputs. `npm run evidence` rejects missing or changed
 source-tree bindings and exports the verification summary and per-file hashes. Test
 reports include timing and are not expected to be byte-identical. Snapshot content
-is the deterministic comparison subject.
+and explicit browser-build tests cover deterministic comparison subjects.
 
 ## Current corpus scope
 
-The test corpus covers Stage 0 contracts and snapshot trust, the Stage 1 deterministic
-decision/facet core, and the Stage 2 candidate, promotion and reviewed-snapshot path.
+The corpus now covers Stage 0 contracts and snapshot trust, the Stage 1 deterministic
+decision/facet core, Stage 2 candidate/promotion/reviewed snapshot, and Stage 3 browser
+portability, canonical UI facts, controller/model, runtime trust, DOM safety and build
+invariants.
 Decision tests include hard constraints, all rule-effect classes, conservative UNKNOWN
 handling, component scope isolation, conditional applicability, ordered conflicts,
 Pareto behavior, ASK/abstention states, supersession drift and project-level license
-decisions.
-Facet tests verify that option counts use the same decision engine and do not mutate
-canonical project facts. Stage 2 tests validate the 51-document candidate pack,
-17 source records, exact license identities, volatile-version freshness, deterministic
-candidate manifests and hash-bound human promotion. Reviewed-snapshot tests then prove
-that the 52-document promoted snapshot reproduces exactly from the approved candidate
-and review record, remains byte-stable across formatting, and is rejected without a
-caller-supplied trusted manifest digest.
+decisions. Facet tests verify that option counts use the same decision engine and do not
+mutate canonical project facts.
 
+Stage 2 tests validate the 51-document candidate pack, 17 source records, exact license
+identities, volatile-version freshness, deterministic candidate manifests and hash-bound
+human promotion. Reviewed-snapshot tests prove that the 52-document promoted snapshot
+reproduces exactly from the approved candidate and review record, remains byte-stable
+across formatting, and is rejected without a caller-supplied trusted manifest digest.
+
+Stage 3 tests additionally prove that schema portability preserves the exact schema
+digest, UI selections become deterministic `ui.facet.*` constraints, foreign project
+constraints survive UI changes, controller counts/results match `facetCounts()` and
+`evaluateDecision()`, sort changes presentation only, and runtime bootstrap reuses
+`verifySnapshot()` with fail-closed behavior for absent, wrong or tampered approval.
+The browser build is run twice and required to produce byte-identical static outputs
+without `node:` imports, `readFileSync` or synthetic recommendation fixtures.
 Passing these tests does not make the reviewed snapshot a general-purpose accuracy
 claim. Before v0.0.1 Beta, release-specific suites still need broader reviewed knowledge,
 high-risk gold/holdout cases, application-level E2E coverage and filter/free-text
@@ -46,8 +55,12 @@ leakage, conditional conflicts and unsafe supersession references.
 
 Stage 2 tests caught evidence captured in the future relative to the test clock,
 insufficient source support for a compound Rust claim, stale-world version semantics,
-and formatter mutation of immutable reviewed snapshot bytes. The resulting boundaries
-are now part of the regression corpus rather than undocumented assumptions.
+and formatter mutation of immutable reviewed snapshot bytes.
+
+Stage 3 RED tests began with the Node filesystem dependency in validation, missing
+canonical UI constraint handling, missing controller/model modules, absent runtime trust
+and DOM boundaries, and a nonexistent browser build. The resulting production code is
+therefore constrained by regression tests rather than retrospective UI snapshots.
 
 AI review or automation can contribute evidence, but neither substitutes for source-backed
 knowledge review, human accountability or separately protected runtime approval.

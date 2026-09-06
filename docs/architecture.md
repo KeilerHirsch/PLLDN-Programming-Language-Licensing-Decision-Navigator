@@ -3,9 +3,10 @@
 PLLDN separates untrusted authoring input, reviewed knowledge, canonical project
 facts and deterministic decisions. Stage 0 established versioned schemas, strict
 parsing, reference validation and the digest-bound snapshot trust boundary.
-Stage 1 added the deterministic decision core. Stage 2 now has both a small
-source-backed candidate pack and a human-reviewed immutable snapshot derived from
-one exact candidate manifest.
+Stage 1 added the deterministic decision core. Stage 2 added a small source-backed
+candidate pack and a human-reviewed immutable snapshot derived from one exact
+candidate manifest. Stage 3 adds the first framework-free browser UI over those
+same contracts and decision semantics.
 
 The trust path remains layered: strict JSON parsing, schema validation, typed
 references and scopes, candidate evidence review, human approval, immutable
@@ -45,29 +46,48 @@ not silently keep references to superseded claims or relations.
 
 Facet previews clone canonical project facts, add one synthetic constraint and
 run the same decision engine. Counts therefore cannot drift into a second, weaker
-filtering implementation.
-Stage 1 consumes project records with lifecycle `current` or `target` for active
-decisions. Other lifecycle states remain representable by the contract but are not
-decision-active in this slice.
+filtering implementation. Stage 1 consumes project records with lifecycle `current`
+or `target` for active decisions.
+## Browser UI boundary
+
+Stage 3 keeps the browser surface intentionally thin. Repository JSON Schemas are
+statically imported through `src/validation/schema-set.ts`, so Node and browser
+validation consume the same schema documents and schema digest without `node:fs`.
+
+Facet selections are converted into deterministic `ui.facet.*` constraints inside
+canonical project facts. Clearing or changing a facet touches only its own UI-owned
+constraint; imported or user-authored facts and constraints remain intact. Same-facet
+option previews remove only that facet's current UI-owned selection before calling
+`facetCounts()`, which preserves real cross-facet and foreign conflicts.
+
+`src/ui/controller.ts` orchestrates `evaluateDecision()` and `facetCounts()`; it does
+not compute independent eligibility, exclusions or recommendations. Sorting and labels
+are presentation-only projections. `src/ui/render.ts` uses DOM content APIs rather than
+HTML interpolation for knowledge-derived text.
+
+The static browser build is produced with pinned `esbuild-wasm` into ignored
+`.build/site/`. The bundle contains no default project, synthetic recommendation corpus
+or trusted snapshot pin. `bootstrapUiRuntime()` requires caller-supplied runtime material
+and sends it through the existing `verifySnapshot()` boundary before a controller exists.
+Missing, wrong or tampered trust input therefore renders an unavailable state instead of
+recommendations.
 
 ## Candidate, review and immutable snapshot
-
 Stage 2 candidate assertions remain `Partial`. Source records carry the official
-reference, retrieval time and exact content SHA-256 fingerprint. Candidate
-construction rejects embedded review records and any assertion that declares
-itself `Reviewed`.
+reference, retrieval time and exact content SHA-256 fingerprint. Candidate construction
+rejects embedded review records and any assertion that declares itself `Reviewed`.
 
-The first Stage 2 candidate was human-approved only after its exact manifest digest
-was fixed. Promotion then produced 16 `Reviewed` assertions plus the human review
-record in `reviewed.stage2-core.2026-09-05`. The checked-in snapshot must reproduce
-byte-for-byte from that approved candidate and review record. `knowledge/reviewed/**`
-is excluded from formatting so tooling cannot silently rewrite immutable bytes.
+The first Stage 2 candidate was human-approved only after its exact manifest digest was
+fixed. Promotion then produced 16 `Reviewed` assertions plus the human review record in
+`reviewed.stage2-core.2026-09-05`. The checked-in snapshot must reproduce byte-for-byte
+from that approved candidate and review record. `knowledge/reviewed/**` is excluded from
+formatting so tooling cannot silently rewrite immutable bytes.
 
 Runtime acceptance is a separate trust boundary. `verifySnapshot` still requires a
 caller-supplied trusted digest, and the repository does not ship a default runtime
 approval pin for this snapshot.
 
-A browser UI, free-text accelerator, broader reviewed catalogue,
-configuration/interaction optimization and release-grade end-to-end corpus are
-later stages. The Stage 2 reviewed snapshot is not the v0.0.1 product release and
-makes no general recommendation-accuracy or certification claim.
+Free-text acceleration, broader reviewed catalogue coverage, GitHub Pages deployment,
+configuration/interaction optimization and release-grade end-to-end corpus remain later
+stages. Stage 3 is not the v0.0.1 product release and makes no general recommendation-
+accuracy or certification claim.

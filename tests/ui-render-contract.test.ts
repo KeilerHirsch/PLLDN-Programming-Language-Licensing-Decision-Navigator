@@ -36,3 +36,8 @@ test("browser startup fails closed when runtime material is absent", () => {
   assert(main.includes('addEventListener("click"'));
   assert(main.includes('addEventListener("change"'));
 });
+
+test("renderer clears initial busy state after settling", () => {
+  const render = source("src/ui/render.ts");
+  assert(render.includes('removeAttribute("aria-busy")'));
+});

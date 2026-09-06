@@ -175,7 +175,7 @@ assert(!first.toString().includes("readFileSync"));
 - [ ] **Step 2: Update the public control plane and docs** without claiming GitHub Pages, broad catalogue coverage, production runtime trust or v0.0.1 release readiness.
 - [ ] **Step 3: Run formatter and prove reviewed snapshot manifest digest is byte-identical before/after.**
 - [ ] **Step 4: Run full `npm run verify`, `npm audit --audit-level=low`, Gitleaks tree/history, disclosure firewall and `git diff --check`.**
-- [ ] **Step 5: Run `npm run evidence`; bind the final source subject and update the private GRANIT adapter to Stage-3 source-only scope, preserving explicit exclusions.**
-- [ ] **Step 6: Require GRANIT READY, zero failures/unresolved, then checkpoint Notion before Git promotion.**
-- [ ] **Step 7: Commit final docs/assurance changes, rerun post-commit verify/security/GRANIT, push `stage3/faceted-ui-core`, open PR with AI-assistance disclosure, wait for required GitHub checks, merge with expected head SHA, and verify main carries the same Git tree/source subject.**
+- [ ] **Step 5: Run `npm run evidence`; bind the final source subject and update the private assurance adapter to Stage-3 source-only scope, preserving explicit exclusions.**
+- [ ] **Step 6: Require private assurance READY, zero failures/unresolved, then checkpoint Notion before Git promotion.**
+- [ ] **Step 7: Commit final docs/assurance changes, rerun post-commit verify/security/private assurance, push `stage3/faceted-ui-core`, open PR with AI-assistance disclosure, wait for required GitHub checks, merge with expected head SHA, and verify main carries the same Git tree/source subject.**
 - [ ] **Step 8: Append and verify `Stage 3 — CLOSED` in Notion.**

@@ -46,3 +46,10 @@ test("browser build is deterministic and browser-only", async () => {
     await rm(out, { recursive: true, force: true });
   }
 });
+
+test("generated browser output is excluded from formatter input", async () => {
+  const biome = JSON.parse(await readFile("biome.json", "utf8")) as {
+    files: { includes: string[] };
+  };
+  assert(biome.files.includes.includes("!.build"));
+});

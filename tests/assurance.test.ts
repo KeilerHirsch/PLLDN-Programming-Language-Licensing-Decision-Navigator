@@ -7,20 +7,18 @@ import test from "node:test";
 const readJson = (path: string) =>
   JSON.parse(readFileSync(new URL(`../${path}`, import.meta.url), "utf8"));
 
-test("assurance control plane names the Stage 2 reviewed-knowledge scope", () => {
+test("assurance control plane names the Stage 3 faceted-UI scope", () => {
   const requirements = readJson("assurance/requirements.json");
   const evidenceSchema = readJson("assurance/evidence-contract.schema.json");
-  assert.equal(requirements.scope, "stage-2-reviewed-knowledge");
-  assert.equal(
-    evidenceSchema.properties.scope.const,
-    "stage-2-reviewed-knowledge",
-  );
+  assert.equal(requirements.scope, "stage-3-faceted-ui");
+  assert.equal(evidenceSchema.properties.scope.const, "stage-3-faceted-ui");
   assert.match(
     readFileSync(new URL("../tools/evidence.ts", import.meta.url), "utf8"),
-    /scope: "stage-2-reviewed-knowledge"/,
+    /scope: "stage-3-faceted-ui"/,
   );
 });
-test("Stage 2 requirements map decision and knowledge invariants to real tests", () => {
+
+test("Stage 3 requirements map core, knowledge and browser invariants to real tests", () => {
   const rows = (
     readJson("assurance/requirements.json") as {
       requirements: Array<{ id: string; tests: string[] }>;
@@ -53,8 +51,24 @@ test("Stage 2 requirements map decision and knowledge invariants to real tests",
     "PLLDN-C11": ["tests/knowledge-stage2.test.ts"],
     "PLLDN-C12": ["tests/knowledge-promotion.test.ts"],
     "PLLDN-C13": ["tests/reviewed-stage2.test.ts"],
+    "PLLDN-C14": ["tests/browser-portability.test.ts"],
+    "PLLDN-C15": ["tests/ui-facts.test.ts"],
+    "PLLDN-C16": ["tests/ui-controller.test.ts", "tests/ui-model.test.ts"],
+    "PLLDN-C17": ["tests/ui-runtime.test.ts"],
+    "PLLDN-C18": [
+      "tests/ui-render-contract.test.ts",
+      "tests/browser-build.test.ts",
+    ],
   };
   assert.equal(rows.length, Object.keys(expected).length);
-  for (const [id, tests] of Object.entries(expected))
+  for (const [id, tests] of Object.entries(expected)) {
     assert.deepEqual(byId.get(id)?.tests, tests);
+    for (const path of tests) {
+      assert.equal(
+        readFileSync(new URL(`../${path}`, import.meta.url), "utf8").length > 0,
+        true,
+        path,
+      );
+    }
+  }
 });

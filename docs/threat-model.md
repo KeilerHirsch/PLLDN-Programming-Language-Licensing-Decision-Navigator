@@ -3,7 +3,8 @@
 Assets: canonical project facts, reviewed knowledge integrity, source identity,
 review authority, snapshot identity, dependency provenance and private contributor data.
 
-Untrusted inputs: candidate JSON, source references, PR content and dependency changes.
+Untrusted inputs: candidate JSON, source references, PR content, dependency changes,
+caller-injected browser runtime material, facet actions and knowledge-derived display text.
 Trusted inputs are layered: reviewed repository schemas, explicitly selected validation
 code, a hash-bound human review decision and, separately, a protected runtime snapshot
 approval set.
@@ -18,6 +19,11 @@ approval set.
 | Modified snapshot bytes | Exact file set and SHA-256 checks | Authenticate runtime approval digest |
 | Stale or future assertion | Explicit clock and freshness checks | Refresh volatile claims before expiry |
 | Executable data or remote schema loading | No data-driven execution or remote resolver | Review future adapters |
+| Unapproved browser runtime material | `bootstrapUiRuntime()` requires caller-supplied approval and reuses `verifySnapshot()` | Protect the external approval source |
+| Knowledge text becomes executable HTML | DOM renderer uses `textContent`/native element creation and forbids HTML interpolation | Review future rendering helpers |
+| UI invents or weakens decision semantics | Controller reuses `evaluateDecision()` and `facetCounts()`; UI-owned constraints are namespaced | Keep business rules out of render/startup code |
+| Stale recommendation remains after failed UI action | Failed action renders a diagnostic state instead of reusing prior counts/results | Add application E2E coverage before Beta |
+| Browser build leaks Node-only or synthetic fixture material | Deterministic bundle tests reject `node:`, `readFileSync` and test candidate IDs | Review future build plugins/assets |
 | Workflow credential theft | Read-only PR jobs, pinned Actions, no PR secrets | Protect repository administration |
 | Dependency compromise | Exact pins, integrity lock, audit, notices | Review updates and upstream provenance |
 
@@ -28,5 +34,5 @@ signature. A compromised trusted runner or administrator remains outside this li
 protection.
 
 No user roadmap ingestion, authentication, hosting or free-text parser exists yet.
-The first Stage 2 reviewed snapshot does not imply broader factual coverage, UI security
-or v0.0.1 release readiness.
+A framework-free browser shell exists, but the repository ships no default trusted
+runtime snapshot and Stage 3 does not imply broad factual coverage or v0.0.1 readiness.
