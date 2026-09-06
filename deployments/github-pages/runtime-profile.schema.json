@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://plldn.invalid/deployments/github-pages/runtime-profile.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "deployment_id": { "const": "github-pages" },
+    "source_manifest_path": {
+      "const": "knowledge/reviewed/stage2-core.manifest.json"
+    },
+    "approved_source_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "runtime_knowledge_snapshot": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+    },
+    "approved_runtime_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "runtime_document_paths": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "maxItems": 10000
+    },
+    "candidate_type": { "const": "language" },
+    "component_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+    },
+    "base_project": { "type": "object" }
+  },
+  "required": [
+    "schema_version",
+    "deployment_id",
+    "source_manifest_path",
+    "approved_source_manifest_sha256",
+    "runtime_knowledge_snapshot",
+    "approved_runtime_manifest_sha256",
+    "runtime_document_paths",
+    "candidate_type",
+    "component_id",
+    "base_project"
+  ],
+  "additionalProperties": false
+}

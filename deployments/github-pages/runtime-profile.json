@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.1",
+  "deployment_id": "github-pages",
+  "source_manifest_path": "knowledge/reviewed/stage2-core.manifest.json",
+  "approved_source_manifest_sha256": "a363cca90f1730910cbb617edb029646fdfde9e8e44f7abbc0a879f9a6c763d5",
+  "runtime_knowledge_snapshot": "deployment.github-pages.language.stage2-core.2026-09-06",
+  "approved_runtime_manifest_sha256": "a1e9533605e402339b0b473076cce68cdf60e758455831b891fbdda16473d4ec",
+  "runtime_document_paths": [
+    "claims/go-runtime-gc.json",
+    "claims/rust-safe-memory-without-gc.json",
+    "claims/typescript-emits-javascript.json",
+    "claims/typescript-static-checker.json",
+    "dimensions/emits-javascript.json",
+    "dimensions/runtime-garbage-collection.json",
+    "dimensions/safe-code-memory-safety-without-gc.json",
+    "dimensions/static-type-checker.json",
+    "entities/language-go.json",
+    "entities/language-python.json",
+    "entities/language-rust.json",
+    "entities/language-typescript.json",
+    "sources/go-faq.json",
+    "sources/rust-ownership.json",
+    "sources/rust-safe-unsafe.json",
+    "sources/typescript-handbook.json"
+  ],
+  "candidate_type": "language",
+  "component_id": "component.github-pages-browser",
+  "base_project": {
+    "schema_version": "0.1",
+    "project_id": "project.github-pages",
+    "components": [
+      {
+        "component_id": "component.github-pages-browser",
+        "form": "browser-ui"
+      }
+    ],
+    "facts": [],
+    "boundaries": []
+  }
+}

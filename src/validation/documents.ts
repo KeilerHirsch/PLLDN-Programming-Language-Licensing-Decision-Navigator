@@ -1,9 +1,24 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
-import { Ajv2020 } from "ajv/dist/2020.js";
-import formats from "ajv-formats";
+
+import type {
+  StandaloneValidationError,
+  StandaloneValidator,
+} from "./generated/validators.cjs";
+import {
+  claim,
+  decision_trace,
+  dimension,
+  entity,
+  evaluation_time,
+  project_facts,
+  relation,
+  review,
+  rule,
+  snapshot,
+  source,
+} from "./generated/validators.cjs";
 import { asObject, parseStrictJson } from "./json.ts";
-import { schemaBytes } from "./schema-set.ts";
 
 export { schemaBytes } from "./schema-set.ts";
 export const kinds = [
@@ -18,39 +33,53 @@ export const kinds = [
   "snapshot",
   "decision-trace",
 ] as const;
-const ajv = new Ajv2020({
-  strict: true,
-  allErrors: true,
-  coerceTypes: false,
-  useDefaults: false,
-  removeAdditional: false,
-});
-formats.default(ajv);
-for (const raw of Object.values(schemaBytes))
-  ajv.addSchema(asObject(parseStrictJson(raw)));
-/** Validate against repository schemas only; never resolve a network reference. */
+
+type DocumentKind = (typeof kinds)[number];
+const validators: Readonly<Record<DocumentKind, StandaloneValidator>> =
+  Object.freeze({
+    "project-facts": project_facts,
+    entity,
+    dimension,
+    source,
+    claim,
+    relation,
+    rule,
+    review,
+    snapshot,
+    "decision-trace": decision_trace,
+  });
+
+function errorsText(
+  errors: readonly StandaloneValidationError[] | null | undefined,
+): string {
+  return (errors ?? [])
+    .map(
+      (error) => `data${error.instancePath} ${error.message ?? "is invalid"}`,
+    )
+    .join(", ");
+}
 export function validateDocument(kind: string, data: unknown): void {
   if (!(kinds as readonly string[]).includes(kind))
     throw new Error("Unsupported document kind");
-  const validate = ajv.getSchema(
-    `https://plldn.invalid/schemas/${kind}.schema.json`,
-  );
-  if (!validate?.(data))
-    throw new Error(`Invalid ${kind}: ${ajv.errorsText(validate?.errors)}`);
+  const validate = validators[kind as DocumentKind];
+  if (!validate(data))
+    throw new Error(`Invalid ${kind}: ${errorsText(validate.errors)}`);
 }
-const validateTimestamp = ajv.compile({ type: "string", format: "date-time" });
+
 /** Require an offset-bearing RFC3339 instant before using the host clock parser. */
 export function evaluationTime(at: string): number {
-  if (!validateTimestamp(at) || !/(?:Z|[+-]\d{2}:\d{2})$/i.test(at))
+  if (!evaluation_time(at) || !/(?:Z|[+-]\d{2}:\d{2})$/i.test(at))
     throw new Error("Explicit valid evaluation time required");
   const time = Date.parse(at);
   if (!Number.isFinite(time)) throw new Error("Unsupported evaluation time");
   return time;
 }
+
 export interface Document {
   kind: string;
   record: Record<string, unknown>;
 }
+
 /** Reject wrapper extensions so candidate input cannot carry trust metadata. */
 export function parseDocument(raw: string): Document {
   const wrapper = asObject(parseStrictJson(raw));

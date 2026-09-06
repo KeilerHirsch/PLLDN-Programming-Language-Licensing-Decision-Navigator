@@ -19,6 +19,11 @@ for (const required of [
   ".github/CODEOWNERS",
   ".github/workflows/verify.yml",
   ".github/workflows/security.yml",
+  "deployments/github-pages/runtime-profile.json",
+  "deployments/github-pages/runtime-profile.schema.json",
+  "tools/pages-profile.ts",
+  "tools/pages-runtime.ts",
+  "tools/build-pages.ts",
 ])
   assert(files.includes(required), `Missing ${required}`);
 for (const path of files) {
