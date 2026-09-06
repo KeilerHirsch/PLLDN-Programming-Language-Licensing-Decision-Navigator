@@ -201,7 +201,7 @@ assert.match(yaml, /npm run build:pages/);
 - [ ] **Step 3: Implement the workflow with immutable pins.** Use existing pins for checkout/setup-node/upload-artifact where applicable and these Pages pins resolved during planning:
   - `actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d` (`v6.0.0`)
   - `actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9` (`v5.0.0`)
-  - `actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346` (`v5.0.1`)
+  - `actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128` (`v5.0.0`) — refreshed 2026-09-06 after official tag verification; the previously planned v5.0.1 pin is not an official release.
 - [ ] **Step 4:** For automatic runs, checkout `${{ github.event.workflow_run.head_sha }}` with `persist-credentials: false`. Add one read-only stale-main guard that fetches `refs/heads/main` and requires it still equals the verified `head_sha` before artifact upload; a superseded main commit must never redeploy over a newer Pages state. Add `concurrency: { group: pages, cancel-in-progress: true }`.
 - [ ] **Step 5:** Reuse the pinned Gitleaks `v8.30.1` archive URL and SHA-256 from `security.yml`; do not curl an unverified binary.
 - [ ] **Step 6:** Manual dispatch sets the target SHA from `github.sha` only when `github.ref == 'refs/heads/main'`; otherwise the build/deploy jobs are skipped/fail closed.
