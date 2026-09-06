@@ -22,7 +22,8 @@ The corpus now covers Stage 0 contracts and snapshot trust, the Stage 1 determin
 decision/facet core, Stage 2 candidate/promotion/reviewed snapshot, Stage 3 browser
 portability/canonical UI facts/runtime trust, and Stage 4 product-facet provenance,
 bounded text normalization/rules/analyzer, manual-text equivalence and safe local UI
-integration.
+integration, plus the Stage 5A deployment profile, approved runtime projection, static Pages
+artifact boundary and exact-SHA deployment policy.
 Decision tests include hard constraints, all rule-effect classes, conservative UNKNOWN
 handling, component scope isolation, conditional applicability, ordered conflicts,
 Pareto behavior, ASK/abstention states, supersession drift and project-level license
@@ -50,6 +51,15 @@ no Stage-4 network or dynamic-code surface, and explicit confirmation only throu
 existing facet path. The central equivalence test requires canonical project serialization
 and material decision state/trace to match equivalent manual facet selection.
 
+Stage 5A tests bind the deployment profile to both the Reviewed source-manifest digest and
+the separately approved 16-document runtime projection. They prove exact projection closure,
+post-expiry usability without the four volatile current-version claims, deterministic Pages
+bytes, ordinary-browser trust isolation, safe runtime serialization, generated-byte rejection
+of dynamic-code/network/credential surfaces, reproducible standalone schema validators and
+an exact-SHA least-privilege Pages workflow with stale-main rejection. The projection covers
+only the four current language facets; it contains no licensing records or current-version
+claims.
+
 Passing these tests does not make the reviewed snapshot a general-purpose accuracy
 claim. Before v0.0.1 Beta, release-specific suites still need broader reviewed knowledge,
 high-risk holdout cases and application-level E2E coverage beyond the deliberately small
@@ -75,6 +85,13 @@ Stage 4 RED tests began with missing product facets/rule loader/normalizer/analy
 confirmation/UI modules. The gold corpus then caught overlapping short GC phrases that
 would have produced a false confident secondary mapping inside a memory-safety statement;
 the declarative rules were narrowed instead of adding hidden longest-match precedence.
+
+Stage 5A RED generated-byte tests exposed AJV's runtime schema compiler as a real
+`new Function` surface inside the browser bundle. The root cause was removed rather than
+allowlisted: pinned AJV now generates a checked-in deterministic standalone validator set,
+and browser-reachable validation imports those functions without the runtime compiler.
+Workflow RED tests then fixed the exact verified SHA, same-repository push requirement,
+stale-main guard and job-specific Pages/OIDC permissions before deployment YAML landed.
 
 AI review or automation can contribute evidence, but neither substitutes for source-backed
 knowledge review, human accountability or separately protected runtime approval.

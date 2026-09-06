@@ -7,7 +7,9 @@ Stage 1 added the deterministic decision core. Stage 2 added a small source-back
 candidate pack and a human-reviewed immutable snapshot derived from one exact
 candidate manifest. Stage 3 added the first framework-free browser UI over those
 same contracts and decision semantics. Stage 4 adds a bounded local deterministic
-text accelerator whose output is presentation-only until explicitly confirmed.
+text accelerator whose output is presentation-only until explicitly confirmed. Stage 5A
+adds a deployment-specific verified GitHub Pages runtime path without changing the core
+runtime-trust contract.
 
 The trust path remains layered: strict JSON parsing, schema validation, typed
 references and scopes, candidate evidence review, human approval, immutable
@@ -51,9 +53,11 @@ filtering implementation. Stage 1 consumes project records with lifecycle `curre
 or `target` for active decisions.
 ## Browser UI boundary
 
-Stage 3 keeps the browser surface intentionally thin. Repository JSON Schemas are
-statically imported through `src/validation/schema-set.ts`, so Node and browser
-validation consume the same schema documents and schema digest without `node:fs`.
+Stage 3 keeps the browser surface intentionally thin. Repository JSON Schemas remain
+statically imported through `src/validation/schema-set.ts`. Pinned AJV tooling generates
+a checked-in standalone validator set from those same schemas, and both Node and browser
+runtime validation consume those precompiled functions. Browser-reachable validation
+therefore preserves the schema digest without `node:fs` or AJV runtime code generation.
 
 Facet selections are converted into deterministic `ui.facet.*` constraints inside
 canonical project facts. Clearing or changing a facet touches only its own UI-owned
@@ -95,6 +99,33 @@ Stage 4 invariant is that confirming text proposals for a set of facet options p
 byte-equivalent canonical project state and the same material decision trace as selecting
 those facets manually. Clearing or reanalyzing text changes analysis state only.
 
+## Verified GitHub Pages runtime boundary
+
+Stage 5A keeps the ordinary browser build and core runtime trust unchanged. A separate
+deployment profile binds two explicit approvals: the Reviewed source-manifest digest and
+a deployment-only runtime-projection digest. Deriving a projection from Reviewed bytes
+does not grant runtime trust by itself.
+
+Embedding the complete Reviewed Stage 2 pack was rejected because four volatile current-
+version claims would make the whole browser runtime unavailable after their freshness
+window expired even though Stage 4 does not consume them. The approved Pages projection
+therefore contains exactly 16 already-Reviewed documents: four language entities, four
+boolean capability dimensions, four capability claims and four primary sources. It contains
+no current-version claims and no licensing records.
+
+`build:pages` layers deployment material over the unchanged browser build and emits a
+static `runtime.js` before `app.js`. Evaluation time is taken at page load. Generated-byte
+tests reject dynamic-code, network and credential surfaces; schema validation uses the
+reproducible standalone validator set rather than AJV's runtime compiler.
+
+The Pages workflow accepts only a successful same-repository `Verify` push on `main`, or
+a manual dispatch while already on `main`. It checks out the exact verified SHA, rejects
+a stale SHA if `main` has advanced, repeats audit and pinned Gitleaks checks, and uploads
+the static Pages artifact from a `contents: read` build job. Only the final deployment job
+receives `pages: write` and `id-token: write`, and that job executes no repository code.
+The workflow exists before public promotion; PLLDN does not claim the Pages site is live
+until Task 7 observes a successful post-merge deployment.
+
 ## Candidate, review and immutable snapshot
 Stage 2 candidate assertions remain `Partial`. Source records carry the official
 reference, retrieval time and exact content SHA-256 fingerprint. Candidate construction
@@ -110,7 +141,7 @@ Runtime acceptance is a separate trust boundary. `verifySnapshot` still requires
 caller-supplied trusted digest, and the repository does not ship a default runtime
 approval pin for this snapshot.
 
-Broader reviewed catalogue coverage, GitHub Pages deployment, configuration/interaction
-optimization and release-grade end-to-end corpus remain later stages. Stage 4 is not the
-v0.0.1 product release and makes no claim of broad natural-language understanding,
+Broader reviewed catalogue coverage, a licensing Pages surface, public deployment
+promotion and release-grade end-to-end corpus remain separately gated work. Stage 5A is
+not the v0.0.1 product release and makes no claim of broad natural-language understanding,
 general recommendation accuracy or certification.
