@@ -1,0 +1,44 @@
+name: Community
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  freshness:
+    name: Freshness candidate report
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24.15.0"
+      - run: npm install --global npm@11.12.1 --ignore-scripts
+      - run: npm ci --ignore-scripts      - name: Build freshness candidate report
+        shell: bash
+        run: |
+          evaluated_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          node tools/source-candidates.ts \
+            --evaluated-at "$evaluated_at" \
+            --review-window-hours 24 \
+            --output reports/source-candidates.json
+      - name: Publish advisory summary
+        shell: bash
+        run: |
+          {
+            echo '### Freshness candidates'
+            echo '```json'
+            cat reports/source-candidates.json
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: source-candidates
+          path: reports/source-candidates.json
+          if-no-files-found: error
+          retention-days: 30
