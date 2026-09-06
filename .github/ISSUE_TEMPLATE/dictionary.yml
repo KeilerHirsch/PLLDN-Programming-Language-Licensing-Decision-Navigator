@@ -1,0 +1,76 @@
+name: Dictionary candidate
+
+description: Propose a phrase or alias for deterministic text assistance
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form collects untrusted candidate input only. A submission does not become a rule, fact, Reviewed knowledge, or runtime approval.
+        Any implementation PR still requires strict schema validation, positive and negative gold-corpus regressions, ambiguity/conflict checks, and manual/text equivalence.
+  - type: input
+    id: phrase
+    attributes:
+      label: Exact phrase or alias
+      description: Enter the exact text to evaluate; do not generalize beyond this phrase.
+    validations:
+      required: true
+  - type: dropdown
+    id: locale
+    attributes:
+      label: Locale
+      options:
+        - en
+        - de
+        - other
+    validations:
+      required: true
+  - type: dropdown
+    id: target_facet
+    attributes:
+      label: Target facet
+      options:
+        - runtime-garbage-collection
+        - memory-safety-without-gc
+        - static-type-checker
+        - emits-javascript
+        - ambiguity-only
+    validations:
+      required: true
+  - type: dropdown
+    id: target_option
+    attributes:
+      label: Intended option
+      options:
+        - "true"
+        - "false"
+        - ambiguity-only
+    validations:
+      required: true
+  - type: textarea
+    id: positive
+    attributes:
+      label: Positive example
+      description: Show a sentence where this phrase should map to the intended candidate.
+    validations:
+      required: true
+  - type: textarea
+    id: negative
+    attributes:
+      label: Negative or near-miss example
+      description: Show a similar sentence that must not map the same way.
+    validations:
+      required: true
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Provenance and rationale
+      description: Explain where the phrase comes from and why the proposed interpretation is bounded and defensible.
+    validations:
+      required: true
+  - type: textarea
+    id: ai_assistance
+    attributes:
+      label: Material AI assistance disclosure
+      description: State whether AI materially helped discover, phrase, classify, or test this proposal and what was independently checked.
+    validations:
+      required: true
