@@ -1,23 +1,25 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
-import { Ajv2020 } from "ajv/dist/2020.js";
-import textRuleSetSchema from "../../schemas/text-rule-set.schema.json" with {
-  type: "json",
-};
+
 import stage4Core from "../../text-rules/stage4-core.json" with {
   type: "json",
 };
 import type { FacetDefinition } from "../ui/types.ts";
+import {
+  type StandaloneValidationError,
+  text_rule_set,
+} from "../validation/generated/validators.cjs";
 import type { PatternAtom, TextRuleSet } from "./types.ts";
 
-const ajv = new Ajv2020({
-  strict: true,
-  allErrors: true,
-  coerceTypes: false,
-  useDefaults: false,
-  removeAdditional: false,
-});
-const validateRuleSet = ajv.compile(textRuleSetSchema);
+function errorsText(
+  errors: readonly StandaloneValidationError[] | null | undefined,
+): string {
+  return (errors ?? [])
+    .map(
+      (error) => `data${error.instancePath} ${error.message ?? "is invalid"}`,
+    )
+    .join(", ");
+}
 
 function requireUniqueIds(values: readonly string[], label: string): void {
   const seen = new Set<string>();
@@ -37,9 +39,9 @@ export function loadTextRuleSet(
   data: unknown,
   facets: readonly FacetDefinition[],
 ): TextRuleSet {
-  if (!validateRuleSet(data)) {
+  if (!text_rule_set(data)) {
     throw new Error(
-      `Invalid text rule set schema: ${ajv.errorsText(validateRuleSet.errors)}`,
+      `Invalid text rule set schema: ${errorsText(text_rule_set.errors)}`,
     );
   }
   const ruleSet = data as unknown as TextRuleSet;
@@ -59,7 +61,6 @@ export function loadTextRuleSet(
         throw new Error(`Unknown alias reference: ${alias}`);
     }
   }
-
   requireUniqueIds(
     facets.map((facet) => facet.facet_id),
     "facet",
