@@ -23,7 +23,8 @@ decision/facet core, Stage 2 candidate/promotion/reviewed snapshot, Stage 3 brow
 portability/canonical UI facts/runtime trust, and Stage 4 product-facet provenance,
 bounded text normalization/rules/analyzer, manual-text equivalence and safe local UI
 integration, plus the Stage 5A deployment profile, approved runtime projection, static Pages
-artifact boundary and exact-SHA deployment policy.
+artifact boundary and exact-SHA deployment policy, plus Stage 5B deterministic freshness
+maintenance, dictionary candidate intake, path-only PR classification and automation-authority separation.
 Decision tests include hard constraints, all rule-effect classes, conservative UNKNOWN
 handling, component scope isolation, conditional applicability, ordered conflicts,
 Pareto behavior, ASK/abstention states, supersession drift and project-level license
@@ -59,6 +60,13 @@ of dynamic-code/network/credential surfaces, reproducible standalone schema vali
 an exact-SHA least-privilege Pages workflow with stale-main rejection. The projection covers
 only the four current language facets; it contains no licensing records or current-version
 claims.
+
+Stage 5B tests additionally prove explicit-time freshness classification, canonical and
+byte-deterministic maintenance reports, candidate-only dictionary intake, deterministic
+path classification with overlap handling, base-branch PR-tool isolation, parser-valid
+read-only workflow permissions, and a public governance contract that automation output is
+not approval. Freshness checks intentionally inspect already expired claims without using
+the runtime expiry gate that they are responsible for reporting.
 
 Passing these tests does not make the reviewed snapshot a general-purpose accuracy
 claim. Before v0.0.1 Beta, release-specific suites still need broader reviewed knowledge,

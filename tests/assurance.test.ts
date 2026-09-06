@@ -7,21 +7,21 @@ import test from "node:test";
 const readJson = (path: string) =>
   JSON.parse(readFileSync(new URL(`../${path}`, import.meta.url), "utf8"));
 
-test("assurance control plane names the Stage 5A verified Pages runtime scope", () => {
+test("assurance control plane names the final Stage 5 GitHub-native runtime and community scope", () => {
   const requirements = readJson("assurance/requirements.json");
   const evidenceSchema = readJson("assurance/evidence-contract.schema.json");
-  assert.equal(requirements.scope, "stage-5a-verified-github-pages-runtime");
+  assert.equal(requirements.scope, "stage-5-github-native-runtime-community");
   assert.equal(
     evidenceSchema.properties.scope.const,
-    "stage-5a-verified-github-pages-runtime",
+    "stage-5-github-native-runtime-community",
   );
   assert.match(
     readFileSync(new URL("../tools/evidence.ts", import.meta.url), "utf8"),
-    /scope: "stage-5a-verified-github-pages-runtime"/,
+    /scope: "stage-5-github-native-runtime-community"/,
   );
 });
 
-test("Stage 5A requirements map core, text and Pages invariants to real tests", () => {
+test("Stage 5 requirements map core, text, Pages and community invariants to real tests", () => {
   const rows = (
     readJson("assurance/requirements.json") as {
       requirements: Array<{ id: string; tests: string[] }>;
@@ -85,6 +85,13 @@ test("Stage 5A requirements map core, text and Pages invariants to real tests", 
       "tests/standalone-validators.test.ts",
     ],
     "PLLDN-C28": ["tests/pages-workflow.test.ts"],
+    "PLLDN-C29": ["tests/source-candidates.test.ts"],
+    "PLLDN-C30": ["tests/dictionary-issue-form.test.ts"],
+    "PLLDN-C31": [
+      "tests/community-review.test.ts",
+      "tests/community-workflow.test.ts",
+    ],
+    "PLLDN-C32": ["tests/community-authority.test.ts"],
   };
   assert.equal(rows.length, Object.keys(expected).length);
   for (const [id, tests] of Object.entries(expected)) {

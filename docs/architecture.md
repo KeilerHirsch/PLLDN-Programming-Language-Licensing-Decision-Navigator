@@ -123,8 +123,27 @@ a manual dispatch while already on `main`. It checks out the exact verified SHA,
 a stale SHA if `main` has advanced, repeats audit and pinned Gitleaks checks, and uploads
 the static Pages artifact from a `contents: read` build job. Only the final deployment job
 receives `pages: write` and `id-token: write`, and that job executes no repository code.
-The workflow exists before public promotion; PLLDN does not claim the Pages site is live
-until Task 7 observes a successful post-merge deployment.
+The Pages site is live only because a post-merge deployment was observed and its four
+served files were byte-compared with the verified true-main Pages artifact.
+
+## Read-only community candidate boundary
+
+Stage 5B adds maintenance and review assistance without adding a second authority plane.
+`tools/source-candidates.ts` classifies only explicit `valid_until` metadata at an explicit
+evaluation time and review horizon. It may report `EXPIRED` or `REVIEW_DUE`; it never
+invents a replacement fact, fetches the web, or changes Reviewed knowledge.
+
+Dictionary issues are untrusted candidate intake. The form captures exact phrase, locale,
+target facet/option, positive and negative examples, provenance and material AI assistance.
+Submission alone cannot modify `text-rules/stage4-core.json`; normal schema, ambiguity,
+conflict and manual/text-equivalence regressions remain mandatory.
+
+`tools/community-review.ts` classifies changed repository paths into deterministic review
+surfaces and lists companion evidence. On pull requests, the Community workflow checks out
+trusted base-branch tooling and fetches the PR head only to compute changed paths. It does
+not install or execute PR-supplied code. Job summaries and artifacts are advisory only;
+workflow permissions remain `contents: read` and confer no approval, promotion or merge
+authority. GitHub App/repository-read integration remains optional Stage 5C work.
 
 ## Candidate, review and immutable snapshot
 Stage 2 candidate assertions remain `Partial`. Source records carry the official

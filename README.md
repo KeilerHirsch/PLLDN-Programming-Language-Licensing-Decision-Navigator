@@ -14,6 +14,8 @@ facet and decision core. Stage 4 added a small local deterministic free-text acc
 that can propose reviewed product facets but cannot apply them without confirmation.
 Stage 5A adds a deployment-specific verified GitHub Pages runtime path over that same
 small reviewed language surface.
+Stage 5B adds deterministic read-only freshness maintenance, structured dictionary
+candidate intake and advisory pull-request path classification without automation authority.
 
 Runtime trust remains separate: the core and ordinary browser build still ship no default
 snapshot approval pin. The Pages deployment profile separately approves the Reviewed
