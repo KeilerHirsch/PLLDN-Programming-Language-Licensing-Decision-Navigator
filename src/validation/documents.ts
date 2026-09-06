@@ -1,9 +1,11 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
-import { readFileSync } from "node:fs";
 import { Ajv2020 } from "ajv/dist/2020.js";
 import formats from "ajv-formats";
 import { asObject, parseStrictJson } from "./json.ts";
+import { schemaBytes } from "./schema-set.ts";
+
+export { schemaBytes } from "./schema-set.ts";
 export const kinds = [
   "project-facts",
   "entity",
@@ -24,17 +26,6 @@ const ajv = new Ajv2020({
   removeAdditional: false,
 });
 formats.default(ajv);
-export const schemaBytes: Readonly<Record<string, string>> = Object.freeze(
-  Object.fromEntries(
-    ["common", ...kinds].map((name) => [
-      name,
-      readFileSync(
-        new URL(`../../schemas/${name}.schema.json`, import.meta.url),
-        "utf8",
-      ),
-    ]),
-  ),
-);
 for (const raw of Object.values(schemaBytes))
   ajv.addSchema(asObject(parseStrictJson(raw)));
 /** Validate against repository schemas only; never resolve a network reference. */

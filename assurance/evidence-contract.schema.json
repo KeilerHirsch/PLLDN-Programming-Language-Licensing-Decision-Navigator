@@ -15,7 +15,7 @@
       "const": "0.1"
     },
     "scope": {
-      "const": "stage-2-reviewed-knowledge"
+      "const": "stage-3-faceted-ui"
     },
     "subject_sha256": {
       "type": "string",

@@ -18,7 +18,8 @@
     "test:coverage": "node --test --experimental-test-coverage --test-coverage-include=src/**/*.ts --test-coverage-lines=80 --test-coverage-functions=80 --test-coverage-branches=80 tests/*.test.ts",
     "verify": "node tools/verify.ts",
     "evidence": "node tools/evidence.ts",
-    "check:repository": "node tools/repository.ts"
+    "check:repository": "node tools/repository.ts",
+    "build:browser": "node tools/build-browser.ts"
   },
   "dependencies": {
     "ajv": "8.20.0",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.5.12",
     "@types/node": "24.13.3",
+    "esbuild-wasm": "0.28.2",
     "typescript": "7.0.2"
   }
 }
