@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "scope": "stage-5a-verified-github-pages-runtime",
+  "scope": "stage-5-github-native-runtime-community",
   "requirements": [
     {
       "id": "PLLDN-C01",
@@ -166,7 +166,30 @@
       "id": "PLLDN-C28",
       "invariant": "Pages deployment is chained to the exact successful same-repository main Verify SHA with stale-main rejection and least-privilege deployment permissions",
       "tests": ["tests/pages-workflow.test.ts"]
+    },
+    {
+      "id": "PLLDN-C29",
+      "invariant": "Freshness maintenance is deterministic, explicit-time and advisory only; expired or review-due claims produce candidates without inferred replacement facts",
+      "tests": ["tests/source-candidates.test.ts"]
+    },
+    {
+      "id": "PLLDN-C30",
+      "invariant": "Dictionary contribution intake remains untrusted candidate material and preserves the Stage 4 schema, ambiguity, conflict and equivalence regression burden",
+      "tests": ["tests/dictionary-issue-form.test.ts"]
+    },
+    {
+      "id": "PLLDN-C31",
+      "invariant": "Community PR assistance classifies changed review surfaces deterministically from paths while trusted base-branch tooling remains isolated from untrusted PR code",
+      "tests": [
+        "tests/community-review.test.ts",
+        "tests/community-workflow.test.ts"
+      ]
+    },
+    {
+      "id": "PLLDN-C32",
+      "invariant": "Community automation is read-only advisory evidence and cannot approve, promote, merge or mutate repository knowledge or contribution state",
+      "tests": ["tests/community-authority.test.ts"]
     }
   ],
-  "release_scope": "Stage 5A provides a pre-release verified GitHub Pages deployment path for the four reviewed capability facets in the language decision surface using a separately approved 16-document runtime projection; the core still ships no default runtime approval pin, the licensing surface is not deployed, and no v0.0.1 Beta, broad recommendation-accuracy or certification claim is made"
+  "release_scope": "Stage 5 provides the verified pre-release GitHub Pages runtime plus deterministic read-only community candidate maintenance and PR review assistance; automation has no approval or mutation authority, GitHub App repository access remains deferred to optional Stage 5C, and no v0.0.1 Beta, broad recommendation-accuracy or certification claim is made"
 }

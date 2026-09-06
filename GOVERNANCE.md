@@ -35,3 +35,15 @@ against a repository administrator who can change the rules.
 
 Use is free. Voluntary GitHub Sponsors and Ko-fi donations confer no feature
 entitlement, ranking influence or approval authority.
+
+## Automation authority
+
+Bots cannot approve, merge or promote their own proposals. Community workflows are
+read-only advisory tooling: they may emit freshness candidates, classify changed paths
+and publish job summaries or artifacts, but they cannot create Reviewed assertions,
+change runtime approval digests, write branches, label issues or PRs, or mutate review
+state.
+
+A bot-produced report is evidence about what automation observed, not authority over the
+underlying claim. Human review, immutable promotion and runtime approval remain separate
+steps with their existing controls.

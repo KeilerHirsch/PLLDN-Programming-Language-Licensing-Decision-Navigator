@@ -38,6 +38,11 @@ approval set.
 | Wrong or stale commit is deployed | Pages chains only from successful same-repository main Verify push, checks out its exact SHA and rejects it if remote main advanced | Protect branch/workflow administration |
 | Pages workflow escalates repository privileges | Build/scan job has `contents: read`; deploy job alone has `pages: write` and `id-token: write` and executes no repository code | Review every permission or trigger change |
 | Workflow credential theft | Read-only PR/build jobs, immutable Action pins, no PR secrets; generated artifact rejects credential markers | Protect repository administration |
+| Malicious dictionary issue content | Issue form is candidate-only text; no issue field is loaded as a rule or Reviewed fact | Maintainer reviews provenance and regression cases before any code/data change |
+| Path-classifier manipulation | Classifier accepts normalized safe repository paths only and reports overlapping review surfaces instead of approval | Review future path classes and keep advisory semantics explicit |
+| Untrusted PR code execution through assistance | Community PR job checks out trusted base tooling and fetches PR head only for `git diff --name-only`; no PR-supplied Node/npm code runs | Preserve base-tool isolation when workflow steps change |
+| Community automation permission creep | Workflow is globally `contents: read` and tests reject write permissions and mutation commands | Review every permission/trigger/action change |
+| Bot output is mistaken for authority | Governance states summaries/artifacts are advisory and cannot approve, promote, merge or mutate knowledge | Human reviewer remains accountable for promotion and merge decisions |
 | Dependency compromise | Exact pins, integrity lock, audit, notices | Review updates and upstream provenance |
 
 SHA-256 proves identity, not factual correctness. Human review establishes the scoped
@@ -48,9 +53,9 @@ protection.
 
 Stage 4 accepts bounded local text only through the deterministic proposal accelerator;
 it does not persist, upload or treat that text as canonical project state. Stage 5A adds
-only a static deployment path for the same four reviewed language facets: no account,
-authentication, backend, hosted inference or general natural-language parser exists. The
-core still ships no default trusted runtime snapshot. The Pages workflow is not evidence
-that a public deployment is live until post-merge observation, and Stage 5A does not imply
-broad factual coverage, licensing coverage, general recommendation accuracy or v0.0.1
-readiness.
+a verified static deployment path for the same four reviewed language facets. Stage 5B
+adds read-only candidate maintenance and PR-path review assistance only. No account,
+authentication, backend, hosted inference, repository-write bot or general natural-language
+parser exists. The core still ships no default trusted runtime snapshot. Stage 5 does not
+imply broad factual coverage, licensing coverage, general recommendation accuracy or
+v0.0.1 readiness; repository-read GitHub App work remains deferred to optional Stage 5C.
