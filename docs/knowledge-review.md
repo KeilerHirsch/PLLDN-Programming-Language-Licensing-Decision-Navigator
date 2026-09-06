@@ -22,3 +22,18 @@ Runtime approval remains separate from human knowledge review. A trusted snapsho
 digest must be supplied independently and protected against snapshot-controlled
 replacement. The repository's default runtime allowlist remains empty. Released
 snapshots must remain immutable; corrections require a new snapshot.
+
+## Stage 5B advisory automation
+
+Freshness reports and PR classifiers operate before authority is granted. Their complete
+path is candidate input -> candidate PR -> validation and evidence -> human review ->
+immutable promotion -> separate runtime approval. No job summary or artifact is approval.
+
+Freshness automation reports only claims whose existing `valid_until` metadata is expired
+or inside the explicit review horizon. It does not propose replacement values, sources or
+Reviewed assertions. PR classification reports touched review surfaces and companion
+evidence patterns; it does not decide whether those companions are sufficient.
+
+Dictionary issue submissions are untrusted candidate material. A resulting PR still needs
+the Stage 4 rule schema, positive and negative/near-miss corpus coverage, ambiguity and
+conflict behavior, manual/text equivalence and normal human review before promotion.
