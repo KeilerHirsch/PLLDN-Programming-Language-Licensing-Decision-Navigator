@@ -2,6 +2,10 @@
 
 A faceted decision navigator for programming languages, software licenses and architecture constraints.
 
+> **Try PLLDN live:** [Open the verified GitHub Pages app →](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/)
+>
+> **Support development:** [Ko-fi](https://ko-fi.com/keilerhirsch) · [GitHub Sponsors](https://github.com/sponsors/KeilerHirsch)
+
 PLLDN is in active pre-release development. Stage 0 established the trust and
 data-contract foundation; Stage 1 added the deterministic decision and facet core.
 Stage 2 added a small source-backed knowledge pack plus an immutable human-reviewed
@@ -16,8 +20,8 @@ snapshot approval pin. The Pages deployment profile separately approves the Revi
 source manifest and a minimal 16-document runtime projection; the deployment artifact
 contains only that runtime projection as its trust input. Stage 4 adds no LLM, provider
 API, network inference, embeddings, fuzzy classifier or direct text-to-decision path.
-The Pages deployment workflow is implemented but is not claimed live until post-merge
-deployment observation. There is no **v0.0.1 Beta release** yet.
+The verified GitHub Pages deployment is live and serves the exact reviewed runtime projection.
+The live site remains a pre-release surface; there is no **v0.0.1 Beta release** yet.
 
 ## Run the checks
 
@@ -63,7 +67,11 @@ certification claim.
 Start with [architecture](docs/architecture.md), [data contracts](docs/data-contracts.md)
 or [contributing](CONTRIBUTING.md).
 
-PLLDN will be free to use, without a paid feature tier. Funding is limited to
-voluntary GitHub Sponsors and Ko-fi support; donation links will be added when verified.
+## Support
+
+PLLDN will be free to use, without a paid feature tier. If the project is useful to you,
+voluntary support is welcome through [Ko-fi](https://ko-fi.com/keilerhirsch) or
+[GitHub Sponsors](https://github.com/sponsors/KeilerHirsch). GitHub controls Sponsors
+availability for the linked account; Ko-fi is the currently verified active support route.
 
 Own code, documentation and project data are licensed under [EUPL-1.2](LICENSE).
