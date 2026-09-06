@@ -1,0 +1,232 @@
+[
+  {
+    "id": "gc-required-en",
+    "input": "We must use garbage collection.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "runtime-garbage-collection",
+        "option_id": "true"
+      }
+    ]
+  },
+  {
+    "id": "gc-required-alias-en",
+    "input": "GC required.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "runtime-garbage-collection",
+        "option_id": "true"
+      }
+    ]
+  },
+  {
+    "id": "gc-required-de",
+    "input": "GC erforderlich.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "runtime-garbage-collection",
+        "option_id": "true"
+      }
+    ]
+  },
+  {
+    "id": "gc-forbidden-en",
+    "input": "The runtime must operate without GC.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "runtime-garbage-collection",
+        "option_id": "false"
+      }
+    ]
+  },
+  {
+    "id": "gc-forbidden-de",
+    "input": "Muss ohne GC laufen.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "runtime-garbage-collection",
+        "option_id": "false"
+      }
+    ]
+  },
+  {
+    "id": "gc-conflict",
+    "input": "GC required, but must not use GC.",
+    "expected": [
+      { "state": "CONFLICTING", "facet_id": "runtime-garbage-collection" }
+    ]
+  },
+  {
+    "id": "gc-ambiguous",
+    "input": "GC optional.",
+    "expected": [{ "state": "AMBIGUOUS" }]
+  },
+  {
+    "id": "gc-bare-concept-abstains",
+    "input": "Garbage collection is a runtime technique.",
+    "expected": []
+  },
+  {
+    "id": "memory-safe-required-en",
+    "input": "It must be memory safe without GC.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "memory-safety-without-gc",
+        "option_id": "true"
+      }
+    ]
+  },
+  {
+    "id": "memory-safe-required-de",
+    "input": "Speichersicherheit muss ohne GC gewährleistet sein.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "memory-safety-without-gc",
+        "option_id": "true"
+      }
+    ]
+  },
+  {
+    "id": "memory-safe-not-required-en",
+    "input": "Memory safety without GC not required.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "memory-safety-without-gc",
+        "option_id": "false"
+      }
+    ]
+  },
+  {
+    "id": "static-required-en",
+    "input": "Static type checker required.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "static-type-checker",
+        "option_id": "true"
+      }
+    ]
+  },
+  {
+    "id": "static-required-de",
+    "input": "Statische Typprüfung erforderlich.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "static-type-checker",
+        "option_id": "true"
+      }
+    ]
+  },
+  {
+    "id": "static-forbidden-en",
+    "input": "No static type checker.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "static-type-checker",
+        "option_id": "false"
+      }
+    ]
+  },
+  {
+    "id": "static-forbidden-de",
+    "input": "Keine statische Typprüfung.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "static-type-checker",
+        "option_id": "false"
+      }
+    ]
+  },
+  {
+    "id": "static-optional-ambiguous",
+    "input": "Static typing optional.",
+    "expected": [{ "state": "AMBIGUOUS" }]
+  },
+  {
+    "id": "javascript-required-en",
+    "input": "Must emit JavaScript.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "emits-javascript",
+        "option_id": "true"
+      }
+    ]
+  },
+  {
+    "id": "javascript-required-de",
+    "input": "MUSS JS erzeugen.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "emits-javascript",
+        "option_id": "true"
+      }
+    ]
+  },
+  {
+    "id": "javascript-forbidden-en",
+    "input": "Must not emit JavaScript.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "emits-javascript",
+        "option_id": "false"
+      }
+    ]
+  },
+  {
+    "id": "javascript-forbidden-de",
+    "input": "Darf kein JavaScript erzeugen.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "emits-javascript",
+        "option_id": "false"
+      }
+    ]
+  },
+  {
+    "id": "javascript-bare-concept-abstains",
+    "input": "JavaScript is popular.",
+    "expected": []
+  },
+  {
+    "id": "nfkc-javascript-required",
+    "input": "ＭＵＳＴ emit JS!",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "emits-javascript",
+        "option_id": "true"
+      }
+    ]
+  },
+  {
+    "id": "same-target-dedupes",
+    "input": "GC required; must use garbage collection.",
+    "expected": [
+      {
+        "state": "PROPOSED",
+        "facet_id": "runtime-garbage-collection",
+        "option_id": "true"
+      }
+    ]
+  },
+  {
+    "id": "irrelevant-abstains",
+    "input": "A command line tool with a small parser.",
+    "expected": []
+  }
+]

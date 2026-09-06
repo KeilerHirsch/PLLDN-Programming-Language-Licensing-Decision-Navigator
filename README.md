@@ -5,12 +5,14 @@ A faceted decision navigator for programming languages, software licenses and ar
 PLLDN is in active pre-release development. Stage 0 established the trust and
 data-contract foundation; Stage 1 added the deterministic decision and facet core.
 Stage 2 added a small source-backed knowledge pack plus an immutable human-reviewed
-snapshot. Stage 3 adds the first framework-free browser UI over the same authoritative
-facet and decision core.
+snapshot. Stage 3 added the first framework-free browser UI over the same authoritative
+facet and decision core. Stage 4 adds a small local deterministic free-text accelerator
+that can propose reviewed product facets but cannot apply them without confirmation.
 
 Runtime trust remains separate: no default snapshot approval pin is shipped. The
 browser shell therefore fails closed unless a caller supplies approved runtime material.
-There is no free-text parser, GitHub Pages deployment or **v0.0.1 Beta release** yet.
+Stage 4 adds no LLM, provider API, network inference, embeddings, fuzzy classifier or
+direct text-to-decision path. There is no GitHub Pages deployment or **v0.0.1 Beta release** yet.
 
 ## Run the checks
 
@@ -44,6 +46,8 @@ do not fetch knowledge or remote schemas.
 - A candidate cannot approve itself. Released snapshots remain immutable.
 - Human review and runtime snapshot approval are separate trust decisions.
 - UI counts and material candidate states reuse the deterministic decision core.
+- Free text may propose filters; only confirmed proposals enter the existing facet path.
+- Correct abstention is preferred over guessed text interpretation.
 - Language and license choices are component- and scenario-specific.
 The first planned public product release is **v0.0.1 Beta**. The current
 repository is not that release and makes no general recommendation-accuracy or

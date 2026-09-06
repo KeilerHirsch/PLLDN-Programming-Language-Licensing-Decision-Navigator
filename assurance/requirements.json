@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "scope": "stage-3-faceted-ui",
+  "scope": "stage-4-free-text-accelerator",
   "requirements": [
     {
       "id": "PLLDN-C01",
@@ -106,7 +106,39 @@
         "tests/ui-render-contract.test.ts",
         "tests/browser-build.test.ts"
       ]
+    },
+    {
+      "id": "PLLDN-C19",
+      "invariant": "Product facets are derived only from approved Reviewed boolean dimensions and fail closed on missing or type-mismatched dimensions",
+      "tests": ["tests/product-facets.test.ts"]
+    },
+    {
+      "id": "PLLDN-C20",
+      "invariant": "Free-text rules, normalization and matching are bounded, deterministic and abstain on unsupported or ambiguous input",
+      "tests": [
+        "tests/text-rules.test.ts",
+        "tests/text-normalize.test.ts",
+        "tests/text-analyze.test.ts"
+      ]
+    },
+    {
+      "id": "PLLDN-C21",
+      "invariant": "Confirmed text proposals are materially equivalent to selecting the same authoritative facets manually",
+      "tests": ["tests/text-equivalence.test.ts"]
+    },
+    {
+      "id": "PLLDN-C22",
+      "invariant": "Stage 4 text assistance remains local-only and introduces no network or dynamic-code execution surface",
+      "tests": ["tests/ui-text-contract.test.ts", "tests/browser-build.test.ts"]
+    },
+    {
+      "id": "PLLDN-C23",
+      "invariant": "Text analysis stays outside canonical project state and only explicit PROPOSED confirmation reaches the existing facet path",
+      "tests": [
+        "tests/ui-text-contract.test.ts",
+        "tests/text-equivalence.test.ts"
+      ]
     }
   ],
-  "release_scope": "A deterministic Stage 3 faceted browser UI exists; no default runtime approval pin, GitHub Pages deployment or v0.0.1 Beta release is claimed"
+  "release_scope": "A deterministic local Stage 4 free-text accelerator can propose reviewed product facets and requires explicit confirmation; no default runtime approval pin, GitHub Pages deployment, v0.0.1 Beta release or general natural-language recommendation-accuracy claim is made"
 }
