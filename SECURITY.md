@@ -15,7 +15,10 @@ permissions and protected snapshot approvals. Stage 4 user text remains bounded 
 it must not become executable code, network input, telemetry or canonical project state
 without explicit facet confirmation. Stage 5A's static Pages path uses a separately approved
 minimal runtime projection, generated-byte security checks and an exact-SHA least-privilege
-deployment workflow. It adds no account, backend or secret-bearing browser feature.
+deployment workflow. Stage 5B adds only read-only maintenance/reporting and contribution
+classification: issue content and PR paths remain untrusted, PR-supplied code is not executed by the
+community workflow, and automation cannot approve, merge or mutate Reviewed knowledge. It adds no
+account, backend, repository-write bot or secret-bearing browser feature.
 See [the threat model](docs/threat-model.md).
 
 Security-sensitive fixes need a regression, provenance and review.
