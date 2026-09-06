@@ -24,6 +24,11 @@ approval set.
 | UI invents or weakens decision semantics | Controller reuses `evaluateDecision()` and `facetCounts()`; UI-owned constraints are namespaced | Keep business rules out of render/startup code |
 | Stale recommendation remains after failed UI action | Failed action renders a diagnostic state instead of reusing prior counts/results | Add application E2E coverage before Beta |
 | Browser build leaks Node-only or synthetic fixture material | Deterministic bundle tests reject `node:`, `readFileSync` and test candidate IDs | Review future build plugins/assets |
+| False-confident free-text mapping | Small reviewed literal rule surface plus gold-corpus regression; unsupported text abstains | Require a regression case and review for every rule expansion |
+| Contradictory text silently chooses one interpretation | Opposing same-facet matches become `CONFLICTING` and are not confirmable | User resolves the authoritative facet manually |
+| Rule drift invents knowledge | Production rules target only checked-in facets derived from Reviewed boolean dimensions | Re-review facet/rule changes together with provenance tests |
+| User text becomes code, network input or persisted telemetry | 16 KiB bound, declarative token rules, no regex/code/provider surface, source checks forbid network/dynamic execution | Review future adapters and storage proposals as new trust boundaries |
+| Analysis silently mutates canonical facts | Raw text/proposals remain outside `UiController`; only explicit PROPOSED confirmation calls the existing facet path | Preserve manual/text equivalence tests |
 | Workflow credential theft | Read-only PR jobs, pinned Actions, no PR secrets | Protect repository administration |
 | Dependency compromise | Exact pins, integrity lock, audit, notices | Review updates and upstream provenance |
 
@@ -33,6 +38,8 @@ still requires a separately supplied manifest digest. CI evidence is a report, n
 signature. A compromised trusted runner or administrator remains outside this library's
 protection.
 
-No user roadmap ingestion, authentication, hosting or free-text parser exists yet.
-A framework-free browser shell exists, but the repository ships no default trusted
-runtime snapshot and Stage 3 does not imply broad factual coverage or v0.0.1 readiness.
+Stage 4 accepts bounded local text only through the deterministic proposal accelerator;
+it does not persist, upload or treat that text as canonical project state. No account,
+authentication, backend, hosted inference or general natural-language parser exists.
+The repository still ships no default trusted runtime snapshot, and Stage 4 does not imply
+broad factual coverage, general recommendation accuracy or v0.0.1 readiness.

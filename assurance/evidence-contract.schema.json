@@ -15,7 +15,7 @@
       "const": "0.1"
     },
     "scope": {
-      "const": "stage-3-faceted-ui"
+      "const": "stage-4-free-text-accelerator"
     },
     "subject_sha256": {
       "type": "string",

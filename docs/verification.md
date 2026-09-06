@@ -19,9 +19,10 @@ and explicit browser-build tests cover deterministic comparison subjects.
 ## Current corpus scope
 
 The corpus now covers Stage 0 contracts and snapshot trust, the Stage 1 deterministic
-decision/facet core, Stage 2 candidate/promotion/reviewed snapshot, and Stage 3 browser
-portability, canonical UI facts, controller/model, runtime trust, DOM safety and build
-invariants.
+decision/facet core, Stage 2 candidate/promotion/reviewed snapshot, Stage 3 browser
+portability/canonical UI facts/runtime trust, and Stage 4 product-facet provenance,
+bounded text normalization/rules/analyzer, manual-text equivalence and safe local UI
+integration.
 Decision tests include hard constraints, all rule-effect classes, conservative UNKNOWN
 handling, component scope isolation, conditional applicability, ordered conflicts,
 Pareto behavior, ASK/abstention states, supersession drift and project-level license
@@ -41,10 +42,18 @@ constraints survive UI changes, controller counts/results match `facetCounts()` 
 `verifySnapshot()` with fail-closed behavior for absent, wrong or tampered approval.
 The browser build is run twice and required to produce byte-identical static outputs
 without `node:` imports, `readFileSync` or synthetic recommendation fixtures.
+
+Stage 4 tests additionally prove exact product-facet provenance, strict rule-set references,
+16 KiB UTF-8 input bounds, NFKC/source-span preservation, deterministic English/German
+gold-corpus behavior, correct zero-match/ambiguity/conflict abstention, same-target dedupe,
+no Stage-4 network or dynamic-code surface, and explicit confirmation only through the
+existing facet path. The central equivalence test requires canonical project serialization
+and material decision state/trace to match equivalent manual facet selection.
+
 Passing these tests does not make the reviewed snapshot a general-purpose accuracy
 claim. Before v0.0.1 Beta, release-specific suites still need broader reviewed knowledge,
-high-risk gold/holdout cases, application-level E2E coverage and filter/free-text
-equivalence once the optional text path exists.
+high-risk holdout cases and application-level E2E coverage beyond the deliberately small
+Stage 4 deterministic phrase surface.
 
 ## Test-first history
 
@@ -61,6 +70,11 @@ Stage 3 RED tests began with the Node filesystem dependency in validation, missi
 canonical UI constraint handling, missing controller/model modules, absent runtime trust
 and DOM boundaries, and a nonexistent browser build. The resulting production code is
 therefore constrained by regression tests rather than retrospective UI snapshots.
+
+Stage 4 RED tests began with missing product facets/rule loader/normalizer/analyzer and
+confirmation/UI modules. The gold corpus then caught overlapping short GC phrases that
+would have produced a false confident secondary mapping inside a memory-safety statement;
+the declarative rules were narrowed instead of adding hidden longest-match precedence.
 
 AI review or automation can contribute evidence, but neither substitutes for source-backed
 knowledge review, human accountability or separately protected runtime approval.
