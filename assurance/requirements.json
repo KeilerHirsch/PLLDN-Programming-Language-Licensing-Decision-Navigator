@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "scope": "stage-4-free-text-accelerator",
+  "scope": "stage-5a-verified-github-pages-runtime",
   "requirements": [
     {
       "id": "PLLDN-C01",
@@ -138,7 +138,35 @@
         "tests/ui-text-contract.test.ts",
         "tests/text-equivalence.test.ts"
       ]
+    },
+    {
+      "id": "PLLDN-C24",
+      "invariant": "GitHub Pages deployment trust requires a strict deployment profile that separately pins the Reviewed source manifest and approved runtime projection",
+      "tests": ["tests/pages-profile.test.ts"]
+    },
+    {
+      "id": "PLLDN-C25",
+      "invariant": "The Pages runtime is a minimal deterministic projection of exactly approved Reviewed documents and rejects source, allowlist or projection digest drift",
+      "tests": ["tests/pages-runtime.test.ts"]
+    },
+    {
+      "id": "PLLDN-C26",
+      "invariant": "Deployment-only runtime trust cannot leak into the ordinary browser build; Pages output is deterministic and injects approval material only in the deployment artifact",
+      "tests": ["tests/pages-build.test.ts", "tests/browser-build.test.ts"]
+    },
+    {
+      "id": "PLLDN-C27",
+      "invariant": "Generated Pages bytes contain no dynamic-code, network or credential surface and browser-reachable schema validation uses reproducible precompiled validators",
+      "tests": [
+        "tests/pages-security.test.ts",
+        "tests/standalone-validators.test.ts"
+      ]
+    },
+    {
+      "id": "PLLDN-C28",
+      "invariant": "Pages deployment is chained to the exact successful same-repository main Verify SHA with stale-main rejection and least-privilege deployment permissions",
+      "tests": ["tests/pages-workflow.test.ts"]
     }
   ],
-  "release_scope": "A deterministic local Stage 4 free-text accelerator can propose reviewed product facets and requires explicit confirmation; no default runtime approval pin, GitHub Pages deployment, v0.0.1 Beta release or general natural-language recommendation-accuracy claim is made"
+  "release_scope": "Stage 5A provides a pre-release verified GitHub Pages deployment path for the four reviewed capability facets in the language decision surface using a separately approved 16-document runtime projection; the core still ships no default runtime approval pin, the licensing surface is not deployed, and no v0.0.1 Beta, broad recommendation-accuracy or certification claim is made"
 }

@@ -7,21 +7,21 @@ import test from "node:test";
 const readJson = (path: string) =>
   JSON.parse(readFileSync(new URL(`../${path}`, import.meta.url), "utf8"));
 
-test("assurance control plane names the Stage 4 free-text accelerator scope", () => {
+test("assurance control plane names the Stage 5A verified Pages runtime scope", () => {
   const requirements = readJson("assurance/requirements.json");
   const evidenceSchema = readJson("assurance/evidence-contract.schema.json");
-  assert.equal(requirements.scope, "stage-4-free-text-accelerator");
+  assert.equal(requirements.scope, "stage-5a-verified-github-pages-runtime");
   assert.equal(
     evidenceSchema.properties.scope.const,
-    "stage-4-free-text-accelerator",
+    "stage-5a-verified-github-pages-runtime",
   );
   assert.match(
     readFileSync(new URL("../tools/evidence.ts", import.meta.url), "utf8"),
-    /scope: "stage-4-free-text-accelerator"/,
+    /scope: "stage-5a-verified-github-pages-runtime"/,
   );
 });
 
-test("Stage 4 requirements map core, knowledge, browser and text invariants to real tests", () => {
+test("Stage 5A requirements map core, text and Pages invariants to real tests", () => {
   const rows = (
     readJson("assurance/requirements.json") as {
       requirements: Array<{ id: string; tests: string[] }>;
@@ -77,6 +77,14 @@ test("Stage 4 requirements map core, knowledge, browser and text invariants to r
       "tests/ui-text-contract.test.ts",
       "tests/text-equivalence.test.ts",
     ],
+    "PLLDN-C24": ["tests/pages-profile.test.ts"],
+    "PLLDN-C25": ["tests/pages-runtime.test.ts"],
+    "PLLDN-C26": ["tests/pages-build.test.ts", "tests/browser-build.test.ts"],
+    "PLLDN-C27": [
+      "tests/pages-security.test.ts",
+      "tests/standalone-validators.test.ts",
+    ],
+    "PLLDN-C28": ["tests/pages-workflow.test.ts"],
   };
   assert.equal(rows.length, Object.keys(expected).length);
   for (const [id, tests] of Object.entries(expected)) {

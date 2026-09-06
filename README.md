@@ -6,13 +6,18 @@ PLLDN is in active pre-release development. Stage 0 established the trust and
 data-contract foundation; Stage 1 added the deterministic decision and facet core.
 Stage 2 added a small source-backed knowledge pack plus an immutable human-reviewed
 snapshot. Stage 3 added the first framework-free browser UI over the same authoritative
-facet and decision core. Stage 4 adds a small local deterministic free-text accelerator
+facet and decision core. Stage 4 added a small local deterministic free-text accelerator
 that can propose reviewed product facets but cannot apply them without confirmation.
+Stage 5A adds a deployment-specific verified GitHub Pages runtime path over that same
+small reviewed language surface.
 
-Runtime trust remains separate: no default snapshot approval pin is shipped. The
-browser shell therefore fails closed unless a caller supplies approved runtime material.
-Stage 4 adds no LLM, provider API, network inference, embeddings, fuzzy classifier or
-direct text-to-decision path. There is no GitHub Pages deployment or **v0.0.1 Beta release** yet.
+Runtime trust remains separate: the core and ordinary browser build still ship no default
+snapshot approval pin. The Pages deployment profile separately approves the Reviewed
+source manifest and a minimal 16-document runtime projection; the deployment artifact
+contains only that runtime projection as its trust input. Stage 4 adds no LLM, provider
+API, network inference, embeddings, fuzzy classifier or direct text-to-decision path.
+The Pages deployment workflow is implemented but is not claimed live until post-merge
+deployment observation. There is no **v0.0.1 Beta release** yet.
 
 ## Run the checks
 
@@ -29,9 +34,11 @@ To build the current static browser shell locally:
 npm run build:browser
 ```
 
-Generated files go to ignored `.build/site/`. The repository does not embed or
-ship a default trusted runtime snapshot, so the standalone shell intentionally
-shows an unavailable state until approved runtime material is injected.
+Generated ordinary-browser files go to ignored `.build/site/`. The repository does not
+embed or ship a default trusted runtime snapshot, so that standalone shell intentionally
+shows an unavailable state until approved runtime material is injected. To build the
+deployment-only Pages artifact locally, run `npm run build:pages`; it writes ignored
+`.build/pages/` with the separately approved runtime projection.
 
 Verification checks types, repository policy, formatting and tests with coverage.
 Reports are written to the ignored `reports/` directory. Network access is needed
