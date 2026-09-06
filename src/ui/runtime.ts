@@ -4,6 +4,7 @@ import { sha256 } from "../snapshots/manifest.ts";
 import { verifySnapshot } from "../snapshots/verify.ts";
 import { asObject, parseStrictJson } from "../validation/json.ts";
 import { createUiController, type UiController } from "./controller.ts";
+import { validatedProductFacets } from "./product-facets.ts";
 import type { FacetDefinition } from "./types.ts";
 
 export interface BrowserRuntimeInput {
@@ -12,7 +13,7 @@ export interface BrowserRuntimeInput {
   trustedSnapshotDigests: readonly string[];
   evaluatedAt: string;
   baseProject: Record<string, unknown>;
-  facets: readonly FacetDefinition[];
+  facets?: readonly FacetDefinition[];
   candidateType: string;
   componentId: string | null;
 }
@@ -45,7 +46,7 @@ export async function bootstrapUiRuntime(
     const controller = createUiController({
       baseProject: input.baseProject,
       knowledge,
-      facets: input.facets,
+      facets: input.facets ?? validatedProductFacets(knowledge),
       candidateType: input.candidateType,
       componentId: input.componentId,
       evaluatedAt: input.evaluatedAt,
