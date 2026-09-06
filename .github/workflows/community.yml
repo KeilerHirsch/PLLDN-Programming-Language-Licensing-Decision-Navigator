@@ -3,12 +3,12 @@ on:
   schedule:
     - cron: "17 3 * * *"
   workflow_dispatch:
-  pull_request:
+  pull_request_target:
 permissions:
   contents: read
 jobs:
   freshness:
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request_target'
     name: Freshness candidate report
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -47,7 +47,7 @@ jobs:
           retention-days: 30
 
   review:
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request_target'
     name: Community PR assistance
     runs-on: ubuntu-24.04
     timeout-minutes: 10

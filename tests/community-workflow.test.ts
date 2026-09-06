@@ -71,14 +71,15 @@ test("freshness workflow uploads only the advisory JSON report", () => {
 });
 test("pull-request assistance is isolated from the freshness job", () => {
   const yaml = workflow();
-  assert.match(yaml, /pull_request:/);
+  assert.match(yaml, /pull_request_target:/);
+  assert.equal(/(?:^|\n) {2}pull_request:\s*(?:\n|$)/.test(yaml), false);
   assert.match(
     yaml,
-    /freshness:\s*\r?\n\s+if:\s*github\.event_name != 'pull_request'/,
+    /freshness:\s*\r?\n\s+if:\s*github\.event_name != 'pull_request_target'/,
   );
   assert.match(
     yaml,
-    /review:\s*\r?\n\s+if:\s*github\.event_name == 'pull_request'/,
+    /review:\s*\r?\n\s+if:\s*github\.event_name == 'pull_request_target'/,
   );
   assert.equal(yaml.includes("npm ci --ignore-scripts      - name"), false);
 });
