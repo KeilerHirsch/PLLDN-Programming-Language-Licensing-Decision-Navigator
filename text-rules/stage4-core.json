@@ -62,7 +62,7 @@
     {
       "rule_id": "gc.forbidden.without.en",
       "kind": "actionable",
-      "pattern": ["without", { "alias": "gc-concept" }],
+      "pattern": ["must", "operate", "without", { "alias": "gc-concept" }],
       "target": {
         "facet_id": "runtime-garbage-collection",
         "option_id": "false"
@@ -82,7 +82,7 @@
     {
       "rule_id": "gc.forbidden.without.de",
       "kind": "actionable",
-      "pattern": ["ohne", { "alias": "gc-concept" }],
+      "pattern": ["muss", "ohne", { "alias": "gc-concept" }, "laufen"],
       "target": {
         "facet_id": "runtime-garbage-collection",
         "option_id": "false"
@@ -107,9 +107,11 @@
       "kind": "actionable",
       "pattern": [
         { "alias": "memory-safety" },
+        "muss",
         "ohne",
         { "alias": "gc-concept" },
-        "erforderlich"
+        "gewährleistet",
+        "sein"
       ],
       "target": { "facet_id": "memory-safety-without-gc", "option_id": "true" },
       "reason_key": "text.memory-safety-without-gc.required"
