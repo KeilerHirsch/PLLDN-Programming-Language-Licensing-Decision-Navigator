@@ -3,6 +3,7 @@
   "files": {
     "includes": [
       "**",
+      "!.build",
       "!node_modules",
       "!reports",
       "!package-lock.json",

@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "scope": "stage-2-reviewed-knowledge",
+  "scope": "stage-3-faceted-ui",
   "requirements": [
     {
       "id": "PLLDN-C01",
@@ -78,7 +78,35 @@
       "id": "PLLDN-C13",
       "invariant": "Checked-in Reviewed knowledge exactly reproduces the hash-approved candidate and still requires caller-supplied snapshot approval",
       "tests": ["tests/reviewed-stage2.test.ts"]
+    },
+    {
+      "id": "PLLDN-C14",
+      "invariant": "Browser validation consumes the same static schema set without filesystem coupling or schema-digest drift",
+      "tests": ["tests/browser-portability.test.ts"]
+    },
+    {
+      "id": "PLLDN-C15",
+      "invariant": "UI facet selections materialize only deterministic ui.facet.* canonical constraints and preserve foreign project state",
+      "tests": ["tests/ui-facts.test.ts"]
+    },
+    {
+      "id": "PLLDN-C16",
+      "invariant": "UI results and facet counts reuse evaluateDecision and facetCounts; sorting changes presentation only",
+      "tests": ["tests/ui-controller.test.ts", "tests/ui-model.test.ts"]
+    },
+    {
+      "id": "PLLDN-C17",
+      "invariant": "Browser runtime remains fail-closed until an externally supplied trusted snapshot digest passes verifySnapshot",
+      "tests": ["tests/ui-runtime.test.ts"]
+    },
+    {
+      "id": "PLLDN-C18",
+      "invariant": "Browser shell uses safe DOM content APIs and deterministic browser-only build output",
+      "tests": [
+        "tests/ui-render-contract.test.ts",
+        "tests/browser-build.test.ts"
+      ]
     }
   ],
-  "release_scope": "A human-reviewed Stage 2 snapshot exists; no default runtime approval pin or v0.0.1 Beta release is claimed"
+  "release_scope": "A deterministic Stage 3 faceted browser UI exists; no default runtime approval pin, GitHub Pages deployment or v0.0.1 Beta release is claimed"
 }

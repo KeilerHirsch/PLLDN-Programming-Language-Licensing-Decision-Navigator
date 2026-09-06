@@ -20,7 +20,7 @@ const logs = Object.fromEntries(
 await validateVerification(report, subject.sha256, logs);
 const manifest = {
   schema_version: "0.1",
-  scope: "stage-2-reviewed-knowledge",
+  scope: "stage-3-faceted-ui",
   subject_sha256: subject.sha256,
   files: subject.files,
   node: process.version,

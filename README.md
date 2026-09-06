@@ -4,10 +4,13 @@ A faceted decision navigator for programming languages, software licenses and ar
 
 PLLDN is in active pre-release development. Stage 0 established the trust and
 data-contract foundation; Stage 1 added the deterministic decision and facet core.
-Stage 2 now contains a small real-world candidate knowledge pack plus an immutable,
-human-reviewed snapshot reproduced from the exact approved candidate manifest.
-Runtime trust is intentionally separate: no default snapshot approval pin is shipped.
-There is still no end-user UI or free-text parser, and **v0.0.1 Beta has not been released**.
+Stage 2 added a small source-backed knowledge pack plus an immutable human-reviewed
+snapshot. Stage 3 adds the first framework-free browser UI over the same authoritative
+facet and decision core.
+
+Runtime trust remains separate: no default snapshot approval pin is shipped. The
+browser shell therefore fails closed unless a caller supplies approved runtime material.
+There is no free-text parser, GitHub Pages deployment or **v0.0.1 Beta release** yet.
 
 ## Run the checks
 
@@ -18,11 +21,21 @@ npm ci --ignore-scripts
 npm run verify
 npm run evidence
 ```
+To build the current static browser shell locally:
+
+```sh
+npm run build:browser
+```
+
+Generated files go to ignored `.build/site/`. The repository does not embed or
+ship a default trusted runtime snapshot, so the standalone shell intentionally
+shows an unavailable state until approved runtime material is injected.
 
 Verification checks types, repository policy, formatting and tests with coverage.
 Reports are written to the ignored `reports/` directory. Network access is needed
 for dependency installation and vulnerability checks; contract and snapshot checks
 do not fetch knowledge or remote schemas.
+
 ## Decision principles
 
 - Filters and explicit project facts are authoritative.
@@ -30,8 +43,8 @@ do not fetch knowledge or remote schemas.
 - Knowledge needs scope, sources, review and reproducible evidence.
 - A candidate cannot approve itself. Released snapshots remain immutable.
 - Human review and runtime snapshot approval are separate trust decisions.
+- UI counts and material candidate states reuse the deterministic decision core.
 - Language and license choices are component- and scenario-specific.
-
 The first planned public product release is **v0.0.1 Beta**. The current
 repository is not that release and makes no general recommendation-accuracy or
 certification claim.

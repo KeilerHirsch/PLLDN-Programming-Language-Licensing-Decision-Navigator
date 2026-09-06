@@ -8,7 +8,7 @@ Include stable record IDs, a minimal non-sensitive example and primary sources.
 Use the pinned Node/npm versions in README.md. Run `npm ci --ignore-scripts`,
 then `npm run verify`. Change the schema before its consumers.
 Add a positive case and a negative regression for each material invariant.
-Keep extraction, decision and end-to-end corpus categories distinct.
+Keep extraction, decision, browser and end-to-end corpus categories distinct.
 
 ## Origin and authority
 
@@ -23,11 +23,10 @@ AI output is not an independent factual source or human approval.
 
 ## Knowledge changes
 
-Follow [knowledge review](docs/knowledge-review.md). The current fixtures are
-synthetic test inputs, not accepted language or legal claims.
-Include changed record IDs, evidence and expected corpus effects in the PR.
-Do not mark a recommendation diff as empty when the engine is not implemented;
-report it as not available.
+Follow [knowledge review](docs/knowledge-review.md). Synthetic fixtures remain test-only;
+reviewed runtime knowledge must come from the governed candidate/promotion path.
+Include changed record IDs, evidence and expected decision-surface effects in the PR.
+Do not present uncomputed recommendation differences as zero change.
 
 Higher-risk changes require independent human review. If no suitable reviewer
 is available, the candidate remains unpromoted.
