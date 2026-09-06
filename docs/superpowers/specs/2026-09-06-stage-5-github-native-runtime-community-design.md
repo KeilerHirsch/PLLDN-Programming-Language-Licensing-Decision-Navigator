@@ -47,7 +47,17 @@ The current Reviewed manifest is `knowledge/reviewed/stage2-core.manifest.json`,
 
 `a363cca90f1730910cbb617edb029646fdfde9e8e44f7abbc0a879f9a6c763d5`
 
-This digest is not automatically trusted merely because it is present on `main`. Stage 5A introduces an explicit Pages-deployment approval record that names this exact manifest digest.
+This digest is not automatically trusted merely because it is present on `main`. Stage 5A introduces an explicit Pages-deployment approval record that names this exact source-manifest digest **and** an exact deployment-runtime projection digest.
+
+The complete Reviewed pack cannot be embedded unchanged: its four `current-stable-version` claims are intentionally `volatile` and expire at `2026-09-06T20:50:00Z`. Existing `verifySnapshot()` validates every included assertion at page-load time, so carrying those unrelated volatile claims would make the entire public runtime unavailable after expiry even though the Stage 4 product facets do not consume them.
+
+Stage 5A therefore uses a narrow deployment projection derived only from exact bytes already present in the approved Reviewed manifest. The projection contains the four product-facet dimensions, four language entities, the four reviewed capability claims currently needed by those facets, and the four primary source records referenced by those claims. It excludes current-version claims, license entities and other records not consumed by the first public language surface.
+
+The canonical projected manifest uses `knowledge_snapshot: "deployment.github-pages.language.stage2-core.2026-09-06"`, preserves the source manifest's `rules_snapshot` and `schema_sha256`, and has exact SHA-256:
+
+`a1e9533605e402339b0b473076cce68cdf60e758455831b891fbdda16473d4ec`
+
+This projection digest is a separate deployment approval, not a consequence of being derivable from Reviewed data.
 ## Stage 5A — Verified GitHub Pages Runtime
 
 ### Deployment trust record
@@ -58,11 +68,33 @@ It records:
 
 - `schema_version: "0.1"`;
 - `deployment_id: "github-pages"`;
-- the Reviewed manifest path;
-- the exact approved manifest SHA-256;
+- `source_manifest_path: "knowledge/reviewed/stage2-core.manifest.json"`;
+- `approved_source_manifest_sha256: "a363cca90f1730910cbb617edb029646fdfde9e8e44f7abbc0a879f9a6c763d5"`;
+- `runtime_knowledge_snapshot: "deployment.github-pages.language.stage2-core.2026-09-06"`;
+- `approved_runtime_manifest_sha256: "a1e9533605e402339b0b473076cce68cdf60e758455831b891fbdda16473d4ec"`;
+- an explicit `runtime_document_paths` allowlist containing exactly the 16 approved projection paths;
 - `candidate_type: "language"`;
 - one explicit public component ID;
 - one minimal empty canonical base project.
+
+The 16 `runtime_document_paths` are frozen to:
+
+- `claims/go-runtime-gc.json`
+- `claims/rust-safe-memory-without-gc.json`
+- `claims/typescript-emits-javascript.json`
+- `claims/typescript-static-checker.json`
+- `dimensions/emits-javascript.json`
+- `dimensions/runtime-garbage-collection.json`
+- `dimensions/safe-code-memory-safety-without-gc.json`
+- `dimensions/static-type-checker.json`
+- `entities/language-go.json`
+- `entities/language-python.json`
+- `entities/language-rust.json`
+- `entities/language-typescript.json`
+- `sources/go-faq.json`
+- `sources/rust-ownership.json`
+- `sources/rust-safe-unsafe.json`
+- `sources/typescript-handbook.json`
 
 The public component exists only to satisfy the existing component-scoped decision contract. It starts with no project facts or boundaries.
 
@@ -76,13 +108,17 @@ Add `tools/build-pages.ts` as a deployment-only build orchestrator.
 Its responsibilities are:
 
 1. run the existing deterministic browser build into a temporary site directory;
-2. read the deployment profile;
-3. read the named Reviewed manifest and all manifest-listed Reviewed files;
-4. compute the manifest SHA-256 and fail closed unless it exactly equals the deployment profile's approved digest;
-5. reject candidate-path manifests or files outside the named Reviewed snapshot;
-6. serialize the manifest/files/base project into a generated `runtime.js` using data literals only;
-7. inject `runtime.js` before `app.js` in the deployment artifact;
-8. leave `web/index.html` and ordinary `npm run build:browser` semantics unchanged.
+2. read and validate the deployment profile;
+3. read the named Reviewed source manifest and compute its SHA-256;
+4. fail closed unless the source manifest digest exactly equals `approved_source_manifest_sha256`;
+5. require every `runtime_document_paths` entry to exist in that exact source manifest and reject duplicate, candidate, absolute or traversal paths;
+6. read only those allowlisted Reviewed files and verify their bytes against the source manifest's document digests;
+7. construct the canonical projected runtime manifest from the allowlisted source-manifest entries, the profile's `runtime_knowledge_snapshot`, and the source manifest's `rules_snapshot` and `schema_sha256`;
+8. fail closed unless the canonical projected manifest digest exactly equals `approved_runtime_manifest_sha256`;
+9. serialize the projected manifest/files/base project into a generated `runtime.js` using inert JSON/data literals plus only `new Date().toISOString()` for page-load evaluation time;
+10. set `trustedSnapshotDigests` to the approved **runtime projection** digest, not the complete source-manifest digest;
+11. inject `runtime.js` before `app.js` in the deployment artifact;
+12. leave `web/index.html` and ordinary `npm run build:browser` semantics unchanged.
 
 The generated script sets `window.PLLDN_RUNTIME` and uses the browser's current UTC clock at page load for `evaluatedAt`. The build must not freeze freshness evaluation to deployment time.
 
@@ -91,7 +127,7 @@ No static snapshot file is loaded later with `fetch()`. The runtime material is 
 
 The first Pages runtime exposes the existing Stage 3/4 language-decision surface only.
 
-The Reviewed snapshot may contain license entities, but Stage 5A does not claim that the browser UI is already a complete outgoing-license decision product. Current product facets target the Reviewed boolean language capability dimensions introduced before Stage 4.
+The complete Reviewed source snapshot contains license entities and volatile current-version claims, but the approved Pages runtime projection intentionally excludes them. Stage 5A does not claim that the browser UI is already a complete outgoing-license decision product. Current product facets target only the Reviewed boolean language capability dimensions introduced before Stage 4.
 
 The default Pages base project is intentionally empty except for one public component. A visitor creates material state only through existing manual facet selections or explicit confirmation of Stage 4 text proposals.
 
@@ -102,11 +138,13 @@ Pages must visibly remain a pre-release development surface. No Beta badge, vers
 The Pages build fails before artifact upload when:
 
 - the deployment profile is malformed;
-- the named manifest is missing;
-- the manifest digest differs from the approved deployment digest;
-- a listed snapshot file is missing or digest-mismatched;
-- the profile points at candidate rather than Reviewed knowledge;
-- generated runtime material cannot be represented as inert JSON/data literals.
+- the named source manifest is missing;
+- the source manifest digest differs from `approved_source_manifest_sha256`;
+- an allowlisted runtime path is absent from the approved source manifest, duplicated, absolute, traversal-shaped or candidate-scoped;
+- an allowlisted Reviewed file is missing or digest-mismatched;
+- the canonical projected runtime manifest differs from `approved_runtime_manifest_sha256`;
+- the projected closure fails ordinary snapshot/reference validation at a non-expired test instant;
+- generated runtime material cannot be represented as inert JSON/data literals plus the single page-load clock expression.
 
 At browser runtime, existing `verifySnapshot()` behavior remains authoritative. Tampered or stale runtime material renders unavailable rather than recommendations.
 ### Pages workflow
@@ -240,7 +278,7 @@ Stage 5 extends the assurance scope to deployment and community automation witho
 Required evidence classes are:
 
 1. source-bound local verification;
-2. Pages deployment-profile binding to an exact Reviewed manifest digest;
+2. Pages deployment-profile binding to both the exact Reviewed source-manifest digest and the exact approved runtime-projection digest;
 3. generated-site reproducibility for identical source/profile inputs;
 4. no-secret/no-network/no-dynamic-code deployment checks;
 5. community automation authority-boundary checks;
@@ -270,7 +308,8 @@ Exact implementation filenames may be narrowed by the implementation plan, but r
 
 Stage 5A is complete only when:
 
-- the deployment profile is bound to the exact Reviewed manifest digest and fails closed on mismatch;
+- the deployment profile is bound to the exact Reviewed source-manifest digest **and** the exact 16-document runtime-projection digest and fails closed on either mismatch;
+- the projected runtime excludes unrelated volatile current-version claims and remains valid after `2026-09-06T20:50:00Z`;
 - identical source/profile inputs produce byte-identical Pages artifacts;
 - the generated Pages artifact boots through the existing `verifySnapshot()` boundary and exposes Stage 4 text assistance without auto-confirmation;
 - ordinary `npm run build:browser` remains untrusted/fail-closed by default;
@@ -292,7 +331,8 @@ Stage 5 closes only after 5A + 5B pass local, remote PR and post-merge main veri
 The following approaches are rejected for Stage 5:
 
 - **Trust whatever Reviewed snapshot is on `main`.** This collapses snapshot existence and runtime approval into one event.
-- **Fetch runtime JSON from Pages after startup.** This adds unnecessary runtime network loading when the small Reviewed pack can be embedded into the static artifact.
+- **Embed the entire Reviewed source pack just because it is approved.** Unrelated volatile claims can expire and fail the whole runtime; Pages uses an explicitly approved minimal Reviewed projection instead.
+- **Fetch runtime JSON from Pages after startup.** This adds unnecessary runtime network loading when the small approved runtime projection can be embedded into the static artifact.
 - **Bake deployment time into `evaluatedAt`.** That would let an old deployment keep evaluating freshness at an old timestamp; page-load time is required.
 - **Make Pages the GitHub App backend.** Static Pages cannot safely hold normal web-flow secrets or webhook verification secrets.
 - **Use GitHub Actions as the synchronous application API.** Actions remain asynchronous build/maintenance workers.
