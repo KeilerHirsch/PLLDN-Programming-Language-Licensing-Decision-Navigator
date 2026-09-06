@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://plldn.invalid/schemas/text-rule-set.schema.json",
+  "type": "object",
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "rule_set_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+    },
+    "aliases": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/alias" },
+      "maxItems": 64
+    },
+    "rules": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/rule" },
+      "minItems": 1,
+      "maxItems": 128
+    }
+  },
+  "required": ["schema_version", "rule_set_id", "aliases", "rules"],
+  "additionalProperties": false,
+  "$defs": {
+    "token": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "pattern_atom": {
+      "oneOf": [
+        { "$ref": "#/$defs/token" },
+        {
+          "type": "object",
+          "properties": {
+            "alias": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+            }
+          },
+          "required": ["alias"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "pattern": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/pattern_atom" },
+      "minItems": 1,
+      "maxItems": 16
+    },
+    "alias": {
+      "type": "object",
+      "properties": {
+        "alias_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+        },
+        "phrases": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/token" },
+            "minItems": 1,
+            "maxItems": 8
+          },
+          "minItems": 1,
+          "maxItems": 16
+        }
+      },
+      "required": ["alias_id", "phrases"],
+      "additionalProperties": false
+    },
+    "target": {
+      "type": "object",
+      "properties": {
+        "facet_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "option_id": { "type": "string", "minLength": 1, "maxLength": 64 }
+      },
+      "required": ["facet_id", "option_id"],
+      "additionalProperties": false
+    },
+    "actionable_rule": {
+      "type": "object",
+      "properties": {
+        "rule_id": { "type": "string", "pattern": "^[a-z][a-z0-9._-]{1,127}$" },
+        "kind": { "const": "actionable" },
+        "pattern": { "$ref": "#/$defs/pattern" },
+        "target": { "$ref": "#/$defs/target" },
+        "reason_key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+        }
+      },
+      "required": ["rule_id", "kind", "pattern", "target", "reason_key"],
+      "additionalProperties": false
+    },
+    "ambiguity_rule": {
+      "type": "object",
+      "properties": {
+        "rule_id": { "type": "string", "pattern": "^[a-z][a-z0-9._-]{1,127}$" },
+        "kind": { "const": "ambiguity" },
+        "pattern": { "$ref": "#/$defs/pattern" },
+        "reason_key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._-]{1,127}$"
+        }
+      },
+      "required": ["rule_id", "kind", "pattern", "reason_key"],
+      "additionalProperties": false
+    },
+    "rule": {
+      "oneOf": [
+        { "$ref": "#/$defs/actionable_rule" },
+        { "$ref": "#/$defs/ambiguity_rule" }
+      ]
+    }
+  }
+}

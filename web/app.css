@@ -20,7 +20,8 @@ body {
 
 button,
 select,
-input {
+input,
+textarea {
   font: inherit;
 }
 
@@ -57,11 +58,42 @@ button:disabled {
   font-size: clamp(1.7rem, 4vw, 2.6rem);
 }
 
+.text-assistance,
 .active-filters,
 .decision-state,
 .facets,
 .results {
   margin-top: 1.4rem;
+}
+
+.text-assistance textarea {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  padding: 0.7rem;
+  border: 1px solid color-mix(in srgb, CanvasText 24%, transparent);
+  border-radius: 0.65rem;
+  background: Canvas;
+  color: CanvasText;
+  resize: vertical;
+}
+
+.text-actions,
+.text-proposal-list {
+  margin-top: 0.7rem;
+}
+
+.text-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.text-proposal-list {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0;
+  list-style: none;
 }
 .chip-row {
   display: flex;

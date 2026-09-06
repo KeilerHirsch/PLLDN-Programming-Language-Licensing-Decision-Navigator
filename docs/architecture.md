@@ -5,8 +5,9 @@ facts and deterministic decisions. Stage 0 established versioned schemas, strict
 parsing, reference validation and the digest-bound snapshot trust boundary.
 Stage 1 added the deterministic decision core. Stage 2 added a small source-backed
 candidate pack and a human-reviewed immutable snapshot derived from one exact
-candidate manifest. Stage 3 adds the first framework-free browser UI over those
-same contracts and decision semantics.
+candidate manifest. Stage 3 added the first framework-free browser UI over those
+same contracts and decision semantics. Stage 4 adds a bounded local deterministic
+text accelerator whose output is presentation-only until explicitly confirmed.
 
 The trust path remains layered: strict JSON parsing, schema validation, typed
 references and scopes, candidate evidence review, human approval, immutable
@@ -72,6 +73,28 @@ and sends it through the existing `verifySnapshot()` boundary before a controlle
 Missing, wrong or tampered trust input therefore renders an unavailable state instead of
 recommendations.
 
+## Deterministic free-text accelerator
+
+Stage 4 keeps filters authoritative. `src/text/normalize.ts` performs bounded 16 KiB
+UTF-8 input validation, NFKC normalization, locale-independent lowercase handling and
+Unicode letter/number tokenization while preserving original UTF-16 source spans.
+`text-rules/stage4-core.json` contains only schema-validated literal token patterns and
+reviewed aliases; it exposes no regex, executable expression, provider prompt or user-code
+surface.
+
+Production text rules target only the checked-in product facets derived from already
+Reviewed Stage 2 boolean dimensions. `src/text/analyze.ts` performs exact contiguous
+matching, deterministic deduplication and explicit `PROPOSED`, `AMBIGUOUS` or
+`CONFLICTING` projection. Unsupported text is allowed to produce no proposal. There is
+no LLM, embedding, fuzzy semantic similarity, statistical classifier, network inference
+or direct text-to-decision path.
+
+Raw text and analysis results remain outside canonical project facts. Only a user-confirmed
+`PROPOSED` item delegates to the existing `UiController.selectFacet()` path. The primary
+Stage 4 invariant is that confirming text proposals for a set of facet options produces
+byte-equivalent canonical project state and the same material decision trace as selecting
+those facets manually. Clearing or reanalyzing text changes analysis state only.
+
 ## Candidate, review and immutable snapshot
 Stage 2 candidate assertions remain `Partial`. Source records carry the official
 reference, retrieval time and exact content SHA-256 fingerprint. Candidate construction
@@ -87,7 +110,7 @@ Runtime acceptance is a separate trust boundary. `verifySnapshot` still requires
 caller-supplied trusted digest, and the repository does not ship a default runtime
 approval pin for this snapshot.
 
-Free-text acceleration, broader reviewed catalogue coverage, GitHub Pages deployment,
-configuration/interaction optimization and release-grade end-to-end corpus remain later
-stages. Stage 3 is not the v0.0.1 product release and makes no general recommendation-
-accuracy or certification claim.
+Broader reviewed catalogue coverage, GitHub Pages deployment, configuration/interaction
+optimization and release-grade end-to-end corpus remain later stages. Stage 4 is not the
+v0.0.1 product release and makes no claim of broad natural-language understanding,
+general recommendation accuracy or certification.

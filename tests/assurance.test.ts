@@ -7,18 +7,21 @@ import test from "node:test";
 const readJson = (path: string) =>
   JSON.parse(readFileSync(new URL(`../${path}`, import.meta.url), "utf8"));
 
-test("assurance control plane names the Stage 3 faceted-UI scope", () => {
+test("assurance control plane names the Stage 4 free-text accelerator scope", () => {
   const requirements = readJson("assurance/requirements.json");
   const evidenceSchema = readJson("assurance/evidence-contract.schema.json");
-  assert.equal(requirements.scope, "stage-3-faceted-ui");
-  assert.equal(evidenceSchema.properties.scope.const, "stage-3-faceted-ui");
+  assert.equal(requirements.scope, "stage-4-free-text-accelerator");
+  assert.equal(
+    evidenceSchema.properties.scope.const,
+    "stage-4-free-text-accelerator",
+  );
   assert.match(
     readFileSync(new URL("../tools/evidence.ts", import.meta.url), "utf8"),
-    /scope: "stage-3-faceted-ui"/,
+    /scope: "stage-4-free-text-accelerator"/,
   );
 });
 
-test("Stage 3 requirements map core, knowledge and browser invariants to real tests", () => {
+test("Stage 4 requirements map core, knowledge, browser and text invariants to real tests", () => {
   const rows = (
     readJson("assurance/requirements.json") as {
       requirements: Array<{ id: string; tests: string[] }>;
@@ -58,6 +61,21 @@ test("Stage 3 requirements map core, knowledge and browser invariants to real te
     "PLLDN-C18": [
       "tests/ui-render-contract.test.ts",
       "tests/browser-build.test.ts",
+    ],
+    "PLLDN-C19": ["tests/product-facets.test.ts"],
+    "PLLDN-C20": [
+      "tests/text-rules.test.ts",
+      "tests/text-normalize.test.ts",
+      "tests/text-analyze.test.ts",
+    ],
+    "PLLDN-C21": ["tests/text-equivalence.test.ts"],
+    "PLLDN-C22": [
+      "tests/ui-text-contract.test.ts",
+      "tests/browser-build.test.ts",
+    ],
+    "PLLDN-C23": [
+      "tests/ui-text-contract.test.ts",
+      "tests/text-equivalence.test.ts",
     ],
   };
   assert.equal(rows.length, Object.keys(expected).length);
