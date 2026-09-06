@@ -1,0 +1,237 @@
+{
+  "schema_version": "0.1",
+  "rule_set_id": "text-rules.stage4-core",
+  "aliases": [
+    {
+      "alias_id": "gc-concept",
+      "phrases": [["gc"], ["garbage", "collection"], ["garbage", "collector"]]
+    },
+    {
+      "alias_id": "memory-safety",
+      "phrases": [
+        ["memory", "safe"],
+        ["memory", "safety"],
+        ["speichersicher"],
+        ["speichersicherheit"]
+      ]
+    },
+    {
+      "alias_id": "static-checker",
+      "phrases": [
+        ["static", "type", "checker"],
+        ["static", "typing"],
+        ["statische", "typprüfung"]
+      ]
+    },
+    {
+      "alias_id": "javascript-name",
+      "phrases": [["javascript"], ["js"]]
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "gc.required.must-use.en",
+      "kind": "actionable",
+      "pattern": ["must", "use", { "alias": "gc-concept" }],
+      "target": {
+        "facet_id": "runtime-garbage-collection",
+        "option_id": "true"
+      },
+      "reason_key": "text.gc.required"
+    },
+    {
+      "rule_id": "gc.required.explicit.en",
+      "kind": "actionable",
+      "pattern": [{ "alias": "gc-concept" }, "required"],
+      "target": {
+        "facet_id": "runtime-garbage-collection",
+        "option_id": "true"
+      },
+      "reason_key": "text.gc.required"
+    },
+    {
+      "rule_id": "gc.required.explicit.de",
+      "kind": "actionable",
+      "pattern": [{ "alias": "gc-concept" }, "erforderlich"],
+      "target": {
+        "facet_id": "runtime-garbage-collection",
+        "option_id": "true"
+      },
+      "reason_key": "text.gc.required"
+    },
+    {
+      "rule_id": "gc.forbidden.without.en",
+      "kind": "actionable",
+      "pattern": ["without", { "alias": "gc-concept" }],
+      "target": {
+        "facet_id": "runtime-garbage-collection",
+        "option_id": "false"
+      },
+      "reason_key": "text.gc.forbidden"
+    },
+    {
+      "rule_id": "gc.forbidden.must-not.en",
+      "kind": "actionable",
+      "pattern": ["must", "not", "use", { "alias": "gc-concept" }],
+      "target": {
+        "facet_id": "runtime-garbage-collection",
+        "option_id": "false"
+      },
+      "reason_key": "text.gc.forbidden"
+    },
+    {
+      "rule_id": "gc.forbidden.without.de",
+      "kind": "actionable",
+      "pattern": ["ohne", { "alias": "gc-concept" }],
+      "target": {
+        "facet_id": "runtime-garbage-collection",
+        "option_id": "false"
+      },
+      "reason_key": "text.gc.forbidden"
+    },
+    {
+      "rule_id": "memory-safe-without-gc.required.en",
+      "kind": "actionable",
+      "pattern": [
+        "must",
+        "be",
+        { "alias": "memory-safety" },
+        "without",
+        { "alias": "gc-concept" }
+      ],
+      "target": { "facet_id": "memory-safety-without-gc", "option_id": "true" },
+      "reason_key": "text.memory-safety-without-gc.required"
+    },
+    {
+      "rule_id": "memory-safe-without-gc.required.de",
+      "kind": "actionable",
+      "pattern": [
+        { "alias": "memory-safety" },
+        "ohne",
+        { "alias": "gc-concept" },
+        "erforderlich"
+      ],
+      "target": { "facet_id": "memory-safety-without-gc", "option_id": "true" },
+      "reason_key": "text.memory-safety-without-gc.required"
+    },
+    {
+      "rule_id": "memory-safe-without-gc.not-required.en",
+      "kind": "actionable",
+      "pattern": [
+        { "alias": "memory-safety" },
+        "without",
+        { "alias": "gc-concept" },
+        "not",
+        "required"
+      ],
+      "target": {
+        "facet_id": "memory-safety-without-gc",
+        "option_id": "false"
+      },
+      "reason_key": "text.memory-safety-without-gc.not-required"
+    },
+    {
+      "rule_id": "memory-safe-without-gc.not-required.de",
+      "kind": "actionable",
+      "pattern": [
+        { "alias": "memory-safety" },
+        "ohne",
+        { "alias": "gc-concept" },
+        "nicht",
+        "erforderlich"
+      ],
+      "target": {
+        "facet_id": "memory-safety-without-gc",
+        "option_id": "false"
+      },
+      "reason_key": "text.memory-safety-without-gc.not-required"
+    },
+    {
+      "rule_id": "static-checker.required.en",
+      "kind": "actionable",
+      "pattern": [{ "alias": "static-checker" }, "required"],
+      "target": { "facet_id": "static-type-checker", "option_id": "true" },
+      "reason_key": "text.static-checker.required"
+    },
+    {
+      "rule_id": "static-checker.must-have.en",
+      "kind": "actionable",
+      "pattern": ["must", "have", { "alias": "static-checker" }],
+      "target": { "facet_id": "static-type-checker", "option_id": "true" },
+      "reason_key": "text.static-checker.required"
+    },
+    {
+      "rule_id": "static-checker.required.de",
+      "kind": "actionable",
+      "pattern": [{ "alias": "static-checker" }, "erforderlich"],
+      "target": { "facet_id": "static-type-checker", "option_id": "true" },
+      "reason_key": "text.static-checker.required"
+    },
+    {
+      "rule_id": "static-checker.forbidden.en",
+      "kind": "actionable",
+      "pattern": ["no", { "alias": "static-checker" }],
+      "target": { "facet_id": "static-type-checker", "option_id": "false" },
+      "reason_key": "text.static-checker.forbidden"
+    },
+    {
+      "rule_id": "static-checker.forbidden.de",
+      "kind": "actionable",
+      "pattern": ["keine", { "alias": "static-checker" }],
+      "target": { "facet_id": "static-type-checker", "option_id": "false" },
+      "reason_key": "text.static-checker.forbidden"
+    },
+    {
+      "rule_id": "javascript-output.required.en",
+      "kind": "actionable",
+      "pattern": ["must", "emit", { "alias": "javascript-name" }],
+      "target": { "facet_id": "emits-javascript", "option_id": "true" },
+      "reason_key": "text.javascript-output.required"
+    },
+    {
+      "rule_id": "javascript-output.required.de",
+      "kind": "actionable",
+      "pattern": ["muss", { "alias": "javascript-name" }, "erzeugen"],
+      "target": { "facet_id": "emits-javascript", "option_id": "true" },
+      "reason_key": "text.javascript-output.required"
+    },
+    {
+      "rule_id": "javascript-output.forbidden.en",
+      "kind": "actionable",
+      "pattern": ["must", "not", "emit", { "alias": "javascript-name" }],
+      "target": { "facet_id": "emits-javascript", "option_id": "false" },
+      "reason_key": "text.javascript-output.forbidden"
+    },
+    {
+      "rule_id": "javascript-output.forbidden.de",
+      "kind": "actionable",
+      "pattern": ["darf", "kein", { "alias": "javascript-name" }, "erzeugen"],
+      "target": { "facet_id": "emits-javascript", "option_id": "false" },
+      "reason_key": "text.javascript-output.forbidden"
+    },
+    {
+      "rule_id": "gc.optional.ambiguous",
+      "kind": "ambiguity",
+      "pattern": [{ "alias": "gc-concept" }, "optional"],
+      "reason_key": "text.gc.optional"
+    },
+    {
+      "rule_id": "memory-safety.preferred.ambiguous",
+      "kind": "ambiguity",
+      "pattern": [{ "alias": "memory-safety" }, "preferred"],
+      "reason_key": "text.memory-safety.preferred"
+    },
+    {
+      "rule_id": "static-checker.optional.ambiguous",
+      "kind": "ambiguity",
+      "pattern": [{ "alias": "static-checker" }, "optional"],
+      "reason_key": "text.static-checker.optional"
+    },
+    {
+      "rule_id": "javascript-output.optional.ambiguous",
+      "kind": "ambiguity",
+      "pattern": [{ "alias": "javascript-name" }, "output", "optional"],
+      "reason_key": "text.javascript-output.optional"
+    }
+  ]
+}
