@@ -1,6 +1,6 @@
 # Stage 4 Deterministic Free-Text Accelerator Design
 
-**Status:** Approved architecture A2; written design contract before implementation.
+**Status:** Approved architecture A2 with approved product-facet prerequisite; this revision supersedes commit `1f46e3bea3d01310b1b5b7ee3d765ec944b02548`.
 
 **Goal:** Add a local, deterministic free-text accelerator that converts a small set of explicit English/German project phrases into reviewable facet proposals without allowing raw text to influence recommendations directly.
 
@@ -31,6 +31,15 @@ The Stage 4 subsystem is intentionally one-way and split into five boundaries:
 
 No second project-fact writer, recommendation engine or hidden scoring model is introduced.
 
+## Product facet prerequisite
+
+Stage 4 first materializes a small product facet catalogue because Stage 3 provided the facet engine but intentionally shipped no checked-in product facet definitions. Test fixtures are not product truth and must not become text-rule targets.
+
+The initial product catalogue contains only four boolean facets whose dimensions already exist in the immutable Reviewed Stage 2 snapshot: runtime garbage collection, safe-code memory safety without garbage collection, static type checker, and emits JavaScript. Each facet uses `MUST` + `EQ` and explicit `true` / `false` options. Labels and facet IDs are presentation/control metadata; they do not create new knowledge claims.
+
+The catalogue is validated against the supplied verified runtime knowledge before it is accepted: each referenced dimension must exist as a `dimension` record, be Reviewed-snapshot material, and have `value_type: boolean`. Unknown or type-mismatched dimensions fail closed. The repository does not infer missing candidate values from the existence of a facet.
+
+Text rules may target only facet/option IDs from this checked-in product catalogue. Synthetic test facets remain test-only and are never referenced by the production Stage 4 rule set.
 ## V1 proposal target contract
 
 A Stage 4 rule does not directly carry an arbitrary `dimension_id`, operator, strength or typed value.
@@ -199,6 +208,7 @@ No raw input text, proposal list or matched spans are persisted, logged, uploade
 ## Intended file boundaries
 
 Expected new/changed responsibilities:
+- `src/ui/product-facets.ts` — small checked-in product facet catalogue derived only from already-Reviewed Stage 2 boolean dimensions;
 - `schemas/text-rule-set.schema.json` — strict contract for the checked-in deterministic rule set;
 - `text-rules/stage4-core.json` — small reviewed English/German alias, actionable and ambiguity patterns;
 - `src/text/types.ts` — rule, token, source-span and proposal contracts;
@@ -215,6 +225,7 @@ No Stage 4 behavior belongs in `src/decision/`. The decision engine must remain 
 Stage 4 is not complete unless automated tests prove at least:
 - normalization is deterministic and preserves matched original source spans;
 - the 16 KiB UTF-8 input limit fails closed;
+- product facets reference only existing Reviewed boolean dimensions and fail closed on missing/type-mismatched runtime dimensions;
 - malformed/unknown rule targets fail closed before analysis;
 - rule data contains no executable regex/code surface;
 - bare concept mentions in negative corpus cases produce no proposal;
