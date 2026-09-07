@@ -7,21 +7,18 @@ import test from "node:test";
 const readJson = (path: string) =>
   JSON.parse(readFileSync(new URL(`../${path}`, import.meta.url), "utf8"));
 
-test("assurance control plane names the final Stage 5 GitHub-native runtime and community scope", () => {
+test("assurance control plane names the Stage 6 beta release scope", () => {
   const requirements = readJson("assurance/requirements.json");
   const evidenceSchema = readJson("assurance/evidence-contract.schema.json");
-  assert.equal(requirements.scope, "stage-5-github-native-runtime-community");
-  assert.equal(
-    evidenceSchema.properties.scope.const,
-    "stage-5-github-native-runtime-community",
-  );
+  assert.equal(requirements.scope, "stage-6-beta-release");
+  assert.equal(evidenceSchema.properties.scope.const, "stage-6-beta-release");
   assert.match(
     readFileSync(new URL("../tools/evidence.ts", import.meta.url), "utf8"),
-    /scope: "stage-5-github-native-runtime-community"/,
+    /scope: "stage-6-beta-release"/,
   );
 });
 
-test("Stage 5 requirements map core, text, Pages and community invariants to real tests", () => {
+test("Stage 6 requirements map core through immutable beta release invariants to real tests", () => {
   const rows = (
     readJson("assurance/requirements.json") as {
       requirements: Array<{ id: string; tests: string[] }>;
@@ -92,6 +89,22 @@ test("Stage 5 requirements map core, text, Pages and community invariants to rea
       "tests/community-workflow.test.ts",
     ],
     "PLLDN-C32": ["tests/community-authority.test.ts"],
+    "PLLDN-C33": [
+      "tests/release-policy.test.ts",
+      "tests/release-workflow.test.ts",
+    ],
+    "PLLDN-C34": [
+      "tests/release-coverage.test.ts",
+      "tests/release-docs.test.ts",
+    ],
+    "PLLDN-C35": [
+      "tests/release-archive.test.ts",
+      "tests/release-sbom.test.ts",
+      "tests/release-assets.test.ts",
+    ],
+    "PLLDN-C36": ["tests/release-workflow.test.ts"],
+    "PLLDN-C37": ["tests/release-workflow.test.ts"],
+    "PLLDN-C38": ["tests/release-assets.test.ts", "tests/release-docs.test.ts"],
   };
   assert.equal(rows.length, Object.keys(expected).length);
   for (const [id, tests] of Object.entries(expected)) {

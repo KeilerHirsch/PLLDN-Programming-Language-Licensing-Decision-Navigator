@@ -1,6 +1,6 @@
 # Security policy
 
-PLLDN is still pre-release and has no supported application release. Security fixes target the main branch.
+PLLDN v0.0.1 Beta 1 is the first supported public prerelease. Security fixes target the main branch and published immutable corrections use a superseding release identity.
 
 Report vulnerabilities through GitHub's private vulnerability reporting:
 https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/security/advisories/new
@@ -18,7 +18,7 @@ minimal runtime projection, generated-byte security checks and an exact-SHA leas
 deployment workflow. Stage 5B adds only read-only maintenance/reporting and contribution
 classification: issue content and PR paths remain untrusted, PR-supplied code is not executed by the
 community workflow, and automation cannot approve, merge or mutate Reviewed knowledge. It adds no
-account, backend, repository-write bot or secret-bearing browser feature.
+account, backend, repository-write bot or secret-bearing browser feature. Stage 6 adds an exact-main-SHA immutable prerelease pipeline: source executes only in a read-only build job; the write-capable publish job executes no repository source and must verify all release-asset digests before publication.
 See [the threat model](docs/threat-model.md).
 
 Security-sensitive fixes need a regression, provenance and review.

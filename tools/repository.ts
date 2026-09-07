@@ -28,6 +28,18 @@ for (const required of [
   "tools/pages-profile.ts",
   "tools/pages-runtime.ts",
   "tools/build-pages.ts",
+  ".github/workflows/release.yml",
+  "CHANGELOG.md",
+  "release/v0.0.1-beta.1/policy.json",
+  "release/v0.0.1-beta.1/release-notes.md",
+  "assurance/release-evidence.schema.json",
+  "assurance/publication-manifest.schema.json",
+  "tools/release-policy.ts",
+  "tools/release-coverage.ts",
+  "tools/release-archive.ts",
+  "tools/release-sbom.ts",
+  "tools/build-release.ts",
+  "docs/decisions/0009-immutable-beta-release.md",
 ])
   assert(files.includes(required), `Missing ${required}`);
 for (const path of files) {
