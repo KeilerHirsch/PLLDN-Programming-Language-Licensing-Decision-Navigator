@@ -134,12 +134,12 @@ jobs:
         run: |
           set -euo pipefail
           manifest="release-handoff/internal/publication-manifest.json"
-          release_json="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$TAG")"
-          release_id="$(jq -r '.id' <<<"$release_json")"
-          test "$(jq -r '.draft' <<<"$release_json")" = "true"
-          test "$(jq -r '.prerelease' <<<"$release_json")" = "true"
-          test "$(jq -r '.tag_name' <<<"$release_json")" = "$TAG"
-          test "$(jq -r '.target_commitish' <<<"$release_json")" = "$TARGET_SHA"
+          release_json="$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json databaseId,isDraft,isPrerelease,tagName,targetCommitish)"
+          release_id="$(jq -r '.databaseId' <<<"$release_json")"
+          test "$(jq -r '.isDraft' <<<"$release_json")" = "true"
+          test "$(jq -r '.isPrerelease' <<<"$release_json")" = "true"
+          test "$(jq -r '.tagName' <<<"$release_json")" = "$TAG"
+          test "$(jq -r '.targetCommitish' <<<"$release_json")" = "$TARGET_SHA"
           gh api "repos/$GITHUB_REPOSITORY/releases/$release_id/assets" --paginate > release-assets.json
           test "$(jq 'length' release-assets.json)" = "6"
           while IFS=$'\t' read -r name expected; do
@@ -157,10 +157,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if release_json="$(gh api "repos/$GITHUB_REPOSITORY/releases/tags/$TAG" 2>/dev/null)"; then
-            draft="$(jq -r '.draft' <<<"$release_json")"
-            prerelease="$(jq -r '.prerelease' <<<"$release_json")"
-            target="$(jq -r '.target_commitish' <<<"$release_json")"
+          if release_json="$(gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json databaseId,isDraft,isPrerelease,tagName,targetCommitish 2>/dev/null)"; then
+            draft="$(jq -r '.isDraft' <<<"$release_json")"
+            prerelease="$(jq -r '.isPrerelease' <<<"$release_json")"
+            target="$(jq -r '.targetCommitish' <<<"$release_json")"
             if [ "$draft" = "true" ] && [ "$prerelease" = "true" ] && [ "$target" = "$TARGET_SHA" ]; then
               gh release delete "$TAG" --repo "$GITHUB_REPOSITORY" --cleanup-tag --yes
             else
