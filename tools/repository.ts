@@ -17,6 +17,7 @@ for (const required of [
   "CODE_OF_CONDUCT.md",
   "AGENTS.md",
   ".github/CODEOWNERS",
+  ".github/FUNDING.yml",
   ".github/workflows/verify.yml",
   ".github/workflows/security.yml",
   ".github/workflows/community.yml",

@@ -72,8 +72,9 @@ or [contributing](CONTRIBUTING.md).
 
 PLLDN will be free to use, without a paid feature tier. If the project is useful to you,
 voluntary support is welcome through [Ko-fi](https://ko-fi.com/keilerhirsch) or
-[GitHub Sponsors](https://github.com/sponsors/KeilerHirsch). GitHub controls Sponsors
-availability for the linked account; Ko-fi is the currently verified active support route.
+[GitHub Sponsors](https://github.com/sponsors/KeilerHirsch). On GitHub, the native Sponsor
+button exposes Ko-fi as the currently verified active support route. GitHub controls Sponsors
+availability for the linked account.
 Voluntary funding creates no feature entitlement, ranking influence, approval authority, or
 review privilege.
 
