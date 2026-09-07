@@ -94,3 +94,17 @@ test("all release transport actions are immutable pins", () => {
   ])
     assert.match(raw, new RegExp(`@${sha}`, "u"));
 });
+
+test("draft verification and cleanup use the draft-aware release lookup", () => {
+  const publish = job(workflow(), "publish");
+  assert.doesNotMatch(publish, /releases\/tags\/\$TAG/u);
+  assert.match(
+    publish,
+    /gh release view "\$TAG"[\s\S]*databaseId,isDraft,isPrerelease,tagName,targetCommitish/u,
+  );
+  assert.match(publish, /\.isDraft/u);
+  assert.match(publish, /\.isPrerelease/u);
+  assert.match(publish, /\.tagName/u);
+  assert.match(publish, /\.targetCommitish/u);
+  assert.match(publish, /\.databaseId/u);
+});
