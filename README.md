@@ -14,7 +14,13 @@ A deterministic decision navigator for programming languages, software licenses,
 
 **Next:** [Architecture](docs/architecture.md) · [Data contracts](docs/data-contracts.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [License](LICENSE) · [Support](#support)
 
-**Support development:** [Ko-fi](https://ko-fi.com/keilerhirsch) · [GitHub Sponsors](https://github.com/sponsors/KeilerHirsch)
+> [!IMPORTANT]
+> ### Support PLLDN
+> PLLDN is free and community-supported. If it saves you time, you can support maintenance through [Ko-fi](https://ko-fi.com/keilerhirsch).
+>
+> [GitHub Sponsors](https://github.com/sponsors/KeilerHirsch) remains linked for future availability, but it is not currently an active native funding destination. On GitHub, the native **Sponsor** button and **Sponsor this project** panel currently expose the verified Ko-fi route.
+>
+> Voluntary support creates no feature entitlement, ranking influence, approval authority, review priority, or release priority.
 
 ## Scope and trust model
 
