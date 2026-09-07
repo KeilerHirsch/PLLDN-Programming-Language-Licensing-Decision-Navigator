@@ -68,10 +68,10 @@ read-only workflow permissions, and a public governance contract that automation
 not approval. Freshness checks intentionally inspect already expired claims without using
 the runtime expiry gate that they are responsible for reporting.
 
-Passing these tests does not make the reviewed snapshot a general-purpose accuracy
-claim. Before v0.0.1 Beta, release-specific suites still need broader reviewed knowledge,
-high-risk holdout cases and application-level E2E coverage beyond the deliberately small
-Stage 4 deterministic phrase surface.
+Passing these tests does not make the reviewed snapshot a general-purpose accuracy claim.
+Beta 1 intentionally publishes the current narrow evidence-backed surface; broader reviewed
+knowledge, high-risk holdout cases and complete licensing/application E2E coverage remain
+future gated work rather than implied release claims.
 
 ## Test-first history
 
@@ -103,3 +103,11 @@ stale-main guard and job-specific Pages/OIDC permissions before deployment YAML 
 
 AI review or automation can contribute evidence, but neither substitutes for source-backed
 knowledge review, human accountability or separately protected runtime approval.
+
+## Stage 6 release verification
+
+Stage 6 adds release-policy, coverage/limitations, deterministic archive, canonical SBOM, release-asset, documentation and release-workflow tests. The release builder is required to reproduce the same public assets and internal publication manifest from the same exact commit and explicit commit epoch.
+
+The release workflow repeats `verify`, evidence export, npm audit and pinned Gitleaks on the exact current protected-main SHA before building the handoff twice. Publication receives only the verified handoff; it recomputes all six local asset digests, compares them with the publication manifest, creates a draft prerelease, then compares GitHub-reported `sha256:` asset digests before publication.
+
+Post-publication closure additionally verifies the immutable release/tag, downloaded asset bytes, release attestation/integrity where supported by the authenticated GitHub CLI, and byte equality between the released Pages archive contents and the live Pages deployment. Any correction after publication requires a new superseding release identity rather than asset or tag mutation.

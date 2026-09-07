@@ -59,3 +59,16 @@ authentication, backend, hosted inference, repository-write bot or general natur
 parser exists. The core still ships no default trusted runtime snapshot. Stage 5 does not
 imply broad factual coverage, licensing coverage, general recommendation accuracy or
 v0.0.1 readiness; repository-read GitHub App work remains deferred to optional Stage 5C.
+
+## Stage 6 release threats
+
+| Threat | Implemented boundary | Remaining responsibility |
+| --- | --- | --- |
+| Release targets a stale or non-main commit | Manual release workflow checks out the requested SHA, fetches protected `main`, and requires exact equality before source execution | Protect branch and workflow administration |
+| Release artifact is substituted between build and publish | One internal handoff contains six expected asset digests plus release-note digest; publish recomputes every digest before GitHub mutation | Protect GitHub Actions artifact service and runner trust |
+| Write-capable publish job executes repository code | Publish job has no checkout, Node/npm or git step and consumes only downloaded verified bytes, `jq`, `sha256sum` and `gh` | Review every publish-job change as an authority change |
+| Draft assets differ from verified local bytes | GitHub-reported `sha256:` asset digests must match the publication manifest before draft status is cleared | Treat missing digest support as a failed publication gate |
+| Published Beta is silently rewritten | Repository Immutable Releases must be enabled before dispatch; post-publication corrections require a new superseding Beta | Protect repository administration and release settings |
+| Release metadata overstates product coverage | Checked-in policy, Reviewed coverage, known limitations, README, changelog and release-note tests bind the same narrow Beta boundary | Re-review coverage when the live decision surface expands |
+
+Stage 6 publishes an immutable evidence-bound prerelease; it does not broaden the decision engine, Reviewed trust model or live Pages coverage. A successful release proves identity and control execution, not universal factual correctness or certification.

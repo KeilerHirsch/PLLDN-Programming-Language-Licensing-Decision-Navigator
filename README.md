@@ -1,29 +1,28 @@
 # PLLDN - Programming Language & Licensing Decision Navigator
 
-A faceted decision navigator for programming languages, software licenses and architecture constraints.
+A deterministic decision navigator for programming languages, software licenses, and architecture constraints.
 
-> **Try PLLDN live:** [Open the verified GitHub Pages app →](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/)
->
-> **Support development:** [Ko-fi](https://ko-fi.com/keilerhirsch) · [GitHub Sponsors](https://github.com/sponsors/KeilerHirsch)
+**For:** developers and maintainers who need traceable, constraint-first comparisons and explicit abstention when Reviewed evidence is insufficient.
 
-PLLDN is in active pre-release development. Stage 0 established the trust and
-data-contract foundation; Stage 1 added the deterministic decision and facet core.
-Stage 2 added a small source-backed knowledge pack plus an immutable human-reviewed
-snapshot. Stage 3 added the first framework-free browser UI over the same authoritative
-facet and decision core. Stage 4 added a small local deterministic free-text accelerator
-that can propose reviewed product facets but cannot apply them without confirmation.
-Stage 5A adds a deployment-specific verified GitHub Pages runtime path over that same
-small reviewed language surface.
-Stage 5B adds deterministic read-only freshness maintenance, structured dictionary
-candidate intake and advisory pull-request path classification without automation authority.
+**Status:** **v0.0.1 Beta 1** prerelease · community-supported · no response-time guarantee.
 
-Runtime trust remains separate: the core and ordinary browser build still ship no default
-snapshot approval pin. The Pages deployment profile separately approves the Reviewed
-source manifest and a minimal 16-document runtime projection; the deployment artifact
-contains only that runtime projection as its trust input. Stage 4 adds no LLM, provider
-API, network inference, embeddings, fuzzy classifier or direct text-to-decision path.
-The verified GitHub Pages deployment is live and serves the exact reviewed runtime projection.
-The live site remains a pre-release surface; there is no **v0.0.1 Beta release** yet.
+**Use it now:** [Open the verified GitHub Pages app →](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/)
+
+**Verify:** [Release](https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/releases/tag/v0.0.1-beta.1) · [Verification](docs/verification.md) · [Changelog](CHANGELOG.md)
+
+**Before using:** The live Beta covers Go, Python, Rust, and TypeScript across four Reviewed boolean capability dimensions. Eight SPDX license identities are Reviewed but are not yet exposed as a complete live licensing recommendation workflow. PLLDN does not provide legal advice or certification.
+
+**Next:** [Architecture](docs/architecture.md) · [Data contracts](docs/data-contracts.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [License](LICENSE) · [Support](#support)
+
+**Support development:** [Ko-fi](https://ko-fi.com/keilerhirsch) · [GitHub Sponsors](https://github.com/sponsors/KeilerHirsch)
+
+## Scope and trust model
+
+PLLDN Beta 1 packages the deterministic decision/facet core, Reviewed knowledge, framework-free browser UI, explicit-confirmation free-text assistance, the verified GitHub Pages runtime, and read-only community maintenance controls. Filters and explicit project facts remain authoritative; free text can only propose existing facets and cannot confirm them automatically.
+
+Runtime trust remains separate. The core and ordinary browser build ship no default snapshot approval pin. The Pages deployment profile separately approves the Reviewed source manifest and a minimal 16-document runtime projection. That projection contains only the four live language entities, four boolean capability dimensions, four supporting claims, and four primary sources; it contains no current-version claims or licensing records.
+
+Beta 1 makes no claim of complete license compatibility analysis, universal natural-language understanding, general recommendation accuracy, or certification. Correct abstention is expected when Reviewed evidence is insufficient.
 
 ## Run the checks
 
@@ -62,9 +61,9 @@ do not fetch knowledge or remote schemas.
 - Free text may propose filters; only confirmed proposals enter the existing facet path.
 - Correct abstention is preferred over guessed text interpretation.
 - Language and license choices are component- and scenario-specific.
-The first planned public product release is **v0.0.1 Beta**. The current
-repository is not that release and makes no general recommendation-accuracy or
-certification claim.
+The first public product release identity is **v0.0.1 Beta 1**. Exact coverage and known
+limitations ship as release assets; published corrections use a superseding Beta rather than
+mutating an immutable release.
 
 Start with [architecture](docs/architecture.md), [data contracts](docs/data-contracts.md)
 or [contributing](CONTRIBUTING.md).
@@ -75,5 +74,7 @@ PLLDN will be free to use, without a paid feature tier. If the project is useful
 voluntary support is welcome through [Ko-fi](https://ko-fi.com/keilerhirsch) or
 [GitHub Sponsors](https://github.com/sponsors/KeilerHirsch). GitHub controls Sponsors
 availability for the linked account; Ko-fi is the currently verified active support route.
+Voluntary funding creates no feature entitlement, ranking influence, approval authority, or
+review privilege.
 
 Own code, documentation and project data are licensed under [EUPL-1.2](LICENSE).

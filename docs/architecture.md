@@ -160,7 +160,14 @@ Runtime acceptance is a separate trust boundary. `verifySnapshot` still requires
 caller-supplied trusted digest, and the repository does not ship a default runtime
 approval pin for this snapshot.
 
-Broader reviewed catalogue coverage, a licensing Pages surface, public deployment
-promotion and release-grade end-to-end corpus remain separately gated work. Stage 5A is
-not the v0.0.1 product release and makes no claim of broad natural-language understanding,
-general recommendation accuracy or certification.
+Broader reviewed catalogue coverage, a complete licensing Pages surface and Stage 5C
+repository-read integration remain separately gated work. Beta 1 makes no claim of broad
+natural-language understanding, general recommendation accuracy, legal advice or certification.
+
+## Stage 6 immutable Beta release boundary
+
+Stage 6 turns the verified pre-release tree into a reproducible public prerelease without changing the decision engine. `release/v0.0.1-beta.1/policy.json` is the release identity root: it fixes tag, title, package version, six public asset names, Reviewed trust digests, live coverage IDs, Reviewed-but-not-live license IDs and the reviewed release-note path.
+
+`build:release` consumes the exact checked-out commit, current repository evidence and explicit commit epoch. It rebuilds Pages, emits a normalized USTAR/gzip archive, canonicalizes the npm CycloneDX SBOM, derives coverage and limitations from checked-in trust data, writes release evidence, and creates `SHA256SUMS` last. Repeated builds from the same inputs must be byte-identical.
+
+The release workflow preserves authority separation. Its source-executing build job is read-only and must match current protected `main`; its write-capable publish job receives only the verified handoff and executes no repository source. The publish job creates a draft prerelease, verifies GitHub-reported asset digests, then publishes it. Repository Immutable Releases are an external maintainer-admin prerequisite rather than a capability granted to `GITHUB_TOKEN`.
