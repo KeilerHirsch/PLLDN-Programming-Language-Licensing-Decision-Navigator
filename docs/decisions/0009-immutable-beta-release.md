@@ -20,4 +20,4 @@ A published Beta is never silently edited, retargeted, or asset-replaced. A defe
 
 Beta 1 intentionally does not widen product coverage. The live Pages surface remains four languages across four Reviewed boolean capability dimensions. Eight SPDX license identities are Reviewed but are not yet a complete live licensing recommendation surface. Stage 5C repository-read integration remains deferred.
 
-SHA-256, GitHub release attestations, CI, and GRANIT establish identity and control-plane evidence; they do not convert scoped Reviewed facts into legal advice, certification, or a broad recommendation-accuracy claim.
+SHA-256, GitHub release attestations, CI, and private assurance gates establish identity and control-plane evidence; they do not convert scoped Reviewed facts into legal advice, certification, or a broad recommendation-accuracy claim.
