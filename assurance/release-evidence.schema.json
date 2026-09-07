@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "release",
+    "target_commit_sha",
+    "target_commit_timestamp",
+    "source_tree_sha256",
+    "repository_evidence_sha256",
+    "verification",
+    "coverage",
+    "toolchain",
+    "trust",
+    "pages",
+    "artifacts",
+    "immutable_release_requirement",
+    "release_workflow_path",
+    "release_policy_schema_sha256"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "release": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "tag", "title", "prerelease"],
+      "properties": {
+        "version": { "type": "string" },
+        "tag": { "type": "string" },
+        "title": { "type": "string" },
+        "prerelease": { "const": true }
+      }
+    },
+    "target_commit_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "target_commit_timestamp": { "type": "string", "format": "date-time" },
+    "source_tree_sha256": { "$ref": "#/$defs/sha256" },
+    "repository_evidence_sha256": { "$ref": "#/$defs/sha256" },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "checks"],
+      "properties": {
+        "state": { "const": "PASS" },
+        "checks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "result"],
+            "properties": {
+              "id": { "type": "string" },
+              "result": { "const": "PASS" }
+            }
+          }
+        }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lines", "branches", "functions"],
+      "properties": {
+        "lines": { "type": "number" },
+        "branches": { "type": "number" },
+        "functions": { "type": "number" }
+      }
+    },
+    "toolchain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node", "npm"],
+      "properties": {
+        "node": { "type": "string" },
+        "npm": { "type": "string" }
+      }
+    },
+    "trust": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewed_source_manifest_sha256",
+        "runtime_projection_sha256"
+      ],
+      "properties": {
+        "reviewed_source_manifest_sha256": { "$ref": "#/$defs/sha256" },
+        "runtime_projection_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "pages": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["files", "archive_sha256"],
+      "properties": {
+        "files": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "sha256"],
+            "properties": {
+              "name": { "type": "string" },
+              "sha256": { "$ref": "#/$defs/sha256" }
+            }
+          }
+        },
+        "archive_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewed_coverage_sha256",
+        "known_limitations_sha256",
+        "sbom_sha256"
+      ],
+      "properties": {
+        "reviewed_coverage_sha256": { "$ref": "#/$defs/sha256" },
+        "known_limitations_sha256": { "$ref": "#/$defs/sha256" },
+        "sbom_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "immutable_release_requirement": { "const": "required" },
+    "release_workflow_path": { "const": ".github/workflows/release.yml" },
+    "release_policy_schema_sha256": { "$ref": "#/$defs/sha256" }
+  },
+  "$defs": { "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+}
