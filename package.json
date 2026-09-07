@@ -1,6 +1,6 @@
 {
   "name": "plldn",
-  "version": "0.0.0",
+  "version": "0.0.1-beta.1",
   "private": true,
   "description": "Programming Language & Licensing Decision Navigator",
   "license": "EUPL-1.2",
@@ -20,7 +20,8 @@
     "evidence": "node tools/evidence.ts",
     "check:repository": "node tools/repository.ts",
     "build:browser": "node tools/build-browser.ts",
-    "build:pages": "node tools/build-pages.ts"
+    "build:pages": "node tools/build-pages.ts",
+    "build:release": "node tools/build-release.ts"
   },
   "dependencies": {
     "ajv": "8.20.0",

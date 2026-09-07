@@ -20,7 +20,7 @@ const logs = Object.fromEntries(
 await validateVerification(report, subject.sha256, logs);
 const manifest = {
   schema_version: "0.1",
-  scope: "stage-5-github-native-runtime-community",
+  scope: "stage-6-beta-release",
   subject_sha256: subject.sha256,
   files: subject.files,
   node: process.version,

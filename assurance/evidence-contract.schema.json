@@ -15,7 +15,7 @@
       "const": "0.1"
     },
     "scope": {
-      "const": "stage-5-github-native-runtime-community"
+      "const": "stage-6-beta-release"
     },
     "subject_sha256": {
       "type": "string",

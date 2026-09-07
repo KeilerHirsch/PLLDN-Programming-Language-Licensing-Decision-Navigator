@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1",
-  "scope": "stage-5-github-native-runtime-community",
+  "scope": "stage-6-beta-release",
   "requirements": [
     {
       "id": "PLLDN-C01",
@@ -189,7 +189,44 @@
       "id": "PLLDN-C32",
       "invariant": "Community automation is read-only advisory evidence and cannot approve, promote, merge or mutate repository knowledge or contribution state",
       "tests": ["tests/community-authority.test.ts"]
+    },
+    {
+      "id": "PLLDN-C33",
+      "invariant": "Beta release identity binds version, tag, title, prerelease status, exact asset set and protected-main target",
+      "tests": [
+        "tests/release-policy.test.ts",
+        "tests/release-workflow.test.ts"
+      ]
+    },
+    {
+      "id": "PLLDN-C34",
+      "invariant": "Beta coverage and limitations explicitly separate the live Pages decision surface from Reviewed-but-not-live licensing knowledge",
+      "tests": ["tests/release-coverage.test.ts", "tests/release-docs.test.ts"]
+    },
+    {
+      "id": "PLLDN-C35",
+      "invariant": "Release artifacts are deterministic, checksummed and evidence-bound across Pages archive, CycloneDX SBOM and publication manifest",
+      "tests": [
+        "tests/release-archive.test.ts",
+        "tests/release-sbom.test.ts",
+        "tests/release-assets.test.ts"
+      ]
+    },
+    {
+      "id": "PLLDN-C36",
+      "invariant": "Release build authority is read-only and source-executing while publication authority is write-capable and executes no repository source",
+      "tests": ["tests/release-workflow.test.ts"]
+    },
+    {
+      "id": "PLLDN-C37",
+      "invariant": "Public Beta publication requires an exact-SHA verified draft prerelease and immutable release integrity; unpublished-draft cleanup cannot mutate a published release",
+      "tests": ["tests/release-workflow.test.ts"]
+    },
+    {
+      "id": "PLLDN-C38",
+      "invariant": "Published release evidence is baseline-bound and corrections supersede immutable releases instead of silently replacing them",
+      "tests": ["tests/release-assets.test.ts", "tests/release-docs.test.ts"]
     }
   ],
-  "release_scope": "Stage 5 provides the verified pre-release GitHub Pages runtime plus deterministic read-only community candidate maintenance and PR review assistance; automation has no approval or mutation authority, GitHub App repository access remains deferred to optional Stage 5C, and no v0.0.1 Beta, broad recommendation-accuracy or certification claim is made"
+  "release_scope": "Stage 6 publishes PLLDN v0.0.1 Beta 1 as an evidence-bound immutable prerelease: the live Pages surface remains four languages across four Reviewed boolean capability dimensions, eight SPDX license identities remain Reviewed but not live, Stage 5C repository access remains deferred, and no legal-advice, certification or broad recommendation-accuracy claim is made"
 }

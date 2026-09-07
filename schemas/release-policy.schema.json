@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://keilerhirsch.github.io/plldn/schemas/release-policy.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "version",
+    "tag",
+    "title",
+    "prerelease",
+    "assets",
+    "reviewed_source_manifest_sha256",
+    "runtime_projection_sha256",
+    "live_language_ids",
+    "live_dimension_ids",
+    "reviewed_not_live_license_ids",
+    "unsupported_surfaces",
+    "release_notes_path"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "version": { "const": "0.0.1-beta.1" },
+    "tag": { "const": "v0.0.1-beta.1" },
+    "title": { "const": "PLLDN v0.0.1 Beta 1" },
+    "prerelease": { "const": true },
+    "assets": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "reviewed_source_manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "runtime_projection_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "live_language_ids": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "live_dimension_ids": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "reviewed_not_live_license_ids": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "unsupported_surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "release_notes_path": { "const": "release/v0.0.1-beta.1/release-notes.md" }
+  }
+}

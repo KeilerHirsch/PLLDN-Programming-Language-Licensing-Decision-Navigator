@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.1",
+  "version": "0.0.1-beta.1",
+  "tag": "v0.0.1-beta.1",
+  "title": "PLLDN v0.0.1 Beta 1",
+  "prerelease": true,
+  "assets": [
+    "SHA256SUMS",
+    "known-limitations.md",
+    "plldn-v0.0.1-beta.1-pages.tar.gz",
+    "release-evidence.json",
+    "reviewed-coverage.json",
+    "sbom.cdx.json"
+  ],
+  "reviewed_source_manifest_sha256": "a363cca90f1730910cbb617edb029646fdfde9e8e44f7abbc0a879f9a6c763d5",
+  "runtime_projection_sha256": "a1e9533605e402339b0b473076cce68cdf60e758455831b891fbdda16473d4ec",
+  "live_language_ids": [
+    "language.go",
+    "language.python",
+    "language.rust",
+    "language.typescript"
+  ],
+  "live_dimension_ids": [
+    "dimension.emits-javascript",
+    "dimension.runtime-garbage-collection",
+    "dimension.safe-code-memory-safety-without-gc",
+    "dimension.static-type-checker"
+  ],
+  "reviewed_not_live_license_ids": [
+    "license.agpl-3.0-only",
+    "license.agpl-3.0-or-later",
+    "license.apache-2.0",
+    "license.eupl-1.2",
+    "license.gpl-3.0-only",
+    "license.gpl-3.0-or-later",
+    "license.mit",
+    "license.mpl-2.0"
+  ],
+  "unsupported_surfaces": [
+    "Complete outgoing-license recommendation workflow is not yet exposed in the live UI.",
+    "Complete license compatibility analysis is not provided.",
+    "General architecture, repository, roadmap or PRD parsing is not authoritative project-fact input.",
+    "General legal advice or certification is not provided.",
+    "Programming-language coverage is intentionally not comprehensive.",
+    "Stage 5C repository-read integration is not implemented.",
+    "Universal natural-language understanding or general recommendation accuracy is not claimed.",
+    "PLLDN may abstain when Reviewed facts are insufficient."
+  ],
+  "release_notes_path": "release/v0.0.1-beta.1/release-notes.md"
+}
