@@ -12,6 +12,8 @@ PLLDN helps turn concrete project requirements into a small, explainable set of 
 
 **Use it now:** [Open the verified GitHub Pages app →](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/)
 
+![PLLDN — Stop choosing by vibes. Filter. Compare. Decide.](docs/assets/plldn-readme-hero.webp)
+
 **Setup:** no account, API key, LLM, or provider setup is required for the live Beta. Use the filters directly, or optionally describe constraints in plain text; free text only proposes existing filters and you confirm them before they affect the decision.
 
 ## 30-second workflow

@@ -3,6 +3,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { asObject, parseStrictJson } from "../src/validation/json.ts";
+import { decodeRepositoryText } from "./repository-content.ts";
 import { repositoryFiles } from "./source-tree.ts";
 
 const files = repositoryFiles();
@@ -50,7 +51,10 @@ for (const path of files) {
     ),
     "Sensitive file class",
   );
-  const raw = readFileSync(path, "utf8");
+  const bytes = readFileSync(path);
+  assert(bytes.length > 0, `Empty source file: ${path}`);
+  const raw = decodeRepositoryText(bytes);
+  if (raw === null) continue;
   assert(raw.trim().length > 0, `Empty source file: ${path}`);
   assert(!raw.includes("\r"), `Non-LF text: ${path}`);
   assert(
