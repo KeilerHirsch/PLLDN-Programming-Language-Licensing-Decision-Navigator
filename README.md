@@ -8,6 +8,8 @@ A deterministic decision navigator for programming languages, software licenses,
 
 **Use it now:** [Open the verified GitHub Pages app →](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/)
 
+![PLLDN — Stop choosing by vibes. Filter. Compare. Decide.](docs/assets/plldn-readme-hero.webp)
+
 **Verify:** [Release](https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/releases/tag/v0.0.1-beta.1) · [Verification](docs/verification.md) · [Changelog](CHANGELOG.md)
 
 **Before using:** The live Beta covers Go, Python, Rust, and TypeScript across four Reviewed boolean capability dimensions. Eight SPDX license identities are Reviewed but are not yet exposed as a complete live licensing recommendation workflow. PLLDN does not provide legal advice or certification.
