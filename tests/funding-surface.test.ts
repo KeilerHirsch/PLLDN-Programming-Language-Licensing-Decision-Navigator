@@ -21,13 +21,11 @@ test("README keeps funding explanatory rather than entitlement-bearing", () => {
   assert.match(readme, /native Sponsor\s+button.*Ko-fi/isu);
 });
 
-test("README exposes a prominent support callout near the top", () => {
+test("README keeps support simple and non-entitling", () => {
   const readme = readFileSync("README.md", "utf8");
-  const top = readme.split("\n## Scope and trust model\n", 1)[0] ?? readme;
-  assert.match(top, /> \[!IMPORTANT\]/u);
-  assert.match(top, /Support PLLDN/u);
-  assert.match(top, /https:\/\/ko-fi\.com\/keilerhirsch/u);
-  assert.match(top, /https:\/\/github\.com\/sponsors\/KeilerHirsch/u);
-  assert.match(top, /not currently an active native funding destination/iu);
-  assert.match(top, /no feature entitlement/iu);
+  assert.match(readme, /## Support/u);
+  assert.match(readme, /https:\/\/ko-fi\.com\/keilerhirsch/u);
+  assert.match(readme, /https:\/\/github\.com\/sponsors\/KeilerHirsch/u);
+  assert.match(readme, /native Sponsor\s+button.*Ko-fi/isu);
+  assert.match(readme, /no feature entitlement/iu);
 });
