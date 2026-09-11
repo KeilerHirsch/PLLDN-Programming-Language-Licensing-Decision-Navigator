@@ -5,23 +5,21 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 
 const readme = readFileSync("README.md", "utf8");
-const top = readme.split("\n## Scope and trust model\n", 1)[0] ?? readme;
+const template = readFileSync("docs/templates/README-product-first.md", "utf8");
+const words = (text: string) =>
+  text.trim().split(/\s+/u).filter(Boolean).length;
 
-const markers = [
-  "# PLLDN - Programming Language & Licensing Decision Navigator",
-  "**Outcome:**",
-  "**For:**",
-  "**Status:**",
-  "**Use it now:**",
-  "**Setup:**",
-  "## 30-second workflow",
-  "**Before using:**",
-  "**Verify:**",
-  "**Next:**",
-] as const;
-
-test("README top zone sells the product outcome before the machinery", () => {
-  const positions = markers.map((marker) => top.indexOf(marker));
+test("README opens with product value, not machinery", () => {
+  const markers = [
+    "# PLLDN - Programming Language & Licensing Decision Navigator",
+    "**Stop choosing stacks by vibes.**",
+    "**Use it now:**",
+    "docs/assets/plldn-readme-hero.webp",
+    "## What PLLDN does",
+    "## Quick start",
+    "## Under the hood",
+  ] as const;
+  const positions = markers.map((marker) => readme.indexOf(marker));
   assert.equal(
     positions.every((position) => position >= 0),
     true,
@@ -30,17 +28,26 @@ test("README top zone sells the product outcome before the machinery", () => {
     [...positions].sort((a, b) => a - b),
     positions,
   );
-  assert.match(top, /GitHub Pages/u);
-  assert.match(top, /v0\.0\.1 Beta 1/u);
-  assert.match(top, /community-supported/iu);
-  assert.match(top, /no account, API key, LLM, or provider setup/iu);
-  assert.match(top, /free text.*proposes.*confirm/isu);
-  assert.match(top, /why.*fit|why.*candidate/iu);
+  const firstSection = readme.indexOf("\n## ");
+  assert.ok(firstSection > 0);
+  assert.ok(words(readme.slice(0, firstSection)) <= 90);
 });
 
-test("README keeps product explanation ahead of trust internals", () => {
-  const product = readme.indexOf("## What PLLDN does");
-  const trust = readme.indexOf("## Scope and trust model");
-  assert.ok(product >= 0);
-  assert.ok(trust > product);
+test("README stays concise and links the deep engineering story", () => {
+  assert.ok(words(readme) <= 420);
+  assert.match(readme, /docs\/architecture\.md/u);
+  assert.match(readme, /docs\/verification\.md/u);
+  assert.match(readme, /docs\/data-contracts\.md/u);
+  assert.match(readme, /SECURITY\.md/u);
+});
+
+test("product-first template freezes the reusable default", () => {
+  assert.match(template, /Say less\. Show more\. Prove the rest below\./u);
+  assert.match(template, /<HERO_IMAGE>/u);
+  assert.match(template, /## What it does/u);
+  assert.match(template, /## Quick start/u);
+  assert.match(template, /## Under the hood/u);
+  assert.match(template, /## Support/u);
+  assert.match(template, /## License/u);
+  assert.ok(words(template) <= 300);
 });
