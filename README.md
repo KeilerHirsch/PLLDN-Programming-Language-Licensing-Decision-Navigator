@@ -4,11 +4,11 @@
 
 PLLDN turns real project constraints into technology choices you can actually defend. Unknown stays unknown; the tool does not invent certainty just to produce an answer.
 
-**Use it now:** [Open PLLDN on GitHub Pages ?](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/)
+**Use it now:** [Open PLLDN on GitHub Pages →](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/)
 
-![PLLDN ? Stop choosing by vibes. Filter. Compare. Decide.](docs/assets/plldn-readme-hero.webp)
+![PLLDN — Stop choosing by vibes. Filter. Compare. Decide.](docs/assets/plldn-readme-hero.webp)
 
-**v0.0.1 Beta 1** ? community-supported ? no account, API key, LLM, or provider setup required.
+**v0.0.1 Beta 1** · community-supported · no account, API key, LLM, or provider setup required.
 
 ## What PLLDN does
 
@@ -35,7 +35,7 @@ Live today: **Go, Python, Rust, TypeScript** across **four Reviewed boolean capa
 
 When Reviewed evidence is insufficient, **abstention is the correct result**. PLLDN does not provide legal advice or certification.
 
-[Release](https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/releases/tag/v0.0.1-beta.1) ? [Changelog](CHANGELOG.md)
+[Release](https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/releases/tag/v0.0.1-beta.1) · [Changelog](CHANGELOG.md)
 
 ## Under the hood
 
@@ -43,7 +43,7 @@ When Reviewed evidence is insufficient, **abstention is the correct result**. PL
 - Free text may propose existing filters; only confirmed facts enter the decision path.
 - Reviewed knowledge, runtime approval, and release evidence stay separate.
 
-**Deep docs:** [Architecture](docs/architecture.md) ? [Data contracts](docs/data-contracts.md) ? [Verification](docs/verification.md) ? [Security](SECURITY.md) ? [Contributing](CONTRIBUTING.md)
+**Deep docs:** [Architecture](docs/architecture.md) · [Data contracts](docs/data-contracts.md) · [Verification](docs/verification.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
 ## Support
 
