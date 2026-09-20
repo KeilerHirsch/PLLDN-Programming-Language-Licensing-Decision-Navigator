@@ -23,7 +23,7 @@ AI output is not an independent factual source or human approval.
 
 ## Knowledge changes
 
-Follow [knowledge review](docs/knowledge-review.md). Synthetic fixtures remain test-only;
+Follow the governed review path in [GOVERNANCE.md](GOVERNANCE.md). Synthetic fixtures remain test-only;
 reviewed runtime knowledge must come from the governed candidate/promotion path.
 Include changed record IDs, evidence and expected decision-surface effects in the PR.
 Do not present uncomputed recommendation differences as zero change.

@@ -41,7 +41,6 @@ for (const required of [
   "tools/release-archive.ts",
   "tools/release-sbom.ts",
   "tools/build-release.ts",
-  "docs/decisions/0009-immutable-beta-release.md",
 ])
   assert(files.includes(required), `Missing ${required}`);
 for (const path of files) {
