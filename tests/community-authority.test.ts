@@ -34,15 +34,15 @@ test("community automation has no repository-write authority", () => {
 test("public governance separates advisory output from approval", () => {
   const contributing = read("CONTRIBUTING.md");
   const governance = read("GOVERNANCE.md");
-  const review = read("docs/knowledge-review.md");
+  const publicGovernance = `${contributing}\n${governance}`;
   assert.match(governance, /Bots cannot approve/i);
   assert.match(contributing, /candidate/i);
   assert.match(
-    `${contributing}\n${review}`,
+    publicGovernance,
     /job summar(?:y|ies).*not.*approval|artifact.*not.*approval/is,
   );
   assert.match(
-    review,
+    publicGovernance,
     /candidate PR.*human review.*immutable.*runtime approval/is,
   );
 });
