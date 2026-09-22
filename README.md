@@ -43,7 +43,7 @@ When Reviewed evidence is insufficient, **abstention is the correct result**. PL
 - Free text may propose existing filters; only confirmed facts enter the decision path.
 - Reviewed knowledge, runtime approval, and release evidence stay separate.
 
-**Deep docs:** [Architecture](docs/architecture.md) · [Data contracts](docs/data-contracts.md) · [Verification](docs/verification.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
+**Public docs:** [Data contracts](docs/data-contracts.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Governance](GOVERNANCE.md)
 
 ## Support
 
