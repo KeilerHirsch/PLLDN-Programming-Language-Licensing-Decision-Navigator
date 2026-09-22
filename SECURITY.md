@@ -8,18 +8,15 @@ https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Na
 Do not disclose secrets or an unpatched vulnerability in a public issue.
 If the private form is unavailable, wait for a private reporting channel to be restored.
 
-Relevant boundaries include candidate/reviewed knowledge, schema references, dependency
-installation, browser runtime injection, deployment-profile approvals, generated Pages
-artifacts, DOM rendering, deterministic free-text rules and confirmation, workflow
-permissions and protected snapshot approvals. Stage 4 user text remains bounded and local;
-it must not become executable code, network input, telemetry or canonical project state
-without explicit facet confirmation. Stage 5A's static Pages path uses a separately approved
-minimal runtime projection, generated-byte security checks and an exact-SHA least-privilege
-deployment workflow. Stage 5B adds only read-only maintenance/reporting and contribution
-classification: issue content and PR paths remain untrusted, PR-supplied code is not executed by the
-community workflow, and automation cannot approve, merge or mutate Reviewed knowledge. It adds no
-account, backend, repository-write bot or secret-bearing browser feature. Stage 6 adds an exact-main-SHA immutable prerelease pipeline: source executes only in a read-only build job; the write-capable publish job executes no repository source and must verify all release-asset digests before publication.
-See [the threat model](docs/threat-model.md).
+## Public security boundary
 
-Security-sensitive fixes need a regression, provenance and review.
+PLLDN separates reviewed knowledge, browser input, repository contributions, build/deploy workflows, and release publication into distinct trust boundaries.
+
+- User text stays local and non-executable unless it is explicitly confirmed into an existing supported filter.
+- Repository contributions are untrusted until reviewed and must not gain approval or merge authority through automation.
+- Public browser functionality does not require an account, backend, telemetry, API key, or provider credential.
+- Build, deployment, and release workflows use least-privilege permissions and verify the artifacts they publish.
+
+Security-sensitive fixes require a regression test, provenance, and review.
+
 No response-time guarantee or security certification is claimed.
