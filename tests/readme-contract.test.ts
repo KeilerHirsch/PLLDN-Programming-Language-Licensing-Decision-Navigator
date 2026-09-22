@@ -33,12 +33,16 @@ test("README opens with product value, not machinery", () => {
   assert.ok(words(readme.slice(0, firstSection)) <= 90);
 });
 
-test("README stays concise and links the deep engineering story", () => {
+test("README stays concise and links only the intended public engineering surface", () => {
   assert.ok(words(readme) <= 420);
-  assert.match(readme, /docs\/architecture\.md/u);
-  assert.match(readme, /docs\/verification\.md/u);
   assert.match(readme, /docs\/data-contracts\.md/u);
   assert.match(readme, /SECURITY\.md/u);
+  assert.match(readme, /CONTRIBUTING\.md/u);
+  assert.match(readme, /GOVERNANCE\.md/u);
+
+  assert.doesNotMatch(readme, /docs\/architecture\.md/u);
+  assert.doesNotMatch(readme, /docs\/verification\.md/u);
+  assert.doesNotMatch(readme, /docs\/threat-model\.md/u);
 });
 
 test("product-first template freezes the reusable default", () => {
