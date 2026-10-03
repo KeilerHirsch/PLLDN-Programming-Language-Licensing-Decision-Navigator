@@ -111,6 +111,15 @@ function renderSort(model: UiViewModel): HTMLElement {
   return wrapper;
 }
 
+export function safeEvidenceHref(reference: string): string | null {
+  try {
+    const url = new URL(reference);
+    return url.protocol === "https:" ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
 function formatTypedValue(value: TypedValue): string {
   switch (value.type) {
     case "boolean":
@@ -167,11 +176,18 @@ function renderFact(fact: UiCandidateFactView): HTMLLIElement {
     evidence.append(prefix);
     fact.sources.forEach((source, index) => {
       if (index > 0) evidence.append(document.createTextNode(" · "));
-      const link = document.createElement("a");
-      link.href = source.reference;
-      link.rel = "noopener noreferrer";
-      link.textContent = source.title;
-      evidence.append(link);
+      const href = safeEvidenceHref(source.reference);
+      if (href === null) {
+        const sourceLabel = document.createElement("span");
+        sourceLabel.textContent = source.title;
+        evidence.append(sourceLabel);
+      } else {
+        const link = document.createElement("a");
+        link.href = href;
+        link.rel = "noopener noreferrer";
+        link.textContent = source.title;
+        evidence.append(link);
+      }
     });
     item.append(evidence);
   }
