@@ -70,6 +70,29 @@ test("candidate labels and material classes come from engine/entity records", as
     ],
   );
 });
+test("candidate profiles expose reviewed facts, scope, and evidence metadata", async () => {
+  const model = await material("recommended");
+  const zeta = model.candidates.find((candidate) => candidate.label === "Zeta");
+  assert(zeta);
+  assert.deepEqual(zeta.version_scope, ["1.0"]);
+  assert.deepEqual(zeta.target_scope, ["target.ui"]);
+  assert.deepEqual(
+    zeta.facts.map((fact) => [
+      fact.dimension_id,
+      fact.value === null ? null : fact.value.value,
+      fact.sources[0]?.source_id,
+    ]),
+    [
+      ["dimension.safe", true, "source.ui-fixture"],
+      ["dimension.simple", true, "source.ui-fixture"],
+    ],
+  );
+  for (const fact of zeta.facts) {
+    assert.equal(fact.sources[0]?.title, "Synthetic UI fixture");
+    assert.equal(fact.sources[0]?.reference, "urn:plldn:ui-fixture");
+  }
+});
+
 test("name sorting is presentation-only and deterministic", async () => {
   const recommended = await material("recommended");
   const named = await material("name");

@@ -159,6 +159,41 @@ fieldset {
   opacity: 0.75;
 }
 
+
+.candidate-meta {
+  margin: 0.35rem 0 0.7rem;
+  font-size: 0.9rem;
+  opacity: 0.78;
+}
+
+.candidate-facts {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.candidate-fact {
+  padding-top: 0.55rem;
+  border-top: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
+}
+
+.candidate-fact-label {
+  margin-right: 0.45rem;
+}
+
+.candidate-fact-value {
+  white-space: nowrap;
+}
+
+.candidate-conditions,
+.candidate-evidence {
+  margin: 0.2rem 0 0;
+  font-size: 0.85rem;
+  opacity: 0.82;
+}
+
 pre {
   overflow: auto;
   white-space: pre-wrap;

@@ -1,11 +1,17 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
 import type { FacetCount } from "../decision/facets.ts";
-import type { DecisionEvaluation } from "../decision/types.ts";
+import { KnowledgeIndex } from "../decision/knowledge.ts";
+import type {
+  ConditionRecord,
+  DecisionEvaluation,
+  TypedValue,
+} from "../decision/types.ts";
 import type { Document } from "../validation/documents.ts";
 import type {
   FacetDefinition,
   FacetSelections,
+  KnowledgeClaimState,
   SortMode,
   UiCandidateView,
   UiViewModel,
@@ -64,21 +70,59 @@ function stateMessage(state: DecisionEvaluation["trace"]["state"]): string {
   }
 }
 
-function entityLabels(
+function dimensionLabels(
   knowledge: readonly Document[],
-  candidateType: string,
 ): ReadonlyMap<string, string> {
   return new Map(
     knowledge
-      .filter(
-        (doc) =>
-          doc.kind === "entity" && doc.record.entity_type === candidateType,
-      )
+      .filter((doc) => doc.kind === "dimension")
       .map((doc) => [
-        String(doc.record.entity_id),
+        String(doc.record.dimension_id),
         String(doc.record.canonical_name),
       ]),
   );
+}
+
+function candidateFacts(
+  index: KnowledgeIndex,
+  labels: ReadonlyMap<string, string>,
+  candidateId: string,
+) {
+  return [...index.claims.values()]
+    .filter((claim) => claim.entity_id === candidateId)
+    .map((claim) => {
+      const dimensionId = String(claim.dimension_id);
+      const sourceIds = claim.source_ids as string[];
+      return {
+        claim_id: String(claim.claim_id),
+        dimension_id: dimensionId,
+        label: labels.get(dimensionId) ?? dimensionId,
+        state: claim.state as KnowledgeClaimState,
+        value:
+          claim.value === undefined
+            ? null
+            : structuredClone(claim.value as TypedValue),
+        conditions: structuredClone(
+          (claim.conditions ?? []) as ConditionRecord[],
+        ),
+        sources: sourceIds.map((sourceId) => {
+          const source = index.sources.get(sourceId);
+          if (!source)
+            throw new Error(`Missing candidate evidence source: ${sourceId}`);
+          return {
+            source_id: sourceId,
+            title: String(source.title),
+            reference: String(source.reference),
+          };
+        }),
+      };
+    })
+    .sort((a, b) => {
+      const labelOrder = a.label.localeCompare(b.label);
+      return labelOrder !== 0
+        ? labelOrder
+        : a.claim_id.localeCompare(b.claim_id);
+    });
 }
 export function buildUiViewModel(input: {
   project: Record<string, unknown>;
@@ -90,14 +134,16 @@ export function buildUiViewModel(input: {
   selections: FacetSelections;
   sort: SortMode;
 }): UiViewModel {
-  const labels = entityLabels(input.knowledge, input.candidateType);
+  const index = new KnowledgeIndex(input.knowledge);
+  const dimensions = dimensionLabels(input.knowledge);
   const selectedIds = new Set(
     input.evaluation.trace.results.flatMap((result) => result.candidate_ids),
   );
   const candidates = input.evaluation.candidates.map((candidate) => {
-    const label = labels.get(candidate.candidate_id);
-    if (!label)
-      throw new Error(`Missing candidate label: ${candidate.candidate_id}`);
+    const entity = index.entities.get(candidate.candidate_id);
+    if (!entity || entity.entity_type !== input.candidateType)
+      throw new Error(`Missing candidate entity: ${candidate.candidate_id}`);
+    const label = String(entity.canonical_name);
     const material_class = selectedIds.has(candidate.candidate_id)
       ? "selected"
       : candidate.status === "ELIGIBLE"
@@ -110,6 +156,9 @@ export function buildUiViewModel(input: {
       label,
       status: candidate.status,
       material_class,
+      version_scope: [...(entity.version_scope as string[])],
+      target_scope: [...(entity.target_scope as string[])],
+      facts: candidateFacts(index, dimensions, candidate.candidate_id),
       exclusions: [...candidate.exclusions],
       unresolved: [...candidate.unresolved],
       source_ids: [...candidate.source_ids],

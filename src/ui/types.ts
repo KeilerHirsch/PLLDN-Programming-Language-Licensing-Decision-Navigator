@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 import type {
   CandidateStatus,
+  ConditionRecord,
   DecisionEvaluation,
   DecisionState,
   DecisionTrace,
@@ -40,11 +41,37 @@ export type CandidateMaterialClass =
   | "unresolved"
   | "excluded";
 
+export type KnowledgeClaimState =
+  | "TRUE"
+  | "FALSE"
+  | "CONDITIONAL"
+  | "UNKNOWN"
+  | "NOT_APPLICABLE";
+
+export interface UiEvidenceSource {
+  source_id: string;
+  title: string;
+  reference: string;
+}
+
+export interface UiCandidateFactView {
+  claim_id: string;
+  dimension_id: string;
+  label: string;
+  state: KnowledgeClaimState;
+  value: TypedValue | null;
+  conditions: readonly ConditionRecord[];
+  sources: readonly UiEvidenceSource[];
+}
+
 export interface UiCandidateView {
   candidate_id: string;
   label: string;
   status: CandidateStatus;
   material_class: CandidateMaterialClass;
+  version_scope: readonly string[];
+  target_scope: readonly string[];
+  facts: readonly UiCandidateFactView[];
   exclusions: readonly string[];
   unresolved: readonly string[];
   source_ids: readonly string[];
