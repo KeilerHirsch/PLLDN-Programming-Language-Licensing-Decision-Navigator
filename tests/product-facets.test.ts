@@ -100,7 +100,10 @@ test("facet validation supports typed enum vocabularies without a boolean-only g
   assert.deepEqual(validateFacetDefinitions(knowledge, facets), facets);
 
   const invalid = structuredClone(facets);
-  invalid[0].options[0].value.value = "unknown";
+  const invalidFacet = invalid[0];
+  const invalidOption = invalidFacet?.options[0];
+  assert(invalidOption);
+  invalidOption.value.value = "unknown";
   assert.throws(
     () => validateFacetDefinitions(knowledge, invalid),
     /outside dimension vocabulary/i,
