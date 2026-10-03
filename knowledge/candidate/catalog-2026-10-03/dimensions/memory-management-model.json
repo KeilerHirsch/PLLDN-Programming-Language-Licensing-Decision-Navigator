@@ -1,0 +1,18 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.memory-management-model",
+    "canonical_name": "Memory-management model",
+    "value_type": "set",
+    "category": "assurance",
+    "unit": null,
+    "allowed_values": [
+      "manual",
+      "garbage-collected",
+      "ownership-borrowing",
+      "reference-counting",
+      "automatic-reference-counting"
+    ]
+  }
+}

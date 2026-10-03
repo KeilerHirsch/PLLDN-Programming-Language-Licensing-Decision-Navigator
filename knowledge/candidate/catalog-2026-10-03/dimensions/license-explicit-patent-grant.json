@@ -1,0 +1,12 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.license-explicit-patent-grant",
+    "canonical_name": "Explicit patent grant",
+    "value_type": "boolean",
+    "category": "license-legal",
+    "unit": null,
+    "allowed_values": []
+  }
+}

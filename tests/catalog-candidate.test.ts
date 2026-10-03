@@ -32,7 +32,7 @@ function files(): Record<string, string> {
 
 test("broad candidate catalog is structurally valid without self-approved assertions", async () => {
   const built = await buildKnowledgeCandidate(files(), at, identity);
-  assert.equal(built.documents.length, 50);
+  assert.equal(built.documents.length, 61);
   assert.equal(built.reviewedAssertions, 0);
   assert.equal(built.partialAssertions, 0);
   assert.equal(
@@ -137,6 +137,31 @@ test("candidate catalog contains every license identity currently admitted by th
     "LGPL-3.0-only",
     "LGPL-3.0-or-later",
     "MIT",
-    "MPL-2.0"
-]);
+    "MPL-2.0",
+  ]);
+});
+
+test("candidate catalog defines comparison vocabularies without assigning candidate values", async () => {
+  const built = await buildKnowledgeCandidate(files(), at, identity);
+  const dimensions = built.documents
+    .filter((doc) => doc.kind === "dimension")
+    .map((doc) => doc.record.dimension_id)
+    .sort();
+  assert.deepEqual(dimensions, [
+    "dimension.bare-metal-support",
+    "dimension.c-ffi-support",
+    "dimension.concurrency-models",
+    "dimension.execution-model",
+    "dimension.license-explicit-patent-grant",
+    "dimension.license-family",
+    "dimension.memory-management-model",
+    "dimension.official-package-manager",
+    "dimension.runtime-targets",
+    "dimension.type-checking-model",
+    "dimension.webassembly-support",
+  ]);
+  assert.equal(
+    built.documents.some((doc) => doc.kind === "claim"),
+    false,
+  );
 });

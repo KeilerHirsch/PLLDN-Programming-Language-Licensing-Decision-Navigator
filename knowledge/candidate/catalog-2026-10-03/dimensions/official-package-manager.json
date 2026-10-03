@@ -1,0 +1,12 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.official-package-manager",
+    "canonical_name": "Official package manager",
+    "value_type": "string",
+    "category": "team-maintenance",
+    "unit": null,
+    "allowed_values": []
+  }
+}

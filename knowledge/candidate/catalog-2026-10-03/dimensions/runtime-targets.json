@@ -1,0 +1,23 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.runtime-targets",
+    "canonical_name": "Runtime and compilation targets",
+    "value_type": "set",
+    "category": "platform",
+    "unit": null,
+    "allowed_values": [
+      "native",
+      "jvm",
+      "clr",
+      "javascript",
+      "webassembly",
+      "beam",
+      "browser",
+      "mobile",
+      "embedded",
+      "shell"
+    ]
+  }
+}

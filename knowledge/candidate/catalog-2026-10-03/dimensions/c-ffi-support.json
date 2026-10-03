@@ -1,0 +1,12 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.c-ffi-support",
+    "canonical_name": "C FFI support",
+    "value_type": "boolean",
+    "category": "integration",
+    "unit": null,
+    "allowed_values": []
+  }
+}
