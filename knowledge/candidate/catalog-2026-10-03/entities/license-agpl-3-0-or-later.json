@@ -6,12 +6,8 @@
     "entity_type": "license",
     "canonical_name": "AGPL-3.0-or-later",
     "aliases": [],
-    "version_scope": [
-      "AGPL-3.0-or-later"
-    ],
-    "target_scope": [
-      "general"
-    ],
+    "version_scope": ["AGPL-3.0-or-later"],
+    "target_scope": ["general"],
     "license_id": "AGPL-3.0-or-later"
   }
 }

@@ -9,16 +9,10 @@
       {
         "text": "JS",
         "ambiguity": "context-required",
-        "context": [
-          "programming-language"
-        ]
+        "context": ["programming-language"]
       }
     ],
-    "version_scope": [
-      "unspecified"
-    ],
-    "target_scope": [
-      "general"
-    ]
+    "version_scope": ["unspecified"],
+    "target_scope": ["general"]
   }
 }

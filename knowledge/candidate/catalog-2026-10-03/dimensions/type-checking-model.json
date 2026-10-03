@@ -7,10 +7,6 @@
     "value_type": "set",
     "category": "assurance",
     "unit": null,
-    "allowed_values": [
-      "static",
-      "dynamic",
-      "gradual"
-    ]
+    "allowed_values": ["static", "dynamic", "gradual"]
   }
 }

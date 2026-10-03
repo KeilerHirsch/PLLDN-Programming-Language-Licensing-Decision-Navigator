@@ -6,12 +6,8 @@
     "entity_type": "license",
     "canonical_name": "MIT",
     "aliases": [],
-    "version_scope": [
-      "MIT"
-    ],
-    "target_scope": [
-      "general"
-    ],
+    "version_scope": ["MIT"],
+    "target_scope": ["general"],
     "license_id": "MIT"
   }
 }

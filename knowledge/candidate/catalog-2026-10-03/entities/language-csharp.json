@@ -12,11 +12,7 @@
         "context": []
       }
     ],
-    "version_scope": [
-      "unspecified"
-    ],
-    "target_scope": [
-      "general"
-    ]
+    "version_scope": ["unspecified"],
+    "target_scope": ["general"]
   }
 }
