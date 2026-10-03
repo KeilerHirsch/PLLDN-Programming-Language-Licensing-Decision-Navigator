@@ -57,10 +57,7 @@ export const PRODUCT_FACETS: readonly FacetDefinition[] = [
   },
 ];
 
-function validateOperator(
-  facet: FacetDefinition,
-  valueType: string,
-): void {
+function validateOperator(facet: FacetDefinition, valueType: string): void {
   if (facet.operator === "IN" && valueType !== "set") {
     throw new Error(`IN facet requires a set dimension: ${facet.dimension_id}`);
   }
@@ -86,10 +83,7 @@ function validateOption(
         `Facet option type mismatch: ${facet.facet_id}/${option.option_id}`,
       );
     }
-    if (
-      option.value.type === "enum" &&
-      !allowed.has(option.value.value)
-    ) {
+    if (option.value.type === "enum" && !allowed.has(option.value.value)) {
       throw new Error(
         `Facet option outside dimension vocabulary: ${facet.facet_id}/${option.option_id}`,
       );

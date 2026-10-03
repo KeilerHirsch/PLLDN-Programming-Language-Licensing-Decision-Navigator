@@ -4,8 +4,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   PRODUCT_FACETS,
-  validateFacetDefinitions,
   validatedProductFacets,
+  validateFacetDefinitions,
 } from "../src/ui/product-facets.ts";
 import type { Document } from "../src/validation/documents.ts";
 
