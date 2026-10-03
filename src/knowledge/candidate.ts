@@ -30,7 +30,9 @@ function candidateSnapshotIdentity(
     !resolved.knowledgeSnapshot.startsWith("candidate.") ||
     !resolved.rulesSnapshot.startsWith("candidate.")
   ) {
-    throw new Error("Candidate snapshot identity must use candidate.* namespace");
+    throw new Error(
+      "Candidate snapshot identity must use candidate.* namespace",
+    );
   }
   return resolved;
 }
