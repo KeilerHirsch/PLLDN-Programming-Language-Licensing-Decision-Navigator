@@ -20,6 +20,7 @@ test("DOM boundary uses safe content APIs and semantic native controls", () => {
   }
   for (const required of [
     'createElement("button")',
+    'createElement("a")',
     'createElement("select")',
     'createElement("details")',
     'setAttribute("aria-live", "polite")',

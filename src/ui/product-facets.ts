@@ -57,8 +57,59 @@ export const PRODUCT_FACETS: readonly FacetDefinition[] = [
   },
 ];
 
-export function validatedProductFacets(
+function validateOperator(facet: FacetDefinition, valueType: string): void {
+  if (facet.operator === "IN" && valueType !== "set") {
+    throw new Error(`IN facet requires a set dimension: ${facet.dimension_id}`);
+  }
+  if (
+    ["GTE", "LTE"].includes(facet.operator) &&
+    !["integer", "quantity"].includes(valueType)
+  ) {
+    throw new Error(
+      `Ordered facet requires an integer or quantity dimension: ${facet.dimension_id}`,
+    );
+  }
+}
+
+function validateOption(
+  facet: FacetDefinition,
+  dimension: Record<string, unknown>,
+): void {
+  const valueType = String(dimension.value_type);
+  const allowed = new Set((dimension.allowed_values ?? []) as string[]);
+  for (const option of facet.options) {
+    if (option.value.type !== valueType) {
+      throw new Error(
+        `Facet option type mismatch: ${facet.facet_id}/${option.option_id}`,
+      );
+    }
+    if (option.value.type === "enum" && !allowed.has(option.value.value)) {
+      throw new Error(
+        `Facet option outside dimension vocabulary: ${facet.facet_id}/${option.option_id}`,
+      );
+    }
+    if (
+      option.value.type === "set" &&
+      !option.value.value.every((value) => allowed.has(value))
+    ) {
+      throw new Error(
+        `Facet option outside dimension vocabulary: ${facet.facet_id}/${option.option_id}`,
+      );
+    }
+    if (
+      option.value.type === "quantity" &&
+      option.value.unit !== dimension.unit
+    ) {
+      throw new Error(
+        `Facet option unit mismatch: ${facet.facet_id}/${option.option_id}`,
+      );
+    }
+  }
+}
+
+export function validateFacetDefinitions(
   knowledge: readonly Document[],
+  facets: readonly FacetDefinition[],
 ): readonly FacetDefinition[] {
   const dimensions = new Map<string, Record<string, unknown>>();
   for (const document of knowledge) {
@@ -67,16 +118,19 @@ export function validatedProductFacets(
     if (typeof id === "string") dimensions.set(id, document.record);
   }
 
-  for (const facet of PRODUCT_FACETS) {
+  for (const facet of facets) {
     const dimension = dimensions.get(facet.dimension_id);
     if (!dimension) {
       throw new Error(`Product facet dimension missing: ${facet.dimension_id}`);
     }
-    if (dimension.value_type !== "boolean") {
-      throw new Error(
-        `Product facet dimension must be boolean: ${facet.dimension_id}`,
-      );
-    }
+    validateOperator(facet, String(dimension.value_type));
+    validateOption(facet, dimension);
   }
-  return PRODUCT_FACETS;
+  return facets;
+}
+
+export function validatedProductFacets(
+  knowledge: readonly Document[],
+): readonly FacetDefinition[] {
+  return validateFacetDefinitions(knowledge, PRODUCT_FACETS);
 }

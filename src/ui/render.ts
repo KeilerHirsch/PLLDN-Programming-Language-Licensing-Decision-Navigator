@@ -1,7 +1,8 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
+import type { ConditionRecord, TypedValue } from "../decision/types.ts";
 import type { TextAnalysis, TextProposal } from "../text/types.ts";
-import type { UiViewModel } from "./types.ts";
+import type { UiCandidateFactView, UiViewModel } from "./types.ts";
 
 function heading(level: 1 | 2 | 3, text: string): HTMLHeadingElement {
   const node = document.createElement(`h${level}`) as HTMLHeadingElement;
@@ -110,6 +111,89 @@ function renderSort(model: UiViewModel): HTMLElement {
   return wrapper;
 }
 
+export function safeEvidenceHref(reference: string): string | null {
+  try {
+    const url = new URL(reference);
+    return url.protocol === "https:" ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function formatTypedValue(value: TypedValue): string {
+  switch (value.type) {
+    case "boolean":
+      return value.value ? "Yes" : "No";
+    case "integer":
+    case "string":
+    case "enum":
+      return String(value.value);
+    case "set":
+      return value.value.join(", ");
+    case "quantity":
+      return `${value.value} ${value.unit}`;
+  }
+}
+
+function formatCondition(condition: ConditionRecord): string {
+  return `${condition.dimension_id} ${condition.operator} ${formatTypedValue(condition.value)}`;
+}
+
+function formatFactValue(fact: UiCandidateFactView): string {
+  if (fact.state === "UNKNOWN") return "Unknown";
+  if (fact.state === "NOT_APPLICABLE") return "Not applicable";
+  if (fact.value === null) return fact.state;
+  const value = formatTypedValue(fact.value);
+  return fact.state === "CONDITIONAL" ? `${value} (conditional)` : value;
+}
+
+function renderFact(fact: UiCandidateFactView): HTMLLIElement {
+  const item = document.createElement("li");
+  item.className = "candidate-fact";
+
+  const label = document.createElement("span");
+  label.className = "candidate-fact-label";
+  label.textContent = fact.label;
+
+  const value = document.createElement("strong");
+  value.className = "candidate-fact-value";
+  value.textContent = formatFactValue(fact);
+  item.append(label, value);
+
+  if (fact.conditions.length > 0) {
+    const conditions = paragraph(
+      `Conditions: ${fact.conditions.map(formatCondition).join(" · ")}`,
+    );
+    conditions.className = "candidate-conditions";
+    item.append(conditions);
+  }
+
+  if (fact.sources.length > 0) {
+    const evidence = document.createElement("div");
+    evidence.className = "candidate-evidence";
+    const prefix = document.createElement("span");
+    prefix.textContent = "Evidence: ";
+    evidence.append(prefix);
+    fact.sources.forEach((source, index) => {
+      if (index > 0) evidence.append(document.createTextNode(" · "));
+      const href = safeEvidenceHref(source.reference);
+      if (href === null) {
+        const sourceLabel = document.createElement("span");
+        sourceLabel.textContent = source.title;
+        evidence.append(sourceLabel);
+      } else {
+        const link = document.createElement("a");
+        link.href = href;
+        link.rel = "noopener noreferrer";
+        link.textContent = source.title;
+        evidence.append(link);
+      }
+    });
+    item.append(evidence);
+  }
+  return item;
+}
+
 function renderCandidates(model: UiViewModel): HTMLElement {
   const section = document.createElement("section");
   section.className = "results";
@@ -125,9 +209,23 @@ function renderCandidates(model: UiViewModel): HTMLElement {
     status.className = "candidate-status";
     status.textContent = candidate.material_class;
     item.append(name, status);
+
+    const scope = paragraph(
+      `Snapshot scope: ${candidate.version_scope.join(", ")} · Targets: ${candidate.target_scope.join(", ")}`,
+    );
+    scope.className = "candidate-meta";
+    item.append(scope);
+
+    if (candidate.facts.length > 0) {
+      const facts = document.createElement("ul");
+      facts.className = "candidate-facts";
+      for (const fact of candidate.facts) facts.append(renderFact(fact));
+      item.append(facts);
+    }
+
     const details = document.createElement("details");
     const summary = document.createElement("summary");
-    summary.textContent = "Evidence details";
+    summary.textContent = "Decision details";
     const pre = document.createElement("pre");
     pre.textContent = JSON.stringify(
       {

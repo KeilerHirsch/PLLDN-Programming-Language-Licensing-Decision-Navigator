@@ -5,6 +5,7 @@ import test from "node:test";
 import {
   PRODUCT_FACETS,
   validatedProductFacets,
+  validateFacetDefinitions,
 } from "../src/ui/product-facets.ts";
 import type { Document } from "../src/validation/documents.ts";
 
@@ -29,7 +30,7 @@ function dimensions(valueType = "boolean"): Document[] {
     },
   }));
 }
-test("product facets bind only the approved Reviewed boolean dimensions", () => {
+test("product facets bind the currently approved Reviewed dimensions", () => {
   assert.deepEqual(
     PRODUCT_FACETS.map((facet) => facet.dimension_id),
     [...dimensionIds],
@@ -48,10 +49,63 @@ test("product facets bind only the approved Reviewed boolean dimensions", () => 
   assert.deepEqual(validatedProductFacets(dimensions()), PRODUCT_FACETS);
 });
 
-test("product facets fail closed on missing or non-boolean dimensions", () => {
+test("product facets fail closed on missing or mismatched dimensions", () => {
   assert.throws(
     () => validatedProductFacets(dimensions().slice(1)),
     /dimension/i,
   );
-  assert.throws(() => validatedProductFacets(dimensions("string")), /boolean/i);
+  assert.throws(
+    () => validatedProductFacets(dimensions("string")),
+    /type mismatch/i,
+  );
+});
+
+test("facet validation supports typed enum vocabularies without a boolean-only gate", () => {
+  const knowledge: Document[] = [
+    {
+      kind: "dimension",
+      record: {
+        schema_version: "0.1",
+        dimension_id: "dimension.execution-model",
+        canonical_name: "Execution model",
+        value_type: "enum",
+        category: "performance",
+        unit: null,
+        allowed_values: ["native", "managed-runtime", "transpiled"],
+      },
+    },
+  ];
+  const facets = [
+    {
+      facet_id: "execution-model",
+      label: "Execution model",
+      group: "Runtime",
+      dimension_id: "dimension.execution-model",
+      operator: "EQ" as const,
+      strength: "MUST" as const,
+      options: [
+        {
+          option_id: "native",
+          label: "Native",
+          value: { type: "enum" as const, value: "native" },
+        },
+        {
+          option_id: "managed-runtime",
+          label: "Managed runtime",
+          value: { type: "enum" as const, value: "managed-runtime" },
+        },
+      ],
+    },
+  ];
+  assert.deepEqual(validateFacetDefinitions(knowledge, facets), facets);
+
+  const invalid = structuredClone(facets);
+  const invalidFacet = invalid[0];
+  const invalidOption = invalidFacet?.options[0];
+  assert(invalidOption);
+  invalidOption.value.value = "unknown";
+  assert.throws(
+    () => validateFacetDefinitions(knowledge, invalid),
+    /outside dimension vocabulary/i,
+  );
 });
