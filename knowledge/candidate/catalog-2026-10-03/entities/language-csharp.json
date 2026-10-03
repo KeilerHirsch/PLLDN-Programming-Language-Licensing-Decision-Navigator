@@ -1,0 +1,22 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "language.csharp",
+    "entity_type": "language",
+    "canonical_name": "C#",
+    "aliases": [
+      {
+        "text": "C Sharp",
+        "ambiguity": "unambiguous",
+        "context": []
+      }
+    ],
+    "version_scope": [
+      "unspecified"
+    ],
+    "target_scope": [
+      "general"
+    ]
+  }
+}

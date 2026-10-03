@@ -1,0 +1,22 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "language.visual-basic-dotnet",
+    "entity_type": "language",
+    "canonical_name": "Visual Basic .NET",
+    "aliases": [
+      {
+        "text": "VB.NET",
+        "ambiguity": "unambiguous",
+        "context": []
+      }
+    ],
+    "version_scope": [
+      "unspecified"
+    ],
+    "target_scope": [
+      "general"
+    ]
+  }
+}

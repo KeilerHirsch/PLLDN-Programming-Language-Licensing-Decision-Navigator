@@ -1,0 +1,22 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "language.bash",
+    "entity_type": "language",
+    "canonical_name": "Bash",
+    "aliases": [
+      {
+        "text": "Bourne Again Shell",
+        "ambiguity": "unambiguous",
+        "context": []
+      }
+    ],
+    "version_scope": [
+      "unspecified"
+    ],
+    "target_scope": [
+      "general"
+    ]
+  }
+}

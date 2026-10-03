@@ -1,0 +1,17 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "license.bsd-3-clause",
+    "entity_type": "license",
+    "canonical_name": "BSD-3-Clause",
+    "aliases": [],
+    "version_scope": [
+      "BSD-3-Clause"
+    ],
+    "target_scope": [
+      "general"
+    ],
+    "license_id": "BSD-3-Clause"
+  }
+}

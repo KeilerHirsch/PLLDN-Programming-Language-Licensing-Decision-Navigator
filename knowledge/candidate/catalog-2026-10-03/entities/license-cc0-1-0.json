@@ -1,0 +1,17 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "license.cc0-1.0",
+    "entity_type": "license",
+    "canonical_name": "CC0-1.0",
+    "aliases": [],
+    "version_scope": [
+      "CC0-1.0"
+    ],
+    "target_scope": [
+      "general"
+    ],
+    "license_id": "CC0-1.0"
+  }
+}
