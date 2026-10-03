@@ -54,8 +54,7 @@ test("broad candidate catalog is structurally valid without self-approved assert
 test("candidate catalog contains 35 languages without invented current versions", async () => {
   const built = await buildKnowledgeCandidate(files(), at, identity);
   const languages = built.documents.filter(
-    (doc) =>
-      doc.kind === "entity" && doc.record.entity_type === "language",
+    (doc) => doc.kind === "entity" && doc.record.entity_type === "language",
   );
   assert.equal(languages.length, 35);
   assert(
@@ -117,8 +116,7 @@ test("candidate catalog contains every license identity currently admitted by th
   const built = await buildKnowledgeCandidate(files(), at, identity);
   const ids = built.documents
     .filter(
-      (doc) =>
-        doc.kind === "entity" && doc.record.entity_type === "license",
+      (doc) => doc.kind === "entity" && doc.record.entity_type === "license",
     )
     .map((doc) => doc.record.license_id)
     .sort();
