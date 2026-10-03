@@ -11,6 +11,30 @@ export interface CandidateBuild {
   partialAssertions: number;
 }
 
+export interface CandidateSnapshotIdentity {
+  knowledgeSnapshot: string;
+  rulesSnapshot: string;
+}
+
+export const STAGE2_CORE_CANDIDATE_IDENTITY: Readonly<CandidateSnapshotIdentity> =
+  Object.freeze({
+    knowledgeSnapshot: "candidate.stage2-core.2026-09-05",
+    rulesSnapshot: "candidate.stage2-core.rules.2026-09-05",
+  });
+
+function candidateSnapshotIdentity(
+  identity: CandidateSnapshotIdentity | undefined,
+): CandidateSnapshotIdentity {
+  const resolved = identity ?? STAGE2_CORE_CANDIDATE_IDENTITY;
+  if (
+    !resolved.knowledgeSnapshot.startsWith("candidate.") ||
+    !resolved.rulesSnapshot.startsWith("candidate.")
+  ) {
+    throw new Error("Candidate snapshot identity must use candidate.* namespace");
+  }
+  return resolved;
+}
+
 const assertionKinds = new Set(["claim", "relation", "rule"]);
 const forbiddenKinds = new Set([
   "project-facts",
@@ -23,6 +47,7 @@ const forbiddenKinds = new Set([
 export async function buildKnowledgeCandidate(
   files: Readonly<Record<string, string>>,
   at: string,
+  identity?: CandidateSnapshotIdentity,
 ): Promise<CandidateBuild> {
   const entries = Object.entries(files).sort(([a], [b]) => a.localeCompare(b));
   if (entries.length === 0)
@@ -42,10 +67,11 @@ export async function buildKnowledgeCandidate(
     throw new Error("Candidate pack cannot self-declare Reviewed assertions");
 
   validateReferences(documents, at);
+  const snapshot = candidateSnapshotIdentity(identity);
   const manifest = await createManifest(
     files,
-    "candidate.stage2-core.2026-09-05",
-    "candidate.stage2-core.rules.2026-09-05",
+    snapshot.knowledgeSnapshot,
+    snapshot.rulesSnapshot,
   );
   return { manifest, documents, reviewedAssertions, partialAssertions };
 }

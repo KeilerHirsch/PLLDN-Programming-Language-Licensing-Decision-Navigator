@@ -14,7 +14,10 @@ import {
 } from "../validation/documents.ts";
 import { asObject, parseStrictJson } from "../validation/json.ts";
 import { validateReferences } from "../validation/references.ts";
-import { buildKnowledgeCandidate } from "./candidate.ts";
+import {
+  buildKnowledgeCandidate,
+  type CandidateSnapshotIdentity,
+} from "./candidate.ts";
 
 export interface KnowledgeReview {
   schema_version: "0.1";
@@ -53,8 +56,9 @@ export async function promoteKnowledgeCandidate(
   files: Readonly<Record<string, string>>,
   at: string,
   reviewInput: KnowledgeReview,
+  identity?: CandidateSnapshotIdentity,
 ): Promise<PromotionBuild> {
-  const candidate = await buildKnowledgeCandidate(files, at);
+  const candidate = await buildKnowledgeCandidate(files, at, identity);
   validateDocument("review", reviewInput);
   if (
     reviewInput.candidate_manifest_sha256 !==
