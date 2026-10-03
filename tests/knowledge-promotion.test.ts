@@ -82,7 +82,6 @@ test("external review promotes every assertion and injects non-empty test refs",
   );
 });
 
-
 test("new candidate snapshots use explicit versioned identities without rewriting Stage 2", async () => {
   const identity: CandidateSnapshotIdentity = {
     knowledgeSnapshot: "candidate.language-core.2026-10-03",
