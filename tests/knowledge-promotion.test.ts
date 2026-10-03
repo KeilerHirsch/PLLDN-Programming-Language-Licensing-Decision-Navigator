@@ -3,7 +3,10 @@
 import assert from "node:assert/strict";
 import { readdirSync, readFileSync } from "node:fs";
 import test from "node:test";
-import { buildKnowledgeCandidate } from "../src/knowledge/candidate.ts";
+import {
+  buildKnowledgeCandidate,
+  type CandidateSnapshotIdentity,
+} from "../src/knowledge/candidate.ts";
 import {
   candidateDigest,
   type KnowledgeReview,
@@ -22,8 +25,10 @@ function files(): Record<string, string> {
   }
   return out;
 }
-async function reviewRecord(): Promise<KnowledgeReview> {
-  const built = await buildKnowledgeCandidate(files(), at);
+async function reviewRecord(
+  identity?: CandidateSnapshotIdentity,
+): Promise<KnowledgeReview> {
+  const built = await buildKnowledgeCandidate(files(), at, identity);
   const assertionIds = built.documents
     .filter((d) => ["claim", "relation", "rule"].includes(d.kind))
     .map((d) => d.record[`${d.kind}_id`] as string)
@@ -74,5 +79,49 @@ test("external review promotes every assertion and injects non-empty test refs",
   assert.equal(
     promoted.manifest.knowledge_snapshot,
     "reviewed.stage2-core.2026-09-05",
+  );
+});
+
+
+test("new candidate snapshots use explicit versioned identities without rewriting Stage 2", async () => {
+  const identity: CandidateSnapshotIdentity = {
+    knowledgeSnapshot: "candidate.language-core.2026-10-03",
+    rulesSnapshot: "candidate.language-core.rules.2026-10-03",
+  };
+  const candidate = await buildKnowledgeCandidate(files(), at, identity);
+  assert.equal(
+    candidate.manifest.knowledge_snapshot,
+    "candidate.language-core.2026-10-03",
+  );
+  assert.equal(
+    candidate.manifest.rules_snapshot,
+    "candidate.language-core.rules.2026-10-03",
+  );
+
+  const review = await reviewRecord(identity);
+  const promoted = await promoteKnowledgeCandidate(
+    files(),
+    at,
+    review,
+    identity,
+  );
+  assert.equal(
+    promoted.manifest.knowledge_snapshot,
+    "reviewed.language-core.2026-10-03",
+  );
+  assert.equal(
+    promoted.manifest.rules_snapshot,
+    "reviewed.language-core.rules.2026-10-03",
+  );
+});
+
+test("candidate snapshot identities fail closed outside the candidate namespace", async () => {
+  await assert.rejects(
+    () =>
+      buildKnowledgeCandidate(files(), at, {
+        knowledgeSnapshot: "reviewed.invalid",
+        rulesSnapshot: "candidate.valid.rules",
+      }),
+    /candidate snapshot identity/i,
   );
 });
