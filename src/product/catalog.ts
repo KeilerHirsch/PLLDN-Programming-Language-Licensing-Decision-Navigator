@@ -14,11 +14,11 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "high-integrity systems",
         "embedded systems",
-        "long-lived codebases"
+        "long-lived codebases",
       ],
       watch_for: [
         "smaller general-purpose ecosystem",
-        "tooling familiarity varies by team"
+        "tooling familiarity varies by team",
       ],
     },
     {
@@ -31,7 +31,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["system automation", "glue scripts", "CI helpers"],
       watch_for: [
         "portability across shells",
-        "large programs become hard to structure"
+        "large programs become hard to structure",
       ],
     },
     {
@@ -44,7 +44,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["embedded", "operating-system interfaces", "FFI boundaries"],
       watch_for: [
         "manual memory safety burden",
-        "platform details leak into code"
+        "platform details leak into code",
       ],
     },
     {
@@ -56,7 +56,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["desktop software", "engines", "performance-critical systems"],
       watch_for: [
         "complexity and build systems",
-        "memory and lifetime hazards remain possible"
+        "memory and lifetime hazards remain possible",
       ],
     },
     {
@@ -69,7 +69,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["Windows desktop", "services", "business applications"],
       watch_for: [
         "runtime/framework choices matter",
-        "less direct for tiny bare-metal targets"
+        "less direct for tiny bare-metal targets",
       ],
     },
     {
@@ -82,7 +82,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "data-heavy services",
         "REPL-driven development",
-        "JVM integration"
+        "JVM integration",
       ],
       watch_for: ["smaller hiring pool", "startup and JVM footprint"],
     },
@@ -96,11 +96,11 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "mainframe business systems",
         "batch processing",
-        "legacy maintenance"
+        "legacy maintenance",
       ],
       watch_for: [
         "modern ecosystem breadth",
-        "specialized environment knowledge"
+        "specialized environment knowledge",
       ],
     },
     {
@@ -114,7 +114,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["cross-platform UI", "mobile apps", "Flutter products"],
       watch_for: [
         "ecosystem is strongly Flutter-shaped",
-        "less common outside app development"
+        "less common outside app development",
       ],
     },
     {
@@ -126,11 +126,11 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "concurrent services",
         "realtime systems",
-        "fault-tolerant backends"
+        "fault-tolerant backends",
       ],
       watch_for: [
         "BEAM ecosystem is specialized",
-        "CPU-heavy native workloads need other tools"
+        "CPU-heavy native workloads need other tools",
       ],
     },
     {
@@ -143,11 +143,11 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "telecom-style concurrency",
         "distributed systems",
-        "high-uptime services"
+        "high-uptime services",
       ],
       watch_for: [
         "syntax and ecosystem are specialized",
-        "not aimed at native desktop software"
+        "not aimed at native desktop software",
       ],
     },
     {
@@ -160,7 +160,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["domain modeling", "data processing", "typed .NET services"],
       watch_for: [
         "smaller ecosystem than C#",
-        "team familiarity can be a constraint"
+        "team familiarity can be a constraint",
       ],
     },
     {
@@ -173,7 +173,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["HPC", "numerical simulation", "scientific legacy"],
       watch_for: [
         "general app ecosystem is narrow",
-        "interop/build knowledge can be specialized"
+        "interop/build knowledge can be specialized",
       ],
     },
     {
@@ -186,7 +186,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["CLI tools", "network services", "infrastructure software"],
       watch_for: [
         "GC/runtime trade-offs",
-        "language intentionally limits abstraction features"
+        "language intentionally limits abstraction features",
       ],
     },
     {
@@ -199,11 +199,11 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "compilers and DSLs",
         "research-heavy systems",
-        "type-driven design"
+        "type-driven design",
       ],
       watch_for: [
         "steep learning curve",
-        "ecosystem fit depends strongly on domain"
+        "ecosystem fit depends strongly on domain",
       ],
     },
     {
@@ -225,7 +225,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "browser applications",
         "web tooling",
-        "event-driven services"
+        "event-driven services",
       ],
       watch_for: ["dynamic typing without extra tooling", "ecosystem churn"],
     },
@@ -239,7 +239,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "numerical research",
         "scientific prototyping",
-        "data exploration"
+        "data exploration",
       ],
       watch_for: ["startup/runtime deployment", "smaller production ecosystem"],
     },
@@ -252,7 +252,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["Android", "JVM services", "multiplatform apps"],
       watch_for: [
         "multi-target builds add complexity",
-        "JVM heritage shapes much of the ecosystem"
+        "JVM heritage shapes much of the ecosystem",
       ],
     },
     {
@@ -265,7 +265,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["embedded scripting", "game tooling", "configuration"],
       watch_for: [
         "standard library is intentionally small",
-        "large standalone systems need conventions"
+        "large standalone systems need conventions",
       ],
     },
     {
@@ -278,11 +278,11 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "small native tools",
         "cross-platform utilities",
-        "systems scripting"
+        "systems scripting",
       ],
       watch_for: [
         "smaller ecosystem",
-        "fewer battle-tested libraries than mainstream peers"
+        "fewer battle-tested libraries than mainstream peers",
       ],
     },
     {
@@ -295,7 +295,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "existing Apple codebases",
         "C/Objective-C interop",
-        "legacy Cocoa"
+        "legacy Cocoa",
       ],
       watch_for: ["Swift is the modern default", "platform scope is narrow"],
     },
@@ -309,7 +309,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["compilers", "static analysis", "domain-heavy tooling"],
       watch_for: [
         "smaller mainstream ecosystem",
-        "tooling conventions differ from larger platforms"
+        "tooling conventions differ from larger platforms",
       ],
     },
     {
@@ -322,7 +322,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["text processing", "legacy automation", "quick system glue"],
       watch_for: [
         "modern adoption is limited",
-        "maintainability depends heavily on style"
+        "maintainability depends heavily on style",
       ],
     },
     {
@@ -334,7 +334,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["web backends", "CMS ecosystems", "shared hosting"],
       watch_for: [
         "web-centric design",
-        "large systems depend heavily on framework discipline"
+        "large systems depend heavily on framework discipline",
       ],
     },
     {
@@ -347,11 +347,11 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "Windows automation",
         "administration",
-        "cross-platform operations"
+        "cross-platform operations",
       ],
       watch_for: [
         "not a native application language",
-        "host/version differences matter"
+        "host/version differences matter",
       ],
     },
     {
@@ -364,7 +364,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["automation", "data work", "prototyping"],
       watch_for: [
         "runtime packaging",
-        "CPU-bound performance and threading constraints"
+        "CPU-bound performance and threading constraints",
       ],
     },
     {
@@ -377,7 +377,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["statistics", "research analysis", "visualization"],
       watch_for: [
         "application deployment is secondary",
-        "general software engineering ergonomics vary"
+        "general software engineering ergonomics vary",
       ],
     },
     {
@@ -390,7 +390,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["web applications", "automation", "DSL-heavy tooling"],
       watch_for: [
         "runtime performance",
-        "smaller modern footprint than its peak"
+        "smaller modern footprint than its peak",
       ],
     },
     {
@@ -403,11 +403,11 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "systems tools",
         "security-sensitive software",
-        "native services"
+        "native services",
       ],
       watch_for: [
         "ownership learning curve",
-        "compile times and ecosystem complexity can grow"
+        "compile times and ecosystem complexity can grow",
       ],
     },
     {
@@ -420,11 +420,11 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "JVM data systems",
         "typed backends",
-        "functional architectures"
+        "functional architectures",
       ],
       watch_for: [
         "language/tooling complexity",
-        "build times and version ecosystems"
+        "build times and version ecosystems",
       ],
     },
     {
@@ -436,11 +436,11 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "Ethereum-compatible contracts",
         "on-chain protocols",
-        "EVM tooling"
+        "EVM tooling",
       ],
       watch_for: [
         "security mistakes are expensive",
-        "not a general-purpose application language"
+        "not a general-purpose application language",
       ],
     },
     {
@@ -453,7 +453,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["Apple apps", "native libraries", "modern systems code"],
       watch_for: [
         "best tooling remains Apple-centric",
-        "cross-platform ecosystem is smaller"
+        "cross-platform ecosystem is smaller",
       ],
     },
     {
@@ -466,7 +466,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["web applications", "Node services", "large JS codebases"],
       watch_for: [
         "still inherits JS runtime behavior",
-        "build/tooling stacks can sprawl"
+        "build/tooling stacks can sprawl",
       ],
     },
     {
@@ -479,11 +479,11 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: [
         "existing .NET business software",
         "Windows desktop",
-        "maintenance"
+        "maintenance",
       ],
       watch_for: [
         "new ecosystem energy is concentrated on C#",
-        "cross-platform examples are scarcer"
+        "cross-platform examples are scarcer",
       ],
     },
     {
@@ -496,7 +496,7 @@ export const PRODUCT_MODEL: ProductModel = {
       good_for: ["native utilities", "embedded work", "cross-compilation"],
       watch_for: [
         "young ecosystem and language evolution",
-        "manual memory management remains explicit"
+        "manual memory management remains explicit",
       ],
     },
   ],
@@ -643,7 +643,7 @@ export const PRODUCT_MODEL: ProductModel = {
         "language.go",
         "language.rust",
         "language.zig",
-        "language.nim"
+        "language.nim",
       ],
       rationale: "Favor simple native deployment and predictable packaging.",
     },
@@ -694,7 +694,7 @@ export const PRODUCT_MODEL: ProductModel = {
         "language.c",
         "language.cpp",
         "language.rust",
-        "language.zig"
+        "language.zig",
       ],
       rationale:
         "Target support, footprint and hardware access are first-class constraints.",
@@ -707,7 +707,7 @@ export const PRODUCT_MODEL: ProductModel = {
         "language.cpp",
         "language.rust",
         "language.zig",
-        "language.fortran"
+        "language.fortran",
       ],
       rationale:
         "Benchmark the actual workload; toolchain and library fit matter as much as syntax.",
@@ -722,7 +722,7 @@ export const PRODUCT_MODEL: ProductModel = {
         "language.python",
         "language.elixir",
         "language.java",
-        "language.csharp"
+        "language.csharp",
       ],
       rationale:
         "Choose around concurrency, ecosystem, deployment and team constraints.",
@@ -734,7 +734,7 @@ export const PRODUCT_MODEL: ProductModel = {
       language_ids: [
         "language.typescript",
         "language.javascript",
-        "language.dart"
+        "language.dart",
       ],
       rationale:
         "Browser platform fit and framework/tooling ecosystem dominate.",
@@ -747,7 +747,7 @@ export const PRODUCT_MODEL: ProductModel = {
         "language.kotlin",
         "language.swift",
         "language.dart",
-        "language.csharp"
+        "language.csharp",
       ],
       rationale:
         "Native platform integration versus shared code is the core trade-off.",
@@ -760,7 +760,7 @@ export const PRODUCT_MODEL: ProductModel = {
         "language.java",
         "language.csharp",
         "language.kotlin",
-        "language.scala"
+        "language.scala",
       ],
       rationale:
         "Ecosystem stability, tooling and maintainability usually outweigh novelty.",
@@ -781,7 +781,7 @@ export const PRODUCT_MODEL: ProductModel = {
         "language.python",
         "language.bash",
         "language.ruby",
-        "language.javascript"
+        "language.javascript",
       ],
       rationale:
         "Optimize for feedback speed, then harden the parts that survive.",
