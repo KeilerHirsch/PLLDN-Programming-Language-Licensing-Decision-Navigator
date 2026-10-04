@@ -61,6 +61,6 @@ test("browser places Product Model ahead of the Reviewed decision lab", () => {
   }
   assert(
     main.indexOf("renderProductExperience") <
-      main.indexOf("decision.className = \"decision-lab\""),
+      main.indexOf('decision.className = "decision-lab"'),
   );
 });
