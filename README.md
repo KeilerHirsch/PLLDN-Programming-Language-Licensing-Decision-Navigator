@@ -33,7 +33,7 @@ npm run evidence
 
 Live today: **Go, Python, Rust, TypeScript** across **four Reviewed boolean capabilities**. The repository also carries **eight Reviewed SPDX license identities**, but Beta 1 is **not a complete licensing workflow**.
 
-A separate Candidate catalog now stages **35 language identities** and **15 SPDX license identities** for later evidence work. Candidate entries are not Reviewed and do not expand the live recommendation surface.
+A separate **Catalog Preview** now exposes **35 languages**, **15 SPDX license identities**, and **345 Preview facts** in the browser for broad comparison and search. Preview entries are visually and mechanically isolated from the Reviewed recommendation path.
 
 When Reviewed evidence is insufficient, **abstention is the correct result**. PLLDN does not provide legal advice or certification.
 
@@ -43,7 +43,8 @@ When Reviewed evidence is insufficient, **abstention is the correct result**. PL
 
 - Deterministic constraint evaluation; no LLM owns the recommendation path.
 - Free text may propose existing filters; only confirmed facts enter the decision path.
-- Reviewed knowledge, runtime approval, and release evidence stay separate.
+- Reviewed knowledge, Candidate Preview, runtime approval, and release evidence stay separate.
+- Preview catalogue failure cannot expand or disable the trusted decision candidate space.
 
 **Public docs:** [Data contracts](docs/data-contracts.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Governance](GOVERNANCE.md)
 
