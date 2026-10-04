@@ -34,7 +34,7 @@ npm run evidence
 
 Live today: **Go, Python, Rust, TypeScript** across **four Reviewed boolean capabilities**. The repository also carries **eight Reviewed SPDX license identities**, but Beta 1 is **not a complete licensing workflow**.
 
-The **Product Model v1** turns the broad Candidate material into a human-facing navigator: **35 language profiles**, **15 license profiles**, **15 use-case guides**, side-by-side comparison, and **345 Preview facts** behind expandable evidence. Product guidance remains visually and mechanically isolated from the Reviewed recommendation path.
+The Product Model turns the broad Candidate material into a human-facing navigator: **35 language profiles**, **32 license profiles**, **15 use-case guides**, side-by-side language comparison, structured performance/complexity bands, and a **License Model v2** covering Open Source, source-available, public-domain-like and scheduled-license-transition patterns. Product guidance remains visually and mechanically isolated from the Reviewed recommendation path.
 
 When Reviewed evidence is insufficient, **abstention is the correct result**. PLLDN does not provide legal advice or certification.
 
