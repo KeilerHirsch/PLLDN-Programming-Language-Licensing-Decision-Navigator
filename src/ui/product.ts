@@ -5,6 +5,12 @@ import {
   PRODUCT_COMPARE_DIMENSIONS,
   PRODUCT_MODEL,
 } from "../product/catalog.ts";
+import {
+  DEFAULT_PRODUCT_FILTERS,
+  languageMatchesFilters,
+  licenseMatchesFilters,
+  type ProductFilterState,
+} from "../product/catalog-filters.ts";
 import { LANGUAGE_DECISION_PROFILES } from "../product/language-decision-profiles.ts";
 import { LICENSE_DECISION_PROFILES } from "../product/license-decision-profiles.ts";
 import type {
@@ -24,12 +30,14 @@ export interface ProductUiState {
   mode: ProductCatalogMode;
   selectedUseCaseId: string | null;
   compareLanguageIds: readonly string[];
+  filters: ProductFilterState;
 }
 
 export const DEFAULT_PRODUCT_UI_STATE: ProductUiState = {
   mode: "languages",
   selectedUseCaseId: null,
   compareLanguageIds: [],
+  filters: { ...DEFAULT_PRODUCT_FILTERS },
 };
 
 function heading(level: 1 | 2 | 3, text: string): HTMLHeadingElement {
@@ -62,6 +70,42 @@ function button(
   node.dataset.action = action;
   if (className) node.className = className;
   return node;
+}
+
+function selectControl(
+  labelText: string,
+  filterKey: keyof ProductFilterState,
+  value: string,
+  options: readonly (readonly [string, string])[],
+): HTMLLabelElement {
+  const label = document.createElement("label");
+  label.className = "catalog-filter";
+  const title = document.createElement("span");
+  title.textContent = labelText;
+  const select = document.createElement("select");
+  select.dataset.action = "product-filter";
+  select.dataset.filterKey = filterKey;
+  for (const [optionValue, optionLabel] of options) {
+    const option = document.createElement("option");
+    option.value = optionValue;
+    option.textContent = optionLabel;
+    option.selected = optionValue === value;
+    select.append(option);
+  }
+  label.append(title, select);
+  return label;
+}
+
+function quickFact(labelText: string, value: string): HTMLElement {
+  const item = document.createElement("span");
+  item.className = "decision-quick-fact";
+  const label = document.createElement("span");
+  label.className = "decision-quick-label";
+  label.textContent = labelText;
+  const strong = document.createElement("strong");
+  strong.textContent = humanizeDecisionValue(value);
+  item.append(label, strong);
+  return item;
 }
 
 function formatTypedValue(value: TypedValue): string {
@@ -274,6 +318,22 @@ function humanizeDecisionValue(value: string): string {
     .replace(/\b\w/g, (character) => character.toUpperCase());
 }
 
+function renderLanguageQuickFacts(
+  profile: LanguageProductProfile,
+): HTMLElement {
+  const decision = LANGUAGE_DECISION_PROFILES[profile.entity_id];
+  const strip = document.createElement("div");
+  strip.className = "decision-quick-strip";
+  if (!decision) return strip;
+  strip.append(
+    quickFact("Throughput", decision.performance.throughput_potential),
+    quickFact("Learning", decision.complexity.learning_curve),
+    quickFact("Deployment", decision.complexity.deployment),
+    quickFact("Ecosystem", decision.ecosystem.breadth),
+  );
+  return strip;
+}
+
 function renderDecisionProfile(profile: LanguageProductProfile): HTMLElement {
   const decision = LANGUAGE_DECISION_PROFILES[profile.entity_id];
   const details = document.createElement("details");
@@ -409,7 +469,7 @@ function renderLanguageCard(
   const tags = document.createElement("div");
   tags.className = "profile-tags";
   for (const category of profile.categories) tags.append(badge(category));
-  card.append(tags);
+  card.append(tags, renderLanguageQuickFacts(profile));
 
   const build = document.createElement("div");
   build.className = "build-path";
@@ -453,14 +513,30 @@ function renderLanguageCatalog(
   const byId = new Map(
     catalog.languages.map((entry) => [entry.entity_id, entry]),
   );
+  const wrapper = document.createElement("div");
+  const profiles = PRODUCT_MODEL.languages.filter((profile) =>
+    languageMatchesFilters(profile, state.filters),
+  );
+  const count = paragraph(
+    `${profiles.length} languages match the selected filters.`,
+  );
+  count.className = "catalog-result-count";
+  count.dataset.catalogVisibleCount = "true";
+  wrapper.append(count);
+
   const grid = document.createElement("div");
   grid.className = "product-card-grid";
-  for (const profile of PRODUCT_MODEL.languages) {
+  for (const profile of profiles) {
     grid.append(
       renderLanguageCard(profile, byId.get(profile.entity_id), state),
     );
   }
-  return grid;
+  if (profiles.length === 0) {
+    wrapper.append(paragraph("No languages match these filters."));
+  } else {
+    wrapper.append(grid);
+  }
+  return wrapper;
 }
 
 const LICENSE_FAMILY_LABELS: Readonly<Record<string, string>> = {
@@ -600,6 +676,21 @@ function renderLicenseDecisionProfile(
   return details;
 }
 
+function renderLicenseQuickFacts(profile: LicenseProductProfile): HTMLElement {
+  const decision = LICENSE_DECISION_PROFILES[profile.entity_id];
+  const strip = document.createElement("div");
+  strip.className = "decision-quick-strip";
+  if (!decision) return strip;
+  strip.append(
+    quickFact("Model", decision.model),
+    quickFact("Commercial", decision.rights.commercial_use),
+    quickFact("SaaS", decision.rights.saas_hosting),
+    quickFact("Compete", decision.rights.competitive_use),
+    quickFact("OSI", decision.osi_status),
+  );
+  return strip;
+}
+
 function renderLicenseCard(
   profile: LicenseProductProfile,
   entry: CatalogPreviewEntryView | undefined,
@@ -615,7 +706,11 @@ function renderLicenseCard(
     heading(3, profile.label),
     badge(LICENSE_FAMILY_LABELS[profile.family] ?? profile.family),
   );
-  card.append(head, paragraph(profile.tagline));
+  card.append(
+    head,
+    paragraph(profile.tagline),
+    renderLicenseQuickFacts(profile),
+  );
 
   const good = paragraph(`Good when: ${profile.good_when}`);
   good.className = "license-good";
@@ -630,19 +725,36 @@ function renderLicenseCard(
   return card;
 }
 
-function renderLicenseCatalog(catalog: CatalogPreviewView): HTMLElement {
+function renderLicenseCatalog(
+  catalog: CatalogPreviewView,
+  state: ProductUiState,
+): HTMLElement {
   const byId = new Map(
     catalog.licenses.map((entry) => [entry.entity_id, entry]),
   );
   const wrapper = document.createElement("div");
   wrapper.append(renderLicenseAxis());
 
+  const profiles = PRODUCT_MODEL.licenses.filter((profile) =>
+    licenseMatchesFilters(profile, state.filters),
+  );
+  const count = paragraph(
+    `${profiles.length} licenses match the selected filters.`,
+  );
+  count.className = "catalog-result-count";
+  count.dataset.catalogVisibleCount = "true";
+  wrapper.append(count);
+
   const grid = document.createElement("div");
   grid.className = "product-card-grid";
-  for (const profile of PRODUCT_MODEL.licenses) {
+  for (const profile of profiles) {
     grid.append(renderLicenseCard(profile, byId.get(profile.entity_id)));
   }
-  wrapper.append(grid);
+  if (profiles.length === 0) {
+    wrapper.append(paragraph("No licenses match these filters."));
+  } else {
+    wrapper.append(grid);
+  }
   return wrapper;
 }
 
@@ -689,10 +801,126 @@ function renderCatalog(
   controls.append(searchLabel);
   section.append(controls);
 
+  const filters = document.createElement("div");
+  filters.className = "catalog-filter-grid";
+  if (state.mode === "languages") {
+    filters.append(
+      selectControl(
+        "Category",
+        "languageCategory",
+        state.filters.languageCategory,
+        [
+          ["any", "Any category"],
+          ["assurance", "Assurance"],
+          ["domain", "Domain"],
+          ["fundament", "General-purpose"],
+          ["functional", "Functional"],
+          ["legacy", "Legacy / established"],
+          ["managed", "Managed runtime"],
+          ["science", "Science / numerical"],
+          ["scripting", "Scripting"],
+          ["system", "Systems"],
+          ["tool", "Tooling / shell"],
+        ],
+      ),
+      selectControl(
+        "Throughput",
+        "languageThroughput",
+        state.filters.languageThroughput,
+        [
+          ["any", "Any throughput"],
+          ["high", "High"],
+          ["medium", "Medium"],
+          ["low", "Low"],
+        ],
+      ),
+      selectControl(
+        "Learning curve",
+        "languageLearning",
+        state.filters.languageLearning,
+        [
+          ["any", "Any learning curve"],
+          ["low", "Low"],
+          ["medium", "Medium"],
+          ["high", "High"],
+        ],
+      ),
+      selectControl(
+        "Ecosystem",
+        "languageEcosystem",
+        state.filters.languageEcosystem,
+        [
+          ["any", "Any ecosystem"],
+          ["broad", "Broad"],
+          ["moderate", "Moderate"],
+          ["niche", "Niche"],
+        ],
+      ),
+    );
+  } else {
+    filters.append(
+      selectControl(
+        "License model",
+        "licenseModel",
+        state.filters.licenseModel,
+        [
+          ["any", "Any model"],
+          ["open-source", "Open Source"],
+          ["source-available", "Source available"],
+          ["public-domain-like", "Public-domain-like"],
+          ["license-transition", "License transition"],
+        ],
+      ),
+      selectControl(
+        "Commercial use",
+        "licenseCommercial",
+        state.filters.licenseCommercial,
+        [
+          ["any", "Any"],
+          ["yes", "Allowed"],
+          ["conditional", "Conditional"],
+          ["no", "Not granted"],
+        ],
+      ),
+      selectControl(
+        "SaaS / hosting",
+        "licenseSaas",
+        state.filters.licenseSaas,
+        [
+          ["any", "Any"],
+          ["yes", "Allowed"],
+          ["conditional", "Conditional"],
+          ["no", "Not granted"],
+        ],
+      ),
+      selectControl(
+        "Competitive use",
+        "licenseCompetitive",
+        state.filters.licenseCompetitive,
+        [
+          ["any", "Any"],
+          ["yes", "Allowed"],
+          ["conditional", "Conditional"],
+          ["no", "Restricted"],
+        ],
+      ),
+      selectControl("OSI status", "licenseOsi", state.filters.licenseOsi, [
+        ["any", "Any OSI status"],
+        ["approved", "Approved"],
+        ["not-approved", "Not approved"],
+        ["not-applicable", "Not applicable"],
+      ]),
+    );
+  }
+  const reset = button("Reset filters", "reset-product-filters");
+  reset.className = "catalog-filter-reset";
+  filters.append(reset);
+  section.append(filters);
+
   section.append(
     state.mode === "languages"
       ? renderLanguageCatalog(catalog, state)
-      : renderLicenseCatalog(catalog),
+      : renderLicenseCatalog(catalog, state),
   );
   return section;
 }
