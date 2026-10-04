@@ -5,6 +5,7 @@ import {
   PRODUCT_COMPARE_DIMENSIONS,
   PRODUCT_MODEL,
 } from "../product/catalog.ts";
+import { LANGUAGE_DECISION_PROFILES } from "../product/language-decision-profiles.ts";
 import type {
   LanguageProductProfile,
   LicenseProductProfile,
@@ -115,6 +116,11 @@ function productSearchText(
           ...profile.categories,
           ...profile.good_for,
           ...profile.watch_for,
+          ...Object.values(
+            LANGUAGE_DECISION_PROFILES[profile.entity_id] ?? {},
+          ).flatMap((group) =>
+            typeof group === "object" && group ? Object.values(group) : [],
+          ),
         ]
       : [
           profile.label,
@@ -256,6 +262,84 @@ function renderListBlock(
   return wrapper;
 }
 
+function humanizeDecisionValue(value: string): string {
+  return value
+    .replaceAll("-", " ")
+    .replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function renderDecisionProfile(profile: LanguageProductProfile): HTMLElement {
+  const decision = LANGUAGE_DECISION_PROFILES[profile.entity_id];
+  const details = document.createElement("details");
+  details.className = "decision-profile";
+  const summary = document.createElement("summary");
+  summary.textContent = "Performance & complexity";
+  details.append(summary);
+
+  if (!decision) {
+    details.append(paragraph("Editorial decision profile unavailable."));
+    return details;
+  }
+
+  const grid = document.createElement("div");
+  grid.className = "decision-profile-grid";
+  const groups = [
+    [
+      "Performance",
+      [
+        ["Throughput potential", decision.performance.throughput_potential],
+        ["Startup", decision.performance.startup],
+        ["Runtime overhead", decision.performance.runtime_overhead],
+        ["Latency predictability", decision.performance.latency_predictability],
+        ["Build speed", decision.performance.build_speed],
+      ],
+    ],
+    [
+      "Complexity",
+      [
+        ["Learning curve", decision.complexity.learning_curve],
+        ["Language surface", decision.complexity.language_surface],
+        ["Memory reasoning", decision.complexity.memory_reasoning],
+        ["Toolchain", decision.complexity.toolchain],
+        ["Dependencies", decision.complexity.dependency_management],
+        ["Deployment", decision.complexity.deployment],
+      ],
+    ],
+    [
+      "Ecosystem",
+      [
+        ["Maturity", decision.ecosystem.maturity],
+        ["Breadth", decision.ecosystem.breadth],
+        ["Tooling", decision.ecosystem.tooling],
+        ["Hiring pool", decision.ecosystem.hiring_pool],
+      ],
+    ],
+  ] as const;
+
+  for (const [title, rows] of groups) {
+    const group = document.createElement("section");
+    group.className = "decision-profile-group";
+    group.append(heading(3, title));
+    const list = document.createElement("dl");
+    for (const [label, value] of rows) {
+      const term = document.createElement("dt");
+      term.textContent = label;
+      const description = document.createElement("dd");
+      description.textContent = humanizeDecisionValue(value);
+      list.append(term, description);
+    }
+    group.append(list);
+    grid.append(group);
+  }
+
+  const note = paragraph(
+    "Editorial Preview: workload, runtime, compiler, team and deployment context can move these bands.",
+  );
+  note.className = "decision-profile-note";
+  details.append(grid, note);
+  return details;
+}
+
 function renderPreviewFacts(
   entry: CatalogPreviewEntryView | undefined,
 ): HTMLElement {
@@ -348,7 +432,11 @@ function renderLanguageCard(
   );
   compare.dataset.entityId = profile.entity_id;
   actions.append(compare);
-  card.append(actions, renderPreviewFacts(entry));
+  card.append(
+    actions,
+    renderDecisionProfile(profile),
+    renderPreviewFacts(entry),
+  );
   return card;
 }
 
@@ -574,6 +662,54 @@ function renderCompare(
     { label: "Build", value: (profile) => profile.build_path },
     { label: "Good for", value: (profile) => profile.good_for.join(", ") },
     { label: "Watch for", value: (profile) => profile.watch_for.join(", ") },
+    {
+      label: "Throughput potential",
+      value: (profile) =>
+        humanizeDecisionValue(
+          LANGUAGE_DECISION_PROFILES[profile.entity_id]?.performance
+            .throughput_potential ?? "unknown",
+        ),
+    },
+    {
+      label: "Startup",
+      value: (profile) =>
+        humanizeDecisionValue(
+          LANGUAGE_DECISION_PROFILES[profile.entity_id]?.performance.startup ??
+            "unknown",
+        ),
+    },
+    {
+      label: "Learning curve",
+      value: (profile) =>
+        humanizeDecisionValue(
+          LANGUAGE_DECISION_PROFILES[profile.entity_id]?.complexity
+            .learning_curve ?? "unknown",
+        ),
+    },
+    {
+      label: "Language complexity",
+      value: (profile) =>
+        humanizeDecisionValue(
+          LANGUAGE_DECISION_PROFILES[profile.entity_id]?.complexity
+            .language_surface ?? "unknown",
+        ),
+    },
+    {
+      label: "Deployment complexity",
+      value: (profile) =>
+        humanizeDecisionValue(
+          LANGUAGE_DECISION_PROFILES[profile.entity_id]?.complexity
+            .deployment ?? "unknown",
+        ),
+    },
+    {
+      label: "Ecosystem breadth",
+      value: (profile) =>
+        humanizeDecisionValue(
+          LANGUAGE_DECISION_PROFILES[profile.entity_id]?.ecosystem.breadth ??
+            "unknown",
+        ),
+    },
   ];
   for (const dimensionId of PRODUCT_COMPARE_DIMENSIONS) {
     const label =

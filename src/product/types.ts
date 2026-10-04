@@ -52,3 +52,39 @@ export interface ProductModel {
   licenses: readonly LicenseProductProfile[];
   use_cases: readonly UseCaseGuide[];
 }
+
+export type DecisionBand = "low" | "medium" | "high";
+export type PaceBand = "fast" | "medium" | "slow";
+export type EcosystemBreadth = "niche" | "moderate" | "broad";
+export type MaturityBand = "emerging" | "mature" | "legacy-stable";
+export type ToolingBand = "basic" | "good" | "strong";
+
+export interface LanguagePerformanceProfile {
+  throughput_potential: DecisionBand;
+  startup: PaceBand;
+  runtime_overhead: DecisionBand;
+  latency_predictability: DecisionBand;
+  build_speed: PaceBand;
+}
+
+export interface LanguageComplexityProfile {
+  learning_curve: DecisionBand;
+  language_surface: DecisionBand;
+  memory_reasoning: DecisionBand;
+  toolchain: DecisionBand;
+  dependency_management: DecisionBand;
+  deployment: DecisionBand;
+}
+
+export interface LanguageEcosystemProfile {
+  maturity: MaturityBand;
+  breadth: EcosystemBreadth;
+  tooling: ToolingBand;
+  hiring_pool: EcosystemBreadth;
+}
+
+export interface LanguageDecisionProfile {
+  performance: LanguagePerformanceProfile;
+  complexity: LanguageComplexityProfile;
+  ecosystem: LanguageEcosystemProfile;
+}

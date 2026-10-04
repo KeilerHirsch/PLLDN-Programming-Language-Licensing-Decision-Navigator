@@ -21,6 +21,10 @@ test("Product Model UI exposes explore, compare, catalogue and license guidance"
     "Watch for",
     "Build",
     "Preview facts",
+    "Performance & complexity",
+    "Throughput potential",
+    "Learning curve",
+    "Deployment complexity",
   ]) {
     assert(product.includes(required), required);
   }
