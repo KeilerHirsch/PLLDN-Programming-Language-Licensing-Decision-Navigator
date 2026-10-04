@@ -11,7 +11,7 @@ import type {
 } from "./types.ts";
 
 function stringArray(value: unknown, field: string): string[] {
-  if (!Array.isArray(value) || !value.every((item) => typeof item === "string")) {
+  if (\n    !Array.isArray(value) ||\n    !value.every((item) => typeof item === "string")\n  ) {
     throw new Error(`Invalid Preview catalogue ${field}`);
   }
   return [...value];
@@ -123,10 +123,7 @@ export function buildCatalogPreview(input: {
   const sources = new Map(
     documents
       .filter((document) => document.kind === "source")
-      .map((document) => [
-        String(document.record.source_id),
-        document.record,
-      ]),
+      .map((document) => [String(document.record.source_id), document.record]),
   );
   return {
     knowledge_snapshot: input.knowledgeSnapshot,
