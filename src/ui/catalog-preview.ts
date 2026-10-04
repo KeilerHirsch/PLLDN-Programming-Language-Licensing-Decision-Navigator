@@ -11,7 +11,10 @@ import type {
 } from "./types.ts";
 
 function stringArray(value: unknown, field: string): string[] {
-  if (\n    !Array.isArray(value) ||\n    !value.every((item) => typeof item === "string")\n  ) {
+  if (
+    !Array.isArray(value) ||
+    !value.every((item) => typeof item === "string")
+  ) {
     throw new Error(`Invalid Preview catalogue ${field}`);
   }
   return [...value];
