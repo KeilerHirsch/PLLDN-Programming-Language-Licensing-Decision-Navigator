@@ -1,0 +1,13 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "license.0bsd",
+    "entity_type": "license",
+    "canonical_name": "0BSD",
+    "aliases": [],
+    "version_scope": ["0BSD"],
+    "target_scope": ["general"],
+    "license_id": "0BSD"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "language.javascript",
+    "entity_type": "language",
+    "canonical_name": "JavaScript",
+    "aliases": [
+      {
+        "text": "JS",
+        "ambiguity": "context-required",
+        "context": ["programming-language"]
+      }
+    ],
+    "version_scope": ["unspecified"],
+    "target_scope": ["general"]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "language.objective-c",
+    "entity_type": "language",
+    "canonical_name": "Objective-C",
+    "aliases": [
+      {
+        "text": "Obj-C",
+        "ambiguity": "unambiguous",
+        "context": []
+      }
+    ],
+    "version_scope": ["unspecified"],
+    "target_scope": ["general"]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.bare-metal-support",
+    "canonical_name": "Bare-metal support",
+    "value_type": "boolean",
+    "category": "platform",
+    "unit": null,
+    "allowed_values": []
+  }
+}

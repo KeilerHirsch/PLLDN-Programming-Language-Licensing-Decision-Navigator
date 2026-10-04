@@ -1,0 +1,18 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.execution-model",
+    "canonical_name": "Execution model",
+    "value_type": "set",
+    "category": "performance",
+    "unit": null,
+    "allowed_values": [
+      "ahead-of-time-native",
+      "bytecode-vm",
+      "interpreter",
+      "jit",
+      "transpiled"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.concurrency-models",
+    "canonical_name": "Concurrency models",
+    "value_type": "set",
+    "category": "availability-concurrency",
+    "unit": null,
+    "allowed_values": [
+      "os-threads",
+      "async-await",
+      "actors",
+      "channels",
+      "coroutines",
+      "green-threads",
+      "processes",
+      "event-loop"
+    ]
+  }
+}

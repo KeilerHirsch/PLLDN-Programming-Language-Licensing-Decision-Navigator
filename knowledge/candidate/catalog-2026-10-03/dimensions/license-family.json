@@ -1,0 +1,19 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.license-family",
+    "canonical_name": "License family",
+    "value_type": "enum",
+    "category": "license-legal",
+    "unit": null,
+    "allowed_values": [
+      "permissive",
+      "weak-copyleft",
+      "strong-copyleft",
+      "network-copyleft",
+      "public-domain-like",
+      "other"
+    ]
+  }
+}

@@ -33,6 +33,8 @@ npm run evidence
 
 Live today: **Go, Python, Rust, TypeScript** across **four Reviewed boolean capabilities**. The repository also carries **eight Reviewed SPDX license identities**, but Beta 1 is **not a complete licensing workflow**.
 
+A separate Candidate catalog now stages **35 language identities** and **15 SPDX license identities** for later evidence work. Candidate entries are not Reviewed and do not expand the live recommendation surface.
+
 When Reviewed evidence is insufficient, **abstention is the correct result**. PLLDN does not provide legal advice or certification.
 
 [Release](https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/releases/tag/v0.0.1-beta.1) · [Changelog](CHANGELOG.md)

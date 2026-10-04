@@ -1,0 +1,12 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "language.kotlin",
+    "entity_type": "language",
+    "canonical_name": "Kotlin",
+    "aliases": [],
+    "version_scope": ["unspecified"],
+    "target_scope": ["general"]
+  }
+}

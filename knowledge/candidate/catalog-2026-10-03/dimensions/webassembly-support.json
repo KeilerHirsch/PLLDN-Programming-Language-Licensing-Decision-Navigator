@@ -1,0 +1,12 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.webassembly-support",
+    "canonical_name": "WebAssembly support",
+    "value_type": "boolean",
+    "category": "platform",
+    "unit": null,
+    "allowed_values": []
+  }
+}

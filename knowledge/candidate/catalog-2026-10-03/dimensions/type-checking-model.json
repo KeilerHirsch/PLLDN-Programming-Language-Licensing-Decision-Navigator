@@ -1,0 +1,12 @@
+{
+  "kind": "dimension",
+  "record": {
+    "schema_version": "0.1",
+    "dimension_id": "dimension.type-checking-model",
+    "canonical_name": "Type-checking model",
+    "value_type": "set",
+    "category": "assurance",
+    "unit": null,
+    "allowed_values": ["static", "dynamic", "gradual"]
+  }
+}
