@@ -148,7 +148,6 @@ for (const [sourceId, evidencePath] of [
   });
 }
 
-
 test("license identity is independent from optional SPDX metadata", async () => {
   const built = await buildKnowledgeCandidate(files(), at, identity);
   const licenses = built.documents.filter(
@@ -163,14 +162,9 @@ test("license identity is independent from optional SPDX metadata", async () => 
   assert.equal("spdx_id" in shield, false);
   assert.equal("license_id" in shield, false);
 
-  const noncommercial = byId.get(
-    "license.polyform-noncommercial-1.0.0",
-  );
+  const noncommercial = byId.get("license.polyform-noncommercial-1.0.0");
   assert(noncommercial);
-  assert.equal(
-    noncommercial.spdx_id,
-    "PolyForm-Noncommercial-1.0.0",
-  );
+  assert.equal(noncommercial.spdx_id, "PolyForm-Noncommercial-1.0.0");
 
   const legacyMit = byId.get("license.mit");
   assert(legacyMit);
