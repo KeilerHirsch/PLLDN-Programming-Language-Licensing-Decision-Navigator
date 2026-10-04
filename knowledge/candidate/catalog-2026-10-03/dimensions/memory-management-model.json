@@ -12,7 +12,9 @@
       "garbage-collected",
       "ownership-borrowing",
       "reference-counting",
-      "automatic-reference-counting"
+      "automatic-reference-counting",
+      "runtime-managed",
+      "raii-deterministic-destruction"
     ]
   }
 }

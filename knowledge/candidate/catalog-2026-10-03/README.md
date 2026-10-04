@@ -1,14 +1,18 @@
 # Candidate language and license catalog — 2026-10-03
 
-This pack is an identity-first expansion for PLLDN.
+This pack is a broad Candidate expansion for PLLDN.
 
 - 35 programming-language identities.
 - 15 SPDX license identities already admitted by the current entity schema.
-- 11 comparison vocabularies for later source-backed language and license claims.
-- No candidate-specific capability, compatibility, obligation, performance, popularity, or suitability claims.
+- 11 comparison vocabularies.
+- 105 Preview claims covering type checking, execution model, and memory management.
 - Language versions are deliberately `unspecified`; this pack does not pretend to be a current-version feed.
 - Candidate data is not Reviewed runtime knowledge and must not be presented as a recommendation.
 
-The dimension records define vocabulary only. They do not assign values to any language or license.
+Block 1 is intentionally coarse and is bound to
+`evidence/block1-initial-classification.md` through a SHA-256 source record.
+Its values are Preview classifications, not Reviewed evidence. Later passes should
+replace or supplement the broad seed with language-specific official documentation,
+normative specifications, and reproducible tests.
 
-Future claims belong in separate source-backed changes and remain subject to the normal human review and promotion path.
+No compatibility, obligation, performance, popularity, or suitability claim is implied.

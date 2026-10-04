@@ -1,0 +1,26 @@
+{
+  "kind": "claim",
+  "record": {
+    "schema_version": "0.1",
+    "claim_id": "claim.java.execution-model",
+    "entity_id": "language.java",
+    "dimension_id": "dimension.execution-model",
+    "value": {
+      "type": "set",
+      "value": ["bytecode-vm", "jit"]
+    },
+    "state": "TRUE",
+    "conditions": [],
+    "scope": {
+      "versions": ["unspecified"],
+      "targets": ["general"]
+    },
+    "source_ids": ["source.catalog-block1-preview"],
+    "verified_at": "2026-10-04T05:47:00Z",
+    "world_freshness_class": "volatile",
+    "review_status": "Preview",
+    "test_refs": [],
+    "supersedes": [],
+    "valid_until": "2027-01-04T00:00:00Z"
+  }
+}
