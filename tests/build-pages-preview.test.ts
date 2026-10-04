@@ -16,9 +16,7 @@ test("Pages build embeds Preview catalog beside the approved Reviewed runtime", 
       readFile(join(out, "index.html"), "utf8"),
     ]);
     assert(runtime.includes('"catalogPreview"'));
-    assert(
-      runtime.includes("candidate.language-license-catalog.2026-10-03"),
-    );
+    assert(runtime.includes("candidate.language-license-catalog.2026-10-03"));
     assert(runtime.includes("language.rust"));
     assert(
       runtime.includes(
