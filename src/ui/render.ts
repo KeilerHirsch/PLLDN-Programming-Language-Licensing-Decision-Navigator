@@ -339,7 +339,6 @@ function renderTextAssistance(state: TextAssistanceState): HTMLElement {
   return section;
 }
 
-
 export interface CatalogPreviewState {
   view: CatalogPreviewView | null;
   diagnostic: string | null;
