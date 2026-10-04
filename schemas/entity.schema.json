@@ -36,7 +36,10 @@
             "maxLength": 2048
           },
           "ambiguity": {
-            "enum": ["unambiguous", "context-required"]
+            "enum": [
+              "unambiguous",
+              "context-required"
+            ]
           },
           "context": {
             "type": "array",
@@ -50,7 +53,11 @@
             "uniqueItems": true
           }
         },
-        "required": ["text", "ambiguity", "context"],
+        "required": [
+          "text",
+          "ambiguity",
+          "context"
+        ],
         "additionalProperties": false
       },
       "minItems": 0,
@@ -95,7 +102,14 @@
         "AGPL-3.0-or-later",
         "0BSD",
         "CC0-1.0"
-      ]
+      ],
+      "description": "Deprecated legacy SPDX-like field retained for replay compatibility. Entity identity is entity_id."
+    },
+    "spdx_id": {
+      "description": "Optional SPDX short identifier. A license entity remains valid without SPDX; entity_id is the stable PLLDN identity.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9.+-]{0,127}$",
+      "maxLength": 128
     }
   },
   "required": [
@@ -116,21 +130,28 @@
             "const": "license"
           }
         },
-        "required": ["entity_type"]
+        "required": [
+          "entity_type"
+        ]
       },
-      "then": {
-        "required": ["license_id"],
-        "properties": {
-          "license_id": {}
-        }
-      },
+      "then": {},
       "else": {
-        "not": {
-          "required": ["license_id"],
-          "properties": {
-            "license_id": {}
+        "allOf": [
+          {
+            "not": {
+              "required": [
+                "license_id"
+              ]
+            }
+          },
+          {
+            "not": {
+              "required": [
+                "spdx_id"
+              ]
+            }
           }
-        }
+        ]
       }
     }
   ]
