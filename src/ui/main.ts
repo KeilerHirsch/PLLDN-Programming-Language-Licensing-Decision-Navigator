@@ -42,6 +42,7 @@ let catalogState: CatalogPreviewState = {
 let productState: ProductUiState = {
   ...DEFAULT_PRODUCT_UI_STATE,
   compareLanguageIds: [],
+  filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
 };
 let catalogQuery = "";
 
@@ -57,16 +58,25 @@ function normalizedSearch(value: string): string {
 
 function applyCatalogFilter(): void {
   const query = normalizedSearch(catalogQuery);
+  let visible = 0;
   for (const entry of root.querySelectorAll<HTMLElement>(
     "[data-catalog-entry]",
   )) {
     const text = entry.dataset.catalogSearchText ?? "";
     entry.hidden = query.length > 0 && !text.includes(query);
+    if (!entry.hidden) visible += 1;
   }
   const input = root.querySelector<HTMLInputElement>(
     '[data-action="catalog-search"]',
   );
   if (input && input.value !== catalogQuery) input.value = catalogQuery;
+  const count = root.querySelector<HTMLElement>(
+    "[data-catalog-visible-count]",
+  );
+  if (count) {
+    const noun = productState.mode === "languages" ? "languages" : "licenses";
+    count.textContent = `${visible} ${noun} shown.`;
+  }
 }
 
 function installProductExperience(model: UiViewModel): void {
@@ -180,6 +190,14 @@ root.addEventListener("click", (event) => {
     productState = { ...productState, compareLanguageIds: [] };
     void publish(() => current.view());
   }
+  if (action === "reset-product-filters") {
+    productState = {
+      ...productState,
+      filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
+    };
+    catalogQuery = "";
+    void publish(() => current.view());
+  }
   if (action === "analyze-text") {
     void analyzeCurrent(current);
   }
@@ -238,6 +256,23 @@ root.addEventListener("change", (event) => {
     const optionId = element.dataset.optionId;
     if (!facetId || !optionId) return;
     void publish(() => current.selectFacet(facetId, optionId));
+  }
+  if (
+    action === "product-filter" &&
+    element instanceof HTMLSelectElement
+  ) {
+    const filterKey = element.dataset.filterKey;
+    if (filterKey && filterKey in productState.filters) {
+      productState = {
+        ...productState,
+        filters: {
+          ...productState.filters,
+          [filterKey]: element.value,
+        },
+      };
+      catalogQuery = "";
+      void publish(() => current.view());
+    }
   }
   if (action === "sort" && element instanceof HTMLSelectElement) {
     const sort = element.value as SortMode;
