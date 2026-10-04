@@ -116,3 +116,26 @@ export interface UiViewModel {
   candidates: readonly UiCandidateView[];
   sort: SortMode;
 }
+
+
+export type CatalogEntityType = "language" | "license";
+
+export interface CatalogPreviewFactView extends UiCandidateFactView {
+  review_status: string;
+}
+
+export interface CatalogPreviewEntryView {
+  entity_id: string;
+  label: string;
+  entity_type: CatalogEntityType;
+  version_scope: readonly string[];
+  target_scope: readonly string[];
+  facts: readonly CatalogPreviewFactView[];
+}
+
+export interface CatalogPreviewView {
+  knowledge_snapshot: string;
+  status: "Preview";
+  languages: readonly CatalogPreviewEntryView[];
+  licenses: readonly CatalogPreviewEntryView[];
+}
