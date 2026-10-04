@@ -30,6 +30,15 @@ test("Product Model UI exposes explore, compare, catalogue and license guidance"
     "SaaS / hosting",
     "Competitive use",
     "Canonical terms",
+    "Throughput",
+    "Learning",
+    "Deployment",
+    "Ecosystem",
+    "Commercial",
+    "SaaS",
+    "Compete",
+    "OSI",
+    "Reset filters",
   ]) {
     assert(product.includes(required), required);
   }
@@ -65,6 +74,8 @@ test("browser places Product Model ahead of the Reviewed decision lab", () => {
     'action === "toggle-compare"',
     'action === "catalog-mode"',
     'action === "clear-compare"',
+    'action === "reset-product-filters"',
+    'action === "product-filter"',
   ]) {
     assert(main.includes(required), required);
   }
@@ -72,4 +83,36 @@ test("browser places Product Model ahead of the Reviewed decision lab", () => {
     main.indexOf("renderProductExperience") <
       main.indexOf('decision.className = "decision-lab"'),
   );
+});
+
+
+test("catalogue decision filters are rendered as explicit select controls", () => {
+  const product = source("src/ui/product.ts");
+  for (const required of [
+    "languageCategory",
+    "languageThroughput",
+    "languageLearning",
+    "languageEcosystem",
+    "licenseModel",
+    "licenseCommercial",
+    "licenseSaas",
+    "licenseCompetitive",
+    "licenseOsi",
+    'select.dataset.action = "product-filter"',
+    'count.dataset.catalogVisibleCount = "true"',
+  ]) {
+    assert(product.includes(required), required);
+  }
+});
+
+test("catalogue search and structured filters share one visible-result counter", () => {
+  const main = source("src/ui/main.ts");
+  for (const required of [
+    "let visible = 0",
+    "data-catalog-visible-count",
+    "productState.filters",
+    "DEFAULT_PRODUCT_UI_STATE.filters",
+  ]) {
+    assert(main.includes(required), required);
+  }
 });
