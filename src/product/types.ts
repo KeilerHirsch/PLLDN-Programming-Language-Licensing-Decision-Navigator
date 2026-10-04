@@ -91,7 +91,6 @@ export interface LanguageDecisionProfile {
   ecosystem: LanguageEcosystemProfile;
 }
 
-
 export type LicenseModel =
   | "license-transition"
   | "open-source"
