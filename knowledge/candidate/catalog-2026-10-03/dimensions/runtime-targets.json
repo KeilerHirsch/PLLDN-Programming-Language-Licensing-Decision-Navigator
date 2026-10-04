@@ -9,6 +9,7 @@
     "unit": null,
     "allowed_values": [
       "native",
+      "bytecode-vm",
       "jvm",
       "clr",
       "javascript",
