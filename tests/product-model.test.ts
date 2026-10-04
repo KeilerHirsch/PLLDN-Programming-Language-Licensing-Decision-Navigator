@@ -58,7 +58,6 @@ test("Use-case guidance references only known Product Model languages", () => {
   }
 });
 
-
 test("Decision Dimensions v2 covers every language with bounded editorial bands", () => {
   const expected = new Set(
     PRODUCT_MODEL.languages.map((profile) => profile.entity_id),
