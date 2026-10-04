@@ -13,8 +13,12 @@ Project lifecycle, fact kind and constraint strength are separate dimensions.
 Constraints may carry explicit `EQ`, `NEQ`, `IN`, `GTE` or `LTE` operators;
 plain facts may not. Operator/value types are checked against their dimension.
 Global and component facts do not imply an automatic precedence rule. Component
-and boundary IDs must resolve. License identifiers name exact supported variants;
-listing an identifier does not assert license compatibility.
+and boundary IDs must resolve. License entities are identified by their stable
+`entity_id`; SPDX is optional metadata rather than the identity boundary.
+The legacy `license_id` field remains accepted only for snapshot replay
+compatibility while new catalogue entries use optional `spdx_id`. A license can
+therefore be represented even when SPDX does not assign it a short identifier.
+Listing an entity or SPDX identifier does not assert license compatibility.
 
 Entity scopes bound versions and targets. Relations carry separate from_scope
 and to_scope, each checked against its own endpoint. Evidence references identify
