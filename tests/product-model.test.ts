@@ -1,23 +1,43 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
 import assert from "node:assert/strict";
+import { readdirSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { PRODUCT_MODEL } from "../src/product/catalog.ts";
 
-test("Product Model v1 covers the broad Preview catalogue", () => {
-  assert.equal(PRODUCT_MODEL.languages.length, 35);
-  assert.equal(PRODUCT_MODEL.licenses.length, 15);
-  assert(PRODUCT_MODEL.use_cases.length >= 12);
+function candidateEntityIds(type: "language" | "license"): string[] {
+  const root = "knowledge/candidate/catalog-2026-10-03/entities";
+  return readdirSync(root)
+    .filter((name) => name.endsWith(".json"))
+    .map((name) => JSON.parse(readFileSync(`${root}/${name}`, "utf8")))
+    .filter(
+      (document) =>
+        document.kind === "entity" && document.record.entity_type === type,
+    )
+    .map((document) => String(document.record.entity_id))
+    .sort();
+}
 
-  const languageIds = PRODUCT_MODEL.languages.map((item) => item.entity_id);
-  const licenseIds = PRODUCT_MODEL.licenses.map((item) => item.entity_id);
-  assert.equal(new Set(languageIds).size, languageIds.length);
-  assert.equal(new Set(licenseIds).size, licenseIds.length);
+test("Product Model v1 exactly covers the broad Preview catalogue", () => {
+  const languageIds = PRODUCT_MODEL.languages
+    .map((item) => item.entity_id)
+    .sort();
+  const licenseIds = PRODUCT_MODEL.licenses
+    .map((item) => item.entity_id)
+    .sort();
+
+  assert.deepEqual(languageIds, candidateEntityIds("language"));
+  assert.deepEqual(licenseIds, candidateEntityIds("license"));
+  assert.equal(new Set(languageIds).size, 35);
+  assert.equal(new Set(licenseIds).size, 15);
+  assert(PRODUCT_MODEL.use_cases.length >= 12);
 
   for (const profile of PRODUCT_MODEL.languages) {
     assert(profile.tagline.length > 20);
     assert(profile.build_path.includes("→"));
-    assert(profile.good_for.length >= 2 || profile.entity_id === "language.solidity");
+    assert(
+      profile.good_for.length >= 2 || profile.entity_id === "language.solidity",
+    );
     assert(profile.watch_for.length >= 1);
   }
   for (const profile of PRODUCT_MODEL.licenses) {
