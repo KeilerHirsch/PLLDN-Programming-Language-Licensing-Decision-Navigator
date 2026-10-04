@@ -400,8 +400,7 @@ export function licenseMatchesFilters(
       decision.rights.saas_hosting === filters.licenseSaas) &&
     (filters.licenseCompetitive === "any" ||
       decision.rights.competitive_use === filters.licenseCompetitive) &&
-    (filters.licenseOsi === "any" ||
-      decision.osi_status === filters.licenseOsi)
+    (filters.licenseOsi === "any" || decision.osi_status === filters.licenseOsi)
   );
 }
 
@@ -588,7 +587,9 @@ function renderLanguageCatalog(
   const profiles = PRODUCT_MODEL.languages.filter((profile) =>
     languageMatchesFilters(profile, state.filters),
   );
-  const count = paragraph(`${profiles.length} languages match the selected filters.`);
+  const count = paragraph(
+    `${profiles.length} languages match the selected filters.`,
+  );
   count.className = "catalog-result-count";
   count.dataset.catalogVisibleCount = "true";
   wrapper.append(count);
@@ -745,9 +746,7 @@ function renderLicenseDecisionProfile(
   return details;
 }
 
-function renderLicenseQuickFacts(
-  profile: LicenseProductProfile,
-): HTMLElement {
+function renderLicenseQuickFacts(profile: LicenseProductProfile): HTMLElement {
   const decision = LICENSE_DECISION_PROFILES[profile.entity_id];
   const strip = document.createElement("div");
   strip.className = "decision-quick-strip";
@@ -809,7 +808,9 @@ function renderLicenseCatalog(
   const profiles = PRODUCT_MODEL.licenses.filter((profile) =>
     licenseMatchesFilters(profile, state.filters),
   );
-  const count = paragraph(`${profiles.length} licenses match the selected filters.`);
+  const count = paragraph(
+    `${profiles.length} licenses match the selected filters.`,
+  );
   count.className = "catalog-result-count";
   count.dataset.catalogVisibleCount = "true";
   wrapper.append(count);
@@ -973,17 +974,12 @@ function renderCatalog(
           ["no", "Restricted"],
         ],
       ),
-      selectControl(
-        "OSI status",
-        "licenseOsi",
-        state.filters.licenseOsi,
-        [
-          ["any", "Any OSI status"],
-          ["approved", "Approved"],
-          ["not-approved", "Not approved"],
-          ["not-applicable", "Not applicable"],
-        ],
-      ),
+      selectControl("OSI status", "licenseOsi", state.filters.licenseOsi, [
+        ["any", "Any OSI status"],
+        ["approved", "Approved"],
+        ["not-approved", "Not approved"],
+        ["not-applicable", "Not applicable"],
+      ]),
     );
   }
   const reset = button("Reset filters", "reset-product-filters");
