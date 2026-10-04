@@ -7,7 +7,11 @@
     "dimension_id": "dimension.memory-management-model",
     "value": {
       "type": "set",
-      "value": ["manual", "reference-counting", "raii-deterministic-destruction"]
+      "value": [
+        "manual",
+        "reference-counting",
+        "raii-deterministic-destruction"
+      ]
     },
     "state": "TRUE",
     "conditions": [],
