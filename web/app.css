@@ -485,7 +485,7 @@ summary {
   font-size: 1.2rem;
 }
 
-.product-card > p {
+.language-profile-card > p {
   min-height: 3em;
   margin: 0.55rem 0 0.8rem;
 }
@@ -612,7 +612,7 @@ summary {
   border-right: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
 }
 
-.license-axis-step:last-child {
+.license-axis-step:nth-child(4) {
   border-right: 0;
 }
 
@@ -624,7 +624,6 @@ summary {
 
 .license-good,
 .license-watch {
-  min-height: auto !important;
   font-size: 0.9rem;
 }
 
@@ -745,5 +744,93 @@ summary {
 @media (max-width: 760px) {
   .decision-profile-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.license-axis {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.license-axis-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.7rem;
+  border-top: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.license-decision-profile {
+  margin-top: 0.85rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
+}
+
+.license-decision-profile > summary {
+  font-weight: 650;
+}
+
+.license-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.canonical-license-link {
+  font-size: 0.78rem;
+}
+
+.license-decision-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.8fr;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.license-decision-group {
+  min-width: 0;
+  padding: 0.65rem;
+  border: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, CanvasText 2.5%, Canvas);
+}
+
+.license-decision-group h3 {
+  margin: 0 0 0.45rem;
+  font-size: 0.85rem;
+}
+
+.license-decision-group dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.3rem 0.7rem;
+  margin: 0;
+}
+
+.license-decision-group dt,
+.license-decision-group dd {
+  font-size: 0.8rem;
+}
+
+.license-decision-group dt {
+  opacity: 0.72;
+}
+
+.license-decision-group dd {
+  margin: 0;
+  font-weight: 650;
+  text-align: right;
+}
+
+@media (max-width: 760px) {
+  .license-axis,
+  .license-decision-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .license-axis-note {
+    grid-column: auto;
   }
 }

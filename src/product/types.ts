@@ -14,9 +14,11 @@ export type LanguageCategory =
   | "tool";
 
 export type LicenseFamily =
+  | "license-transition"
   | "network-copyleft"
   | "permissive"
   | "public-domain-like"
+  | "source-available"
   | "strong-copyleft"
   | "weak-copyleft";
 
@@ -87,4 +89,53 @@ export interface LanguageDecisionProfile {
   performance: LanguagePerformanceProfile;
   complexity: LanguageComplexityProfile;
   ecosystem: LanguageEcosystemProfile;
+}
+
+export type LicenseModel =
+  | "license-transition"
+  | "open-source"
+  | "public-domain-like"
+  | "source-available";
+
+export type OsiStatus =
+  | "approved"
+  | "not-approved"
+  | "not-applicable"
+  | "unknown";
+
+export type LicensePermission = "yes" | "conditional" | "no" | "unknown";
+
+export type LicenseDisclosureScope =
+  | "conditional"
+  | "file"
+  | "library"
+  | "network-service"
+  | "none"
+  | "unknown"
+  | "work";
+
+export type LicenseTimeRule = "change-date" | "none" | "trial" | "unknown";
+
+export interface LicenseDecisionProfile {
+  model: LicenseModel;
+  osi_status: OsiStatus;
+  spdx_id: string | null;
+  canonical_source: string;
+  rights: {
+    use: LicensePermission;
+    modify: LicensePermission;
+    redistribute: LicensePermission;
+    commercial_use: LicensePermission;
+    internal_business_use: LicensePermission;
+    saas_hosting: LicensePermission;
+    competitive_use: LicensePermission;
+  };
+  obligations: {
+    source_disclosure: LicenseDisclosureScope;
+    notice: LicensePermission;
+    patent_grant: LicensePermission;
+    time_rule: LicenseTimeRule;
+  };
+  compliance_complexity: DecisionBand;
+  business_model_friction: DecisionBand;
 }
