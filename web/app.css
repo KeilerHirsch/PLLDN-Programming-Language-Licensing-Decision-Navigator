@@ -695,7 +695,7 @@ summary {
 
 .decision-profile-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
   gap: 0.75rem;
   margin-top: 0.75rem;
 }
@@ -713,26 +713,62 @@ summary {
   font-size: 0.85rem;
 }
 
-.decision-profile-group dl {
+.metric-group-rows {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 0.3rem 0.7rem;
-  margin: 0;
+  gap: 0.35rem;
 }
 
-.decision-profile-group dt,
-.decision-profile-group dd {
+.metric-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: start;
+  gap: 0.6rem;
+}
+
+.metric-row-label {
+  min-width: 0;
+  overflow-wrap: anywhere;
   font-size: 0.8rem;
+  color: color-mix(in srgb, CanvasText 82%, Canvas);
 }
 
-.decision-profile-group dt {
-  opacity: 0.72;
-}
-
-.decision-profile-group dd {
-  margin: 0;
+.metric-badge {
+  --metric-background: light-dark(#f0f3f7, #252c37);
+  --metric-color: light-dark(#435168, #c2cddd);
+  --metric-border: light-dark(#bac4d3, #67738a);
+  display: inline-block;
+  justify-self: end;
+  padding: 0.12rem 0.45rem;
+  border: 1px solid var(--metric-border);
+  border-radius: 999px;
+  background: var(--metric-background);
+  color: var(--metric-color);
+  font-size: 0.8rem;
   font-weight: 650;
-  text-align: right;
+  white-space: nowrap;
+}
+
+.metric-badge--favorable {
+  --metric-background: light-dark(#edf7f1, #192d23);
+  --metric-color: light-dark(#185b37, #a3d9b8);
+  --metric-border: light-dark(#a4c9b2, #4f7f61);
+}
+
+.metric-badge--mixed {
+  --metric-background: light-dark(#fff5df, #332b19);
+  --metric-color: light-dark(#724b05, #f0d394);
+  --metric-border: light-dark(#d7bb7b, #897044);
+}
+
+.metric-badge--unfavorable {
+  --metric-background: light-dark(#fff0ec, #35221f);
+  --metric-color: light-dark(#943b28, #efb29f);
+  --metric-border: light-dark(#dbb0a4, #985e4e);
+}
+
+.metric-tone-guide {
+  font-size: 0.82rem;
+  color: color-mix(in srgb, CanvasText 82%, Canvas);
 }
 
 .decision-profile-note {
@@ -844,6 +880,8 @@ summary {
 
 .decision-quick-fact {
   display: grid;
+  min-width: 0;
+  align-content: start;
   gap: 0.12rem;
   padding: 0.5rem 0.6rem;
   border: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
@@ -858,8 +896,11 @@ summary {
   text-transform: uppercase;
 }
 
-.decision-quick-fact strong {
+.decision-quick-fact .metric-badge {
+  justify-self: start;
+  max-width: 100%;
   font-size: 0.88rem;
+  white-space: normal;
 }
 
 .catalog-filter-grid {
