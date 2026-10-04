@@ -350,7 +350,7 @@ function renderLanguageQuickFacts(
   return strip;
 }
 
-function languageMatchesFilters(
+export function languageMatchesFilters(
   profile: LanguageProductProfile,
   filters: ProductFilterState,
 ): boolean {
@@ -385,7 +385,7 @@ function languageMatchesFilters(
   return true;
 }
 
-function licenseMatchesFilters(
+export function licenseMatchesFilters(
   profile: LicenseProductProfile,
   filters: ProductFilterState,
 ): boolean {
