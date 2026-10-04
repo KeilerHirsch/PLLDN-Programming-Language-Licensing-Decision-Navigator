@@ -5,8 +5,8 @@ import type { TextAnalysis, TextRuleSet } from "../text/types.ts";
 import type { UiController } from "./controller.ts";
 import {
   DEFAULT_PRODUCT_UI_STATE,
-  renderProductExperience,
   type ProductUiState,
+  renderProductExperience,
 } from "./product.ts";
 import {
   type CatalogPreviewState,
