@@ -1,0 +1,22 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "license.polyform-strict-1.0.0",
+    "entity_type": "license",
+    "canonical_name": "PolyForm Strict License 1.0.0",
+    "aliases": [
+      {
+        "text": "PolyForm Strict 1.0.0",
+        "ambiguity": "unambiguous",
+        "context": []
+      }
+    ],
+    "version_scope": [
+      "PolyForm Strict 1.0.0"
+    ],
+    "target_scope": [
+      "general"
+    ]
+  }
+}
