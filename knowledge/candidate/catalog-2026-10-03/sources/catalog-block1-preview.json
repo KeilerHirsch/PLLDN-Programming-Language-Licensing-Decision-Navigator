@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.catalog-block1-preview",
+    "source_class": "community",
+    "reference": "https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/blob/main/knowledge/candidate/catalog-2026-10-03/evidence/block1-initial-classification.md",
+    "title": "PLLDN Block 1 initial classification matrix",
+    "retrieved_at": "2026-10-04T05:47:00Z",
+    "content_sha256": "29d826017698fc87120be04b543a33007acb8cdbe81b232c196acdb3f6e9f238"
+  }
+}

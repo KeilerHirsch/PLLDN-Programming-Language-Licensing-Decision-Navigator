@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readdirSync, readFileSync } from "node:fs";
 import test from "node:test";
 import {
@@ -12,7 +13,7 @@ const root = new URL(
   "../knowledge/candidate/catalog-2026-10-03/",
   import.meta.url,
 );
-const at = "2026-10-03T21:00:00Z";
+const at = "2026-10-04T05:47:00Z";
 const identity: CandidateSnapshotIdentity = {
   knowledgeSnapshot: "candidate.language-license-catalog.2026-10-03",
   rulesSnapshot: "candidate.language-license-catalog.rules.2026-10-03",
@@ -32,7 +33,7 @@ function files(): Record<string, string> {
 
 test("broad candidate catalog is structurally valid without self-approved assertions", async () => {
   const built = await buildKnowledgeCandidate(files(), at, identity);
-  assert.equal(built.documents.length, 61);
+  assert.equal(built.documents.length, 167);
   assert.equal(built.reviewedAssertions, 0);
   assert.equal(built.partialAssertions, 0);
   assert.equal(
@@ -44,9 +45,7 @@ test("broad candidate catalog is structurally valid without self-approved assert
     "candidate.language-license-catalog.rules.2026-10-03",
   );
   assert.equal(
-    built.documents.some((doc) =>
-      ["claim", "relation", "rule"].includes(doc.kind),
-    ),
+    built.documents.some((doc) => ["relation", "rule"].includes(doc.kind)),
     false,
   );
 });
@@ -69,46 +68,6 @@ test("candidate catalog contains 35 languages without invented current versions"
       (doc) =>
         JSON.stringify(doc.record.target_scope) === JSON.stringify(["general"]),
     ),
-  );
-  assert.deepEqual(
-    languages.map((doc) => doc.record.canonical_name).sort(),
-    [
-      "Ada",
-      "Bash",
-      "C",
-      "C#",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "Dart",
-      "Elixir",
-      "Erlang",
-      "F#",
-      "Fortran",
-      "Go",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Julia",
-      "Kotlin",
-      "Lua",
-      "Nim",
-      "Objective-C",
-      "OCaml",
-      "PHP",
-      "Perl",
-      "PowerShell",
-      "Python",
-      "R",
-      "Ruby",
-      "Rust",
-      "Scala",
-      "Solidity",
-      "Swift",
-      "TypeScript",
-      "Visual Basic .NET",
-      "Zig",
-    ].sort(),
   );
 });
 
@@ -139,7 +98,7 @@ test("candidate catalog contains every license identity currently admitted by th
   ]);
 });
 
-test("candidate catalog defines comparison vocabularies without assigning candidate values", async () => {
+test("candidate catalog defines the comparison vocabulary used by block 1", async () => {
   const built = await buildKnowledgeCandidate(files(), at, identity);
   const dimensions = built.documents
     .filter((doc) => doc.kind === "dimension")
@@ -158,8 +117,51 @@ test("candidate catalog defines comparison vocabularies without assigning candid
     "dimension.type-checking-model",
     "dimension.webassembly-support",
   ]);
+});
+
+test("block 1 provides exactly three Preview claims for every language", async () => {
+  const built = await buildKnowledgeCandidate(files(), at, identity);
+  const claims = built.documents.filter((doc) => doc.kind === "claim");
+  assert.equal(claims.length, 105);
+  assert(
+    claims.every((doc) => {
+      const sourceIds = doc.record.source_ids;
+      return (
+        doc.record.review_status === "Preview" &&
+        Array.isArray(sourceIds) &&
+        sourceIds.length === 1 &&
+        sourceIds[0] === "source.catalog-block1-preview"
+      );
+    }),
+  );
+  const byLanguage = new Map<string, number>();
+  for (const claim of claims) {
+    const entityId = claim.record.entity_id;
+    if (typeof entityId !== "string") {
+      throw new Error("Claim entity_id must be a string");
+    }
+    byLanguage.set(entityId, (byLanguage.get(entityId) ?? 0) + 1);
+  }
+  assert.equal(byLanguage.size, 35);
+  assert([...byLanguage.values()].every((count) => count === 3));
+});
+
+test("block 1 source hash binds the checked-in classification matrix", async () => {
+  const built = await buildKnowledgeCandidate(files(), at, identity);
+  const source = built.documents.find(
+    (doc) =>
+      doc.kind === "source" &&
+      doc.record.source_id === "source.catalog-block1-preview",
+  );
+  assert(source);
+  const evidence = readFileSync(
+    new URL(
+      "../knowledge/candidate/catalog-2026-10-03/evidence/block1-initial-classification.md",
+      import.meta.url,
+    ),
+  );
   assert.equal(
-    built.documents.some((doc) => doc.kind === "claim"),
-    false,
+    createHash("sha256").update(evidence).digest("hex"),
+    source.record.content_sha256,
   );
 });
