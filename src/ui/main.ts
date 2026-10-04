@@ -70,9 +70,7 @@ function applyCatalogFilter(): void {
     '[data-action="catalog-search"]',
   );
   if (input && input.value !== catalogQuery) input.value = catalogQuery;
-  const count = root.querySelector<HTMLElement>(
-    "[data-catalog-visible-count]",
-  );
+  const count = root.querySelector<HTMLElement>("[data-catalog-visible-count]");
   if (count) {
     const noun = productState.mode === "languages" ? "languages" : "licenses";
     count.textContent = `${visible} ${noun} shown.`;
@@ -257,10 +255,7 @@ root.addEventListener("change", (event) => {
     if (!facetId || !optionId) return;
     void publish(() => current.selectFacet(facetId, optionId));
   }
-  if (
-    action === "product-filter" &&
-    element instanceof HTMLSelectElement
-  ) {
+  if (action === "product-filter" && element instanceof HTMLSelectElement) {
     const filterKey = element.dataset.filterKey;
     if (filterKey && filterKey in productState.filters) {
       productState = {
