@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
 import type { TypedValue } from "../decision/types.ts";
-import { LANGUAGE_DECISION_PROFILES } from "../product/language-decision-profiles.ts";
 import {
   PRODUCT_COMPARE_DIMENSIONS,
   PRODUCT_MODEL,
 } from "../product/catalog.ts";
+import { LANGUAGE_DECISION_PROFILES } from "../product/language-decision-profiles.ts";
 import type {
   LanguageProductProfile,
   LicenseProductProfile,
@@ -116,7 +116,9 @@ function productSearchText(
           ...profile.categories,
           ...profile.good_for,
           ...profile.watch_for,
-          ...Object.values(LANGUAGE_DECISION_PROFILES[profile.entity_id] ?? {}).flatMap((group) =>
+          ...Object.values(
+            LANGUAGE_DECISION_PROFILES[profile.entity_id] ?? {},
+          ).flatMap((group) =>
             typeof group === "object" && group ? Object.values(group) : [],
           ),
         ]
@@ -430,7 +432,11 @@ function renderLanguageCard(
   );
   compare.dataset.entityId = profile.entity_id;
   actions.append(compare);
-  card.append(actions, renderDecisionProfile(profile), renderPreviewFacts(entry));
+  card.append(
+    actions,
+    renderDecisionProfile(profile),
+    renderPreviewFacts(entry),
+  );
   return card;
 }
 
@@ -692,8 +698,8 @@ function renderCompare(
       label: "Deployment complexity",
       value: (profile) =>
         humanizeDecisionValue(
-          LANGUAGE_DECISION_PROFILES[profile.entity_id]?.complexity.deployment ??
-            "unknown",
+          LANGUAGE_DECISION_PROFILES[profile.entity_id]?.complexity
+            .deployment ?? "unknown",
         ),
     },
     {
