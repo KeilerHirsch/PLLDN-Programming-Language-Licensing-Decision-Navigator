@@ -2,10 +2,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 import { LANGUAGE_DECISION_PROFILES } from "./language-decision-profiles.ts";
 import { LICENSE_DECISION_PROFILES } from "./license-decision-profiles.ts";
-import type {
-  LanguageProductProfile,
-  LicenseProductProfile,
-} from "./types.ts";
+import type { LanguageProductProfile, LicenseProductProfile } from "./types.ts";
 
 export interface ProductFilterState {
   languageCategory: string;
