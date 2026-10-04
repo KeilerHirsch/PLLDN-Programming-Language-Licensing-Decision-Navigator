@@ -6,6 +6,7 @@ import {
   PRODUCT_MODEL,
 } from "../product/catalog.ts";
 import { LANGUAGE_DECISION_PROFILES } from "../product/language-decision-profiles.ts";
+import { LICENSE_DECISION_PROFILES } from "../product/license-decision-profiles.ts";
 import type {
   LanguageProductProfile,
   LicenseProductProfile,
@@ -128,6 +129,11 @@ function productSearchText(
           profile.family,
           profile.good_when,
           profile.watch_for,
+          ...Object.values(
+            LICENSE_DECISION_PROFILES[profile.entity_id] ?? {},
+          ).flatMap((group) =>
+            typeof group === "object" && group ? Object.values(group) : [group],
+          ),
         ];
   return [
     ...base,
@@ -458,38 +464,138 @@ function renderLanguageCatalog(
 }
 
 const LICENSE_FAMILY_LABELS: Readonly<Record<string, string>> = {
-  "public-domain-like": "Public-domain-like",
-  permissive: "Permissive",
-  "weak-copyleft": "Weak copyleft",
-  "strong-copyleft": "Strong copyleft",
+  "license-transition": "License transition",
   "network-copyleft": "Network copyleft",
+  permissive: "Permissive",
+  "public-domain-like": "Public-domain-like",
+  "source-available": "Source available",
+  "strong-copyleft": "Strong copyleft",
+  "weak-copyleft": "Weak copyleft",
 };
 
 function renderLicenseAxis(): HTMLElement {
   const axis = document.createElement("div");
   axis.className = "license-axis";
-  for (const family of [
-    "public-domain-like",
-    "permissive",
-    "weak-copyleft",
-    "strong-copyleft",
-    "network-copyleft",
-  ]) {
+  const models = [
+    [
+      "Open Source",
+      "OSI-style freedom to use, modify and redistribute; obligations differ by license.",
+    ],
+    [
+      "Source available",
+      "Source is visible, but business-purpose, hosting, competition or eligibility restrictions may apply.",
+    ],
+    [
+      "Public-domain-like",
+      "Designed to minimize copyright control and downstream obligations.",
+    ],
+    [
+      "License transition",
+      "Mechanisms such as change dates schedule different terms rather than defining one static permission set.",
+    ],
+  ] as const;
+  for (const [label, copy] of models) {
     const step = document.createElement("div");
     step.className = "license-axis-step";
-    step.append(
-      badge(LICENSE_FAMILY_LABELS[family] ?? family),
-      paragraph(
-        family === "public-domain-like"
-          ? "Maximum downstream freedom"
-          : family === "network-copyleft"
-            ? "Strongest sharing trigger in this catalogue"
-            : "Increasing reciprocal obligations",
-      ),
-    );
+    step.append(badge(label), paragraph(copy));
     axis.append(step);
   }
+  const note = paragraph(
+    "These are different legal models, not one linear scale from permissive to restrictive.",
+  );
+  note.className = "license-axis-note";
+  axis.append(note);
   return axis;
+}
+
+function renderLicenseDecisionProfile(
+  profile: LicenseProductProfile,
+): HTMLElement {
+  const decision = LICENSE_DECISION_PROFILES[profile.entity_id];
+  const details = document.createElement("details");
+  details.className = "license-decision-profile";
+  const summary = document.createElement("summary");
+  summary.textContent = "Rights, restrictions & compliance";
+  details.append(summary);
+
+  if (!decision) {
+    details.append(paragraph("Editorial license decision profile unavailable."));
+    return details;
+  }
+
+  const metadata = document.createElement("div");
+  metadata.className = "license-metadata";
+  metadata.append(
+    badge(humanizeDecisionValue(decision.model)),
+    badge(`OSI: ${humanizeDecisionValue(decision.osi_status)}`),
+  );
+  if (decision.spdx_id) metadata.append(badge(`SPDX: ${decision.spdx_id}`));
+
+  const sourceHref = safeHttps(decision.canonical_source);
+  if (sourceHref) {
+    const source = document.createElement("a");
+    source.href = sourceHref;
+    source.rel = "noopener noreferrer";
+    source.textContent = "Canonical terms";
+    source.className = "canonical-license-link";
+    metadata.append(source);
+  }
+
+  const grid = document.createElement("div");
+  grid.className = "license-decision-grid";
+  const groups = [
+    [
+      "Rights",
+      [
+        ["Use", decision.rights.use],
+        ["Modify", decision.rights.modify],
+        ["Redistribute", decision.rights.redistribute],
+        ["Commercial use", decision.rights.commercial_use],
+        ["Internal business", decision.rights.internal_business_use],
+        ["SaaS / hosting", decision.rights.saas_hosting],
+        ["Competitive use", decision.rights.competitive_use],
+      ],
+    ],
+    [
+      "Obligations",
+      [
+        ["Source disclosure", decision.obligations.source_disclosure],
+        ["Notice", decision.obligations.notice],
+        ["Patent grant", decision.obligations.patent_grant],
+        ["Time rule", decision.obligations.time_rule],
+      ],
+    ],
+    [
+      "Decision cost",
+      [
+        ["Compliance complexity", decision.compliance_complexity],
+        ["Business-model friction", decision.business_model_friction],
+      ],
+    ],
+  ] as const;
+
+  for (const [title, rows] of groups) {
+    const group = document.createElement("section");
+    group.className = "license-decision-group";
+    group.append(heading(3, title));
+    const list = document.createElement("dl");
+    for (const [label, value] of rows) {
+      const term = document.createElement("dt");
+      term.textContent = label;
+      const description = document.createElement("dd");
+      description.textContent = humanizeDecisionValue(value);
+      list.append(term, description);
+    }
+    group.append(list);
+    grid.append(group);
+  }
+
+  const note = paragraph(
+    "Editorial Preview only. Read the canonical terms for legal interpretation and project-specific compliance.",
+  );
+  note.className = "decision-profile-note";
+  details.append(metadata, grid, note);
+  return details;
 }
 
 function renderLicenseCard(
@@ -513,7 +619,12 @@ function renderLicenseCard(
   good.className = "license-good";
   const watch = paragraph(`Watch for: ${profile.watch_for}`);
   watch.className = "license-watch";
-  card.append(good, watch, renderPreviewFacts(entry));
+  card.append(
+    good,
+    watch,
+    renderLicenseDecisionProfile(profile),
+    renderPreviewFacts(entry),
+  );
   return card;
 }
 
@@ -570,7 +681,7 @@ function renderCatalog(
   search.placeholder =
     state.mode === "languages"
       ? "Rust, Windows, embedded, Cargo…"
-      : "MIT, copyleft, patent, permissive…";
+      : "PolyForm, source available, SaaS, patent, copyleft…";
   search.dataset.action = "catalog-search";
   searchLabel.append(searchTitle, search);
   controls.append(searchLabel);
