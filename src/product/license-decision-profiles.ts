@@ -492,7 +492,8 @@ export const LICENSE_DECISION_PROFILES: Readonly<
     model: "source-available",
     osi_status: "not-approved",
     spdx_id: "PolyForm-Noncommercial-1.0.0",
-    canonical_source: "https://polyformproject.org/licenses/noncommercial/1.0.0",
+    canonical_source:
+      "https://polyformproject.org/licenses/noncommercial/1.0.0",
     rights: {
       use: "conditional",
       modify: "conditional",
@@ -607,7 +608,8 @@ export const LICENSE_DECISION_PROFILES: Readonly<
     model: "source-available",
     osi_status: "not-approved",
     spdx_id: "PolyForm-Small-Business-1.0.0",
-    canonical_source: "https://polyformproject.org/licenses/small-business/1.0.0",
+    canonical_source:
+      "https://polyformproject.org/licenses/small-business/1.0.0",
     rights: {
       use: "conditional",
       modify: "conditional",
