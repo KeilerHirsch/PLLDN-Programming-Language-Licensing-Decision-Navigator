@@ -4,10 +4,10 @@ import { analyzeText } from "../text/analyze.ts";
 import type { TextAnalysis, TextRuleSet } from "../text/types.ts";
 import type { UiController } from "./controller.ts";
 import {
+  type CatalogPreviewState,
   renderApp,
   renderDiagnostic,
   renderUnavailable,
-  type CatalogPreviewState,
   type TextAssistanceState,
 } from "./render.ts";
 import { type BrowserRuntimeInput, bootstrapUiRuntime } from "./runtime.ts";
