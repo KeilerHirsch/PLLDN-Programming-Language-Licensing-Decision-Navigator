@@ -25,6 +25,11 @@ test("Product Model UI exposes explore, compare, catalogue and license guidance"
     "Throughput potential",
     "Learning curve",
     "Deployment complexity",
+    "Rights, restrictions & compliance",
+    "Commercial use",
+    "SaaS / hosting",
+    "Competitive use",
+    "Canonical terms",
   ]) {
     assert(product.includes(required), required);
   }
