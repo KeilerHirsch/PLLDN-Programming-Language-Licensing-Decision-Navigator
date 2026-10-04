@@ -48,7 +48,7 @@ button:disabled {
 }
 
 .app-shell {
-  width: min(1180px, calc(100% - 2rem));
+  width: min(1320px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 2rem 0 4rem;
 }
@@ -285,4 +285,401 @@ summary {
   margin: 0.2rem 0 0;
   font-size: 0.8rem;
   opacity: 0.72;
+}
+
+.product-experience {
+  display: grid;
+  gap: 3rem;
+}
+
+.product-hero {
+  max-width: 60rem;
+  padding: 3.5rem 0 1rem;
+}
+
+.product-eyebrow {
+  margin: 0 0 0.75rem;
+  font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  opacity: 0.68;
+}
+
+.product-hero h1 {
+  max-width: 18ch;
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.product-hero > p:not(.product-eyebrow):not(.product-notice) {
+  max-width: 48rem;
+  margin: 1.2rem 0 0;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  opacity: 0.82;
+}
+
+.product-stats,
+.profile-tags,
+.profile-actions,
+.catalog-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.product-stats {
+  margin-top: 1.5rem;
+}
+
+.product-badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);
+  border-radius: 999px;
+  font-family: ui-monospace, "Cascadia Code", "SFMono-Regular", monospace;
+  font-size: 0.74rem;
+  line-height: 1.2;
+  opacity: 0.82;
+}
+
+.product-badge-trusted {
+  border-color: color-mix(in srgb, Highlight 48%, CanvasText 12%);
+  background: color-mix(in srgb, Highlight 10%, Canvas);
+}
+
+.product-notice {
+  max-width: 62rem;
+  margin-top: 1.25rem;
+  padding-left: 0.85rem;
+  border-left: 0.18rem solid color-mix(in srgb, Highlight 55%, CanvasText 12%);
+  font-size: 0.9rem;
+  opacity: 0.76;
+}
+
+.use-case-section,
+.product-catalog,
+.compare-section {
+  padding-top: 0.25rem;
+}
+
+.use-case-section > h2,
+.product-catalog > h2,
+.compare-section h2 {
+  margin-bottom: 0.25rem;
+  font-size: clamp(1.6rem, 3vw, 2.35rem);
+}
+
+.use-case-section > p,
+.product-catalog > p,
+.compare-section p {
+  max-width: 72ch;
+}
+
+.use-case-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 0.7rem;
+  margin-top: 1.25rem;
+}
+
+.use-case-card {
+  display: grid;
+  gap: 0.3rem;
+  min-height: 7.2rem;
+  padding: 0.9rem;
+  text-align: left;
+  align-content: start;
+  border-radius: 0.85rem;
+}
+
+.use-case-card[aria-pressed="true"],
+.catalog-mode-button[aria-pressed="true"] {
+  border-color: color-mix(in srgb, Highlight 58%, CanvasText 12%);
+  background: color-mix(in srgb, Highlight 11%, Canvas);
+}
+
+.use-case-question {
+  font-size: 0.84rem;
+  opacity: 0.7;
+}
+
+.use-case-result {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);
+  border-radius: 1rem;
+  background: color-mix(in srgb, CanvasText 3%, Canvas);
+}
+
+.section-heading-row {
+  display: flex;
+  gap: 1rem;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.shortlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.shortlist-card {
+  padding: 0.85rem;
+  border-top: 1px solid color-mix(in srgb, CanvasText 18%, transparent);
+}
+
+.shortlist-card h3,
+.shortlist-card p {
+  margin-top: 0;
+}
+
+.secondary-action {
+  opacity: 0.86;
+}
+
+.catalog-controls {
+  justify-content: space-between;
+  margin: 1rem 0 1.25rem;
+}
+
+.catalog-mode-button {
+  min-width: 7rem;
+}
+
+.product-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 23rem), 1fr));
+  gap: 0.85rem;
+}
+
+.product-card {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, CanvasText 17%, transparent);
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, CanvasText 2.5%, Canvas);
+  box-shadow: 0 0.75rem 1.8rem color-mix(in srgb, CanvasText 8%, transparent);
+}
+
+.product-card[hidden] {
+  display: none;
+}
+
+.product-card-head {
+  display: flex;
+  gap: 0.8rem;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.product-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.product-card > p {
+  min-height: 3em;
+  margin: 0.55rem 0 0.8rem;
+}
+
+.profile-tags {
+  margin-bottom: 0.85rem;
+}
+
+.build-path {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.7rem;
+  border: 1px solid color-mix(in srgb, CanvasText 14%, transparent);
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, CanvasText 3%, Canvas);
+}
+
+.build-path code {
+  overflow-wrap: anywhere;
+  font-size: 0.84rem;
+}
+
+.profile-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-top: 0.9rem;
+}
+
+.profile-list-block ul {
+  margin: 0.35rem 0 0;
+  padding-left: 1.15rem;
+}
+
+.profile-list-block li {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+}
+
+.profile-actions {
+  margin-top: 0.9rem;
+}
+
+.profile-facts {
+  margin-top: 0.85rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
+}
+
+.profile-facts dl {
+  display: grid;
+  grid-template-columns: minmax(9rem, 0.8fr) minmax(0, 1.4fr);
+  gap: 0.35rem 0.7rem;
+  margin-bottom: 0;
+}
+
+.profile-facts dt {
+  font-size: 0.84rem;
+  opacity: 0.72;
+}
+
+.profile-facts dd {
+  margin: 0;
+  font-size: 0.88rem;
+}
+
+.profile-source-links {
+  font-size: 0.78rem;
+  opacity: 0.72;
+}
+
+.compare-empty {
+  padding: 1rem;
+  border: 1px dashed color-mix(in srgb, CanvasText 22%, transparent);
+  border-radius: 0.8rem;
+}
+
+.compare-table-wrap {
+  overflow-x: auto;
+  margin-top: 1rem;
+  border: 1px solid color-mix(in srgb, CanvasText 16%, transparent);
+  border-radius: 0.85rem;
+}
+
+.compare-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 0.7rem;
+  border-bottom: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
+  text-align: left;
+  vertical-align: top;
+}
+
+.compare-table thead th {
+  position: sticky;
+  top: 0;
+  background: Canvas;
+}
+
+.compare-table tbody th {
+  width: 12rem;
+  font-weight: 650;
+  opacity: 0.78;
+}
+
+.license-axis {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 1rem 0 1.4rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, CanvasText 16%, transparent);
+  border-radius: 0.85rem;
+}
+
+.license-axis-step {
+  min-width: 0;
+  padding: 0.75rem;
+  border-right: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
+}
+
+.license-axis-step:last-child {
+  border-right: 0;
+}
+
+.license-axis-step p {
+  margin: 0.45rem 0 0;
+  font-size: 0.78rem;
+  opacity: 0.72;
+}
+
+.license-good,
+.license-watch {
+  min-height: auto !important;
+  font-size: 0.9rem;
+}
+
+.license-watch {
+  opacity: 0.75;
+}
+
+.decision-lab {
+  margin-top: 0.5rem;
+  border-top: 2px solid color-mix(in srgb, CanvasText 18%, transparent);
+}
+
+.decision-lab > summary {
+  padding: 1rem 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.decision-lab-body {
+  padding-bottom: 2rem;
+}
+
+.decision-lab-body > h1,
+.decision-lab-body > p:first-of-type {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .product-hero {
+    padding-top: 2rem;
+  }
+
+  .product-hero h1 {
+    font-size: clamp(2.25rem, 12vw, 3.4rem);
+  }
+
+  .profile-columns,
+  .license-axis {
+    grid-template-columns: 1fr;
+  }
+
+  .license-axis-step {
+    border-right: 0;
+    border-bottom: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
+  }
+
+  .license-axis-step:last-child {
+    border-bottom: 0;
+  }
+
+  .section-heading-row {
+    display: grid;
+  }
+
+  .app-shell {
+    width: min(100% - 1rem, 1320px);
+  }
 }

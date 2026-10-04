@@ -12,12 +12,13 @@ PLLDN turns real project constraints into technology choices you can actually de
 
 ## What PLLDN does
 
-- **Filter** by what the project actually needs.
-- **Compare** candidates backed by Reviewed evidence.
-- **Explain** why a candidate fits, fails, or stays unresolved.
-- **Assist** with plain text without letting free text bypass confirmed filters.
+- **Explore** from the job you are trying to build instead of starting with language trivia.
+- **Read** compact language and license profiles before opening raw evidence.
+- **Compare** up to four languages side by side across editorial trade-offs and Preview facts.
+- **Decide** in a separate Reviewed decision lab whose trust boundary is unchanged.
+- **Explain** why a Reviewed candidate fits, fails, or stays unresolved.
 
-**Filter. Compare. Decide.** No popularity contest. No AI oracle.
+**Explore. Compare. Decide. Verify.** No popularity contest. No AI oracle.
 
 ## Quick start
 
@@ -33,7 +34,7 @@ npm run evidence
 
 Live today: **Go, Python, Rust, TypeScript** across **four Reviewed boolean capabilities**. The repository also carries **eight Reviewed SPDX license identities**, but Beta 1 is **not a complete licensing workflow**.
 
-A separate **Catalog Preview** now exposes **35 languages**, **15 SPDX license identities**, and **345 Preview facts** in the browser for broad comparison and search. Preview entries are visually and mechanically isolated from the Reviewed recommendation path.
+The **Product Model v1** turns the broad Candidate material into a human-facing navigator: **35 language profiles**, **15 license profiles**, **15 use-case guides**, side-by-side comparison, and **345 Preview facts** behind expandable evidence. Product guidance remains visually and mechanically isolated from the Reviewed recommendation path.
 
 When Reviewed evidence is insufficient, **abstention is the correct result**. PLLDN does not provide legal advice or certification.
 
