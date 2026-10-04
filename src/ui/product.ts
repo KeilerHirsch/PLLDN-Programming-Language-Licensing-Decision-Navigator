@@ -2,6 +2,12 @@
 // SPDX-License-Identifier: EUPL-1.2
 import type { TypedValue } from "../decision/types.ts";
 import {
+  DEFAULT_PRODUCT_FILTERS,
+  languageMatchesFilters,
+  licenseMatchesFilters,
+  type ProductFilterState,
+} from "../product/catalog-filters.ts";
+import {
   PRODUCT_COMPARE_DIMENSIONS,
   PRODUCT_MODEL,
 } from "../product/catalog.ts";
@@ -20,18 +26,6 @@ import type {
 
 export type ProductCatalogMode = "languages" | "licenses";
 
-export interface ProductFilterState {
-  languageCategory: string;
-  languageThroughput: string;
-  languageLearning: string;
-  languageEcosystem: string;
-  licenseModel: string;
-  licenseCommercial: string;
-  licenseSaas: string;
-  licenseCompetitive: string;
-  licenseOsi: string;
-}
-
 export interface ProductUiState {
   mode: ProductCatalogMode;
   selectedUseCaseId: string | null;
@@ -43,17 +37,7 @@ export const DEFAULT_PRODUCT_UI_STATE: ProductUiState = {
   mode: "languages",
   selectedUseCaseId: null,
   compareLanguageIds: [],
-  filters: {
-    languageCategory: "any",
-    languageThroughput: "any",
-    languageLearning: "any",
-    languageEcosystem: "any",
-    licenseModel: "any",
-    licenseCommercial: "any",
-    licenseSaas: "any",
-    licenseCompetitive: "any",
-    licenseOsi: "any",
-  },
+  filters: { ...DEFAULT_PRODUCT_FILTERS },
 };
 
 function heading(level: 1 | 2 | 3, text: string): HTMLHeadingElement {
@@ -348,60 +332,6 @@ function renderLanguageQuickFacts(
     quickFact("Ecosystem", decision.ecosystem.breadth),
   );
   return strip;
-}
-
-export function languageMatchesFilters(
-  profile: LanguageProductProfile,
-  filters: ProductFilterState,
-): boolean {
-  const decision = LANGUAGE_DECISION_PROFILES[profile.entity_id];
-  if (!decision) return false;
-  if (
-    filters.languageCategory !== "any" &&
-    !profile.categories.includes(
-      filters.languageCategory as LanguageProductProfile["categories"][number],
-    )
-  ) {
-    return false;
-  }
-  if (
-    filters.languageThroughput !== "any" &&
-    decision.performance.throughput_potential !== filters.languageThroughput
-  ) {
-    return false;
-  }
-  if (
-    filters.languageLearning !== "any" &&
-    decision.complexity.learning_curve !== filters.languageLearning
-  ) {
-    return false;
-  }
-  if (
-    filters.languageEcosystem !== "any" &&
-    decision.ecosystem.breadth !== filters.languageEcosystem
-  ) {
-    return false;
-  }
-  return true;
-}
-
-export function licenseMatchesFilters(
-  profile: LicenseProductProfile,
-  filters: ProductFilterState,
-): boolean {
-  const decision = LICENSE_DECISION_PROFILES[profile.entity_id];
-  if (!decision) return false;
-  return (
-    (filters.licenseModel === "any" ||
-      decision.model === filters.licenseModel) &&
-    (filters.licenseCommercial === "any" ||
-      decision.rights.commercial_use === filters.licenseCommercial) &&
-    (filters.licenseSaas === "any" ||
-      decision.rights.saas_hosting === filters.licenseSaas) &&
-    (filters.licenseCompetitive === "any" ||
-      decision.rights.competitive_use === filters.licenseCompetitive) &&
-    (filters.licenseOsi === "any" || decision.osi_status === filters.licenseOsi)
-  );
 }
 
 function renderDecisionProfile(profile: LanguageProductProfile): HTMLElement {
