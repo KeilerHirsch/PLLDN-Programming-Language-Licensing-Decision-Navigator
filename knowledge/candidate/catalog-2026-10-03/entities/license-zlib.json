@@ -12,12 +12,8 @@
         "context": []
       }
     ],
-    "version_scope": [
-      "Zlib"
-    ],
-    "target_scope": [
-      "general"
-    ],
+    "version_scope": ["Zlib"],
+    "target_scope": ["general"],
     "spdx_id": "Zlib"
   }
 }

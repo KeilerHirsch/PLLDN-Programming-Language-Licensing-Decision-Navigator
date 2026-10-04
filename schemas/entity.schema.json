@@ -36,10 +36,7 @@
             "maxLength": 2048
           },
           "ambiguity": {
-            "enum": [
-              "unambiguous",
-              "context-required"
-            ]
+            "enum": ["unambiguous", "context-required"]
           },
           "context": {
             "type": "array",
@@ -53,11 +50,7 @@
             "uniqueItems": true
           }
         },
-        "required": [
-          "text",
-          "ambiguity",
-          "context"
-        ],
+        "required": ["text", "ambiguity", "context"],
         "additionalProperties": false
       },
       "minItems": 0,
@@ -130,25 +123,19 @@
             "const": "license"
           }
         },
-        "required": [
-          "entity_type"
-        ]
+        "required": ["entity_type"]
       },
       "then": {},
       "else": {
         "allOf": [
           {
             "not": {
-              "required": [
-                "license_id"
-              ]
+              "required": ["license_id"]
             }
           },
           {
             "not": {
-              "required": [
-                "spdx_id"
-              ]
+              "required": ["spdx_id"]
             }
           }
         ]

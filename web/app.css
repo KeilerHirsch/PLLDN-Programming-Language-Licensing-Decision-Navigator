@@ -485,7 +485,7 @@ summary {
   font-size: 1.2rem;
 }
 
-.product-card > p {
+.language-profile-card > p {
   min-height: 3em;
   margin: 0.55rem 0 0.8rem;
 }
@@ -612,7 +612,7 @@ summary {
   border-right: 1px solid color-mix(in srgb, CanvasText 12%, transparent);
 }
 
-.license-axis-step:last-child {
+.license-axis-step:nth-child(4) {
   border-right: 0;
 }
 
@@ -624,7 +624,6 @@ summary {
 
 .license-good,
 .license-watch {
-  min-height: auto !important;
   font-size: 0.9rem;
 }
 
@@ -747,7 +746,6 @@ summary {
     grid-template-columns: 1fr;
   }
 }
-
 
 .license-axis {
   grid-template-columns: repeat(4, minmax(0, 1fr));

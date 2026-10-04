@@ -12,12 +12,8 @@
         "context": []
       }
     ],
-    "version_scope": [
-      "BUSL-1.1"
-    ],
-    "target_scope": [
-      "general"
-    ],
+    "version_scope": ["BUSL-1.1"],
+    "target_scope": ["general"],
     "spdx_id": "BUSL-1.1"
   }
 }

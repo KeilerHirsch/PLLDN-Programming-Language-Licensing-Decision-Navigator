@@ -12,12 +12,8 @@
         "context": []
       }
     ],
-    "version_scope": [
-      "BSD-2-Clause"
-    ],
-    "target_scope": [
-      "general"
-    ],
+    "version_scope": ["BSD-2-Clause"],
+    "target_scope": ["general"],
     "spdx_id": "BSD-2-Clause"
   }
 }

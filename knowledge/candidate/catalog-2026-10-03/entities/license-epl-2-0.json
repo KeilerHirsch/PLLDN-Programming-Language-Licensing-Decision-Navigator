@@ -12,12 +12,8 @@
         "context": []
       }
     ],
-    "version_scope": [
-      "EPL-2.0"
-    ],
-    "target_scope": [
-      "general"
-    ],
+    "version_scope": ["EPL-2.0"],
+    "target_scope": ["general"],
     "spdx_id": "EPL-2.0"
   }
 }

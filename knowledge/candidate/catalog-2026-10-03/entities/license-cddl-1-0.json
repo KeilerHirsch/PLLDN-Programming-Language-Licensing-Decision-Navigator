@@ -12,12 +12,8 @@
         "context": []
       }
     ],
-    "version_scope": [
-      "CDDL-1.0"
-    ],
-    "target_scope": [
-      "general"
-    ],
+    "version_scope": ["CDDL-1.0"],
+    "target_scope": ["general"],
     "spdx_id": "CDDL-1.0"
   }
 }

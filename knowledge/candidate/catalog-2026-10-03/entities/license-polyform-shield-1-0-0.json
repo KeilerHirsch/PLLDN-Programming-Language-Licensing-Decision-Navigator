@@ -12,11 +12,7 @@
         "context": []
       }
     ],
-    "version_scope": [
-      "PolyForm Shield 1.0.0"
-    ],
-    "target_scope": [
-      "general"
-    ]
+    "version_scope": ["PolyForm Shield 1.0.0"],
+    "target_scope": ["general"]
   }
 }
