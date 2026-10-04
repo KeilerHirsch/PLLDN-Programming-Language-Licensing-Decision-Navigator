@@ -87,7 +87,10 @@ function installProductExperience(model: UiViewModel): void {
     body.append(child);
   });
   decision.append(summary, body);
-  shell.replaceChildren(renderProductExperience(catalog, productState), decision);
+  shell.replaceChildren(
+    renderProductExperience(catalog, productState),
+    decision,
+  );
 }
 
 async function publish(action: () => Promise<UiViewModel>): Promise<void> {
