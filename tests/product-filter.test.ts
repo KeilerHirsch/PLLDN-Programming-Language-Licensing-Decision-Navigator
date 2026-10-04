@@ -4,14 +4,14 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { PRODUCT_MODEL } from "../src/product/catalog.ts";
 import {
-  DEFAULT_PRODUCT_UI_STATE,
+  DEFAULT_PRODUCT_FILTERS,
   languageMatchesFilters,
   licenseMatchesFilters,
-} from "../src/ui/product.ts";
+} from "../src/product/catalog-filters.ts";
 
 test("language catalogue filters combine decision dimensions deterministically", () => {
   const filters = {
-    ...DEFAULT_PRODUCT_UI_STATE.filters,
+    ...DEFAULT_PRODUCT_FILTERS,
     languageThroughput: "high",
     languageLearning: "low",
     languageEcosystem: "broad",
@@ -29,7 +29,7 @@ test("language catalogue filters combine decision dimensions deterministically",
 
 test("language category filter composes with performance filters", () => {
   const filters = {
-    ...DEFAULT_PRODUCT_UI_STATE.filters,
+    ...DEFAULT_PRODUCT_FILTERS,
     languageCategory: "system",
     languageThroughput: "high",
   };
@@ -46,7 +46,7 @@ test("language category filter composes with performance filters", () => {
 
 test("license catalogue filters expose source-available business restrictions", () => {
   const filters = {
-    ...DEFAULT_PRODUCT_UI_STATE.filters,
+    ...DEFAULT_PRODUCT_FILTERS,
     licenseModel: "source-available",
     licenseCommercial: "no",
   };
@@ -61,7 +61,7 @@ test("license catalogue filters expose source-available business restrictions", 
 
 test("license competition filter finds PolyForm protective variants", () => {
   const filters = {
-    ...DEFAULT_PRODUCT_UI_STATE.filters,
+    ...DEFAULT_PRODUCT_FILTERS,
     licenseCompetitive: "no",
   };
   const ids = PRODUCT_MODEL.licenses
