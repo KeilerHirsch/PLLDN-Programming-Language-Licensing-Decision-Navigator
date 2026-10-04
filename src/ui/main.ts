@@ -4,6 +4,11 @@ import { analyzeText } from "../text/analyze.ts";
 import type { TextAnalysis, TextRuleSet } from "../text/types.ts";
 import type { UiController } from "./controller.ts";
 import {
+  DEFAULT_PRODUCT_UI_STATE,
+  renderProductExperience,
+  type ProductUiState,
+} from "./product.ts";
+import {
   type CatalogPreviewState,
   renderApp,
   renderDiagnostic,
@@ -34,6 +39,10 @@ let catalogState: CatalogPreviewState = {
   view: null,
   diagnostic: null,
 };
+let productState: ProductUiState = {
+  ...DEFAULT_PRODUCT_UI_STATE,
+  compareLanguageIds: [],
+};
 let catalogQuery = "";
 
 function diagnostic(error: unknown): string {
@@ -60,9 +69,32 @@ function applyCatalogFilter(): void {
   if (input && input.value !== catalogQuery) input.value = catalogQuery;
 }
 
+function installProductExperience(model: UiViewModel): void {
+  const catalog = catalogState.view;
+  const shell = root.querySelector<HTMLElement>("main.app-shell");
+  if (!catalog || !shell) return;
+
+  const existing = [...shell.children];
+  const decision = document.createElement("details");
+  decision.className = "decision-lab";
+  const summary = document.createElement("summary");
+  summary.textContent = `Reviewed decision lab · ${model.state.state}`;
+  const body = document.createElement("div");
+  body.className = "decision-lab-body";
+
+  existing.forEach((child, index) => {
+    if (index < 2 || child.classList.contains("catalog-preview")) return;
+    body.append(child);
+  });
+  decision.append(summary, body);
+  shell.replaceChildren(renderProductExperience(catalog, productState), decision);
+}
+
 async function publish(action: () => Promise<UiViewModel>): Promise<void> {
   try {
-    renderApp(root, await action(), textState, catalogState);
+    const model = await action();
+    renderApp(root, model, textState, catalogState);
+    installProductExperience(model);
     applyCatalogFilter();
   } catch (error) {
     renderDiagnostic(root, diagnostic(error));
@@ -106,6 +138,45 @@ root.addEventListener("click", (event) => {
   const current = controller;
   if (!element || !current) return;
   const action = element.dataset.action;
+  if (action === "select-use-case") {
+    productState = {
+      ...productState,
+      selectedUseCaseId: element.dataset.useCaseId ?? null,
+    };
+    void publish(() => current.view());
+  }
+  if (action === "clear-use-case") {
+    productState = { ...productState, selectedUseCaseId: null };
+    void publish(() => current.view());
+  }
+  if (action === "catalog-mode") {
+    const mode = element.dataset.mode;
+    if (mode === "languages" || mode === "licenses") {
+      productState = { ...productState, mode };
+      catalogQuery = "";
+      void publish(() => current.view());
+    }
+  }
+  if (action === "toggle-compare") {
+    const entityId = element.dataset.entityId;
+    if (entityId) {
+      const selected = new Set(productState.compareLanguageIds);
+      if (selected.has(entityId)) {
+        selected.delete(entityId);
+      } else if (selected.size < 4) {
+        selected.add(entityId);
+      }
+      productState = {
+        ...productState,
+        compareLanguageIds: [...selected],
+      };
+      void publish(() => current.view());
+    }
+  }
+  if (action === "clear-compare") {
+    productState = { ...productState, compareLanguageIds: [] };
+    void publish(() => current.view());
+  }
   if (action === "analyze-text") {
     void analyzeCurrent(current);
   }
