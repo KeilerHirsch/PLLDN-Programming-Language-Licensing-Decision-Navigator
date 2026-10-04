@@ -82,7 +82,6 @@ test("exact trusted manifest creates a working controller", async () => {
   }
 });
 
-
 const previewLanguage: Document = {
   kind: "entity",
   record: {
