@@ -5,6 +5,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { PRODUCT_MODEL } from "../src/product/catalog.ts";
 import { LANGUAGE_DECISION_PROFILES } from "../src/product/language-decision-profiles.ts";
+import { LICENSE_DECISION_PROFILES } from "../src/product/license-decision-profiles.ts";
 
 function candidateEntityIds(type: "language" | "license"): string[] {
   const root = "knowledge/candidate/catalog-2026-10-03/entities";
@@ -30,7 +31,7 @@ test("Product Model v1 exactly covers the broad Preview catalogue", () => {
   assert.deepEqual(languageIds, candidateEntityIds("language"));
   assert.deepEqual(licenseIds, candidateEntityIds("license"));
   assert.equal(new Set(languageIds).size, 35);
-  assert.equal(new Set(licenseIds).size, 15);
+  assert.equal(new Set(licenseIds).size, 32);
   assert(PRODUCT_MODEL.use_cases.length >= 12);
 
   for (const profile of PRODUCT_MODEL.languages) {
@@ -88,4 +89,34 @@ test("Decision Dimensions v2 covers every language with bounded editorial bands"
     assert(allowedTooling.has(profile.ecosystem.tooling));
     assert(allowedBreadth.has(profile.ecosystem.hiring_pool));
   }
+});
+
+
+test("License Model v2 covers every license entity without requiring SPDX identity", () => {
+  const expected = PRODUCT_MODEL.licenses
+    .map((profile) => profile.entity_id)
+    .sort();
+  assert.deepEqual(
+    Object.keys(LICENSE_DECISION_PROFILES).sort(),
+    expected,
+  );
+
+  const shield =
+    LICENSE_DECISION_PROFILES["license.polyform-shield-1.0.0"];
+  assert(shield);
+  assert.equal(shield.spdx_id, null);
+  assert.equal(shield.model, "source-available");
+  assert.equal(shield.rights.competitive_use, "no");
+
+  const noncommercial =
+    LICENSE_DECISION_PROFILES["license.polyform-noncommercial-1.0.0"];
+  assert(noncommercial);
+  assert.equal(noncommercial.spdx_id, "PolyForm-Noncommercial-1.0.0");
+  assert.equal(noncommercial.rights.commercial_use, "no");
+
+  const countdown =
+    LICENSE_DECISION_PROFILES["license.polyform-countdown-1.0.0"];
+  assert(countdown);
+  assert.equal(countdown.model, "license-transition");
+  assert.equal(countdown.obligations.time_rule, "change-date");
 });
