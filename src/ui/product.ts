@@ -18,6 +18,11 @@ import type {
   LicenseProductProfile,
   UseCaseGuide,
 } from "../product/types.ts";
+import {
+  type DecisionTone,
+  languageDecisionTone,
+  licenseDecisionTone,
+} from "./decision-tones.ts";
 import type {
   CatalogPreviewEntryView,
   CatalogPreviewFactView,
@@ -96,15 +101,37 @@ function selectControl(
   return label;
 }
 
-function quickFact(labelText: string, value: string): HTMLElement {
+const TONE_SYMBOLS: Record<DecisionTone, string> = {
+  favorable: "+",
+  mixed: "±",
+  unfavorable: "−",
+  neutral: "·",
+};
+
+function metricBadge(value: string, tone: DecisionTone): HTMLSpanElement {
+  const text = humanizeDecisionValue(value);
+  const node = badge(
+    `${TONE_SYMBOLS[tone]} ${text}`,
+    `metric-badge metric-badge--${tone}`,
+  );
+  const description = `${text}: ${tone} trade-off`;
+  node.setAttribute("role", "img");
+  node.setAttribute("aria-label", description);
+  node.title = description;
+  return node;
+}
+
+function quickFact(
+  labelText: string,
+  value: string,
+  tone: DecisionTone,
+): HTMLElement {
   const item = document.createElement("span");
   item.className = "decision-quick-fact";
   const label = document.createElement("span");
   label.className = "decision-quick-label";
   label.textContent = labelText;
-  const strong = document.createElement("strong");
-  strong.textContent = humanizeDecisionValue(value);
-  item.append(label, strong);
+  item.append(label, metricBadge(value, tone));
   return item;
 }
 
@@ -326,10 +353,32 @@ function renderLanguageQuickFacts(
   strip.className = "decision-quick-strip";
   if (!decision) return strip;
   strip.append(
-    quickFact("Throughput", decision.performance.throughput_potential),
-    quickFact("Learning", decision.complexity.learning_curve),
-    quickFact("Deployment", decision.complexity.deployment),
-    quickFact("Ecosystem", decision.ecosystem.breadth),
+    quickFact(
+      "Throughput",
+      decision.performance.throughput_potential,
+      languageDecisionTone(
+        "throughput_potential",
+        decision.performance.throughput_potential,
+      ),
+    ),
+    quickFact(
+      "Learning",
+      decision.complexity.learning_curve,
+      languageDecisionTone(
+        "learning_curve",
+        decision.complexity.learning_curve,
+      ),
+    ),
+    quickFact(
+      "Deployment",
+      decision.complexity.deployment,
+      languageDecisionTone("deployment", decision.complexity.deployment),
+    ),
+    quickFact(
+      "Ecosystem",
+      decision.ecosystem.breadth,
+      languageDecisionTone("breadth", decision.ecosystem.breadth),
+    ),
   );
   return strip;
 }
@@ -353,31 +402,59 @@ function renderDecisionProfile(profile: LanguageProductProfile): HTMLElement {
     [
       "Performance",
       [
-        ["Throughput potential", decision.performance.throughput_potential],
-        ["Startup", decision.performance.startup],
-        ["Runtime overhead", decision.performance.runtime_overhead],
-        ["Latency predictability", decision.performance.latency_predictability],
-        ["Build speed", decision.performance.build_speed],
+        [
+          "throughput_potential",
+          "Throughput potential",
+          decision.performance.throughput_potential,
+        ],
+        ["startup", "Startup", decision.performance.startup],
+        [
+          "runtime_overhead",
+          "Runtime overhead",
+          decision.performance.runtime_overhead,
+        ],
+        [
+          "latency_predictability",
+          "Latency predictability",
+          decision.performance.latency_predictability,
+        ],
+        ["build_speed", "Build speed", decision.performance.build_speed],
       ],
     ],
     [
       "Complexity",
       [
-        ["Learning curve", decision.complexity.learning_curve],
-        ["Language surface", decision.complexity.language_surface],
-        ["Memory reasoning", decision.complexity.memory_reasoning],
-        ["Toolchain", decision.complexity.toolchain],
-        ["Dependencies", decision.complexity.dependency_management],
-        ["Deployment", decision.complexity.deployment],
+        [
+          "learning_curve",
+          "Learning curve",
+          decision.complexity.learning_curve,
+        ],
+        [
+          "language_surface",
+          "Language surface",
+          decision.complexity.language_surface,
+        ],
+        [
+          "memory_reasoning",
+          "Memory reasoning",
+          decision.complexity.memory_reasoning,
+        ],
+        ["toolchain", "Toolchain", decision.complexity.toolchain],
+        [
+          "dependency_management",
+          "Dependencies",
+          decision.complexity.dependency_management,
+        ],
+        ["deployment", "Deployment", decision.complexity.deployment],
       ],
     ],
     [
       "Ecosystem",
       [
-        ["Maturity", decision.ecosystem.maturity],
-        ["Breadth", decision.ecosystem.breadth],
-        ["Tooling", decision.ecosystem.tooling],
-        ["Hiring pool", decision.ecosystem.hiring_pool],
+        ["maturity", "Maturity", decision.ecosystem.maturity],
+        ["breadth", "Breadth", decision.ecosystem.breadth],
+        ["tooling", "Tooling", decision.ecosystem.tooling],
+        ["hiring_pool", "Hiring pool", decision.ecosystem.hiring_pool],
       ],
     ],
   ] as const;
@@ -386,13 +463,16 @@ function renderDecisionProfile(profile: LanguageProductProfile): HTMLElement {
     const group = document.createElement("section");
     group.className = "decision-profile-group";
     group.append(heading(3, title));
-    const list = document.createElement("dl");
-    for (const [label, value] of rows) {
-      const term = document.createElement("dt");
+    const list = document.createElement("div");
+    list.className = "metric-group-rows";
+    for (const [metric, label, value] of rows) {
+      const row = document.createElement("div");
+      row.className = "metric-row";
+      const term = document.createElement("span");
+      term.className = "metric-row-label";
       term.textContent = label;
-      const description = document.createElement("dd");
-      description.textContent = humanizeDecisionValue(value);
-      list.append(term, description);
+      row.append(term, metricBadge(value, languageDecisionTone(metric, value)));
+      list.append(row);
     }
     group.append(list);
     grid.append(group);
@@ -682,11 +762,31 @@ function renderLicenseQuickFacts(profile: LicenseProductProfile): HTMLElement {
   strip.className = "decision-quick-strip";
   if (!decision) return strip;
   strip.append(
-    quickFact("Model", decision.model),
-    quickFact("Commercial", decision.rights.commercial_use),
-    quickFact("SaaS", decision.rights.saas_hosting),
-    quickFact("Compete", decision.rights.competitive_use),
-    quickFact("OSI", decision.osi_status),
+    quickFact(
+      "Model",
+      decision.model,
+      licenseDecisionTone("model", decision.model),
+    ),
+    quickFact(
+      "Commercial",
+      decision.rights.commercial_use,
+      licenseDecisionTone("commercial_use", decision.rights.commercial_use),
+    ),
+    quickFact(
+      "SaaS",
+      decision.rights.saas_hosting,
+      licenseDecisionTone("saas_hosting", decision.rights.saas_hosting),
+    ),
+    quickFact(
+      "Compete",
+      decision.rights.competitive_use,
+      licenseDecisionTone("competitive_use", decision.rights.competitive_use),
+    ),
+    quickFact(
+      "OSI",
+      decision.osi_status,
+      licenseDecisionTone("osi_status", decision.osi_status),
+    ),
   );
   return strip;
 }
@@ -773,6 +873,11 @@ function renderCatalog(
       ? "Read the card first; open the Preview facts only when you need the mechanics."
       : "Start with the licensing intent, then inspect the Preview facts. This is navigation help, not legal advice.";
   section.append(heading(2, title), paragraph(intro));
+  const toneGuide = paragraph(
+    "Badge tones: + Favorable; ± Mixed; − Unfavorable; · Neutral. Context still matters.",
+  );
+  toneGuide.className = "metric-tone-guide";
+  section.append(toneGuide);
 
   const controls = document.createElement("div");
   controls.className = "catalog-controls";
