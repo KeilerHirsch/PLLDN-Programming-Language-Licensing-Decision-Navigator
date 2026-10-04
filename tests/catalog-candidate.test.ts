@@ -75,8 +75,7 @@ test("catalog exposes twelve comparison vocabularies", async () => {
   assert.equal(dimensions.length, 12);
   assert(
     dimensions.some(
-      (doc) =>
-        doc.record.dimension_id === "dimension.package-dependency-tools",
+      (doc) => doc.record.dimension_id === "dimension.package-dependency-tools",
     ),
   );
 });
@@ -126,21 +125,14 @@ test("every license has two Preview classification claims", async () => {
 });
 
 for (const [sourceId, evidencePath] of [
-  [
-    "source.catalog-block1-preview",
-    "block1-initial-classification.md",
-  ],
+  ["source.catalog-block1-preview", "block1-initial-classification.md"],
   ["source.catalog-block2-preview", "block2-platform-ecosystem.md"],
-  [
-    "source.catalog-block3-preview",
-    "block3-license-classification.md",
-  ],
+  ["source.catalog-block3-preview", "block3-license-classification.md"],
 ] as const) {
   test(`${sourceId} hash binds its checked-in evidence matrix`, async () => {
     const built = await buildKnowledgeCandidate(files(), at, identity);
     const source = built.documents.find(
-      (doc) =>
-        doc.kind === "source" && doc.record.source_id === sourceId,
+      (doc) => doc.kind === "source" && doc.record.source_id === sourceId,
     );
     assert(source);
     const evidence = readFileSync(
