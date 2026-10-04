@@ -519,7 +519,9 @@ function renderLicenseDecisionProfile(
   details.append(summary);
 
   if (!decision) {
-    details.append(paragraph("Editorial license decision profile unavailable."));
+    details.append(
+      paragraph("Editorial license decision profile unavailable."),
+    );
     return details;
   }
 
