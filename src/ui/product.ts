@@ -2,15 +2,15 @@
 // SPDX-License-Identifier: EUPL-1.2
 import type { TypedValue } from "../decision/types.ts";
 import {
+  PRODUCT_COMPARE_DIMENSIONS,
+  PRODUCT_MODEL,
+} from "../product/catalog.ts";
+import {
   DEFAULT_PRODUCT_FILTERS,
   languageMatchesFilters,
   licenseMatchesFilters,
   type ProductFilterState,
 } from "../product/catalog-filters.ts";
-import {
-  PRODUCT_COMPARE_DIMENSIONS,
-  PRODUCT_MODEL,
-} from "../product/catalog.ts";
 import { LANGUAGE_DECISION_PROFILES } from "../product/language-decision-profiles.ts";
 import { LICENSE_DECISION_PROFILES } from "../product/license-decision-profiles.ts";
 import type {
