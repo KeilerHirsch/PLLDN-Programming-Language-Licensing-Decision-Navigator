@@ -1,0 +1,26 @@
+{
+  "kind": "claim",
+  "record": {
+    "schema_version": "0.1",
+    "claim_id": "claim.gpl-2-0-only.license-explicit-patent-grant",
+    "entity_id": "license.gpl-2.0-only",
+    "dimension_id": "dimension.license-explicit-patent-grant",
+    "value": {
+      "type": "boolean",
+      "value": false
+    },
+    "state": "TRUE",
+    "conditions": [],
+    "scope": {
+      "versions": ["GPL-2.0-only"],
+      "targets": ["general"]
+    },
+    "source_ids": ["source.catalog-block3-preview"],
+    "verified_at": "2026-10-04T05:59:00Z",
+    "world_freshness_class": "volatile",
+    "review_status": "Preview",
+    "test_refs": [],
+    "supersedes": [],
+    "valid_until": "2027-01-04T00:00:00Z"
+  }
+}

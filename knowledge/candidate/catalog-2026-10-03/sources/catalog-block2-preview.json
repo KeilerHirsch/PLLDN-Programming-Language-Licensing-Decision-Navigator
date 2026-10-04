@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.catalog-block2-preview",
+    "source_class": "community",
+    "reference": "https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/blob/main/knowledge/candidate/catalog-2026-10-03/evidence/block2-platform-ecosystem.md",
+    "title": "PLLDN Block 2 initial platform and ecosystem matrix",
+    "retrieved_at": "2026-10-04T05:59:00Z",
+    "content_sha256": "98c4c473c0677acceec79b63d4e1e890e42c61dfc1af8cceff295b3b71952f86"
+  }
+}

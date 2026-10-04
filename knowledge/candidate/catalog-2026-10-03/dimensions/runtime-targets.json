@@ -17,7 +17,9 @@
       "browser",
       "mobile",
       "embedded",
-      "shell"
+      "shell",
+      "server-runtime",
+      "evm"
     ]
   }
 }
