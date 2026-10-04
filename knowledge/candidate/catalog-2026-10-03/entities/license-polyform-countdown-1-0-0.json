@@ -1,0 +1,22 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "license.polyform-countdown-1.0.0",
+    "entity_type": "license",
+    "canonical_name": "PolyForm Countdown License Grant 1.0.0",
+    "aliases": [
+      {
+        "text": "PolyForm Countdown 1.0.0",
+        "ambiguity": "unambiguous",
+        "context": []
+      }
+    ],
+    "version_scope": [
+      "PolyForm Countdown 1.0.0"
+    ],
+    "target_scope": [
+      "general"
+    ]
+  }
+}
