@@ -91,18 +91,13 @@ test("Decision Dimensions v2 covers every language with bounded editorial bands"
   }
 });
 
-
 test("License Model v2 covers every license entity without requiring SPDX identity", () => {
   const expected = PRODUCT_MODEL.licenses
     .map((profile) => profile.entity_id)
     .sort();
-  assert.deepEqual(
-    Object.keys(LICENSE_DECISION_PROFILES).sort(),
-    expected,
-  );
+  assert.deepEqual(Object.keys(LICENSE_DECISION_PROFILES).sort(), expected);
 
-  const shield =
-    LICENSE_DECISION_PROFILES["license.polyform-shield-1.0.0"];
+  const shield = LICENSE_DECISION_PROFILES["license.polyform-shield-1.0.0"];
   assert(shield);
   assert.equal(shield.spdx_id, null);
   assert.equal(shield.model, "source-available");
