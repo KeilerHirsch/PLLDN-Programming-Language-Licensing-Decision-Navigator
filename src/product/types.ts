@@ -53,7 +53,6 @@ export interface ProductModel {
   use_cases: readonly UseCaseGuide[];
 }
 
-
 export type DecisionBand = "low" | "medium" | "high";
 export type PaceBand = "fast" | "medium" | "slow";
 export type EcosystemBreadth = "niche" | "moderate" | "broad";
