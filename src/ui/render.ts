@@ -2,7 +2,13 @@
 // SPDX-License-Identifier: EUPL-1.2
 import type { ConditionRecord, TypedValue } from "../decision/types.ts";
 import type { TextAnalysis, TextProposal } from "../text/types.ts";
-import type { UiCandidateFactView, UiViewModel } from "./types.ts";
+import type {
+  CatalogPreviewEntryView,
+  CatalogPreviewFactView,
+  CatalogPreviewView,
+  UiCandidateFactView,
+  UiViewModel,
+} from "./types.ts";
 
 function heading(level: 1 | 2 | 3, text: string): HTMLHeadingElement {
   const node = document.createElement(`h${level}`) as HTMLHeadingElement;
@@ -333,6 +339,127 @@ function renderTextAssistance(state: TextAssistanceState): HTMLElement {
   return section;
 }
 
+
+export interface CatalogPreviewState {
+  view: CatalogPreviewView | null;
+  diagnostic: string | null;
+}
+
+function renderCatalogFact(fact: CatalogPreviewFactView): HTMLLIElement {
+  const item = renderFact(fact);
+  const status = paragraph(`Review status: ${fact.review_status}`);
+  status.className = "catalog-review-status";
+  item.append(status);
+  return item;
+}
+
+function catalogSearchText(entry: CatalogPreviewEntryView): string {
+  return [
+    entry.label,
+    entry.entity_id,
+    entry.entity_type,
+    ...entry.facts.flatMap((fact) => [
+      fact.label,
+      fact.value === null ? fact.state : formatFactValue(fact),
+    ]),
+  ]
+    .join(" ")
+    .normalize("NFKD")
+    .toLocaleLowerCase("en-US");
+}
+
+function renderCatalogGroup(
+  title: string,
+  entries: readonly CatalogPreviewEntryView[],
+): HTMLElement {
+  const section = document.createElement("section");
+  section.className = "catalog-group";
+  section.append(heading(3, `${title} (${entries.length})`));
+  const list = document.createElement("ul");
+  list.className = "catalog-list";
+  for (const entry of entries) {
+    const item = document.createElement("li");
+    item.className = "catalog-card";
+    item.dataset.catalogEntry = "true";
+    item.dataset.catalogSearchText = catalogSearchText(entry);
+
+    const header = document.createElement("div");
+    header.className = "catalog-card-header";
+    const name = document.createElement("strong");
+    name.textContent = entry.label;
+    const badge = document.createElement("span");
+    badge.className = "catalog-preview-badge";
+    badge.textContent = "Preview";
+    header.append(name, badge);
+    item.append(header);
+
+    const meta = paragraph(
+      `${entry.entity_id} · Scope: ${entry.version_scope.join(", ")} · Targets: ${entry.target_scope.join(", ")}`,
+    );
+    meta.className = "candidate-meta";
+    item.append(meta);
+
+    if (entry.facts.length > 0) {
+      const facts = document.createElement("ul");
+      facts.className = "candidate-facts";
+      for (const fact of entry.facts) facts.append(renderCatalogFact(fact));
+      item.append(facts);
+    } else {
+      item.append(paragraph("No Preview facts recorded yet."));
+    }
+    list.append(item);
+  }
+  section.append(list);
+  return section;
+}
+
+function renderCatalogPreview(state: CatalogPreviewState): HTMLElement {
+  const section = document.createElement("section");
+  section.className = "catalog-preview";
+  section.append(heading(2, "Catalog Preview"));
+  section.append(
+    paragraph(
+      "Broad Candidate catalogue for exploration only. Preview facts never enter the Reviewed recommendation path.",
+    ),
+  );
+  if (state.diagnostic) {
+    const diagnostic = paragraph(`Preview unavailable: ${state.diagnostic}`);
+    diagnostic.className = "catalog-diagnostic";
+    section.append(diagnostic);
+    return section;
+  }
+  if (!state.view) {
+    section.append(paragraph("Preview catalogue is not configured."));
+    return section;
+  }
+
+  const summary = paragraph(
+    `${state.view.languages.length} languages · ${state.view.licenses.length} licenses · Snapshot: ${state.view.knowledge_snapshot}`,
+  );
+  summary.className = "catalog-summary";
+  section.append(summary);
+
+  const searchLabel = document.createElement("label");
+  searchLabel.className = "catalog-search";
+  const searchText = document.createElement("span");
+  searchText.textContent = "Search catalogue";
+  const search = document.createElement("input");
+  search.type = "search";
+  search.placeholder = "Rust, WebAssembly, copyleft, Cargo…";
+  search.dataset.action = "catalog-search";
+  searchLabel.append(searchText, search);
+  section.append(searchLabel);
+
+  const groups = document.createElement("div");
+  groups.className = "catalog-groups";
+  groups.append(
+    renderCatalogGroup("Languages", state.view.languages),
+    renderCatalogGroup("Licenses", state.view.licenses),
+  );
+  section.append(groups);
+  return section;
+}
+
 function renderTrace(model: UiViewModel): HTMLElement {
   const details = document.createElement("details");
   details.className = "trace-details";
@@ -347,6 +474,7 @@ export function renderApp(
   root: HTMLElement,
   model: UiViewModel,
   textState?: TextAssistanceState,
+  catalogState?: CatalogPreviewState,
 ): void {
   root.removeAttribute("aria-busy");
   const shell = document.createElement("main");
@@ -378,5 +506,6 @@ export function renderApp(
   grid.append(renderFacets(model), renderCandidates(model));
   if (textState) shell.append(renderTextAssistance(textState));
   shell.append(renderChips(model), status, grid, renderTrace(model));
+  if (catalogState) shell.append(renderCatalogPreview(catalogState));
   root.replaceChildren(shell);
 }
