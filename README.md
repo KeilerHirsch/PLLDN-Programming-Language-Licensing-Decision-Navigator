@@ -13,8 +13,7 @@ PLLDN turns real project constraints into technology choices you can actually de
 ## What PLLDN does
 
 - **Explore** from the job you are trying to build instead of starting with language trivia.
-- **Read** compact language and license profiles with decision-critical values visible at a glance.
-- **Filter** languages by category, throughput, learning curve and ecosystem; filter licenses by model, commercial use, SaaS, competition and OSI status.
+- **Read** compact language and license profiles before opening raw evidence.
 - **Compare** up to four languages side by side across editorial trade-offs and Preview facts.
 - **Decide** in a separate Reviewed decision lab whose trust boundary is unchanged.
 - **Explain** why a Reviewed candidate fits, fails, or stays unresolved.
