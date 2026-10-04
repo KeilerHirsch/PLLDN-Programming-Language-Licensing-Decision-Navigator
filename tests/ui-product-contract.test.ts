@@ -85,7 +85,6 @@ test("browser places Product Model ahead of the Reviewed decision lab", () => {
   );
 });
 
-
 test("catalogue decision filters are rendered as explicit select controls", () => {
   const product = source("src/ui/product.ts");
   for (const required of [
