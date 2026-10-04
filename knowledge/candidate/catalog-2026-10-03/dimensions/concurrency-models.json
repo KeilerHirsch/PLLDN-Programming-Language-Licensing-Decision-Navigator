@@ -15,7 +15,16 @@
       "coroutines",
       "green-threads",
       "processes",
-      "event-loop"
+      "event-loop",
+      "language-tasks",
+      "isolates",
+      "lightweight-processes",
+      "virtual-threads",
+      "web-workers",
+      "worker-threads",
+      "tasks",
+      "goroutines",
+      "fibers"
     ]
   }
 }

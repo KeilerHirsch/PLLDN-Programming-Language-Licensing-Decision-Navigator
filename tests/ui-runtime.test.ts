@@ -8,6 +8,7 @@ import {
   sha256,
 } from "../src/snapshots/manifest.ts";
 import { bootstrapUiRuntime } from "../src/ui/runtime.ts";
+import type { Document } from "../src/validation/documents.ts";
 import { uiAt, uiFacets, uiKnowledge, uiProject } from "./ui-fixtures.ts";
 
 async function snapshotFixture() {
@@ -78,5 +79,75 @@ test("exact trusted manifest creates a working controller", async () => {
     const view = await result.controller.selectFacet("safe", "yes");
     assert.equal(view.state.state, "RECOMMEND");
     assert.equal(view.trace.snapshot_sha256, snapshot.digest);
+  }
+});
+
+const previewLanguage: Document = {
+  kind: "entity",
+  record: {
+    schema_version: "0.1",
+    entity_id: "language.preview-only",
+    entity_type: "language",
+    canonical_name: "Preview Only",
+    aliases: [],
+    version_scope: ["unspecified"],
+    target_scope: ["general"],
+  },
+};
+
+test("Preview catalog stays outside the trusted decision candidate space", async () => {
+  const snapshot = await snapshotFixture();
+  const result = await bootstrapUiRuntime({
+    ...(await input([snapshot.digest])),
+    snapshotManifest: snapshot.raw,
+    snapshotFiles: snapshot.files,
+    trustedSnapshotDigests: [snapshot.digest],
+    catalogPreview: {
+      knowledgeSnapshot: "candidate.preview",
+      documents: [previewLanguage],
+    },
+  });
+  assert.equal(result.status, "ready");
+  if (result.status === "ready") {
+    assert.equal(result.catalogPreview?.languages.length, 1);
+    assert.equal(
+      result.catalogPreview?.languages[0]?.entity_id,
+      "language.preview-only",
+    );
+    const view = await result.controller.view();
+    assert.equal(
+      view.candidates.some(
+        (candidate) => candidate.candidate_id === "language.preview-only",
+      ),
+      false,
+    );
+  }
+});
+
+test("malformed Preview catalog cannot take down the trusted decision runtime", async () => {
+  const snapshot = await snapshotFixture();
+  const malformed: Document = {
+    ...previewLanguage,
+    record: {
+      ...previewLanguage.record,
+      version_scope: "not-an-array",
+    },
+  };
+  const result = await bootstrapUiRuntime({
+    ...(await input([snapshot.digest])),
+    snapshotManifest: snapshot.raw,
+    snapshotFiles: snapshot.files,
+    trustedSnapshotDigests: [snapshot.digest],
+    catalogPreview: {
+      knowledgeSnapshot: "candidate.preview",
+      documents: [malformed],
+    },
+  });
+  assert.equal(result.status, "ready");
+  if (result.status === "ready") {
+    assert.equal(result.catalogPreview, null);
+    assert.match(result.catalogPreviewDiagnostic ?? "", /version_scope/i);
+    const view = await result.controller.selectFacet("safe", "yes");
+    assert.equal(view.state.state, "RECOMMEND");
   }
 });

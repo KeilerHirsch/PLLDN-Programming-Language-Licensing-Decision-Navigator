@@ -1,0 +1,12 @@
+{
+  "kind": "source",
+  "record": {
+    "schema_version": "0.1",
+    "source_id": "source.catalog-block3-preview",
+    "source_class": "community",
+    "reference": "https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/blob/main/knowledge/candidate/catalog-2026-10-03/evidence/block3-license-classification.md",
+    "title": "PLLDN Block 3 initial license classification matrix",
+    "retrieved_at": "2026-10-04T05:59:00Z",
+    "content_sha256": "e0a01abf3ffb6cdd36c2956f887649e270ab4fab085cb4435616a508a77d9fcd"
+  }
+}

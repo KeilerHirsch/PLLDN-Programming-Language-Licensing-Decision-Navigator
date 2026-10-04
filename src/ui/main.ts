@@ -4,6 +4,7 @@ import { analyzeText } from "../text/analyze.ts";
 import type { TextAnalysis, TextRuleSet } from "../text/types.ts";
 import type { UiController } from "./controller.ts";
 import {
+  type CatalogPreviewState,
   renderApp,
   renderDiagnostic,
   renderUnavailable,
@@ -29,6 +30,11 @@ let textState: TextAssistanceState = {
   analysis: null,
   diagnostic: null,
 };
+let catalogState: CatalogPreviewState = {
+  view: null,
+  diagnostic: null,
+};
+let catalogQuery = "";
 
 function diagnostic(error: unknown): string {
   return error instanceof Error
@@ -36,9 +42,28 @@ function diagnostic(error: unknown): string {
     : "Unexpected browser action failure";
 }
 
+function normalizedSearch(value: string): string {
+  return value.normalize("NFKD").toLocaleLowerCase("en-US").trim();
+}
+
+function applyCatalogFilter(): void {
+  const query = normalizedSearch(catalogQuery);
+  for (const entry of root.querySelectorAll<HTMLElement>(
+    "[data-catalog-entry]",
+  )) {
+    const text = entry.dataset.catalogSearchText ?? "";
+    entry.hidden = query.length > 0 && !text.includes(query);
+  }
+  const input = root.querySelector<HTMLInputElement>(
+    '[data-action="catalog-search"]',
+  );
+  if (input && input.value !== catalogQuery) input.value = catalogQuery;
+}
+
 async function publish(action: () => Promise<UiViewModel>): Promise<void> {
   try {
-    renderApp(root, await action(), textState);
+    renderApp(root, await action(), textState, catalogState);
+    applyCatalogFilter();
   } catch (error) {
     renderDiagnostic(root, diagnostic(error));
   }
@@ -118,6 +143,17 @@ root.addEventListener("click", (event) => {
   }
 });
 
+root.addEventListener("input", (event) => {
+  const element = actionElement(event.target);
+  if (
+    element?.dataset.action === "catalog-search" &&
+    element instanceof HTMLInputElement
+  ) {
+    catalogQuery = element.value;
+    applyCatalogFilter();
+  }
+});
+
 root.addEventListener("change", (event) => {
   const element = actionElement(event.target);
   const current = controller;
@@ -152,6 +188,10 @@ async function start(): Promise<void> {
   controller = runtime.controller;
   textRules = runtime.textRules;
   textFacets = runtime.facets;
+  catalogState = {
+    view: runtime.catalogPreview,
+    diagnostic: runtime.catalogPreviewDiagnostic,
+  };
   await publish(() => runtime.controller.view());
 }
 

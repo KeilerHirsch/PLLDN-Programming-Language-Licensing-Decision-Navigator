@@ -1,0 +1,26 @@
+{
+  "kind": "claim",
+  "record": {
+    "schema_version": "0.1",
+    "claim_id": "claim.agpl-3-0-or-later.license-explicit-patent-grant",
+    "entity_id": "license.agpl-3.0-or-later",
+    "dimension_id": "dimension.license-explicit-patent-grant",
+    "value": {
+      "type": "boolean",
+      "value": true
+    },
+    "state": "TRUE",
+    "conditions": [],
+    "scope": {
+      "versions": ["AGPL-3.0-or-later"],
+      "targets": ["general"]
+    },
+    "source_ids": ["source.catalog-block3-preview"],
+    "verified_at": "2026-10-04T05:59:00Z",
+    "world_freshness_class": "volatile",
+    "review_status": "Preview",
+    "test_refs": [],
+    "supersedes": [],
+    "valid_until": "2027-01-04T00:00:00Z"
+  }
+}

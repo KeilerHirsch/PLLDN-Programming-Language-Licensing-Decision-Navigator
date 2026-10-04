@@ -4,10 +4,12 @@ import { sha256 } from "../snapshots/manifest.ts";
 import { verifySnapshot } from "../snapshots/verify.ts";
 import { loadStage4Rules } from "../text/rules.ts";
 import type { TextRuleSet } from "../text/types.ts";
+import type { Document } from "../validation/documents.ts";
 import { asObject, parseStrictJson } from "../validation/json.ts";
+import { buildCatalogPreview } from "./catalog-preview.ts";
 import { createUiController, type UiController } from "./controller.ts";
 import { validatedProductFacets } from "./product-facets.ts";
-import type { FacetDefinition } from "./types.ts";
+import type { CatalogPreviewView, FacetDefinition } from "./types.ts";
 
 export interface BrowserRuntimeInput {
   snapshotManifest: string;
@@ -18,6 +20,10 @@ export interface BrowserRuntimeInput {
   facets?: readonly FacetDefinition[];
   candidateType: string;
   componentId: string | null;
+  catalogPreview?: {
+    knowledgeSnapshot: string;
+    documents: readonly Document[];
+  };
 }
 
 export type BrowserRuntimeResult =
@@ -26,6 +32,8 @@ export type BrowserRuntimeResult =
       controller: UiController;
       facets: readonly FacetDefinition[];
       textRules: TextRuleSet | null;
+      catalogPreview: CatalogPreviewView | null;
+      catalogPreviewDiagnostic: string | null;
     }
   | { status: "unavailable"; reason: string };
 
@@ -53,6 +61,15 @@ export async function bootstrapUiRuntime(
     const snapshotSha256 = await sha256(input.snapshotManifest);
     const facets = input.facets ?? validatedProductFacets(knowledge);
     const textRules = input.facets ? null : loadStage4Rules(facets);
+    let catalogPreview: CatalogPreviewView | null = null;
+    let catalogPreviewDiagnostic: string | null = null;
+    if (input.catalogPreview) {
+      try {
+        catalogPreview = buildCatalogPreview(input.catalogPreview);
+      } catch (error) {
+        catalogPreviewDiagnostic = diagnostic(error);
+      }
+    }
     const controller = createUiController({
       baseProject: input.baseProject,
       knowledge,
@@ -64,7 +81,14 @@ export async function bootstrapUiRuntime(
       rulesSnapshot: String(manifest.rules_snapshot),
       snapshotSha256,
     });
-    return { status: "ready", controller, facets, textRules };
+    return {
+      status: "ready",
+      controller,
+      facets,
+      textRules,
+      catalogPreview,
+      catalogPreviewDiagnostic,
+    };
   } catch (error) {
     return { status: "unavailable", reason: diagnostic(error) };
   }

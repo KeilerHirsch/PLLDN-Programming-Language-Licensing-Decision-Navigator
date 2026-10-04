@@ -1,9 +1,20 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import {
+  mkdir,
+  mkdtemp,
+  readdir,
+  readFile,
+  rm,
+  writeFile,
+} from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  buildKnowledgeCandidate,
+  type CandidateSnapshotIdentity,
+} from "../src/knowledge/candidate.ts";
 import { buildBrowser } from "./build-browser.ts";
 import { parsePagesRuntimeProfile } from "./pages-profile.ts";
 import { projectPagesRuntime } from "./pages-runtime.ts";
@@ -56,6 +67,40 @@ export function serializePagesRuntime(payload: unknown): string {
   return `window.PLLDN_RUNTIME=${json};window.PLLDN_RUNTIME.evaluatedAt=new Date().toISOString();\n`;
 }
 
+const catalogRoot = resolve(repoRoot, "knowledge/candidate/catalog-2026-10-03");
+const catalogIdentity: CandidateSnapshotIdentity = {
+  knowledgeSnapshot: "candidate.language-license-catalog.2026-10-03",
+  rulesSnapshot: "candidate.language-license-catalog.rules.2026-10-03",
+};
+const catalogDirectories = [
+  "claims",
+  "dimensions",
+  "entities",
+  "sources",
+] as const;
+
+async function loadCatalogPreview() {
+  const files: Record<string, string> = {};
+  for (const directory of catalogDirectories) {
+    const names = (await readdir(resolve(catalogRoot, directory)))
+      .filter((name) => name.endsWith(".json"))
+      .sort();
+    for (const name of names) {
+      const path = `${directory}/${name}`;
+      files[path] = await readFile(resolve(catalogRoot, path), "utf8");
+    }
+  }
+  const candidate = await buildKnowledgeCandidate(
+    files,
+    new Date().toISOString(),
+    catalogIdentity,
+  );
+  return {
+    knowledgeSnapshot: candidate.manifest.knowledge_snapshot,
+    documents: candidate.documents,
+  };
+}
+
 async function loadProjectedRuntime() {
   const profileRaw = await readFile(
     resolve(repoRoot, "deployments/github-pages/runtime-profile.json"),
@@ -82,7 +127,10 @@ export async function buildPages(outDir: string): Promise<void> {
   const output = resolve(outDir);
   try {
     await buildBrowser(browserDir);
-    const projected = await loadProjectedRuntime();
+    const [projected, catalogPreview] = await Promise.all([
+      loadProjectedRuntime(),
+      loadCatalogPreview(),
+    ]);
     const payload = {
       snapshotManifest: projected.manifestRaw,
       snapshotFiles: projected.files,
@@ -90,6 +138,7 @@ export async function buildPages(outDir: string): Promise<void> {
       candidateType: projected.candidateType,
       componentId: projected.componentId,
       baseProject: projected.baseProject,
+      catalogPreview,
     };
     const runtimeJs = serializePagesRuntime(payload);
     const [html, css, appJs] = await Promise.all([

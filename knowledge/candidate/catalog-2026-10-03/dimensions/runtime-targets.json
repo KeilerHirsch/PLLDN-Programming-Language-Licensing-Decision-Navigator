@@ -9,6 +9,7 @@
     "unit": null,
     "allowed_values": [
       "native",
+      "bytecode-vm",
       "jvm",
       "clr",
       "javascript",
@@ -17,7 +18,9 @@
       "browser",
       "mobile",
       "embedded",
-      "shell"
+      "shell",
+      "server-runtime",
+      "evm"
     ]
   }
 }
