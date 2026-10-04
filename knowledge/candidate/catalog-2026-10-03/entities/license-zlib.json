@@ -1,0 +1,23 @@
+{
+  "kind": "entity",
+  "record": {
+    "schema_version": "0.1",
+    "entity_id": "license.zlib",
+    "entity_type": "license",
+    "canonical_name": "zlib License",
+    "aliases": [
+      {
+        "text": "Zlib",
+        "ambiguity": "unambiguous",
+        "context": []
+      }
+    ],
+    "version_scope": [
+      "Zlib"
+    ],
+    "target_scope": [
+      "general"
+    ],
+    "spdx_id": "Zlib"
+  }
+}
