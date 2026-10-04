@@ -1,6 +1,13 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
-import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import {
+  mkdir,
+  mkdtemp,
+  readFile,
+  readdir,
+  rm,
+  writeFile,
+} from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -60,10 +67,7 @@ export function serializePagesRuntime(payload: unknown): string {
   return `window.PLLDN_RUNTIME=${json};window.PLLDN_RUNTIME.evaluatedAt=new Date().toISOString();\n`;
 }
 
-const catalogRoot = resolve(
-  repoRoot,
-  "knowledge/candidate/catalog-2026-10-03",
-);
+const catalogRoot = resolve(repoRoot, "knowledge/candidate/catalog-2026-10-03");
 const catalogIdentity: CandidateSnapshotIdentity = {
   knowledgeSnapshot: "candidate.language-license-catalog.2026-10-03",
   rulesSnapshot: "candidate.language-license-catalog.rules.2026-10-03",
