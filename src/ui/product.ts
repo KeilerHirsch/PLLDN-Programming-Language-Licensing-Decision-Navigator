@@ -163,7 +163,7 @@ function renderHero(catalog: CatalogPreviewView): HTMLElement {
   stats.className = "product-stats";
   stats.append(
     badge(`${catalog.languages.length} languages`),
-    badge(`${catalog.licenses.length} licenses`),
+    badge(`${PRODUCT_MODEL.licenses.length} licenses`),
     badge("345 Preview facts"),
     badge("Reviewed decision path", "product-badge product-badge-trusted"),
   );

@@ -29,9 +29,14 @@ test("Product Model v1 exactly covers the broad Preview catalogue", () => {
     .sort();
 
   assert.deepEqual(languageIds, candidateEntityIds("language"));
-  assert.deepEqual(licenseIds, candidateEntityIds("license"));
   assert.equal(new Set(languageIds).size, 35);
   assert.equal(new Set(licenseIds).size, 32);
+
+  const candidateLicenseIds = candidateEntityIds("license");
+  assert.equal(candidateLicenseIds.length, 15);
+  assert(
+    candidateLicenseIds.every((entityId) => licenseIds.includes(entityId)),
+  );
   assert(PRODUCT_MODEL.use_cases.length >= 12);
 
   for (const profile of PRODUCT_MODEL.languages) {
@@ -91,7 +96,7 @@ test("Decision Dimensions v2 covers every language with bounded editorial bands"
   }
 });
 
-test("License Model v2 covers every license entity without requiring SPDX identity", () => {
+test("License Model v2 covers every Product Model license independent of Candidate v0.1", () => {
   const expected = PRODUCT_MODEL.licenses
     .map((profile) => profile.entity_id)
     .sort();

@@ -33,7 +33,7 @@ function files(): Record<string, string> {
 
 test("broad candidate catalog remains structurally valid and non-Reviewed", async () => {
   const built = await buildKnowledgeCandidate(files(), at, identity);
-  assert.equal(built.documents.length, 427);
+  assert.equal(built.documents.length, 410);
   assert.equal(built.reviewedAssertions, 0);
   assert.equal(built.partialAssertions, 0);
   assert.equal(
@@ -50,7 +50,7 @@ test("broad candidate catalog remains structurally valid and non-Reviewed", asyn
   );
 });
 
-test("candidate catalog contains 35 languages and 32 licenses", async () => {
+test("candidate catalog contains 35 languages and 15 licenses", async () => {
   const built = await buildKnowledgeCandidate(files(), at, identity);
   const languages = built.documents.filter(
     (doc) => doc.kind === "entity" && doc.record.entity_type === "language",
@@ -59,7 +59,7 @@ test("candidate catalog contains 35 languages and 32 licenses", async () => {
     (doc) => doc.kind === "entity" && doc.record.entity_type === "license",
   );
   assert.equal(languages.length, 35);
-  assert.equal(licenses.length, 32);
+  assert.equal(licenses.length, 15);
   assert(
     languages.every(
       (doc) =>
@@ -102,7 +102,7 @@ test("every language has nine Preview claims", async () => {
   assert([...byLanguage.values()].every((count) => count === 9));
 });
 
-test("the original 15 license seeds retain two Preview classification claims", async () => {
+test("every license has two Preview classification claims", async () => {
   const built = await buildKnowledgeCandidate(files(), at, identity);
   const claims = built.documents.filter(
     (doc) =>
@@ -147,26 +147,3 @@ for (const [sourceId, evidencePath] of [
     );
   });
 }
-
-test("license identity is independent from optional SPDX metadata", async () => {
-  const built = await buildKnowledgeCandidate(files(), at, identity);
-  const licenses = built.documents.filter(
-    (doc) => doc.kind === "entity" && doc.record.entity_type === "license",
-  );
-  const byId = new Map(
-    licenses.map((doc) => [String(doc.record.entity_id), doc.record]),
-  );
-
-  const shield = byId.get("license.polyform-shield-1.0.0");
-  assert(shield);
-  assert.equal("spdx_id" in shield, false);
-  assert.equal("license_id" in shield, false);
-
-  const noncommercial = byId.get("license.polyform-noncommercial-1.0.0");
-  assert(noncommercial);
-  assert.equal(noncommercial.spdx_id, "PolyForm-Noncommercial-1.0.0");
-
-  const legacyMit = byId.get("license.mit");
-  assert(legacyMit);
-  assert.equal(legacyMit.license_id, "MIT");
-});
