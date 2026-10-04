@@ -117,7 +117,6 @@ export interface UiViewModel {
   sort: SortMode;
 }
 
-
 export type CatalogEntityType = "language" | "license";
 
 export interface CatalogPreviewFactView extends UiCandidateFactView {
