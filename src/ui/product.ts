@@ -125,10 +125,7 @@ function productSearchText(
         ];
   return [
     ...base,
-    ...(entry?.facts ?? []).flatMap((fact) => [
-      fact.label,
-      factValue(fact),
-    ]),
+    ...(entry?.facts ?? []).flatMap((fact) => [fact.label, factValue(fact)]),
   ]
     .join(" ")
     .normalize("NFKD")
@@ -241,7 +238,10 @@ function renderUseCases(state: ProductUiState): HTMLElement {
   return section;
 }
 
-function renderListBlock(title: string, values: readonly string[]): HTMLElement {
+function renderListBlock(
+  title: string,
+  values: readonly string[],
+): HTMLElement {
   const wrapper = document.createElement("div");
   wrapper.className = "profile-list-block";
   const label = document.createElement("strong");
@@ -256,7 +256,9 @@ function renderListBlock(title: string, values: readonly string[]): HTMLElement 
   return wrapper;
 }
 
-function renderPreviewFacts(entry: CatalogPreviewEntryView | undefined): HTMLElement {
+function renderPreviewFacts(
+  entry: CatalogPreviewEntryView | undefined,
+): HTMLElement {
   const details = document.createElement("details");
   details.className = "profile-facts";
   const summary = document.createElement("summary");
@@ -354,11 +356,15 @@ function renderLanguageCatalog(
   catalog: CatalogPreviewView,
   state: ProductUiState,
 ): HTMLElement {
-  const byId = new Map(catalog.languages.map((entry) => [entry.entity_id, entry]));
+  const byId = new Map(
+    catalog.languages.map((entry) => [entry.entity_id, entry]),
+  );
   const grid = document.createElement("div");
   grid.className = "product-card-grid";
   for (const profile of PRODUCT_MODEL.languages) {
-    grid.append(renderLanguageCard(profile, byId.get(profile.entity_id), state));
+    grid.append(
+      renderLanguageCard(profile, byId.get(profile.entity_id), state),
+    );
   }
   return grid;
 }
@@ -424,7 +430,9 @@ function renderLicenseCard(
 }
 
 function renderLicenseCatalog(catalog: CatalogPreviewView): HTMLElement {
-  const byId = new Map(catalog.licenses.map((entry) => [entry.entity_id, entry]));
+  const byId = new Map(
+    catalog.licenses.map((entry) => [entry.entity_id, entry]),
+  );
   const wrapper = document.createElement("div");
   wrapper.append(renderLicenseAxis());
 
@@ -571,7 +579,8 @@ function renderCompare(
     const label =
       catalog.languages
         .flatMap((entry) => entry.facts)
-        .find((fact) => fact.dimension_id === dimensionId)?.label ?? dimensionId;
+        .find((fact) => fact.dimension_id === dimensionId)?.label ??
+      dimensionId;
     rows.push({
       label,
       value: (profile) =>
