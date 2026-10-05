@@ -1,44 +1,50 @@
+<div align="center">
+
 # PLLDN - Programming Language & Licensing Decision Navigator
 
 **Stop choosing stacks by vibes.**
 
 ## **Use it now:** [Open the live app on GitHub Pages →](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/)
 
-**Free in your browser. No installation, account, API key, or LLM setup required.**
+**Choose a language. Understand the license. Defend the trade-off.**
 
-Start with what you are building, explore language and license trade-offs, and compare options side by side. Unknown stays unknown.
+PLLDN helps you choose a language and understand licensing before the first commit. Start with your project, explore trade-offs in performance, complexity and deployment, and inspect license rights and obligations. Unknown stays unknown.
+
+**Free in your browser. No installation, account, API key, or LLM setup required.**
 
 [![Open the PLLDN live app — Filter. Compare. Decide.](docs/assets/plldn-readme-hero.webp)](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/)
 
 [**Launch PLLDN →**](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/) · [Browser quick start](#quick-start) · [Local verification](#local-verification)
 
+</div>
+
 ## What PLLDN does
 
-- **Explore** task-first language shortlists.
-- **Read** language and license profiles, then inspect their Preview facts.
+- **Explore** task-first shortlists for Windows tools, web apps, embedded software, and more.
 - **Compare** up to four languages side by side.
-- **Decide** in a separate Reviewed decision lab.
-- **Explain** why a Reviewed candidate fits, fails, or remains unresolved.
+- **Inspect licenses** through permissions, obligations, commercial use, SaaS/hosting, and competition.
+- **Follow evidence** through Preview facts and canonical license terms.
+- **Decide** in a separate Reviewed lab that explains fits, failures, and unresolved constraints.
 
 ## Quick start
 
 1. Choose a task under **What are you building?**
-2. Filter the **Language catalogue** and add up to four languages to compare.
-3. Switch to **Licenses** to explore commercial use, SaaS/hosting, competition, and OSI status.
+2. Filter the **Language catalogue** and add languages to compare.
+3. Switch to **Licenses** and open **Rights, restrictions & compliance**.
 
-Open **Performance & complexity** for metric bands and contextual badges with text and symbols.
+Building a hosted service? Start with **Web backend**, compare languages, then inspect SaaS permissions and source-disclosure obligations under **Licenses**.
 
 ## Scope and confidence
 
-**Preview navigator:** 35 language profiles, 32 license profiles, and 15 use-case guides. Qualitative performance, complexity, and ecosystem bands; Open Source, source-available, public-domain-like, and license-transition models.
+**Preview navigator:** 35 languages, 32 licenses, and 15 use-case guides. Qualitative performance, complexity, and ecosystem bands; Open Source, source-available, public-domain-like, and license-transition models.
 
-**Reviewed decision lab:** a separate, narrower recommendation path for **Go, Python, Rust, and TypeScript** across **four Reviewed boolean capabilities**. Eight Reviewed SPDX license identities are present, but this is **not a complete licensing workflow**. Preview guidance never self-promotes into Reviewed recommendations.
+**Reviewed decision lab:** **Go, Python, Rust, and TypeScript**, four Reviewed boolean capabilities, and eight Reviewed SPDX license identities. This is **not a complete licensing workflow**. Preview guidance never self-promotes into Reviewed recommendations.
 
-When Reviewed evidence is insufficient, abstention is the correct result. PLLDN does not provide legal advice or certification.
+Insufficient Reviewed evidence means abstention. PLLDN provides no legal advice or certification.
 
 ## Local verification
 
-To work on the repository, use Node.js **24.15.0** and npm **11.12.1**:
+For contributors: Node.js **24.15.0** and npm **11.12.1**.
 
 ```sh
 npm ci --ignore-scripts
@@ -50,10 +56,9 @@ npm run evidence
 
 ## Under the hood
 
-- Deterministic constraint evaluation; no LLM owns the recommendation path.
-- Free text may propose existing filters; only confirmed facts enter the decision path.
+- Deterministic evaluation; no LLM owns recommendations.
+- Free text proposes filters; only confirmed facts enter decisions.
 - Reviewed knowledge, Candidate Preview, runtime approval, and release evidence stay separate.
-- Preview catalogue failure cannot expand or disable the trusted decision candidate space.
 
 **Public docs:** [Data contracts](docs/data-contracts.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Governance](GOVERNANCE.md)
 

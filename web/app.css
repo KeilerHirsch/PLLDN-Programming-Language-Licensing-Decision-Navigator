@@ -622,6 +622,39 @@ summary {
   opacity: 0.72;
 }
 
+.license-profile-card {
+  align-self: start;
+}
+
+.license-profile-card .product-card-head {
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.license-profile-card .product-card-head h3,
+.license-profile-card .product-card-head .product-badge {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.license-profile-card .product-card-head .product-badge {
+  white-space: normal;
+}
+
+.license-profile-card .product-card-head + p {
+  min-height: 3em;
+  margin: 0.55rem 0 0.8rem;
+}
+
+.license-profile-card .decision-quick-strip {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.license-profile-card .decision-quick-fact:first-child {
+  grid-column: 1 / -1;
+}
+
 .license-good,
 .license-watch {
   font-size: 0.9rem;
@@ -820,7 +853,7 @@ summary {
 
 .license-decision-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 0.8fr;
+  grid-template-columns: 1fr;
   gap: 0.75rem;
   margin-top: 0.75rem;
 }
@@ -840,7 +873,8 @@ summary {
 
 .license-decision-group dl {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: start;
   gap: 0.3rem 0.7rem;
   margin: 0;
 }
@@ -851,10 +885,15 @@ summary {
 }
 
 .license-decision-group dt {
+  min-width: 0;
+  overflow-wrap: anywhere;
   opacity: 0.72;
 }
 
 .license-decision-group dd {
+  justify-self: end;
+  max-width: 14ch;
+  overflow-wrap: anywhere;
   margin: 0;
   font-weight: 650;
   text-align: right;
