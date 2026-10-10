@@ -9,9 +9,11 @@ test("required replay check fails closed when Verify fails or is cancelled", () 
   const replay = workflow.split(/^ {2}replay:\s*$/m)[1];
   assert(replay, "Cross-platform replay job must exist");
   assert.match(replay, /name: Cross-platform replay/u);
-  assert.match(replay, /needs: verify/u);
+  assert.match(replay, /needs: \[verify, browser\]/u);
   assert.match(replay, /if: \$\{\{ always\(\) \}\}/u);
   assert.match(replay, /VERIFY_RESULT: \$\{\{ needs\.verify\.result \}\}/u);
+  assert.match(replay, /BROWSER_RESULT: \$\{\{ needs\.browser\.result \}\}/u);
+  assert.match(replay, /test "\$BROWSER_RESULT" = "success"/u);
   assert.match(replay, /test "\$VERIFY_RESULT" = "success"/u);
   assert.match(replay, /actions\/download-artifact@/u);
 });
