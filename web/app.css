@@ -404,7 +404,9 @@ summary {
   text-align: left;
   align-content: start;
   border-radius: 0.85rem;
-  transition: border-color 150ms ease, background-color 150ms ease;
+  transition:
+    border-color 150ms ease,
+    background-color 150ms ease;
 }
 
 .use-case-card[aria-pressed="true"],
@@ -476,7 +478,9 @@ summary {
   border-radius: 0.9rem;
   background: color-mix(in srgb, CanvasText 2.5%, Canvas);
   box-shadow: 0 0.75rem 1.8rem color-mix(in srgb, CanvasText 8%, transparent);
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .product-card[hidden] {
