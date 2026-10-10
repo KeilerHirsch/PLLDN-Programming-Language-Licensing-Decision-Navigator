@@ -75,9 +75,7 @@ function applyCatalogFilter(): void {
     const noun = productState.mode === "languages" ? "languages" : "licenses";
     count.textContent = `${visible} ${noun} shown.`;
   }
-  const empty = root.querySelector<HTMLElement>(
-    "[data-catalog-search-empty]",
-  );
+  const empty = root.querySelector<HTMLElement>("[data-catalog-search-empty]");
   if (empty) empty.hidden = query.length === 0 || visible > 0;
 }
 
