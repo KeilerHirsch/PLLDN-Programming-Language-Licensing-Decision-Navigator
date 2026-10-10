@@ -289,6 +289,8 @@ summary {
 
 .product-experience {
   display: grid;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(2rem, 4.5vw, 3.5rem);
 }
 
@@ -373,6 +375,7 @@ summary {
 .use-case-section,
 .product-catalog,
 .compare-section {
+  min-width: 0;
   padding-top: 0.25rem;
 }
 
@@ -578,6 +581,7 @@ summary {
 }
 
 .compare-table-wrap {
+  max-width: 100%;
   overflow-x: auto;
   margin-top: 1rem;
   border: 1px solid color-mix(in srgb, CanvasText 16%, transparent);
