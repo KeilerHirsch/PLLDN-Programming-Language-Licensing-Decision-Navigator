@@ -2,6 +2,25 @@
 
 All notable PLLDN releases are recorded here. Published prereleases are immutable; fixes use a new release identity rather than silent replacement.
 
+## Unreleased (main)
+
+Changes since the immutable Beta 1 release are development work, not a
+replacement or silent update of the published Beta 1 artifacts.
+
+### Product
+
+- Expanded the editorial Preview catalogue to 35 languages, 32 licenses,
+  and 15 task-based guides, with broader licensing models including PolyForm.
+- Added task-first navigation, language comparison, catalogue filters,
+  qualitative performance and complexity dimensions, and clearer metric badges.
+- Improved the GitHub Pages entry point and product-first README presentation.
+
+### Verification
+
+- Product model tests protect entity identities and profile-to-catalogue coverage.
+- Browser-renderer interaction coverage remains an improvement area; automated
+  source-level checks are not substitutes for end-to-end browser testing.
+
 ## 0.0.1-beta.1 — PLLDN v0.0.1 Beta 1
 
 First public evidence-bound Beta of the Programming Language & Licensing Decision Navigator.
