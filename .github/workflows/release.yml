@@ -24,12 +24,13 @@ jobs:
       contents: read
     env:
       TARGET_SHA: ${{ inputs.target_sha }}
+      RELEASE_CONFIRMATION: ${{ inputs.confirmation }}
     steps:
       - name: Confirm release identity
         shell: bash
         run: |
           set -euo pipefail
-          test "${{ inputs.confirmation }}" = "v0.0.1-beta.1"
+          test "$RELEASE_CONFIRMATION" = "v0.0.1-beta.1"
           [[ "$TARGET_SHA" =~ ^[0-9a-f]{40}$ ]]
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
