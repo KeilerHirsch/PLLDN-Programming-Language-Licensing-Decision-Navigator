@@ -155,8 +155,7 @@ async function main(): Promise<void> {
       ),
     );
     const index = files.get("/index.html")?.toString("utf8");
-    if (!index?.includes("</body>"))
-      throw new Error("Pages HTML body missing");
+    if (!index?.includes("</body>")) throw new Error("Pages HTML body missing");
     files.set(
       "/index.html",
       Buffer.from(
