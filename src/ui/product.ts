@@ -77,6 +77,25 @@ function button(
   return node;
 }
 
+function compareButton(
+  entityId: string,
+  state: ProductUiState,
+  className?: string,
+): HTMLButtonElement {
+  const selected = state.compareLanguageIds.includes(entityId);
+  const control = button(
+    selected ? "Remove from compare" : "Add to compare",
+    "toggle-compare",
+    className,
+  );
+  control.dataset.entityId = entityId;
+  if (!selected && state.compareLanguageIds.length >= 4) {
+    control.disabled = true;
+    control.title = "Four languages selected. Remove one to add another.";
+  }
+  return control;
+}
+
 function selectControl(
   labelText: string,
   filterKey: keyof ProductFilterState,
@@ -305,14 +324,7 @@ function renderUseCases(state: ProductUiState): HTMLElement {
     const card = document.createElement("article");
     card.className = "shortlist-card";
     card.append(heading(3, profile.label), paragraph(profile.tagline));
-    const add = button(
-      state.compareLanguageIds.includes(id)
-        ? "Remove from compare"
-        : "Add to compare",
-      "toggle-compare",
-      "secondary-action",
-    );
-    add.dataset.entityId = id;
+    const add = compareButton(id, state, "secondary-action");
     card.append(add);
     shortlist.append(card);
   }
@@ -570,13 +582,7 @@ function renderLanguageCard(
 
   const actions = document.createElement("div");
   actions.className = "profile-actions";
-  const compare = button(
-    state.compareLanguageIds.includes(profile.entity_id)
-      ? "Remove from compare"
-      : "Add to compare",
-    "toggle-compare",
-  );
-  compare.dataset.entityId = profile.entity_id;
+  const compare = compareButton(profile.entity_id, state);
   actions.append(compare);
   card.append(
     actions,
@@ -602,6 +608,8 @@ function renderLanguageCatalog(
   );
   count.className = "catalog-result-count";
   count.dataset.catalogVisibleCount = "true";
+  count.setAttribute("role", "status");
+  count.setAttribute("aria-live", "polite");
   wrapper.append(count);
 
   const grid = document.createElement("div");
@@ -843,6 +851,8 @@ function renderLicenseCatalog(
   );
   count.className = "catalog-result-count";
   count.dataset.catalogVisibleCount = "true";
+  count.setAttribute("role", "status");
+  count.setAttribute("aria-live", "polite");
   wrapper.append(count);
 
   const grid = document.createElement("div");
@@ -1027,6 +1037,13 @@ function renderCatalog(
       ? renderLanguageCatalog(catalog, state)
       : renderLicenseCatalog(catalog, state),
   );
+  const searchEmpty = paragraph(
+    "No matches for that search. Try a different keyword or reset the filters.",
+  );
+  searchEmpty.className = "catalog-search-empty";
+  searchEmpty.dataset.catalogSearchEmpty = "true";
+  searchEmpty.hidden = true;
+  section.append(searchEmpty);
   return section;
 }
 
