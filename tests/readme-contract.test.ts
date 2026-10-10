@@ -39,6 +39,7 @@ test("README stays concise and links only the intended public engineering surfac
   assert.match(readme, /SECURITY\.md/u);
   assert.match(readme, /CONTRIBUTING\.md/u);
   assert.match(readme, /GOVERNANCE\.md/u);
+  assert.match(readme, /35 languages, 32 licenses, and 15 use-case guides/u);
 
   assert.doesNotMatch(readme, /docs\/architecture\.md/u);
   assert.doesNotMatch(readme, /docs\/verification\.md/u);

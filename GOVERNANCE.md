@@ -24,12 +24,23 @@ Released snapshots are never silently edited.
 
 There is initially one maintainer. CODEOWNERS routes review; it does not prove
 independence. The owner cannot count self-review as independent human review.
-The initial repository foundation may be bootstrapped by its owner. Reviewed
-runtime knowledge remains empty until its promotion requirements are met.
+The initial repository foundation may be bootstrapped by its owner. The current
+Reviewed runtime snapshot covers only the explicitly approved decision-lab scope;
+it does not confer Reviewed status on the broader Preview catalogue.
 
-Main requires passing checks and reviewed PRs after bootstrap. Administration
-changes and emergency exceptions must be recorded; do not claim protection
-against a repository administrator who can change the rules.
+The active main ruleset requires pull requests and named status checks, but zero
+approving reviews. Passing automation does not establish independent human review.
+Administration changes and emergency exceptions must be recorded; do not claim
+protection against a repository administrator who can change the rules.
+
+## Published history
+
+As observed on 2026-10-10, immutable Beta 1 tag `v0.0.1-beta.1` points to
+`151fd12`, which is not an ancestor of current main (`d1b04c0`). Some earlier
+documentation is absent from current main but remains public through historical
+GitHub references. The cause, authorization route and exact intent of the
+divergence have not been established. Removing a file from main does not retract
+previously published history.
 
 ## Funding
 
