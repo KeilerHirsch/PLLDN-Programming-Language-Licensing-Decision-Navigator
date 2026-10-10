@@ -6,7 +6,7 @@ import test from "node:test";
 
 test("required replay check fails closed when Verify fails or is cancelled", () => {
   const workflow = readFileSync(".github/workflows/verify.yml", "utf8");
-  const replay = workflow.split(/^  replay:\s*$/m)[1];
+  const replay = workflow.split(/^ {2}replay:\s*$/m)[1];
   assert(replay, "Cross-platform replay job must exist");
   assert.match(replay, /name: Cross-platform replay/u);
   assert.match(replay, /needs: verify/u);
@@ -18,7 +18,10 @@ test("required replay check fails closed when Verify fails or is cancelled", () 
 
 test("release confirmation is passed as environment data", () => {
   const workflow = readFileSync(".github/workflows/release.yml", "utf8");
-  assert.match(workflow, /RELEASE_CONFIRMATION: \$\{\{ inputs\.confirmation \}\}/u);
+  assert.match(
+    workflow,
+    /RELEASE_CONFIRMATION: \$\{\{ inputs\.confirmation \}\}/u,
+  );
   assert.match(workflow, /test "\$RELEASE_CONFIRMATION" = "v0\.0\.1-beta\.1"/u);
   assert.doesNotMatch(workflow, /test "\$\{\{ inputs\.confirmation \}\}"/u);
 });
