@@ -146,7 +146,7 @@ async function main(): Promise<void> {
   try {
     await buildPages(root);
     const allowed = ["index.html", "runtime.js", "app.js", "app.css"];
-    const files = new Map(
+    const files = new Map<string, Buffer>(
       await Promise.all(
         allowed.map(
           async (name) =>
@@ -219,8 +219,7 @@ async function main(): Promise<void> {
       )?.[1];
       if (!mark?.startsWith("PASS:")) {
         throw new Error(
-          `Chromium ${width}px smoke failed: ${mark ?? "missing result marker"}` +
-            `\nBrowser stderr: ${stderr.slice(-2000)}`,
+          `Chromium ${width}px smoke failed: ${mark ?? "missing result marker"}\nBrowser stderr: ${stderr.slice(-2000)}`,
         );
       }
       process.stdout.write(`Chromium ${width}px: ${mark}\n`);
