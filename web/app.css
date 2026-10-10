@@ -289,12 +289,20 @@ summary {
 
 .product-experience {
   display: grid;
-  gap: 3rem;
+  gap: clamp(2rem, 4.5vw, 3.5rem);
 }
 
 .product-hero {
-  max-width: 60rem;
-  padding: 3.5rem 0 1rem;
+  max-width: none;
+  padding: clamp(1.4rem, 4.5vw, 3.25rem);
+  border: 1px solid color-mix(in srgb, Highlight 18%, CanvasText 12%);
+  border-radius: 1.25rem;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, Highlight 9%, Canvas),
+    Canvas 72%
+  );
+  box-shadow: 0 1rem 2.5rem color-mix(in srgb, CanvasText 5%, transparent);
 }
 
 .product-eyebrow {
@@ -396,6 +404,7 @@ summary {
   text-align: left;
   align-content: start;
   border-radius: 0.85rem;
+  transition: border-color 150ms ease, background-color 150ms ease;
 }
 
 .use-case-card[aria-pressed="true"],
@@ -467,6 +476,7 @@ summary {
   border-radius: 0.9rem;
   background: color-mix(in srgb, CanvasText 2.5%, Canvas);
   box-shadow: 0 0.75rem 1.8rem color-mix(in srgb, CanvasText 8%, transparent);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
 .product-card[hidden] {
@@ -977,7 +987,43 @@ summary {
 .catalog-result-count {
   margin: 0 0 0.85rem;
   font-size: 0.86rem;
-  opacity: 0.72;
+  font-weight: 650;
+  color: color-mix(in srgb, CanvasText 92%, Canvas);
+}
+
+.catalog-search-empty {
+  margin: 0.5rem 0 1rem;
+  padding: 1rem;
+  border: 1px dashed color-mix(in srgb, Highlight 48%, CanvasText 14%);
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, Highlight 6%, Canvas);
+  font-size: 0.92rem;
+}
+
+.catalog-search-empty[hidden] {
+  display: none;
+}
+
+button[data-action="toggle-compare"]:disabled {
+  border-style: dashed;
+}
+
+@media (hover: hover) {
+  .product-card:hover {
+    border-color: color-mix(in srgb, Highlight 30%, CanvasText 14%);
+    box-shadow: 0 1rem 2.1rem color-mix(in srgb, CanvasText 10%, transparent);
+  }
+
+  .use-case-card:hover:not([aria-pressed="true"]) {
+    background: color-mix(in srgb, Highlight 5%, Canvas);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-card,
+  .use-case-card {
+    transition: none;
+  }
 }
 
 @media (max-width: 760px) {
