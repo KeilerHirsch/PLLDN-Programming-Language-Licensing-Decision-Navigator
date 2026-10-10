@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
 import { execFile } from "node:child_process";
-import { readFile, mkdtemp, rm } from "node:fs/promises";
+import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { createServer } from "node:http";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -12,7 +12,7 @@ const execFileAsync = promisify(execFile);
 
 // Deliberately executed by a real Chromium engine, not by a DOM mock.
 // This probe is served only on loopback and is never included in Pages output.
-const smokeProbe = String.raw`
+const smokeProbe = `
 (async () => {
   const output = document.createElement("output");
   output.id = "browser-smoke-result";
@@ -119,7 +119,16 @@ const smokeProbe = String.raw`
     if (window.innerWidth <= 760) {
       assert(
         document.documentElement.scrollWidth <= window.innerWidth + 2,
-        "mobile page must not overflow horizontally",
+        "mobile page must not overflow horizontally (viewport " + window.innerWidth +
+          ", document " + document.documentElement.scrollWidth + ", suspected: " +
+          Array.from(document.querySelectorAll("body *"))
+            .filter((element) =>
+              element.scrollWidth > element.clientWidth + 3 &&
+              getComputedStyle(element).overflowX === "visible"
+            )
+            .slice(0, 8)
+            .map((element) => element.tagName + "." + element.className)
+            .join(", ") + ")",
       );
     }
 
@@ -139,14 +148,23 @@ async function main(): Promise<void> {
     const allowed = ["index.html", "runtime.js", "app.js", "app.css"];
     const files = new Map(
       await Promise.all(
-        allowed.map(async (name) => ["/" + name, await readFile(join(root, name))] as const),
+        allowed.map(
+          async (name) =>
+            [`/${name}`, await readFile(join(root, name))] as const,
+        ),
       ),
     );
     const index = files.get("/index.html")?.toString("utf8");
-    if (!index || !index.includes("</body>")) throw new Error("Pages HTML body missing");
+    if (!index?.includes("</body>"))
+      throw new Error("Pages HTML body missing");
     files.set(
       "/index.html",
-      Buffer.from(index.replace("</body>", '<script src="./browser-smoke.js"></script>\n</body>')),
+      Buffer.from(
+        index.replace(
+          "</body>",
+          '<script src="./browser-smoke.js"></script>\n</body>',
+        ),
+      ),
     );
     files.set("/browser-smoke.js", Buffer.from(smokeProbe));
 
@@ -164,7 +182,10 @@ async function main(): Promise<void> {
         : path.endsWith(".css")
           ? "text/css"
           : "text/html";
-      response.writeHead(200, { "Content-Type": type + "; charset=utf-8", "Cache-Control": "no-store" });
+      response.writeHead(200, {
+        "Content-Type": `${type}; charset=utf-8`,
+        "Cache-Control": "no-store",
+      });
       response.end(data);
     });
     await new Promise<void>((resolve, reject) => {
@@ -172,7 +193,8 @@ async function main(): Promise<void> {
       server?.listen(0, "127.0.0.1", resolve);
     });
     const address = server.address();
-    if (!address || typeof address === "string") throw new Error("Loopback server address unavailable");
+    if (!address || typeof address === "string")
+      throw new Error("Loopback server address unavailable");
 
     for (const width of [1280, 390]) {
       const { stdout, stderr } = await execFileAsync(
@@ -185,21 +207,23 @@ async function main(): Promise<void> {
           "--disable-background-networking",
           "--no-first-run",
           "--force-device-scale-factor=1",
-          "--window-size=" + width + ",844",
+          `--window-size=${width},844`,
           "--virtual-time-budget=20000",
           "--dump-dom",
-          "http://127.0.0.1:" + address.port + "/index.html",
+          `http://127.0.0.1:${address.port}/index.html`,
         ],
         { timeout: 60000, maxBuffer: 16 * 1024 * 1024 },
       );
-      const mark = stdout.match(/<output id="browser-smoke-result">([^<]*)<\/output>/u)?.[1];
-      if (!mark || !mark.startsWith("PASS:")) {
+      const mark = stdout.match(
+        /<output id="browser-smoke-result">([^<]*)<\/output>/u,
+      )?.[1];
+      if (!mark?.startsWith("PASS:")) {
         throw new Error(
-          "Chromium " + width + "px smoke failed: " + (mark ?? "missing result marker") +
-            "\nBrowser stderr: " + stderr.slice(-2000),
+          `Chromium ${width}px smoke failed: ${mark ?? "missing result marker"}` +
+            `\nBrowser stderr: ${stderr.slice(-2000)}`,
         );
       }
-      process.stdout.write("Chromium " + width + "px: " + mark + "\n");
+      process.stdout.write(`Chromium ${width}px: ${mark}\n`);
     }
   } finally {
     if (server) {
