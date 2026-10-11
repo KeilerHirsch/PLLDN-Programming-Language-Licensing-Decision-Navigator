@@ -26,9 +26,7 @@ test("browser identity links are same-origin, searchable and fully test-driven",
   const product = readFileSync("src/ui/product.ts", "utf8");
   const main = readFileSync("src/ui/main.ts", "utf8");
   const browser = readFileSync("tools/browser-smoke.ts", "utf8");
-  assert(
-    product.includes('encodeURIComponent(record.id)}#catalog'),
-  );
+  assert(product.includes("encodeURIComponent(record.id)}#catalog"));
   assert(product.includes('permalink.dataset.candidatePermalink = "true"'));
   assert(
     main.includes(
