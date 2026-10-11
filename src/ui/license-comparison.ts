@@ -177,7 +177,10 @@ export function renderLicenseComparison(
     }
     body.append(tr);
   }
-  const previewRows = licensePreviewClaimRows(catalog, selected.map((p) => p.entity_id));
+  const previewRows = licensePreviewClaimRows(
+    catalog,
+    selected.map((p) => p.entity_id),
+  );
   if (previewRows.length > 0) {
     const subtitle = document.createElement("tr");
     const note = document.createElement("th");
