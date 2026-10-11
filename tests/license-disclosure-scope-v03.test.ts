@@ -34,9 +34,11 @@ test("MPL and EUPL Editorial Preview disclosure conditions use issuer primary te
     assert.equal(license.rights.saas_hosting, record.saas_value_retained);
     assert.equal(license.canonical_source, record.issuer_source_url);
     assert(record.references.length >= 2);
-    assert(record.references.every((item: { url: string }) =>
-      item.url.startsWith("https://"),
-    ));
+    assert(
+      record.references.every((item: { url: string }) =>
+        item.url.startsWith("https://"),
+      ),
+    );
     assert.equal(record.review_status, "EDITORIAL_PREVIEW_NOT_REVIEWED");
     assert(record.conditions.length >= 3);
   }
@@ -57,22 +59,22 @@ test("MPL and EUPL Editorial Preview disclosure conditions use issuer primary te
 
 test("disclosure qualifier uses shared Editorial Preview UI/CSV rows", () => {
   const row = licenseComparisonRows().find(
-    (item) => item.label === "Distribution / network disclosure scope (Preview)",
+    (item) =>
+      item.label === "Distribution / network disclosure scope (Preview)",
   );
   assert(row);
   for (const id of ["license.mpl-2.0", "license.eupl-1.2"]) {
     const profile = selectEditorialLicenses([id])[0];
     assert(profile);
-    assert.equal(
-      row.value(profile),
-      licenseDisclosureScopeQualifier(id),
-    );
+    assert.equal(row.value(profile), licenseDisclosureScopeQualifier(id));
   }
   const mit = selectEditorialLicenses(["license.mit"])[0];
   assert(mit);
   assert.equal(row.value(mit), "Unknown");
   const product = readFileSync("src/ui/product.ts", "utf8");
-  assert(product.includes("licenseDisclosureScopeQualifier(profile.entity_id)"));
+  assert(
+    product.includes("licenseDisclosureScopeQualifier(profile.entity_id)"),
+  );
   const csv = readFileSync("src/ui/license-compare-export.ts", "utf8");
   assert(csv.includes("licenseComparisonRows()"));
 });
