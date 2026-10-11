@@ -150,6 +150,26 @@ function withClass(root: TestElement, name: string): TestElement[] {
   );
 }
 
+test("all pinned identities are first-class catalogue cards without manufactured assessments", (t) => {
+  const previous = Object.getOwnPropertyDescriptor(globalThis, "document");
+  Object.defineProperty(globalThis, "document", {configurable:true, value:{createElement:(tag:string)=>new TestElement(tag)}});
+  t.after(()=>{if(previous) Object.defineProperty(globalThis,"document",previous); else Reflect.deleteProperty(globalThis,"document");});
+  const catalog: CatalogPreviewView = {knowledge_snapshot:"candidate.test",status:"Preview",languages:[],licenses:[]};
+  for (const [mode, total, unassessed] of [["languages",194,159],["licenses",714,682]] as const) {
+    const view = renderProductExperience(catalog,{...DEFAULT_PRODUCT_UI_STATE,mode}) as unknown as TestElement;
+    assert.equal(withClass(view,"product-card").length,total);
+    assert.equal(withClass(view,"identity-card").length,unassessed);
+    assert.equal(withClass(view,"product-card-grid").length,1);
+    for(const card of withClass(view,"identity-card")) {
+      assert.equal(withClass(card,"decision-profile").length,0);
+      assert(descendants(card).some(node=>node.textContent.includes("UNKNOWN")));
+      assert.equal(card.dataset.catalogStatus,"unassessed");
+    }
+    assert.equal(withClass(view,"catalog-navigation").length,1);
+    assert.equal(withClass(view,"catalog-share").length,1);
+  }
+});
+
 function cardNamed(root: TestElement, name: string): TestElement {
   const card = withClass(root, "product-card").find((node) =>
     descendants(node).some(
