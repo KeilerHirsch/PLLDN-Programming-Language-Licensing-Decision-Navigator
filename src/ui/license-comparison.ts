@@ -73,8 +73,7 @@ export function licenseComparisonRows(): LicenseComparisonRow[] {
     },
     {
       label: "Distribution / network disclosure scope (Preview)",
-      value: (p) =>
-        licenseDisclosureScopeQualifier(p.entity_id) ?? "Unknown",
+      value: (p) => licenseDisclosureScopeQualifier(p.entity_id) ?? "Unknown",
     },
     { label: "Notice", value: (p) => obligation(p, "notice") },
     { label: "Patent grant", value: (p) => obligation(p, "patent_grant") },
