@@ -1,0 +1,72 @@
+{
+  "schema_version": "0.3",
+  "baseline_main_sha": "b0979bed0082e79c462ce0a87182637a3f352db2",
+  "dataset": "language-decision-profiles Editorial Preview",
+  "review_status": "EDITORIAL_PREVIEW_NOT_REVIEWED",
+  "evidence_status": "NO_LINKED_INDEPENDENT_EVIDENCE",
+  "scope_note": "This inventory measures linked evidence coverage only, not truth/falsity of any qualitative assessment or availability of sources elsewhere.",
+  "performance_dimensions": [
+    "throughput_potential",
+    "startup",
+    "runtime_overhead",
+    "latency_predictability",
+    "build_speed"
+  ],
+  "complexity_dimensions": [
+    "learning_curve",
+    "language_surface",
+    "memory_reasoning",
+    "toolchain",
+    "dependency_management",
+    "deployment"
+  ],
+  "editorial_language_ids": [
+    "language.ada",
+    "language.bash",
+    "language.c",
+    "language.clojure",
+    "language.cobol",
+    "language.cpp",
+    "language.csharp",
+    "language.dart",
+    "language.elixir",
+    "language.erlang",
+    "language.fortran",
+    "language.fsharp",
+    "language.go",
+    "language.haskell",
+    "language.java",
+    "language.javascript",
+    "language.julia",
+    "language.kotlin",
+    "language.lua",
+    "language.nim",
+    "language.objective-c",
+    "language.ocaml",
+    "language.perl",
+    "language.php",
+    "language.powershell",
+    "language.python",
+    "language.r",
+    "language.ruby",
+    "language.rust",
+    "language.scala",
+    "language.solidity",
+    "language.swift",
+    "language.typescript",
+    "language.visual-basic-dotnet",
+    "language.zig"
+  ],
+  "independently_supported_band_claims": [],
+  "reproducible_test_refs": [],
+  "assessment_units": {
+    "performance_bands": 175,
+    "complexity_bands": 210,
+    "total_bands": 385
+  },
+  "promotion_contract": {
+    "performance": "Named workload, source implementation and inputs/digest, language and compiler/runtime exact version, build flags, operating system, CPU/platform and test resources, warmup/calibration, repetition and raw samples, robust summary, reproducibility reference and appropriate comparison baseline required before specific band may become Reviewed.",
+    "complexity": "Explicit user/team profile, task definition, scope and scoring anchors, evaluator protocol, sample/results, version/toolchain/platform and repeatable adjudication with evidence refs required before specific band may become Reviewed.",
+    "status": "UNKNOWN until band-specific independently checkable records are accepted in a later dataset version."
+  }
+}
