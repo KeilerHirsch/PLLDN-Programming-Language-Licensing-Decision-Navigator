@@ -7,6 +7,24 @@ import { join } from "node:path";
 import test from "node:test";
 import { buildBrowser } from "../tools/build-browser.ts";
 
+function assertNoNodeModuleReferences(javascript: string): void {
+  assert.doesNotMatch(javascript, /["'`]node:/u, "Node module reference");
+}
+
+test("browser metadata may name Node without granting Node module access", () => {
+  assert.doesNotThrow(() =>
+    assertNoNodeModuleReferences('const environment = { node: "v24.15.0" };'),
+  );
+  for (const reference of [
+    'import fs from "node:fs";',
+    "export { readFileSync } from 'node:fs';",
+    'import("node:fs");',
+    "require('node:fs');",
+  ]) {
+    assert.throws(() => assertNoNodeModuleReferences(reference));
+  }
+});
+
 async function bytes(dir: string): Promise<Record<string, Buffer>> {
   return Object.fromEntries(
     await Promise.all(
@@ -28,8 +46,8 @@ test("browser build is deterministic and browser-only", async () => {
       "index.html",
     ]);
     const js = first["app.js"]?.toString("utf8") ?? "";
+    assertNoNodeModuleReferences(js);
     for (const forbidden of [
-      "node:",
       "readFileSync",
       "language.alpha",
       "language.beta",
