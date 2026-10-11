@@ -99,6 +99,31 @@ const smokeProbe = `
       "all Editorial language cards must disclose unverified heuristic bands",
     );
 
+    const workloadEvidence = document.querySelectorAll("[data-workload-evidence]");
+    assert(workloadEvidence.length === 1,
+      "only the measured JavaScript identity may expose workload observations");
+    const workloadDetails = workloadEvidence[0];
+    assert(workloadDetails?.tagName === "DETAILS" && !workloadDetails.open,
+      "measured workload evidence must be a separate collapsed disclosure");
+    workloadDetails.open = true;
+    assert(workloadDetails.querySelectorAll("[data-workload-run]").length === 2,
+      "exactly two genuine archived runs must be visible without pooling");
+    assert(workloadDetails.textContent.includes("19.81 ms") &&
+      workloadDetails.textContent.includes("20.70 ms") &&
+      workloadDetails.textContent.includes("Different CPU models") &&
+      workloadDetails.textContent.includes("not a language ranking") &&
+      workloadDetails.textContent.includes("MAD") &&
+      workloadDetails.textContent.includes("No confidence interval"),
+      "measurement scope, dispersion and unavailable uncertainty must be explicit");
+    assert([...workloadDetails.querySelectorAll("a")].every((link) =>
+      link.href.startsWith("https://github.com/KeilerHirsch/") &&
+      link.rel.includes("noopener") && link.rel.includes("noreferrer")),
+      "measured evidence links must remain on the known public repository");
+    if (window.innerWidth <= 760) {
+      assert(document.documentElement.scrollWidth <= window.innerWidth + 2,
+        "expanded measured workload evidence must fit the mobile viewport");
+    }
+
     action("select-use-case", "use-case-id", "web-backend").click();
     await waitFor(() => document.querySelectorAll(".shortlist-card").length >= 5, "use-case shortlist");
 
