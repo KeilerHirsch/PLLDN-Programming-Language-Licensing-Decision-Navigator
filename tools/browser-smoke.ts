@@ -39,6 +39,17 @@ const smokeProbe = `
       "trusted Pages runtime and language catalogue",
     );
 
+    const heroStats = document.querySelector(".product-stats")?.textContent ?? "";
+    for (const expected of [
+      "194 language identities",
+      "714 license identities",
+      "35 detailed languages",
+      "32 detailed licenses",
+      "345 Preview facts",
+    ]) {
+      assert(heroStats.includes(expected), "hero count mismatch: " + expected);
+    }
+
     action("select-use-case", "use-case-id", "web-backend").click();
     await waitFor(() => document.querySelectorAll(".shortlist-card").length >= 5, "use-case shortlist");
 
