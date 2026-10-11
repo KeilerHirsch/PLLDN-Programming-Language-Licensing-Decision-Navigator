@@ -11,6 +11,12 @@ import {
   licenseMatchesFilters,
   type ProductFilterState,
 } from "../product/catalog-filters.ts";
+import {
+  INDEX_ONLY_LANGUAGES,
+  INDEX_ONLY_LICENSES,
+  LANGUAGE_IDENTITY_SOURCE,
+  LICENSE_IDENTITY_SOURCE,
+} from "../product/identity-index.ts";
 import { LANGUAGE_DECISION_PROFILES } from "../product/language-decision-profiles.ts";
 import { LICENSE_DECISION_PROFILES } from "../product/license-decision-profiles.ts";
 import type {
@@ -256,6 +262,10 @@ function renderHero(catalog: CatalogPreviewView): HTMLElement {
     badge(`${PRODUCT_MODEL.licenses.length} licenses`),
     badge("345 Preview facts"),
     badge("Reviewed decision path", "product-badge product-badge-trusted"),
+  );
+  stats.append(
+    badge(`${INDEX_ONLY_LANGUAGES.length} additional language identities`),
+    badge(`${INDEX_ONLY_LICENSES.length} additional license identities`),
   );
   hero.append(stats);
 
@@ -868,6 +878,65 @@ function renderLicenseCatalog(
   return wrapper;
 }
 
+function renderIdentityIndex(state: ProductUiState): HTMLElement {
+  const languages = state.mode === "languages";
+  const identities = languages ? INDEX_ONLY_LANGUAGES : INDEX_ONLY_LICENSES;
+  const label = languages ? "languages" : "licenses";
+  const source = languages ? LANGUAGE_IDENTITY_SOURCE : LICENSE_IDENTITY_SOURCE;
+  const details = document.createElement("details");
+  details.className = "identity-index";
+  details.dataset.identityIndex = "true";
+
+  const summary = document.createElement("summary");
+  summary.textContent = `${identities.length} more ${label} · identity-only index`;
+  details.append(summary);
+
+  const explanation = paragraph(
+    "These entries are names only: no performance scores, license permissions, obligations, or Reviewed recommendations. Structured filters apply to detailed profiles, not this index.",
+  );
+  explanation.className = "identity-index-note";
+  const sourceLink = document.createElement("a");
+  sourceLink.href = source;
+  sourceLink.textContent = languages
+    ? "Source: GitHub Linguist (pinned snapshot)"
+    : "Source: SPDX license list (pinned snapshot)";
+  sourceLink.rel = "noopener noreferrer";
+  details.append(explanation, sourceLink);
+
+  const count = paragraph(`${identities.length} indexed identities available.`);
+  count.className = "identity-index-count";
+  count.dataset.identityCount = "true";
+  details.append(count);
+  const list = document.createElement("ul");
+  list.className = "identity-index-list";
+  if (languages) {
+    for (const name of INDEX_ONLY_LANGUAGES) {
+      const li = document.createElement("li");
+      li.dataset.identityEntry = "true";
+      li.dataset.identitySearchText = name.normalize("NFKD").toLocaleLowerCase("en-US");
+      li.textContent = name;
+      list.append(li);
+    }
+  } else {
+    for (const license of INDEX_ONLY_LICENSES) {
+      const li = document.createElement("li");
+      li.dataset.identityEntry = "true";
+      li.dataset.identitySearchText =
+        `${license.id} ${license.name}`.normalize("NFKD").toLocaleLowerCase("en-US");
+      const link = document.createElement("a");
+      link.href = license.reference;
+      link.textContent = license.id;
+      link.rel = "noopener noreferrer";
+      const name = document.createElement("small");
+      name.textContent = license.name;
+      li.append(link, name);
+      list.append(li);
+    }
+  }
+  details.append(list);
+  return details;
+}
+
 function renderCatalog(
   catalog: CatalogPreviewView,
   state: ProductUiState,
@@ -1037,6 +1106,7 @@ function renderCatalog(
       ? renderLanguageCatalog(catalog, state)
       : renderLicenseCatalog(catalog, state),
   );
+  section.append(renderIdentityIndex(state));
   const searchEmpty = paragraph(
     "No matches for that search. Try a different keyword or reset the filters.",
   );
