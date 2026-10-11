@@ -35,8 +35,8 @@ test("pinned language identity index extends profiles without duplicate assessme
 
 test("pinned SPDX identities are links and never silently become license decisions", () => {
   assert.equal(SPDX_IDENTITY_VERSION, "3.29.0");
-  assert(LICENSE_IDENTITIES.length >= 100);
-  assert(INDEX_ONLY_LICENSES.length >= 65);
+  assert.equal(LICENSE_IDENTITIES.length, 708);
+  assert(INDEX_ONLY_LICENSES.length >= 675);
   const keys = LICENSE_IDENTITIES.map((entry) =>
     entry.id.toLocaleLowerCase("en-US"),
   );
@@ -48,6 +48,7 @@ test("pinned SPDX identities are links and never silently become license decisio
   );
   for (const license of LICENSE_IDENTITIES) {
     assert(license.id.length > 0 && license.name.length > 0);
+    assert.equal(typeof license.osiApproved, "boolean");
     assert.equal(
       license.reference,
       `https://spdx.org/licenses/${license.id}.html`,
