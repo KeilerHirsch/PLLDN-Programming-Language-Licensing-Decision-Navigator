@@ -257,8 +257,10 @@ function renderHero(catalog: CatalogPreviewView): HTMLElement {
 
   const stats = document.createElement("div");
   stats.className = "product-stats";
-  const languageTotal = PRODUCT_MODEL.languages.length + INDEX_ONLY_LANGUAGES.length;
-  const licenseTotal = PRODUCT_MODEL.licenses.length + INDEX_ONLY_LICENSES.length;
+  const languageTotal =
+    PRODUCT_MODEL.languages.length + INDEX_ONLY_LANGUAGES.length;
+  const licenseTotal =
+    PRODUCT_MODEL.licenses.length + INDEX_ONLY_LICENSES.length;
   const candidateFacts = [...catalog.languages, ...catalog.licenses].reduce(
     (total, entry) => total + entry.facts.length,
     0,
