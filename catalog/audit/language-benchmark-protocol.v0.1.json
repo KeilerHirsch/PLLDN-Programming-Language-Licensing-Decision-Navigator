@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.1",
+  "audit_id": "A5",
+  "status": "PROTOCOL_ONLY_NO_RUN_IN_THIS_RECORD",
+  "workload_id": "javascript.node24.json-roundtrip-v0.1",
+  "editorial_identity": "language.javascript",
+  "runtime_implementation": "Node.js",
+  "runtime_version": "24.15.0",
+  "operating_system_runner": "ubuntu-24.04",
+  "source_script": "tools/benchmark-node24-json-v01.ts",
+  "manual_workflow": ".github/workflows/language-benchmark.yml",
+  "raw_report_artifact": "reports/node24-json-roundtrip-v0.1.json",
+  "workload": {
+    "records": 2048,
+    "repeats_per_sample": 16,
+    "operations_per_sample": "16 paired JSON.stringify and JSON.parse on 2048-record deterministic in-memory fixture",
+    "warmup_samples": 5,
+    "measured_samples": 21,
+    "wall_time_clock": "process.hrtime.bigint",
+    "correctness": "Each sample/warmup checksum independently checked; source and generated input SHA-256 reported"
+  },
+  "execution": {
+    "ref": "protected current main commit only",
+    "exact_sha_input": "required",
+    "github_token_permissions": "contents:read",
+    "artifact_retention_days": 90,
+    "runner_environment": "reported at run time; CPU/VM allocation and noise not controlled",
+    "build_flags": "Node.js v24.15.0 default command, no custom V8 flags, single process"
+  },
+  "evidence_state": "AWAITING_REAL_GITHUB_ACTIONS_RUN",
+  "limitations": [
+    "Not an independent or cross-language reference benchmark.",
+    "Does not measure startup, compilation, GC pause behavior, network, I/O or entire applications.",
+    "Does not verify any of the 385 Editorial performance/complexity bands.",
+    "Later measured results require exact GitHub run id, run commit, report hash and raw samples."
+  ],
+  "measurements": []
+}
