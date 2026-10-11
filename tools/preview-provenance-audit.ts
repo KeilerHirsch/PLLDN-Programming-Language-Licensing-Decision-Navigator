@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
 import { createHash } from "node:crypto";
-import { readFileSync, readdirSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -30,7 +30,10 @@ export interface ClaimAuditRow {
   dimension_id: string;
   review_status: string;
   state: string;
-  evidence_status: "INTERNAL_SEED_ONLY" | "OTHER_UNVERIFIED_SOURCE" | "NO_SOURCE";
+  evidence_status:
+    | "INTERNAL_SEED_ONLY"
+    | "OTHER_UNVERIFIED_SOURCE"
+    | "NO_SOURCE";
   source_ids: string[];
   test_refs: string[];
 }
@@ -47,7 +50,12 @@ export interface ProvenanceAudit {
   verified_internal_seed_hashes: number;
   mutable_main_source_urls: number;
   independently_verified_claims: 0;
-  sources: { id: string; type: string; reference: string; sha256_matches: boolean }[];
+  sources: {
+    id: string;
+    type: string;
+    reference: string;
+    sha256_matches: boolean;
+  }[];
   claims: ClaimAuditRow[];
 }
 
@@ -60,8 +68,7 @@ function parseRecord<T>(filename: string): T {
   return value.record;
 }
 
-const lexical = (a: string, b: string): number =>
-  a < b ? -1 : a > b ? 1 : 0;
+const lexical = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
 
 /** SHA binding verifies seed bytes, NOT accuracy of the seed's assertions. */
 function internalSeedPath(source: SeedSource): string | null {
@@ -127,11 +134,14 @@ export function auditPreviewProvenance(root = process.cwd()): ProvenanceAudit {
     .map((file) => {
       const claim = parseRecord<CandidateClaim>(join(dir, "claims", file));
       if (claim.review_status !== "Preview") {
-        throw new Error(`Non-Preview record in candidate pack: ${claim.claim_id}`);
+        throw new Error(
+          `Non-Preview record in candidate pack: ${claim.claim_id}`,
+        );
       }
       const kinds = claim.source_ids.map((id) => {
         const source = sources.get(id);
-        if (!source) throw new Error(`Unresolved source ${id}: ${claim.claim_id}`);
+        if (!source)
+          throw new Error(`Unresolved source ${id}: ${claim.claim_id}`);
         return internalSeedPath(source) ? "INTERNAL_SEED" : "OTHER_UNVERIFIED";
       });
       const evidence_status: ClaimAuditRow["evidence_status"] =
@@ -165,12 +175,10 @@ export function auditPreviewProvenance(root = process.cwd()): ProvenanceAudit {
     other_unverified_sources: claims.filter(
       (claim) => claim.evidence_status === "OTHER_UNVERIFIED_SOURCE",
     ).length,
-    no_sources: claims.filter(
-      (claim) => claim.evidence_status === "NO_SOURCE",
-    ).length,
-    claims_with_test_refs: claims.filter(
-      (claim) => claim.test_refs.length > 0,
-    ).length,
+    no_sources: claims.filter((claim) => claim.evidence_status === "NO_SOURCE")
+      .length,
+    claims_with_test_refs: claims.filter((claim) => claim.test_refs.length > 0)
+      .length,
     internal_seed_documents: sourceAudit.filter(
       (source) => source.type === "INTERNAL_SEED",
     ).length,
