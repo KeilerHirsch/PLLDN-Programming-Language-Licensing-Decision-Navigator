@@ -71,6 +71,17 @@ const smokeProbe = `
     );
 
     const search = document.querySelector('[data-action="catalog-search"]');
+    const languageIndex = document.querySelector("[data-identity-index]");
+    languageIndex.open = true;
+    assert(
+      document.querySelectorAll("[data-identity-entry]:not([hidden])").length === 60,
+      "identity catalogue should show one initial page of 60",
+    );
+    action("identity-more", "identity-more", "true").click();
+    assert(
+      document.querySelectorAll("[data-identity-entry]:not([hidden])").length === 120,
+      "show-more must reveal the next 60, not recalculate assessments",
+    );
     assert(
       document.querySelectorAll("[data-identity-entry]").length > 65,
       "expanded language identities should exist without being rated",
@@ -118,6 +129,31 @@ const smokeProbe = `
         document.querySelector("[data-catalog-visible-count]").textContent.includes("32 licenses shown"),
       "switching to license mode",
     );
+
+    const licenseIndex = document.querySelector("[data-identity-index]");
+    licenseIndex.open = true;
+    assert(
+      document.querySelectorAll("[data-identity-entry]").length === 682 &&
+      document.querySelectorAll("[data-identity-entry]:not([hidden])").length === 60,
+      "active SPDX identities must paginate independently of detailed profiles",
+    );
+    const osiFilter = document.querySelector('[data-action="identity-osi"]');
+    osiFilter.value = "yes";
+    osiFilter.dispatchEvent(new Event("change", { bubbles: true }));
+    assert(
+      document.querySelector("[data-identity-count]").textContent.includes("of 121") &&
+      Array.from(document.querySelectorAll("[data-identity-entry]:not([hidden])"))
+        .every((entry) => entry.dataset.identityOsiApproved === "true"),
+      "OSI filter must use pinned SPDX flags, not invented license analysis",
+    );
+    osiFilter.value = "no";
+    osiFilter.dispatchEvent(new Event("change", { bubbles: true }));
+    assert(
+      document.querySelector("[data-identity-count]").textContent.includes("of 561"),
+      "non-OSI-flagged SPDX entries must remain discoverable",
+    );
+    osiFilter.value = "any";
+    osiFilter.dispatchEvent(new Event("change", { bubbles: true }));
 
     const licenseSearch = document.querySelector('[data-action="catalog-search"]');
     licenseSearch.value = "Artistic-2.0";
