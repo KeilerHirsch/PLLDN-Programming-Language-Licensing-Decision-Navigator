@@ -903,11 +903,35 @@ function renderIdentityIndex(state: ProductUiState): HTMLElement {
   sourceLink.rel = "noopener noreferrer";
   details.append(explanation, sourceLink);
 
+  if (!languages) {
+    const filterLabel = document.createElement("label");
+    filterLabel.className = "catalog-filter identity-osi-filter";
+    const title = document.createElement("span");
+    title.textContent = "SPDX OSI flag";
+    const select = document.createElement("select");
+    select.dataset.action = "identity-osi";
+    for (const [value, label] of [
+      ["any", "All SPDX identities"],
+      ["yes", "OSI-approved in SPDX"],
+      ["no", "Not flagged OSI-approved in SPDX"],
+    ] as const) {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      select.append(option);
+    }
+    filterLabel.append(title, select);
+    details.append(filterLabel);
+  }
+
   const count = paragraph(`${identities.length} indexed identities available.`);
   count.className = "identity-index-count";
   count.dataset.identityCount = "true";
+  count.setAttribute("role", "status");
+  count.setAttribute("aria-live", "polite");
   details.append(count);
   const list = document.createElement("ul");
+  list.id = "identity-index-results";
   list.className = "identity-index-list";
   if (languages) {
     for (const name of INDEX_ONLY_LANGUAGES) {
@@ -926,6 +950,7 @@ function renderIdentityIndex(state: ProductUiState): HTMLElement {
       li.dataset.identitySearchText = `${license.id} ${license.name}`
         .normalize("NFKD")
         .toLocaleLowerCase("en-US");
+      li.dataset.identityOsiApproved = String(license.osiApproved);
       const link = document.createElement("a");
       link.href = license.reference;
       link.textContent = license.id;
@@ -941,6 +966,11 @@ function renderIdentityIndex(state: ProductUiState): HTMLElement {
     }
   }
   details.append(list);
+  const more = button("Show more identities", "identity-more", "identity-more");
+  more.dataset.identityMore = "true";
+  more.setAttribute("aria-controls", list.id);
+  more.hidden = true;
+  details.append(more);
   return details;
 }
 
