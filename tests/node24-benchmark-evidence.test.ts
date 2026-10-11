@@ -7,15 +7,21 @@ import test from "node:test";
 
 const benchmark = "tools/benchmark-node24-json-v01.ts";
 const workflow = ".github/workflows/language-benchmark.yml";
-const run = (...args: string[]) =>
-  spawnSync(process.execPath, [benchmark, ...args], {
+function run(...args: string[]) {
+  // Node's test-coverage child protocol must not leak into ordinary fixture CLI
+  // subprocesses; on Windows, child coverage can corrupt the parent report.
+  const childEnv = { ...process.env };
+  delete childEnv.NODE_V8_COVERAGE;
+  delete childEnv.NODE_TEST_CONTEXT;
+  return spawnSync(process.execPath, [benchmark, ...args], {
     encoding: "utf8",
     env: {
-      ...process.env,
+      ...childEnv,
       GITHUB_ACTIONS: "false",
       BENCHMARK_SOURCE_SHA: "",
     },
   });
+}
 
 test("Node 24 workload fixture identity and checksum replay deterministically", () => {
   const first = run("--self-test");
