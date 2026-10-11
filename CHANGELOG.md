@@ -14,6 +14,7 @@ replacement or silent update of the published Beta 1 artifacts.
 - Added task-first navigation, language comparison, catalogue filters,
   qualitative performance and complexity dimensions, and clearer metric badges.
 - Improved the GitHub Pages entry point and product-first README presentation.
+- Added a separate source-linked identity index for more programming languages and SPDX licenses, without inventing assessments or promoting entries to Reviewed status.
 
 ### Verification
 
