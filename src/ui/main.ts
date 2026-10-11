@@ -1,5 +1,11 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
+import {
+  catalogNavigationHref,
+  compareCatalogNames,
+  readCatalogNavigation,
+} from "./catalog-navigation.ts";
+import { PRODUCT_MODEL } from "../product/catalog.ts";
 import { exportUnassessedCandidateCsv } from "../product/unassessed-export.ts";
 import { analyzeText } from "../text/analyze.ts";
 import type { TextAnalysis, TextRuleSet } from "../text/types.ts";
@@ -49,10 +55,19 @@ let productState: ProductUiState = {
   compareLicenseIds: [],
   filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
 };
-let catalogQuery = "";
+const initialNavigation = readCatalogNavigation(window.location.search);
+productState = {
+  ...productState,
+  mode: initialNavigation.mode,
+  status: initialNavigation.status,
+  order: initialNavigation.order,
+  view: initialNavigation.view,
+  filters: initialNavigation.filters,
+};
+let catalogQuery = initialNavigation.query;
 const identityPageSize = 60;
 let identityLimit = identityPageSize;
-let identityOsiFilter = "any";
+let identityOsiFilter = initialNavigation.spdx;
 
 function diagnostic(error: unknown): string {
   return error instanceof Error
@@ -64,75 +79,84 @@ function normalizedSearch(value: string): string {
   return value.normalize("NFKD").toLocaleLowerCase("en-US").trim();
 }
 
+function navigationState() {
+  return {
+    mode: productState.mode,
+    query: catalogQuery,
+    status: productState.status,
+    order: productState.order,
+    view: productState.view,
+    spdx: identityOsiFilter,
+    filters: productState.filters,
+  };
+}
+function saveNavigation(push = false): void {
+  window.history[push ? "pushState" : "replaceState"](
+    null,
+    "",
+    catalogNavigationHref(navigationState()),
+  );
+}
 function applyCatalogFilter(): void {
   const query = normalizedSearch(catalogQuery);
   let visible = 0;
-  for (const entry of root.querySelectorAll<HTMLElement>(
-    "[data-catalog-entry]",
-  )) {
-    const text = entry.dataset.catalogSearchText ?? "";
-    entry.hidden = query.length > 0 && !text.includes(query);
-    if (!entry.hidden) visible += 1;
-  }
-
-  const filterPrefix =
-    productState.mode === "languages" ? "language" : "license";
-  const filtered = Object.entries(productState.filters).some(
-    ([key, value]) => key.startsWith(filterPrefix) && value !== "any",
+  let editorial = 0;
+  let unassessed = 0;
+  const entries = [
+    ...root.querySelectorAll<HTMLElement>("[data-catalog-entry]"),
+  ];
+  entries.sort((a, b) =>
+    compareCatalogNames(
+      a.dataset.catalogName ?? "",
+      b.dataset.catalogName ?? "",
+      productState.order,
+    ),
   );
-  let extra = 0;
-  let extraShown = 0;
-  for (const entry of root.querySelectorAll<HTMLElement>(
-    "[data-identity-entry]",
-  )) {
+  const grid = root.querySelector<HTMLElement>("[data-catalog-grid]");
+  if (grid) for (const entry of entries) grid.append(entry);
+  for (const entry of entries) {
     const matches =
-      !filtered &&
-      (query.length === 0 ||
-        entry.dataset.identitySearchText?.includes(query)) &&
-      (productState.mode !== "licenses" ||
-        identityOsiFilter === "any" ||
+      (!query || (entry.dataset.catalogSearchText ?? "").includes(query)) &&
+      (identityOsiFilter === "any" ||
         entry.dataset.identityOsiApproved ===
           String(identityOsiFilter === "yes"));
     if (matches) {
-      extra += 1;
-      if (extraShown < identityLimit) extraShown += 1;
+      visible += 1;
+      if (entry.dataset.catalogStatus === "editorial") editorial += 1;
+      else unassessed += 1;
     }
-    entry.hidden = !matches || extra > identityLimit;
+    entry.hidden = !matches || visible > identityLimit;
   }
-
   const input = root.querySelector<HTMLInputElement>(
     '[data-action="catalog-search"]',
   );
   if (input && input.value !== catalogQuery) input.value = catalogQuery;
   const count = root.querySelector<HTMLElement>("[data-catalog-visible-count]");
   if (count) {
-    const noun = productState.mode === "languages" ? "languages" : "licenses";
-    count.textContent = `${visible} ${noun} shown. ${extra} additional identities in the unassessed index.`;
+    const noun =
+      productState.mode === "languages"
+        ? visible === 1
+          ? "language"
+          : "languages"
+        : visible === 1
+          ? "license"
+          : "licenses";
+    count.textContent = `${visible} ${noun} found · ${Math.min(visible, identityLimit)} shown · ${editorial} editorial · ${unassessed} unassessed.`;
   }
-
-  const index = root.querySelector<HTMLDetailsElement>("[data-identity-index]");
-  const indexCount = root.querySelector<HTMLElement>("[data-identity-count]");
-  if (indexCount) {
-    indexCount.textContent = filtered
-      ? "Clear structured filters to browse identity-only entries."
-      : `${extraShown} of ${extra} additional identities shown.`;
+  const more = root.querySelector<HTMLButtonElement>("[data-identity-more]");
+  if (more) {
+    const remaining = Math.max(0, visible - identityLimit);
+    more.hidden = remaining === 0;
+    more.textContent = `Show ${Math.min(identityPageSize, remaining)} more (${remaining} remaining)`;
   }
   const osi = root.querySelector<HTMLSelectElement>(
     '[data-action="identity-osi"]',
   );
   if (osi) osi.value = identityOsiFilter;
-  const more = root.querySelector<HTMLButtonElement>("[data-identity-more]");
-  if (more) {
-    const remaining = extra - extraShown;
-    more.hidden = filtered || remaining <= 0;
-    more.textContent = `Show ${Math.min(identityPageSize, remaining)} more (${remaining} remaining)`;
-  }
-  if (index && (query.length > 0 || filtered || identityOsiFilter !== "any")) {
-    index.open = !filtered && extra > 0;
-  }
-
   const empty = root.querySelector<HTMLElement>("[data-catalog-search-empty]");
-  if (empty) empty.hidden = query.length === 0 || visible + extra > 0;
+  if (empty) empty.hidden = visible > 0;
+  const share = root.querySelector<HTMLAnchorElement>(".catalog-share");
+  if (share) share.href = catalogNavigationHref(navigationState());
 }
 
 function installProductExperience(model: UiViewModel): void {
@@ -161,10 +185,26 @@ function installProductExperience(model: UiViewModel): void {
 
 async function publish(action: () => Promise<UiViewModel>): Promise<void> {
   try {
+    const active =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+    const focus = active?.dataset.action ? { ...active.dataset } : null;
     const model = await action();
     renderApp(root, model, textState, catalogState);
     installProductExperience(model);
     applyCatalogFilter();
+    if (focus) {
+      const replacement = [
+        ...root.querySelectorAll<HTMLElement>("[data-action]"),
+      ].find(
+        (el) =>
+          el.dataset.action === focus.action &&
+          el.dataset.filterKey === focus.filterKey &&
+          el.dataset.mode === focus.mode,
+      );
+      replacement?.focus({ preventScroll: true });
+    }
   } catch (error) {
     renderDiagnostic(root, diagnostic(error));
   }
@@ -260,16 +300,27 @@ root.addEventListener("click", (event) => {
   if (action === "catalog-mode") {
     const mode = element.dataset.mode;
     if (mode === "languages" || mode === "licenses") {
-      productState = { ...productState, mode };
+      productState = { ...productState, mode, status: "all" };
       catalogQuery = "";
       identityLimit = identityPageSize;
       identityOsiFilter = "any";
+      saveNavigation(true);
       void publish(() => current.view());
     }
   }
   if (action === "identity-more") {
+    const before = identityLimit;
     identityLimit += identityPageSize;
     applyCatalogFilter();
+    const firstNew = [
+      ...root.querySelectorAll<HTMLElement>(
+        "[data-catalog-entry]:not([hidden])",
+      ),
+    ][before];
+    const link = firstNew?.querySelector<HTMLAnchorElement>(
+      ".catalog-profile-link",
+    );
+    link?.focus({ preventScroll: true });
   }
   if (action === "toggle-compare") {
     const entityId = element.dataset.entityId;
@@ -315,10 +366,12 @@ root.addEventListener("click", (event) => {
     productState = {
       ...productState,
       filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
+      status: "all",
     };
     catalogQuery = "";
     identityLimit = identityPageSize;
     identityOsiFilter = "any";
+    saveNavigation(true);
     void publish(() => current.view());
   }
   if (action === "analyze-text") {
@@ -364,9 +417,10 @@ root.addEventListener("input", (event) => {
     element?.dataset.action === "catalog-search" &&
     element instanceof HTMLInputElement
   ) {
-    catalogQuery = element.value;
+    catalogQuery = element.value.slice(0, 200);
     identityLimit = identityPageSize;
     applyCatalogFilter();
+    saveNavigation();
   }
 });
 
@@ -381,16 +435,34 @@ root.addEventListener("change", (event) => {
     if (!facetId || !optionId) return;
     void publish(() => current.selectFacet(facetId, optionId));
   }
+  if (
+    element instanceof HTMLSelectElement &&
+    ["catalog-status", "catalog-order", "catalog-view"].includes(action ?? "")
+  ) {
+    if (
+      action === "catalog-status" &&
+      ["all", "editorial", "unassessed"].includes(element.value)
+    )
+      productState.status = element.value as ProductUiState["status"];
+    if (action === "catalog-order" && ["asc", "desc"].includes(element.value))
+      productState.order = element.value as ProductUiState["order"];
+    if (action === "catalog-view" && ["cards", "list"].includes(element.value))
+      productState.view = element.value as ProductUiState["view"];
+    identityLimit = identityPageSize;
+    saveNavigation(true);
+    void publish(() => current.view());
+  }
   if (action === "identity-osi" && element instanceof HTMLSelectElement) {
     if (["any", "yes", "no"].includes(element.value)) {
-      identityOsiFilter = element.value;
+      identityOsiFilter = element.value as typeof identityOsiFilter;
       identityLimit = identityPageSize;
       applyCatalogFilter();
+      saveNavigation(true);
     }
   }
   if (action === "product-filter" && element instanceof HTMLSelectElement) {
     const filterKey = element.dataset.filterKey;
-    if (filterKey && filterKey in productState.filters) {
+    if (filterKey && Object.hasOwn(productState.filters, filterKey)) {
       productState = {
         ...productState,
         filters: {
@@ -398,7 +470,8 @@ root.addEventListener("change", (event) => {
           [filterKey]: element.value,
         },
       };
-      catalogQuery = "";
+      identityLimit = identityPageSize;
+      saveNavigation(true);
       void publish(() => current.view());
     }
   }
@@ -436,27 +509,74 @@ async function start(): Promise<void> {
     productState = {
       ...productState,
       mode: candidate.kind === "language" ? "languages" : "licenses",
+      status: "all",
+      view: "cards",
+      filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
     };
     catalogQuery =
       candidate.kind === "language"
         ? candidate.name
         : (candidate.spdx_id ?? candidate.name);
   }
+  const profileId = new URLSearchParams(window.location.search).get("profile");
+  const editorial = [
+    ...PRODUCT_MODEL.languages,
+    ...PRODUCT_MODEL.licenses,
+  ].find((p) => p.entity_id === profileId);
+  if (!candidate && editorial) {
+    productState = {
+      ...productState,
+      mode: PRODUCT_MODEL.languages.some(
+        (p) => p.entity_id === editorial.entity_id,
+      )
+        ? "languages"
+        : "licenses",
+      status: "editorial",
+      view: "cards",
+      filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
+    };
+    catalogQuery = editorial.label;
+  }
+  if (candidate || editorial) identityOsiFilter = "any";
   await publish(() => runtime.controller.view());
   if (candidate) {
     const profile = [
       ...root.querySelectorAll<HTMLDetailsElement>(".identity-profile"),
     ].find((entry) => entry.dataset.candidateId === candidate.id);
-    if (profile && !profile.closest("li")?.hidden) {
-      const index = root.querySelector<HTMLDetailsElement>(
-        "[data-identity-index]",
-      );
-      if (index) index.open = true;
+    if (
+      profile &&
+      !profile.closest<HTMLElement>("[data-catalog-entry]")?.hidden
+    ) {
       profile.open = true;
       profile.scrollIntoView({ block: "nearest" });
     }
   }
+  if (editorial) {
+    const card = [
+      ...root.querySelectorAll<HTMLElement>("[data-catalog-entry]"),
+    ].find((el) => el.dataset.entityId === editorial.entity_id);
+    card?.scrollIntoView({ block: "nearest" });
+  }
+  if (window.location.hash === "#catalog" && !candidate && !editorial)
+    root
+      .querySelector<HTMLElement>("#catalog")
+      ?.scrollIntoView({ block: "start" });
 }
+window.addEventListener("popstate", () => {
+  const nav = readCatalogNavigation(window.location.search);
+  productState = {
+    ...productState,
+    mode: nav.mode,
+    status: nav.status,
+    order: nav.order,
+    view: nav.view,
+    filters: nav.filters,
+  };
+  catalogQuery = nav.query;
+  identityOsiFilter = nav.spdx;
+  identityLimit = identityPageSize;
+  if (controller) void publish(() => controller!.view());
+});
 
 void start().catch((error) => {
   renderDiagnostic(root, diagnostic(error));
