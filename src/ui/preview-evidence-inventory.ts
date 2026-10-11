@@ -1,9 +1,6 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
-import type {
-  CatalogPreviewEntryView,
-  CatalogPreviewView,
-} from "./types.ts";
+import type { CatalogPreviewEntryView, CatalogPreviewView } from "./types.ts";
 
 export interface PreviewEvidenceCount {
   claims: number;
@@ -70,8 +67,7 @@ export function renderPreviewEvidenceInventory(
     const term = document.createElement("dt");
     term.textContent = name;
     const value = document.createElement("dd");
-    value.textContent =
-      `${counts.claims} claims · ${counts.withSources} with recorded references · ${counts.withoutSources} without recorded references · ${counts.unknownValues} UNKNOWN values · ${counts.sourceReferences} total reference entries (${counts.distinctReferences} distinct URLs)`;
+    value.textContent = `${counts.claims} claims · ${counts.withSources} with recorded references · ${counts.withoutSources} without recorded references · ${counts.unknownValues} UNKNOWN values · ${counts.sourceReferences} total reference entries (${counts.distinctReferences} distinct URLs)`;
     value.dataset.inventoryKind = name.toLowerCase();
     list.append(term, value);
   }
