@@ -109,6 +109,11 @@ export function renderLicenseComparison(ids: readonly string[]): HTMLElement {
     clear.dataset.action = "clear-license-compare";
     clear.textContent = "Clear comparison";
     header.append(clear);
+    const exportButton = document.createElement("button");
+    exportButton.type = "button";
+    exportButton.dataset.action = "export-license-compare";
+    exportButton.textContent = "Export selected comparison (CSV)";
+    header.append(exportButton);
   }
   section.append(header);
   if (selected.length === 0) {
