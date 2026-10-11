@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
 import { PRODUCT_MODEL } from "../product/catalog.ts";
-import { networkSourceOfferQualifier } from "./license-qualifications.ts";
 import { LICENSE_DECISION_PROFILES } from "../product/license-decision-profiles.ts";
 import type {
   LicenseDecisionProfile,
   LicenseProductProfile,
 } from "../product/types.ts";
+import { networkSourceOfferQualifier } from "./license-qualifications.ts";
 import {
   licensePreviewClaimRows,
   previewFactText,
