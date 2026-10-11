@@ -39,11 +39,11 @@ test("freshness job reads protected main with immutable tool pins", () => {
   );
   assert.match(
     yaml,
-    /actions\/setup-node@820762786026740c76f36085b0efc47a31fe5020/,
+    /actions\/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1/,
   );
   assert.match(
     yaml,
-    /actions\/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a/,
+    /actions\/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9/,
   );
   assert.match(yaml, /ref:\s*main/);
   assert.match(yaml, /persist-credentials:\s*false/);

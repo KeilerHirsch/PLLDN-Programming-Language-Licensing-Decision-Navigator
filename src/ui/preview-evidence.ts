@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
+import { factProvenanceDisclosure } from "./source-provenance.ts";
 import type { CatalogPreviewFactView, CatalogPreviewView } from "./types.ts";
 
 /** Display the recorded Preview claim, never infer a rights conclusion. */
@@ -84,6 +85,10 @@ export function renderPreviewClaimEvidence(
   const summary = document.createElement("summary");
   summary.textContent = `Preview evidence · ${fact?.review_status ?? "UNKNOWN"} · ${fact?.sources.length ?? 0} source(s)`;
   details.append(summary);
+  const disclosure = document.createElement("p");
+  disclosure.className = "preview-provenance-disclosure";
+  disclosure.textContent = factProvenanceDisclosure(fact);
+  details.append(disclosure);
   const claim = document.createElement("code");
   claim.textContent = fact?.claim_id ?? "No Preview claim recorded";
   details.append(claim);

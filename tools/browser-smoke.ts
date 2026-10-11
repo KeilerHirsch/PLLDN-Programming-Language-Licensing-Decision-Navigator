@@ -129,6 +129,12 @@ const smokeProbe = `
     const evidence = [...document.querySelectorAll("#compare [data-compare-evidence]")];
     assert(evidence.length === 36, "nine dimensions times four languages require source drilldowns");
     assert(
+      evidence.some((entry) =>
+        entry.querySelector(".preview-provenance-disclosure")
+          ?.textContent?.includes("Internal classification seed only")),
+      "language comparison must identify seed-only references rather than primary proof",
+    );
+    assert(
       evidence.every((entry) => entry.querySelector("code")?.textContent &&
         entry.querySelector("summary")?.textContent?.includes("Preview evidence")),
       "every Preview comparison cell must identify its recorded claim and review status",
@@ -233,6 +239,18 @@ const smokeProbe = `
       "switching to license mode",
     );
 
+    const licenseCards = [...document.querySelectorAll(".license-profile-card")];
+    assert(
+      licenseCards.some((card) => card.textContent.includes("MPL-2.0 §§1.10") &&
+        card.textContent.includes("server-side")),
+      "MPL editorial card must qualify distribution vs hosted functionality",
+    );
+    assert(
+      licenseCards.some((card) => card.textContent.includes("EUPL-1.2 Arts. 1, 3, 5") &&
+        card.textContent.includes("essential functionality")),
+      "EUPL editorial card must disclose network communication scope",
+    );
+
     const compareLicenses = [
       "license.mit",
       "license.apache-2.0",
@@ -261,6 +279,12 @@ const smokeProbe = `
     const licensedEvidence = [...document.querySelectorAll("#compare-licenses [data-compare-evidence]")];
     assert(licensedEvidence.length > 0,
       "selected detailed licenses must offer source-linked Preview claim inspection");
+    assert(
+      licensedEvidence.some((entry) =>
+        entry.querySelector(".preview-provenance-disclosure")
+          ?.textContent?.includes("Internal classification seed only")),
+      "license comparison must identify internal seed-only references",
+    );
     assert(
       licensedEvidence.every((details) =>
         details.querySelector("code")?.textContent &&

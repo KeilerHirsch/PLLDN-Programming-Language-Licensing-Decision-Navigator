@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.3",
+  "record_type": "editorial_license_condition_audit",
+  "review_status": "EDITORIAL_PREVIEW_NOT_REVIEWED",
+  "baseline_main_sha": "7a176fe99a2dae5470a248632041a7e5e6d2ac94",
+  "entity_ids": ["license.agpl-3.0-only", "license.agpl-3.0-or-later"],
+  "field": "obligations.source_disclosure",
+  "editorial_value_retained": "network-service",
+  "trigger": {
+    "modified_program": true,
+    "remote_user_interaction": true,
+    "unmodified_remote_use_alone": false,
+    "offer_source_to_remote_users": true
+  },
+  "interpretation": "AGPLv3 section 13 requires a modified version capable of remote network interaction to offer its Corresponding Source to remote users. Running an unmodified copy over a network by itself is not the section 13 modification trigger. Separate conveyance/distribution obligations and upstream modifications may still matter. The offer is to interacting users; not necessarily an unrestricted public release. For or-later, evaluate the actual version selected.",
+  "references": [
+    {
+      "section": "AGPLv3 §13",
+      "url": "https://www.gnu.org/licenses/agpl-3.0.html#section13",
+      "relevance": "Normative if-you-modify and remote-network interaction conditions, offer Corresponding Source without charge."
+    },
+    {
+      "section": "FSF GPL FAQ #UnreleasedModsAGPL",
+      "url": "https://www.gnu.org/licenses/gpl-faq.html#UnreleasedModsAGPL",
+      "relevance": "Explains the source-offer duty for a company hosting a modified AGPL program."
+    },
+    {
+      "section": "FSF GPL FAQ #AGPLv3InteractingRemotely",
+      "url": "https://www.gnu.org/licenses/gpl-faq.html#AGPLv3InteractingRemotely",
+      "relevance": "Clarifies what counts as program designed for interactive remote-network use."
+    }
+  ],
+  "verification_limits": [
+    "Normative web texts are section-linked but not checked in with immutable byte digests.",
+    "No specific licensed program, modification history, remote user interface or actual AGPL version was examined.",
+    "This is a narrow editorial qualifier and not a completed review of AGPL obligations, redistribution, license compatibility, or any of the historical v0.1 claims."
+  ]
+}

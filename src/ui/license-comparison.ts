@@ -7,6 +7,10 @@ import type {
   LicenseProductProfile,
 } from "../product/types.ts";
 import {
+  licenseDisclosureScopeQualifier,
+  networkSourceOfferQualifier,
+} from "./license-qualifications.ts";
+import {
   licensePreviewClaimRows,
   previewFactText,
   renderPreviewClaimEvidence,
@@ -63,6 +67,14 @@ export function licenseComparisonRows(): LicenseComparisonRow[] {
       label: "Source disclosure",
       value: (p) => obligation(p, "source_disclosure"),
     },
+    {
+      label: "Network source-offer condition (Preview)",
+      value: (p) => networkSourceOfferQualifier(p.entity_id) ?? "Unknown",
+    },
+    {
+      label: "Distribution / network disclosure scope (Preview)",
+      value: (p) => licenseDisclosureScopeQualifier(p.entity_id) ?? "Unknown",
+    },
     { label: "Notice", value: (p) => obligation(p, "notice") },
     { label: "Patent grant", value: (p) => obligation(p, "patent_grant") },
     { label: "Time rule", value: (p) => obligation(p, "time_rule") },
@@ -109,7 +121,7 @@ export function renderLicenseComparison(
   title.textContent = `Compare licenses (${selected.length}/4)`;
   const caveat = document.createElement("p");
   caveat.textContent =
-    "Editorial Preview only: not legal advice or a compatibility verdict. Index-only identities have no assessed rights.";
+    "Editorial Preview only: not legal advice or a compatibility verdict. Patent fields concern express license terms, not patent clearance; for GPL-2.0-or-later verify the selected GPL version and contributor before relying on a grant. Index-only identities have no assessed rights.";
   copy.append(title, caveat);
   header.append(copy);
   if (selected.length > 0) {

@@ -33,7 +33,12 @@ import {
   licenseDecisionTone,
 } from "./decision-tones.ts";
 import { renderLicenseComparison } from "./license-comparison.ts";
+import {
+  licenseDisclosureScopeQualifier,
+  networkSourceOfferQualifier,
+} from "./license-qualifications.ts";
 import { renderPreviewEvidenceInventory } from "./preview-evidence-inventory.ts";
+import { factProvenanceDisclosure } from "./source-provenance.ts";
 import type {
   CatalogPreviewEntryView,
   CatalogPreviewFactView,
@@ -601,6 +606,10 @@ function renderPreviewFacts(
       });
       value.append(sources);
     }
+    const origin = document.createElement("small");
+    origin.className = "preview-provenance-disclosure";
+    origin.textContent = ` · ${factProvenanceDisclosure(fact)}`;
+    value.append(origin);
     list.append(term, value);
   }
   details.append(list);
@@ -821,9 +830,13 @@ function renderLicenseDecisionProfile(
   }
 
   const note = paragraph(
-    "Editorial Preview only. Read the canonical terms for legal interpretation and project-specific compliance.",
+    "Editorial Preview only. Patent fields describe express license text, not patent clearance; for GPL-2.0-or-later verify the selected GPL version and contributor. Read canonical terms for project-specific compliance.",
   );
   note.className = "decision-profile-note";
+  const networkQualifier = networkSourceOfferQualifier(profile.entity_id);
+  if (networkQualifier) details.append(paragraph(networkQualifier));
+  const scopeQualifier = licenseDisclosureScopeQualifier(profile.entity_id);
+  if (scopeQualifier) details.append(paragraph(scopeQualifier));
   details.append(metadata, grid, note);
   return details;
 }
@@ -1403,6 +1416,10 @@ function renderCompareEvidence(
   const summary = document.createElement("summary");
   summary.textContent = `Preview evidence · ${fact?.review_status ?? "UNKNOWN"} · ${fact?.sources.length ?? 0} source(s)`;
   details.append(summary);
+  const disclosure = document.createElement("p");
+  disclosure.className = "preview-provenance-disclosure";
+  disclosure.textContent = factProvenanceDisclosure(fact);
+  details.append(disclosure);
   const claim = document.createElement("code");
   claim.textContent = fact?.claim_id ?? "No Preview claim recorded";
   details.append(claim);
