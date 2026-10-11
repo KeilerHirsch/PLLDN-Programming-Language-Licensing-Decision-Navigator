@@ -6,7 +6,10 @@ import {
   licensePreviewClaimRows,
   previewFactText,
 } from "../src/ui/preview-evidence.ts";
-import type { CatalogPreviewFactView, CatalogPreviewView } from "../src/ui/types.ts";
+import type {
+  CatalogPreviewFactView,
+  CatalogPreviewView,
+} from "../src/ui/types.ts";
 
 const claim: CatalogPreviewFactView = {
   claim_id: "historic-preview-claim",
@@ -58,15 +61,26 @@ test("license Preview claim matrix preserves recorded IDs and missing fields", (
   assert.equal(rows[0]?.dimensionId, "dimension.example");
   assert.equal(rows[0]?.facts[0]?.claim_id, claim.claim_id);
   assert.equal(rows[0]?.facts[1], undefined);
-  assert.equal(previewFactText(rows[0]?.facts[0]), "pinned observation (conditional)");
+  assert.equal(
+    previewFactText(rows[0]?.facts[0]),
+    "pinned observation (conditional)",
+  );
   assert.equal(previewFactText(rows[0]?.facts[1]), "Unknown");
-  assert.equal(previewFactText({ ...claim, state: "UNKNOWN", value: null }), "Unknown");
+  assert.equal(
+    previewFactText({ ...claim, state: "UNKNOWN", value: null }),
+    "Unknown",
+  );
 });
 
 test("license claim matrix neither invents rights nor expands unassessed identities", () => {
-  assert.equal(licensePreviewClaimRows(catalogue, ["candidate.license.unknown"]).length, 0);
+  assert.equal(
+    licensePreviewClaimRows(catalogue, ["candidate.license.unknown"]).length,
+    0,
+  );
   assert.throws(() =>
-    licensePreviewClaimRows({ ...catalogue, status: "Reviewed" as "Preview" }, ["license.mit"]),
+    licensePreviewClaimRows({ ...catalogue, status: "Reviewed" as "Preview" }, [
+      "license.mit",
+    ]),
   );
   assert.deepEqual(licensePreviewClaimRows(catalogue, []), []);
 });
