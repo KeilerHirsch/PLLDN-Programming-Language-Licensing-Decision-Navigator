@@ -309,7 +309,7 @@ export const LICENSE_IDENTITIES: readonly {
   },
   {
     id: "BSD-2-Clause",
-    name: "BSD 2-Clause \"Simplified\" License",
+    name: 'BSD 2-Clause "Simplified" License',
     reference: "https://spdx.org/licenses/BSD-2-Clause.html",
   },
   {
@@ -319,7 +319,7 @@ export const LICENSE_IDENTITIES: readonly {
   },
   {
     id: "BSD-3-Clause",
-    name: "BSD 3-Clause \"New\" or \"Revised\" License",
+    name: 'BSD 3-Clause "New" or "Revised" License',
     reference: "https://spdx.org/licenses/BSD-3-Clause.html",
   },
   {
