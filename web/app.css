@@ -1047,3 +1047,57 @@ button[data-action="toggle-compare"]:disabled {
     grid-column: 1 / -1;
   }
 }
+
+/* Lightweight identities are deliberately visually distinct from rated cards. */
+.identity-index {
+  min-width: 0;
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, CanvasText 22%, transparent);
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, CanvasText 2%, Canvas);
+}
+
+.identity-index > summary {
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.identity-index-note,
+.identity-index-count {
+  max-width: 78ch;
+  margin: 0.75rem 0;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, CanvasText 80%, Canvas);
+}
+
+.identity-index-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
+  gap: 0.45rem;
+  padding: 0;
+  margin: 1rem 0 0;
+  list-style: none;
+}
+
+.identity-index-list li {
+  min-width: 0;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid color-mix(in srgb, CanvasText 14%, transparent);
+  border-radius: 0.55rem;
+  background: Canvas;
+  font-size: 0.86rem;
+  overflow-wrap: anywhere;
+}
+
+.identity-index-list li[hidden] {
+  display: none;
+}
+
+.identity-index-list li small {
+  display: block;
+  margin-top: 0.22rem;
+  color: color-mix(in srgb, CanvasText 74%, Canvas);
+}
+
