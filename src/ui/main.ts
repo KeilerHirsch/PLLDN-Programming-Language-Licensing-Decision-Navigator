@@ -4,6 +4,7 @@ import { exportUnassessedCandidateCsv } from "../product/unassessed-export.ts";
 import { analyzeText } from "../text/analyze.ts";
 import type { TextAnalysis, TextRuleSet } from "../text/types.ts";
 import type { UiController } from "./controller.ts";
+import { exportEditorialLicenseCompareCsv } from "./license-compare-export.ts";
 import {
   DEFAULT_PRODUCT_UI_STATE,
   type ProductUiState,
@@ -199,20 +200,33 @@ async function analyzeCurrent(current: UiController): Promise<void> {
   await publish(() => current.view());
 }
 
+function downloadCsv(content: string, filename: string): void {
+  const blob = new Blob([content], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
+}
+
 root.addEventListener("click", (event) => {
   const element = actionElement(event.target);
   const current = controller;
   if (!element || !current) return;
   const action = element.dataset.action;
   if (action === "export-unassessed-csv") {
-    const csv = exportUnassessedCandidateCsv();
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "plldn-unassessed-candidates-v0.2.csv";
-    link.click();
-    setTimeout(() => URL.revokeObjectURL(url), 0);
+    downloadCsv(
+      exportUnassessedCandidateCsv(),
+      "plldn-unassessed-candidates-v0.2.csv",
+    );
+    return;
+  }
+  if (action === "export-license-compare") {
+    downloadCsv(
+      exportEditorialLicenseCompareCsv(productState.compareLicenseIds),
+      "plldn-editorial-license-comparison.csv",
+    );
     return;
   }
   if (action === "select-use-case") {
