@@ -53,6 +53,10 @@ const smokeProbe = `
   try {
     if (new URLSearchParams(window.location.search).get("probe") === "focus") {
       await waitFor(() => document.querySelector("[data-catalog-visible-count]")?.textContent.includes("194 languages found"), "focus runtime");
+      const focusStatus = document.querySelector('[data-action="catalog-status"]');
+      focusStatus.value = "editorial";
+      focusStatus.dispatchEvent(new Event("change", { bubbles: true }));
+      await waitFor(() => document.querySelector("[data-catalog-visible-count]").textContent.includes("35 languages found"), "visible editorial focus targets");
       const guide = action("select-use-case", "use-case-id", "web-backend");
       guide.focus();
       guide.click();
@@ -424,13 +428,29 @@ const smokeProbe = `
     );
 
     assert(document.querySelectorAll("[data-identity-entry]").length===682 && document.querySelectorAll("[data-catalog-entry]").length===714,"all pinned license identities must share the main catalogue");
+    const editorialStatus = document.querySelector('[data-action="catalog-status"]');
+    editorialStatus.value = "editorial";
+    editorialStatus.dispatchEvent(new Event("change", { bubbles: true }));
+    await waitFor(() => document.querySelector("[data-catalog-visible-count]").textContent.includes("32 licenses found"), "editorial license source-flag baseline");
+    const editorialFlag = document.querySelector('[data-action="identity-osi"]');
+    editorialFlag.value = "yes";
+    editorialFlag.dispatchEvent(new Event("change", { bubbles: true }));
+    const flaggedEditorial = [...document.querySelectorAll("[data-catalog-entry]:not([hidden])")];
+    assert(flaggedEditorial.length > 0 && flaggedEditorial.some(card => card.dataset.entityId === "license.mit"), "SPDX source flag must include real editorial MIT identity");
+    assert(flaggedEditorial.every(card => card.dataset.identityOsiApproved === "true"), "editorial source flag must use pinned SPDX metadata");
+    editorialFlag.value = "any";
+    editorialFlag.dispatchEvent(new Event("change", { bubbles: true }));
+    const restoreAll = document.querySelector('[data-action="catalog-status"]');
+    restoreAll.value = "all";
+    restoreAll.dispatchEvent(new Event("change", { bubbles: true }));
+    await waitFor(() => document.querySelector("[data-catalog-visible-count]").textContent.includes("714 licenses found"), "restore all license identities");
     const osiFilter = document.querySelector('[data-action="identity-osi"]');
     osiFilter.value = "yes";
     osiFilter.dispatchEvent(new Event("change",{bubbles:true}));
-    assert([...document.querySelectorAll("[data-catalog-entry]:not([hidden])")].every(entry=>entry.dataset.identityOsiApproved==="true"),"SPDX flag filter must use recorded source metadata");
+    assert(document.querySelectorAll("[data-catalog-entry]:not([hidden])").length > 0 && [...document.querySelectorAll("[data-catalog-entry]:not([hidden])")].every(entry=>entry.dataset.identityOsiApproved==="true"),"SPDX flag filter must use recorded source metadata");
     osiFilter.value = "no";
     osiFilter.dispatchEvent(new Event("change",{bubbles:true}));
-    assert([...document.querySelectorAll("[data-catalog-entry]:not([hidden])")].every(entry=>entry.dataset.identityOsiApproved==="false"),"non-approved source flags must remain discoverable");
+    assert(document.querySelectorAll("[data-catalog-entry]:not([hidden])").length > 0 && [...document.querySelectorAll("[data-catalog-entry]:not([hidden])")].every(entry=>entry.dataset.identityOsiApproved==="false"),"non-approved source flags must remain discoverable");
     osiFilter.value = "any";
     osiFilter.dispatchEvent(new Event("change",{bubbles:true}));
     const licenseSearch = document.querySelector('[data-action="catalog-search"]');

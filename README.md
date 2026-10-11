@@ -14,12 +14,15 @@ PLLDN helps you choose a language and understand licensing before the first comm
 
 [![Open the PLLDN live app — Filter. Compare. Decide.](docs/assets/plldn-readme-hero.webp)](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/)
 
+[**Languages →**](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/?catalog=languages#catalog) · [**Licenses →**](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/?catalog=licenses#catalog)
+
 [**Launch PLLDN →**](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/) · [Browser quick start](#quick-start) · [Local verification](#local-verification)
 
 </div>
 
 ## What PLLDN does
 
+- **Browse** all 194 language and 714 license identities in one searchable catalogue, with status filters, A–Z/Z–A sorting, compact lists, detailed cards, and shareable links.
 - **Explore** task-first shortlists for Windows tools, web apps, embedded software, and more.
 - **Compare** up to four languages side by side.
 - **Inspect licenses** through permissions, obligations, commercial use, SaaS/hosting, and competition.
@@ -28,9 +31,11 @@ PLLDN helps you choose a language and understand licensing before the first comm
 
 ## Quick start
 
-1. Choose a task under **What are you building?**
-2. Filter the **Language catalogue** and add languages to compare.
-3. Switch to **Licenses** and open **Rights, restrictions & compliance**.
+1. Open **Languages** or **Licenses** directly, or choose a task under **What are you building?**
+2. Search by name or SPDX identifier; narrow results with the filters. Switch between compact lists and detailed cards.
+3. Open a profile, compare up to four Editorial profiles, or use **Link to this view** to share the current filters.
+
+[Catalogue navigation and direct-link examples](docs/catalogue.md).
 
 Building a hosted service? Start with **Web backend**, compare languages, then inspect SaaS permissions and source-disclosure obligations under **Licenses**.
 
@@ -38,7 +43,7 @@ Building a hosted service? Start with **Web backend**, compare languages, then i
 
 **Preview navigator:** 35 languages, 32 licenses, and 30 use-case guides. Qualitative performance, complexity, and ecosystem bands; Open Source, source-available, public-domain-like, and license-transition models.
 
-**Expanded:** [Unassessed identity index](docs/identity-index.md).
+**Unified catalogue:** all 194 language and 714 license identities are normal website results. The additional **159 languages and 682 licenses** expose pinned identities and sources with **UNKNOWN assessments**; they are not newly rated or Reviewed recommendations. [Identity sources and scope](docs/identity-index.md).
 
 **Reviewed decision lab:** **Go, Python, Rust, and TypeScript**, four Reviewed boolean capabilities, and eight Reviewed SPDX license identities. This is **not a complete licensing workflow**. Preview guidance never self-promotes into Reviewed recommendations.
 

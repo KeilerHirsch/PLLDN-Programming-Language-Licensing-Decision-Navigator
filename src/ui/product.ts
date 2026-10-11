@@ -3,10 +3,6 @@
 import candidates from "../../catalog/unassessed-candidates.v0.2.json" with {
   type: "json",
 };
-import {
-  candidateMatchesFilters,
-  type CatalogStatus,
-} from "./catalog-navigation.ts";
 import type { TypedValue } from "../decision/types.ts";
 import {
   PRODUCT_COMPARE_DIMENSIONS,
@@ -21,6 +17,7 @@ import {
 import {
   INDEX_ONLY_LANGUAGES,
   INDEX_ONLY_LICENSES,
+  LICENSE_IDENTITIES,
 } from "../product/identity-index.ts";
 import { LANGUAGE_BAND_EVIDENCE_NOTICE } from "../product/language-band-provenance.ts";
 import { LANGUAGE_DECISION_PROFILES } from "../product/language-decision-profiles.ts";
@@ -30,6 +27,10 @@ import type {
   LicenseProductProfile,
   UseCaseGuide,
 } from "../product/types.ts";
+import {
+  type CatalogStatus,
+  candidateMatchesFilters,
+} from "./catalog-navigation.ts";
 import {
   type DecisionTone,
   languageDecisionTone,
@@ -879,6 +880,9 @@ function renderLicenseCard(
   card.dataset.catalogStatus = "editorial";
   card.dataset.entityId = profile.entity_id;
   card.dataset.catalogSearchText = productSearchText(profile, entry);
+  const spdxId = LICENSE_DECISION_PROFILES[profile.entity_id]?.spdx_id;
+  const identity = LICENSE_IDENTITIES.find((item) => item.id === spdxId);
+  if (identity) card.dataset.identityOsiApproved = String(identity.osiApproved);
 
   const head = document.createElement("div");
   head.className = "product-card-head";

@@ -4,10 +4,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { DEFAULT_PRODUCT_FILTERS } from "../src/product/catalog-filters.ts";
 import {
-  readCatalogNavigation,
+  candidateMatchesFilters,
   catalogNavigationHref,
   compareCatalogNames,
-  candidateMatchesFilters,
+  readCatalogNavigation,
 } from "../src/ui/catalog-navigation.ts";
 
 test("catalogue URLs round-trip search, mode, status, sort and structured filters", () => {

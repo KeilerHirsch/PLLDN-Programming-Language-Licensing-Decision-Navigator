@@ -178,8 +178,14 @@ test("all pinned identities are first-class catalogue cards without manufactured
     assert.equal(withClass(view, "identity-card").length, unassessed);
     assert.equal(withClass(view, "product-card-grid").length, 1);
     if (mode === "licenses") {
-      const mit = withClass(view,"license-profile-card").find(card=>card.dataset.entityId === "license.mit");
-      assert.equal(mit?.dataset.identityOsiApproved,"true","the source flag must also include profiled SPDX identities");
+      const mit = withClass(view, "license-profile-card").find(
+        (card) => card.dataset.entityId === "license.mit",
+      );
+      assert.equal(
+        mit?.dataset.identityOsiApproved,
+        "true",
+        "the source flag must also include profiled SPDX identities",
+      );
     }
     for (const card of withClass(view, "identity-card")) {
       assert.equal(withClass(card, "decision-profile").length, 0);

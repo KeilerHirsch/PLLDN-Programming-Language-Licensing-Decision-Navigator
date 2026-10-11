@@ -1,14 +1,15 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
+
+import { PRODUCT_MODEL } from "../product/catalog.ts";
+import { exportUnassessedCandidateCsv } from "../product/unassessed-export.ts";
+import { analyzeText } from "../text/analyze.ts";
+import type { TextAnalysis, TextRuleSet } from "../text/types.ts";
 import {
   catalogNavigationHref,
   compareCatalogNames,
   readCatalogNavigation,
 } from "./catalog-navigation.ts";
-import { PRODUCT_MODEL } from "../product/catalog.ts";
-import { exportUnassessedCandidateCsv } from "../product/unassessed-export.ts";
-import { analyzeText } from "../text/analyze.ts";
-import type { TextAnalysis, TextRuleSet } from "../text/types.ts";
 import type { UiController } from "./controller.ts";
 import { exportEditorialLanguageCompareCsv } from "./language-compare-export.ts";
 import { exportEditorialLicenseCompareCsv } from "./license-compare-export.ts";
@@ -183,13 +184,22 @@ function installProductExperience(model: UiViewModel): void {
   );
 }
 
+function focusScope(element: HTMLElement): string {
+  const scope = element.closest(
+    "#catalog, .use-case-result, .use-case-section, .decision-lab",
+  );
+  return scope?.id || scope?.className || "";
+}
+
 async function publish(action: () => Promise<UiViewModel>): Promise<void> {
   try {
     const active =
       document.activeElement instanceof HTMLElement
         ? document.activeElement
         : null;
-    const focus = active?.dataset.action ? { ...active.dataset } : null;
+    const focus = active?.dataset.action
+      ? { data: { ...active.dataset }, scope: focusScope(active) }
+      : null;
     const model = await action();
     renderApp(root, model, textState, catalogState);
     installProductExperience(model);
@@ -199,9 +209,10 @@ async function publish(action: () => Promise<UiViewModel>): Promise<void> {
         ...root.querySelectorAll<HTMLElement>("[data-action]"),
       ].find(
         (el) =>
-          el.dataset.action === focus.action &&
-          el.dataset.filterKey === focus.filterKey &&
-          el.dataset.mode === focus.mode,
+          focusScope(el) === focus.scope &&
+          Object.entries(focus.data).every(
+            ([key, value]) => el.dataset[key] === value,
+          ),
       );
       replacement?.focus({ preventScroll: true });
     }
@@ -502,6 +513,22 @@ async function start(): Promise<void> {
     view: runtime.catalogPreview,
     diagnostic: runtime.catalogPreviewDiagnostic,
   };
+  await restoreCatalogLocation(runtime.controller);
+}
+
+async function restoreCatalogLocation(current: UiController): Promise<void> {
+  const nav = readCatalogNavigation(window.location.search);
+  productState = {
+    ...productState,
+    mode: nav.mode,
+    status: nav.status,
+    order: nav.order,
+    view: nav.view,
+    filters: nav.filters,
+  };
+  catalogQuery = nav.query;
+  identityOsiFilter = nav.spdx;
+  identityLimit = identityPageSize;
   const candidate = pinnedCandidateById(
     new URLSearchParams(window.location.search).get("candidate"),
   );
@@ -538,7 +565,7 @@ async function start(): Promise<void> {
     catalogQuery = editorial.label;
   }
   if (candidate || editorial) identityOsiFilter = "any";
-  await publish(() => runtime.controller.view());
+  await publish(() => current.view());
   if (candidate) {
     const profile = [
       ...root.querySelectorAll<HTMLDetailsElement>(".identity-profile"),
@@ -563,19 +590,11 @@ async function start(): Promise<void> {
       ?.scrollIntoView({ block: "start" });
 }
 window.addEventListener("popstate", () => {
-  const nav = readCatalogNavigation(window.location.search);
-  productState = {
-    ...productState,
-    mode: nav.mode,
-    status: nav.status,
-    order: nav.order,
-    view: nav.view,
-    filters: nav.filters,
-  };
-  catalogQuery = nav.query;
-  identityOsiFilter = nav.spdx;
-  identityLimit = identityPageSize;
-  if (controller) void publish(() => controller!.view());
+  const current = controller;
+  if (current)
+    void restoreCatalogLocation(current).catch((error) => {
+      renderDiagnostic(root, diagnostic(error));
+    });
 });
 
 void start().catch((error) => {
