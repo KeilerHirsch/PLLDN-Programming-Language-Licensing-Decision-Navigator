@@ -50,6 +50,21 @@ const smokeProbe = `
       assert(heroStats.includes(expected), "hero count mismatch: " + expected);
     }
 
+    const inventory = document.querySelector("#evidence-inventory");
+    assert(
+      inventory?.querySelector("summary")?.textContent.includes("345 recorded Preview claims"),
+      "inventory must count recorded Preview facts without promotion",
+    );
+    inventory.open = true;
+    const invLanguages = inventory.querySelector('[data-inventory-kind="languages"]');
+    const invLicenses = inventory.querySelector('[data-inventory-kind="licenses"]');
+    assert(
+      invLanguages?.textContent.includes("with recorded references") &&
+      invLicenses?.textContent.includes("without recorded references") &&
+      inventory.textContent.includes("not independently verified claims"),
+      "source inventory must distinguish presence of links from verification",
+    );
+
     action("select-use-case", "use-case-id", "web-backend").click();
     await waitFor(() => document.querySelectorAll(".shortlist-card").length >= 5, "use-case shortlist");
 
