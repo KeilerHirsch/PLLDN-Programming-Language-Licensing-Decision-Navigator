@@ -26,10 +26,16 @@ test("browser identity links are same-origin, searchable and fully test-driven",
   const product = readFileSync("src/ui/product.ts", "utf8");
   const main = readFileSync("src/ui/main.ts", "utf8");
   const browser = readFileSync("tools/browser-smoke.ts", "utf8");
-  assert(product.includes('destination.searchParams.set("candidate", record.id)'));
+  assert(
+    product.includes('destination.searchParams.set("candidate", record.id)'),
+  );
   assert(product.includes('destination.hash = "catalog"'));
   assert(product.includes('permalink.dataset.candidatePermalink = "true"'));
-  assert(main.includes('new URLSearchParams(window.location.search).get("candidate")'));
+  assert(
+    main.includes(
+      'new URLSearchParams(window.location.search).get("candidate")',
+    ),
+  );
   assert(main.includes("pinnedCandidateById("));
   assert(main.includes("profile.scrollIntoView("));
   assert(browser.includes('"?candidate=candidate.language.61676461"'));
