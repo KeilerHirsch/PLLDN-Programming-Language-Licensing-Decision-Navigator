@@ -1,13 +1,16 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
 import { LICENSE_DECISION_PROFILES } from "../product/license-decision-profiles.ts";
-import { licensePreviewClaimRows, previewFactText } from "./preview-evidence.ts";
-import type { CatalogPreviewView } from "./types.ts";
 import { exportCsvCell } from "../product/unassessed-export.ts";
 import {
   licenseComparisonRows,
   selectEditorialLicenses,
 } from "./license-comparison.ts";
+import {
+  licensePreviewClaimRows,
+  previewFactText,
+} from "./preview-evidence.ts";
+import type { CatalogPreviewView } from "./types.ts";
 
 /** Export existing Editorial Preview decisions, not new or reviewed assertions. */
 export function exportEditorialLicenseCompareCsv(
