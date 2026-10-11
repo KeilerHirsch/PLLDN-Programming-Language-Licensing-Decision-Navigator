@@ -67,12 +67,15 @@ function applyCatalogFilter(): void {
     if (!entry.hidden) visible += 1;
   }
 
-  const filterPrefix = productState.mode === "languages" ? "language" : "license";
+  const filterPrefix =
+    productState.mode === "languages" ? "language" : "license";
   const filtered = Object.entries(productState.filters).some(
     ([key, value]) => key.startsWith(filterPrefix) && value !== "any",
   );
   let extra = 0;
-  for (const entry of root.querySelectorAll<HTMLElement>("[data-identity-entry]")) {
+  for (const entry of root.querySelectorAll<HTMLElement>(
+    "[data-identity-entry]",
+  )) {
     entry.hidden =
       filtered ||
       (query.length > 0 && !entry.dataset.identitySearchText?.includes(query));
@@ -86,8 +89,7 @@ function applyCatalogFilter(): void {
   const count = root.querySelector<HTMLElement>("[data-catalog-visible-count]");
   if (count) {
     const noun = productState.mode === "languages" ? "languages" : "licenses";
-    count.textContent =
-      `${visible} ${noun} shown. ${extra} additional identities in the unassessed index.`;
+    count.textContent = `${visible} ${noun} shown. ${extra} additional identities in the unassessed index.`;
   }
 
   const index = root.querySelector<HTMLDetailsElement>("[data-identity-index]");
