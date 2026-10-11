@@ -1392,7 +1392,9 @@ function renderCompareEvidence(
   claim.textContent = fact?.claim_id ?? "No Preview claim recorded";
   details.append(claim);
   if (!fact || fact.sources.length === 0) {
-    details.append(paragraph("No sources recorded for this Preview dimension."));
+    details.append(
+      paragraph("No sources recorded for this Preview dimension."),
+    );
     return details;
   }
   const sources = document.createElement("div");
@@ -1485,7 +1487,9 @@ function renderCompare(
       if (row.dimensionId) {
         const fact = catalog.languages
           .find((entry) => entry.entity_id === profile.entity_id)
-          ?.facts.find((entryFact) => entryFact.dimension_id === row.dimensionId);
+          ?.facts.find(
+            (entryFact) => entryFact.dimension_id === row.dimensionId,
+          );
         cell.append(renderCompareEvidence(fact));
       }
       tr.append(cell);
