@@ -60,21 +60,26 @@ export function renderWorkloadEvidence(entityId: string): HTMLElement | null {
         "All samples (min–max)",
         `${milliseconds(spread.minimum_ns)}–${milliseconds(spread.maximum_ns)}`,
       ],
-    ]) {
+    ] as const) {
       const term = document.createElement("dt");
-      term.textContent = label ?? "";
+      term.textContent = label;
       const definition = document.createElement("dd");
-      definition.textContent = value ?? "";
+      definition.textContent = value;
       values.append(term, definition);
     }
     const sources = document.createElement("p");
-    sources.append(
-      link("Original Actions run", observation.run_url),
-      " · ",
-      link("Raw samples (pinned archive)", observation.raw_record_url),
-      " · ",
-      link("Measured source", observation.source_url),
-    );
+    for (const [index, [label, href]] of [
+      ["Original Actions run", observation.run_url],
+      ["Raw samples (pinned archive)", observation.raw_record_url],
+      ["Measured source", observation.source_url],
+    ].entries()) {
+      if (index > 0) {
+        const separator = document.createElement("span");
+        separator.textContent = " · ";
+        sources.append(separator);
+      }
+      if (label && href) sources.append(link(label, href));
+    }
     run.append(title, values, sources);
     details.append(run);
   }

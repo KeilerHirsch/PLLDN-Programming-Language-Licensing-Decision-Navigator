@@ -8,11 +8,13 @@ import test from "node:test";
 import { buildBrowser } from "../tools/build-browser.ts";
 
 function assertNoNodeModuleReferences(javascript: string): void {
-  assert.equal(javascript.includes("node:"), false, "Node module reference");
+  assert.doesNotMatch(javascript, /["'`]node:/u, "Node module reference");
 }
 
 test("browser metadata may name Node without granting Node module access", () => {
-  assert.doesNotThrow(() => assertNoNodeModuleReferences('const environment = { node: "v24.15.0" };'));
+  assert.doesNotThrow(() =>
+    assertNoNodeModuleReferences('const environment = { node: "v24.15.0" };'),
+  );
   for (const reference of [
     'import fs from "node:fs";',
     "export { readFileSync } from 'node:fs';",
