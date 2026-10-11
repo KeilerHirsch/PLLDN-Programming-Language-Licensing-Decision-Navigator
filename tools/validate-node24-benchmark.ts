@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
-import { spawnSync } from "node:child_process";
 
 const expectedPath = "reports/node24-json-roundtrip-v0.1.json";
 assert.deepEqual(process.argv.slice(2), [expectedPath]);
