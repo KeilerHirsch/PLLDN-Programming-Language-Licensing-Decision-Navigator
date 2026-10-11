@@ -6,7 +6,10 @@ import type {
   LicenseDecisionProfile,
   LicenseProductProfile,
 } from "../product/types.ts";
-import { networkSourceOfferQualifier } from "./license-qualifications.ts";
+import {
+  licenseDisclosureScopeQualifier,
+  networkSourceOfferQualifier,
+} from "./license-qualifications.ts";
 import {
   licensePreviewClaimRows,
   previewFactText,
@@ -67,6 +70,11 @@ export function licenseComparisonRows(): LicenseComparisonRow[] {
     {
       label: "Network source-offer condition (Preview)",
       value: (p) => networkSourceOfferQualifier(p.entity_id) ?? "Unknown",
+    },
+    {
+      label: "Distribution / network disclosure scope (Preview)",
+      value: (p) =>
+        licenseDisclosureScopeQualifier(p.entity_id) ?? "Unknown",
     },
     { label: "Notice", value: (p) => obligation(p, "notice") },
     { label: "Patent grant", value: (p) => obligation(p, "patent_grant") },
