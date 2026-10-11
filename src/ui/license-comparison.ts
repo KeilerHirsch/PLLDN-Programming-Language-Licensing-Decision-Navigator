@@ -70,14 +70,18 @@ export function licenseComparisonRows(): LicenseComparisonRow[] {
 }
 
 /** Fail closed on unknown IDs: index-only identities are not editorial assessments. */
-export function selectEditorialLicenses(ids: readonly string[]): LicenseProductProfile[] {
+export function selectEditorialLicenses(
+  ids: readonly string[],
+): LicenseProductProfile[] {
   if (ids.length > 4 || new Set(ids).size !== ids.length)
     throw new Error("License comparison requires at most four distinct IDs");
   const entries = new Map(PRODUCT_MODEL.licenses.map((p) => [p.entity_id, p]));
   return ids.map((id) => {
     const entry = entries.get(id);
     if (!entry || !decision(entry))
-      throw new Error("License comparison is restricted to Editorial Preview profiles");
+      throw new Error(
+        "License comparison is restricted to Editorial Preview profiles",
+      );
     return entry;
   });
 }
@@ -108,7 +112,8 @@ export function renderLicenseComparison(ids: readonly string[]): HTMLElement {
   if (selected.length === 0) {
     const empty = document.createElement("p");
     empty.className = "compare-empty";
-    empty.textContent = "Add up to four Editorial Preview licenses from the catalogue.";
+    empty.textContent =
+      "Add up to four Editorial Preview licenses from the catalogue.";
     section.append(empty);
     return section;
   }
