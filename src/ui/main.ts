@@ -45,6 +45,9 @@ let productState: ProductUiState = {
   filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
 };
 let catalogQuery = "";
+const identityPageSize = 60;
+let identityLimit = identityPageSize;
+let identityOsiFilter = "any";
 
 function diagnostic(error: unknown): string {
   return error instanceof Error
@@ -73,13 +76,21 @@ function applyCatalogFilter(): void {
     ([key, value]) => key.startsWith(filterPrefix) && value !== "any",
   );
   let extra = 0;
+  let extraShown = 0;
   for (const entry of root.querySelectorAll<HTMLElement>(
     "[data-identity-entry]",
   )) {
-    entry.hidden =
-      filtered ||
-      (query.length > 0 && !entry.dataset.identitySearchText?.includes(query));
-    if (!entry.hidden) extra += 1;
+    const matches =
+      !filtered &&
+      (query.length === 0 || entry.dataset.identitySearchText?.includes(query)) &&
+      (productState.mode !== "licenses" ||
+        identityOsiFilter === "any" ||
+        entry.dataset.identityOsiApproved === String(identityOsiFilter === "yes"));
+    if (matches) {
+      extra += 1;
+      if (extraShown < identityLimit) extraShown += 1;
+    }
+    entry.hidden = !matches || extra > identityLimit;
   }
 
   const input = root.querySelector<HTMLInputElement>(
@@ -97,9 +108,17 @@ function applyCatalogFilter(): void {
   if (indexCount) {
     indexCount.textContent = filtered
       ? "Clear structured filters to browse identity-only entries."
-      : `${extra} additional identities match.`;
+      : `${extraShown} of ${extra} additional identities shown.`;
   }
-  if (index && (query.length > 0 || filtered)) {
+  const osi = root.querySelector<HTMLSelectElement>('[data-action="identity-osi"]');
+  if (osi) osi.value = identityOsiFilter;
+  const more = root.querySelector<HTMLButtonElement>("[data-identity-more]");
+  if (more) {
+    const remaining = extra - extraShown;
+    more.hidden = filtered || remaining <= 0;
+    more.textContent = `Show ${Math.min(identityPageSize, remaining)} more (${remaining} remaining)`;
+  }
+  if (index && (query.length > 0 || filtered || identityOsiFilter !== "any")) {
     index.open = !filtered && extra > 0;
   }
 
@@ -195,8 +214,14 @@ root.addEventListener("click", (event) => {
     if (mode === "languages" || mode === "licenses") {
       productState = { ...productState, mode };
       catalogQuery = "";
+      identityLimit = identityPageSize;
+      identityOsiFilter = "any";
       void publish(() => current.view());
     }
+  }
+  if (action === "identity-more") {
+    identityLimit += identityPageSize;
+    applyCatalogFilter();
   }
   if (action === "toggle-compare") {
     const entityId = element.dataset.entityId;
@@ -224,6 +249,8 @@ root.addEventListener("click", (event) => {
       filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
     };
     catalogQuery = "";
+    identityLimit = identityPageSize;
+    identityOsiFilter = "any";
     void publish(() => current.view());
   }
   if (action === "analyze-text") {
@@ -270,6 +297,7 @@ root.addEventListener("input", (event) => {
     element instanceof HTMLInputElement
   ) {
     catalogQuery = element.value;
+    identityLimit = identityPageSize;
     applyCatalogFilter();
   }
 });
@@ -284,6 +312,13 @@ root.addEventListener("change", (event) => {
     const optionId = element.dataset.optionId;
     if (!facetId || !optionId) return;
     void publish(() => current.selectFacet(facetId, optionId));
+  }
+  if (action === "identity-osi" && element instanceof HTMLSelectElement) {
+    if (["any", "yes", "no"].includes(element.value)) {
+      identityOsiFilter = element.value;
+      identityLimit = identityPageSize;
+      applyCatalogFilter();
+    }
   }
   if (action === "product-filter" && element instanceof HTMLSelectElement) {
     const filterKey = element.dataset.filterKey;
