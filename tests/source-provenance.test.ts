@@ -6,7 +6,10 @@ import {
   factProvenanceDisclosure,
   isInternalPreviewSeed,
 } from "../src/ui/source-provenance.ts";
-import type { CatalogPreviewFactView, UiEvidenceSource } from "../src/ui/types.ts";
+import type {
+  CatalogPreviewFactView,
+  UiEvidenceSource,
+} from "../src/ui/types.ts";
 
 const seed: UiEvidenceSource = {
   source_id: "source.catalog-block2-preview",
@@ -48,12 +51,18 @@ test("only the exact pinned-internal seed IDs and repository path classify as se
 });
 
 test("claim provenance language never upgrades links to independent verification", () => {
-  assert.match(factProvenanceDisclosure(fact), /Internal classification seed only/u);
+  assert.match(
+    factProvenanceDisclosure(fact),
+    /Internal classification seed only/u,
+  );
   assert.match(
     factProvenanceDisclosure({ ...fact, sources: [] }),
     /No recorded source/u,
   );
-  assert.match(factProvenanceDisclosure(undefined), /not independently verified/u);
+  assert.match(
+    factProvenanceDisclosure(undefined),
+    /not independently verified/u,
+  );
   assert.match(
     factProvenanceDisclosure({
       ...fact,
