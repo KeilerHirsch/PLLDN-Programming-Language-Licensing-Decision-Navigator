@@ -1278,6 +1278,7 @@ function compareFact(
 }
 
 export type LanguageCompareRow = {
+  dimensionId?: string;
   label: string;
   value: (profile: LanguageProductProfile) => string;
 };
@@ -1368,6 +1369,7 @@ export function languageComparisonRows(
         .find((fact) => fact.dimension_id === dimensionId)?.label ??
       dimensionId;
     rows.push({
+      dimensionId,
       label,
       value: (profile) =>
         compareFact(entryMap.get(profile.entity_id), dimensionId),
@@ -1375,6 +1377,40 @@ export function languageComparisonRows(
   }
 
   return rows;
+}
+
+function renderCompareEvidence(
+  fact: CatalogPreviewFactView | undefined,
+): HTMLDetailsElement {
+  const details = document.createElement("details");
+  details.className = "compare-evidence";
+  details.dataset.compareEvidence = "true";
+  const summary = document.createElement("summary");
+  summary.textContent = `Preview evidence · ${fact?.review_status ?? "UNKNOWN"} · ${fact?.sources.length ?? 0} source(s)`;
+  details.append(summary);
+  const claim = document.createElement("code");
+  claim.textContent = fact?.claim_id ?? "No Preview claim recorded";
+  details.append(claim);
+  if (!fact || fact.sources.length === 0) {
+    details.append(paragraph("No sources recorded for this Preview dimension."));
+    return details;
+  }
+  const sources = document.createElement("div");
+  sources.className = "profile-source-links";
+  for (const source of fact.sources) {
+    const href = safeHttps(source.reference);
+    if (href) {
+      const link = document.createElement("a");
+      link.href = href;
+      link.rel = "noopener noreferrer";
+      link.textContent = source.title;
+      sources.append(link);
+    } else {
+      sources.append(paragraph(`Unlinked source: ${source.title}`));
+    }
+  }
+  details.append(sources);
+  return details;
 }
 
 function renderCompare(
@@ -1446,6 +1482,12 @@ function renderCompare(
     for (const profile of selected) {
       const cell = document.createElement("td");
       cell.textContent = row.value(profile);
+      if (row.dimensionId) {
+        const fact = catalog.languages
+          .find((entry) => entry.entity_id === profile.entity_id)
+          ?.facts.find((entryFact) => entryFact.dimension_id === row.dimensionId);
+        cell.append(renderCompareEvidence(fact));
+      }
       tr.append(cell);
     }
     body.append(tr);
