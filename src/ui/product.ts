@@ -636,7 +636,9 @@ function renderLanguageCard(
   tags.className = "profile-tags";
   for (const category of profile.categories) tags.append(badge(category));
   card.append(tags, renderLanguageQuickFacts(profile));
-  const bandStatus = paragraph("Unverified editorial estimates · audit v0.3 · not benchmark results.");
+  const bandStatus = paragraph(
+    "Unverified editorial estimates · audit v0.3 · not benchmark results.",
+  );
   bandStatus.className = "decision-profile-note";
   bandStatus.dataset.languageBandEvidence = "unverified";
   card.append(bandStatus);
