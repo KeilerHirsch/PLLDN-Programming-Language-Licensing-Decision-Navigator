@@ -932,7 +932,11 @@ function renderIdentityIndex(state: ProductUiState): HTMLElement {
       link.rel = "noopener noreferrer";
       const name = document.createElement("small");
       name.textContent = license.name;
-      li.append(link, name);
+      const osi = document.createElement("small");
+      osi.textContent = license.osiApproved
+        ? "OSI-approved in pinned SPDX list"
+        : "No OSI approval flag in pinned SPDX list";
+      li.append(link, name, osi);
       list.append(li);
     }
   }
