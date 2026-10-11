@@ -29,9 +29,13 @@ test("browser profile disclosures use safe text APIs with exact provenance", () 
     "record.claim_refs.length !== 0",
     'record.review_status !== "NOT_REVIEWED"',
     'reference.rel = "noopener noreferrer"',
-    'details.dataset.candidateId = record.id',
-  ]) assert(product.includes(expected), expected);
-  for (const expected of ["candidate.language.61676461", "candidate.license.artistic-2.0"]) {
+    "details.dataset.candidateId = record.id",
+  ])
+    assert(product.includes(expected), expected);
+  for (const expected of [
+    "candidate.language.61676461",
+    "candidate.license.artistic-2.0",
+  ]) {
     assert(probe.includes(expected), expected);
   }
   for (const forbidden of ["innerHTML", "insertAdjacentHTML", "eval("]) {
