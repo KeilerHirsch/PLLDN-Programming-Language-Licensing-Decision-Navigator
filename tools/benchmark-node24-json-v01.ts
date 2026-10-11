@@ -32,7 +32,7 @@ const inputJson = JSON.stringify(inputRecords);
 const inputSha256 = sha256(inputJson);
 const expectedChecksum = Array.from(
   { length: REPEATS_PER_SAMPLE },
-  (_, index) => inputRecords[index].amount + RECORDS,
+  (_, index) => inputRecords[index]!.amount + RECORDS,
 ).reduce((a, b) => a + b, 0);
 
 function roundTripWorkload(): number {
@@ -40,7 +40,7 @@ function roundTripWorkload(): number {
   for (let i = 0; i < REPEATS_PER_SAMPLE; i += 1) {
     const bytes = JSON.stringify(inputRecords);
     const parsed = JSON.parse(bytes) as typeof inputRecords;
-    checksum += parsed[i].amount + parsed.length;
+    checksum += parsed[i]!.amount + parsed.length;
   }
   return checksum;
 }
@@ -74,7 +74,11 @@ function run(): void {
     );
     return;
   }
-  assert.deepEqual(args, ["--output", OUTPUT], "Only the fixed report path is supported");
+  assert.deepEqual(
+    args,
+    ["--output", OUTPUT],
+    "Only the fixed report path is supported",
+  );
   assert.equal(process.version, RUNTIME_VERSION, "Unsupported runtime version");
   const sourceSha = process.env.BENCHMARK_SOURCE_SHA;
   assert.match(sourceSha ?? "", /^[a-f0-9]{40}$/u, "Exact source commit required");
@@ -139,8 +143,8 @@ function run(): void {
     summary: {
       median_wall_nanoseconds: medianNs,
       p95_wall_nanoseconds: p95Ns,
-      minimum_wall_nanoseconds: sorted[0],
-      maximum_wall_nanoseconds: sorted[sorted.length - 1],
+      minimum_wall_nanoseconds: sorted[0]!,
+      maximum_wall_nanoseconds: sorted[sorted.length - 1]!,
       process_cpu_user_microseconds: cpu.user,
       process_cpu_system_microseconds: cpu.system,
       process_rss_before_bytes: startRss,
