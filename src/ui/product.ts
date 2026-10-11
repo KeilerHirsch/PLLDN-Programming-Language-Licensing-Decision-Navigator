@@ -1282,21 +1282,28 @@ export type LanguageCompareRow = {
   value: (profile: LanguageProductProfile) => string;
 };
 
-export function selectEditorialLanguages(ids: readonly string[]): LanguageProductProfile[] {
+export function selectEditorialLanguages(
+  ids: readonly string[],
+): LanguageProductProfile[] {
   if (ids.length > 4 || new Set(ids).size !== ids.length) {
-    throw new Error("Language comparison requires up to four distinct editorial IDs");
+    throw new Error(
+      "Language comparison requires up to four distinct editorial IDs",
+    );
   }
   const profiles = new Map(
     PRODUCT_MODEL.languages.map((profile) => [profile.entity_id, profile]),
   );
   return ids.map((id) => {
     const profile = profiles.get(id);
-    if (!profile) throw new Error("Language is not an Editorial Preview profile");
+    if (!profile)
+      throw new Error("Language is not an Editorial Preview profile");
     return profile;
   });
 }
 
-export function languageComparisonRows(catalog: CatalogPreviewView): LanguageCompareRow[] {
+export function languageComparisonRows(
+  catalog: CatalogPreviewView,
+): LanguageCompareRow[] {
   const entryMap = new Map(
     catalog.languages.map((entry) => [entry.entity_id, entry]),
   );
