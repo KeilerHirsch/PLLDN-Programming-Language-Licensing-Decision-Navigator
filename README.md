@@ -36,7 +36,7 @@ Building a hosted service? Start with **Web backend**, compare languages, then i
 
 ## Scope and confidence
 
-**Preview navigator:** 35 languages, 32 licenses, and 15 use-case guides. Qualitative performance, complexity, and ecosystem bands; Open Source, source-available, public-domain-like, and license-transition models.
+**Preview navigator:** 35 languages, 32 licenses, and 30 use-case guides. Qualitative performance, complexity, and ecosystem bands; Open Source, source-available, public-domain-like, and license-transition models.
 
 **Expanded:** [Unassessed identity index](docs/identity-index.md).
 
