@@ -37,12 +37,14 @@ test("changed matrix bytes invalidate the old claim-to-seed provenance", () => {
   const dir = "knowledge/candidate/catalog-2026-10-03";
   try {
     cpSync(dir, join(base, dir), { recursive: true });
-    const matrix = join(base, dir, "evidence", "block3-license-classification.md");
-    writeFileSync(matrix, `${readFileSync(matrix, "utf8")}\nchanged\n`);
-    assert.throws(
-      () => auditPreviewProvenance(base),
-      /Seed hash mismatch/u,
+    const matrix = join(
+      base,
+      dir,
+      "evidence",
+      "block3-license-classification.md",
     );
+    writeFileSync(matrix, `${readFileSync(matrix, "utf8")}\nchanged\n`);
+    assert.throws(() => auditPreviewProvenance(base), /Seed hash mismatch/u);
   } finally {
     rmSync(base, { recursive: true, force: true });
   }
@@ -53,14 +55,16 @@ test("missing Preview source references fail closed", () => {
   const dir = "knowledge/candidate/catalog-2026-10-03";
   try {
     cpSync(dir, join(base, dir), { recursive: true });
-    const file = join(base, dir, "claims", "mit-license-explicit-patent-grant.json");
+    const file = join(
+      base,
+      dir,
+      "claims",
+      "mit-license-explicit-patent-grant.json",
+    );
     const parsed = JSON.parse(readFileSync(file, "utf8"));
     parsed.record.source_ids = ["source.does-not-exist"];
     writeFileSync(file, JSON.stringify(parsed));
-    assert.throws(
-      () => auditPreviewProvenance(base),
-      /Unresolved source/u,
-    );
+    assert.throws(() => auditPreviewProvenance(base), /Unresolved source/u);
   } finally {
     rmSync(base, { recursive: true, force: true });
   }
