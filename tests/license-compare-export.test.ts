@@ -23,7 +23,9 @@ test("selected Editorial license export is deterministic and complete", () => {
 
 test("export fails closed on empty, repeated and unassessed candidate selection", () => {
   assert.throws(() => exportEditorialLicenseCompareCsv([]));
-  assert.throws(() => exportEditorialLicenseCompareCsv(["license.mit", "license.mit"]));
+  assert.throws(() =>
+    exportEditorialLicenseCompareCsv(["license.mit", "license.mit"]),
+  );
   assert.throws(() =>
     exportEditorialLicenseCompareCsv(["candidate.license.artistic-2.0"]),
   );
