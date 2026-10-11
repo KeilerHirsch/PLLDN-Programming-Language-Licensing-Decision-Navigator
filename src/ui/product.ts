@@ -987,11 +987,7 @@ function renderUnassessedProfile(record: UnassessedRecord): HTMLElement {
   const permalink = document.createElement("a");
   permalink.className = "candidate-permalink";
   permalink.dataset.candidatePermalink = "true";
-  const destination = new URL(window.location.href);
-  destination.search = "";
-  destination.searchParams.set("candidate", record.id);
-  destination.hash = "catalog";
-  permalink.href = destination.href;
+  permalink.href = `?candidate=${encodeURIComponent(record.id)}#catalog`;
   permalink.textContent = "Direct link to this unassessed profile";
   details.append(summary, values, provenance, reference, permalink);
   return details;
