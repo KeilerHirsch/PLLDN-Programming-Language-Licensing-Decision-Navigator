@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://plldn.invalid/catalog/unassessed-candidates.v0.2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "migration_from", "source_pins", "records"],
+  "properties": {
+    "schema_version": {
+      "const": "0.2"
+    },
+    "migration_from": {
+      "const": "identity-index.v1"
+    },
+    "source_pins": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "linguist_commit",
+        "linguist_blob_sha",
+        "spdx_commit",
+        "spdx_blob_sha",
+        "spdx_version"
+      ],
+      "properties": {
+        "linguist_commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "linguist_blob_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "spdx_commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "spdx_blob_sha": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "spdx_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "records": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "name",
+          "reference",
+          "source_status",
+          "stage",
+          "review_status",
+          "assessments",
+          "claim_refs"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^candidate\\.(language|license)\\.[a-z0-9.-]+$"
+          },
+          "kind": {
+            "enum": ["language", "license"]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reference": {
+            "type": "string",
+            "pattern": "^https://"
+          },
+          "source_status": {
+            "const": "PINNED_IDENTITY"
+          },
+          "stage": {
+            "const": "UNASSESSED_PREVIEW"
+          },
+          "review_status": {
+            "const": "NOT_REVIEWED"
+          },
+          "claim_refs": {
+            "type": "array",
+            "maxItems": 0
+          },
+          "spdx_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9.-]+$"
+          },
+          "osi_approved_source_flag": {
+            "type": "boolean"
+          },
+          "assessments": {
+            "type": "object",
+            "properties": {
+              "performance": {
+                "const": "UNKNOWN"
+              },
+              "complexity": {
+                "const": "UNKNOWN"
+              },
+              "suitability": {
+                "const": "UNKNOWN"
+              },
+              "rights": {
+                "const": "UNKNOWN"
+              },
+              "obligations": {
+                "const": "UNKNOWN"
+              },
+              "compatibility": {
+                "const": "UNKNOWN"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "language",
+                  "type": "string"
+                }
+              },
+              "required": ["kind"],
+              "type": "object"
+            },
+            "then": {
+              "properties": {
+                "assessments": {
+                  "required": ["performance", "complexity", "suitability"],
+                  "maxProperties": 3,
+                  "type": "object"
+                }
+              },
+              "not": {
+                "anyOf": [
+                  {
+                    "required": ["spdx_id"],
+                    "type": "object"
+                  },
+                  {
+                    "required": ["osi_approved_source_flag"],
+                    "type": "object"
+                  }
+                ]
+              },
+              "type": "object"
+            },
+            "else": {
+              "required": ["spdx_id", "osi_approved_source_flag"],
+              "properties": {
+                "assessments": {
+                  "required": ["rights", "obligations", "compatibility"],
+                  "maxProperties": 3,
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
