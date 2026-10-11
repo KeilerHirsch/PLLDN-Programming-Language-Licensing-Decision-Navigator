@@ -25,7 +25,9 @@ test("language CSV matches the presentation rows with IDs and snapshot", () => {
   const lines = csv.trimEnd().split("\n");
   assert.equal(
     lines.length,
-    languageComparisonRows(preview).length + 4 + 3 * PRODUCT_COMPARE_DIMENSIONS.length,
+    languageComparisonRows(preview).length +
+      4 +
+      3 * PRODUCT_COMPARE_DIMENSIONS.length,
   );
   assert.equal(lines[0], '"Attribute","Go","Python"');
   assert(lines.includes('"Entity ID","language.go","language.python"'));
