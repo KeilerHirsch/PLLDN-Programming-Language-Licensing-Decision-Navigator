@@ -1,0 +1,35 @@
+{
+  "schema_version": "0.3",
+  "record_type": "editorial_license_field_correction",
+  "review_status": "EDITORIAL_PREVIEW_NOT_REVIEWED",
+  "baseline_main_sha": "e2782237f69c3ac45f5bad245f2a4878655e72a7",
+  "entity_id": "license.gpl-2.0-or-later",
+  "spdx_expression": "GPL-2.0-or-later",
+  "field": "obligations.patent_grant",
+  "previous_value": "no",
+  "corrected_value": "conditional",
+  "license_version_selected": "UNKNOWN",
+  "interpretation": "GPLv2 has no GPLv3-style express patent grant; GPLv3 section 11 does. The option to use a later GPL version does not retroactively bind an earlier GPLv2 distributor to GPLv3 patent-grant obligations. Determine actual selected license version and contributor/version scope before making a rights determination.",
+  "references": [
+    {
+      "section": "GPLv3 §11",
+      "url": "https://www.gnu.org/licenses/gpl-3.0.html#section11",
+      "relevance": "Contains express contributor patent grant."
+    },
+    {
+      "section": "GPLv3 §14",
+      "url": "https://www.gnu.org/licenses/gpl-3.0.html#section14",
+      "relevance": "Defines choice when a work specifies or-any-later-version."
+    },
+    {
+      "section": "FSF GPL FAQ — #v2OrLaterPatentLicense",
+      "url": "https://www.gnu.org/licenses/gpl-faq.html#v2OrLaterPatentLicense",
+      "relevance": "Explicitly rejects automatic retroactive GPLv3 patent grants for a GPLv2 distributor."
+    }
+  ],
+  "verification_limits": [
+    "Primary issuer pages are not byte-pinned; exact live text should be rechecked before Reviewed promotion.",
+    "Version-selection and each contributor's actual license/grant scope are not established.",
+    "This single-field editorial correction does not establish global license compatibility or product-specific legal advice."
+  ]
+}
