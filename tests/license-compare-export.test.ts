@@ -17,7 +17,7 @@ const snapshot: CatalogPreviewView = {
 test("selected Editorial license export is deterministic and complete", () => {
   const ids = ["license.mit", "license.apache-2.0"];
   const csv = exportEditorialLicenseCompareCsv(ids, snapshot);
-  assert.equal(csv, exportEditorialLicenseCompareCsv(ids));
+  assert.equal(csv, exportEditorialLicenseCompareCsv(ids, snapshot));
   const lines = csv.trimEnd().split("\n");
   assert.equal(lines.length, licenseComparisonRows().length + 5);
   assert.equal(lines[0], '"Attribute","MIT","Apache-2.0"');
