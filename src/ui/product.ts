@@ -1277,73 +1277,30 @@ function compareFact(
   return factValue(factsByDimension(entry).get(dimensionId));
 }
 
-function renderCompare(
-  catalog: CatalogPreviewView,
-  state: ProductUiState,
-): HTMLElement {
-  const section = document.createElement("section");
-  section.className = "compare-section";
-  section.id = "compare";
+export type LanguageCompareRow = {
+  label: string;
+  value: (profile: LanguageProductProfile) => string;
+};
 
-  const headingRow = document.createElement("div");
-  headingRow.className = "section-heading-row";
-  const copy = document.createElement("div");
-  copy.append(
-    heading(2, `Compare languages (${state.compareLanguageIds.length}/4)`),
-    paragraph(
-      "Pick up to four languages. Editorial summaries sit beside the same Preview facts used by the catalogue.",
-    ),
-  );
-  headingRow.append(copy);
-  if (state.compareLanguageIds.length > 0) {
-    headingRow.append(button("Clear comparison", "clear-compare"));
+export function selectEditorialLanguages(ids: readonly string[]): LanguageProductProfile[] {
+  if (ids.length > 4 || new Set(ids).size !== ids.length) {
+    throw new Error("Language comparison requires up to four distinct editorial IDs");
   }
-  section.append(headingRow);
-
-  if (state.compareLanguageIds.length === 0) {
-    const empty = paragraph(
-      "Add languages from a use-case shortlist or catalogue card to build a side-by-side matrix.",
-    );
-    empty.className = "compare-empty";
-    section.append(empty);
-    return section;
-  }
-
-  const profileMap = new Map(
+  const profiles = new Map(
     PRODUCT_MODEL.languages.map((profile) => [profile.entity_id, profile]),
   );
+  return ids.map((id) => {
+    const profile = profiles.get(id);
+    if (!profile) throw new Error("Language is not an Editorial Preview profile");
+    return profile;
+  });
+}
+
+export function languageComparisonRows(catalog: CatalogPreviewView): LanguageCompareRow[] {
   const entryMap = new Map(
     catalog.languages.map((entry) => [entry.entity_id, entry]),
   );
-  const selected = state.compareLanguageIds
-    .map((id) => profileMap.get(id))
-    .filter((profile): profile is LanguageProductProfile => Boolean(profile));
-
-  const wrapper = document.createElement("div");
-  wrapper.className = "compare-table-wrap";
-  const table = document.createElement("table");
-  table.className = "compare-table";
-
-  const head = document.createElement("thead");
-  const headRow = document.createElement("tr");
-  const blank = document.createElement("th");
-  blank.scope = "col";
-  blank.textContent = "Attribute";
-  headRow.append(blank);
-  for (const profile of selected) {
-    const cell = document.createElement("th");
-    cell.scope = "col";
-    cell.textContent = profile.label;
-    headRow.append(cell);
-  }
-  head.append(headRow);
-  table.append(head);
-
-  const body = document.createElement("tbody");
-  const rows: Array<{
-    label: string;
-    value: (profile: LanguageProductProfile) => string;
-  }> = [
+  const rows: LanguageCompareRow[] = [
     { label: "Character", value: (profile) => profile.tagline },
     { label: "Build", value: (profile) => profile.build_path },
     { label: "Good for", value: (profile) => profile.good_for.join(", ") },
@@ -1409,6 +1366,69 @@ function renderCompare(
         compareFact(entryMap.get(profile.entity_id), dimensionId),
     });
   }
+
+  return rows;
+}
+
+function renderCompare(
+  catalog: CatalogPreviewView,
+  state: ProductUiState,
+): HTMLElement {
+  const section = document.createElement("section");
+  section.className = "compare-section";
+  section.id = "compare";
+
+  const headingRow = document.createElement("div");
+  headingRow.className = "section-heading-row";
+  const copy = document.createElement("div");
+  copy.append(
+    heading(2, `Compare languages (${state.compareLanguageIds.length}/4)`),
+    paragraph(
+      "Pick up to four languages. Editorial summaries sit beside the same Preview facts used by the catalogue.",
+    ),
+  );
+  headingRow.append(copy);
+  if (state.compareLanguageIds.length > 0) {
+    headingRow.append(button("Clear comparison", "clear-compare"));
+    headingRow.append(
+      button("Export selected comparison (CSV)", "export-language-compare"),
+    );
+  }
+  section.append(headingRow);
+
+  if (state.compareLanguageIds.length === 0) {
+    const empty = paragraph(
+      "Add languages from a use-case shortlist or catalogue card to build a side-by-side matrix.",
+    );
+    empty.className = "compare-empty";
+    section.append(empty);
+    return section;
+  }
+
+  const selected = selectEditorialLanguages(state.compareLanguageIds);
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "compare-table-wrap";
+  const table = document.createElement("table");
+  table.className = "compare-table";
+
+  const head = document.createElement("thead");
+  const headRow = document.createElement("tr");
+  const blank = document.createElement("th");
+  blank.scope = "col";
+  blank.textContent = "Attribute";
+  headRow.append(blank);
+  for (const profile of selected) {
+    const cell = document.createElement("th");
+    cell.scope = "col";
+    cell.textContent = profile.label;
+    headRow.append(cell);
+  }
+  head.append(headRow);
+  table.append(head);
+
+  const body = document.createElement("tbody");
+  const rows = languageComparisonRows(catalog);
 
   for (const row of rows) {
     const tr = document.createElement("tr");
