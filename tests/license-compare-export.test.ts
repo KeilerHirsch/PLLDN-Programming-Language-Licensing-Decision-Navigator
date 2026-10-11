@@ -3,8 +3,8 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import { licenseComparisonRows } from "../src/ui/license-comparison.ts";
 import { exportEditorialLicenseCompareCsv } from "../src/ui/license-compare-export.ts";
+import { licenseComparisonRows } from "../src/ui/license-comparison.ts";
 
 test("selected Editorial license export is deterministic and complete", () => {
   const ids = ["license.mit", "license.apache-2.0"];
