@@ -97,6 +97,16 @@ const smokeProbe = `
       "removing a language must re-enable the fifth candidate",
     );
 
+    assert(
+      document.querySelector("#compare [data-action=export-language-compare]")?.textContent ===
+        "Export selected comparison (CSV)",
+      "language comparison must expose a real CSV download control",
+    );
+    assert(
+      document.querySelector("#compare .compare-table tbody tr")?.querySelectorAll("td").length === 3,
+      "language comparison must still render after removal",
+    );
+
     const search = document.querySelector('[data-action="catalog-search"]');
     const languageIndex = document.querySelector("[data-identity-index]");
     languageIndex.open = true;
