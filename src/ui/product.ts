@@ -45,6 +45,7 @@ import type {
   CatalogPreviewFactView,
   CatalogPreviewView,
 } from "./types.ts";
+import { renderWorkloadEvidence } from "./workload-evidence.ts";
 
 export type ProductCatalogMode = "languages" | "licenses";
 
@@ -669,6 +670,8 @@ function renderLanguageCard(
     renderDecisionProfile(profile),
     renderPreviewFacts(entry),
   );
+  const measuredEvidence = renderWorkloadEvidence(profile.entity_id);
+  if (measuredEvidence) card.append(measuredEvidence);
   return card;
 }
 
