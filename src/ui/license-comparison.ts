@@ -16,7 +16,9 @@ const decision = (profile: LicenseProductProfile) =>
   LICENSE_DECISION_PROFILES[profile.entity_id];
 
 const text = (value: string | undefined): string =>
-  value ? value.replaceAll("-", " ").replace(/\b\w/gu, (s) => s.toUpperCase()) : "Unknown";
+  value
+    ? value.replaceAll("-", " ").replace(/\b\w/gu, (s) => s.toUpperCase())
+    : "Unknown";
 
 const right = (
   profile: LicenseProductProfile,
