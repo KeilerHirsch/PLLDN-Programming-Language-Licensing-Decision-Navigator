@@ -55,7 +55,7 @@ function validateFixture(): void {
 function percentile(sorted: readonly number[], percentage: number): number {
   assert(sorted.length > 0);
   const index = Math.ceil(sorted.length * percentage) - 1;
-  return sorted[Math.max(0, Math.min(index, sorted.length - 1))];
+  return sorted[Math.max(0, Math.min(index, sorted.length - 1))]!;
 }
 
 function run(): void {
