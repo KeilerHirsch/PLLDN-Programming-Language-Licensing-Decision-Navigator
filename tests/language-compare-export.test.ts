@@ -3,6 +3,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import { PRODUCT_COMPARE_DIMENSIONS } from "../src/product/catalog.ts";
 import { exportEditorialLanguageCompareCsv } from "../src/ui/language-compare-export.ts";
 import {
   languageComparisonRows,
@@ -24,7 +25,7 @@ test("language CSV matches the presentation rows with IDs and snapshot", () => {
   const lines = csv.trimEnd().split("\n");
   assert.equal(
     lines.length,
-    languageComparisonRows(preview).length + 4 + 3 * 4,
+    languageComparisonRows(preview).length + 4 + 3 * PRODUCT_COMPARE_DIMENSIONS.length,
   );
   assert.equal(lines[0], '"Attribute","Go","Python"');
   assert(lines.includes('"Entity ID","language.go","language.python"'));
@@ -33,7 +34,11 @@ test("language CSV matches the presentation rows with IDs and snapshot", () => {
       '"Evidence tier","Editorial Preview (not Reviewed)","Editorial Preview (not Reviewed)"',
     ),
   );
-  assert(lines.includes('"Preview snapshot","pinned-fixture-preview","pinned-fixture-preview"'));
+  assert(
+    lines.includes(
+      '"Preview snapshot","pinned-fixture-preview","pinned-fixture-preview"',
+    ),
+  );
   assert(csv.includes('"Preview claim ID:'));
   assert(csv.includes('"Preview sources:'));
 });
@@ -66,6 +71,10 @@ test("browser and download use the same rows and existing CSV safety helper", ()
   assert(exporter.includes("fact?.sources.map("));
   assert(main.includes('action === "export-language-compare"'));
   assert(main.includes("plldn-editorial-language-comparison.csv"));
-  assert(browser.includes("language comparison must expose a real CSV download control"));
+  assert(
+    browser.includes(
+      "language comparison must expose a real CSV download control",
+    ),
+  );
   assert(!exporter.includes("innerHTML"));
 });
