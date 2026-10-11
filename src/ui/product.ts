@@ -947,8 +947,12 @@ const unassessedLicenseProfiles = new Map(
 );
 
 /** Resolve only pinned v0.2 records; arbitrary URL input never creates a profile. */
-export function pinnedCandidateById(id: string | null): UnassessedRecord | null {
-  return id ? (candidates.records.find((record) => record.id === id) ?? null) : null;
+export function pinnedCandidateById(
+  id: string | null,
+): UnassessedRecord | null {
+  return id
+    ? (candidates.records.find((record) => record.id === id) ?? null)
+    : null;
 }
 
 function renderUnassessedProfile(record: UnassessedRecord): HTMLElement {
