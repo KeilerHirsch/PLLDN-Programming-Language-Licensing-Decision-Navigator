@@ -42,6 +42,22 @@ const smokeProbe = `
     action("select-use-case", "use-case-id", "web-backend").click();
     await waitFor(() => document.querySelectorAll(".shortlist-card").length >= 5, "use-case shortlist");
 
+    assert(
+      document.querySelectorAll("[data-action=select-use-case]").length === 30,
+      "all thirty editorial guides must be available",
+    );
+    const moreGuides = document.querySelector("[data-use-case-more]");
+    assert(moreGuides && !moreGuides.open, "extra task cards start collapsed");
+    moreGuides.open = true;
+    action("select-use-case", "use-case-id", "game-engine").click();
+    await waitFor(
+      () => document.querySelector(".use-case-result h3")?.textContent ===
+        "Game or simulation engine" && document.querySelector("[data-use-case-more]").open,
+      "additional use-case selection remains visible",
+    );
+    action("select-use-case", "use-case-id", "web-backend").click();
+    await waitFor(() => document.querySelectorAll(".shortlist-card").length >= 5, "return to web backend");
+
     const ids = ["language.go", "language.typescript", "language.python", "language.elixir"];
     for (let i = 0; i < ids.length; i += 1) {
       const control = action("toggle-compare", "entity-id", ids[i]);
