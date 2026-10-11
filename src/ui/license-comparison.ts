@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
 import { PRODUCT_MODEL } from "../product/catalog.ts";
+import { networkSourceOfferQualifier } from "./license-qualifications.ts";
 import { LICENSE_DECISION_PROFILES } from "../product/license-decision-profiles.ts";
 import type {
   LicenseDecisionProfile,
@@ -62,6 +63,10 @@ export function licenseComparisonRows(): LicenseComparisonRow[] {
     {
       label: "Source disclosure",
       value: (p) => obligation(p, "source_disclosure"),
+    },
+    {
+      label: "Network source-offer condition (Preview)",
+      value: (p) => networkSourceOfferQualifier(p.entity_id) ?? "Unknown",
     },
     { label: "Notice", value: (p) => obligation(p, "notice") },
     { label: "Patent grant", value: (p) => obligation(p, "patent_grant") },
