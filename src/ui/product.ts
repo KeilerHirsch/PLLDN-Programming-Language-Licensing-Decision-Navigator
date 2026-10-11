@@ -20,6 +20,7 @@ import {
   LANGUAGE_IDENTITY_SOURCE,
   LICENSE_IDENTITY_SOURCE,
 } from "../product/identity-index.ts";
+import { LANGUAGE_BAND_EVIDENCE_NOTICE } from "../product/language-band-provenance.ts";
 import { LANGUAGE_DECISION_PROFILES } from "../product/language-decision-profiles.ts";
 import { LICENSE_DECISION_PROFILES } from "../product/license-decision-profiles.ts";
 import type {
@@ -560,7 +561,7 @@ function renderDecisionProfile(profile: LanguageProductProfile): HTMLElement {
   }
 
   const note = paragraph(
-    "Editorial Preview: workload, runtime, compiler, team and deployment context can move these bands.",
+    `${LANGUAGE_BAND_EVIDENCE_NOTICE} Workload, runtime, compiler, team and deployment context can move these bands.`,
   );
   note.className = "decision-profile-note";
   details.append(grid, note);
@@ -635,6 +636,10 @@ function renderLanguageCard(
   tags.className = "profile-tags";
   for (const category of profile.categories) tags.append(badge(category));
   card.append(tags, renderLanguageQuickFacts(profile));
+  const bandStatus = paragraph("Unverified editorial estimates · audit v0.3 · not benchmark results.");
+  bandStatus.className = "decision-profile-note";
+  bandStatus.dataset.languageBandEvidence = "unverified";
+  card.append(bandStatus);
 
   const build = document.createElement("div");
   build.className = "build-path";
@@ -1342,6 +1347,10 @@ export function languageComparisonRows(
     { label: "Good for", value: (profile) => profile.good_for.join(", ") },
     { label: "Watch for", value: (profile) => profile.watch_for.join(", ") },
     {
+      label: "Performance / complexity evidence status",
+      value: () => LANGUAGE_BAND_EVIDENCE_NOTICE,
+    },
+    {
       label: "Throughput potential",
       value: (profile) =>
         humanizeDecisionValue(
@@ -1461,7 +1470,7 @@ function renderCompare(
   copy.append(
     heading(2, `Compare languages (${state.compareLanguageIds.length}/4)`),
     paragraph(
-      "Pick up to four languages. Editorial summaries sit beside the same Preview facts used by the catalogue.",
+      "Pick up to four languages. Editorial summaries and unverified heuristic performance/complexity bands sit beside recorded Preview facts. No measured cross-language ranking is claimed.",
     ),
   );
   headingRow.append(copy);
