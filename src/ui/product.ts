@@ -33,6 +33,7 @@ import {
   licenseDecisionTone,
 } from "./decision-tones.ts";
 import { renderLicenseComparison } from "./license-comparison.ts";
+import { networkSourceOfferQualifier } from "./license-qualifications.ts";
 import { renderPreviewEvidenceInventory } from "./preview-evidence-inventory.ts";
 import { factProvenanceDisclosure } from "./source-provenance.ts";
 import type {
@@ -829,6 +830,8 @@ function renderLicenseDecisionProfile(
     "Editorial Preview only. Patent fields describe express license text, not patent clearance; for GPL-2.0-or-later verify the selected GPL version and contributor. Read canonical terms for project-specific compliance.",
   );
   note.className = "decision-profile-note";
+  const networkQualifier = networkSourceOfferQualifier(profile.entity_id);
+  if (networkQualifier) details.append(paragraph(networkQualifier));
   details.append(metadata, grid, note);
   return details;
 }
