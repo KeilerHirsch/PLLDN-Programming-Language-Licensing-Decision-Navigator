@@ -257,15 +257,21 @@ function renderHero(catalog: CatalogPreviewView): HTMLElement {
 
   const stats = document.createElement("div");
   stats.className = "product-stats";
-  stats.append(
-    badge(`${catalog.languages.length} languages`),
-    badge(`${PRODUCT_MODEL.licenses.length} licenses`),
-    badge("345 Preview facts"),
-    badge("Reviewed decision path", "product-badge product-badge-trusted"),
+  const languageTotal =
+    PRODUCT_MODEL.languages.length + INDEX_ONLY_LANGUAGES.length;
+  const licenseTotal =
+    PRODUCT_MODEL.licenses.length + INDEX_ONLY_LICENSES.length;
+  const candidateFacts = [...catalog.languages, ...catalog.licenses].reduce(
+    (total, entry) => total + entry.facts.length,
+    0,
   );
   stats.append(
-    badge(`${INDEX_ONLY_LANGUAGES.length} additional language identities`),
-    badge(`${INDEX_ONLY_LICENSES.length} additional license identities`),
+    badge(`${languageTotal} language identities`),
+    badge(`${licenseTotal} license identities`),
+    badge(`${PRODUCT_MODEL.languages.length} detailed languages`),
+    badge(`${PRODUCT_MODEL.licenses.length} detailed licenses`),
+    badge(`${candidateFacts} Preview facts`),
+    badge("Reviewed decision path", "product-badge product-badge-trusted"),
   );
   hero.append(stats);
 
