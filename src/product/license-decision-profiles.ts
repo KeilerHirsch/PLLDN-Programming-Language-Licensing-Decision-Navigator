@@ -147,7 +147,8 @@ export const LICENSE_DECISION_PROFILES: Readonly<
     model: "open-source",
     osi_status: "approved",
     spdx_id: "EUPL-1.2",
-    canonical_source: "https://spdx.org/licenses/EUPL-1.2.html",
+    canonical_source:
+      "https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12",
     rights: {
       use: "yes",
       modify: "yes",
@@ -331,7 +332,7 @@ export const LICENSE_DECISION_PROFILES: Readonly<
     model: "open-source",
     osi_status: "approved",
     spdx_id: "MPL-2.0",
-    canonical_source: "https://spdx.org/licenses/MPL-2.0.html",
+    canonical_source: "https://www.mozilla.org/en-US/MPL/2.0/",
     rights: {
       use: "yes",
       modify: "yes",
