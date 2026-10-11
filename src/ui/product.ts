@@ -946,6 +946,15 @@ const unassessedLicenseProfiles = new Map(
     .map((item) => ["spdx_id" in item ? item.spdx_id : "", item] as const),
 );
 
+/** Resolve only pinned v0.2 records; arbitrary URL input never creates a profile. */
+export function pinnedCandidateById(
+  id: string | null,
+): UnassessedRecord | null {
+  return id
+    ? (candidates.records.find((record) => record.id === id) ?? null)
+    : null;
+}
+
 function renderUnassessedProfile(record: UnassessedRecord): HTMLElement {
   if (
     record.stage !== "UNASSESSED_PREVIEW" ||
@@ -975,7 +984,12 @@ function renderUnassessedProfile(record: UnassessedRecord): HTMLElement {
   reference.href = record.reference;
   reference.textContent = "Pinned source";
   reference.rel = "noopener noreferrer";
-  details.append(summary, values, provenance, reference);
+  const permalink = document.createElement("a");
+  permalink.className = "candidate-permalink";
+  permalink.dataset.candidatePermalink = "true";
+  permalink.href = `?candidate=${encodeURIComponent(record.id)}#catalog`;
+  permalink.textContent = "Direct link to this unassessed profile";
+  details.append(summary, values, provenance, reference, permalink);
   return details;
 }
 

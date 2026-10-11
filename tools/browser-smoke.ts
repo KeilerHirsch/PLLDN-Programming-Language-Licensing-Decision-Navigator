@@ -33,6 +33,30 @@ const smokeProbe = `
     document.querySelector('[data-action="' + name + '"][data-' + field + '="' + value + '"]');
 
   try {
+    const requested = new URLSearchParams(window.location.search).get("candidate");
+    if (requested) {
+      await waitFor(
+        () => [...document.querySelectorAll(".identity-profile")].some(
+          (entry) => entry.dataset.candidateId === requested && entry.open
+        ),
+        "pinned candidate direct link",
+      );
+      const selected = [...document.querySelectorAll(".identity-profile")]
+        .find((entry) => entry.dataset.candidateId === requested);
+      assert(selected?.closest("[data-identity-index]")?.open,
+        "deep link must expand the unassessed index");
+      assert(!selected?.closest("li")?.hidden,
+        "deep link must reveal the requested identity");
+      assert(selected?.textContent?.includes("UNKNOWN"),
+        "deep link must preserve UNKNOWN assessment boundary");
+      const expectedMode = requested.startsWith("candidate.language.") ? "languages" : "licenses";
+      assert(
+        document.querySelector('[data-action="catalog-mode"][aria-pressed="true"]')?.dataset.mode === expectedMode,
+        "deep link must route to the correct catalogue mode",
+      );
+      output.textContent = "PASS: pinned candidate permalink";
+      return;
+    }
     await waitFor(
       () => document.querySelector(".product-experience") &&
         document.querySelector("[data-catalog-visible-count]").textContent.includes("35 languages shown"),
@@ -167,6 +191,15 @@ const smokeProbe = `
           entry.textContent?.includes("UNKNOWN"),
         ),
       "identity search must expose Agda with a pinned unassessed profile",
+    );
+    const agdaLink = [...document.querySelectorAll(".identity-profile")]
+      .find((entry) => entry.dataset.candidateId === "candidate.language.61676461")
+      ?.querySelector("[data-candidate-permalink]");
+    assert(
+      agdaLink && new URL(agdaLink.href).searchParams.get("candidate") === "candidate.language.61676461" &&
+        new URL(agdaLink.href).origin === window.location.origin &&
+        new URL(agdaLink.href).hash === "#catalog",
+      "Agda permalink must remain same-origin and point to the pinned identity",
     );
     assert(
       document.querySelector("[data-catalog-search-empty]").hidden,
@@ -309,6 +342,14 @@ const smokeProbe = `
         ),
       "license detail must preserve UNKNOWN and pinned SPDX provenance",
     );
+    const artisticLink = [...document.querySelectorAll(".identity-profile")]
+      .find((entry) => entry.dataset.candidateId === "candidate.license.artistic-2.0")
+      ?.querySelector("[data-candidate-permalink]");
+    assert(
+      artisticLink &&
+        new URL(artisticLink.href).searchParams.get("candidate") === "candidate.license.artistic-2.0",
+      "license permalink must use its stable SPDX identity ID",
+    );
     licenseSearch.value = "";
     licenseSearch.dispatchEvent(new Event("input", { bubbles: true }));
 
@@ -408,7 +449,12 @@ async function main(): Promise<void> {
     if (!address || typeof address === "string")
       throw new Error("Loopback server address unavailable");
 
-    for (const width of [1280, 390]) {
+    for (const [width, suffix] of [
+      [1280, ""],
+      [390, ""],
+      [1280, "?candidate=candidate.language.61676461"],
+      [1280, "?candidate=candidate.license.artistic-2.0"],
+    ] as const) {
       const { stdout, stderr } = await execFileAsync(
         browser,
         [
@@ -422,7 +468,7 @@ async function main(): Promise<void> {
           `--window-size=${width},844`,
           "--virtual-time-budget=20000",
           "--dump-dom",
-          `http://127.0.0.1:${address.port}/index.html`,
+          `http://127.0.0.1:${address.port}/index.html${suffix}`,
         ],
         { timeout: 60000, maxBuffer: 16 * 1024 * 1024 },
       );
