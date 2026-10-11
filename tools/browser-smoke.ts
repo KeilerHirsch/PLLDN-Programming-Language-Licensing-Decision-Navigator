@@ -89,6 +89,16 @@ const smokeProbe = `
       "source inventory must distinguish presence of links from verification",
     );
 
+    const languageBandBadges = [...document.querySelectorAll(
+      '[data-language-band-evidence="unverified"]',
+    )];
+    assert(
+      languageBandBadges.length === 35 &&
+        languageBandBadges.every((note) =>
+          note.textContent?.includes("not benchmark results")),
+      "all Editorial language cards must disclose unverified heuristic bands",
+    );
+
     action("select-use-case", "use-case-id", "web-backend").click();
     await waitFor(() => document.querySelectorAll(".shortlist-card").length >= 5, "use-case shortlist");
 
@@ -118,6 +128,15 @@ const smokeProbe = `
         "comparison update " + (i + 1),
       );
     }
+    assert(
+      document.querySelector("#compare .compare-table")?.textContent?.includes(
+        "Performance / complexity evidence status",
+      ) &&
+        document.querySelector("#compare .compare-table")?.textContent?.includes(
+          "not measured cross-language rankings",
+        ),
+      "language comparison must preserve the unverified band disclaimer",
+    );
     assert(
       action("toggle-compare", "entity-id", "language.java").disabled,
       "fifth language must visibly be disabled at the comparison limit",
