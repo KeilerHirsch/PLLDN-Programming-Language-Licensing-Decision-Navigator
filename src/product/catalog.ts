@@ -1036,7 +1036,8 @@ export const PRODUCT_MODEL: ProductModel = {
     {
       use_case_id: "distributed-service",
       label: "Distributed service",
-      question: "Operate communicating services across multiple processes or hosts.",
+      question:
+        "Operate communicating services across multiple processes or hosts.",
       language_ids: [
         "language.go",
         "language.elixir",
@@ -1114,7 +1115,8 @@ export const PRODUCT_MODEL: ProductModel = {
     {
       use_case_id: "functional-app",
       label: "Functional application",
-      question: "Build a system around algebraic data types and functional design.",
+      question:
+        "Build a system around algebraic data types and functional design.",
       language_ids: [
         "language.haskell",
         "language.ocaml",
@@ -1127,7 +1129,8 @@ export const PRODUCT_MODEL: ProductModel = {
     {
       use_case_id: "financial-platform",
       label: "Financial business software",
-      question: "Maintain transactional systems and regulated business processes.",
+      question:
+        "Maintain transactional systems and regulated business processes.",
       language_ids: [
         "language.java",
         "language.csharp",
@@ -1149,11 +1152,7 @@ export const PRODUCT_MODEL: ProductModel = {
       use_case_id: "plugin-extension",
       label: "Embedded scripting or plugins",
       question: "Let users customize or extend a host application.",
-      language_ids: [
-        "language.lua",
-        "language.python",
-        "language.javascript",
-      ],
+      language_ids: ["language.lua", "language.python", "language.javascript"],
       rationale:
         "Host embedding, isolation and stable extension APIs decide the useful options.",
     },
