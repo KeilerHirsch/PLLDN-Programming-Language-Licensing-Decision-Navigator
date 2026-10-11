@@ -7,7 +7,7 @@ export const LANGUAGE_BAND_PERFORMANCE_DIMENSIONS = [
   "startup",
   "runtime_overhead",
   "latency_predictability",
-  "build_speed"
+  "build_speed",
 ] as const;
 export const LANGUAGE_BAND_COMPLEXITY_DIMENSIONS = [
   "learning_curve",
@@ -15,7 +15,7 @@ export const LANGUAGE_BAND_COMPLEXITY_DIMENSIONS = [
   "memory_reasoning",
   "toolchain",
   "dependency_management",
-  "deployment"
+  "deployment",
 ] as const;
 
 /** Shown with heuristic ratings; no per-band Reviewed evidence has been linked. */
