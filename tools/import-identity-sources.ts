@@ -75,7 +75,7 @@ export function parseLinguistProgrammingNames(raw: string): string[] {
       i += 1;
       fields.push(lines[i] ?? "");
     }
-    if (fields.some((line) => /^  type: programming\s*$/u.test(line))) {
+    if (fields.some((line) => /^ {2}type: programming\s*$/u.test(line))) {
       if (!title) fail("empty Linguist language name");
       names.push(title);
     }
@@ -99,7 +99,8 @@ export function importIdentities(
     !/^[a-f0-9]{40}$/u.test(pins.spdx_commit) ||
     !/^[a-f0-9]{40}$/u.test(pins.linguist_blob_sha) ||
     !/^[a-f0-9]{40}$/u.test(pins.spdx_blob_sha)
-  ) fail("invalid source pin");
+  )
+    fail("invalid source pin");
 
   const linguist = new Set(parseLinguistProgrammingNames(linguistYaml));
   if (selection.language_names.length === 0) fail("empty language selection");
@@ -110,7 +111,8 @@ export function importIdentities(
     fail("duplicate selected language");
   }
   for (const name of selection.language_names) {
-    if (!linguist.has(name)) fail(`language missing from pinned Linguist: ${name}`);
+    if (!linguist.has(name))
+      fail(`language missing from pinned Linguist: ${name}`);
   }
 
   const source: unknown = JSON.parse(spdxJson);
@@ -137,7 +139,8 @@ export function importIdentities(
       typeof x.isOsiApproved !== "boolean" ||
       typeof x.isDeprecatedLicenseId !== "boolean" ||
       x.reference !== `https://spdx.org/licenses/${x.licenseId}.html`
-    ) fail("invalid SPDX license metadata");
+    )
+      fail("invalid SPDX license metadata");
     if (x.isDeprecatedLicenseId) continue;
     const folded = x.licenseId.toLocaleLowerCase("en-US");
     if (seen.has(folded)) fail("duplicate SPDX license identity");
@@ -175,35 +178,53 @@ function requiredArg(argv: string[], key: string): string {
 export async function runIdentityImport(argv: string[]): Promise<void> {
   const mode = argv[0];
   if (mode !== "--check" && mode !== "--write") {
-    fail("usage: node tools/import-identity-sources.ts (--check|--write) --linguist PATH --spdx PATH");
+    fail(
+      "usage: node tools/import-identity-sources.ts (--check|--write) --linguist PATH --spdx PATH",
+    );
   }
   const linguistPath = requiredArg(argv, "--linguist");
   const spdxPath = requiredArg(argv, "--spdx");
-  const selection = JSON.parse(await readFile(selectionPath, "utf8")) as IdentitySelection;
+  const selection = JSON.parse(
+    await readFile(selectionPath, "utf8"),
+  ) as IdentitySelection;
   const [linguist, spdx] = await Promise.all([
     readFile(resolve(linguistPath)),
     readFile(resolve(spdxPath)),
   ]);
-  assert.equal(gitBlobSha(linguist), selection.source_pins.linguist_blob_sha,
-    "Linguist input does not match pinned Git blob");
-  assert.equal(gitBlobSha(spdx), selection.source_pins.spdx_blob_sha,
-    "SPDX input does not match pinned Git blob");
+  assert.equal(
+    gitBlobSha(linguist),
+    selection.source_pins.linguist_blob_sha,
+    "Linguist input does not match pinned Git blob",
+  );
+  assert.equal(
+    gitBlobSha(spdx),
+    selection.source_pins.spdx_blob_sha,
+    "SPDX input does not match pinned Git blob",
+  );
   const imported = importIdentities(
     linguist.toString("utf8"),
     spdx.toString("utf8"),
     selection,
   );
-  const output = JSON.stringify(imported, null, 2) + "\n";
+  const output = `${JSON.stringify(imported, null, 2)}\n`;
   if (mode === "--check") {
-    assert.equal(await readFile(outputPath, "utf8"), output,
-      "Identity data differs; run --write with the same pinned inputs");
+    assert.equal(
+      await readFile(outputPath, "utf8"),
+      output,
+      "Identity data differs; run --write with the same pinned inputs",
+    );
     process.stdout.write("Identity import is reproducible and up to date.\n");
     return;
   }
   await writeFile(outputPath, output, "utf8");
-  process.stdout.write(`Wrote ${imported.languages.length} language names and ${imported.licenses.length} SPDX identities.\n`);
+  process.stdout.write(
+    `Wrote ${imported.languages.length} language names and ${imported.licenses.length} SPDX identities.\n`,
+  );
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (
+  process.argv[1] &&
+  resolve(process.argv[1]) === fileURLToPath(import.meta.url)
+) {
   await runIdentityImport(process.argv.slice(2));
 }
