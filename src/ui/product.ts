@@ -34,6 +34,7 @@ import {
 } from "./decision-tones.ts";
 import { renderLicenseComparison } from "./license-comparison.ts";
 import { renderPreviewEvidenceInventory } from "./preview-evidence-inventory.ts";
+import { factProvenanceDisclosure } from "./source-provenance.ts";
 import type {
   CatalogPreviewEntryView,
   CatalogPreviewFactView,
@@ -601,6 +602,10 @@ function renderPreviewFacts(
       });
       value.append(sources);
     }
+    const origin = document.createElement("small");
+    origin.className = "preview-provenance-disclosure";
+    origin.textContent = ` · ${factProvenanceDisclosure(fact)}`;
+    value.append(origin);
     list.append(term, value);
   }
   details.append(list);
@@ -1403,6 +1408,10 @@ function renderCompareEvidence(
   const summary = document.createElement("summary");
   summary.textContent = `Preview evidence · ${fact?.review_status ?? "UNKNOWN"} · ${fact?.sources.length ?? 0} source(s)`;
   details.append(summary);
+  const disclosure = document.createElement("p");
+  disclosure.className = "preview-provenance-disclosure";
+  disclosure.textContent = factProvenanceDisclosure(fact);
+  details.append(disclosure);
   const claim = document.createElement("code");
   claim.textContent = fact?.claim_id ?? "No Preview claim recorded";
   details.append(claim);
