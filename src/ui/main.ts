@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
+import { exportUnassessedCandidateCsv } from "../product/unassessed-export.ts";
 import { analyzeText } from "../text/analyze.ts";
 import type { TextAnalysis, TextRuleSet } from "../text/types.ts";
 import type { UiController } from "./controller.ts";
@@ -202,6 +203,17 @@ root.addEventListener("click", (event) => {
   const current = controller;
   if (!element || !current) return;
   const action = element.dataset.action;
+  if (action === "export-unassessed-csv") {
+    const csv = exportUnassessedCandidateCsv();
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "plldn-unassessed-candidates-v0.2.csv";
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 0);
+    return;
+  }
   if (action === "select-use-case") {
     productState = {
       ...productState,
