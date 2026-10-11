@@ -826,7 +826,7 @@ function renderLicenseDecisionProfile(
   }
 
   const note = paragraph(
-    "Editorial Preview only. Read the canonical terms for legal interpretation and project-specific compliance.",
+    "Editorial Preview only. Patent fields describe express license text, not patent clearance; for GPL-2.0-or-later verify the selected GPL version and contributor. Read canonical terms for project-specific compliance.",
   );
   note.className = "decision-profile-note";
   details.append(metadata, grid, note);
