@@ -438,7 +438,9 @@ async function start(): Promise<void> {
       mode: candidate.kind === "language" ? "languages" : "licenses",
     };
     catalogQuery =
-      candidate.kind === "language" ? candidate.name : candidate.spdx_id;
+      candidate.kind === "language"
+        ? candidate.name
+        : (candidate.spdx_id ?? candidate.name);
   }
   await publish(() => runtime.controller.view());
   if (candidate) {
