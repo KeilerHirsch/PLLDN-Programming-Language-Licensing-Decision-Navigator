@@ -2,10 +2,7 @@
 // SPDX-License-Identifier: EUPL-1.2
 import { PRODUCT_COMPARE_DIMENSIONS } from "../product/catalog.ts";
 import { exportCsvCell } from "../product/unassessed-export.ts";
-import {
-  languageComparisonRows,
-  selectEditorialLanguages,
-} from "./product.ts";
+import { languageComparisonRows, selectEditorialLanguages } from "./product.ts";
 import type { CatalogPreviewView } from "./types.ts";
 
 /** Exactly the same editorial and Preview values as the on-screen language table. */
@@ -42,7 +39,8 @@ export function exportEditorialLanguageCompareCsv(
         .get(profile.entity_id)
         ?.facts.find((fact) => fact.dimension_id === dimensionId),
     );
-    const label = records.find((fact) => fact !== undefined)?.label ?? dimensionId;
+    const label =
+      records.find((fact) => fact !== undefined)?.label ?? dimensionId;
     lines.push(
       [
         `Preview claim ID: ${label}`,
