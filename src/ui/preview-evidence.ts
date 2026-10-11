@@ -3,7 +3,9 @@
 import type { CatalogPreviewFactView, CatalogPreviewView } from "./types.ts";
 
 /** Display the recorded Preview claim, never infer a rights conclusion. */
-export function previewFactText(fact: CatalogPreviewFactView | undefined): string {
+export function previewFactText(
+  fact: CatalogPreviewFactView | undefined,
+): string {
   if (!fact || fact.state === "UNKNOWN") return "Unknown";
   if (fact.state === "NOT_APPLICABLE") return "Not applicable";
   if (fact.value === null) return fact.state;
@@ -50,15 +52,17 @@ export function licensePreviewClaimRows(
       dimensions.set(fact.dimension_id, fact.label);
     }
   }
-  return [...dimensions].sort(([a], [b]) => a.localeCompare(b)).map(
-    ([dimensionId, label]) => ({
+  return [...dimensions]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([dimensionId, label]) => ({
       dimensionId,
       label,
       facts: ids.map((id) =>
-        entries.get(id)?.facts.find((fact) => fact.dimension_id === dimensionId),
+        entries
+          .get(id)
+          ?.facts.find((fact) => fact.dimension_id === dimensionId),
       ),
-    }),
-  );
+    }));
 }
 
 function safeHttps(reference: string): string | null {
