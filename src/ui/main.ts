@@ -9,6 +9,7 @@ import { exportEditorialLicenseCompareCsv } from "./license-compare-export.ts";
 import {
   DEFAULT_PRODUCT_UI_STATE,
   type ProductUiState,
+  pinnedCandidateById,
   renderProductExperience,
 } from "./product.ts";
 import {
@@ -428,7 +429,28 @@ async function start(): Promise<void> {
     view: runtime.catalogPreview,
     diagnostic: runtime.catalogPreviewDiagnostic,
   };
+  const candidate = pinnedCandidateById(
+    new URLSearchParams(window.location.search).get("candidate"),
+  );
+  if (candidate) {
+    productState = {
+      ...productState,
+      mode: candidate.kind === "language" ? "languages" : "licenses",
+    };
+    catalogQuery =
+      candidate.kind === "language" ? candidate.name : candidate.spdx_id;
+  }
   await publish(() => runtime.controller.view());
+  if (candidate) {
+    const profile = [...root.querySelectorAll<HTMLDetailsElement>(".identity-profile")]
+      .find((entry) => entry.dataset.candidateId === candidate.id);
+    if (profile && !profile.closest("li")?.hidden) {
+      const index = root.querySelector<HTMLDetailsElement>("[data-identity-index]");
+      if (index) index.open = true;
+      profile.open = true;
+      profile.scrollIntoView({ block: "nearest" });
+    }
+  }
 }
 
 void start().catch((error) => {
