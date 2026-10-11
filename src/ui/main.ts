@@ -235,8 +235,12 @@ root.addEventListener("click", (event) => {
     return;
   }
   if (action === "export-license-compare") {
+    if (!catalogState.view) throw new Error("Preview catalogue not loaded");
     downloadCsv(
-      exportEditorialLicenseCompareCsv(productState.compareLicenseIds),
+      exportEditorialLicenseCompareCsv(
+        productState.compareLicenseIds,
+        catalogState.view,
+      ),
       "plldn-editorial-license-comparison.csv",
     );
     return;
