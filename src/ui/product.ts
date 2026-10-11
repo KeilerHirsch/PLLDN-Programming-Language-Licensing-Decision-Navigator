@@ -1513,7 +1513,7 @@ export function renderProductExperience(
     renderUseCases(state),
     state.mode === "languages"
       ? renderCompare(catalog, state)
-      : renderLicenseComparison(state.compareLicenseIds),
+      : renderLicenseComparison(state.compareLicenseIds, catalog),
     renderCatalog(catalog, state),
   );
   return wrapper;

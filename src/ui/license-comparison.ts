@@ -6,6 +6,12 @@ import type {
   LicenseDecisionProfile,
   LicenseProductProfile,
 } from "../product/types.ts";
+import {
+  licensePreviewClaimRows,
+  previewFactText,
+  renderPreviewClaimEvidence,
+} from "./preview-evidence.ts";
+import type { CatalogPreviewView } from "./types.ts";
 
 export type LicenseComparisonRow = {
   label: string;
@@ -88,7 +94,10 @@ export function selectEditorialLicenses(
   });
 }
 
-export function renderLicenseComparison(ids: readonly string[]): HTMLElement {
+export function renderLicenseComparison(
+  ids: readonly string[],
+  catalog: CatalogPreviewView,
+): HTMLElement {
   const selected = selectEditorialLicenses(ids);
   const section = document.createElement("section");
   section.className = "compare-section";
@@ -165,6 +174,34 @@ export function renderLicenseComparison(ids: readonly string[]): HTMLElement {
       const td = document.createElement("td");
       td.textContent = row.value(profile);
       tr.append(td);
+    }
+    body.append(tr);
+  }
+  const previewRows = licensePreviewClaimRows(
+    catalog,
+    selected.map((p) => p.entity_id),
+  );
+  if (previewRows.length > 0) {
+    const subtitle = document.createElement("tr");
+    const note = document.createElement("th");
+    note.colSpan = selected.length + 1;
+    note.scope = "row";
+    note.textContent =
+      "Recorded Preview claims below are separate from the editorial rights summary above. They are not a license-compatibility verdict.";
+    subtitle.append(note);
+    body.append(subtitle);
+  }
+  for (const record of previewRows) {
+    const tr = document.createElement("tr");
+    const label = document.createElement("th");
+    label.scope = "row";
+    label.textContent = `Preview fact: ${record.label}`;
+    tr.append(label);
+    for (const fact of record.facts) {
+      const cell = document.createElement("td");
+      cell.textContent = previewFactText(fact);
+      cell.append(renderPreviewClaimEvidence(fact));
+      tr.append(cell);
     }
     body.append(tr);
   }

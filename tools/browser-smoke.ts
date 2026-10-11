@@ -210,6 +210,21 @@ const smokeProbe = `
       "selected license comparison must expose a CSV download action",
     );
     const rows = Array.from(document.querySelectorAll("#compare-licenses .compare-table tbody tr"));
+    const licensedEvidence = [...document.querySelectorAll("#compare-licenses [data-compare-evidence]")];
+    assert(licensedEvidence.length > 0,
+      "selected detailed licenses must offer source-linked Preview claim inspection");
+    assert(
+      licensedEvidence.every((details) =>
+        details.querySelector("code")?.textContent &&
+        details.querySelector("summary")?.textContent?.includes("Preview evidence")),
+      "all recorded license comparison claims must expose IDs and review statuses",
+    );
+    assert(
+      licensedEvidence.flatMap((details) => [...details.querySelectorAll("a")])
+        .every((link) => link.href.startsWith("https://") &&
+          link.rel.includes("noopener") && link.rel.includes("noreferrer")),
+      "license evidence links must be trusted HTTPS references",
+    );
     const saas = rows.find((row) => row.querySelector("th")?.textContent === "SaaS / hosting");
     assert(saas && saas.querySelectorAll("td").length === 4,
       "comparison must present sourced hosting rights");
