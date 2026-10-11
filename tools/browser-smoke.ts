@@ -71,6 +71,26 @@ const smokeProbe = `
     );
 
     const search = document.querySelector('[data-action="catalog-search"]');
+    assert(
+      document.querySelectorAll("[data-identity-entry]").length > 65,
+      "expanded language identities should exist without being rated",
+    );
+    search.value = "agda";
+    search.dispatchEvent(new Event("input", { bubbles: true }));
+    assert(
+      document.querySelector("[data-catalog-visible-count]").textContent.includes("0 languages shown"),
+      "unassessed language search should not invent profiled matches",
+    );
+    assert(
+      document.querySelector("[data-identity-index]").open &&
+      Array.from(document.querySelectorAll("[data-identity-entry]:not([hidden])"))
+        .some((entry) => entry.textContent === "Agda"),
+      "identity search should find Agda in the source-based index",
+    );
+    assert(
+      document.querySelector("[data-catalog-search-empty]").hidden,
+      "an identity-only match is still a real search result",
+    );
     search.value = "plldn-no-match-zzxyy";
     search.dispatchEvent(new Event("input", { bubbles: true }));
     assert(
@@ -98,6 +118,19 @@ const smokeProbe = `
         document.querySelector("[data-catalog-visible-count]").textContent.includes("32 licenses shown"),
       "switching to license mode",
     );
+
+    const licenseSearch = document.querySelector('[data-action="catalog-search"]');
+    licenseSearch.value = "Artistic-2.0";
+    licenseSearch.dispatchEvent(new Event("input", { bubbles: true }));
+    assert(
+      document.querySelector("[data-identity-index]").open &&
+      Array.from(document.querySelectorAll("[data-identity-entry]:not([hidden]) a"))
+        .some((link) => link.textContent === "Artistic-2.0" &&
+          link.href === "https://spdx.org/licenses/Artistic-2.0.html"),
+      "license identity search must show canonical SPDX link",
+    );
+    licenseSearch.value = "";
+    licenseSearch.dispatchEvent(new Event("input", { bubbles: true }));
 
     const filter = action("product-filter", "filter-key", "licenseModel");
     assert(filter && !filter.disabled, "license-model filter must exist");
