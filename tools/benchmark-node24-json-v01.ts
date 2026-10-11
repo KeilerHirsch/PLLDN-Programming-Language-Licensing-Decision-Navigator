@@ -17,6 +17,12 @@ const OUTPUT = "reports/node24-json-roundtrip-v0.1.json";
 const WORKLOAD_ID = "javascript.node24.json-roundtrip-v0.1";
 const sourcePath = fileURLToPath(import.meta.url);
 
+function requiredAt<T>(values: readonly T[], index: number): T {
+  const value = values[index];
+  assert(value !== undefined, "Required index absent");
+  return value;
+}
+
 function sha256(input: string | Uint8Array): string {
   return createHash("sha256").update(input).digest("hex");
 }
@@ -32,7 +38,7 @@ const inputJson = JSON.stringify(inputRecords);
 const inputSha256 = sha256(inputJson);
 const expectedChecksum = Array.from(
   { length: REPEATS_PER_SAMPLE },
-  (_, index) => inputRecords[index]!.amount + RECORDS,
+  (_, index) => requiredAt(inputRecords, index).amount + RECORDS,
 ).reduce((a, b) => a + b, 0);
 
 function roundTripWorkload(): number {
@@ -40,7 +46,7 @@ function roundTripWorkload(): number {
   for (let i = 0; i < REPEATS_PER_SAMPLE; i += 1) {
     const bytes = JSON.stringify(inputRecords);
     const parsed = JSON.parse(bytes) as typeof inputRecords;
-    checksum += parsed[i]!.amount + parsed.length;
+    checksum += requiredAt(parsed, i).amount + parsed.length;
   }
   return checksum;
 }
@@ -55,7 +61,7 @@ function validateFixture(): void {
 function percentile(sorted: readonly number[], percentage: number): number {
   assert(sorted.length > 0);
   const index = Math.ceil(sorted.length * percentage) - 1;
-  return sorted[Math.max(0, Math.min(index, sorted.length - 1))]!;
+  return requiredAt(sorted, Math.max(0, Math.min(index, sorted.length - 1)));
 }
 
 function run(): void {
@@ -81,8 +87,16 @@ function run(): void {
   );
   assert.equal(process.version, RUNTIME_VERSION, "Unsupported runtime version");
   const sourceSha = process.env.BENCHMARK_SOURCE_SHA;
-  assert.match(sourceSha ?? "", /^[a-f0-9]{40}$/u, "Exact source commit required");
-  assert.equal(process.env.GITHUB_ACTIONS, "true", "Run only on GitHub Actions");
+  assert.match(
+    sourceSha ?? "",
+    /^[a-f0-9]{40}$/u,
+    "Exact source commit required",
+  );
+  assert.equal(
+    process.env.GITHUB_ACTIONS,
+    "true",
+    "Run only on GitHub Actions",
+  );
 
   const sampleDurationsNs: string[] = [];
   for (let i = 0; i < WARMUPS; i += 1) {
@@ -118,11 +132,13 @@ function run(): void {
       repeats_per_sample: REPEATS_PER_SAMPLE,
       records_processed_per_sample: RECORDS * REPEATS_PER_SAMPLE,
       expected_checksum: expectedChecksum,
-      validation: "Every warmup and measured sample asserted against known checksum",
+      validation:
+        "Every warmup and measured sample asserted against known checksum",
       warmups: WARMUPS,
       measured_samples: SAMPLES,
       timer: "process.hrtime.bigint",
-      measured_section: "paired stringify and parse; no process startup, I/O, file access, or toolchain build",
+      measured_section:
+        "paired stringify and parse; no process startup, I/O, file access, or toolchain build",
     },
     environment: {
       captured_at_utc: startAt,
@@ -143,8 +159,8 @@ function run(): void {
     summary: {
       median_wall_nanoseconds: medianNs,
       p95_wall_nanoseconds: p95Ns,
-      minimum_wall_nanoseconds: sorted[0]!,
-      maximum_wall_nanoseconds: sorted[sorted.length - 1]!,
+      minimum_wall_nanoseconds: requiredAt(sorted, 0),
+      maximum_wall_nanoseconds: requiredAt(sorted, sorted.length - 1),
       process_cpu_user_microseconds: cpu.user,
       process_cpu_system_microseconds: cpu.system,
       process_rss_before_bytes: startRss,
