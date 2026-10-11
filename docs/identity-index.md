@@ -38,6 +38,8 @@ The exported `INDEX_ONLY_*` arrays exclude any identities already represented by
 - No generated `performance`, `rights`, `obligations`, or `compliance_complexity` values.
 - The UI uses compact, clearly labeled index-only entries, distinct from detailed profile cards.
 - Text search spans the profiled catalogue and index-only entries. Structured capability/license filters apply **only to detailed profiles**, because index-only items lack assessed values.
+- The index-only panel reveals **60 entries per page** with an explicit “Show more” button. Text search runs across the full underlying list before pagination; its result counter distinguishes total matches from visible entries.
+- The license index can filter by the **OSI-approved flag in the pinned SPDX snapshot**. This is not a legal classification by PLLDN, and cannot be applied to hand-authored profile ratings.
 - `tests/identity-index.test.ts` checks uniqueness, provenance and non-overlap with rated profiles; the Chromium smoke suite verifies discovery and links.
 
 ## Later stages
