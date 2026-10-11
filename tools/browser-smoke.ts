@@ -239,6 +239,18 @@ const smokeProbe = `
       "switching to license mode",
     );
 
+    const licenseCards = [...document.querySelectorAll(".license-profile-card")];
+    assert(
+      licenseCards.some((card) => card.textContent.includes("MPL-2.0 §§1.10") &&
+        card.textContent.includes("server-side")),
+      "MPL editorial card must qualify distribution vs hosted functionality",
+    );
+    assert(
+      licenseCards.some((card) => card.textContent.includes("EUPL-1.2 Arts. 1, 3, 5") &&
+        card.textContent.includes("essential functionality")),
+      "EUPL editorial card must disclose network communication scope",
+    );
+
     const compareLicenses = [
       "license.mit",
       "license.apache-2.0",
