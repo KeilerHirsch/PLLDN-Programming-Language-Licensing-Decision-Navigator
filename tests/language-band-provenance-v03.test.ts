@@ -30,8 +30,12 @@ test("Editorial language metrics inventory stays unverified and complete", () =>
     ...LANGUAGE_BAND_COMPLEXITY_DIMENSIONS,
   ]);
   assert.equal(ledger.assessment_units.total_bands, 385);
+  const childEnv = { ...process.env };
+  delete childEnv.NODE_V8_COVERAGE;
+  delete childEnv.NODE_TEST_CONTEXT;
   const cmd = spawnSync(process.execPath, ["tools/audit-language-bands.ts"], {
     encoding: "utf8",
+    env: childEnv,
   });
   assert.equal(cmd.status, 0, cmd.stderr);
   const report = JSON.parse(cmd.stdout);
