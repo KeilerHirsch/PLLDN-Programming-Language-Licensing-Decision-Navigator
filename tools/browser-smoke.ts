@@ -122,8 +122,13 @@ const smokeProbe = `
     assert(
       document.querySelector("[data-identity-index]").open &&
       Array.from(document.querySelectorAll("[data-identity-entry]:not([hidden])"))
-        .some((entry) => entry.textContent === "Agda"),
-      "identity search should find Agda in the source-based index",
+        .some((entry) =>
+          entry.querySelector("span")?.textContent === "Agda" &&
+          entry.querySelector(".identity-profile")?.dataset.candidateId ===
+            "candidate.language.61676461" &&
+          entry.textContent?.includes("UNKNOWN"),
+        ),
+      "identity search must expose Agda with a pinned unassessed profile",
     );
     assert(
       document.querySelector("[data-catalog-search-empty]").hidden,
@@ -191,6 +196,17 @@ const smokeProbe = `
         .some((link) => link.textContent === "Artistic-2.0" &&
           link.href === "https://spdx.org/licenses/Artistic-2.0.html"),
       "license identity search must show canonical SPDX link",
+    );
+    assert(
+      Array.from(document.querySelectorAll("[data-identity-entry]:not([hidden])"))
+        .some((entry) =>
+          entry.querySelector(".identity-profile")?.dataset.candidateId ===
+            "candidate.license.artistic-2.0" &&
+          entry.textContent?.includes("UNKNOWN") &&
+          entry.querySelector(".identity-profile a")?.href ===
+            "https://spdx.org/licenses/Artistic-2.0.html",
+        ),
+      "license detail must preserve UNKNOWN and pinned SPDX provenance",
     );
     licenseSearch.value = "";
     licenseSearch.dispatchEvent(new Event("input", { bubbles: true }));
