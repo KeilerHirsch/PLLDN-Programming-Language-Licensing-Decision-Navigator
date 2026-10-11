@@ -24,7 +24,7 @@ test("export is deterministic and includes exactly 841 unassessed records", () =
 });
 test("CSV encoding resists spreadsheet formulas and preserves delimiters", () => {
   assert.equal(exportCsvCell('Ada, "SPARK"'), '"Ada, ""SPARK"""');
-  assert.equal(exportCsvCell("=HYPERLINK(\"x\")"), '"\'=HYPERLINK(""x"")"');
+  assert.equal(exportCsvCell('=HYPERLINK("x")'), '"\'=HYPERLINK(""x"")"');
   assert.equal(exportCsvCell(" +SUM(1)"), '"\' +SUM(1)"');
   assert.equal(exportCsvCell("-2"), '"\'-2"');
   assert.equal(exportCsvCell("text"), '"text"');
