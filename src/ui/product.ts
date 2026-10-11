@@ -1021,7 +1021,8 @@ function renderIdentityIndex(state: ProductUiState): HTMLElement {
       const title = document.createElement("span");
       title.textContent = name;
       const profile = unassessedLanguageProfiles.get(name);
-      if (!profile) throw new Error(`Missing pinned candidate profile: ${name}`);
+      if (!profile)
+        throw new Error(`Missing pinned candidate profile: ${name}`);
       li.append(title, renderUnassessedProfile(profile));
       list.append(li);
     }
@@ -1044,7 +1045,8 @@ function renderIdentityIndex(state: ProductUiState): HTMLElement {
         ? "OSI-approved in pinned SPDX list"
         : "No OSI approval flag in pinned SPDX list";
       const profile = unassessedLicenseProfiles.get(license.id);
-      if (!profile) throw new Error(`Missing pinned candidate profile: ${license.id}`);
+      if (!profile)
+        throw new Error(`Missing pinned candidate profile: ${license.id}`);
       li.append(link, name, osi, renderUnassessedProfile(profile));
       list.append(li);
     }
