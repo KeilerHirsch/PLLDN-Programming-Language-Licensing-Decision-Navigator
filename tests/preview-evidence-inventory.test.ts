@@ -21,8 +21,16 @@ const entry: CatalogPreviewEntryView = {
       review_status: "NOT_REVIEWED",
       conditions: [],
       sources: [
-        { source_id: "a", title: "Recorded source A", reference: "https://example.org/a" },
-        { source_id: "b", title: "Recorded source B", reference: "https://example.org/a" },
+        {
+          source_id: "a",
+          title: "Recorded source A",
+          reference: "https://example.org/a",
+        },
+        {
+          source_id: "b",
+          title: "Recorded source B",
+          reference: "https://example.org/a",
+        },
       ],
     },
     {
