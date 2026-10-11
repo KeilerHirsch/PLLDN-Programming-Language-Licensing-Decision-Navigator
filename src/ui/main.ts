@@ -43,6 +43,7 @@ let catalogState: CatalogPreviewState = {
 let productState: ProductUiState = {
   ...DEFAULT_PRODUCT_UI_STATE,
   compareLanguageIds: [],
+  compareLicenseIds: [],
   filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
 };
 let catalogQuery = "";
@@ -257,6 +258,26 @@ root.addEventListener("click", (event) => {
   }
   if (action === "clear-compare") {
     productState = { ...productState, compareLanguageIds: [] };
+    void publish(() => current.view());
+  }
+  if (action === "toggle-license-compare") {
+    const entityId = element.dataset.entityId;
+    if (entityId) {
+      const selected = new Set(productState.compareLicenseIds);
+      if (selected.has(entityId)) {
+        selected.delete(entityId);
+      } else if (selected.size < 4) {
+        selected.add(entityId);
+      }
+      productState = {
+        ...productState,
+        compareLicenseIds: [...selected],
+      };
+      void publish(() => current.view());
+    }
+  }
+  if (action === "clear-license-compare") {
+    productState = { ...productState, compareLicenseIds: [] };
     void publish(() => current.view());
   }
   if (action === "reset-product-filters") {
