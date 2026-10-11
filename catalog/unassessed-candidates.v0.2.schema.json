@@ -127,37 +127,45 @@
             "if": {
               "properties": {
                 "kind": {
-                  "const": "language"
+                  "const": "language",
+                  "type": "string"
                 }
               },
-              "required": ["kind"]
+              "required": ["kind"],
+              "type": "object"
             },
             "then": {
               "properties": {
                 "assessments": {
                   "required": ["performance", "complexity", "suitability"],
-                  "maxProperties": 3
+                  "maxProperties": 3,
+                  "type": "object"
                 }
               },
               "not": {
                 "anyOf": [
                   {
-                    "required": ["spdx_id"]
+                    "required": ["spdx_id"],
+                    "type": "object"
                   },
                   {
-                    "required": ["osi_approved_source_flag"]
+                    "required": ["osi_approved_source_flag"],
+                    "type": "object"
                   }
                 ]
-              }
+              },
+              "type": "object"
             },
             "else": {
               "required": ["spdx_id", "osi_approved_source_flag"],
               "properties": {
                 "assessments": {
                   "required": ["rights", "obligations", "compatibility"],
-                  "maxProperties": 3
+                  "maxProperties": 3,
+                  "type": "object"
                 }
-              }
+              },
+              "type": "object"
             }
           }
         ]
