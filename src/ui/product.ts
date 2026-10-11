@@ -1,5 +1,8 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
+import candidates from "../../catalog/unassessed-candidates.v0.2.json" with {
+  type: "json",
+};
 import type { TypedValue } from "../decision/types.ts";
 import {
   PRODUCT_COMPARE_DIMENSIONS,
@@ -908,6 +911,51 @@ function renderLicenseCatalog(
   return wrapper;
 }
 
+type UnassessedRecord = (typeof candidates.records)[number];
+const unassessedLanguageProfiles = new Map(
+  candidates.records
+    .filter((item) => item.kind === "language")
+    .map((item) => [item.name, item] as const),
+);
+const unassessedLicenseProfiles = new Map(
+  candidates.records
+    .filter((item) => item.kind === "license")
+    .map((item) => ["spdx_id" in item ? item.spdx_id : "", item] as const),
+);
+
+function renderUnassessedProfile(record: UnassessedRecord): HTMLElement {
+  if (
+    record.stage !== "UNASSESSED_PREVIEW" ||
+    record.review_status !== "NOT_REVIEWED" ||
+    record.source_status !== "PINNED_IDENTITY" ||
+    record.claim_refs.length !== 0 ||
+    !Object.values(record.assessments).every((value) => value === "UNKNOWN")
+  ) {
+    throw new Error("Unassessed candidate metadata violated trust boundary");
+  }
+  const details = document.createElement("details");
+  details.className = "identity-profile";
+  details.dataset.candidateId = record.id;
+  const summary = document.createElement("summary");
+  summary.textContent = "Profile v0.2 · unassessed";
+  const values = paragraph(
+    Object.entries(record.assessments)
+      .map(([key, value]) => `${key.replaceAll("_", " ")}: ${value}`)
+      .join(" · "),
+  );
+  const pin =
+    record.kind === "language"
+      ? candidates.source_pins.linguist_commit
+      : candidates.source_pins.spdx_commit;
+  const provenance = paragraph(`ID: ${record.id} · Source commit: ${pin}`);
+  const reference = document.createElement("a");
+  reference.href = record.reference;
+  reference.textContent = "Pinned source";
+  reference.rel = "noopener noreferrer";
+  details.append(summary, values, provenance, reference);
+  return details;
+}
+
 function renderIdentityIndex(state: ProductUiState): HTMLElement {
   const languages = state.mode === "languages";
   const identities = languages ? INDEX_ONLY_LANGUAGES : INDEX_ONLY_LICENSES;
@@ -918,11 +966,11 @@ function renderIdentityIndex(state: ProductUiState): HTMLElement {
   details.dataset.identityIndex = "true";
 
   const summary = document.createElement("summary");
-  summary.textContent = `${identities.length} more ${label} · identity-only index`;
+  summary.textContent = `${identities.length} more ${label} · unassessed profiles`;
   details.append(summary);
 
   const explanation = paragraph(
-    "These entries are names only: no performance scores, license permissions, obligations, or Reviewed recommendations. Structured filters apply to detailed profiles, not this index.",
+    "These v0.2 profiles record pinned identity provenance and explicitly UNKNOWN assessments. They contain no performance scores, license permissions, obligations, or Reviewed recommendations. Structured filters apply to detailed editorial profiles, not this index.",
   );
   explanation.className = "identity-index-note";
   const sourceLink = document.createElement("a");
@@ -970,7 +1018,11 @@ function renderIdentityIndex(state: ProductUiState): HTMLElement {
       li.dataset.identitySearchText = name
         .normalize("NFKD")
         .toLocaleLowerCase("en-US");
-      li.textContent = name;
+      const title = document.createElement("span");
+      title.textContent = name;
+      const profile = unassessedLanguageProfiles.get(name);
+      if (!profile) throw new Error(`Missing pinned candidate profile: ${name}`);
+      li.append(title, renderUnassessedProfile(profile));
       list.append(li);
     }
   } else {
@@ -991,7 +1043,9 @@ function renderIdentityIndex(state: ProductUiState): HTMLElement {
       osi.textContent = license.osiApproved
         ? "OSI-approved in pinned SPDX list"
         : "No OSI approval flag in pinned SPDX list";
-      li.append(link, name, osi);
+      const profile = unassessedLicenseProfiles.get(license.id);
+      if (!profile) throw new Error(`Missing pinned candidate profile: ${license.id}`);
+      li.append(link, name, osi, renderUnassessedProfile(profile));
       list.append(li);
     }
   }
