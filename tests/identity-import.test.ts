@@ -5,9 +5,9 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import {
   gitBlobSha,
+  type IdentitySelection,
   importIdentities,
   parseLinguistProgrammingNames,
-  type IdentitySelection,
 } from "../tools/import-identity-sources.ts";
 
 const selection: IdentitySelection = {
@@ -94,24 +94,27 @@ test("SPDX importer preserves OSI flag and excludes deprecated identities", () =
 
 test("import rejects missing names, repeated selection and mismatched version", () => {
   assert.throws(
-    () => importIdentities(linguist, licenseSource(), {
-      ...selection,
-      language_names: ["Absent"],
-    }),
+    () =>
+      importIdentities(linguist, licenseSource(), {
+        ...selection,
+        language_names: ["Absent"],
+      }),
     /language missing/u,
   );
   assert.throws(
-    () => importIdentities(linguist, licenseSource(), {
-      ...selection,
-      language_names: ["Foo", "foo"],
-    }),
+    () =>
+      importIdentities(linguist, licenseSource(), {
+        ...selection,
+        language_names: ["Foo", "foo"],
+      }),
     /duplicate selected/u,
   );
   assert.throws(
-    () => importIdentities(linguist, licenseSource(), {
-      ...selection,
-      source_pins: { ...selection.source_pins, spdx_version: "9.9.9" },
-    }),
+    () =>
+      importIdentities(linguist, licenseSource(), {
+        ...selection,
+        source_pins: { ...selection.source_pins, spdx_version: "9.9.9" },
+      }),
     /SPDX version/u,
   );
 });
@@ -137,11 +140,23 @@ test("selection and generated snapshot agree exactly on names and source pins", 
   ) as IdentitySelection;
   const generated = JSON.parse(
     readFileSync("catalog/identity-data.json", "utf8"),
-  ) as { source: { spdx_version: string; languages: string; licenses: string }; languages: string[] };
+  ) as {
+    source: { spdx_version: string; languages: string; licenses: string };
+    languages: string[];
+  };
   assert.deepEqual(generated.languages, actualSelection.language_names);
-  assert.equal(generated.source.spdx_version, actualSelection.source_pins.spdx_version);
-  assert(generated.source.languages.includes(actualSelection.source_pins.linguist_commit));
-  assert(generated.source.licenses.includes(actualSelection.source_pins.spdx_commit));
+  assert.equal(
+    generated.source.spdx_version,
+    actualSelection.source_pins.spdx_version,
+  );
+  assert(
+    generated.source.languages.includes(
+      actualSelection.source_pins.linguist_commit,
+    ),
+  );
+  assert(
+    generated.source.licenses.includes(actualSelection.source_pins.spdx_commit),
+  );
 });
 
 test("Git blob verification uses Git's blob framing", () => {
