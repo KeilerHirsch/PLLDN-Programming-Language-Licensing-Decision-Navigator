@@ -33,7 +33,10 @@ import {
   licenseDecisionTone,
 } from "./decision-tones.ts";
 import { renderLicenseComparison } from "./license-comparison.ts";
-import { networkSourceOfferQualifier } from "./license-qualifications.ts";
+import {
+  licenseDisclosureScopeQualifier,
+  networkSourceOfferQualifier,
+} from "./license-qualifications.ts";
 import { renderPreviewEvidenceInventory } from "./preview-evidence-inventory.ts";
 import { factProvenanceDisclosure } from "./source-provenance.ts";
 import type {
@@ -832,6 +835,8 @@ function renderLicenseDecisionProfile(
   note.className = "decision-profile-note";
   const networkQualifier = networkSourceOfferQualifier(profile.entity_id);
   if (networkQualifier) details.append(paragraph(networkQualifier));
+  const scopeQualifier = licenseDisclosureScopeQualifier(profile.entity_id);
+  if (scopeQualifier) details.append(paragraph(scopeQualifier));
   details.append(metadata, grid, note);
   return details;
 }
