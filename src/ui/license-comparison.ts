@@ -58,8 +58,14 @@ export function licenseComparisonRows(): LicenseComparisonRow[] {
     { label: "Notice", value: (p) => obligation(p, "notice") },
     { label: "Patent grant", value: (p) => obligation(p, "patent_grant") },
     { label: "Time rule", value: (p) => obligation(p, "time_rule") },
-    { label: "Compliance complexity", value: (p) => text(decision(p)?.compliance_complexity) },
-    { label: "Business-model friction", value: (p) => text(decision(p)?.business_model_friction) },
+    {
+      label: "Compliance complexity",
+      value: (p) => text(decision(p)?.compliance_complexity),
+    },
+    {
+      label: "Business-model friction",
+      value: (p) => text(decision(p)?.business_model_friction),
+    },
   ];
 }
 
