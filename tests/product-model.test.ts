@@ -37,7 +37,7 @@ test("Product Model v1 exactly covers the broad Preview catalogue", () => {
   assert(
     candidateLicenseIds.every((entityId) => licenseIds.includes(entityId)),
   );
-  assert.equal(PRODUCT_MODEL.use_cases.length, 15);
+  assert.equal(PRODUCT_MODEL.use_cases.length, 30);
 
   for (const profile of PRODUCT_MODEL.languages) {
     assert(profile.tagline.length > 20);
