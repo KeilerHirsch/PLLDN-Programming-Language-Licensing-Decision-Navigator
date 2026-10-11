@@ -4,6 +4,7 @@ import { exportUnassessedCandidateCsv } from "../product/unassessed-export.ts";
 import { analyzeText } from "../text/analyze.ts";
 import type { TextAnalysis, TextRuleSet } from "../text/types.ts";
 import type { UiController } from "./controller.ts";
+import { exportEditorialLanguageCompareCsv } from "./language-compare-export.ts";
 import { exportEditorialLicenseCompareCsv } from "./license-compare-export.ts";
 import {
   DEFAULT_PRODUCT_UI_STATE,
@@ -219,6 +220,17 @@ root.addEventListener("click", (event) => {
     downloadCsv(
       exportUnassessedCandidateCsv(),
       "plldn-unassessed-candidates-v0.2.csv",
+    );
+    return;
+  }
+  if (action === "export-language-compare") {
+    if (!catalogState.view) throw new Error("Preview catalogue not loaded");
+    downloadCsv(
+      exportEditorialLanguageCompareCsv(
+        productState.compareLanguageIds,
+        catalogState.view,
+      ),
+      "plldn-editorial-language-comparison.csv",
     );
     return;
   }
