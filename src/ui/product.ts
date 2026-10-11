@@ -32,8 +32,8 @@ import {
   languageDecisionTone,
   licenseDecisionTone,
 } from "./decision-tones.ts";
-import { networkSourceOfferQualifier } from "./license-qualifications.ts";
 import { renderLicenseComparison } from "./license-comparison.ts";
+import { networkSourceOfferQualifier } from "./license-qualifications.ts";
 import { renderPreviewEvidenceInventory } from "./preview-evidence-inventory.ts";
 import { factProvenanceDisclosure } from "./source-provenance.ts";
 import type {
