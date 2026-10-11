@@ -10,7 +10,7 @@ replacement or silent update of the published Beta 1 artifacts.
 ### Product
 
 - Expanded the editorial Preview catalogue to 35 languages, 32 licenses,
-  and 15 task-based guides, with broader licensing models including PolyForm.
+  and 30 task-based guides, with broader licensing models including PolyForm.
 - Added task-first navigation, language comparison, catalogue filters,
   qualitative performance and complexity dimensions, and clearer metric badges.
 - Improved the GitHub Pages entry point and product-first README presentation.
