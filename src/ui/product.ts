@@ -33,6 +33,7 @@ import {
   licenseDecisionTone,
 } from "./decision-tones.ts";
 import { renderLicenseComparison } from "./license-comparison.ts";
+import { renderPreviewEvidenceInventory } from "./preview-evidence-inventory.ts";
 import type {
   CatalogPreviewEntryView,
   CatalogPreviewFactView,
@@ -1510,6 +1511,7 @@ export function renderProductExperience(
   wrapper.className = "product-experience";
   wrapper.append(
     renderHero(catalog),
+    renderPreviewEvidenceInventory(catalog),
     renderUseCases(state),
     state.mode === "languages"
       ? renderCompare(catalog, state)
