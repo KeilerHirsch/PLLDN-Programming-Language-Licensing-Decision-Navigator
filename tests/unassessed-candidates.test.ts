@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
-import Ajv2020 from "ajv/dist/2020.js";
+import { Ajv2020 } from "ajv/dist/2020.js";
 import { buildUnassessedCandidatesV02 } from "../src/product/unassessed-candidates.ts";
 import { INDEX_ONLY_LANGUAGES, INDEX_ONLY_LICENSES } from "../src/product/identity-index.ts";
 import { encodeCanonical } from "../src/snapshots/manifest.ts";
