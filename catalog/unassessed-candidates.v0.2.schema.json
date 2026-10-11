@@ -3,12 +3,7 @@
   "$id": "https://plldn.invalid/catalog/unassessed-candidates.v0.2.schema.json",
   "type": "object",
   "additionalProperties": false,
-  "required": [
-    "schema_version",
-    "migration_from",
-    "source_pins",
-    "records"
-  ],
+  "required": ["schema_version", "migration_from", "source_pins", "records"],
   "properties": {
     "schema_version": {
       "const": "0.2"
@@ -72,10 +67,7 @@
             "pattern": "^candidate\\.(language|license)\\.[a-z0-9.-]+$"
           },
           "kind": {
-            "enum": [
-              "language",
-              "license"
-            ]
+            "enum": ["language", "license"]
           },
           "name": {
             "type": "string",
@@ -138,48 +130,31 @@
                   "const": "language"
                 }
               },
-              "required": [
-                "kind"
-              ]
+              "required": ["kind"]
             },
             "then": {
               "properties": {
                 "assessments": {
-                  "required": [
-                    "performance",
-                    "complexity",
-                    "suitability"
-                  ],
+                  "required": ["performance", "complexity", "suitability"],
                   "maxProperties": 3
                 }
               },
               "not": {
                 "anyOf": [
                   {
-                    "required": [
-                      "spdx_id"
-                    ]
+                    "required": ["spdx_id"]
                   },
                   {
-                    "required": [
-                      "osi_approved_source_flag"
-                    ]
+                    "required": ["osi_approved_source_flag"]
                   }
                 ]
               }
             },
             "else": {
-              "required": [
-                "spdx_id",
-                "osi_approved_source_flag"
-              ],
+              "required": ["spdx_id", "osi_approved_source_flag"],
               "properties": {
                 "assessments": {
-                  "required": [
-                    "rights",
-                    "obligations",
-                    "compatibility"
-                  ],
+                  "required": ["rights", "obligations", "compatibility"],
                   "maxProperties": 3
                 }
               }
