@@ -32,6 +32,7 @@ import {
   languageDecisionTone,
   licenseDecisionTone,
 } from "./decision-tones.ts";
+import { renderLicenseComparison } from "./license-comparison.ts";
 import type {
   CatalogPreviewEntryView,
   CatalogPreviewFactView,
@@ -44,6 +45,7 @@ export interface ProductUiState {
   mode: ProductCatalogMode;
   selectedUseCaseId: string | null;
   compareLanguageIds: readonly string[];
+  compareLicenseIds: readonly string[];
   filters: ProductFilterState;
 }
 
@@ -51,6 +53,7 @@ export const DEFAULT_PRODUCT_UI_STATE: ProductUiState = {
   mode: "languages",
   selectedUseCaseId: null,
   compareLanguageIds: [],
+  compareLicenseIds: [],
   filters: { ...DEFAULT_PRODUCT_FILTERS },
 };
 
@@ -101,6 +104,23 @@ function compareButton(
   if (!selected && state.compareLanguageIds.length >= 4) {
     control.disabled = true;
     control.title = "Four languages selected. Remove one to add another.";
+  }
+  return control;
+}
+
+function licenseCompareButton(
+  entityId: string,
+  state: ProductUiState,
+): HTMLButtonElement {
+  const selected = state.compareLicenseIds.includes(entityId);
+  const control = button(
+    selected ? "Remove from compare" : "Add to compare",
+    "toggle-license-compare",
+  );
+  control.dataset.entityId = entityId;
+  if (!selected && state.compareLicenseIds.length >= 4) {
+    control.disabled = true;
+    control.title = "Four licenses selected. Remove one to add another.";
   }
   return control;
 }
@@ -845,6 +865,7 @@ function renderLicenseQuickFacts(profile: LicenseProductProfile): HTMLElement {
 function renderLicenseCard(
   profile: LicenseProductProfile,
   entry: CatalogPreviewEntryView | undefined,
+  state: ProductUiState,
 ): HTMLElement {
   const card = document.createElement("article");
   card.className = "product-card license-profile-card";
@@ -870,6 +891,7 @@ function renderLicenseCard(
   card.append(
     good,
     watch,
+    licenseCompareButton(profile.entity_id, state),
     renderLicenseDecisionProfile(profile),
     renderPreviewFacts(entry),
   );
@@ -901,7 +923,7 @@ function renderLicenseCatalog(
   const grid = document.createElement("div");
   grid.className = "product-card-grid";
   for (const profile of profiles) {
-    grid.append(renderLicenseCard(profile, byId.get(profile.entity_id)));
+    grid.append(renderLicenseCard(profile, byId.get(profile.entity_id), state));
   }
   if (profiles.length === 0) {
     wrapper.append(paragraph("No licenses match these filters."));
@@ -1416,7 +1438,9 @@ export function renderProductExperience(
   wrapper.append(
     renderHero(catalog),
     renderUseCases(state),
-    renderCompare(catalog, state),
+    state.mode === "languages"
+      ? renderCompare(catalog, state)
+      : renderLicenseComparison(state.compareLicenseIds),
     renderCatalog(catalog, state),
   );
   return wrapper;

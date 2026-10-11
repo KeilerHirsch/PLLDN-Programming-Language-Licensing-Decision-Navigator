@@ -162,6 +162,49 @@ const smokeProbe = `
       "switching to license mode",
     );
 
+    const compareLicenses = [
+      "license.mit",
+      "license.apache-2.0",
+      "license.gpl-3.0-only",
+      "license.polyform-noncommercial-1.0.0",
+    ];
+    for (let i = 0; i < compareLicenses.length; i += 1) {
+      const control = action("toggle-license-compare", "entity-id", compareLicenses[i]);
+      assert(control && !control.disabled, "missing license comparison control");
+      control.click();
+      await waitFor(
+        () => document.querySelector("#compare-licenses h2")?.textContent.includes("(" + (i + 1) + "/4)"),
+        "license comparison step " + (i + 1),
+      );
+    }
+    assert(
+      document.querySelectorAll("#compare-licenses .compare-table thead th").length === 5,
+      "four license columns required",
+    );
+    const rows = Array.from(document.querySelectorAll("#compare-licenses .compare-table tbody tr"));
+    const saas = rows.find((row) => row.querySelector("th")?.textContent === "SaaS / hosting");
+    assert(saas && saas.querySelectorAll("td").length === 4,
+      "comparison must present sourced hosting rights");
+    assert(
+      document.querySelectorAll("#compare-licenses .compare-table thead a").length === 4 &&
+        Array.from(document.querySelectorAll("#compare-licenses .compare-table thead a"))
+          .every((link) => link.href.startsWith("https://") && link.textContent === "Canonical terms"),
+      "comparison canonical terms links missing",
+    );
+    assert(
+      action("toggle-license-compare", "entity-id", "license.bsd-3-clause").disabled,
+      "fifth license must be disabled",
+    );
+    action("toggle-license-compare", "entity-id", "license.mit").click();
+    await waitFor(
+      () => document.querySelector("#compare-licenses h2")?.textContent.includes("(3/4)"),
+      "license comparison removal",
+    );
+    assert(
+      !action("toggle-license-compare", "entity-id", "license.bsd-3-clause").disabled,
+      "removing license must free a comparison slot",
+    );
+
     const licenseIndex = document.querySelector("[data-identity-index]");
     licenseIndex.open = true;
     assert(
