@@ -181,6 +181,11 @@ const smokeProbe = `
       document.querySelectorAll("#compare-licenses .compare-table thead th").length === 5,
       "four license columns required",
     );
+    assert(
+      document.querySelector("#compare-licenses [data-action=export-license-compare]")?.textContent ===
+        "Export selected comparison (CSV)",
+      "selected license comparison must expose a CSV download action",
+    );
     const rows = Array.from(document.querySelectorAll("#compare-licenses .compare-table tbody tr"));
     const saas = rows.find((row) => row.querySelector("th")?.textContent === "SaaS / hosting");
     assert(saas && saas.querySelectorAll("td").length === 4,
