@@ -87,6 +87,19 @@ const smokeProbe = `
       document.querySelectorAll(".compare-table thead th").length === 5,
       "comparison table must have four language columns",
     );
+    const evidence = [...document.querySelectorAll("#compare [data-compare-evidence]")];
+    assert(evidence.length === 36, "nine dimensions times four languages require source drilldowns");
+    assert(
+      evidence.every((entry) => entry.querySelector("code")?.textContent &&
+        entry.querySelector("summary")?.textContent?.includes("Preview evidence")),
+      "every Preview comparison cell must identify its recorded claim and review status",
+    );
+    assert(
+      evidence.flatMap((entry) => [...entry.querySelectorAll("a")])
+        .every((link) => link.href.startsWith("https://") &&
+          link.rel.includes("noopener") && link.rel.includes("noreferrer")),
+      "source drilldowns must use validated HTTPS links",
+    );
     action("toggle-compare", "entity-id", "language.go").click();
     await waitFor(
       () => document.querySelector("#compare h2").textContent.includes("(3/4)"),
