@@ -109,7 +109,7 @@ export function renderLicenseComparison(
   title.textContent = `Compare licenses (${selected.length}/4)`;
   const caveat = document.createElement("p");
   caveat.textContent =
-    "Editorial Preview only: not legal advice or a compatibility verdict. Index-only identities have no assessed rights.";
+    "Editorial Preview only: not legal advice or a compatibility verdict. Patent fields concern express license terms, not patent clearance; for GPL-2.0-or-later verify the selected GPL version and contributor before relying on a grant. Index-only identities have no assessed rights.";
   copy.append(title, caveat);
   header.append(copy);
   if (selected.length > 0) {

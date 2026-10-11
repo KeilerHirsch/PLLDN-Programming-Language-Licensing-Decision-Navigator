@@ -206,7 +206,7 @@ export const LICENSE_DECISION_PROFILES: Readonly<
     obligations: {
       source_disclosure: "work",
       notice: "yes",
-      patent_grant: "no",
+      patent_grant: "conditional",
       time_rule: "none",
     },
     compliance_complexity: "high",
