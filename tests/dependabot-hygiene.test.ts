@@ -12,17 +12,34 @@ test("current workflows use reviewed action SHA pins without changing frozen bet
     ".github/workflows/security.yml",
     ".github/workflows/community.yml",
     ".github/workflows/pages.yml",
-  ].map(read).join("\n");
+  ]
+    .map(read)
+    .join("\n");
   const frozen = read(".github/workflows/release.yml");
   for (const [oldPin, newPin] of [
-    ["820762786026740c76f36085b0efc47a31fe5020", "949feb2413d6458794dcd2491c4babbbce0c15c1"],
-    ["043fb46d1a93c77aae656e7c1c64a875d1fc6a0a", "cf430e030ddbb5b0abf93d22962f4752f3646cd9"],
-    ["3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c", "9000827ccba6bdab643e8b6fd33ac0654aef8333"],
+    [
+      "820762786026740c76f36085b0efc47a31fe5020",
+      "949feb2413d6458794dcd2491c4babbbce0c15c1",
+    ],
+    [
+      "043fb46d1a93c77aae656e7c1c64a875d1fc6a0a",
+      "cf430e030ddbb5b0abf93d22962f4752f3646cd9",
+    ],
+    [
+      "3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c",
+      "9000827ccba6bdab643e8b6fd33ac0654aef8333",
+    ],
   ] as const) {
     assert(!active.includes(oldPin), "active CI still uses old transport pin");
     assert(active.includes(newPin), "active CI missing expected reviewed pin");
-    assert(frozen.includes(oldPin), "frozen Beta release SHA changed unexpectedly");
-    assert(!frozen.includes(newPin), "frozen Beta release was inadvertently upgraded");
+    assert(
+      frozen.includes(oldPin),
+      "frozen Beta release SHA changed unexpectedly",
+    );
+    assert(
+      !frozen.includes(newPin),
+      "frozen Beta release was inadvertently upgraded",
+    );
   }
 });
 
@@ -37,6 +54,7 @@ test("Dependabot guards Node 24 type major and frozen Beta transport actions", (
     "actions/setup-node",
     "actions/upload-artifact",
     "actions/download-artifact",
-  ]) assert(config.includes('dependency-name: "' + action + '"'));
+  ])
+    assert(config.includes('dependency-name: "' + action + '"'));
   assert(config.includes("interval: weekly"));
 });
