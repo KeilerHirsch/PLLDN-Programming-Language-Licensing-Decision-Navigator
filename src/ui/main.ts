@@ -82,10 +82,12 @@ function applyCatalogFilter(): void {
   )) {
     const matches =
       !filtered &&
-      (query.length === 0 || entry.dataset.identitySearchText?.includes(query)) &&
+      (query.length === 0 ||
+        entry.dataset.identitySearchText?.includes(query)) &&
       (productState.mode !== "licenses" ||
         identityOsiFilter === "any" ||
-        entry.dataset.identityOsiApproved === String(identityOsiFilter === "yes"));
+        entry.dataset.identityOsiApproved ===
+          String(identityOsiFilter === "yes"));
     if (matches) {
       extra += 1;
       if (extraShown < identityLimit) extraShown += 1;
@@ -110,7 +112,9 @@ function applyCatalogFilter(): void {
       ? "Clear structured filters to browse identity-only entries."
       : `${extraShown} of ${extra} additional identities shown.`;
   }
-  const osi = root.querySelector<HTMLSelectElement>('[data-action="identity-osi"]');
+  const osi = root.querySelector<HTMLSelectElement>(
+    '[data-action="identity-osi"]',
+  );
   if (osi) osi.value = identityOsiFilter;
   const more = root.querySelector<HTMLButtonElement>("[data-identity-more]");
   if (more) {
