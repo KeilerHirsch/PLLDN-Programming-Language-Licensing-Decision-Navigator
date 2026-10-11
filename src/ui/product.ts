@@ -913,7 +913,9 @@ function renderIdentityIndex(state: ProductUiState): HTMLElement {
     for (const name of INDEX_ONLY_LANGUAGES) {
       const li = document.createElement("li");
       li.dataset.identityEntry = "true";
-      li.dataset.identitySearchText = name.normalize("NFKD").toLocaleLowerCase("en-US");
+      li.dataset.identitySearchText = name
+        .normalize("NFKD")
+        .toLocaleLowerCase("en-US");
       li.textContent = name;
       list.append(li);
     }
@@ -921,8 +923,9 @@ function renderIdentityIndex(state: ProductUiState): HTMLElement {
     for (const license of INDEX_ONLY_LICENSES) {
       const li = document.createElement("li");
       li.dataset.identityEntry = "true";
-      li.dataset.identitySearchText =
-        `${license.id} ${license.name}`.normalize("NFKD").toLocaleLowerCase("en-US");
+      li.dataset.identitySearchText = `${license.id} ${license.name}`
+        .normalize("NFKD")
+        .toLocaleLowerCase("en-US");
       const link = document.createElement("a");
       link.href = license.reference;
       link.textContent = license.id;
