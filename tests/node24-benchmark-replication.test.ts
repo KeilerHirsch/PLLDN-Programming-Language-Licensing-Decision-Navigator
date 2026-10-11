@@ -27,11 +27,13 @@ function loadMeasuredRun(id: string, expectedDigest: string) {
   assert.equal(report.workload.measured_samples, 21);
   const samples = report.raw_wall_nanoseconds as unknown[];
   assert.equal(samples.length, 21);
-  const sorted = samples.map((x) => {
-    assert.equal(typeof x, "string");
-    assert.match(x as string, /^[1-9][0-9]*$/u);
-    return Number(x);
-  }).sort((a, b) => a - b);
+  const sorted = samples
+    .map((x) => {
+      assert.equal(typeof x, "string");
+      assert.match(x as string, /^[1-9][0-9]*$/u);
+      return Number(x);
+    })
+    .sort((a, b) => a - b);
   assert(sorted.every((x) => Number.isSafeInteger(x)));
   assert.equal(report.summary.minimum_wall_nanoseconds, sorted[0]);
   assert.equal(report.summary.median_wall_nanoseconds, sorted[10]);
@@ -54,11 +56,17 @@ test("separate real-run raw JSON reports stay SHA-pinned and non-Reviewed", () =
     "e80fbae4981d95bce628904661c87a4064a4e0fd96c3b4fbe5510a4ad6bc73c0",
   );
   assert.equal(first.source_commit, "c5cfc313464056869fc0bc1c16684dab1a4dee6e");
-  assert.equal(second.source_commit, "81ef871fbdb5a567b55f86875eab13ea2f1e2afe");
+  assert.equal(
+    second.source_commit,
+    "81ef871fbdb5a567b55f86875eab13ea2f1e2afe",
+  );
   assert.equal(first.input_sha256, second.input_sha256);
   assert.equal(first.benchmark_source_sha256, second.benchmark_source_sha256);
   assert.equal(first.environment.v8, second.environment.v8);
-  assert.equal(first.environment.github_runner_image, second.environment.github_runner_image);
+  assert.equal(
+    first.environment.github_runner_image,
+    second.environment.github_runner_image,
+  );
   assert.notEqual(first.environment.cpu_model, second.environment.cpu_model);
   assert.equal(first.summary.median_wall_nanoseconds, 19814713);
   assert.equal(second.summary.median_wall_nanoseconds, 20701353);
