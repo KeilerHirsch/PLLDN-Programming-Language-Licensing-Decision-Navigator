@@ -4,15 +4,18 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { LICENSE_DECISION_PROFILES } from "../src/product/license-decision-profiles.ts";
-import { networkSourceOfferQualifier } from "../src/ui/license-qualifications.ts";
 import {
   licenseComparisonRows,
   selectEditorialLicenses,
 } from "../src/ui/license-comparison.ts";
+import { networkSourceOfferQualifier } from "../src/ui/license-qualifications.ts";
 
 test("AGPLv3 network disclosure conditions are grounded and still Preview", () => {
   const audit = JSON.parse(
-    readFileSync("catalog/audit/license-agpl-network-trigger.v0.3.json", "utf8"),
+    readFileSync(
+      "catalog/audit/license-agpl-network-trigger.v0.3.json",
+      "utf8",
+    ),
   );
   assert.equal(audit.schema_version, "0.3");
   assert.equal(audit.review_status, "EDITORIAL_PREVIEW_NOT_REVIEWED");
