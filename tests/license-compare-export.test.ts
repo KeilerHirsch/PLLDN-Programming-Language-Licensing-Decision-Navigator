@@ -23,7 +23,9 @@ test("selected Editorial license export is deterministic and complete", () => {
   assert.equal(lines[0], '"Attribute","MIT","Apache-2.0"');
   assert(lines.some((line) => line.startsWith('"Entity ID",')));
   assert(lines.some((line) => line.startsWith('"Canonical terms",')));
-  assert(csv.includes('"Preview snapshot","fixture-snapshot","fixture-snapshot"'));
+  assert(
+    csv.includes('"Preview snapshot","fixture-snapshot","fixture-snapshot"'),
+  );
   assert(csv.includes('"Editorial Preview (not Reviewed)"'));
   assert(csv.includes('"license.mit"'));
   assert(csv.includes('"SaaS / hosting"'));
@@ -36,7 +38,10 @@ test("export fails closed on empty, repeated and unassessed candidate selection"
     exportEditorialLicenseCompareCsv(["license.mit", "license.mit"], snapshot),
   );
   assert.throws(() =>
-    exportEditorialLicenseCompareCsv(["candidate.license.artistic-2.0"], snapshot),
+    exportEditorialLicenseCompareCsv(
+      ["candidate.license.artistic-2.0"],
+      snapshot,
+    ),
   );
 });
 
@@ -75,10 +80,24 @@ test("recorded Preview license claims export actual evidence, missing values UNK
     ["license.mit", "license.apache-2.0"],
     withClaim,
   );
-  assert(csv.includes('"Preview fact: Example source claim","Unknown","Unknown"'));
-  assert(csv.includes('"Preview claim ID: Example source claim","pinned-preview-claim","UNKNOWN"'));
-  assert(csv.includes('"Preview review status: Example source claim","NOT_REVIEWED","UNKNOWN"'));
-  assert(csv.includes('"Preview sources: Example source claim","https://example.org/source","UNKNOWN"'));
+  assert(
+    csv.includes('"Preview fact: Example source claim","Unknown","Unknown"'),
+  );
+  assert(
+    csv.includes(
+      '"Preview claim ID: Example source claim","pinned-preview-claim","UNKNOWN"',
+    ),
+  );
+  assert(
+    csv.includes(
+      '"Preview review status: Example source claim","NOT_REVIEWED","UNKNOWN"',
+    ),
+  );
+  assert(
+    csv.includes(
+      '"Preview sources: Example source claim","https://example.org/source","UNKNOWN"',
+    ),
+  );
   assert.equal(
     csv.trimEnd().split("\n").length,
     licenseComparisonRows().length + 5 + 4,
