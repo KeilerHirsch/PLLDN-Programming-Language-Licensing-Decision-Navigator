@@ -1,0 +1,69 @@
+{
+  "schema_version": "0.3",
+  "record_type": "editorial_disclosure_scope_conditions",
+  "review_status": "EDITORIAL_PREVIEW_NOT_REVIEWED",
+  "baseline_main_sha": "2d73d09373f6c3db39f8feeaabc73fcf301718a3",
+  "records": [
+    {
+      "entity_id": "license.mpl-2.0",
+      "review_status": "EDITORIAL_PREVIEW_NOT_REVIEWED",
+      "editorial_value_retained": "file",
+      "saas_value_retained": "yes",
+      "issuer_source_url": "https://www.mozilla.org/en-US/MPL/2.0/",
+      "conditions": [
+        "Covered Software and Modifications are defined at file boundaries (MPL 2.0 sections 1.4, 1.10).",
+        "Source under MPL 2.0 and availability to recipients are required when Covered Software is distributed in source or executable form (sections 3.1 and 3.2).",
+        "Merely providing the functionality of server-side code online without delivering a copy does not constitute distribution in Mozilla FAQ Q17.",
+        "Larger Work and Secondary License distribution routes have specific conditions (sections 1.5, 3.3 and Exhibit B); no automatic compatibility verdict."
+      ],
+      "references": [
+        {
+          "section": "MPL 2.0 §§1.4,1.10,3.1–3.3",
+          "url": "https://www.mozilla.org/en-US/MPL/2.0/",
+          "type": "normative-license"
+        },
+        {
+          "section": "Mozilla MPL FAQ Q8–Q11,Q14,Q17",
+          "url": "https://www.mozilla.org/en-US/MPL/2.0/FAQ/",
+          "type": "issuer-explanation"
+        }
+      ]
+    },
+    {
+      "entity_id": "license.eupl-1.2",
+      "review_status": "EDITORIAL_PREVIEW_NOT_REVIEWED",
+      "editorial_value_retained": "work",
+      "saas_value_retained": "conditional",
+      "issuer_source_url": "https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12",
+      "conditions": [
+        "Article 1 includes access to essential functionalities of the Work in the defined Distribution or Communication, whether online or offline.",
+        "Articles 3 and 5 require source-code availability when the Work is distributed or communicated; evaluate whether the activity matches the defined terms.",
+        "Article 5 preserves notices and requires dated modification notices on Derivative Works when applicable.",
+        "The specific compatibility exception under Article 5 applies to qualifying combined Derivative Works and licences in the Appendix; not a universal pairwise compatibility verdict."
+      ],
+      "references": [
+        {
+          "section": "EUPL 1.2 Article 1 — Distribution or Communication",
+          "url": "https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12",
+          "type": "commission-official-text-index"
+        },
+        {
+          "section": "EUPL 1.2 Articles 3 and 5",
+          "url": "https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/2020-03/EUPL-1.2%20EN.txt",
+          "type": "commission-official-text"
+        },
+        {
+          "section": "EUPL 1.2 Article 5 and Appendix",
+          "url": "https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12",
+          "type": "commission-official-text-index"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Issuer pages are linked but their exact HTML/TXT bytes are not pinned; perform independent byte/revision verification before Reviewed promotion.",
+    "Actual Work scope, recipients, derivative boundaries, combination with other licenses and jurisdiction are case-specific and UNKNOWN.",
+    "Only these two Editorial Preview qualifiers are updated; no historical v0.1 claim or Candidate-v0.2 record is rewritten.",
+    "No change to existing blanket compatibility judgments, which require separate work-specific primary evidence."
+  ]
+}
