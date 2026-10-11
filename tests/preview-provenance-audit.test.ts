@@ -69,3 +69,24 @@ test("missing Preview source references fail closed", () => {
     rmSync(base, { recursive: true, force: true });
   }
 });
+
+test("historical seed ID cannot be spoofed by an unrelated GitHub repository", () => {
+  const base = mkdtempSync(join(tmpdir(), "plldn-provenance-test-"));
+  const dir = "knowledge/candidate/catalog-2026-10-03";
+  try {
+    cpSync(dir, join(base, dir), { recursive: true });
+    const file = join(base, dir, "sources", "catalog-block3-preview.json");
+    const parsed = JSON.parse(readFileSync(file, "utf8"));
+    parsed.record.reference = parsed.record.reference.replace(
+      "github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator",
+      "github.com/attacker/other-project",
+    );
+    writeFileSync(file, JSON.stringify(parsed));
+    assert.throws(
+      () => auditPreviewProvenance(base),
+      /Historical seed origin drift/u,
+    );
+  } finally {
+    rmSync(base, { recursive: true, force: true });
+  }
+});
