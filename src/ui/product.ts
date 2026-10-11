@@ -1174,6 +1174,14 @@ function renderCatalog(
       : renderLicenseCatalog(catalog, state),
   );
   section.append(renderIdentityIndex(state));
+  const exportControl = button(
+    "Export all 841 unassessed identities (CSV)",
+    "export-unassessed-csv",
+    "catalog-filter-reset",
+  );
+  exportControl.title =
+    "All pinned v0.2 candidates, independent of active search filters. UNKNOWN remains unknown.";
+  section.append(exportControl);
   const searchEmpty = paragraph(
     "No matches for that search. Try a different keyword or reset the filters.",
   );
