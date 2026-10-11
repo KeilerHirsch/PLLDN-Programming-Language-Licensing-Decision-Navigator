@@ -134,7 +134,7 @@ export function auditPreviewProvenance(root = process.cwd()): ProvenanceAudit {
         if (!source) throw new Error(`Unresolved source ${id}: ${claim.claim_id}`);
         return internalSeedPath(source) ? "INTERNAL_SEED" : "OTHER_UNVERIFIED";
       });
-      const evidence_status =
+      const evidence_status: ClaimAuditRow["evidence_status"] =
         kinds.length === 0
           ? "NO_SOURCE"
           : kinds.every((kind) => kind === "INTERNAL_SEED")
