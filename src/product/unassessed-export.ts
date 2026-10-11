@@ -27,7 +27,7 @@ export const UNASSESSED_EXPORT_HEADER = [
 
 /** Always quote fields; protect spreadsheet software against CSV formulas. */
 export function exportCsvCell(value: string): string {
-  const text = /^[\u0000-\u0020]*[=+@-]/u.test(value) ? `'${value}` : value;
+  const text = /^[=+@-]/u.test(value.trimStart()) ? `'${value}` : value;
   return `"${text.replaceAll('"', '""')}"`;
 }
 
@@ -66,10 +66,16 @@ export function exportUnassessedCandidateCsv(): string {
       "spdx_id" in record ? record.spdx_id : "",
       record.source_status,
       record.reference,
-      language ? snapshot.source_pins.linguist_commit : snapshot.source_pins.spdx_commit,
-      language ? snapshot.source_pins.linguist_blob_sha : snapshot.source_pins.spdx_blob_sha,
+      language
+        ? snapshot.source_pins.linguist_commit
+        : snapshot.source_pins.spdx_commit,
+      language
+        ? snapshot.source_pins.linguist_blob_sha
+        : snapshot.source_pins.spdx_blob_sha,
       language ? "" : snapshot.source_pins.spdx_version,
-      "osi_approved_source_flag" in record ? String(record.osi_approved_source_flag) : "",
+      "osi_approved_source_flag" in record
+        ? String(record.osi_approved_source_flag)
+        : "",
       assessments.performance ?? "",
       assessments.complexity ?? "",
       assessments.suitability ?? "",
