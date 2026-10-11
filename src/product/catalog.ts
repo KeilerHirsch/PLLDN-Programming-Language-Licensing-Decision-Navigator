@@ -973,6 +973,189 @@ export const PRODUCT_MODEL: ProductModel = {
       rationale:
         "The execution environment dictates the domain language and security model.",
     },
+    {
+      use_case_id: "ai-ml",
+      label: "Machine learning workflow",
+      question: "Prototype, train and evaluate data-driven models.",
+      language_ids: ["language.python", "language.julia", "language.r"],
+      rationale:
+        "Compare available libraries, deployment paths and reproducibility before choosing.",
+    },
+    {
+      use_case_id: "game-engine",
+      label: "Game or simulation engine",
+      question: "Build performance-sensitive game or simulation systems.",
+      language_ids: [
+        "language.cpp",
+        "language.csharp",
+        "language.rust",
+        "language.lua",
+      ],
+      rationale:
+        "Engine integration and platform targets matter more than isolated language scores.",
+    },
+    {
+      use_case_id: "game-tools",
+      label: "Game content tooling",
+      question: "Build editors, modding utilities and content pipelines.",
+      language_ids: [
+        "language.csharp",
+        "language.python",
+        "language.lua",
+        "language.typescript",
+      ],
+      rationale:
+        "Check host tooling, asset formats and how developers will distribute the tools.",
+    },
+    {
+      use_case_id: "data-engineering",
+      label: "Data processing pipeline",
+      question: "Build batch processing, ETL or event-driven data pipelines.",
+      language_ids: [
+        "language.python",
+        "language.scala",
+        "language.java",
+        "language.go",
+      ],
+      rationale:
+        "Evaluate connectors, operations and failure recovery against the real workload.",
+    },
+    {
+      use_case_id: "database-backed",
+      label: "Database-backed product",
+      question: "Build applications with long-lived transactional data.",
+      language_ids: [
+        "language.typescript",
+        "language.java",
+        "language.csharp",
+        "language.python",
+      ],
+      rationale:
+        "The data model, migrations and runtime operations need first-class consideration.",
+    },
+    {
+      use_case_id: "distributed-service",
+      label: "Distributed service",
+      question:
+        "Operate communicating services across multiple processes or hosts.",
+      language_ids: [
+        "language.go",
+        "language.elixir",
+        "language.erlang",
+        "language.java",
+      ],
+      rationale:
+        "Test failure semantics, concurrency and observability before deciding.",
+    },
+    {
+      use_case_id: "cross-platform-desktop",
+      label: "Cross-platform desktop",
+      question: "Ship a graphical desktop app on multiple operating systems.",
+      language_ids: [
+        "language.dart",
+        "language.csharp",
+        "language.java",
+        "language.rust",
+      ],
+      rationale:
+        "Framework coverage, packaging and accessibility are project-specific constraints.",
+    },
+    {
+      use_case_id: "devops-ci",
+      label: "CI and infrastructure tools",
+      question: "Automate builds, deployments and host administration.",
+      language_ids: [
+        "language.bash",
+        "language.powershell",
+        "language.python",
+        "language.go",
+      ],
+      rationale:
+        "Choose around target environments, auditability and repeatable execution.",
+    },
+    {
+      use_case_id: "iot-gateway",
+      label: "IoT edge gateway",
+      question: "Connect devices to local services and network applications.",
+      language_ids: [
+        "language.go",
+        "language.rust",
+        "language.cpp",
+        "language.python",
+      ],
+      rationale:
+        "Evaluate device protocols, update strategy, resources and network failures.",
+    },
+    {
+      use_case_id: "scientific-modeling",
+      label: "Scientific modeling",
+      question: "Run numerical experiments and maintain research code.",
+      language_ids: [
+        "language.fortran",
+        "language.julia",
+        "language.python",
+        "language.r",
+      ],
+      rationale:
+        "Reproducibility and domain libraries matter alongside measured compute costs.",
+    },
+    {
+      use_case_id: "language-tools",
+      label: "Compiler or code analyzer",
+      question: "Build language tooling, parsers or source-code analysis.",
+      language_ids: [
+        "language.rust",
+        "language.cpp",
+        "language.ocaml",
+        "language.haskell",
+      ],
+      rationale:
+        "Evaluate parser tooling, error recovery and maintainability of intermediate forms.",
+    },
+    {
+      use_case_id: "functional-app",
+      label: "Functional application",
+      question:
+        "Build a system around algebraic data types and functional design.",
+      language_ids: [
+        "language.haskell",
+        "language.ocaml",
+        "language.fsharp",
+        "language.clojure",
+      ],
+      rationale:
+        "Compare effect handling, runtime integration and the team's experience.",
+    },
+    {
+      use_case_id: "financial-platform",
+      label: "Financial business software",
+      question:
+        "Maintain transactional systems and regulated business processes.",
+      language_ids: [
+        "language.java",
+        "language.csharp",
+        "language.kotlin",
+        "language.cobol",
+      ],
+      rationale:
+        "Integration, audit trails and operating constraints take priority over fashion.",
+    },
+    {
+      use_case_id: "crypto-library",
+      label: "Cryptographic integration",
+      question: "Integrate established cryptography into an application.",
+      language_ids: ["language.rust", "language.c", "language.cpp"],
+      rationale:
+        "Prefer reviewed libraries and tested protocols; language choice alone is not assurance.",
+    },
+    {
+      use_case_id: "plugin-extension",
+      label: "Embedded scripting or plugins",
+      question: "Let users customize or extend a host application.",
+      language_ids: ["language.lua", "language.python", "language.javascript"],
+      rationale:
+        "Host embedding, isolation and stable extension APIs decide the useful options.",
+    },
   ],
 };
 

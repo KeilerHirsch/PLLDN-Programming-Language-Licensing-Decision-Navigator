@@ -294,9 +294,7 @@ function renderUseCases(state: ProductUiState): HTMLElement {
     ),
   );
 
-  const grid = document.createElement("div");
-  grid.className = "use-case-grid";
-  for (const guide of PRODUCT_MODEL.use_cases) {
+  function guideControl(guide: UseCaseGuide): HTMLButtonElement {
     const control = button(guide.label, "select-use-case", "use-case-card");
     control.dataset.useCaseId = guide.use_case_id;
     control.setAttribute(
@@ -307,9 +305,35 @@ function renderUseCases(state: ProductUiState): HTMLElement {
     question.className = "use-case-question";
     question.textContent = guide.question;
     control.append(question);
-    grid.append(control);
+    return control;
+  }
+
+  const mainGuides = PRODUCT_MODEL.use_cases.slice(0, 15);
+  const additionalGuides = PRODUCT_MODEL.use_cases.slice(15);
+  const grid = document.createElement("div");
+  grid.className = "use-case-grid";
+  for (const guide of mainGuides) {
+    grid.append(guideControl(guide));
   }
   section.append(grid);
+
+  if (additionalGuides.length > 0) {
+    const more = document.createElement("details");
+    more.className = "use-case-more";
+    more.dataset.useCaseMore = "true";
+    more.open = additionalGuides.some(
+      (guide) => guide.use_case_id === state.selectedUseCaseId,
+    );
+    const summary = document.createElement("summary");
+    summary.textContent = `Explore ${additionalGuides.length} more project types`;
+    const extraGrid = document.createElement("div");
+    extraGrid.className = "use-case-grid";
+    for (const guide of additionalGuides) {
+      extraGrid.append(guideControl(guide));
+    }
+    more.append(summary, extraGrid);
+    section.append(more);
+  }
 
   const selected = useCaseById(state.selectedUseCaseId);
   if (!selected) return section;

@@ -37,7 +37,7 @@ test("Product Model v1 exactly covers the broad Preview catalogue", () => {
   assert(
     candidateLicenseIds.every((entityId) => licenseIds.includes(entityId)),
   );
-  assert.equal(PRODUCT_MODEL.use_cases.length, 15);
+  assert.equal(PRODUCT_MODEL.use_cases.length, 30);
 
   for (const profile of PRODUCT_MODEL.languages) {
     assert(profile.tagline.length > 20);
@@ -56,6 +56,8 @@ test("Product Model v1 exactly covers the broad Preview catalogue", () => {
 
 test("Use-case guidance references only known Product Model languages", () => {
   const known = new Set(PRODUCT_MODEL.languages.map((item) => item.entity_id));
+  const ids = PRODUCT_MODEL.use_cases.map((guide) => guide.use_case_id);
+  assert.equal(new Set(ids).size, ids.length, "Use-case IDs must be unique");
   for (const guide of PRODUCT_MODEL.use_cases) {
     assert(guide.language_ids.length > 0, guide.use_case_id);
     for (const id of guide.language_ids) {
