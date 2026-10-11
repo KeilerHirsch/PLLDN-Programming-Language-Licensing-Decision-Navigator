@@ -71,28 +71,35 @@ function parseRecord<T>(filename: string): T {
 const lexical = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
 
 /** SHA binding verifies seed bytes, NOT accuracy of the seed's assertions. */
+const HISTORICAL_SOURCE_IDS = new Set([
+  "source.catalog-block1-preview",
+  "source.catalog-block2-preview",
+  "source.catalog-block3-preview",
+]);
+const REPOSITORY_MAIN_PREFIX =
+  "/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/blob/main/";
+
 function internalSeedPath(source: SeedSource): string | null {
+  if (!HISTORICAL_SOURCE_IDS.has(source.source_id)) return null;
   let url: URL;
   try {
     url = new URL(source.reference);
   } catch {
-    return null;
+    throw new Error(`Historical seed origin drift: ${source.source_id}`);
   }
-  const marker = "/blob/main/";
-  const position = url.pathname.indexOf(marker);
+  const path = url.pathname.slice(REPOSITORY_MAIN_PREFIX.length);
   if (
     url.protocol !== "https:" ||
     url.hostname !== "github.com" ||
-    position < 0
+    !url.pathname.startsWith(REPOSITORY_MAIN_PREFIX) ||
+    !path.startsWith(SEED_PREFIX) ||
+    !path.endsWith(".md") ||
+    path.includes("..") ||
+    source.source_class !== "community"
   ) {
-    return null;
+    throw new Error(`Historical seed origin drift: ${source.source_id}`);
   }
-  const path = url.pathname.slice(position + marker.length);
-  return path.startsWith(SEED_PREFIX) &&
-    !path.includes("..") &&
-    source.source_class === "community"
-    ? path
-    : null;
+  return path;
 }
 
 export function auditPreviewProvenance(root = process.cwd()): ProvenanceAudit {
