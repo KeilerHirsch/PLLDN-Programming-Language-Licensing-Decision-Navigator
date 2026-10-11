@@ -4,7 +4,18 @@ updates:
     directory: /
     schedule:
       interval: weekly
+    ignore:
+      # Node 24.15.0 is the pinned runtime; Node 26 types require a runtime migration.
+      - dependency-name: "@types/node"
+        update-types:
+          - "version-update:semver-major"
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    ignore:
+      # Frozen Beta 1 transport pins are asserted byte-for-byte in release tests.
+      # Active workflow updates are reviewed and applied independently.
+      - dependency-name: "actions/setup-node"
+      - dependency-name: "actions/upload-artifact"
+      - dependency-name: "actions/download-artifact"
