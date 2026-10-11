@@ -38,6 +38,8 @@ Building a hosted service? Start with **Web backend**, compare languages, then i
 
 **Preview navigator:** 35 languages, 32 licenses, and 15 use-case guides. Qualitative performance, complexity, and ecosystem bands; Open Source, source-available, public-domain-like, and license-transition models.
 
+**Expanded:** [Unassessed identity index](docs/identity-index.md).
+
 **Reviewed decision lab:** **Go, Python, Rust, and TypeScript**, four Reviewed boolean capabilities, and eight Reviewed SPDX license identities. This is **not a complete licensing workflow**. Preview guidance never self-promotes into Reviewed recommendations.
 
 Insufficient Reviewed evidence means abstention. PLLDN provides no legal advice or certification.

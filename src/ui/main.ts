@@ -66,6 +66,22 @@ function applyCatalogFilter(): void {
     entry.hidden = query.length > 0 && !text.includes(query);
     if (!entry.hidden) visible += 1;
   }
+
+  const filterPrefix =
+    productState.mode === "languages" ? "language" : "license";
+  const filtered = Object.entries(productState.filters).some(
+    ([key, value]) => key.startsWith(filterPrefix) && value !== "any",
+  );
+  let extra = 0;
+  for (const entry of root.querySelectorAll<HTMLElement>(
+    "[data-identity-entry]",
+  )) {
+    entry.hidden =
+      filtered ||
+      (query.length > 0 && !entry.dataset.identitySearchText?.includes(query));
+    if (!entry.hidden) extra += 1;
+  }
+
   const input = root.querySelector<HTMLInputElement>(
     '[data-action="catalog-search"]',
   );
@@ -73,10 +89,22 @@ function applyCatalogFilter(): void {
   const count = root.querySelector<HTMLElement>("[data-catalog-visible-count]");
   if (count) {
     const noun = productState.mode === "languages" ? "languages" : "licenses";
-    count.textContent = `${visible} ${noun} shown.`;
+    count.textContent = `${visible} ${noun} shown. ${extra} additional identities in the unassessed index.`;
   }
+
+  const index = root.querySelector<HTMLDetailsElement>("[data-identity-index]");
+  const indexCount = root.querySelector<HTMLElement>("[data-identity-count]");
+  if (indexCount) {
+    indexCount.textContent = filtered
+      ? "Clear structured filters to browse identity-only entries."
+      : `${extra} additional identities match.`;
+  }
+  if (index && (query.length > 0 || filtered)) {
+    index.open = !filtered && extra > 0;
+  }
+
   const empty = root.querySelector<HTMLElement>("[data-catalog-search-empty]");
-  if (empty) empty.hidden = query.length === 0 || visible > 0;
+  if (empty) empty.hidden = query.length === 0 || visible + extra > 0;
 }
 
 function installProductExperience(model: UiViewModel): void {
