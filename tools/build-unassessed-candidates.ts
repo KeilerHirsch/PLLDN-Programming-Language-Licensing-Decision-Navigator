@@ -12,7 +12,9 @@ const outputPath = fileURLToPath(
 
 /** New v0.2 presentation encoding; historic v0.1 bytes stay untouched. */
 export function encodeUnassessedCandidatesV02(): string {
-  const normalized = JSON.parse(encodeCanonical(buildUnassessedCandidatesV02()));
+  const normalized = JSON.parse(
+    encodeCanonical(buildUnassessedCandidatesV02()),
+  );
   return `${JSON.stringify(normalized, null, 2)}\n`;
 }
 
