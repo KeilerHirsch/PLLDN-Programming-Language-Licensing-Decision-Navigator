@@ -3,10 +3,7 @@
   "record_type": "editorial_license_condition_audit",
   "review_status": "EDITORIAL_PREVIEW_NOT_REVIEWED",
   "baseline_main_sha": "7a176fe99a2dae5470a248632041a7e5e6d2ac94",
-  "entity_ids": [
-    "license.agpl-3.0-only",
-    "license.agpl-3.0-or-later"
-  ],
+  "entity_ids": ["license.agpl-3.0-only", "license.agpl-3.0-or-later"],
   "field": "obligations.source_disclosure",
   "editorial_value_retained": "network-service",
   "trigger": {
