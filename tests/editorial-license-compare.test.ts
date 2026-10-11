@@ -16,12 +16,17 @@ test("compare is restricted to distinct editorial license profiles, never index-
   assert.equal(Object.keys(LICENSE_DECISION_PROFILES).length, 32);
   assert.deepEqual(DEFAULT_PRODUCT_UI_STATE.compareLicenseIds, []);
   assert.equal(selectEditorialLicenses(["license.mit"])[0]?.label, "MIT");
-  assert.throws(() => selectEditorialLicenses(["candidate.license.artistic-2.0"]));
+  assert.throws(() =>
+    selectEditorialLicenses(["candidate.license.artistic-2.0"]),
+  );
   assert.throws(() => selectEditorialLicenses(["license.mit", "license.mit"]));
   assert.throws(() =>
     selectEditorialLicenses([
-      "license.mit", "license.apache-2.0", "license.bsd-3-clause",
-      "license.gpl-3.0-only", "license.0bsd",
+      "license.mit",
+      "license.apache-2.0",
+      "license.bsd-3-clause",
+      "license.gpl-3.0-only",
+      "license.0bsd",
     ]),
   );
 });
@@ -57,7 +62,8 @@ test("browser offers comparison without DOM HTML injection or Reviewed promotion
     '"toggle-license-compare"',
     '"clear-license-compare"',
     "compareLicenseIds: []",
-  ]) assert((ui + events).includes(token), token);
+  ])
+    assert((ui + events).includes(token), token);
   assert(logic.includes("Editorial Preview only: not legal advice"));
   assert(logic.includes("Index-only identities have no assessed rights"));
   assert(!logic.includes("innerHTML"));
