@@ -4,7 +4,6 @@ import candidates from "../../catalog/unassessed-candidates.v0.2.json" with {
   type: "json",
 };
 import type { TypedValue } from "../decision/types.ts";
-import { renderLicenseComparison } from "./license-comparison.ts";
 import {
   PRODUCT_COMPARE_DIMENSIONS,
   PRODUCT_MODEL,
@@ -33,6 +32,7 @@ import {
   languageDecisionTone,
   licenseDecisionTone,
 } from "./decision-tones.ts";
+import { renderLicenseComparison } from "./license-comparison.ts";
 import type {
   CatalogPreviewEntryView,
   CatalogPreviewFactView,
