@@ -48,24 +48,42 @@ test("manual evidence workflow pins main, runtime and read-only artifact transpo
   const yaml = readFileSync(workflow, "utf8");
   assert.match(yaml, /^name: Manual Node 24 workload evidence$/mu);
   assert.match(yaml, /workflow_dispatch:/u);
-  assert.doesNotMatch(yaml, /^\s+(?:push|pull_request|pull_request_target|schedule):/mu);
-  assert.match(yaml, /^permissions:\n  contents: read$/mu);
+  assert.doesNotMatch(
+    yaml,
+    /^\s+(?:push|pull_request|pull_request_target|schedule):/mu,
+  );
+  assert.match(yaml, /^permissions:\n\s{2}contents: read$/mu);
   assert.match(yaml, /if: github.ref == 'refs\/heads\/main'/u);
   assert.match(yaml, /persist-credentials: false/u);
   assert.match(yaml, /ref: \$\{\{ inputs.target_sha \}\}/u);
   assert.match(yaml, /git rev-parse refs\/remotes\/origin\/main/u);
   assert.match(yaml, /test "\$GITHUB_SHA" = "\$BENCHMARK_SOURCE_SHA"/u);
   assert.match(yaml, /node-version: "24\.15\.0"/u);
-  assert.match(yaml, /actions\/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1/u);
-  assert.match(yaml, /actions\/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1/u);
-  assert.match(yaml, /actions\/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9/u);
+  assert.match(
+    yaml,
+    /actions\/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1/u,
+  );
+  assert.match(
+    yaml,
+    /actions\/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1/u,
+  );
+  assert.match(
+    yaml,
+    /actions\/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9/u,
+  );
   assert.match(yaml, /retention-days: 90/u);
   assert.match(yaml, /validate-node24-benchmark/u);
-  assert.doesNotMatch(yaml, /contents: write|pages: write|id-token: write|gh release/u);
+  assert.doesNotMatch(
+    yaml,
+    /contents: write|pages: write|id-token: write|gh release/u,
+  );
 });
 
 test("first workload data remains separate from Reviewed and Editorial metric bands", () => {
-  const doc = readFileSync("docs/audit/2026-10-11-language-band-evidence-a4.md", "utf8");
+  const doc = readFileSync(
+    "docs/audit/2026-10-11-language-band-evidence-a4.md",
+    "utf8",
+  );
   const script = readFileSync(benchmark, "utf8");
   assert(doc.includes("385"));
   assert(script.includes("MEASURED_WORKLOAD_ONLY_NOT_REVIEWED"));
