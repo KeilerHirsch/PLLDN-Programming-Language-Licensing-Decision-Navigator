@@ -51,6 +51,98 @@ const smokeProbe = `
   }
 
   try {
+
+    if (new URLSearchParams(window.location.search).get("probe") === "discovery") {
+      await waitFor(() => document.querySelector("[data-catalog-visible-count]")?.textContent.includes("194 languages found"), "language information runtime");
+      const cards = [...document.querySelectorAll("[data-catalog-entry]")];
+      assert(cards.every(card => card.querySelector(".language-information-summary")?.textContent.length > 40 &&
+        card.querySelector(".language-information-uses")?.textContent.length &&
+        card.querySelector(".language-information-sources a")?.href.startsWith("https://")),
+        "all 194 languages need useful sourced information");
+      const basic = cards.find(card => card.dataset.catalogName === "BASIC");
+      assert(basic?.textContent.includes("1964") &&
+        [...basic.querySelectorAll(".language-information-sources a")].some(link => link.href.includes("dartmouth.edu")) &&
+        basic.querySelector(".identity-profile")?.textContent.includes("UNKNOWN"),
+        "BASIC needs sourced history while ratings remain UNKNOWN");
+      assert(cards.filter(card => card.dataset.catalogStatus === "unassessed").every(card =>
+        card.querySelector(".identity-profile")?.textContent.includes("UNKNOWN") &&
+        !card.querySelector(".decision-profile")),
+        "descriptions never promote candidate assessments");
+      const change = async (selector, value, label) => {
+        const control = document.querySelector(selector);
+        assert(control, label + " control missing");
+        control.focus();
+        control.value = value;
+        control.dispatchEvent(new Event("change", { bubbles: true }));
+        await waitFor(() => document.querySelector(selector) !== control &&
+          document.querySelector(selector)?.value === value, label);
+        assert(document.activeElement === document.querySelector(selector),
+          label + " keyboard focus must survive rerender");
+      };
+      const discovery = key => '[data-action="language-discovery"][data-discovery-key="' + key + '"]';
+      const visible = () => [...document.querySelectorAll("[data-catalog-entry]:not([hidden])")];
+      await change('[data-action="catalog-order"]', "common", "common ordering");
+      assert(visible()[0]?.dataset.catalogName === "TypeScript", "common order uses the named 2025 report");
+      await change(discovery("usage"), "ranked", "ranked language filter");
+      assert(visible().length === 9 && visible().every(card => Number(card.dataset.languageRank) > 0),
+        "only exact catalogue identities from the top-ten report match, never inferred Bash from Shell");
+      assert(visible()[0]?.dataset.catalogName === "TypeScript", "ranked language order is deterministic");
+      const share = new URL(document.querySelector(".catalog-share").href);
+      assert(share.searchParams.get("usage") === "ranked" && share.searchParams.get("order") === "common",
+        "discovery sort and usage must be shareable");
+      await change(discovery("era"), "classic", "classic era filter");
+      assert(visible().length > 0 && visible().every(card => card.dataset.languageEra === "classic"),
+        "era intersects usage without introducing assessments");
+      window.history.back();
+      await waitFor(() => document.querySelector(discovery("era"))?.value === "any" &&
+        visible().length === 9, "Back restores usage and era");
+      window.history.forward();
+      await waitFor(() => document.querySelector(discovery("era"))?.value === "classic" &&
+        visible().every(card => card.dataset.languageEra === "classic"), "Forward restores era intersection");
+      await change(discovery("usage"), "any", "all usage");
+      assert(visible().some(card => card.dataset.catalogName === "BASIC"),
+        "BASIC remains discoverable as a classic language");
+      await change(discovery("era"), "any", "all eras");
+      await change(discovery("lifecycle"), "maintained", "maintained implementation filter");
+      assert(visible().length > 0 && visible().every(card => card.dataset.languageLifecycle === "maintained"),
+        "lifecycle uses sourced implementation status");
+      await change(discovery("lifecycle"), "unknown", "unknown implementation status");
+      assert(visible().length > 0 && visible().every(card => card.dataset.languageLifecycle === "unknown"),
+        "unverified lifecycle must be explicitly searchable");
+      await change(discovery("lifecycle"), "any", "all lifecycle values");
+      for (const order of ["oldest", "newest", "lifecycle"]) {
+        await change('[data-action="catalog-order"]', order, order + " ordering");
+        assert(document.querySelector("[data-catalog-visible-count]").textContent.includes("194 languages found"),
+          "sorting never removes identities");
+      }
+      for (const control of document.querySelectorAll(".catalog-layout > .catalog-filter-grid select, .catalog-layout > .catalog-filter-grid button, .catalog-layout > .catalog-filter-grid a")) {
+        control.focus();
+        await sleep(50);
+        const rect = control.getBoundingClientRect();
+        assert(rect.top >= 0 && rect.bottom <= window.innerHeight + 2,
+          "focused sidebar control must be reachable: " + (control.dataset.discoveryKey ?? control.textContent) +
+          ", top " + rect.top + ", bottom " + rect.bottom + ", height " + window.innerHeight);
+      }
+      document.querySelector('[data-action="reset-product-filters"]').click();
+      await waitFor(() => document.querySelector('[data-action="catalog-order"]')?.value === "asc" &&
+        [...document.querySelectorAll('[data-action="language-discovery"]')].every(control => control.value === "any"),
+        "reset clears discovery and order");
+      await change(discovery("era"), "classic", "classic before switching mode");
+      action("catalog-mode", "mode", "licenses").click();
+      await waitFor(() => document.querySelector("[data-catalog-visible-count]")?.textContent.includes("714 licenses found"),
+        "language discovery resets on license switch");
+      const licenseShare = new URL(document.querySelector(".catalog-share").href);
+      assert(!document.querySelector('[data-action="language-discovery"]') &&
+        ["usage", "era", "lifecycle", "order"].every(key => !licenseShare.searchParams.has(key)),
+        "language discovery must not leak into license controls or URLs");
+      action("catalog-mode", "mode", "languages").click();
+      await waitFor(() => document.querySelector("[data-catalog-visible-count]")?.textContent.includes("194 languages found"),
+        "switching back restores all languages");
+      if (window.innerWidth <= 760) assert(document.documentElement.scrollWidth <= window.innerWidth + 2,
+        "new language information and discovery controls must not overflow mobile");
+      output.textContent = "PASS: sourced language information, discovery facets, sorting, history and reset";
+      return;
+    }
     if (new URLSearchParams(window.location.search).get("probe") === "focus") {
       await waitFor(() => document.querySelector("[data-catalog-visible-count]")?.textContent.includes("194 languages found"), "focus runtime");
       const focusStatus = document.querySelector('[data-action="catalog-status"]');
@@ -98,6 +190,9 @@ const smokeProbe = `
         document.querySelector('[data-action="catalog-mode"][aria-pressed="true"]')?.dataset.mode === expectedMode,
         "deep link must route to the correct catalogue mode",
       );
+      assert([...document.querySelectorAll('[data-action="language-discovery"]')].every(control => control.value === "any") &&
+        document.querySelector('[data-action="catalog-order"]')?.value === "asc",
+        "candidate permalink must reset discovery facets and ordering");
       await checkProfileHistory("candidate", requested);
       output.textContent = "PASS: pinned candidate permalink and Back/Forward";
       return;
@@ -109,7 +204,19 @@ const smokeProbe = `
       if(linked.has("profile")) {
         assert(visible.some(card=>card.dataset.entityId===linked.get("profile")),"editorial permalink must resolve only a real profile");
         assert(document.querySelector(".catalog-view-cards"),"direct profile must reveal the detailed card view");
+        assert([...document.querySelectorAll('[data-action="language-discovery"]')].every(control => control.value === "any") &&
+          document.querySelector('[data-action="catalog-order"]')?.value === "asc",
+          "editorial permalink must reset discovery facets and ordering");
         await checkProfileHistory("profile", linked.get("profile"));
+      } else if (linked.get("usage") === "ranked" && linked.get("order") === "common") {
+        assert(visible.length === 9 && visible[0]?.dataset.catalogName === "TypeScript" &&
+          visible.every(card => Number(card.dataset.languageRank) > 0),
+          "initial shared discovery route must restore ranked common ordering");
+        assert(document.querySelector('[data-action="language-discovery"][data-discovery-key="usage"]')?.value === "ranked",
+          "initial shared discovery control must reflect the URL");
+        const share = new URL(document.querySelector(".catalog-share").href);
+        assert(share.searchParams.get("usage") === "ranked" && share.searchParams.get("order") === "common",
+          "initial discovery route must remain shareable");
       } else if(linked.has("q")) {
         assert(visible.length===1 && visible[0].dataset.catalogStatus==="unassessed","shared search must restore the real unassessed result");
         const share = new URL(document.querySelector(".catalog-share").href);
@@ -568,6 +675,10 @@ async function main(): Promise<void> {
       throw new Error("Loopback server address unavailable");
 
     for (const [width, suffix] of [
+      [1280, "?probe=discovery"],
+      [390, "?probe=discovery"],
+      [1280, "?catalog=languages&usage=ranked&order=common"],
+      [390, "?catalog=languages&usage=ranked&order=common"],
       [1280, "?probe=focus"],
       [1280, ""],
       [390, ""],
@@ -579,6 +690,14 @@ async function main(): Promise<void> {
       [390, "?catalog=licenses&q=Artistic-2.0&status=unassessed&order=desc"],
       [1280, "?candidate=candidate.language.61676461"],
       [1280, "?candidate=candidate.license.artistic-2.0"],
+      [
+        1280,
+        "?candidate=candidate.language.6261736963&usage=ranked&era=modern&lifecycle=retired&order=newest",
+      ],
+      [
+        1280,
+        "?profile=language.rust&usage=unranked&era=classic&lifecycle=retired&order=oldest",
+      ],
     ] as const) {
       const { stdout, stderr } = await execFileAsync(
         browser,
@@ -589,6 +708,7 @@ async function main(): Promise<void> {
           "--disable-dev-shm-usage",
           "--disable-background-networking",
           "--no-first-run",
+          `--user-data-dir=${join(root, "chrome-profile")}`,
           "--force-device-scale-factor=1",
           `--window-size=${width},844`,
           "--virtual-time-budget=20000",

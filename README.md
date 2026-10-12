@@ -35,7 +35,7 @@ Explore performance, complexity and deployment trade-offs, and license rights an
 2. Search by name or SPDX identifier; narrow the filters.
 3. Open profiles, compare, or share **Link to this view**.
 
-[Catalogue navigation and direct-link examples](docs/catalogue.md).
+[Navigation](docs/catalogue.md) · [Language information and discovery](docs/language-information.md).
 
 ## Scope and confidence
 

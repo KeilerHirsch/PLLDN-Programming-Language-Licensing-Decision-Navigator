@@ -1,0 +1,774 @@
+[
+  {
+    "name": "Q#",
+    "summary": "Q# is Microsoft's language for expressing quantum programs in the Quantum Development Kit, including qubit operations and classical control logic.",
+    "uses": ["Quantum algorithms", "Quantum simulation"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://learn.microsoft.com/en-us/azure/quantum/qsharp-overview"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/microsoft/qdk/releases/tag/v1.33.0"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "Microsoft QDK implementation released v1.33.0 on 2026-10-06.",
+    "lifecycleSource": "https://github.com/microsoft/qdk/releases/tag/v1.33.0"
+  },
+  {
+    "name": "R",
+    "summary": "R is a language and environment for statistical computation and graphics, providing data analysis, modelling and extensible plotting facilities with links to native-code libraries.",
+    "uses": ["Statistical modelling", "Data analysis and graphics"],
+    "links": [
+      {
+        "label": "R project: language overview",
+        "url": "https://www.r-project.org/about.html"
+      },
+      {
+        "label": "R project release news",
+        "url": "https://www.r-project.org/"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "The R project announced the R 4.6.1 release on 24 June 2026.",
+    "lifecycleSource": "https://www.r-project.org/"
+  },
+  {
+    "name": "Racket",
+    "summary": "Racket is a Lisp-family language and platform for language-oriented programming, with macros and tools for creating domain-specific languages and applications.",
+    "uses": ["Language development", "Functional applications"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://racket-lang.org/"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/racket/racket/releases/tag/v9.3"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "Racket implementation released v9.3 on 2026-08-13.",
+    "lifecycleSource": "https://github.com/racket/racket/releases/tag/v9.3"
+  },
+  {
+    "name": "Raku",
+    "summary": "Raku combines functional, object-oriented and other programming styles with grammars, gradual typing and facilities for scripting and concurrent programs.",
+    "uses": ["Text processing", "Application scripting"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://raku.org/"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/rakudo/rakudo/releases/tag/2026.09"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "Rakudo implementation released 2026.09 on 2026-09-28.",
+    "lifecycleSource": "https://github.com/rakudo/rakudo/releases/tag/2026.09"
+  },
+  {
+    "name": "ReScript",
+    "summary": "ReScript is a statically typed language that compiles to JavaScript, with JavaScript interoperability and tools for browser, Node.js and React applications.",
+    "uses": ["React applications", "Node.js applications"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://rescript-lang.org/"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/rescript-lang/rescript/releases/tag/v12.3.1"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "ReScript implementation released v12.3.1 on 2026-08-24.",
+    "lifecycleSource": "https://github.com/rescript-lang/rescript/releases/tag/v12.3.1"
+  },
+  {
+    "name": "Reason",
+    "summary": "Reason provides alternative syntax and tooling for OCaml, retaining its type system and allowing native OCaml applications or JavaScript output through Melange.",
+    "uses": ["OCaml applications", "JavaScript applications"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://reasonml.github.io/"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/reasonml/reason/releases/tag/3.18.0"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "Reason tooling implementation released 3.18.0 on 2026-06-23.",
+    "lifecycleSource": "https://github.com/reasonml/reason/releases/tag/3.18.0"
+  },
+  {
+    "name": "Red",
+    "summary": "Red is a Rebol-inspired language and toolchain with built-in dialects for parsing, GUI layout and lower-level programming, combining interpreted and compiled code.",
+    "uses": ["GUI applications", "Domain-specific scripting"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://github.com/red/red"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "experimental",
+    "lifecycleNote": "The Red toolchain's official repository explicitly describes its current development stage as alpha.",
+    "lifecycleSource": "https://github.com/red/red"
+  },
+  {
+    "name": "Ring",
+    "summary": "Ring is a dynamic multi-paradigm language with support for embedded domain-specific syntax and libraries for console, graphical, web and mobile applications.",
+    "uses": ["GUI applications", "Domain-specific languages"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://ring-lang.github.io/"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/ring-lang/ring/releases/tag/v1.27"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "Ring implementation released v1.27 on 2026-05-28.",
+    "lifecycleSource": "https://github.com/ring-lang/ring/releases/tag/v1.27"
+  },
+  {
+    "name": "Roc",
+    "summary": "Roc is a statically typed functional language that separates application code from platform code, using type inference and platform packages for host integration.",
+    "uses": ["Functional applications", "Command-line tools"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://www.roc-lang.org/"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "Ruby",
+    "summary": "Ruby is a dynamic object-oriented language with blocks and metaprogramming, used for scripting, data processing and web applications with frameworks such as Rails.",
+    "uses": ["Web applications", "Automation scripts"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://www.ruby-lang.org/en/about/"
+      },
+      {
+        "label": "Implementation status",
+        "url": "https://www.ruby-lang.org/en/news/2026/09/15/ruby-4-0-7-released/"
+      }
+    ],
+    "introduced": 1995,
+    "introducedSource": "https://www.ruby-lang.org/en/about/",
+    "lifecycle": "maintained",
+    "lifecycleNote": "The Ruby project released Ruby 4.0.7 on 2026-09-15.",
+    "lifecycleSource": "https://www.ruby-lang.org/en/news/2026/09/15/ruby-4-0-7-released/"
+  },
+  {
+    "name": "Rust",
+    "summary": "Rust is a compiled systems language whose ownership and borrowing rules govern memory use and sharing, with applications in services, command-line tools and embedded code.",
+    "uses": ["Command-line tools", "Embedded software"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://rust-lang.org/"
+      },
+      {
+        "label": "Implementation status",
+        "url": "https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "The Rust Release Team announced Rust 1.99.0 on 2026-10-01.",
+    "lifecycleSource": "https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/"
+  },
+  {
+    "name": "SAS",
+    "summary": "SAS programs combine DATA steps for managing data with procedures for analysis and reporting, and macros for generating and reusing program text.",
+    "uses": ["Data processing", "Analytical reporting"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://support.sas.com/documentation/cdl/en/lrcon/65287/HTML/default/n0ozjjixavy265n13pjsjukvaynb.htm"
+      },
+      {
+        "label": "Implementation status",
+        "url": "https://communities.sas.com/t5/SAS-Communities-Library/SAS-9-4-Support-Reminders-and-Important-Support-Policy-Updates/ta-p/969468"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "SAS announced SAS 9.4M9 in June 2025 with Standard Support through July 2030.",
+    "lifecycleSource": "https://communities.sas.com/t5/SAS-Communities-Library/SAS-9-4-Support-Reminders-and-Important-Support-Policy-Updates/ta-p/969468"
+  },
+  {
+    "name": "Scala",
+    "summary": "Scala combines object-oriented and functional programming with static types, pattern matching and metaprogramming, supporting applications that integrate with its host platforms and libraries.",
+    "uses": ["Typed application development", "Functional data processing"],
+    "links": [
+      {
+        "label": "Scala language overview",
+        "url": "https://www.scala-lang.org/"
+      },
+      {
+        "label": "Implementation support / releases",
+        "url": "https://github.com/scala/scala3/releases/tag/3.10.0"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "The Scala 3 implementation published compiler version 3.10.0 on 12 October 2026.",
+    "lifecycleSource": "https://github.com/scala/scala3/releases/tag/3.10.0"
+  },
+  {
+    "name": "Scheme",
+    "summary": "Scheme is a Lisp-family language emphasising lexical scope, first-class procedures and a compact core, with several independently developed implementations.",
+    "uses": ["Functional programming", "Domain-specific languages"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://www.scheme.org/"
+      },
+      {
+        "label": "Documented language history",
+        "url": "https://standards.scheme.org/"
+      }
+    ],
+    "introduced": 1975,
+    "introducedSource": "https://standards.scheme.org/",
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "Smalltalk",
+    "summary": "Smalltalk organises computation as objects exchanging messages, with live environments such as Squeak that let developers inspect and change running programs.",
+    "uses": ["Live application development", "Interactive prototyping"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://squeak.org/"
+      },
+      {
+        "label": "Documented language history",
+        "url": "https://www.cs.tufts.edu/comp/150FP/archive/alan-kay/smalltalk-early-history-notices.pdf"
+      },
+      {
+        "label": "Implementation status",
+        "url": "https://github.com/OpenSmalltalk/opensmalltalk-vm/releases/tag/202606270913"
+      }
+    ],
+    "introduced": 1972,
+    "introducedSource": "https://www.cs.tufts.edu/comp/150FP/archive/alan-kay/smalltalk-early-history-notices.pdf",
+    "lifecycle": "maintained",
+    "lifecycleNote": "The OpenSmalltalk VM used by Squeak and Cuis published release 202606270913 on 2026-06-27.",
+    "lifecycleSource": "https://github.com/OpenSmalltalk/opensmalltalk-vm/releases/tag/202606270913"
+  },
+  {
+    "name": "Solidity",
+    "summary": "Solidity is a statically typed language for smart contracts targeting the Ethereum Virtual Machine, with inheritance, libraries and user-defined types for on-chain application logic.",
+    "uses": ["EVM smart contracts", "On-chain application logic"],
+    "links": [
+      {
+        "label": "Solidity documentation",
+        "url": "https://docs.soliditylang.org/en/latest/"
+      },
+      {
+        "label": "Implementation support / releases",
+        "url": "https://github.com/argotorg/solidity/releases/tag/v0.8.37"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "The Solidity compiler implementation published version 0.8.37 on 10 September 2026.",
+    "lifecycleSource": "https://github.com/argotorg/solidity/releases/tag/v0.8.37"
+  },
+  {
+    "name": "Squirrel",
+    "summary": "Squirrel is a dynamic object-oriented language designed for embedding in applications such as games, with classes, generators and cooperative coroutines.",
+    "uses": ["Game scripting", "Application embedding"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://www.squirrel-lang.org/"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "Standard ML",
+    "summary": "Standard ML is a functional language with type inference, algebraic data types and modules; its formal definition specifies both typing and execution semantics.",
+    "uses": ["Functional applications", "Language research"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://smlfamily.github.io/"
+      },
+      {
+        "label": "Documented language history",
+        "url": "https://smlfamily.github.io/history/index.html"
+      },
+      {
+        "label": "Implementation status",
+        "url": "https://www.smlnj.org/"
+      }
+    ],
+    "introduced": 1983,
+    "introducedSource": "https://smlfamily.github.io/history/index.html",
+    "lifecycle": "maintained",
+    "lifecycleNote": "The SML/NJ implementation published development release 2026.2 on 2026-08-14.",
+    "lifecycleSource": "https://www.smlnj.org/"
+  },
+  {
+    "name": "Starlark",
+    "summary": "Starlark is a Python-like embedded configuration language with deterministic evaluation, used for Bazel build definitions and application-specific extension logic.",
+    "uses": ["Bazel build rules", "Embedded configuration"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://github.com/bazelbuild/starlark"
+      },
+      {
+        "label": "Implementation status",
+        "url": "https://github.com/bazelbuild/bazel/releases/tag/9.3.0"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "Bazel, which embeds Starlark for build rules, released 9.3.0 on 2026-10-07.",
+    "lifecycleSource": "https://github.com/bazelbuild/bazel/releases/tag/9.3.0"
+  },
+  {
+    "name": "SuperCollider",
+    "summary": "SuperCollider's sclang language controls a separate real-time audio server, supporting algorithmic sound synthesis, composition and interactive musical systems.",
+    "uses": ["Audio synthesis", "Algorithmic composition"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://supercollider.github.io/"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/supercollider/supercollider/releases/tag/Version-3.14.1"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "SuperCollider implementation released Version-3.14.1 on 2025-11-24.",
+    "lifecycleSource": "https://github.com/supercollider/supercollider/releases/tag/Version-3.14.1"
+  },
+  {
+    "name": "Swift",
+    "summary": "Swift is a statically typed language with value types, generics and optionals, used for applications on Apple platforms and for services and tooling on other supported platforms.",
+    "uses": ["Apple-platform applications", "Server and command-line software"],
+    "links": [
+      {
+        "label": "Swift language overview",
+        "url": "https://www.swift.org/about/"
+      },
+      {
+        "label": "Implementation support / releases",
+        "url": "https://github.com/swiftlang/swift/releases/tag/swift-6.4.0-RELEASE"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "The Swift implementation published its 6.4.0 release on 15 September 2026.",
+    "lifecycleSource": "https://github.com/swiftlang/swift/releases/tag/swift-6.4.0-RELEASE"
+  },
+  {
+    "name": "TLA",
+    "summary": "TLA+ is a mathematical specification language for describing state transitions and checking models of software or hardware, especially concurrent and distributed systems.",
+    "uses": ["System specifications", "Concurrency model checking"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://lamport.azurewebsites.net/tla/high-level-view.html"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "Tcl",
+    "summary": "Tcl is an extensible dynamic scripting language used for automation, networking and application integration; its companion Tk toolkit supplies graphical interfaces.",
+    "uses": ["Application scripting", "Desktop interfaces with Tk"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://www.tcl-lang.org/"
+      },
+      {
+        "label": "Implementation status",
+        "url": "https://www.tcl-lang.org/software/tcltk/9.1.html"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "The Tcl/Tk project lists Tcl/Tk 9.1.0 released on 2026-09-29.",
+    "lifecycleSource": "https://www.tcl-lang.org/software/tcltk/9.1.html"
+  },
+  {
+    "name": "Terra",
+    "summary": "Terra is a compiled low-level language embedded in Lua, allowing Lua programs to generate and specialise native code and embed domain-specific JIT compilers.",
+    "uses": ["Native-code generation", "Embedded JIT compilers"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://terralang.org/"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/terralang/terra/releases/tag/release-1.2.2"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "Terra implementation released release-1.2.2 on 2026-08-14.",
+    "lifecycleSource": "https://github.com/terralang/terra/releases/tag/release-1.2.2"
+  },
+  {
+    "name": "TypeScript",
+    "summary": "TypeScript adds static type annotations and checking to JavaScript, then emits JavaScript that runs in browsers and server runtimes.",
+    "uses": ["Browser applications", "Server applications"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://www.typescriptlang.org/"
+      },
+      {
+        "label": "Documented language history",
+        "url": "https://www.typescriptlang.org/docs/handbook/2/modules.html"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+      }
+    ],
+    "introduced": 2012,
+    "introducedSource": "https://www.typescriptlang.org/docs/handbook/2/modules.html",
+    "lifecycle": "maintained",
+    "lifecycleNote": "TypeScript implementation released v7.0.2 on 2026-08-20.",
+    "lifecycleSource": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+  },
+  {
+    "name": "V",
+    "summary": "V is a compiled language with C interoperability and integrated tooling, supporting native applications, command-line programs and network services.",
+    "uses": ["Native applications", "Network services"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://github.com/vlang/v"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/vlang/v/releases/tag/0.5.2"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "V implementation released 0.5.2 on 2026-07-12.",
+    "lifecycleSource": "https://github.com/vlang/v/releases/tag/0.5.2"
+  },
+  {
+    "name": "VBA",
+    "summary": "Visual Basic for Applications is embedded in Microsoft Office applications, using their object models to automate documents, spreadsheets and other repeated tasks.",
+    "uses": ["Office macros", "Spreadsheet automation"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://learn.microsoft.com/en-us/office/vba/library-reference/concepts/getting-started-with-vba-in-office"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "VBScript",
+    "summary": "VBScript is Microsoft's Visual Basic-family scripting language used with Windows Script Host and legacy Windows applications; Microsoft is phasing out its Windows component.",
+    "uses": ["Legacy Windows scripts", "Windows Script Host automation"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/d1wf56tt(v=vs.84)"
+      },
+      {
+        "label": "Implementation status",
+        "url": "https://learn.microsoft.com/en-us/windows/whats-new/deprecated-features"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "retired",
+    "lifecycleNote": "Microsoft deprecated the Windows VBScript component in October 2023 and plans phased removal; existing installations can still run it.",
+    "lifecycleSource": "https://learn.microsoft.com/en-us/windows/whats-new/deprecated-features"
+  },
+  {
+    "name": "VHDL",
+    "summary": "VHDL describes hardware designs whose behaviour can be simulated and whose synthesizable portions can be translated into gate-level implementations.",
+    "uses": ["Hardware simulation", "Logic synthesis"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://ghdl.github.io/ghdl/about.html"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/ghdl/ghdl/releases/tag/v6.0.0"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "GHDL implementation released v6.0.0 on 2026-03-07.",
+    "lifecycleSource": "https://github.com/ghdl/ghdl/releases/tag/v6.0.0"
+  },
+  {
+    "name": "Vala",
+    "summary": "Vala offers object-oriented syntax and native compilation with direct GObject and GTK support, allowing applications to use existing C libraries.",
+    "uses": ["GTK applications", "GObject libraries"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://vala.dev/"
+      },
+      {
+        "label": "Implementation status",
+        "url": "https://download.gnome.org/sources/vala/0.56/"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "GNOME published the Vala compiler 0.56.19 source release on 2026-03-30.",
+    "lifecycleSource": "https://download.gnome.org/sources/vala/0.56/"
+  },
+  {
+    "name": "Verilog",
+    "summary": "Verilog is a hardware description language for modelling digital circuits, writing simulation testbenches and describing designs for logic synthesis.",
+    "uses": ["Digital-circuit modelling", "Hardware testbenches"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://steveicarus.github.io/iverilog/"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/steveicarus/iverilog/releases/tag/v13_0"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "Icarus Verilog implementation released v13_0 on 2026-03-02.",
+    "lifecycleSource": "https://github.com/steveicarus/iverilog/releases/tag/v13_0"
+  },
+  {
+    "name": "Visual Basic .NET",
+    "summary": "Visual Basic .NET is a .NET language with a stable design, used for Windows Forms applications and libraries. Microsoft's strategy retains core library support and C# interoperability without expanding to new workloads.",
+    "uses": ["Windows Forms applications", ".NET libraries"],
+    "links": [
+      {
+        "label": "Microsoft: Visual Basic language strategy",
+        "url": "https://learn.microsoft.com/en-us/dotnet/visual-basic/getting-started/strategy"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "Microsoft's current strategy retains .NET library support and Visual Studio investment for existing Visual Basic scenarios; the language design remains stable.",
+    "lifecycleSource": "https://learn.microsoft.com/en-us/dotnet/visual-basic/getting-started/strategy"
+  },
+  {
+    "name": "WebAssembly",
+    "summary": "WebAssembly is a binary instruction format for a stack-based virtual machine, serving as a portable compilation target for programs deployed in host environments.",
+    "uses": ["Portable compiled modules", "Browser applications"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://webassembly.org/"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "Wolfram Language",
+    "summary": "Wolfram Language represents code and data as symbolic expressions and includes built-in computation and visualisation functions for technical and mathematical work.",
+    "uses": ["Symbolic computation", "Scientific visualisation"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://www.wolfram.com/language/"
+      },
+      {
+        "label": "Implementation status",
+        "url": "https://www.wolfram.com/mathematica/quick-revision-history/"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "The Mathematica implementation released version 15 in June 2026 and 15.0.1 with fixes in July 2026.",
+    "lifecycleSource": "https://www.wolfram.com/mathematica/quick-revision-history/"
+  },
+  {
+    "name": "XQuery",
+    "summary": "XQuery is a W3C query language for selecting and constructing XML data; XQuery 3.1 also adds maps, arrays and operations for working with JSON.",
+    "uses": ["XML transformation", "Structured-data queries"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://www.w3.org/TR/xquery-31/"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "Xtend",
+    "summary": "Xtend is a statically typed Java dialect that generates readable Java source, adding features such as lambdas, extension methods and compile-time macros.",
+    "uses": ["Java applications", "Code generation"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://eclipse.dev/Xtext/xtend/"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "Yacc",
+    "summary": "Yacc uses grammar rules and associated actions to generate parsers, traditionally producing C source for recognising structured input such as programming-language syntax.",
+    "uses": ["Parser generation", "Language frontends"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://pubs.opengroup.org/onlinepubs/009695399/utilities/yacc.html"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "Yul",
+    "summary": "Yul is Solidity's intermediate language for optimisation and EVM bytecode generation, and can also be written directly as Solidity inline assembly.",
+    "uses": ["EVM code generation", "Solidity inline assembly"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://docs.soliditylang.org/en/latest/yul.html"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/argotorg/solidity/releases/tag/v0.8.37"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "Solidity implementation released v0.8.37 on 2026-09-10.",
+    "lifecycleSource": "https://github.com/argotorg/solidity/releases/tag/v0.8.37"
+  },
+  {
+    "name": "Zeek",
+    "summary": "Zeek's event-driven scripting language extends its network monitor, turning protocol events into custom analysis, logs and network-observation policies.",
+    "uses": ["Network analysis", "Custom monitoring policies"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://docs.zeek.org/en/current/tutorial/scripting/index.html"
+      },
+      {
+        "label": "Implementation release",
+        "url": "https://github.com/zeek/zeek/releases/tag/v9.0.0"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "Zeek implementation released v9.0.0 on 2026-08-21.",
+    "lifecycleSource": "https://github.com/zeek/zeek/releases/tag/v9.0.0"
+  },
+  {
+    "name": "Zig",
+    "summary": "Zig is a general-purpose language and toolchain with explicit memory management and C interoperability, used for native applications and cross-platform builds.",
+    "uses": ["Systems programming", "Cross-platform builds"],
+    "links": [
+      {
+        "label": "Official documentation",
+        "url": "https://ziglang.org/"
+      },
+      {
+        "label": "Implementation status",
+        "url": "https://ziglang.org/download/index.json"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "The Zig project's release index dates compiler release 0.17.0 to 2026-10-01.",
+    "lifecycleSource": "https://ziglang.org/download/index.json"
+  }
+]

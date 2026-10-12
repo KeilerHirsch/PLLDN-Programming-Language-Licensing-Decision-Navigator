@@ -253,6 +253,106 @@ test("all pinned identities are first-class catalogue cards without manufactured
   }
 });
 
+test("every language card has visible sourced information without promoting unassessed ratings", (t) => {
+  const previous = Object.getOwnPropertyDescriptor(globalThis, "document");
+  Object.defineProperty(globalThis, "document", {
+    configurable: true,
+    value: { createElement: (tag: string) => new TestElement(tag) },
+  });
+  t.after(() => {
+    if (previous) Object.defineProperty(globalThis, "document", previous);
+    else Reflect.deleteProperty(globalThis, "document");
+  });
+  const catalog: CatalogPreviewView = {
+    knowledge_snapshot: "candidate.test",
+    status: "Preview",
+    languages: [],
+    licenses: [],
+  };
+  const view = renderProductExperience(
+    catalog,
+    DEFAULT_PRODUCT_UI_STATE,
+  ) as unknown as TestElement;
+  const cards = withClass(view, "product-card");
+  assert.equal(cards.length, 194);
+  for (const card of cards) {
+    const summary = withClass(card, "language-information-summary")[0];
+    assert(
+      summary && summary.textContent.length > 40,
+      card.dataset.catalogName,
+    );
+    assert.notEqual(summary.textContent, card.dataset.catalogName);
+    assert(withClass(card, "language-information-uses")[0]?.textContent.length);
+    const disclosure = withClass(card, "language-information-sources")[0];
+    assert(disclosure && disclosure.tagName === "details");
+    const links = descendants(disclosure).filter(
+      (node) => node.tagName === "a",
+    );
+    assert(links.length > 0, "each description needs inspectable source links");
+    assert(
+      links.every(
+        (link) =>
+          link.href.startsWith("https://") &&
+          link.rel.includes("noopener") &&
+          link.rel.includes("noreferrer"),
+      ),
+    );
+    if (card.dataset.catalogStatus === "unassessed") {
+      assert.equal(withClass(card, "decision-profile").length, 0);
+      assert(
+        descendants(card).some((node) => node.textContent.includes("UNKNOWN")),
+      );
+    }
+  }
+  const basic = cardNamed(view, "BASIC");
+  assert(descendants(basic).some((node) => node.textContent.includes("1964")));
+  assert(
+    descendants(basic).some(
+      (node) => node.tagName === "a" && node.href.includes("dartmouth.edu"),
+    ),
+  );
+  assert(
+    withClass(basic, "language-information-summary")[0]?.textContent.includes(
+      "BASIC",
+    ),
+  );
+  const controls = descendants(view).filter(
+    (node) => node.dataset.action === "language-discovery",
+  );
+  assert.deepEqual(controls.map((node) => node.dataset.discoveryKey).sort(), [
+    "era",
+    "lifecycle",
+    "usage",
+  ]);
+  const sort = descendants(view).find(
+    (node) => node.dataset.action === "catalog-order",
+  );
+  assert(sort);
+  assert.deepEqual(
+    sort.children.map(
+      (node) =>
+        node.attributes.get("value") ??
+        (node as unknown as { value: string }).value,
+    ),
+    ["asc", "desc", "common", "oldest", "newest", "lifecycle"],
+  );
+
+  const licenseView = renderProductExperience(catalog, {
+    ...DEFAULT_PRODUCT_UI_STATE,
+    mode: "licenses",
+  }) as unknown as TestElement;
+  assert.equal(
+    withClass(licenseView, "language-information-summary").length,
+    0,
+  );
+  assert.equal(
+    descendants(licenseView).filter(
+      (node) => node.dataset.action === "language-discovery",
+    ).length,
+    0,
+  );
+});
+
 function cardNamed(root: TestElement, name: string): TestElement {
   const card = withClass(root, "product-card").find((node) =>
     descendants(node).some(
