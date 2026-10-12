@@ -98,7 +98,8 @@ test("A-Z and Z-A order are stable and handle punctuation and Unicode", () => {
 test("language discovery URLs preserve independent usage, era and lifecycle facets", () => {
   for (const order of ["common", "oldest", "newest", "lifecycle"]) {
     const state = readCatalogNavigation(
-      "?catalog=languages&usage=ranked&era=classic&lifecycle=maintained&order=" + order,
+      "?catalog=languages&usage=ranked&era=classic&lifecycle=maintained&order=" +
+        order,
     );
     assert.deepEqual(state.discovery, {
       usage: "ranked",
@@ -124,7 +125,8 @@ test("language discovery rejects invented classifications and does not leak into
   assert.equal(invalid.order, "asc");
   for (const order of ["common", "oldest", "newest", "lifecycle"]) {
     const license = readCatalogNavigation(
-      "?catalog=licenses&usage=ranked&era=classic&lifecycle=retired&order=" + order,
+      "?catalog=licenses&usage=ranked&era=classic&lifecycle=retired&order=" +
+        order,
     );
     assert.deepEqual(license.discovery, invalid.discovery);
     assert.equal(license.order, "asc");
@@ -134,7 +136,10 @@ test("language discovery rejects invented classifications and does not leak into
       discovery: { usage: "ranked", era: "classic", lifecycle: "retired" },
     });
     for (const key of ["usage", "era", "lifecycle", "order"]) {
-      assert.equal(new URL(href, "https://example.test/").searchParams.has(key), false);
+      assert.equal(
+        new URL(href, "https://example.test/").searchParams.has(key),
+        false,
+      );
     }
   }
   assert.equal(

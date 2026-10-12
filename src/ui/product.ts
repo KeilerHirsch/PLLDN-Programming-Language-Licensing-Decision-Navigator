@@ -21,6 +21,16 @@ import {
 } from "../product/identity-index.ts";
 import { LANGUAGE_BAND_EVIDENCE_NOTICE } from "../product/language-band-provenance.ts";
 import { LANGUAGE_DECISION_PROFILES } from "../product/language-decision-profiles.ts";
+import {
+  DEFAULT_LANGUAGE_DISCOVERY_FILTERS,
+  LANGUAGE_INFORMATION,
+  type LanguageDiscoveryFilters,
+  type LanguageInformation,
+  type LanguageOrder,
+  languageEra,
+  languageInformationByName,
+  languageRank,
+} from "../product/language-information.ts";
 import { LICENSE_DECISION_PROFILES } from "../product/license-decision-profiles.ts";
 import type {
   LanguageProductProfile,
@@ -55,7 +65,8 @@ export type ProductCatalogMode = "languages" | "licenses";
 export interface ProductUiState {
   mode: ProductCatalogMode;
   status: CatalogStatus;
-  order: "asc" | "desc";
+  order: LanguageOrder;
+  discovery: LanguageDiscoveryFilters;
   view: "cards" | "list";
   selectedUseCaseId: string | null;
   compareLanguageIds: readonly string[];
@@ -67,6 +78,7 @@ export const DEFAULT_PRODUCT_UI_STATE: ProductUiState = {
   mode: "languages",
   status: "all",
   order: "asc",
+  discovery: { ...DEFAULT_LANGUAGE_DISCOVERY_FILTERS },
   view: "list",
   selectedUseCaseId: null,
   compareLanguageIds: [],
@@ -168,6 +180,126 @@ function selectControl(
   }
   label.append(title, select);
   return label;
+}
+
+function discoveryControl(
+  labelText: string,
+  key: keyof LanguageDiscoveryFilters,
+  value: string,
+  choices: readonly (readonly [string, string])[],
+): HTMLLabelElement {
+  const label = selectControl(
+    labelText,
+    "languageCategory",
+    value,
+    choices,
+    false,
+  );
+  const select = label.children[1] as HTMLSelectElement;
+  select.dataset.action = "language-discovery";
+  select.dataset.discoveryKey = key;
+  delete select.dataset.filterKey;
+  return label;
+}
+
+function requireLanguageInformation(name: string): LanguageInformation {
+  const info = languageInformationByName(name);
+  if (!info) throw new Error(`Language information missing for ${name}`);
+  return info;
+}
+
+function languageInformationTerms(name: string): readonly string[] {
+  const info = requireLanguageInformation(name);
+  return [info.summary, ...info.uses, info.lifecycleNote ?? ""];
+}
+
+function recordLanguageMetadata(card: HTMLElement, name: string): void {
+  const info = requireLanguageInformation(name);
+  card.dataset.languageEra = languageEra(info);
+  card.dataset.languageLifecycle = info.lifecycle;
+  const rank = languageRank(name);
+  if (rank !== null) card.dataset.languageRank = String(rank);
+  if (info.introduced !== null)
+    card.dataset.languageIntroduced = String(info.introduced);
+}
+
+function informationLink(label: string, url: string): HTMLAnchorElement {
+  const link = document.createElement("a");
+  link.textContent = label;
+  link.href = url;
+  link.rel = "noopener noreferrer";
+  return link;
+}
+
+function renderLanguageInformation(name: string): HTMLElement {
+  const info = requireLanguageInformation(name);
+  const block = document.createElement("div");
+  block.className = "language-information";
+  const summary = paragraph(info.summary);
+  summary.className = "language-information-summary";
+  const uses = paragraph(`Used for: ${info.uses.join(", ")}.`);
+  uses.className = "language-information-uses";
+  const metadata = document.createElement("div");
+  metadata.className = "language-information-tags product-stats";
+  const era = languageEra(info);
+  metadata.append(
+    badge(
+      info.introduced === null
+        ? "Documented origin year unverified"
+        : "Documented origin " +
+            info.introduced +
+            " · " +
+            (era === "classic" ? "Classic" : "Modern"),
+    ),
+  );
+  const rank = languageRank(name);
+  metadata.append(
+    badge(rank === null ? "Outside cited top 10" : `GitHub 2025 #${rank}`),
+  );
+  const lifecycleLabels = {
+    maintained: "Maintained implementation",
+    experimental: "Experimental implementation",
+    retired: "Retired / deprecated project",
+    unknown: "Lifecycle unverified",
+  };
+  metadata.append(badge(lifecycleLabels[info.lifecycle]));
+
+  const details = document.createElement("details");
+  details.className = "language-information-sources";
+  const title = document.createElement("summary");
+  title.textContent = "Language information & sources";
+  details.append(
+    title,
+    paragraph(
+      "Descriptive information checked " +
+        LANGUAGE_INFORMATION.checked_on +
+        ". Origin years refer to the cited design, implementation or publication milestone; open the source for its context. These sources do not assess performance, complexity or project suitability.",
+    ),
+  );
+  const links = document.createElement("ul");
+  for (const item of info.links) {
+    const row = document.createElement("li");
+    row.append(informationLink(item.label, item.url));
+    links.append(row);
+  }
+  if (info.introducedSource) {
+    const row = document.createElement("li");
+    row.append(
+      informationLink("Documented origin year source", info.introducedSource),
+    );
+    links.append(row);
+  }
+  if (info.lifecycleNote) details.append(paragraph(info.lifecycleNote));
+  if (info.lifecycleSource) {
+    const row = document.createElement("li");
+    row.append(
+      informationLink("Implementation lifecycle source", info.lifecycleSource),
+    );
+    links.append(row);
+  }
+  details.append(links);
+  block.append(summary, uses, metadata, details);
+  return block;
 }
 
 const TONE_SYMBOLS: Record<DecisionTone, string> = {
@@ -277,6 +409,7 @@ function productSearchText(
         ];
   return [
     ...base,
+    ...("build_path" in profile ? languageInformationTerms(profile.label) : []),
     ...(entry?.facts ?? []).flatMap((fact) => [fact.label, factValue(fact)]),
   ]
     .join(" ")
@@ -643,11 +776,16 @@ function renderLanguageCard(
   card.dataset.catalogStatus = "editorial";
   card.dataset.entityId = profile.entity_id;
   card.dataset.catalogSearchText = productSearchText(profile, entry);
+  recordLanguageMetadata(card, profile.label);
 
   const head = document.createElement("div");
   head.className = "product-card-head";
   head.append(heading(3, profile.label), badge("Editorial Preview"));
-  card.append(head, paragraph(profile.tagline));
+  card.append(
+    head,
+    renderLanguageInformation(profile.label),
+    paragraph(profile.tagline),
+  );
 
   const tags = document.createElement("div");
   tags.className = "profile-tags";
@@ -975,9 +1113,17 @@ function renderIdentityCard(record: UnassessedRecord): HTMLElement {
   card.dataset.identityEntry = "true";
   card.dataset.catalogStatus = "unassessed";
   card.dataset.catalogName = "spdx_id" in record ? record.spdx_id : record.name;
-  card.dataset.catalogSearchText = `${card.dataset.catalogName} ${record.name}`
+  card.dataset.catalogSearchText = [
+    card.dataset.catalogName,
+    record.name,
+    ...(record.kind === "language"
+      ? languageInformationTerms(record.name)
+      : []),
+  ]
+    .join(" ")
     .normalize("NFKD")
     .toLocaleLowerCase("en-US");
+  if (record.kind === "language") recordLanguageMetadata(card, record.name);
   if ("osi_approved_source_flag" in record)
     card.dataset.identityOsiApproved = String(record.osi_approved_source_flag);
   const head = document.createElement("div");
@@ -985,9 +1131,13 @@ function renderIdentityCard(record: UnassessedRecord): HTMLElement {
   head.append(heading(3, card.dataset.catalogName), badge("Unassessed"));
   card.append(
     head,
-    paragraph(record.name),
+    record.kind === "language"
+      ? renderLanguageInformation(record.name)
+      : paragraph(record.name),
     paragraph(
-      "Assessment pending · UNKNOWN. Identity and pinned source only; not a Reviewed recommendation.",
+      record.kind === "language"
+        ? "Performance, complexity and suitability assessments pending · UNKNOWN. Descriptive sources do not make this a Reviewed recommendation."
+        : "Assessment pending · UNKNOWN. Identity and pinned source only; not a Reviewed recommendation.",
     ),
     profileLink(record.id, true),
     renderUnassessedProfile(record),
@@ -1098,6 +1248,18 @@ function renderCatalog(
   search.dataset.action = "catalog-search";
   searchLabel.append(searchTitle, search);
   controls.append(searchLabel);
+  const sortChoices: readonly (readonly [string, string])[] = [
+    ["asc", "Name A–Z"],
+    ["desc", "Name Z–A"],
+    ...(state.mode === "languages"
+      ? ([
+          ["common", "Common first · GitHub 2025"],
+          ["oldest", "Oldest documented origins"],
+          ["newest", "Newest documented origins"],
+          ["lifecycle", "Implementation status"],
+        ] as const)
+      : []),
+  ];
   for (const [label, action, current, choices] of [
     [
       "Data status",
@@ -1109,15 +1271,7 @@ function renderCatalog(
         ["unassessed", "Unassessed identities"],
       ],
     ],
-    [
-      "Sort",
-      "catalog-order",
-      state.order,
-      [
-        ["asc", "Name A–Z"],
-        ["desc", "Name Z–A"],
-      ],
-    ],
+    ["Sort", "catalog-order", state.order, sortChoices],
     [
       "View",
       "catalog-view",
@@ -1151,6 +1305,29 @@ function renderCatalog(
   filters.className = "catalog-filter-grid";
   if (state.mode === "languages") {
     filters.append(
+      discoveryControl("Usage · GitHub 2025", "usage", state.discovery.usage, [
+        ["any", "Any reported usage"],
+        ["ranked", "In the cited top 10"],
+        ["unranked", "Outside the cited top 10"],
+      ]),
+      discoveryControl("Documented origin era", "era", state.discovery.era, [
+        ["any", "Any documented origin era"],
+        ["classic", "Origins before 1990"],
+        ["modern", "Origins 1990 onward"],
+        ["unknown", "Documented origin year unverified"],
+      ]),
+      discoveryControl(
+        "Implementation lifecycle",
+        "lifecycle",
+        state.discovery.lifecycle,
+        [
+          ["any", "Any lifecycle"],
+          ["maintained", "Maintained implementation"],
+          ["experimental", "Experimental implementation"],
+          ["retired", "Retired / deprecated project"],
+          ["unknown", "Lifecycle unverified"],
+        ],
+      ),
       selectControl(
         "Category",
         "languageCategory",
@@ -1275,6 +1452,22 @@ function renderCatalog(
     );
     (osi.children[1] as HTMLSelectElement).dataset.action = "identity-osi";
     filters.append(osi);
+  }
+  if (state.mode === "languages") {
+    const discoveryNote = paragraph(
+      LANGUAGE_INFORMATION.ranking.label +
+        " (" +
+        LANGUAGE_INFORMATION.ranking.period +
+        "), measured by " +
+        LANGUAGE_INFORMATION.ranking.metric +
+        ". Outside its top 10 does not mean unpopular or forgotten. Shell is an aggregate report category, not a Bash ranking. Documented origins may refer to design, implementation or publication rather than a first release. Era is independent of maintenance: an older language may still be maintained. Lifecycle describes the cited implementation; unverified dates and statuses stay unverified.",
+    );
+    discoveryNote.className = "catalog-filter-note";
+    const rankingLink = informationLink(
+      "Ranking source and methodology",
+      LANGUAGE_INFORMATION.ranking.url,
+    );
+    filters.append(discoveryNote, rankingLink);
   }
   const note = paragraph(
     "Assessment filters match known editorial values or explicit Unknown. Unassessed entries never inherit ratings.",

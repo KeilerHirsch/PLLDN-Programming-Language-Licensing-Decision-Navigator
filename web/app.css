@@ -1173,6 +1173,8 @@ button[data-action="toggle-compare"]:disabled {
   position: sticky;
   top: 1rem;
   margin-top: 0;
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
 }
 .catalog-filter-note {
   font-size: 0.85rem;
@@ -1220,6 +1222,8 @@ button[data-action="toggle-compare"]:disabled {
   .catalog-layout > .catalog-filter-grid {
     position: static;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: none;
+    overflow-y: visible;
   }
   .catalog-filter-note {
     grid-column: 1 / -1;

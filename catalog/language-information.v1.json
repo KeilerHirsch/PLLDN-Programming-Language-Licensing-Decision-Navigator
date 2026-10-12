@@ -1,0 +1,3768 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-12",
+  "ranking": {
+    "label": "GitHub Octoverse 2025",
+    "metric": "Monthly contributors on GitHub",
+    "period": "August 2025",
+    "url": "https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/",
+    "ordered_names": [
+      "TypeScript",
+      "Python",
+      "JavaScript",
+      "Java",
+      "C#",
+      "PHP",
+      "Shell",
+      "C++",
+      "HCL",
+      "Go"
+    ]
+  },
+  "records": [
+    {
+      "name": "ABAP",
+      "summary": "ABAP combines procedural and object-oriented programming on SAP application servers, with language features for database access and business application logic.",
+      "uses": ["SAP business applications", "Database-backed enterprise logic"],
+      "links": [
+        {
+          "label": "SAP ABAP overview",
+          "url": "https://help.sap.com/docs/ABAP_PLATFORM/7bfe8cdcfbb040dcb6702dada8c3e2f0/230ffbcaeaa1404889322ced79dfc187.html?version=1709.008"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "AIDL",
+      "summary": "Android Interface Definition Language describes interfaces whose generated bindings let Android components call one another across process boundaries.",
+      "uses": [
+        "Android interprocess communication",
+        "Android hardware abstraction interfaces"
+      ],
+      "links": [
+        {
+          "label": "AOSP AIDL overview",
+          "url": "https://source.android.com/docs/core/architecture/aidl"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "APL",
+      "summary": "APL is an array-oriented language whose functions and operators express computations over whole collections; Dyalog supplies an interactive implementation.",
+      "uses": ["Array transformations", "Interactive numerical programming"],
+      "links": [
+        {
+          "label": "Dyalog APL overview",
+          "url": "https://www.dyalog.com/what-is-dyalog.htm"
+        },
+        {
+          "label": "Dyalog APL anniversary history",
+          "url": "https://www.dyalog.com/50-years-of-apl.htm"
+        }
+      ],
+      "introduced": 1966,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": "https://www.dyalog.com/50-years-of-apl.htm"
+    },
+    {
+      "name": "ATS",
+      "summary": "ATS combines implementation with formal specification through dependent and linear types, supporting native low-level code alongside theorem-proving constructs.",
+      "uses": [
+        "Low-level systems programming",
+        "Programs with type-level proofs"
+      ],
+      "links": [
+        {
+          "label": "ATS project introduction",
+          "url": "https://www.cs.bu.edu/~hwxi/atslangweb/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "ActionScript",
+      "summary": "ActionScript 3 is an object-oriented scripting language supported by Apache Royale, which compiles application code for browser and other targets.",
+      "uses": [
+        "Browser application interfaces",
+        "Cross-platform application code"
+      ],
+      "links": [
+        {
+          "label": "Apache Royale",
+          "url": "https://royale.apache.org/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Apache Royale documents ActionScript 3 support and its December 2024 release.",
+      "lifecycleSource": "https://royale.apache.org/",
+      "introducedSource": null
+    },
+    {
+      "name": "Ada",
+      "summary": "Ada is a strongly typed language with explicit interfaces, tasking and contracts, used in embedded and other software where predictable structure matters.",
+      "uses": ["Embedded software", "Concurrent applications"],
+      "links": [
+        {
+          "label": "AdaCore: introduction and history",
+          "url": "https://learn.adacore.com/courses/intro-to-ada/chapters/introduction.html"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://gcc.gnu.org/"
+        }
+      ],
+      "introduced": 1983,
+      "introducedSource": "https://learn.adacore.com/courses/intro-to-ada/chapters/introduction.html",
+      "lifecycle": "maintained",
+      "lifecycleNote": "GCC ships an Ada front end; its supported 16.2 compiler release was published on 7 August 2026.",
+      "lifecycleSource": "https://gcc.gnu.org/"
+    },
+    {
+      "name": "Agda",
+      "summary": "Agda uses dependent types to express program properties in types and also serves as an interactive proof assistant for constructive mathematics.",
+      "uses": [
+        "Machine-checked mathematical proofs",
+        "Dependently typed programs"
+      ],
+      "links": [
+        {
+          "label": "Agda introduction",
+          "url": "https://agda.readthedocs.io/en/latest/getting-started/what-is-agda.html"
+        },
+        {
+          "label": "Agda 2 release",
+          "url": "https://github.com/agda/agda/releases/tag/v2.8.0.2"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Agda 2 published v2.8.0.2 on 2026-09-13.",
+      "lifecycleSource": "https://github.com/agda/agda/releases/tag/v2.8.0.2",
+      "introducedSource": null
+    },
+    {
+      "name": "Aiken",
+      "summary": "Aiken is a statically typed functional language and toolkit for Cardano smart contracts, compiling on-chain validators to Untyped Plutus Core.",
+      "uses": [
+        "Cardano smart-contract validators",
+        "Property tests for on-chain logic"
+      ],
+      "links": [
+        {
+          "label": "Aiken documentation",
+          "url": "https://aiken-lang.org/"
+        },
+        {
+          "label": "Aiken compiler release",
+          "url": "https://github.com/aiken-lang/aiken/releases/tag/v1.1.24"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Aiken compiler published v1.1.24 on 2026-09-26.",
+      "lifecycleSource": "https://github.com/aiken-lang/aiken/releases/tag/v1.1.24",
+      "introducedSource": null
+    },
+    {
+      "name": "Alloy",
+      "summary": "Alloy describes software models using relations and logic; its analyzer searches for examples and counterexamples, including models with changing state.",
+      "uses": ["Design consistency checks", "Security protocol modeling"],
+      "links": [
+        {
+          "label": "Alloy project",
+          "url": "https://alloytools.org/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Alloy Analyzer project lists the January 2025 Alloy 6.2.0 release.",
+      "lifecycleSource": "https://alloytools.org/",
+      "introducedSource": null
+    },
+    {
+      "name": "AngelScript",
+      "summary": "AngelScript embeds a statically typed, C/C++-style scripting language in host applications, exposing registered native functions and objects to scripts.",
+      "uses": ["Application scripting", "Native C++ application extensions"],
+      "links": [
+        {
+          "label": "AngelScript project",
+          "url": "https://www.angelcode.com/angelscript/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The AngelScript implementation lists version 2.38.0 released in August 2025.",
+      "lifecycleSource": "https://www.angelcode.com/angelscript/",
+      "introducedSource": null
+    },
+    {
+      "name": "Apex",
+      "summary": "Apex runs typed, object-oriented business logic on Salesforce servers, including classes and triggers invoked by record changes and service requests.",
+      "uses": [
+        "Salesforce record triggers",
+        "Salesforce server-side business logic"
+      ],
+      "links": [
+        {
+          "label": "Salesforce Apex guide",
+          "url": "https://developer.salesforce.com/docs/platform/webconsole/guide/work-with-code.html"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "AppleScript",
+      "summary": "AppleScript controls scriptable macOS applications and operating-system features, allowing scripts to combine application actions into repeatable workflows.",
+      "uses": ["macOS application automation", "Cross-application workflows"],
+      "links": [
+        {
+          "label": "AppleScript language guide",
+          "url": "https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/introduction/ASLR_intro.html"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Arc",
+      "summary": "Arc is a Lisp dialect designed around concise expressions and bottom-up programming, where programmers extend the language to fit their application.",
+      "uses": [
+        "Lisp language experiments",
+        "Application-specific abstractions"
+      ],
+      "links": [
+        {
+          "label": "Arc creator's introduction",
+          "url": "https://paulgraham.com/arc.html"
+        },
+        {
+          "label": "Arc creator's design FAQ",
+          "url": "https://paulgraham.com/arcfaq.html"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "AspectJ",
+      "summary": "AspectJ extends Java with aspect-oriented constructs that express behavior across multiple program locations, such as advice attached to selected join points.",
+      "uses": ["Cross-cutting Java behavior", "Instrumentation and tracing"],
+      "links": [
+        {
+          "label": "Eclipse AspectJ project",
+          "url": "https://eclipse.dev/aspectj/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Assembly",
+      "summary": "Assembly is a family of architecture-specific languages expressing processor instructions, registers and memory operations; syntax depends on the chosen assembler.",
+      "uses": [
+        "Processor-level routines",
+        "Operating-system and firmware code"
+      ],
+      "links": [
+        {
+          "label": "Intel instruction-set manuals",
+          "url": "https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "AutoHotkey",
+      "summary": "AutoHotkey is a Windows scripting language for hotkeys, macros and desktop automation, with scripts that interact with keyboard input and application windows.",
+      "uses": ["Windows hotkeys and macros", "Desktop task automation"],
+      "links": [
+        {
+          "label": "AutoHotkey official repository",
+          "url": "https://github.com/AutoHotkey/AutoHotkey"
+        },
+        {
+          "label": "AutoHotkey v2 release",
+          "url": "https://github.com/AutoHotkey/AutoHotkey/releases/tag/v2.0.30"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "AutoHotkey v2 published v2.0.30 on 2026-10-09.",
+      "lifecycleSource": "https://github.com/AutoHotkey/AutoHotkey/releases/tag/v2.0.30",
+      "introducedSource": null
+    },
+    {
+      "name": "AutoIt",
+      "summary": "AutoIt uses BASIC-like syntax to automate Windows interfaces and general tasks, including keystrokes, controls, COM objects and calls to native libraries.",
+      "uses": ["Windows GUI automation", "Administrative desktop scripts"],
+      "links": [
+        {
+          "label": "AutoIt introduction",
+          "url": "https://www.autoitscript.com/site/autoit/"
+        },
+        {
+          "label": "AutoIt project history",
+          "url": "https://www.autoitscript.com/wiki/History"
+        },
+        {
+          "label": "AutoIt release history",
+          "url": "https://www.autoitscript.com/autoit3/docs/history.htm"
+        }
+      ],
+      "introduced": 1999,
+      "lifecycle": "maintained",
+      "lifecycleNote": "AutoIt v3 lists version 3.3.18.0 released on 2025-09-07.",
+      "lifecycleSource": "https://www.autoitscript.com/autoit3/docs/history.htm",
+      "introducedSource": "https://www.autoitscript.com/wiki/History"
+    },
+    {
+      "name": "Awk",
+      "summary": "Awk processes input records through pattern-action rules, combining regular-expression matching, fields, arrays and output formatting for text-oriented tasks.",
+      "uses": ["Text and log processing", "Tabular data transformations"],
+      "links": [
+        {
+          "label": "GNU Awk manual",
+          "url": "https://www.gnu.org/software/gawk/manual/gawk.html"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "BASIC",
+      "summary": "BASIC began at Dartmouth in 1964 to make programming accessible to students through time-sharing. Later BASIC dialects have different syntax and runtimes; FreeBASIC and Visual Basic .NET have separate profiles.",
+      "uses": ["Learning programming", "Historical time-sharing applications"],
+      "links": [
+        {
+          "label": "Dartmouth: BASIC and time-sharing",
+          "url": "https://www.library.dartmouth.edu/exhibits/sharing-the-computer"
+        },
+        {
+          "label": "A later dialect: FreeBASIC",
+          "url": "https://www.freebasic.net/"
+        },
+        {
+          "label": "A later dialect: Visual Basic .NET",
+          "url": "https://learn.microsoft.com/en-us/dotnet/visual-basic/"
+        }
+      ],
+      "introduced": 1964,
+      "introducedSource": "https://www.library.dartmouth.edu/exhibits/sharing-the-computer",
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "BQN",
+      "summary": "BQN is an array-oriented language in the APL tradition, combining multidimensional array operations, higher-order functions and a distinct symbolic notation.",
+      "uses": [
+        "Array data transformations",
+        "Numerical scripting and prototypes"
+      ],
+      "links": [
+        {
+          "label": "BQN language documentation",
+          "url": "https://mlochbaum.github.io/BQN/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Ballerina",
+      "summary": "Ballerina is designed for service integration, with network-oriented language constructs and tools for building APIs and connecting distributed systems.",
+      "uses": ["API and service integration", "Cloud service implementations"],
+      "links": [
+        {
+          "label": "Ballerina project",
+          "url": "https://ballerina.io/"
+        },
+        {
+          "label": "Ballerina distribution release",
+          "url": "https://github.com/ballerina-platform/ballerina-lang/releases/tag/v2201.13.7"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Ballerina distribution published v2201.13.7 on 2026-10-08.",
+      "lifecycleSource": "https://github.com/ballerina-platform/ballerina-lang/releases/tag/v2201.13.7",
+      "introducedSource": null
+    },
+    {
+      "name": "Bash",
+      "summary": "Bash is GNU's Bourne-compatible command shell, combining interactive command editing and job control with functions, arrays and scripts for automating shell tasks.",
+      "uses": ["Command-line automation", "Interactive Unix shells"],
+      "links": [
+        {
+          "label": "GNU Bash",
+          "url": "https://www.gnu.org/software/bash/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "GNU identifies a current Bash maintainer and an active development and bug-reporting process.",
+      "lifecycleSource": "https://www.gnu.org/software/bash/"
+    },
+    {
+      "name": "Bicep",
+      "summary": "Bicep declaratively describes Azure resources and their relationships, compiling infrastructure definitions into Azure Resource Manager deployment templates.",
+      "uses": [
+        "Azure infrastructure deployment",
+        "Reusable infrastructure modules"
+      ],
+      "links": [
+        {
+          "label": "Microsoft Bicep overview",
+          "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview"
+        },
+        {
+          "label": "Microsoft Bicep compiler release",
+          "url": "https://github.com/Azure/bicep/releases/tag/v0.48.1"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Microsoft Bicep compiler published v0.48.1 on 2026-10-05.",
+      "lifecycleSource": "https://github.com/Azure/bicep/releases/tag/v0.48.1",
+      "introducedSource": null
+    },
+    {
+      "name": "Bison",
+      "summary": "Bison grammar files describe tokens, grammar rules and semantic actions from which GNU Bison generates parsers for programming languages and other structured inputs.",
+      "uses": [
+        "Compiler parser generation",
+        "Domain-specific language parsers"
+      ],
+      "links": [
+        {
+          "label": "GNU Bison introduction",
+          "url": "https://www.gnu.org/software/bison/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "BlitzMax",
+      "summary": "BlitzMax provides a cross-platform programming language and modular toolchain, with libraries ranging from game frameworks to database connectivity.",
+      "uses": ["Cross-platform games", "Desktop applications"],
+      "links": [
+        {
+          "label": "BlitzMax project",
+          "url": "https://blitzmax.org/"
+        },
+        {
+          "label": "BlitzMax NG release",
+          "url": "https://github.com/bmx-ng/bmx-ng/releases/tag/v0.165.3.61.linux.x64"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "BlitzMax NG published v0.165.3.61.linux.x64 on 2026-08-24.",
+      "lifecycleSource": "https://github.com/bmx-ng/bmx-ng/releases/tag/v0.165.3.61.linux.x64",
+      "introducedSource": null
+    },
+    {
+      "name": "Bluespec",
+      "summary": "Bluespec describes digital hardware through typed modules and guarded atomic actions; the BSC toolchain can simulate designs and generate standard Verilog.",
+      "uses": ["Digital hardware design", "Hardware simulation"],
+      "links": [
+        {
+          "label": "Bluespec Compiler documentation",
+          "url": "https://github.com/B-Lang-org/bsc"
+        },
+        {
+          "label": "Bluespec Compiler (BSC) release",
+          "url": "https://github.com/B-Lang-org/bsc/releases/tag/2026.07.1"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Bluespec Compiler (BSC) published 2026.07.1 on 2026-09-26.",
+      "lifecycleSource": "https://github.com/B-Lang-org/bsc/releases/tag/2026.07.1",
+      "introducedSource": null
+    },
+    {
+      "name": "Boo",
+      "summary": "Boo is a programming language for the .NET runtime whose compiler produces .NET assemblies and whose interpreter runs scripts from files or standard input.",
+      "uses": [".NET application code", "Scripts on the .NET runtime"],
+      "links": [
+        {
+          "label": "Boo official repository",
+          "url": "https://github.com/boo-lang/boo"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Boogie",
+      "summary": "Boogie is an intermediate verification language separating source-language translation from the back-end reasoning used to check program correctness.",
+      "uses": [
+        "Program verification back ends",
+        "Verification-tool intermediate models"
+      ],
+      "links": [
+        {
+          "label": "Boogie IVL documentation",
+          "url": "https://boogie-docs.readthedocs.io/en/latest/"
+        },
+        {
+          "label": "Boogie verifier release",
+          "url": "https://github.com/boogie-org/boogie/releases/tag/v3.5.8"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Boogie verifier published v3.5.8 on 2026-10-03.",
+      "lifecycleSource": "https://github.com/boogie-org/boogie/releases/tag/v3.5.8",
+      "introducedSource": null
+    },
+    {
+      "name": "C",
+      "summary": "C developed alongside Unix in the early 1970s. It provides procedural programming, explicit pointers and storage control for native programs and libraries.",
+      "uses": ["System software", "Native libraries"],
+      "links": [
+        {
+          "label": "GNU C introduction and reference",
+          "url": "https://www.gnu.org/software/c-intro-and-ref/manual/html_node/index.html"
+        },
+        {
+          "label": "Ritchie: C development, 1969–1973; central work in 1972",
+          "url": "https://www.nokia.com/bell-labs/about/dennis-m-ritchie/chist.html"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://gcc.gnu.org/"
+        }
+      ],
+      "introduced": 1972,
+      "introducedSource": "https://www.nokia.com/bell-labs/about/dennis-m-ritchie/chist.html",
+      "lifecycle": "maintained",
+      "lifecycleNote": "GCC ships a C front end; its supported 16.2 compiler release was published on 7 August 2026.",
+      "lifecycleSource": "https://gcc.gnu.org/"
+    },
+    {
+      "name": "C#",
+      "summary": "C# is a statically typed language for .NET with classes, value types, generics and automatic memory management. Its libraries cover web services, desktop software and other application workloads.",
+      "uses": [".NET application development", "Web services"],
+      "links": [
+        {
+          "label": "Microsoft: C# overview",
+          "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/overview"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "C# ships in the .NET SDK; Microsoft's September 2026 support table lists .NET 10 as actively supported.",
+      "lifecycleSource": "https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core"
+    },
+    {
+      "name": "C++",
+      "summary": "C++ extends the C tradition with classes, templates, deterministic object lifetimes and a standard library for constructing native applications and reusable abstractions.",
+      "uses": ["Native application development", "Generic libraries"],
+      "links": [
+        {
+          "label": "Standard C++: language tour",
+          "url": "https://isocpp.org/tour"
+        },
+        {
+          "label": "Stroustrup: first use under the C++ name in 1983",
+          "url": "https://www.stroustrup.com/bs_faq.html"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://gcc.gnu.org/"
+        }
+      ],
+      "introduced": 1983,
+      "introducedSource": "https://www.stroustrup.com/bs_faq.html",
+      "lifecycle": "maintained",
+      "lifecycleNote": "GCC ships a C++ front end; its supported 16.2 compiler release was published on 7 August 2026.",
+      "lifecycleSource": "https://gcc.gnu.org/"
+    },
+    {
+      "name": "C3",
+      "summary": "C3 develops C-style syntax and semantics into a general-purpose compiled language aimed at systems code, applications, games and developer tools.",
+      "uses": ["Systems and embedded code", "Native applications and games"],
+      "links": [
+        {
+          "label": "C3 language project",
+          "url": "https://c3-lang.org/"
+        },
+        {
+          "label": "C3 compiler release",
+          "url": "https://github.com/c3lang/c3c/releases/tag/v0.8.5"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "C3 compiler published v0.8.5 on 2026-10-10.",
+      "lifecycleSource": "https://github.com/c3lang/c3c/releases/tag/v0.8.5",
+      "introducedSource": null
+    },
+    {
+      "name": "CLIPS",
+      "summary": "CLIPS is a rule-based programming language for expert systems, combining facts and production rules to express heuristic decision logic.",
+      "uses": ["Expert systems", "Rule-based decision logic"],
+      "links": [
+        {
+          "label": "CLIPS project",
+          "url": "https://www.clipsrules.net/"
+        }
+      ],
+      "introduced": 1985,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": "https://www.clipsrules.net/"
+    },
+    {
+      "name": "CMake",
+      "summary": "The CMake language expresses build specifications and reusable modules in CMakeLists.txt and .cmake files, and also supports standalone command scripts.",
+      "uses": [
+        "Build-system configuration",
+        "Reusable build and automation modules"
+      ],
+      "links": [
+        {
+          "label": "CMake language manual",
+          "url": "https://cmake.org/cmake/help/latest/manual/cmake-language.7.html"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "COBOL",
+      "summary": "COBOL was developed for business data processing and uses record-oriented, English-like program structure. Existing applications include financial, administrative and mainframe systems.",
+      "uses": ["Business record processing", "Financial applications"],
+      "links": [
+        {
+          "label": "IBM: COBOL overview and history",
+          "url": "https://www.ibm.com/think/topics/cobol"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://gcc.gnu.org/"
+        }
+      ],
+      "introduced": 1959,
+      "introducedSource": "https://www.ibm.com/think/topics/cobol",
+      "lifecycle": "maintained",
+      "lifecycleNote": "GCC lists a COBOL front end and a supported 16.2 compiler release from 7 August 2026; this describes that implementation.",
+      "lifecycleSource": "https://gcc.gnu.org/"
+    },
+    {
+      "name": "Cairo",
+      "summary": "Cairo expresses programs whose execution can be proved using validity proofs and serves as the smart-contract language for the Starknet blockchain.",
+      "uses": ["Starknet smart contracts", "Provable computations"],
+      "links": [
+        {
+          "label": "Cairo language project",
+          "url": "https://www.cairo-lang.org/"
+        },
+        {
+          "label": "Cairo compiler release",
+          "url": "https://github.com/starkware-libs/cairo/releases/tag/v2.21.0"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Cairo compiler published v2.21.0 on 2026-10-09.",
+      "lifecycleSource": "https://github.com/starkware-libs/cairo/releases/tag/v2.21.0",
+      "introducedSource": null
+    },
+    {
+      "name": "Carbon",
+      "summary": "Carbon is an experimental successor-language project for C++, exploring interoperability and migration while its compiler and language design remain in development.",
+      "uses": [
+        "C++ interoperability experiments",
+        "Compiler and language research"
+      ],
+      "links": [
+        {
+          "label": "Carbon project and status",
+          "url": "https://github.com/carbon-language/carbon-lang"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "experimental",
+      "lifecycleNote": "The Carbon project explicitly describes its language and toolchain as experimental.",
+      "lifecycleSource": "https://github.com/carbon-language/carbon-lang",
+      "introducedSource": null
+    },
+    {
+      "name": "Ceylon",
+      "summary": "Ceylon has a type-checking compiler, module system and Java and JavaScript back ends; the Eclipse project covering these tools is officially archived.",
+      "uses": ["JVM modules", "JavaScript-targeted applications"],
+      "links": [
+        {
+          "label": "Eclipse Ceylon project",
+          "url": "https://projects.eclipse.org/projects/technology.ceylon"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "retired",
+      "lifecycleNote": "The Eclipse Ceylon language and toolchain project is explicitly archived.",
+      "lifecycleSource": "https://projects.eclipse.org/projects/technology.ceylon",
+      "introducedSource": null
+    },
+    {
+      "name": "Chapel",
+      "summary": "Chapel is a compiled language built around parallel computation, with constructs for expressing algorithms across cores and distributed computing resources.",
+      "uses": ["Parallel algorithms", "Scientific and distributed computing"],
+      "links": [
+        {
+          "label": "Chapel language project",
+          "url": "https://chapel-lang.org/"
+        },
+        {
+          "label": "Chapel compiler release",
+          "url": "https://github.com/chapel-lang/chapel/releases/tag/2.10.0"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Chapel compiler published 2.10.0 on 2026-09-24.",
+      "lifecycleSource": "https://github.com/chapel-lang/chapel/releases/tag/2.10.0",
+      "introducedSource": null
+    },
+    {
+      "name": "Circom",
+      "summary": "Circom describes arithmetic circuits using signals, constraints and reusable templates; its compiler produces representations used to build zero-knowledge proofs.",
+      "uses": [
+        "Zero-knowledge proof circuits",
+        "Reusable cryptographic circuit templates"
+      ],
+      "links": [
+        {
+          "label": "Circom 2 documentation",
+          "url": "https://docs.circom.io/"
+        },
+        {
+          "label": "Circom 2 compiler release",
+          "url": "https://github.com/iden3/circom/releases/tag/v2.2.3"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Circom 2 compiler published v2.2.3 on 2025-10-27.",
+      "lifecycleSource": "https://github.com/iden3/circom/releases/tag/v2.2.3",
+      "introducedSource": null
+    },
+    {
+      "name": "Clarion",
+      "summary": "Clarion builds database-oriented applications using a data dictionary, code-generation templates and a programming language for application-specific behavior.",
+      "uses": [
+        "Database business applications",
+        "Template-generated application code"
+      ],
+      "links": [
+        {
+          "label": "SoftVelocity Clarion overview",
+          "url": "https://www.softvelocity.com/clarion.html"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Clean",
+      "summary": "Clean is a pure, lazy functional language with uniqueness typing, dynamic types and generic functions; its ecosystem includes workflow and embedded-device frameworks.",
+      "uses": ["Functional applications", "Workflow management systems"],
+      "links": [
+        {
+          "label": "Clean language project",
+          "url": "https://clean.cs.ru.nl/Clean"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Clojure",
+      "summary": "Clojure is a dynamic Lisp hosted on the JVM, using persistent immutable collections, macros and explicit state-management mechanisms for functional and concurrent programs.",
+      "uses": ["JVM applications", "Concurrent data processing"],
+      "links": [
+        {
+          "label": "Clojure: design rationale",
+          "url": "https://clojure.org/about/rationale"
+        },
+        {
+          "label": "Clojure release news",
+          "url": "https://clojure.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The official Clojure site reports release 1.12.6 on 2 September 2026 and continuing 1.13 development.",
+      "lifecycleSource": "https://clojure.org/"
+    },
+    {
+      "name": "CoffeeScript",
+      "summary": "CoffeeScript compiles a compact alternative syntax into JavaScript, including classes, comprehensions and functions that interoperate with JavaScript libraries.",
+      "uses": [
+        "JavaScript-targeted applications",
+        "Maintaining existing CoffeeScript projects"
+      ],
+      "links": [
+        {
+          "label": "CoffeeScript documentation",
+          "url": "https://coffeescript.org/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Common Lisp",
+      "summary": "Common Lisp supports interactive development, functions, macros and objects; implementations such as SBCL provide an ANSI Common Lisp compiler and runtime.",
+      "uses": [
+        "Interactive application development",
+        "Macro-based language extensions"
+      ],
+      "links": [
+        {
+          "label": "Steel Bank Common Lisp",
+          "url": "https://www.sbcl.org/"
+        },
+        {
+          "label": "Common Lisp language designer's preface",
+          "url": "https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node2.html"
+        }
+      ],
+      "introduced": 1984,
+      "lifecycle": "maintained",
+      "lifecycleNote": "SBCL lists version 2.6.9 released in September 2026.",
+      "lifecycleSource": "https://www.sbcl.org/",
+      "introducedSource": "https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node2.html"
+    },
+    {
+      "name": "Component Pascal",
+      "summary": "Component Pascal is an Oberon-2-derived language used by the BlackBox Component Builder, which combines a development environment with a modular application framework.",
+      "uses": ["BlackBox application modules", "Programming education"],
+      "links": [
+        {
+          "label": "BlackBox Component Pascal overview",
+          "url": "https://blackboxframework.org/index.php?cID=home%2Cen-us"
+        },
+        {
+          "label": "Component Pascal programming textbook",
+          "url": "https://blackboxframework.org/books/warford_2002.pdf"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Crystal",
+      "summary": "Crystal is a compiled, statically checked language with Ruby-inspired syntax and type inference, supporting native libraries, fibers and channels.",
+      "uses": ["Native command-line applications", "Network services"],
+      "links": [
+        {
+          "label": "Crystal language project",
+          "url": "https://crystal-lang.org/"
+        },
+        {
+          "label": "Crystal compiler release",
+          "url": "https://github.com/crystal-lang/crystal/releases/tag/1.21.1"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Crystal compiler published 1.21.1 on 2026-09-26.",
+      "lifecycleSource": "https://github.com/crystal-lang/crystal/releases/tag/1.21.1"
+    },
+    {
+      "name": "Cuda",
+      "summary": "CUDA C++ extends C++ with GPU kernels and launch syntax, expressing parallel work using NVIDIA's thread, block and memory programming model.",
+      "uses": ["GPU numerical computing", "GPU machine-learning kernels"],
+      "links": [
+        {
+          "label": "NVIDIA CUDA programming guide",
+          "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/intro-to-cuda-cpp.html"
+        },
+        {
+          "label": "NVIDIA CUDA introduction history",
+          "url": "https://docs.nvidia.com/cuda/archive/13.0.0/cuda-c-programming-guide/index.html"
+        }
+      ],
+      "introduced": 2006,
+      "introducedSource": "https://docs.nvidia.com/cuda/archive/13.0.0/cuda-c-programming-guide/index.html",
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Curry",
+      "summary": "Curry combines lazy functional programming with logic variables, search and nondeterministic operations in a declarative language with static types.",
+      "uses": ["Functional logic research", "Search-based program models"],
+      "links": [
+        {
+          "label": "Curry language project",
+          "url": "https://curry-lang.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Cypher",
+      "summary": "Cypher is a declarative query language for property graph databases, expressing searches and transformations in terms of nodes, relationships and patterns.",
+      "uses": ["Property graph queries", "Graph data transformations"],
+      "links": [
+        {
+          "label": "Neo4j Cypher introduction",
+          "url": "https://neo4j.com/docs/cypher-manual/current/introduction/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Neo4j documents new Cypher 25 features from 2025 and its database default from February 2026.",
+      "lifecycleSource": "https://neo4j.com/docs/cypher-manual/current/introduction/"
+    },
+    {
+      "name": "Cython",
+      "summary": "Cython extends Python-oriented code with static declarations and native C/C++ interoperability, compiling modules that integrate with the CPython ecosystem.",
+      "uses": ["Python native extensions", "C and C++ library integration"],
+      "links": [
+        {
+          "label": "Cython project",
+          "url": "https://cython.org/"
+        },
+        {
+          "label": "Cython compiler release",
+          "url": "https://github.com/cython/cython/releases/tag/3.3.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Cython compiler published 3.3.0 on 2026-08-22.",
+      "lifecycleSource": "https://github.com/cython/cython/releases/tag/3.3.0"
+    },
+    {
+      "name": "D",
+      "summary": "D is a statically typed general-purpose language with C-like syntax, systems-level access and native compilation, supporting both high-level abstractions and low-level code.",
+      "uses": [
+        "Native systems and application code",
+        "C library interoperability"
+      ],
+      "links": [
+        {
+          "label": "D language project",
+          "url": "https://dlang.org/"
+        },
+        {
+          "label": "DMD implementation history",
+          "url": "https://blog.dlang.org/archive/2017/10/25/dmd-windows-and-c/"
+        },
+        {
+          "label": "D compiler release chronology",
+          "url": "https://dlang.org/changelog/"
+        }
+      ],
+      "introduced": 2001,
+      "introducedSource": "https://blog.dlang.org/archive/2017/10/25/dmd-windows-and-c/",
+      "lifecycle": "maintained",
+      "lifecycleNote": "The D compiler release chronology lists implementation releases in 2026.",
+      "lifecycleSource": "https://dlang.org/changelog/"
+    },
+    {
+      "name": "Dafny",
+      "summary": "Dafny combines executable programs with specifications and a static verifier, checking properties expressed through contracts, invariants and mathematical reasoning.",
+      "uses": ["Verified application algorithms", "Teaching program proofs"],
+      "links": [
+        {
+          "label": "Dafny language project",
+          "url": "https://dafny.org/"
+        },
+        {
+          "label": "Dafny verifier and compiler release",
+          "url": "https://github.com/dafny-lang/dafny/releases/tag/v4.11.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Dafny verifier and compiler published v4.11.0 on 2025-08-25.",
+      "lifecycleSource": "https://github.com/dafny-lang/dafny/releases/tag/v4.11.0"
+    },
+    {
+      "name": "Dart",
+      "summary": "Dart is a type-safe language that powers Flutter and supports web and native compilation. Its language and runtimes focus on client applications across mobile, desktop and browser targets.",
+      "uses": ["Flutter applications", "Web and mobile clients"],
+      "links": [
+        {
+          "label": "Dart: language and runtime overview",
+          "url": "https://dart.dev/overview"
+        },
+        {
+          "label": "Dart release history",
+          "url": "https://dart.dev/resources/whats-new"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Dart team documents the 3.13 SDK release on 12 August 2026.",
+      "lifecycleSource": "https://dart.dev/resources/whats-new"
+    },
+    {
+      "name": "Dhall",
+      "summary": "Dhall is a typed configuration language with functions and imports that evaluates to ordinary configuration data while restricting arbitrary side effects.",
+      "uses": [
+        "Reusable typed configuration",
+        "Generating JSON and other configuration"
+      ],
+      "links": [
+        {
+          "label": "Dhall language project",
+          "url": "https://dhall-lang.org/"
+        },
+        {
+          "label": "Dhall Haskell implementation release",
+          "url": "https://github.com/dhall-lang/dhall-haskell/releases/tag/1.42.2"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Dhall Haskell implementation published 1.42.2 on 2025-01-19.",
+      "lifecycleSource": "https://github.com/dhall-lang/dhall-haskell/releases/tag/1.42.2"
+    },
+    {
+      "name": "Dylan",
+      "summary": "Dylan is an object-functional language descended from Scheme and CLOS, using non-Lisp syntax and a programming model supporting native machine-code generation.",
+      "uses": [
+        "Object-functional applications",
+        "Native interactive development"
+      ],
+      "links": [
+        {
+          "label": "Open Dylan introduction",
+          "url": "https://opendylan.org/"
+        },
+        {
+          "label": "Open Dylan release",
+          "url": "https://github.com/dylan-lang/opendylan/releases/tag/v2026.2.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Open Dylan published v2026.2.0 on 2026-07-10.",
+      "lifecycleSource": "https://github.com/dylan-lang/opendylan/releases/tag/v2026.2.0"
+    },
+    {
+      "name": "Eiffel",
+      "summary": "Eiffel is an object-oriented language and development approach centered on classes, inheritance and Design by Contract for specifying software obligations.",
+      "uses": [
+        "Object-oriented application development",
+        "Contract-based software design"
+      ],
+      "links": [
+        {
+          "label": "Eiffel language documentation",
+          "url": "https://www.eiffel.com/resources/faqs/eiffel-language/"
+        }
+      ],
+      "introduced": 1986,
+      "introducedSource": "https://www.eiffel.com/resources/faqs/eiffel-language/",
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Elixir",
+      "summary": "Elixir builds on Erlang's runtime with immutable data, lightweight processes and message passing. Its ecosystem includes real-time web applications, distributed services and embedded projects.",
+      "uses": ["Real-time web applications", "Message-oriented services"],
+      "links": [
+        {
+          "label": "Elixir overview and use areas",
+          "url": "https://elixir-lang.org/"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://github.com/elixir-lang/elixir/releases/tag/v1.20.4"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Elixir implementation published version 1.20.4 on 28 August 2026.",
+      "lifecycleSource": "https://github.com/elixir-lang/elixir/releases/tag/v1.20.4"
+    },
+    {
+      "name": "Elm",
+      "summary": "Elm is a statically typed functional language that compiles to JavaScript, using a model, messages and update functions to construct browser user interfaces.",
+      "uses": ["Browser user interfaces", "Single-page web applications"],
+      "links": [
+        {
+          "label": "Introduction to Elm",
+          "url": "https://guide.elm-lang.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Emacs Lisp",
+      "summary": "Emacs Lisp is the Lisp dialect embedded in GNU Emacs, providing language constructs and editor-specific operations for customization and extension packages.",
+      "uses": ["Emacs editor extensions", "Text-editing automation"],
+      "links": [
+        {
+          "label": "GNU Emacs project",
+          "url": "https://www.gnu.org/software/emacs/emacs.html"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Erlang",
+      "summary": "Erlang is a functional language with lightweight processes, messaging and distributed runtime support. OTP adds libraries and design patterns for fault-tolerant networked systems.",
+      "uses": ["Telecommunications services", "Distributed applications"],
+      "links": [
+        {
+          "label": "Erlang and OTP",
+          "url": "https://www.erlang.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Erlang/OTP team announced the 29.1 maintenance release on 16 September 2026.",
+      "lifecycleSource": "https://www.erlang.org/"
+    },
+    {
+      "name": "F#",
+      "summary": "F# is a .NET language combining functional, object-oriented and imperative programming, with pattern matching, type inference and access to .NET libraries.",
+      "uses": [
+        "Typed functional .NET applications",
+        "Data-processing and web services"
+      ],
+      "links": [
+        {
+          "label": "Microsoft F# language reference",
+          "url": "https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/"
+        },
+        {
+          "label": "Microsoft .NET F# implementation release",
+          "url": "https://github.com/dotnet/fsharp/releases/tag/v13.9.201"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Microsoft .NET F# implementation published v13.9.201 on 2025-02-11.",
+      "lifecycleSource": "https://github.com/dotnet/fsharp/releases/tag/v13.9.201"
+    },
+    {
+      "name": "F*",
+      "summary": "F* is a proof-oriented functional language with dependent and refinement types; verified code can be extracted through its toolchains to other implementation languages.",
+      "uses": [
+        "Verified cryptographic code",
+        "Programs with formal specifications"
+      ],
+      "links": [
+        {
+          "label": "F* language project",
+          "url": "https://fstar-lang.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The F* project explicitly reports active development by Microsoft Research, Inria and its community.",
+      "lifecycleSource": "https://fstar-lang.org/"
+    },
+    {
+      "name": "Factor",
+      "summary": "Factor is a stack-based, concatenative language with an interactive development environment, where composing words builds programs from operations on the data stack.",
+      "uses": [
+        "Interactive application development",
+        "Concatenative programming"
+      ],
+      "links": [
+        {
+          "label": "Factor language project",
+          "url": "https://factorcode.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Factor implementation lists development builds dated October 2026.",
+      "lifecycleSource": "https://factorcode.org/"
+    },
+    {
+      "name": "Fantom",
+      "summary": "Fantom runs on the JVM and in browsers, combining Java-like syntax with static and dynamic typing, closures, immutability and actor-style concurrency.",
+      "uses": [
+        "Portable JVM applications",
+        "Browser-targeted application code"
+      ],
+      "links": [
+        {
+          "label": "Fantom language project",
+          "url": "https://fantom.org/"
+        },
+        {
+          "label": "Fantom distribution release",
+          "url": "https://github.com/fantom-lang/fantom/releases/tag/v1.0.83"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Fantom distribution published v1.0.83 on 2026-03-12.",
+      "lifecycleSource": "https://github.com/fantom-lang/fantom/releases/tag/v1.0.83"
+    },
+    {
+      "name": "Faust",
+      "summary": "Faust is a functional language for digital signal processing that describes audio computations and compiles them for a variety of audio applications and platforms.",
+      "uses": ["Audio effects", "Sound synthesis"],
+      "links": [
+        {
+          "label": "Faust language project",
+          "url": "https://faust.grame.fr/"
+        },
+        {
+          "label": "Faust compiler release",
+          "url": "https://github.com/grame-cncm/faust/releases/tag/2.88.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Faust compiler published 2.88.0 on 2026-09-09.",
+      "lifecycleSource": "https://github.com/grame-cncm/faust/releases/tag/2.88.0"
+    },
+    {
+      "name": "Fennel",
+      "summary": "Fennel brings Lisp-style syntax and macros to Lua, compiling to Lua code that can use Lua libraries and existing Lua application runtimes.",
+      "uses": ["Lua application scripting", "Lisp macros for Lua projects"],
+      "links": [
+        {
+          "label": "Fennel official tutorial",
+          "url": "https://github.com/bakpakin/Fennel/blob/main/tutorial.md"
+        },
+        {
+          "label": "Fennel macro guide",
+          "url": "https://github.com/bakpakin/Fennel/blob/main/macros.md"
+        },
+        {
+          "label": "Fennel distribution documentation",
+          "url": "https://wiki.fennel-lang.org/Distribution"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Flix",
+      "summary": "Flix combines typed functional programming with effect tracking, pattern matching and structured concurrency, supported by a whole-program optimizing compiler.",
+      "uses": ["Effect-checked applications", "Programming-language research"],
+      "links": [
+        {
+          "label": "Flix language project",
+          "url": "https://flix.dev/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Flix project explicitly describes its compiler as actively developed and maintained.",
+      "lifecycleSource": "https://flix.dev/"
+    },
+    {
+      "name": "Forth",
+      "summary": "Forth is a stack-based language and interactive programming environment whose extensible vocabulary of words supports application and low-level development.",
+      "uses": [
+        "Embedded control software",
+        "Interactive low-level programming"
+      ],
+      "links": [
+        {
+          "label": "FORTH Inc. language introduction",
+          "url": "https://www.forth.com/forth/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Fortran",
+      "summary": "Fortran is a statically typed language designed for numerical work, with array operations and language support for parallel computation in scientific programs.",
+      "uses": ["Scientific numerical computing", "Engineering simulation"],
+      "links": [
+        {
+          "label": "Fortran language community",
+          "url": "https://fortran-lang.org/"
+        },
+        {
+          "label": "IBM Fortran history",
+          "url": "https://www.ibm.com/history/fortran"
+        },
+        {
+          "label": "GCC supported compiler releases",
+          "url": "https://gcc.gnu.org/"
+        }
+      ],
+      "introduced": 1957,
+      "introducedSource": "https://www.ibm.com/history/fortran",
+      "lifecycle": "maintained",
+      "lifecycleNote": "GCC ships a Fortran front end; its supported 16.2 compiler release was published on 7 August 2026.",
+      "lifecycleSource": "https://gcc.gnu.org/"
+    },
+    {
+      "name": "FreeBASIC",
+      "summary": "FreeBASIC compiles BASIC programs for Windows, DOS and Linux; its QB mode supports many QuickBASIC programs, while its default mode offers a different language dialect.",
+      "uses": ["Native BASIC applications", "Porting QuickBASIC programs"],
+      "links": [
+        {
+          "label": "FreeBASIC project",
+          "url": "https://www.freebasic.net/"
+        },
+        {
+          "label": "FreeBASIC project chronology",
+          "url": "https://www.freebasic.net/wiki/CompilerHistory"
+        }
+      ],
+      "introduced": 2004,
+      "introducedSource": "https://www.freebasic.net/wiki/CompilerHistory",
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Frege",
+      "summary": "Frege brings a Haskell-style, purely functional language to the JVM, allowing functional programs to run on the Java platform and interoperate with Java code.",
+      "uses": ["Functional JVM applications", "Java platform integration"],
+      "links": [
+        {
+          "label": "Frege official repository",
+          "url": "https://github.com/Frege/frege"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Futhark",
+      "summary": "Futhark is a purely functional, data-parallel array language whose compiler transforms high-level array computations into code for parallel execution.",
+      "uses": [
+        "Parallel array algorithms",
+        "GPU-oriented numerical computations"
+      ],
+      "links": [
+        {
+          "label": "Futhark language project",
+          "url": "https://futhark-lang.org/"
+        },
+        {
+          "label": "Futhark compiler release",
+          "url": "https://github.com/diku-dk/futhark/releases/tag/v0.28.1"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Futhark compiler published v0.28.1 on 2026-10-11.",
+      "lifecycleSource": "https://github.com/diku-dk/futhark/releases/tag/v0.28.1"
+    },
+    {
+      "name": "GAMS",
+      "summary": "GAMS describes mathematical optimization problems using sets, parameters, variables and equations, then connects the resulting models to selected solvers.",
+      "uses": [
+        "Mathematical optimization models",
+        "Operations-research decision support"
+      ],
+      "links": [
+        {
+          "label": "GAMS language overview",
+          "url": "https://www.gams.com/products/gams-language/"
+        },
+        {
+          "label": "GAMS release documentation",
+          "url": "https://www.gams.com/latest/docs/"
+        },
+        {
+          "label": "GAMS implementation history",
+          "url": "https://www.gams.com/blog/2025/06/gams-under-the-hood-the-delphi-to-c-transition/"
+        }
+      ],
+      "introduced": 1976,
+      "introducedSource": "https://www.gams.com/blog/2025/06/gams-under-the-hood-the-delphi-to-c-transition/",
+      "lifecycle": "maintained",
+      "lifecycleNote": "GAMS lists the September 2026 54.5.0 release in its documentation center.",
+      "lifecycleSource": "https://www.gams.com/latest/docs/"
+    },
+    {
+      "name": "GAP",
+      "summary": "GAP provides a programming language and libraries for computational discrete algebra, with a particular focus on group-theoretic computations.",
+      "uses": ["Computational group theory", "Discrete algebra research"],
+      "links": [
+        {
+          "label": "GAP official repository",
+          "url": "https://github.com/gap-system/gap"
+        },
+        {
+          "label": "GAP system release",
+          "url": "https://github.com/gap-system/gap/releases/tag/v4.16.1"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "GAP system published v4.16.1 on 2026-08-23.",
+      "lifecycleSource": "https://github.com/gap-system/gap/releases/tag/v4.16.1"
+    },
+    {
+      "name": "GDScript",
+      "summary": "GDScript is an indentation-based, gradually typed language built specifically for Godot, integrating object-oriented scripts with the engine's game objects and tools.",
+      "uses": ["Godot game behavior", "Godot content and tool scripts"],
+      "links": [
+        {
+          "label": "Godot GDScript reference",
+          "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "GLSL",
+      "summary": "GLSL is OpenGL's shading language for programmable graphics stages, expressing operations that run as shaders rather than ordinary CPU application code.",
+      "uses": ["OpenGL graphics shaders", "GPU rendering effects"],
+      "links": [
+        {
+          "label": "Khronos OpenGL documentation",
+          "url": "https://www.khronos.org/opengl/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Gherkin",
+      "summary": "Gherkin describes behavior examples as structured scenarios with Given, When and Then steps; Cucumber connects those steps to executable test definitions.",
+      "uses": [
+        "Executable acceptance specifications",
+        "Behavior-driven test scenarios"
+      ],
+      "links": [
+        {
+          "label": "Cucumber Gherkin reference",
+          "url": "https://cucumber.io/docs/gherkin/reference/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Gleam",
+      "summary": "Gleam is a typed functional language that runs on the Erlang virtual machine and also compiles to JavaScript, interoperating with Erlang and Elixir packages.",
+      "uses": [
+        "Concurrent BEAM services",
+        "JavaScript-targeted application code"
+      ],
+      "links": [
+        {
+          "label": "Gleam language project",
+          "url": "https://gleam.run/"
+        },
+        {
+          "label": "Gleam compiler release",
+          "url": "https://github.com/gleam-lang/gleam/releases/tag/v1.19.1"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Gleam compiler published v1.19.1 on 2026-10-07.",
+      "lifecycleSource": "https://github.com/gleam-lang/gleam/releases/tag/v1.19.1"
+    },
+    {
+      "name": "Gnuplot",
+      "summary": "Gnuplot scripts describe plots of functions and data using commands such as plot and splot, producing two-dimensional charts and three-dimensional views.",
+      "uses": ["Scientific data plotting", "Scripted chart generation"],
+      "links": [
+        {
+          "label": "Gnuplot project and release history",
+          "url": "https://www.gnuplot.info/"
+        }
+      ],
+      "introduced": 1986,
+      "introducedSource": "https://www.gnuplot.info/",
+      "lifecycle": "maintained",
+      "lifecycleNote": "The gnuplot implementation lists version 6.0.5 released in July 2026.",
+      "lifecycleSource": "https://www.gnuplot.info/"
+    },
+    {
+      "name": "Go",
+      "summary": "Go is a statically typed language that compiles to machine code and includes garbage collection, goroutines and channels, with standard libraries for networking and application tooling.",
+      "uses": ["Network services", "Command-line tools"],
+      "links": [
+        {
+          "label": "Go documentation",
+          "url": "https://go.dev/doc/"
+        },
+        {
+          "label": "Go release history",
+          "url": "https://go.dev/doc/devel/release"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Go project reports Go 1.27.2, including security and runtime fixes, on 8 October 2026.",
+      "lifecycleSource": "https://go.dev/doc/devel/release"
+    },
+    {
+      "name": "Gosu",
+      "summary": "Gosu is a typed JVM language with Java interoperability, an open type system, extension methods, structural typing and script-style program files.",
+      "uses": ["JVM application code", "Java-integrated scripts"],
+      "links": [
+        {
+          "label": "Gosu language project",
+          "url": "https://gosu-lang.github.io/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Groovy",
+      "summary": "Groovy is a Java-like JVM language supporting static and dynamic typing, closures and metaprogramming, with direct interoperability with Java libraries.",
+      "uses": [
+        "Build and automation scripts",
+        "JVM applications and domain-specific languages"
+      ],
+      "links": [
+        {
+          "label": "Apache Groovy project",
+          "url": "https://groovy-lang.org/"
+        },
+        {
+          "label": "Apache Groovy release chronology",
+          "url": "https://www.groovy-lang.org/changelogs.html"
+        }
+      ],
+      "introduced": 2003,
+      "introducedSource": "https://www.groovy-lang.org/changelogs.html",
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "HCL",
+      "summary": "HashiCorp Configuration Language provides blocks, attributes and expressions for structured configuration; tools such as Terraform define their own semantics on top.",
+      "uses": [
+        "Terraform infrastructure configuration",
+        "HashiCorp tool configuration"
+      ],
+      "links": [
+        {
+          "label": "HashiCorp configuration syntax",
+          "url": "https://developer.hashicorp.com/terraform/language/syntax/configuration"
+        },
+        {
+          "label": "HashiCorp HCL implementation release",
+          "url": "https://github.com/hashicorp/hcl/releases/tag/v2.25.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "HashiCorp HCL implementation published v2.25.0 on 2026-09-15.",
+      "lifecycleSource": "https://github.com/hashicorp/hcl/releases/tag/v2.25.0"
+    },
+    {
+      "name": "HLSL",
+      "summary": "HLSL is a C-like shader language for DirectX, used to write graphics pipeline stages and compute shaders executed by programmable GPU hardware.",
+      "uses": ["Direct3D rendering shaders", "GPU compute shaders"],
+      "links": [
+        {
+          "label": "Microsoft HLSL overview",
+          "url": "https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl"
+        },
+        {
+          "label": "Microsoft DirectX Shader Compiler release",
+          "url": "https://github.com/microsoft/DirectXShaderCompiler/releases/tag/v1.9.2609"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Microsoft DirectX Shader Compiler published v1.9.2609 on 2026-09-29.",
+      "lifecycleSource": "https://github.com/microsoft/DirectXShaderCompiler/releases/tag/v1.9.2609"
+    },
+    {
+      "name": "Hack",
+      "summary": "Hack is an object-oriented language built for the HHVM runtime, using static type checking, generics and asynchronous operations for web applications.",
+      "uses": ["HHVM web applications", "Typed asynchronous server logic"],
+      "links": [
+        {
+          "label": "Hack language project",
+          "url": "https://hacklang.org/"
+        }
+      ],
+      "introduced": 2014,
+      "introducedSource": "https://hacklang.org/",
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Hack project explicitly states that Hack and HHVM are in active development with frequent releases.",
+      "lifecycleSource": "https://hacklang.org/"
+    },
+    {
+      "name": "Hare",
+      "summary": "Hare is a statically typed systems language with manual memory management and a minimal runtime, intended for system tools and other low-level software.",
+      "uses": [
+        "System tools and compilers",
+        "Operating-system and networking code"
+      ],
+      "links": [
+        {
+          "label": "Hare language project",
+          "url": "https://harelang.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Hare toolchain lists version 0.26.0 released in February 2026.",
+      "lifecycleSource": "https://harelang.org/"
+    },
+    {
+      "name": "Haskell",
+      "summary": "Haskell is a purely functional language with lazy evaluation, immutable values and a strong type system, using functions and algebraic data types to model programs.",
+      "uses": [
+        "Typed functional applications",
+        "Domain modeling and language research"
+      ],
+      "links": [
+        {
+          "label": "Haskell language project",
+          "url": "https://www.haskell.org/"
+        },
+        {
+          "label": "Haskell designers' language history",
+          "url": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/07/history.pdf"
+        }
+      ],
+      "introduced": 1990,
+      "introducedSource": "https://www.microsoft.com/en-us/research/wp-content/uploads/2016/07/history.pdf",
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Haxe",
+      "summary": "Haxe is a strictly typed language with a cross-compiler targeting platforms such as JavaScript, C++, JVM and Lua, supporting shared code across application targets.",
+      "uses": [
+        "Cross-platform games",
+        "Multi-target web and desktop applications"
+      ],
+      "links": [
+        {
+          "label": "Haxe language project",
+          "url": "https://haxe.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Haxe compiler lists version 4.3.7 released in May 2025 and a 5.0 preview from July 2025.",
+      "lifecycleSource": "https://haxe.org/"
+    },
+    {
+      "name": "Hy",
+      "summary": "Hy is a Lisp dialect embedded in Python, providing alternative syntax and Lisp features while retaining direct access to Python built-ins and third-party libraries.",
+      "uses": ["Lisp-style Python applications", "Python library integration"],
+      "links": [
+        {
+          "label": "Hy language project",
+          "url": "https://hylang.org/"
+        },
+        {
+          "label": "Hy implementation release",
+          "url": "https://github.com/hylang/hy/releases/tag/1.3.1"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Hy implementation published 1.3.1 on 2026-07-31.",
+      "lifecycleSource": "https://github.com/hylang/hy/releases/tag/1.3.1"
+    },
+    {
+      "name": "Idris",
+      "summary": "Idris supports type-driven development with first-class types, allowing types to express relationships between values and to guide construction of programs and proofs.",
+      "uses": [
+        "Dependently typed programs",
+        "Type-driven program construction"
+      ],
+      "links": [
+        {
+          "label": "Idris language project",
+          "url": "https://idris-lang.org/"
+        },
+        {
+          "label": "Idris 2 release",
+          "url": "https://github.com/idris-lang/Idris2/releases/tag/v0.8.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Idris 2 published v0.8.0 on 2025-10-31.",
+      "lifecycleSource": "https://github.com/idris-lang/Idris2/releases/tag/v0.8.0"
+    },
+    {
+      "name": "Imba",
+      "summary": "Imba compiles to JavaScript and integrates DOM tags and styling into its syntax for building browser interfaces and Node.js applications.",
+      "uses": ["Web interfaces", "Node.js applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://imba.io/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Inform 7",
+      "summary": "Inform 7 describes interactive-fiction worlds and rules using natural-language-style source text, supporting stories, narrative prototypes and teaching.",
+      "uses": ["Interactive fiction", "Narrative prototyping"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://ganelson.github.io/inform-website/"
+        }
+      ],
+      "introduced": 2006,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": "https://ganelson.github.io/inform-website/"
+    },
+    {
+      "name": "Io",
+      "summary": "Io is a prototype-based dynamic language in which expressions are messages and objects are cloned; its VM can be embedded in WebAssembly hosts.",
+      "uses": ["Embedded scripting", "Browser scripting"],
+      "links": [
+        {
+          "label": "Documented language history",
+          "url": "https://iolanguage.org/Timeline/index.html"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://iolanguage.org/Release%20Notes/index.html"
+        }
+      ],
+      "introduced": 2002,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Io project documents its VM and WASM/WASI implementation update dated 2026-04-20.",
+      "lifecycleSource": "https://iolanguage.org/Release%20Notes/index.html",
+      "introducedSource": "https://iolanguage.org/Timeline/index.html"
+    },
+    {
+      "name": "J",
+      "summary": "J is an array-oriented general-purpose language whose operations work on whole arrays, with an interactive environment for mathematical and data-oriented programs.",
+      "uses": ["Array computation", "Data exploration"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.jsoftware.com/help/user/overview.htm"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/jsoftware/jsource/releases/tag/build96"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "J compiler implementation released build96 on 2025-03-06.",
+      "lifecycleSource": "https://github.com/jsoftware/jsource/releases/tag/build96",
+      "introducedSource": null
+    },
+    {
+      "name": "JSONiq",
+      "summary": "JSONiq is a query language for selecting, aggregating and transforming JSON data, with implementations such as RumbleDB for local and distributed processing.",
+      "uses": ["JSON transformation", "Data queries"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.jsoniq.org/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The language's official site identifies RumbleDB as its fully supported recommended implementation.",
+      "lifecycleSource": "https://www.jsoniq.org/",
+      "introducedSource": null
+    },
+    {
+      "name": "Jai",
+      "summary": "Jai is Jonathan Blow's programming-language project for game development, with compiler design and language features demonstrated in the creator's presentations.",
+      "uses": ["Game programming", "Compiler development"],
+      "links": [
+        {
+          "label": "Creator's language presentation",
+          "url": "https://www.youtube.com/watch?v=TH9VCN6UkyQ"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Janet",
+      "summary": "Janet combines functional and imperative programming in an embeddable runtime, with closures, macros and facilities for system scripting.",
+      "uses": ["System scripting", "Application embedding"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://janet-lang.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/janet-lang/janet/releases/tag/v1.42.1"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Janet implementation released v1.42.1 on 2026-09-11.",
+      "lifecycleSource": "https://github.com/janet-lang/janet/releases/tag/v1.42.1",
+      "introducedSource": null
+    },
+    {
+      "name": "Java",
+      "summary": "Java is a statically typed, object-oriented language supported by the Java virtual machine and extensive standard APIs, including collections, concurrency and networked application facilities.",
+      "uses": ["JVM applications", "Server-side services"],
+      "links": [
+        {
+          "label": "Oracle: learn Java",
+          "url": "https://dev.java/learn/"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://openjdk.org/projects/jdk/27/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "OpenJDK's JDK 27 reference implementation reached general availability on 15 September 2026.",
+      "lifecycleSource": "https://openjdk.org/projects/jdk/27/"
+    },
+    {
+      "name": "JavaScript",
+      "summary": "JavaScript is a dynamically typed language with prototype-based objects and first-class functions. Browsers expose DOM APIs, while runtimes such as Node.js provide server and file-system facilities.",
+      "uses": ["Interactive webpages", "Server-side applications"],
+      "links": [
+        {
+          "label": "MDN: JavaScript introduction",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction"
+        },
+        {
+          "label": "Node.js release support",
+          "url": "https://nodejs.org/en/about/previous-releases"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Node.js reports current v26 releases and supported v24/v22 LTS branches, with updates in September and October 2026.",
+      "lifecycleSource": "https://nodejs.org/en/about/previous-releases"
+    },
+    {
+      "name": "Jolie",
+      "summary": "Jolie models services, message interfaces and orchestration workflows directly in the language, with communication that can use different network protocols.",
+      "uses": ["Microservices", "Service orchestration"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.jolie-lang.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/jolie/jolie/releases/tag/v1.12.8"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Jolie implementation released v1.12.8 on 2026-03-01.",
+      "lifecycleSource": "https://github.com/jolie/jolie/releases/tag/v1.12.8",
+      "introducedSource": null
+    },
+    {
+      "name": "Jsonnet",
+      "summary": "Jsonnet extends JSON with functions, variables and object composition, producing configuration data without side effects rather than executing deployment actions.",
+      "uses": ["Configuration generation", "Kubernetes configuration"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://jsonnet.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/google/jsonnet/releases/tag/v0.22.0"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Jsonnet implementation released v0.22.0 on 2026-03-24.",
+      "lifecycleSource": "https://github.com/google/jsonnet/releases/tag/v0.22.0",
+      "introducedSource": null
+    },
+    {
+      "name": "Julia",
+      "summary": "Julia is a dynamically typed language built around multiple dispatch and native-code compilation, with interactive tooling and libraries for numerical, scientific and general application work.",
+      "uses": ["Scientific computing", "Numerical data analysis"],
+      "links": [
+        {
+          "label": "Julia language overview",
+          "url": "https://julialang.org/"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://github.com/JuliaLang/julia/releases/tag/v1.13.1"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Julia implementation published version 1.13.1 on 26 September 2026.",
+      "lifecycleSource": "https://github.com/JuliaLang/julia/releases/tag/v1.13.1"
+    },
+    {
+      "name": "KCL",
+      "summary": "KCL is a schema-based configuration language for defining data structures, validating configuration and generating infrastructure configuration from reusable models.",
+      "uses": ["Configuration validation", "Infrastructure configuration"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.kcl-lang.io/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/kcl-lang/kcl/releases/tag/v0.13.1"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "KCL implementation released v0.13.1 on 2026-10-07.",
+      "lifecycleSource": "https://github.com/kcl-lang/kcl/releases/tag/v0.13.1",
+      "introducedSource": null
+    },
+    {
+      "name": "Koka",
+      "summary": "Koka is a statically typed functional language whose effect types and handlers describe operations such as state, exceptions and asynchronous computations.",
+      "uses": ["Effect-handler research", "Functional programming"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://koka-lang.github.io/koka/doc/index.html"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "experimental",
+      "lifecycleNote": "The Koka project explicitly describes v3 as a research language under development and not ready for production use.",
+      "lifecycleSource": "https://koka-lang.github.io/koka/doc/index.html",
+      "introducedSource": null
+    },
+    {
+      "name": "Kotlin",
+      "summary": "Kotlin is a programming language with Java interoperability and multiplatform tooling, used for Android applications, server software and shared application code.",
+      "uses": ["Android applications", "Multiplatform applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://kotlinlang.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/JetBrains/kotlin/releases/tag/v2.4.21"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Kotlin implementation released v2.4.21 on 2026-10-08.",
+      "lifecycleSource": "https://github.com/JetBrains/kotlin/releases/tag/v2.4.21",
+      "introducedSource": null
+    },
+    {
+      "name": "LabVIEW",
+      "summary": "LabVIEW programs use the graphical G language and dataflow diagrams to acquire measurements, control instruments and build automated test systems.",
+      "uses": ["Instrument control", "Automated testing"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.ni.com/en/shop/labview.html"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://www.ni.com/en/support/documentation/release-notes/product.labview.html"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "NI's release-notes index lists LabVIEW 2026 Q3 and 2026 Q1 product releases.",
+      "lifecycleSource": "https://www.ni.com/en/support/documentation/release-notes/product.labview.html",
+      "introducedSource": null
+    },
+    {
+      "name": "Lean",
+      "summary": "Lean combines an interactive theorem prover with a dependently typed programming language; its current Lean 4 implementation supports proofs and executable programs.",
+      "uses": ["Mathematical proofs", "Program verification"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://lean-lang.org/learn/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/leanprover/lean4/releases/tag/v4.34.1"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Lean 4 implementation released v4.34.1 on 2026-09-24.",
+      "lifecycleSource": "https://github.com/leanprover/lean4/releases/tag/v4.34.1",
+      "introducedSource": null
+    },
+    {
+      "name": "Lean 4",
+      "summary": "Lean 4 reimplements the Lean theorem prover in Lean, combining extensible proof automation with a functional language and native-code compilation.",
+      "uses": ["Proof automation", "Functional programming"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://lean-lang.org/learn/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/leanprover/lean4/releases/tag/v4.34.1"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Lean 4 implementation released v4.34.1 on 2026-09-24.",
+      "lifecycleSource": "https://github.com/leanprover/lean4/releases/tag/v4.34.1",
+      "introducedSource": null
+    },
+    {
+      "name": "LilyPond",
+      "summary": "LilyPond turns a text-based music notation language into engraved scores, supporting orchestral parts, tablature and other structured notation.",
+      "uses": ["Music engraving", "Score generation"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://lilypond.org/text-input.html"
+        },
+        {
+          "label": "Project release information",
+          "url": "https://lilypond.org/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The LilyPond project announced stable 2.26.0 on 2026-04-21 and development 2.27.3 on 2026-09-10.",
+      "lifecycleSource": "https://lilypond.org/",
+      "introducedSource": null
+    },
+    {
+      "name": "LiveScript",
+      "summary": "LiveScript compiles to JavaScript and adds features such as pattern matching, comprehensions and concise functions for functional and imperative programming.",
+      "uses": ["JavaScript applications", "Functional scripting"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://livescript.net/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Logtalk",
+      "summary": "Logtalk extends Prolog with objects, protocols and reusable categories, organising declarative logic programs while using Prolog implementations as backends.",
+      "uses": ["Logic applications", "Reusable Prolog components"],
+      "links": [
+        {
+          "label": "Documented language history",
+          "url": "https://logtalk.org/manuals/userman/features.html"
+        },
+        {
+          "label": "Project release information",
+          "url": "https://logtalk.org/releasenotes.html"
+        }
+      ],
+      "introduced": 1995,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Logtalk project published release 3.102.0 on 2026-09-14.",
+      "lifecycleSource": "https://logtalk.org/releasenotes.html",
+      "introducedSource": "https://logtalk.org/manuals/userman/features.html"
+    },
+    {
+      "name": "Lua",
+      "summary": "Lua is an embeddable, dynamically typed scripting language with table-based data structures and bytecode execution, often used to configure or extend a host application.",
+      "uses": [
+        "Embedded application scripting",
+        "Configuration and prototyping"
+      ],
+      "links": [
+        {
+          "label": "Lua: language and implementation",
+          "url": "https://www.lua.org/about.html"
+        },
+        {
+          "label": "Lua authors: language history",
+          "url": "https://www.lua.org/history.html"
+        }
+      ],
+      "introduced": 1993,
+      "introducedSource": "https://www.lua.org/history.html",
+      "lifecycle": "maintained",
+      "lifecycleNote": "PUC-Rio's Lua team explicitly identifies itself as the language's designers, implementers and maintainers; its page was updated in October 2026.",
+      "lifecycleSource": "https://www.lua.org/about.html"
+    },
+    {
+      "name": "Luau",
+      "summary": "Luau extends Lua-style scripting with gradual types and an embeddable runtime, supporting host-controlled application scripting and Roblox development.",
+      "uses": ["Embedded scripting", "Roblox applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://luau.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/luau-lang/luau/releases/tag/0.742"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Luau implementation released 0.742 on 2026-10-10.",
+      "lifecycleSource": "https://github.com/luau-lang/luau/releases/tag/0.742",
+      "introducedSource": null
+    },
+    {
+      "name": "MATLAB",
+      "summary": "MATLAB is a language and numeric computing environment for developing algorithms, analysing data and visualising results in engineering and science.",
+      "uses": ["Numerical analysis", "Engineering algorithms"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.mathworks.com/products/matlab.html"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://blogs.mathworks.com/matlab/?p=4376%2F%3Ffrom%3Djp"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "MathWorks announced MATLAB R2026b released on 2026-09-23.",
+      "lifecycleSource": "https://blogs.mathworks.com/matlab/?p=4376%2F%3Ffrom%3Djp",
+      "introducedSource": null
+    },
+    {
+      "name": "MQL4",
+      "summary": "MQL4 is MetaTrader 4's language for Expert Advisors, scripts and custom indicators, giving programs access to market quotes and trading-order operations.",
+      "uses": ["Trading automation", "Custom indicators"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://docs.mql4.com/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "MQL5",
+      "summary": "MQL5 is MetaTrader 5's C++-style language for trading robots, technical indicators and utility programs that interact with the trading platform.",
+      "uses": ["Trading robots", "Technical indicators"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.mql5.com/en/docs"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Mercury",
+      "summary": "Mercury combines logic and functional programming with static types, modes and determinism checking to build modular declarative applications.",
+      "uses": ["Logic programming", "Declarative applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://mercurylang.org/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Mercury project announced compiler release 22.01.9 on 2026-08-30.",
+      "lifecycleSource": "https://mercurylang.org/",
+      "introducedSource": null
+    },
+    {
+      "name": "Metal",
+      "summary": "Metal's shading language defines GPU graphics and compute functions for Apple's Metal API, covering rendering shaders and parallel computation on Apple platforms.",
+      "uses": ["GPU shaders", "GPU compute"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://developer.apple.com/metal/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "MiniZinc",
+      "summary": "MiniZinc is a high-level constraint modelling language for expressing discrete optimisation problems independently of the particular solver used to solve them.",
+      "uses": ["Scheduling", "Constraint optimisation"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.minizinc.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/MiniZinc/libminizinc/releases/tag/2.10.1"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "MiniZinc implementation released 2.10.1 on 2026-08-31.",
+      "lifecycleSource": "https://github.com/MiniZinc/libminizinc/releases/tag/2.10.1",
+      "introducedSource": null
+    },
+    {
+      "name": "Modelica",
+      "summary": "Modelica describes physical systems with mathematical equations and reusable connected components, supporting simulations of mechanical, electrical and other systems.",
+      "uses": ["Physical-system modelling", "Engineering simulation"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://modelica.org/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Modula-2",
+      "summary": "Modula-2 separates interfaces from implementation in modules and includes facilities for systems programming; GNU Modula-2 supports PIM and ISO dialects.",
+      "uses": ["Modular applications", "Systems programming"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://gcc.gnu.org/onlinedocs/gm2/Compiler-options.html"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Modula-3",
+      "summary": "Modula-3 is a modular systems language with objects, exceptions, threads and garbage collection, implemented by the Critical Mass Modula-3 toolchain.",
+      "uses": ["Systems programming", "Modular applications"],
+      "links": [
+        {
+          "label": "Language overview",
+          "url": "https://www.modula3.org/about_m3/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/modula3/cm3/releases/tag/d5.12.0"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Critical Mass Modula-3 implementation released d5.12.0 on 2026-03-27.",
+      "lifecycleSource": "https://github.com/modula3/cm3/releases/tag/d5.12.0",
+      "introducedSource": null
+    },
+    {
+      "name": "Mojo",
+      "summary": "Mojo is a systems programming language for CPU and GPU code, combining readable syntax with memory management controls and compile-time metaprogramming.",
+      "uses": ["GPU kernels", "Systems programming"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://mojolang.org/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Mojo project lists stable 1.1.0 dated September 17 and a nightly dated October 9 on its current release page.",
+      "lifecycleSource": "https://mojolang.org/",
+      "introducedSource": null
+    },
+    {
+      "name": "MoonBit",
+      "summary": "MoonBit is a statically typed general-purpose language and toolchain with native and WebAssembly targets, algebraic data types and pattern matching.",
+      "uses": ["WebAssembly components", "Native applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://docs.moonbitlang.com/en/latest/language/introduction.html"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://www.moonbitlang.com/updates/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The MoonBit project announced moonc compiler v0.10.14 on 2026-09-21.",
+      "lifecycleSource": "https://www.moonbitlang.com/updates/",
+      "introducedSource": null
+    },
+    {
+      "name": "MoonScript",
+      "summary": "MoonScript is a dynamic language with indentation-based syntax and classes that compiles to Lua, allowing existing Lua libraries and hosts to be reused.",
+      "uses": ["Lua application scripting", "Lua-based tools"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://moonscript.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/leafo/moonscript/releases/tag/v0.7.0"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "MoonScript implementation released v0.7.0 on 2026-07-26.",
+      "lifecycleSource": "https://github.com/leafo/moonscript/releases/tag/v0.7.0",
+      "introducedSource": null
+    },
+    {
+      "name": "Motoko",
+      "summary": "Motoko is a language for Internet Computer canister applications, with actors, asynchronous calls and persistent data integrated into its programming model.",
+      "uses": ["Canister applications", "Actor-based services"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://docs.internetcomputer.org/languages/motoko/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/caffeinelabs/motoko/releases/tag/2.0.0"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Motoko implementation released 2.0.0 on 2026-10-06.",
+      "lifecycleSource": "https://github.com/caffeinelabs/motoko/releases/tag/2.0.0",
+      "introducedSource": null
+    },
+    {
+      "name": "Move",
+      "summary": "Move represents assets as resources with controlled ownership and transfer, providing modules and transaction logic for blockchain applications.",
+      "uses": ["Smart contracts", "Digital-asset logic"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://move-language.github.io/move/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Nemerle",
+      "summary": "Nemerle is a statically typed .NET language combining functional, object-oriented and imperative code with macros for extending compilation and embedding DSLs.",
+      "uses": [".NET applications", "Language metaprogramming"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://github.com/rsdn/nemerle"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Nextflow",
+      "summary": "Nextflow expresses computational workflows as processes connected by dataflow channels, running pipelines across local, cluster and cloud execution environments.",
+      "uses": ["Bioinformatics pipelines", "Computational workflows"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.nextflow.io/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/nextflow-io/nextflow/releases/tag/v26.04.7"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Nextflow implementation released v26.04.7 on 2026-10-08.",
+      "lifecycleSource": "https://github.com/nextflow-io/nextflow/releases/tag/v26.04.7",
+      "introducedSource": null
+    },
+    {
+      "name": "Nim",
+      "summary": "Nim is a statically typed compiled language with indentation-based syntax and compile-time macros. Its back ends produce C, C++ or JavaScript for native and browser applications.",
+      "uses": ["Native applications", "Compile-time code generation"],
+      "links": [
+        {
+          "label": "Nim language overview",
+          "url": "https://nim-lang.org/"
+        },
+        {
+          "label": "Nim release announcements",
+          "url": "https://nim-lang.org/blog.html"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Nim team announced stable compiler version 2.2.12 on 8 September 2026.",
+      "lifecycleSource": "https://nim-lang.org/blog.html"
+    },
+    {
+      "name": "Nix",
+      "summary": "Nix is a lazy functional language for describing packages and configurations, used by the Nix tools to evaluate build recipes and development environments.",
+      "uses": ["Package definitions", "Development environments"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://nix.dev/manual/nix/latest/language/"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null,
+      "introducedSource": null
+    },
+    {
+      "name": "Nushell",
+      "summary": "Nushell is a cross-platform shell language whose pipelines carry structured values and tables, supporting data transformation and system automation.",
+      "uses": ["Shell automation", "Structured-data processing"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.nushell.sh/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/nushell/nushell/releases/tag/0.116.1"
+        }
+      ],
+      "introduced": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Nushell implementation released 0.116.1 on 2026-10-04.",
+      "lifecycleSource": "https://github.com/nushell/nushell/releases/tag/0.116.1",
+      "introducedSource": null
+    },
+    {
+      "name": "OCaml",
+      "summary": "OCaml is a statically typed functional language with pattern matching, modules and garbage collection, offering both native and bytecode compilation for application and language-tool development.",
+      "uses": ["Functional applications", "Language and analysis tools"],
+      "links": [
+        {
+          "label": "OCaml project",
+          "url": "https://ocaml.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The OCaml project reports compiler version 5.5.1 on 5 September 2026 and an available 4.14 LTS series.",
+      "lifecycleSource": "https://ocaml.org/"
+    },
+    {
+      "name": "Oberon",
+      "summary": "Oberon is a compact modular language developed with the Oberon operating system, extending Pascal-style records to support extensible systems and applications.",
+      "uses": ["Operating-system development", "Modular applications"],
+      "links": [
+        {
+          "label": "Creator's language history",
+          "url": "https://people.inf.ethz.ch/wirth/Articles/Modula-Oberon-June.pdf"
+        }
+      ],
+      "introduced": 1986,
+      "introducedSource": "https://people.inf.ethz.ch/wirth/Articles/Modula-Oberon-June.pdf",
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Objective-C",
+      "summary": "Objective-C adds object-oriented messaging to C and is used by existing Cocoa applications. Its APIs and language conventions connect C code to the Objective-C runtime.",
+      "uses": [
+        "Existing Cocoa applications",
+        "C and object-runtime interoperability"
+      ],
+      "links": [
+        {
+          "label": "Apple: Objective-C programming guide",
+          "url": "https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://gcc.gnu.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "GCC lists an Objective-C front end and a supported 16.2 compiler release from 7 August 2026; this does not describe Apple's SDK lifecycle.",
+      "lifecycleSource": "https://gcc.gnu.org/"
+    },
+    {
+      "name": "Objective-J",
+      "summary": "Objective-J extends JavaScript with Objective-C-style classes and message syntax, and is used with Cappuccino to build desktop-style applications in the browser.",
+      "uses": ["Cappuccino applications", "Browser interfaces"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.cappuccino.dev/learn/objective-j.html"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Odin",
+      "summary": "Odin is a compiled general-purpose language focused on systems and data-oriented programming, with explicit memory allocators and support for array operations.",
+      "uses": ["Systems programming", "Data-oriented applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://odin-lang.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/odin-lang/Odin/releases/tag/dev-2026-10"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Odin implementation released dev-2026-10 on 2026-10-06.",
+      "lifecycleSource": "https://github.com/odin-lang/Odin/releases/tag/dev-2026-10"
+    },
+    {
+      "name": "OpenCL",
+      "summary": "OpenCL provides a kernel programming language and APIs for running parallel computations across CPUs, GPUs and other accelerators in heterogeneous systems.",
+      "uses": ["Parallel kernels", "Accelerated computation"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.khronos.org/opencl/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "OpenQASM",
+      "summary": "OpenQASM describes quantum circuits and their classical control flow, acting as an intermediate representation between quantum compilers and hardware.",
+      "uses": ["Quantum circuits", "Quantum compiler interfaces"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://openqasm.com/intro.html"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "OpenSCAD",
+      "summary": "OpenSCAD describes solid 3D objects with scripts and configurable parameters, rendering models from geometric operations rather than interactive drawing.",
+      "uses": ["Parametric CAD", "3D-printing models"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://openscad.org/about.html"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Oz",
+      "summary": "Oz is the language implemented by the Mozart programming system, combining declarative computation, concurrency and constraint-oriented programming.",
+      "uses": ["Concurrent applications", "Constraint programming"],
+      "links": [
+        {
+          "label": "Language tutorial",
+          "url": "https://mozart2.org/mozart-v1/doc-1.4.0/tutorial/node1.html"
+        },
+        {
+          "label": "Official documentation",
+          "url": "https://github.com/mozart/mozart2"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "experimental",
+      "lifecycleNote": "The Mozart 2 implementation's official repository describes it as alpha quality and not ready for production.",
+      "lifecycleSource": "https://github.com/mozart/mozart2"
+    },
+    {
+      "name": "P4",
+      "summary": "P4 describes packet headers, parsing and forwarding actions for programmable network data planes, with compilers that target particular hardware or software switches.",
+      "uses": ["Packet processing", "Programmable switches"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://p4.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/p4lang/p4c/releases/tag/v1.2.5.18"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "p4c implementation released v1.2.5.18 on 2026-10-02.",
+      "lifecycleSource": "https://github.com/p4lang/p4c/releases/tag/v1.2.5.18"
+    },
+    {
+      "name": "PHP",
+      "summary": "PHP executes scripts on the server to generate web responses and also provides a command-line interpreter, with procedural and object-oriented facilities and database extensions.",
+      "uses": ["Server-rendered websites", "Command-line scripts"],
+      "links": [
+        {
+          "label": "PHP introduction and use areas",
+          "url": "https://www.php.net/intro"
+        },
+        {
+          "label": "PHP release announcements",
+          "url": "https://www.php.net/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The PHP team announced supported-branch security releases, including PHP 8.5.11, on 24 September 2026.",
+      "lifecycleSource": "https://www.php.net/"
+    },
+    {
+      "name": "Pascal",
+      "summary": "Pascal is a structured procedural language originating in Niklaus Wirth's work at ETH, with descendants and compilers supporting applications and programming education.",
+      "uses": ["Structured programming", "Native applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.freepascal.org/"
+        },
+        {
+          "label": "Creator's project history",
+          "url": "https://people.inf.ethz.ch/wirth/projects.html"
+        }
+      ],
+      "introduced": 1970,
+      "introducedSource": "https://people.inf.ethz.ch/wirth/projects.html",
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Perl",
+      "summary": "Perl is a general-purpose scripting language with regular expressions, text-processing facilities and a large module ecosystem, used in automation, web applications and database integration.",
+      "uses": ["Text-processing scripts", "Web and database applications"],
+      "links": [
+        {
+          "label": "Perl overview",
+          "url": "https://www.perl.org/about.html"
+        },
+        {
+          "label": "Perl release history: 1.000 on 18 December 1987",
+          "url": "https://perldoc.perl.org/perlhist"
+        }
+      ],
+      "introduced": 1987,
+      "introducedSource": "https://perldoc.perl.org/perlhist",
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "PicoLisp",
+      "summary": "PicoLisp is a data-oriented Lisp system integrating a language, persistent object database and web interface facilities for building applications.",
+      "uses": ["Database applications", "Web applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://picolisp.com/wiki/?home"
+        }
+      ],
+      "introduced": 1988,
+      "introducedSource": "https://picolisp.com/wiki/?home",
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Pony",
+      "summary": "Pony is a compiled actor-model language using reference capabilities to govern object sharing and mutation, with asynchronous actors and native C interoperability.",
+      "uses": ["Concurrent services", "Actor-based applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.ponylang.io/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/ponylang/ponyc/releases/tag/0.75.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "ponyc implementation released 0.75.0 on 2026-10-11.",
+      "lifecycleSource": "https://github.com/ponylang/ponyc/releases/tag/0.75.0"
+    },
+    {
+      "name": "PowerShell",
+      "summary": "PowerShell combines an object-oriented command shell, scripting language and configuration tools. Commands pass structured .NET objects through pipelines for system and cloud automation.",
+      "uses": ["System administration", "Cloud and configuration automation"],
+      "links": [
+        {
+          "label": "Microsoft: PowerShell overview",
+          "url": "https://learn.microsoft.com/en-us/powershell/scripting/overview"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://github.com/PowerShell/PowerShell/releases/tag/v7.6.6"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The PowerShell implementation published version 7.6.6 on 8 September 2026.",
+      "lifecycleSource": "https://github.com/PowerShell/PowerShell/releases/tag/v7.6.6"
+    },
+    {
+      "name": "Processing",
+      "summary": "Processing is a programming language and environment for visual arts, using sketch-style programs to create graphics, animation and interactive projects.",
+      "uses": ["Creative coding", "Interactive graphics"],
+      "links": [
+        {
+          "label": "Documented language history",
+          "url": "https://processing.org/overview/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/processing/processing4/releases/tag/processing-1435-4.5.7"
+        }
+      ],
+      "introduced": 2001,
+      "introducedSource": "https://processing.org/overview/",
+      "lifecycle": "maintained",
+      "lifecycleNote": "Processing implementation released processing-1435-4.5.7 on 2026-09-24.",
+      "lifecycleSource": "https://github.com/processing/processing4/releases/tag/processing-1435-4.5.7"
+    },
+    {
+      "name": "Prolog",
+      "summary": "Prolog expresses relationships as facts and rules and searches for solutions to queries, supporting symbolic reasoning and applications built with logic programming.",
+      "uses": ["Symbolic reasoning", "Rule-based applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.swi-prolog.org/pldoc/man?section=intro"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/SWI-Prolog/swipl-devel/releases/tag/V10.1.17"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "SWI-Prolog implementation released V10.1.17 on 2026-10-04.",
+      "lifecycleSource": "https://github.com/SWI-Prolog/swipl-devel/releases/tag/V10.1.17"
+    },
+    {
+      "name": "Puppet",
+      "summary": "Puppet's declarative language describes desired resource states in manifests, which the Puppet tools compile and apply to configure machines.",
+      "uses": ["System configuration", "Infrastructure management"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://help.puppet.com/core/current/content/puppetcore/puppet_language.htm"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Puppet Core 9.1.0 documentation was published on 2026-10-06 and documents its supported manifest language.",
+      "lifecycleSource": "https://help.puppet.com/core/current/content/puppetcore/puppet_language.htm"
+    },
+    {
+      "name": "PureScript",
+      "summary": "PureScript is a statically typed functional language that compiles to JavaScript, with type inference and an ecosystem for browser and server applications.",
+      "uses": ["Browser applications", "Functional application code"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.purescript.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/purescript/purescript/releases/tag/v0.15.16"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "PureScript implementation released v0.15.16 on 2026-03-15.",
+      "lifecycleSource": "https://github.com/purescript/purescript/releases/tag/v0.15.16"
+    },
+    {
+      "name": "Python",
+      "summary": "Python is a dynamically typed language supporting procedural, object-oriented and functional code. Its standard library and package ecosystem serve automation, web development and scientific applications.",
+      "uses": ["Automation scripts", "Scientific and web applications"],
+      "links": [
+        {
+          "label": "Python overview and applications",
+          "url": "https://www.python.org/about/"
+        },
+        {
+          "label": "Python FAQ: first public posting in February 1991",
+          "url": "https://docs.python.org/3/faq/general.html"
+        }
+      ],
+      "introduced": 1991,
+      "introducedSource": "https://docs.python.org/3/faq/general.html",
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Python project announced Python 3.15.0 on 9 October 2026 and maintenance releases earlier that month.",
+      "lifecycleSource": "https://www.python.org/about/"
+    },
+    {
+      "name": "Q#",
+      "summary": "Q# is Microsoft's language for expressing quantum programs in the Quantum Development Kit, including qubit operations and classical control logic.",
+      "uses": ["Quantum algorithms", "Quantum simulation"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://learn.microsoft.com/en-us/azure/quantum/qsharp-overview"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/microsoft/qdk/releases/tag/v1.33.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Microsoft QDK implementation released v1.33.0 on 2026-10-06.",
+      "lifecycleSource": "https://github.com/microsoft/qdk/releases/tag/v1.33.0"
+    },
+    {
+      "name": "R",
+      "summary": "R is a language and environment for statistical computation and graphics, providing data analysis, modelling and extensible plotting facilities with links to native-code libraries.",
+      "uses": ["Statistical modelling", "Data analysis and graphics"],
+      "links": [
+        {
+          "label": "R project: language overview",
+          "url": "https://www.r-project.org/about.html"
+        },
+        {
+          "label": "R project release news",
+          "url": "https://www.r-project.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The R project announced the R 4.6.1 release on 24 June 2026.",
+      "lifecycleSource": "https://www.r-project.org/"
+    },
+    {
+      "name": "Racket",
+      "summary": "Racket is a Lisp-family language and platform for language-oriented programming, with macros and tools for creating domain-specific languages and applications.",
+      "uses": ["Language development", "Functional applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://racket-lang.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/racket/racket/releases/tag/v9.3"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Racket implementation released v9.3 on 2026-08-13.",
+      "lifecycleSource": "https://github.com/racket/racket/releases/tag/v9.3"
+    },
+    {
+      "name": "Raku",
+      "summary": "Raku combines functional, object-oriented and other programming styles with grammars, gradual typing and facilities for scripting and concurrent programs.",
+      "uses": ["Text processing", "Application scripting"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://raku.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/rakudo/rakudo/releases/tag/2026.09"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Rakudo implementation released 2026.09 on 2026-09-28.",
+      "lifecycleSource": "https://github.com/rakudo/rakudo/releases/tag/2026.09"
+    },
+    {
+      "name": "ReScript",
+      "summary": "ReScript is a statically typed language that compiles to JavaScript, with JavaScript interoperability and tools for browser, Node.js and React applications.",
+      "uses": ["React applications", "Node.js applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://rescript-lang.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/rescript-lang/rescript/releases/tag/v12.3.1"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "ReScript implementation released v12.3.1 on 2026-08-24.",
+      "lifecycleSource": "https://github.com/rescript-lang/rescript/releases/tag/v12.3.1"
+    },
+    {
+      "name": "Reason",
+      "summary": "Reason provides alternative syntax and tooling for OCaml, retaining its type system and allowing native OCaml applications or JavaScript output through Melange.",
+      "uses": ["OCaml applications", "JavaScript applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://reasonml.github.io/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/reasonml/reason/releases/tag/3.18.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Reason tooling implementation released 3.18.0 on 2026-06-23.",
+      "lifecycleSource": "https://github.com/reasonml/reason/releases/tag/3.18.0"
+    },
+    {
+      "name": "Red",
+      "summary": "Red is a Rebol-inspired language and toolchain with built-in dialects for parsing, GUI layout and lower-level programming, combining interpreted and compiled code.",
+      "uses": ["GUI applications", "Domain-specific scripting"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://github.com/red/red"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "experimental",
+      "lifecycleNote": "The Red toolchain's official repository explicitly describes its current development stage as alpha.",
+      "lifecycleSource": "https://github.com/red/red"
+    },
+    {
+      "name": "Ring",
+      "summary": "Ring is a dynamic multi-paradigm language with support for embedded domain-specific syntax and libraries for console, graphical, web and mobile applications.",
+      "uses": ["GUI applications", "Domain-specific languages"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://ring-lang.github.io/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/ring-lang/ring/releases/tag/v1.27"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Ring implementation released v1.27 on 2026-05-28.",
+      "lifecycleSource": "https://github.com/ring-lang/ring/releases/tag/v1.27"
+    },
+    {
+      "name": "Roc",
+      "summary": "Roc is a statically typed functional language that separates application code from platform code, using type inference and platform packages for host integration.",
+      "uses": ["Functional applications", "Command-line tools"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.roc-lang.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Ruby",
+      "summary": "Ruby is a dynamic object-oriented language with blocks and metaprogramming, used for scripting, data processing and web applications with frameworks such as Rails.",
+      "uses": ["Web applications", "Automation scripts"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.ruby-lang.org/en/about/"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://www.ruby-lang.org/en/news/2026/09/15/ruby-4-0-7-released/"
+        }
+      ],
+      "introduced": 1995,
+      "introducedSource": "https://www.ruby-lang.org/en/about/",
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Ruby project released Ruby 4.0.7 on 2026-09-15.",
+      "lifecycleSource": "https://www.ruby-lang.org/en/news/2026/09/15/ruby-4-0-7-released/"
+    },
+    {
+      "name": "Rust",
+      "summary": "Rust is a compiled systems language whose ownership and borrowing rules govern memory use and sharing, with applications in services, command-line tools and embedded code.",
+      "uses": ["Command-line tools", "Embedded software"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://rust-lang.org/"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Rust Release Team announced Rust 1.99.0 on 2026-10-01.",
+      "lifecycleSource": "https://blog.rust-lang.org/2026/10/01/Rust-1.99.0/"
+    },
+    {
+      "name": "SAS",
+      "summary": "SAS programs combine DATA steps for managing data with procedures for analysis and reporting, and macros for generating and reusing program text.",
+      "uses": ["Data processing", "Analytical reporting"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://support.sas.com/documentation/cdl/en/lrcon/65287/HTML/default/n0ozjjixavy265n13pjsjukvaynb.htm"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://communities.sas.com/t5/SAS-Communities-Library/SAS-9-4-Support-Reminders-and-Important-Support-Policy-Updates/ta-p/969468"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "SAS announced SAS 9.4M9 in June 2025 with Standard Support through July 2030.",
+      "lifecycleSource": "https://communities.sas.com/t5/SAS-Communities-Library/SAS-9-4-Support-Reminders-and-Important-Support-Policy-Updates/ta-p/969468"
+    },
+    {
+      "name": "Scala",
+      "summary": "Scala combines object-oriented and functional programming with static types, pattern matching and metaprogramming, supporting applications that integrate with its host platforms and libraries.",
+      "uses": ["Typed application development", "Functional data processing"],
+      "links": [
+        {
+          "label": "Scala language overview",
+          "url": "https://www.scala-lang.org/"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://github.com/scala/scala3/releases/tag/3.10.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Scala 3 implementation published compiler version 3.10.0 on 12 October 2026.",
+      "lifecycleSource": "https://github.com/scala/scala3/releases/tag/3.10.0"
+    },
+    {
+      "name": "Scheme",
+      "summary": "Scheme is a Lisp-family language emphasising lexical scope, first-class procedures and a compact core, with several independently developed implementations.",
+      "uses": ["Functional programming", "Domain-specific languages"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.scheme.org/"
+        },
+        {
+          "label": "Documented language history",
+          "url": "https://standards.scheme.org/"
+        }
+      ],
+      "introduced": 1975,
+      "introducedSource": "https://standards.scheme.org/",
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Smalltalk",
+      "summary": "Smalltalk organises computation as objects exchanging messages, with live environments such as Squeak that let developers inspect and change running programs.",
+      "uses": ["Live application development", "Interactive prototyping"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://squeak.org/"
+        },
+        {
+          "label": "Documented language history",
+          "url": "https://www.cs.tufts.edu/comp/150FP/archive/alan-kay/smalltalk-early-history-notices.pdf"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://github.com/OpenSmalltalk/opensmalltalk-vm/releases/tag/202606270913"
+        }
+      ],
+      "introduced": 1972,
+      "introducedSource": "https://www.cs.tufts.edu/comp/150FP/archive/alan-kay/smalltalk-early-history-notices.pdf",
+      "lifecycle": "maintained",
+      "lifecycleNote": "The OpenSmalltalk VM used by Squeak and Cuis published release 202606270913 on 2026-06-27.",
+      "lifecycleSource": "https://github.com/OpenSmalltalk/opensmalltalk-vm/releases/tag/202606270913"
+    },
+    {
+      "name": "Solidity",
+      "summary": "Solidity is a statically typed language for smart contracts targeting the Ethereum Virtual Machine, with inheritance, libraries and user-defined types for on-chain application logic.",
+      "uses": ["EVM smart contracts", "On-chain application logic"],
+      "links": [
+        {
+          "label": "Solidity documentation",
+          "url": "https://docs.soliditylang.org/en/latest/"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://github.com/argotorg/solidity/releases/tag/v0.8.37"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Solidity compiler implementation published version 0.8.37 on 10 September 2026.",
+      "lifecycleSource": "https://github.com/argotorg/solidity/releases/tag/v0.8.37"
+    },
+    {
+      "name": "Squirrel",
+      "summary": "Squirrel is a dynamic object-oriented language designed for embedding in applications such as games, with classes, generators and cooperative coroutines.",
+      "uses": ["Game scripting", "Application embedding"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.squirrel-lang.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Standard ML",
+      "summary": "Standard ML is a functional language with type inference, algebraic data types and modules; its formal definition specifies both typing and execution semantics.",
+      "uses": ["Functional applications", "Language research"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://smlfamily.github.io/"
+        },
+        {
+          "label": "Documented language history",
+          "url": "https://smlfamily.github.io/history/index.html"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://www.smlnj.org/"
+        }
+      ],
+      "introduced": 1983,
+      "introducedSource": "https://smlfamily.github.io/history/index.html",
+      "lifecycle": "maintained",
+      "lifecycleNote": "The SML/NJ implementation published development release 2026.2 on 2026-08-14.",
+      "lifecycleSource": "https://www.smlnj.org/"
+    },
+    {
+      "name": "Starlark",
+      "summary": "Starlark is a Python-like embedded configuration language with deterministic evaluation, used for Bazel build definitions and application-specific extension logic.",
+      "uses": ["Bazel build rules", "Embedded configuration"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://github.com/bazelbuild/starlark"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://github.com/bazelbuild/bazel/releases/tag/9.3.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Bazel, which embeds Starlark for build rules, released 9.3.0 on 2026-10-07.",
+      "lifecycleSource": "https://github.com/bazelbuild/bazel/releases/tag/9.3.0"
+    },
+    {
+      "name": "SuperCollider",
+      "summary": "SuperCollider's sclang language controls a separate real-time audio server, supporting algorithmic sound synthesis, composition and interactive musical systems.",
+      "uses": ["Audio synthesis", "Algorithmic composition"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://supercollider.github.io/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/supercollider/supercollider/releases/tag/Version-3.14.1"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "SuperCollider implementation released Version-3.14.1 on 2025-11-24.",
+      "lifecycleSource": "https://github.com/supercollider/supercollider/releases/tag/Version-3.14.1"
+    },
+    {
+      "name": "Swift",
+      "summary": "Swift is a statically typed language with value types, generics and optionals, used for applications on Apple platforms and for services and tooling on other supported platforms.",
+      "uses": [
+        "Apple-platform applications",
+        "Server and command-line software"
+      ],
+      "links": [
+        {
+          "label": "Swift language overview",
+          "url": "https://www.swift.org/about/"
+        },
+        {
+          "label": "Implementation support / releases",
+          "url": "https://github.com/swiftlang/swift/releases/tag/swift-6.4.0-RELEASE"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Swift implementation published its 6.4.0 release on 15 September 2026.",
+      "lifecycleSource": "https://github.com/swiftlang/swift/releases/tag/swift-6.4.0-RELEASE"
+    },
+    {
+      "name": "TLA",
+      "summary": "TLA+ is a mathematical specification language for describing state transitions and checking models of software or hardware, especially concurrent and distributed systems.",
+      "uses": ["System specifications", "Concurrency model checking"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://lamport.azurewebsites.net/tla/high-level-view.html"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Tcl",
+      "summary": "Tcl is an extensible dynamic scripting language used for automation, networking and application integration; its companion Tk toolkit supplies graphical interfaces.",
+      "uses": ["Application scripting", "Desktop interfaces with Tk"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.tcl-lang.org/"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://www.tcl-lang.org/software/tcltk/9.1.html"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Tcl/Tk project lists Tcl/Tk 9.1.0 released on 2026-09-29.",
+      "lifecycleSource": "https://www.tcl-lang.org/software/tcltk/9.1.html"
+    },
+    {
+      "name": "Terra",
+      "summary": "Terra is a compiled low-level language embedded in Lua, allowing Lua programs to generate and specialise native code and embed domain-specific JIT compilers.",
+      "uses": ["Native-code generation", "Embedded JIT compilers"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://terralang.org/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/terralang/terra/releases/tag/release-1.2.2"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Terra implementation released release-1.2.2 on 2026-08-14.",
+      "lifecycleSource": "https://github.com/terralang/terra/releases/tag/release-1.2.2"
+    },
+    {
+      "name": "TypeScript",
+      "summary": "TypeScript adds static type annotations and checking to JavaScript, then emits JavaScript that runs in browsers and server runtimes.",
+      "uses": ["Browser applications", "Server applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.typescriptlang.org/"
+        },
+        {
+          "label": "Documented language history",
+          "url": "https://www.typescriptlang.org/docs/handbook/2/modules.html"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+        }
+      ],
+      "introduced": 2012,
+      "introducedSource": "https://www.typescriptlang.org/docs/handbook/2/modules.html",
+      "lifecycle": "maintained",
+      "lifecycleNote": "TypeScript implementation released v7.0.2 on 2026-08-20.",
+      "lifecycleSource": "https://github.com/microsoft/TypeScript/releases/tag/v7.0.2"
+    },
+    {
+      "name": "V",
+      "summary": "V is a compiled language with C interoperability and integrated tooling, supporting native applications, command-line programs and network services.",
+      "uses": ["Native applications", "Network services"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://github.com/vlang/v"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/vlang/v/releases/tag/0.5.2"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "V implementation released 0.5.2 on 2026-07-12.",
+      "lifecycleSource": "https://github.com/vlang/v/releases/tag/0.5.2"
+    },
+    {
+      "name": "VBA",
+      "summary": "Visual Basic for Applications is embedded in Microsoft Office applications, using their object models to automate documents, spreadsheets and other repeated tasks.",
+      "uses": ["Office macros", "Spreadsheet automation"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://learn.microsoft.com/en-us/office/vba/library-reference/concepts/getting-started-with-vba-in-office"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "VBScript",
+      "summary": "VBScript is Microsoft's Visual Basic-family scripting language used with Windows Script Host and legacy Windows applications; Microsoft is phasing out its Windows component.",
+      "uses": ["Legacy Windows scripts", "Windows Script Host automation"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/d1wf56tt(v=vs.84)"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://learn.microsoft.com/en-us/windows/whats-new/deprecated-features"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "retired",
+      "lifecycleNote": "Microsoft deprecated the Windows VBScript component in October 2023 and plans phased removal; existing installations can still run it.",
+      "lifecycleSource": "https://learn.microsoft.com/en-us/windows/whats-new/deprecated-features"
+    },
+    {
+      "name": "VHDL",
+      "summary": "VHDL describes hardware designs whose behaviour can be simulated and whose synthesizable portions can be translated into gate-level implementations.",
+      "uses": ["Hardware simulation", "Logic synthesis"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://ghdl.github.io/ghdl/about.html"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/ghdl/ghdl/releases/tag/v6.0.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "GHDL implementation released v6.0.0 on 2026-03-07.",
+      "lifecycleSource": "https://github.com/ghdl/ghdl/releases/tag/v6.0.0"
+    },
+    {
+      "name": "Vala",
+      "summary": "Vala offers object-oriented syntax and native compilation with direct GObject and GTK support, allowing applications to use existing C libraries.",
+      "uses": ["GTK applications", "GObject libraries"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://vala.dev/"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://download.gnome.org/sources/vala/0.56/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "GNOME published the Vala compiler 0.56.19 source release on 2026-03-30.",
+      "lifecycleSource": "https://download.gnome.org/sources/vala/0.56/"
+    },
+    {
+      "name": "Verilog",
+      "summary": "Verilog is a hardware description language for modelling digital circuits, writing simulation testbenches and describing designs for logic synthesis.",
+      "uses": ["Digital-circuit modelling", "Hardware testbenches"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://steveicarus.github.io/iverilog/"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/steveicarus/iverilog/releases/tag/v13_0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Icarus Verilog implementation released v13_0 on 2026-03-02.",
+      "lifecycleSource": "https://github.com/steveicarus/iverilog/releases/tag/v13_0"
+    },
+    {
+      "name": "Visual Basic .NET",
+      "summary": "Visual Basic .NET is a .NET language with a stable design, used for Windows Forms applications and libraries. Microsoft's strategy retains core library support and C# interoperability without expanding to new workloads.",
+      "uses": ["Windows Forms applications", ".NET libraries"],
+      "links": [
+        {
+          "label": "Microsoft: Visual Basic language strategy",
+          "url": "https://learn.microsoft.com/en-us/dotnet/visual-basic/getting-started/strategy"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Microsoft's current strategy retains .NET library support and Visual Studio investment for existing Visual Basic scenarios; the language design remains stable.",
+      "lifecycleSource": "https://learn.microsoft.com/en-us/dotnet/visual-basic/getting-started/strategy"
+    },
+    {
+      "name": "WebAssembly",
+      "summary": "WebAssembly is a binary instruction format for a stack-based virtual machine, serving as a portable compilation target for programs deployed in host environments.",
+      "uses": ["Portable compiled modules", "Browser applications"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://webassembly.org/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Wolfram Language",
+      "summary": "Wolfram Language represents code and data as symbolic expressions and includes built-in computation and visualisation functions for technical and mathematical work.",
+      "uses": ["Symbolic computation", "Scientific visualisation"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.wolfram.com/language/"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://www.wolfram.com/mathematica/quick-revision-history/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Mathematica implementation released version 15 in June 2026 and 15.0.1 with fixes in July 2026.",
+      "lifecycleSource": "https://www.wolfram.com/mathematica/quick-revision-history/"
+    },
+    {
+      "name": "XQuery",
+      "summary": "XQuery is a W3C query language for selecting and constructing XML data; XQuery 3.1 also adds maps, arrays and operations for working with JSON.",
+      "uses": ["XML transformation", "Structured-data queries"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://www.w3.org/TR/xquery-31/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Xtend",
+      "summary": "Xtend is a statically typed Java dialect that generates readable Java source, adding features such as lambdas, extension methods and compile-time macros.",
+      "uses": ["Java applications", "Code generation"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://eclipse.dev/Xtext/xtend/"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Yacc",
+      "summary": "Yacc uses grammar rules and associated actions to generate parsers, traditionally producing C source for recognising structured input such as programming-language syntax.",
+      "uses": ["Parser generation", "Language frontends"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://pubs.opengroup.org/onlinepubs/009695399/utilities/yacc.html"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "unknown",
+      "lifecycleNote": null,
+      "lifecycleSource": null
+    },
+    {
+      "name": "Yul",
+      "summary": "Yul is Solidity's intermediate language for optimisation and EVM bytecode generation, and can also be written directly as Solidity inline assembly.",
+      "uses": ["EVM code generation", "Solidity inline assembly"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://docs.soliditylang.org/en/latest/yul.html"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/argotorg/solidity/releases/tag/v0.8.37"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Solidity implementation released v0.8.37 on 2026-09-10.",
+      "lifecycleSource": "https://github.com/argotorg/solidity/releases/tag/v0.8.37"
+    },
+    {
+      "name": "Zeek",
+      "summary": "Zeek's event-driven scripting language extends its network monitor, turning protocol events into custom analysis, logs and network-observation policies.",
+      "uses": ["Network analysis", "Custom monitoring policies"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://docs.zeek.org/en/current/tutorial/scripting/index.html"
+        },
+        {
+          "label": "Implementation release",
+          "url": "https://github.com/zeek/zeek/releases/tag/v9.0.0"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "Zeek implementation released v9.0.0 on 2026-08-21.",
+      "lifecycleSource": "https://github.com/zeek/zeek/releases/tag/v9.0.0"
+    },
+    {
+      "name": "Zig",
+      "summary": "Zig is a general-purpose language and toolchain with explicit memory management and C interoperability, used for native applications and cross-platform builds.",
+      "uses": ["Systems programming", "Cross-platform builds"],
+      "links": [
+        {
+          "label": "Official documentation",
+          "url": "https://ziglang.org/"
+        },
+        {
+          "label": "Implementation status",
+          "url": "https://ziglang.org/download/index.json"
+        }
+      ],
+      "introduced": null,
+      "introducedSource": null,
+      "lifecycle": "maintained",
+      "lifecycleNote": "The Zig project's release index dates compiler release 0.17.0 to 2026-10-01.",
+      "lifecycleSource": "https://ziglang.org/download/index.json"
+    }
+  ]
+}

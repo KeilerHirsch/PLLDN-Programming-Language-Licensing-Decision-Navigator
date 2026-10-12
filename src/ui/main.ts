@@ -2,6 +2,10 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 import { PRODUCT_MODEL } from "../product/catalog.ts";
+import {
+  compareLanguageNames,
+  languageMatchesDiscovery,
+} from "../product/language-information.ts";
 import { exportUnassessedCandidateCsv } from "../product/unassessed-export.ts";
 import { analyzeText } from "../text/analyze.ts";
 import type { TextAnalysis, TextRuleSet } from "../text/types.ts";
@@ -55,6 +59,7 @@ let productState: ProductUiState = {
   compareLanguageIds: [],
   compareLicenseIds: [],
   filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
+  discovery: { ...DEFAULT_PRODUCT_UI_STATE.discovery },
 };
 const initialNavigation = readCatalogNavigation(window.location.search);
 productState = {
@@ -64,6 +69,7 @@ productState = {
   order: initialNavigation.order,
   view: initialNavigation.view,
   filters: initialNavigation.filters,
+  discovery: initialNavigation.discovery,
 };
 let catalogQuery = initialNavigation.query;
 const identityPageSize = 60;
@@ -89,6 +95,7 @@ function navigationState() {
     view: productState.view,
     spdx: identityOsiFilter,
     filters: productState.filters,
+    discovery: productState.discovery,
   };
 }
 function saveNavigation(push = false): void {
@@ -107,16 +114,27 @@ function applyCatalogFilter(): void {
     ...root.querySelectorAll<HTMLElement>("[data-catalog-entry]"),
   ];
   entries.sort((a, b) =>
-    compareCatalogNames(
-      a.dataset.catalogName ?? "",
-      b.dataset.catalogName ?? "",
-      productState.order,
-    ),
+    productState.mode === "languages"
+      ? compareLanguageNames(
+          a.dataset.catalogName ?? "",
+          b.dataset.catalogName ?? "",
+          productState.order,
+        )
+      : compareCatalogNames(
+          a.dataset.catalogName ?? "",
+          b.dataset.catalogName ?? "",
+          productState.order === "desc" ? "desc" : "asc",
+        ),
   );
   const grid = root.querySelector<HTMLElement>("[data-catalog-grid]");
   if (grid) for (const entry of entries) grid.append(entry);
   for (const entry of entries) {
     const matches =
+      (productState.mode !== "languages" ||
+        languageMatchesDiscovery(
+          entry.dataset.catalogName ?? "",
+          productState.discovery,
+        )) &&
       (!query || (entry.dataset.catalogSearchText ?? "").includes(query)) &&
       (identityOsiFilter === "any" ||
         entry.dataset.identityOsiApproved ===
@@ -311,7 +329,13 @@ root.addEventListener("click", (event) => {
   if (action === "catalog-mode") {
     const mode = element.dataset.mode;
     if (mode === "languages" || mode === "licenses") {
-      productState = { ...productState, mode, status: "all" };
+      productState = {
+        ...productState,
+        mode,
+        status: "all",
+        order: "asc",
+        discovery: { ...DEFAULT_PRODUCT_UI_STATE.discovery },
+      };
       catalogQuery = "";
       identityLimit = identityPageSize;
       identityOsiFilter = "any";
@@ -378,6 +402,8 @@ root.addEventListener("click", (event) => {
       ...productState,
       filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
       status: "all",
+      order: "asc",
+      discovery: { ...DEFAULT_PRODUCT_UI_STATE.discovery },
     };
     catalogQuery = "";
     identityLimit = identityPageSize;
@@ -455,13 +481,37 @@ root.addEventListener("change", (event) => {
       ["all", "editorial", "unassessed"].includes(element.value)
     )
       productState.status = element.value as ProductUiState["status"];
-    if (action === "catalog-order" && ["asc", "desc"].includes(element.value))
-      productState.order = element.value as ProductUiState["order"];
+    if (action === "catalog-order")
+      productState.order = readCatalogNavigation(
+        "?catalog=" +
+          productState.mode +
+          "&order=" +
+          encodeURIComponent(element.value),
+      ).order;
     if (action === "catalog-view" && ["cards", "list"].includes(element.value))
       productState.view = element.value as ProductUiState["view"];
     identityLimit = identityPageSize;
     saveNavigation(true);
     void publish(() => current.view());
+  }
+  if (
+    action === "language-discovery" &&
+    productState.mode === "languages" &&
+    element instanceof HTMLSelectElement
+  ) {
+    const key = element.dataset.discoveryKey;
+    if (key && Object.hasOwn(productState.discovery, key)) {
+      const params = new URLSearchParams(
+        catalogNavigationHref(navigationState()).split("#")[0],
+      );
+      params.set(key, element.value);
+      productState.discovery = readCatalogNavigation(
+        params.toString(),
+      ).discovery;
+      identityLimit = identityPageSize;
+      saveNavigation(true);
+      void publish(() => current.view());
+    }
   }
   if (action === "identity-osi" && element instanceof HTMLSelectElement) {
     if (["any", "yes", "no"].includes(element.value)) {
@@ -525,6 +575,7 @@ async function restoreCatalogLocation(current: UiController): Promise<void> {
     order: nav.order,
     view: nav.view,
     filters: nav.filters,
+    discovery: nav.discovery,
   };
   catalogQuery = nav.query;
   identityOsiFilter = nav.spdx;
@@ -538,7 +589,9 @@ async function restoreCatalogLocation(current: UiController): Promise<void> {
       mode: candidate.kind === "language" ? "languages" : "licenses",
       status: "all",
       view: "cards",
+      order: "asc",
       filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
+      discovery: { ...DEFAULT_PRODUCT_UI_STATE.discovery },
     };
     catalogQuery =
       candidate.kind === "language"
@@ -560,7 +613,9 @@ async function restoreCatalogLocation(current: UiController): Promise<void> {
         : "licenses",
       status: "editorial",
       view: "cards",
+      order: "asc",
       filters: { ...DEFAULT_PRODUCT_UI_STATE.filters },
+      discovery: { ...DEFAULT_PRODUCT_UI_STATE.discovery },
     };
     catalogQuery = editorial.label;
   }
