@@ -38,6 +38,12 @@ test("untrusted catalogue URL values cannot invent modes or assessments", () => 
     200,
   );
 });
+test("SPDX source flag applies only to license catalogue URLs", () => {
+  for (const flag of ["yes", "no"]) {
+    assert.equal(readCatalogNavigation(`?catalog=languages&spdx=${flag}`).spdx, "any");
+    assert.equal(readCatalogNavigation(`?catalog=licenses&spdx=${flag}`).spdx, flag);
+  }
+});
 test("UNKNOWN candidates match only any/unknown assessment filters", () => {
   assert.equal(
     candidateMatchesFilters("languages", DEFAULT_PRODUCT_FILTERS),
