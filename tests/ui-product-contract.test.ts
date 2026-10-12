@@ -3,6 +3,9 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
+import candidates from "../catalog/unassessed-candidates.v0.2.json" with {
+  type: "json",
+};
 import {
   DEFAULT_PRODUCT_UI_STATE,
   renderProductExperience,
@@ -124,6 +127,8 @@ test("catalogue search and structured filters share one visible-result counter",
 class TestElement {
   className = "";
   textContent = "";
+  href = "";
+  rel = "";
   dataset: Record<string, string> = {};
   children: TestElement[] = [];
   attributes = new Map<string, string>();
@@ -187,13 +192,62 @@ test("all pinned identities are first-class catalogue cards without manufactured
         "the source flag must also include profiled SPDX identities",
       );
     }
+    const records = candidates.records.filter(
+      (record) =>
+        record.kind === (mode === "languages" ? "language" : "license"),
+    );
+    const byId = new Map(records.map((record) => [record.id, record]));
+    const renderedIds: string[] = [];
     for (const card of withClass(view, "identity-card")) {
+      const disclosure = withClass(card, "identity-profile")[0];
+      assert(
+        disclosure,
+        "every unassessed result must expose its pinned profile",
+      );
+      const profileId = disclosure.dataset.candidateId;
+      assert(profileId, "pinned profile ID must be present");
+      const record = byId.get(profileId);
+      assert(
+        record,
+        "rendered profile must belong to the pinned candidate source",
+      );
+      renderedIds.push(record.id);
+      const pin =
+        record.kind === "language"
+          ? candidates.source_pins.linguist_commit
+          : candidates.source_pins.spdx_commit;
+      assert(
+        descendants(disclosure).some(
+          (node) =>
+            node.textContent.includes(pin) &&
+            node.textContent.includes(record.id),
+        ),
+      );
+      const sourceLink = descendants(disclosure).find(
+        (node) => node.tagName === "a" && node.href === record.reference,
+      );
+      assert(
+        sourceLink,
+        "rendered source link must equal this candidate's pinned reference",
+      );
+      assert(
+        sourceLink.rel.includes("noopener") &&
+          sourceLink.rel.includes("noreferrer"),
+      );
+      assert.equal(record.review_status, "NOT_REVIEWED");
+      assert(
+        Object.values(record.assessments).every((value) => value === "UNKNOWN"),
+      );
       assert.equal(withClass(card, "decision-profile").length, 0);
       assert(
         descendants(card).some((node) => node.textContent.includes("UNKNOWN")),
       );
       assert.equal(card.dataset.catalogStatus, "unassessed");
     }
+    assert.deepEqual(
+      renderedIds.sort(),
+      records.map((record) => record.id).sort(),
+    );
     assert.equal(withClass(view, "catalog-navigation").length, 1);
     assert.equal(withClass(view, "catalog-share").length, 1);
   }

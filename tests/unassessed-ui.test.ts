@@ -22,8 +22,6 @@ test("browser profile disclosures use safe text APIs with exact provenance", () 
   const probe = readFileSync("tools/browser-smoke.ts", "utf8");
   for (const expected of [
     "renderUnassessedProfile",
-    "unassessedLanguageProfiles.get",
-    "unassessedLicenseProfiles.get",
     "candidates.source_pins.linguist_commit",
     "candidates.source_pins.spdx_commit",
     "record.claim_refs.length !== 0",
