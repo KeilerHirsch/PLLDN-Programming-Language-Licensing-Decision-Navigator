@@ -23,6 +23,6 @@ Lifecycle describes the named implementation or project in its evidence note. Ma
 
 ## Data and sources
 
-The checked date and primary links appear in each card's **Sources and context** disclosure. The static dataset is [language-information.v1.json](../catalog/language-information.v1.json); no live API, account or background fetching is required.
+The checked date and primary links appear in each card's **Sources and context** disclosure. The static dataset combines [shared metadata](../catalog/language-information.v1.json) with alphabetic records for [A–G](../catalog/language-information-a-g.v1.json), [H–P](../catalog/language-information-h-p.v1.json) and [Q–Z](../catalog/language-information-q-z.v1.json). All parts are validated together; no live API, account or background fetching is required.
 
 Validation requires complete catalogue coverage, unique identities, HTTPS references, and linked evidence for concrete years and lifecycle labels. Descriptive information never changes Reviewed decision eligibility or creates ratings.

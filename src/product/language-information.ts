@@ -3,6 +3,15 @@
 import raw from "../../catalog/language-information.v1.json" with {
   type: "json",
 };
+import aG from "../../catalog/language-information-a-g.v1.json" with {
+  type: "json",
+};
+import hP from "../../catalog/language-information-h-p.v1.json" with {
+  type: "json",
+};
+import qZ from "../../catalog/language-information-q-z.v1.json" with {
+  type: "json",
+};
 import { PRODUCT_MODEL } from "./catalog.ts";
 import { LANGUAGE_IDENTITIES } from "./identity-index.ts";
 
@@ -252,7 +261,7 @@ const expectedNames = [
   ]),
 ];
 export const LANGUAGE_INFORMATION = validateLanguageInformation(
-  raw,
+  { ...raw, records: [...aG, ...hP, ...qZ] },
   expectedNames,
 );
 const byName = new Map(
