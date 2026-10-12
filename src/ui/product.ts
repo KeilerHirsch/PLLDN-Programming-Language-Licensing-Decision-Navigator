@@ -17,8 +17,7 @@ import {
 import {
   INDEX_ONLY_LANGUAGES,
   INDEX_ONLY_LICENSES,
-  LANGUAGE_IDENTITY_SOURCE,
-  LICENSE_IDENTITY_SOURCE,
+  LICENSE_IDENTITIES,
 } from "../product/identity-index.ts";
 import { LANGUAGE_BAND_EVIDENCE_NOTICE } from "../product/language-band-provenance.ts";
 import { LANGUAGE_DECISION_PROFILES } from "../product/language-decision-profiles.ts";
@@ -28,6 +27,10 @@ import type {
   LicenseProductProfile,
   UseCaseGuide,
 } from "../product/types.ts";
+import {
+  type CatalogStatus,
+  candidateMatchesFilters,
+} from "./catalog-navigation.ts";
 import {
   type DecisionTone,
   languageDecisionTone,
@@ -51,6 +54,9 @@ export type ProductCatalogMode = "languages" | "licenses";
 
 export interface ProductUiState {
   mode: ProductCatalogMode;
+  status: CatalogStatus;
+  order: "asc" | "desc";
+  view: "cards" | "list";
   selectedUseCaseId: string | null;
   compareLanguageIds: readonly string[];
   compareLicenseIds: readonly string[];
@@ -59,6 +65,9 @@ export interface ProductUiState {
 
 export const DEFAULT_PRODUCT_UI_STATE: ProductUiState = {
   mode: "languages",
+  status: "all",
+  order: "asc",
+  view: "list",
   selectedUseCaseId: null,
   compareLanguageIds: [],
   compareLicenseIds: [],
@@ -138,6 +147,7 @@ function selectControl(
   filterKey: keyof ProductFilterState,
   value: string,
   options: readonly (readonly [string, string])[],
+  includeUnknown = true,
 ): HTMLLabelElement {
   const label = document.createElement("label");
   label.className = "catalog-filter";
@@ -146,7 +156,10 @@ function selectControl(
   const select = document.createElement("select");
   select.dataset.action = "product-filter";
   select.dataset.filterKey = filterKey;
-  for (const [optionValue, optionLabel] of options) {
+  const choices = includeUnknown
+    ? [...options, ["unknown", "Unknown / not assessed"] as const]
+    : options;
+  for (const [optionValue, optionLabel] of choices) {
     const option = document.createElement("option");
     option.value = optionValue;
     option.textContent = optionLabel;
@@ -626,6 +639,9 @@ function renderLanguageCard(
   const card = document.createElement("article");
   card.className = "product-card language-profile-card";
   card.dataset.catalogEntry = "true";
+  card.dataset.catalogName = profile.label;
+  card.dataset.catalogStatus = "editorial";
+  card.dataset.entityId = profile.entity_id;
   card.dataset.catalogSearchText = productSearchText(profile, entry);
 
   const head = document.createElement("div");
@@ -672,42 +688,8 @@ function renderLanguageCard(
   );
   const measuredEvidence = renderWorkloadEvidence(profile.entity_id);
   if (measuredEvidence) card.append(measuredEvidence);
+  card.append(profileLink(profile.entity_id));
   return card;
-}
-
-function renderLanguageCatalog(
-  catalog: CatalogPreviewView,
-  state: ProductUiState,
-): HTMLElement {
-  const byId = new Map(
-    catalog.languages.map((entry) => [entry.entity_id, entry]),
-  );
-  const wrapper = document.createElement("div");
-  const profiles = PRODUCT_MODEL.languages.filter((profile) =>
-    languageMatchesFilters(profile, state.filters),
-  );
-  const count = paragraph(
-    `${profiles.length} languages match the selected filters.`,
-  );
-  count.className = "catalog-result-count";
-  count.dataset.catalogVisibleCount = "true";
-  count.setAttribute("role", "status");
-  count.setAttribute("aria-live", "polite");
-  wrapper.append(count);
-
-  const grid = document.createElement("div");
-  grid.className = "product-card-grid";
-  for (const profile of profiles) {
-    grid.append(
-      renderLanguageCard(profile, byId.get(profile.entity_id), state),
-    );
-  }
-  if (profiles.length === 0) {
-    wrapper.append(paragraph("No languages match these filters."));
-  } else {
-    wrapper.append(grid);
-  }
-  return wrapper;
 }
 
 const LICENSE_FAMILY_LABELS: Readonly<Record<string, string>> = {
@@ -894,7 +876,13 @@ function renderLicenseCard(
   const card = document.createElement("article");
   card.className = "product-card license-profile-card";
   card.dataset.catalogEntry = "true";
+  card.dataset.catalogName = profile.label;
+  card.dataset.catalogStatus = "editorial";
+  card.dataset.entityId = profile.entity_id;
   card.dataset.catalogSearchText = productSearchText(profile, entry);
+  const spdxId = LICENSE_DECISION_PROFILES[profile.entity_id]?.spdx_id;
+  const identity = LICENSE_IDENTITIES.find((item) => item.id === spdxId);
+  if (identity) card.dataset.identityOsiApproved = String(identity.osiApproved);
 
   const head = document.createElement("div");
   head.className = "product-card-head";
@@ -918,57 +906,12 @@ function renderLicenseCard(
     licenseCompareButton(profile.entity_id, state),
     renderLicenseDecisionProfile(profile),
     renderPreviewFacts(entry),
+    profileLink(profile.entity_id),
   );
   return card;
 }
 
-function renderLicenseCatalog(
-  catalog: CatalogPreviewView,
-  state: ProductUiState,
-): HTMLElement {
-  const byId = new Map(
-    catalog.licenses.map((entry) => [entry.entity_id, entry]),
-  );
-  const wrapper = document.createElement("div");
-  wrapper.append(renderLicenseAxis());
-
-  const profiles = PRODUCT_MODEL.licenses.filter((profile) =>
-    licenseMatchesFilters(profile, state.filters),
-  );
-  const count = paragraph(
-    `${profiles.length} licenses match the selected filters.`,
-  );
-  count.className = "catalog-result-count";
-  count.dataset.catalogVisibleCount = "true";
-  count.setAttribute("role", "status");
-  count.setAttribute("aria-live", "polite");
-  wrapper.append(count);
-
-  const grid = document.createElement("div");
-  grid.className = "product-card-grid";
-  for (const profile of profiles) {
-    grid.append(renderLicenseCard(profile, byId.get(profile.entity_id), state));
-  }
-  if (profiles.length === 0) {
-    wrapper.append(paragraph("No licenses match these filters."));
-  } else {
-    wrapper.append(grid);
-  }
-  return wrapper;
-}
-
 type UnassessedRecord = (typeof candidates.records)[number];
-const unassessedLanguageProfiles = new Map(
-  candidates.records
-    .filter((item) => item.kind === "language")
-    .map((item) => [item.name, item] as const),
-);
-const unassessedLicenseProfiles = new Map(
-  candidates.records
-    .filter((item) => item.kind === "license")
-    .map((item) => ["spdx_id" in item ? item.spdx_id : "", item] as const),
-);
-
 /** Resolve only pinned v0.2 records; arbitrary URL input never creates a profile. */
 export function pinnedCandidateById(
   id: string | null,
@@ -1016,108 +959,95 @@ function renderUnassessedProfile(record: UnassessedRecord): HTMLElement {
   return details;
 }
 
-function renderIdentityIndex(state: ProductUiState): HTMLElement {
-  const languages = state.mode === "languages";
-  const identities = languages ? INDEX_ONLY_LANGUAGES : INDEX_ONLY_LICENSES;
-  const label = languages ? "languages" : "licenses";
-  const source = languages ? LANGUAGE_IDENTITY_SOURCE : LICENSE_IDENTITY_SOURCE;
-  const details = document.createElement("details");
-  details.className = "identity-index";
-  details.dataset.identityIndex = "true";
-
-  const summary = document.createElement("summary");
-  summary.textContent = `${identities.length} more ${label} · unassessed profiles`;
-  details.append(summary);
-
-  const explanation = paragraph(
-    "These v0.2 profiles record pinned identity provenance and explicitly UNKNOWN assessments. They contain no performance scores, license permissions, obligations, or Reviewed recommendations. Structured filters apply to detailed editorial profiles, not this index.",
+function profileLink(id: string, candidate = false): HTMLAnchorElement {
+  const link = document.createElement("a");
+  link.className = "catalog-profile-link";
+  link.href = candidate
+    ? `?candidate=${encodeURIComponent(id)}#catalog`
+    : `?profile=${encodeURIComponent(id)}#catalog`;
+  link.textContent = "Open profile";
+  return link;
+}
+function renderIdentityCard(record: UnassessedRecord): HTMLElement {
+  const card = document.createElement("article");
+  card.className = "product-card identity-card";
+  card.dataset.catalogEntry = "true";
+  card.dataset.identityEntry = "true";
+  card.dataset.catalogStatus = "unassessed";
+  card.dataset.catalogName = "spdx_id" in record ? record.spdx_id : record.name;
+  card.dataset.catalogSearchText = `${card.dataset.catalogName} ${record.name}`
+    .normalize("NFKD")
+    .toLocaleLowerCase("en-US");
+  if ("osi_approved_source_flag" in record)
+    card.dataset.identityOsiApproved = String(record.osi_approved_source_flag);
+  const head = document.createElement("div");
+  head.className = "product-card-head";
+  head.append(heading(3, card.dataset.catalogName), badge("Unassessed"));
+  card.append(
+    head,
+    paragraph(record.name),
+    paragraph(
+      "Assessment pending · UNKNOWN. Identity and pinned source only; not a Reviewed recommendation.",
+    ),
+    profileLink(record.id, true),
+    renderUnassessedProfile(record),
   );
-  explanation.className = "identity-index-note";
-  const sourceLink = document.createElement("a");
-  sourceLink.href = source;
-  sourceLink.textContent = languages
-    ? "Source: GitHub Linguist (pinned snapshot)"
-    : "Source: SPDX license list (pinned snapshot)";
-  sourceLink.rel = "noopener noreferrer";
-  details.append(explanation, sourceLink);
-
-  if (!languages) {
-    const filterLabel = document.createElement("label");
-    filterLabel.className = "catalog-filter identity-osi-filter";
-    const title = document.createElement("span");
-    title.textContent = "SPDX OSI flag";
-    const select = document.createElement("select");
-    select.dataset.action = "identity-osi";
-    for (const [value, label] of [
-      ["any", "All SPDX identities"],
-      ["yes", "OSI-approved in SPDX"],
-      ["no", "Not flagged OSI-approved in SPDX"],
-    ] as const) {
-      const option = document.createElement("option");
-      option.value = value;
-      option.textContent = label;
-      select.append(option);
-    }
-    filterLabel.append(title, select);
-    details.append(filterLabel);
-  }
-
-  const count = paragraph(`${identities.length} indexed identities available.`);
-  count.className = "identity-index-count";
-  count.dataset.identityCount = "true";
+  return card;
+}
+function renderCatalogResults(
+  catalog: CatalogPreviewView,
+  state: ProductUiState,
+): HTMLElement {
+  const wrapper = document.createElement("div");
+  wrapper.className = "catalog-results";
+  if (state.mode === "licenses") wrapper.append(renderLicenseAxis());
+  const count = paragraph("");
+  count.className = "catalog-result-count";
+  count.dataset.catalogVisibleCount = "true";
   count.setAttribute("role", "status");
   count.setAttribute("aria-live", "polite");
-  details.append(count);
-  const list = document.createElement("ul");
-  list.id = "identity-index-results";
-  list.className = "identity-index-list";
-  if (languages) {
-    for (const name of INDEX_ONLY_LANGUAGES) {
-      const li = document.createElement("li");
-      li.dataset.identityEntry = "true";
-      li.dataset.identitySearchText = name
-        .normalize("NFKD")
-        .toLocaleLowerCase("en-US");
-      const title = document.createElement("span");
-      title.textContent = name;
-      const profile = unassessedLanguageProfiles.get(name);
-      if (!profile)
-        throw new Error(`Missing pinned candidate profile: ${name}`);
-      li.append(title, renderUnassessedProfile(profile));
-      list.append(li);
-    }
-  } else {
-    for (const license of INDEX_ONLY_LICENSES) {
-      const li = document.createElement("li");
-      li.dataset.identityEntry = "true";
-      li.dataset.identitySearchText = `${license.id} ${license.name}`
-        .normalize("NFKD")
-        .toLocaleLowerCase("en-US");
-      li.dataset.identityOsiApproved = String(license.osiApproved);
-      const link = document.createElement("a");
-      link.href = license.reference;
-      link.textContent = license.id;
-      link.rel = "noopener noreferrer";
-      const name = document.createElement("small");
-      name.textContent = license.name;
-      const osi = document.createElement("small");
-      osi.textContent = license.osiApproved
-        ? "OSI-approved in pinned SPDX list"
-        : "No OSI approval flag in pinned SPDX list";
-      const profile = unassessedLicenseProfiles.get(license.id);
-      if (!profile)
-        throw new Error(`Missing pinned candidate profile: ${license.id}`);
-      li.append(link, name, osi, renderUnassessedProfile(profile));
-      list.append(li);
+  wrapper.append(count);
+  const grid = document.createElement("div");
+  grid.className = "product-card-grid";
+  grid.dataset.catalogGrid = "true";
+  const byId = new Map(
+    [...catalog.languages, ...catalog.licenses].map((entry) => [
+      entry.entity_id,
+      entry,
+    ]),
+  );
+  if (state.status !== "unassessed") {
+    if (state.mode === "languages") {
+      for (const profile of PRODUCT_MODEL.languages.filter((p) =>
+        languageMatchesFilters(p, state.filters),
+      ))
+        grid.append(
+          renderLanguageCard(profile, byId.get(profile.entity_id), state),
+        );
+    } else {
+      for (const profile of PRODUCT_MODEL.licenses.filter((p) =>
+        licenseMatchesFilters(p, state.filters),
+      ))
+        grid.append(
+          renderLicenseCard(profile, byId.get(profile.entity_id), state),
+        );
     }
   }
-  details.append(list);
-  const more = button("Show more identities", "identity-more", "identity-more");
+  if (
+    state.status !== "editorial" &&
+    candidateMatchesFilters(state.mode, state.filters)
+  ) {
+    for (const record of candidates.records) {
+      if (record.kind === (state.mode === "languages" ? "language" : "license"))
+        grid.append(renderIdentityCard(record));
+    }
+  }
+  wrapper.append(grid);
+  const more = button("Show more results", "identity-more", "identity-more");
   more.dataset.identityMore = "true";
-  more.setAttribute("aria-controls", list.id);
-  more.hidden = true;
-  details.append(more);
-  return details;
+  more.setAttribute("aria-controls", "catalog");
+  wrapper.append(more);
+  return wrapper;
 }
 
 function renderCatalog(
@@ -1125,7 +1055,7 @@ function renderCatalog(
   state: ProductUiState,
 ): HTMLElement {
   const section = document.createElement("section");
-  section.className = "product-catalog";
+  section.className = `product-catalog catalog-view-${state.view}`;
   section.id = "catalog";
 
   const title =
@@ -1163,9 +1093,58 @@ function renderCatalog(
     state.mode === "languages"
       ? "Rust, Windows, embedded, Cargo…"
       : "PolyForm, source available, SaaS, patent, copyleft…";
+  search.maxLength = 200;
+  search.setAttribute("aria-controls", "catalog");
   search.dataset.action = "catalog-search";
   searchLabel.append(searchTitle, search);
   controls.append(searchLabel);
+  for (const [label, action, current, choices] of [
+    [
+      "Data status",
+      "catalog-status",
+      state.status,
+      [
+        ["all", "All identities"],
+        ["editorial", "Editorial profiles"],
+        ["unassessed", "Unassessed identities"],
+      ],
+    ],
+    [
+      "Sort",
+      "catalog-order",
+      state.order,
+      [
+        ["asc", "Name A–Z"],
+        ["desc", "Name Z–A"],
+      ],
+    ],
+    [
+      "View",
+      "catalog-view",
+      state.view,
+      [
+        ["list", "Compact list"],
+        ["cards", "Detailed cards"],
+      ],
+    ],
+  ] as const) {
+    const control = selectControl(
+      label,
+      "languageCategory",
+      current,
+      choices,
+      false,
+    );
+    (control.children[1] as HTMLSelectElement).dataset.action = action;
+    controls.append(control);
+  }
+  const share = document.createElement("a");
+  share.className = "catalog-share";
+  share.textContent = "Link to this view";
+  share.title =
+    "Copy or bookmark this link to preserve search, filters and sort.";
+  share.href = `?catalog=${state.mode}#catalog`;
+  controls.append(share);
   section.append(controls);
 
   const filters = document.createElement("div");
@@ -1282,14 +1261,30 @@ function renderCatalog(
   const reset = button("Reset filters", "reset-product-filters");
   reset.className = "catalog-filter-reset";
   filters.append(reset);
-  section.append(filters);
-
-  section.append(
-    state.mode === "languages"
-      ? renderLanguageCatalog(catalog, state)
-      : renderLicenseCatalog(catalog, state),
+  if (state.mode === "licenses") {
+    const osi = selectControl(
+      "SPDX source flag",
+      "licenseOsi",
+      "any",
+      [
+        ["any", "All pinned identities"],
+        ["yes", "OSI-approved flag"],
+        ["no", "No OSI-approved flag"],
+      ],
+      false,
+    );
+    (osi.children[1] as HTMLSelectElement).dataset.action = "identity-osi";
+    filters.append(osi);
+  }
+  const note = paragraph(
+    "Assessment filters match known editorial values or explicit Unknown. Unassessed entries never inherit ratings.",
   );
-  section.append(renderIdentityIndex(state));
+  note.className = "catalog-filter-note";
+  filters.append(note);
+  const layout = document.createElement("div");
+  layout.className = "catalog-layout";
+  layout.append(filters, renderCatalogResults(catalog, state));
+  section.append(layout);
   const exportControl = button(
     "Export all 841 unassessed identities (CSV)",
     "export-unassessed-csv",
@@ -1554,6 +1549,21 @@ export function renderProductExperience(
 ): HTMLElement {
   const wrapper = document.createElement("div");
   wrapper.className = "product-experience";
+  const nav = document.createElement("nav");
+  nav.className = "catalog-navigation";
+  nav.setAttribute("aria-label", "Quick navigation");
+  for (const [href, label] of [
+    ["#catalog", "Skip to catalogue"],
+    ["?catalog=languages#catalog", "Browse languages"],
+    ["?catalog=licenses#catalog", "Browse licenses"],
+    ["#explore", "Project guides"],
+  ] as const) {
+    const link = document.createElement("a");
+    link.href = href;
+    link.textContent = label;
+    nav.append(link);
+  }
+  wrapper.append(nav);
   wrapper.append(
     renderHero(catalog),
     renderPreviewEvidenceInventory(catalog),

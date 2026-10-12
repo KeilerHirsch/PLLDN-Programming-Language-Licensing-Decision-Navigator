@@ -32,7 +32,51 @@ const smokeProbe = `
   const action = (name, field, value) =>
     document.querySelector('[data-action="' + name + '"][data-' + field + '="' + value + '"]');
 
+
+  async function checkProfileHistory(kind, id) {
+    const view = document.querySelector('[data-action="catalog-view"]');
+    view.value = "list";
+    view.dispatchEvent(new Event("change", { bubbles: true }));
+    await waitFor(() => document.querySelector(".catalog-view-list"), "changed profile view");
+    window.history.back();
+    await waitFor(() => new URLSearchParams(window.location.search).get(kind) === id &&
+      document.querySelector(".catalog-view-cards"), "Back restores detailed profile route");
+    const selected = kind === "candidate"
+      ? [...document.querySelectorAll(".identity-profile")].find(el => el.dataset.candidateId === id && el.open)?.closest("[data-catalog-entry]")
+      : [...document.querySelectorAll("[data-catalog-entry]")].find(el => el.dataset.entityId === id);
+    assert(selected && !selected.hidden, "Back must reveal the original pinned profile");
+    window.history.forward();
+    await waitFor(() => !new URLSearchParams(window.location.search).has(kind) &&
+      document.querySelector(".catalog-view-list"), "Forward restores changed view");
+  }
+
   try {
+    if (new URLSearchParams(window.location.search).get("probe") === "focus") {
+      await waitFor(() => document.querySelector("[data-catalog-visible-count]")?.textContent.includes("194 languages found"), "focus runtime");
+      const focusStatus = document.querySelector('[data-action="catalog-status"]');
+      focusStatus.value = "editorial";
+      focusStatus.dispatchEvent(new Event("change", { bubbles: true }));
+      await waitFor(() => document.querySelector("[data-catalog-visible-count]").textContent.includes("35 languages found"), "visible editorial focus targets");
+      const guide = action("select-use-case", "use-case-id", "web-backend");
+      guide.focus();
+      guide.click();
+      await waitFor(() => document.querySelector(".use-case-result"), "focused use-case selection");
+      assert(document.activeElement?.dataset.useCaseId === "web-backend", "use-case keyboard focus must remain on the chosen guide");
+      const selector = '[data-action="toggle-compare"][data-entity-id="language.go"]';
+      const catalogButton = document.querySelector("#catalog " + selector);
+      catalogButton.focus();
+      catalogButton.click();
+      await waitFor(() => document.querySelector("#catalog " + selector)?.textContent === "Remove from compare", "catalogue comparison");
+      assert(document.activeElement === document.querySelector("#catalog " + selector), "focus must remain on the exact catalogue comparison button");
+      const shortlistButton = document.querySelector(".use-case-result " + selector);
+      assert(shortlistButton, "duplicate shortlist comparison target must exist");
+      shortlistButton.focus();
+      shortlistButton.click();
+      await waitFor(() => document.querySelector(".use-case-result " + selector)?.textContent === "Add to compare", "shortlist comparison removal");
+      assert(document.activeElement === document.querySelector(".use-case-result " + selector), "focus must preserve the shortlist origin for duplicate entity buttons");
+      output.textContent = "PASS: stable keyboard focus across use-case and duplicate catalogue controls";
+      return;
+    }
     const requested = new URLSearchParams(window.location.search).get("candidate");
     if (requested) {
       await waitFor(
@@ -43,9 +87,9 @@ const smokeProbe = `
       );
       const selected = [...document.querySelectorAll(".identity-profile")]
         .find((entry) => entry.dataset.candidateId === requested);
-      assert(selected?.closest("[data-identity-index]")?.open,
-        "deep link must expand the unassessed index");
-      assert(!selected?.closest("li")?.hidden,
+      assert(selected?.closest("[data-catalog-entry]")?.dataset.catalogStatus === "unassessed",
+        "deep link must resolve an unassessed catalogue card");
+      assert(!selected?.closest("[data-catalog-entry]")?.hidden,
         "deep link must reveal the requested identity");
       assert(selected?.textContent?.includes("UNKNOWN"),
         "deep link must preserve UNKNOWN assessment boundary");
@@ -54,15 +98,42 @@ const smokeProbe = `
         document.querySelector('[data-action="catalog-mode"][aria-pressed="true"]')?.dataset.mode === expectedMode,
         "deep link must route to the correct catalogue mode",
       );
-      output.textContent = "PASS: pinned candidate permalink";
+      await checkProfileHistory("candidate", requested);
+      output.textContent = "PASS: pinned candidate permalink and Back/Forward";
+      return;
+    }
+    const linked = new URLSearchParams(window.location.search);
+    if(linked.has("profile") || linked.has("catalog")) {
+      await waitFor(()=>document.querySelector("[data-catalog-visible-count]")?.textContent.includes("found"),"direct catalogue navigation");
+      const visible = [...document.querySelectorAll("[data-catalog-entry]:not([hidden])")];
+      if(linked.has("profile")) {
+        assert(visible.some(card=>card.dataset.entityId===linked.get("profile")),"editorial permalink must resolve only a real profile");
+        assert(document.querySelector(".catalog-view-cards"),"direct profile must reveal the detailed card view");
+        await checkProfileHistory("profile", linked.get("profile"));
+      } else if(linked.has("q")) {
+        assert(visible.length===1 && visible[0].dataset.catalogStatus==="unassessed","shared search must restore the real unassessed result");
+        const share = new URL(document.querySelector(".catalog-share").href);
+        for(const key of ["catalog","q","status","order"]) assert(share.searchParams.get(key)===linked.get(key),"shared state lost "+key);
+      } else {
+        const expected = linked.get("catalog") === "licenses" ? 714 : 194;
+        assert(document.querySelectorAll("[data-catalog-entry]").length===expected,"direct catalogue must contain every pinned identity");
+        assert(visible.length>0,"irrelevant mode-specific URL flags must not hide all results");
+      }
+      output.textContent = "PASS: direct catalogue, profile and shared filter navigation";
       return;
     }
     await waitFor(
       () => document.querySelector(".product-experience") &&
-        document.querySelector("[data-catalog-visible-count]").textContent.includes("35 languages shown"),
+        document.querySelector("[data-catalog-visible-count]").textContent.includes("194 languages found"),
       "trusted Pages runtime and language catalogue",
     );
 
+    assert(document.querySelectorAll("[data-catalog-entry]").length===194 && document.querySelectorAll("[data-identity-entry]").length===159,"all language identities must be first-class results");
+    assert(document.querySelectorAll("[data-catalog-grid]").length===1,"one combined result grid");
+    const status = document.querySelector('[data-action="catalog-status"]');
+    status.value = "editorial";
+    status.dispatchEvent(new Event("change",{bubbles:true}));
+    await waitFor(()=>document.querySelector("[data-catalog-visible-count]").textContent.includes("35 languages found"),"editorial status filter");
     const heroStats = document.querySelector(".product-stats")?.textContent ?? "";
     for (const expected of [
       "194 language identities",
@@ -209,33 +280,27 @@ const smokeProbe = `
       "language comparison must still render after removal",
     );
 
+    const allStatus = document.querySelector('[data-action="catalog-status"]');
+    allStatus.focus();
+    allStatus.value = "all";
+    allStatus.dispatchEvent(new Event("change",{bubbles:true}));
+    await waitFor(()=>document.querySelector("[data-catalog-visible-count]").textContent.includes("194 languages found"),"all language identities");
+    assert(document.activeElement?.dataset.action==="catalog-status","status filter must retain keyboard focus after rerender");
     const search = document.querySelector('[data-action="catalog-search"]');
-    const languageIndex = document.querySelector("[data-identity-index]");
-    languageIndex.open = true;
-    assert(
-      document.querySelectorAll("[data-identity-entry]:not([hidden])").length === 60,
-      "identity catalogue should show one initial page of 60",
-    );
-    action("identity-more", "identity-more", "true").click();
-    assert(
-      document.querySelectorAll("[data-identity-entry]:not([hidden])").length === 120,
-      "show-more must reveal the next 60, not recalculate assessments",
-    );
-    assert(
-      document.querySelectorAll("[data-identity-entry]").length > 65,
-      "expanded language identities should exist without being rated",
-    );
+    assert(document.querySelectorAll("[data-catalog-entry]:not([hidden])").length===60,"one unified page of 60 results");
+    action("identity-more","identity-more","true").click();
+    assert(document.querySelectorAll("[data-catalog-entry]:not([hidden])").length===120,"load more must reveal next 60 unified results");
+    assert(document.querySelectorAll("[data-identity-entry]").length===159,"exactly all 159 unassessed languages, without new ratings");
     search.value = "agda";
     search.dispatchEvent(new Event("input", { bubbles: true }));
     assert(
-      document.querySelector("[data-catalog-visible-count]").textContent.includes("0 languages shown"),
-      "unassessed language search should not invent profiled matches",
+      document.querySelector("[data-catalog-visible-count]").textContent.includes("1 language found") && document.querySelector("[data-catalog-visible-count]").textContent.includes("0 editorial"),
+      "unassessed language search must count a real identity without inventing a rated profile",
     );
     assert(
-      document.querySelector("[data-identity-index]").open &&
       Array.from(document.querySelectorAll("[data-identity-entry]:not([hidden])"))
         .some((entry) =>
-          entry.querySelector("span")?.textContent === "Agda" &&
+          entry.querySelector("h3")?.textContent === "Agda" &&
           entry.querySelector(".identity-profile")?.dataset.candidateId ===
             "candidate.language.61676461" &&
           entry.textContent?.includes("UNKNOWN"),
@@ -258,7 +323,7 @@ const smokeProbe = `
     search.value = "plldn-no-match-zzxyy";
     search.dispatchEvent(new Event("input", { bubbles: true }));
     assert(
-      document.querySelector("[data-catalog-visible-count]").textContent.includes("0 languages shown"),
+      document.querySelector("[data-catalog-visible-count]").textContent.includes("0 languages found"),
       "zero-match language count",
     );
     assert(
@@ -272,14 +337,14 @@ const smokeProbe = `
       "clearing a search must hide the empty state",
     );
     assert(
-      document.querySelector("[data-catalog-visible-count]").textContent.includes("35 languages shown"),
+      document.querySelector("[data-catalog-visible-count]").textContent.includes("194 languages found"),
       "clearing a search must restore all languages",
     );
 
     action("catalog-mode", "mode", "licenses").click();
     await waitFor(
       () => document.querySelector("#catalog h2").textContent === "License navigator" &&
-        document.querySelector("[data-catalog-visible-count]").textContent.includes("32 licenses shown"),
+        document.querySelector("[data-catalog-visible-count]").textContent.includes("714 licenses found"),
       "switching to license mode",
     );
 
@@ -364,52 +429,37 @@ const smokeProbe = `
       "removing license must free a comparison slot",
     );
 
-    const licenseIndex = document.querySelector("[data-identity-index]");
-    licenseIndex.open = true;
-    assert(
-      document.querySelectorAll("[data-identity-entry]").length === 682 &&
-      document.querySelectorAll("[data-identity-entry]:not([hidden])").length === 60,
-      "active SPDX identities must paginate independently of detailed profiles",
-    );
+    assert(document.querySelectorAll("[data-identity-entry]").length===682 && document.querySelectorAll("[data-catalog-entry]").length===714,"all pinned license identities must share the main catalogue");
+    const editorialStatus = document.querySelector('[data-action="catalog-status"]');
+    editorialStatus.value = "editorial";
+    editorialStatus.dispatchEvent(new Event("change", { bubbles: true }));
+    await waitFor(() => document.querySelector("[data-catalog-visible-count]").textContent.includes("32 licenses found"), "editorial license source-flag baseline");
+    const editorialFlag = document.querySelector('[data-action="identity-osi"]');
+    editorialFlag.value = "yes";
+    editorialFlag.dispatchEvent(new Event("change", { bubbles: true }));
+    const flaggedEditorial = [...document.querySelectorAll("[data-catalog-entry]:not([hidden])")];
+    assert(flaggedEditorial.length > 0 && flaggedEditorial.some(card => card.dataset.entityId === "license.mit"), "SPDX source flag must include real editorial MIT identity");
+    assert(flaggedEditorial.every(card => card.dataset.identityOsiApproved === "true"), "editorial source flag must use pinned SPDX metadata");
+    editorialFlag.value = "any";
+    editorialFlag.dispatchEvent(new Event("change", { bubbles: true }));
+    const restoreAll = document.querySelector('[data-action="catalog-status"]');
+    restoreAll.value = "all";
+    restoreAll.dispatchEvent(new Event("change", { bubbles: true }));
+    await waitFor(() => document.querySelector("[data-catalog-visible-count]").textContent.includes("714 licenses found"), "restore all license identities");
     const osiFilter = document.querySelector('[data-action="identity-osi"]');
     osiFilter.value = "yes";
-    osiFilter.dispatchEvent(new Event("change", { bubbles: true }));
-    assert(
-      document.querySelector("[data-identity-count]").textContent.includes("of 121") &&
-      Array.from(document.querySelectorAll("[data-identity-entry]:not([hidden])"))
-        .every((entry) => entry.dataset.identityOsiApproved === "true"),
-      "OSI filter must use pinned SPDX flags, not invented license analysis",
-    );
+    osiFilter.dispatchEvent(new Event("change",{bubbles:true}));
+    assert(document.querySelectorAll("[data-catalog-entry]:not([hidden])").length > 0 && [...document.querySelectorAll("[data-catalog-entry]:not([hidden])")].every(entry=>entry.dataset.identityOsiApproved==="true"),"SPDX flag filter must use recorded source metadata");
     osiFilter.value = "no";
-    osiFilter.dispatchEvent(new Event("change", { bubbles: true }));
-    assert(
-      document.querySelector("[data-identity-count]").textContent.includes("of 561"),
-      "non-OSI-flagged SPDX entries must remain discoverable",
-    );
+    osiFilter.dispatchEvent(new Event("change",{bubbles:true}));
+    assert(document.querySelectorAll("[data-catalog-entry]:not([hidden])").length > 0 && [...document.querySelectorAll("[data-catalog-entry]:not([hidden])")].every(entry=>entry.dataset.identityOsiApproved==="false"),"non-approved source flags must remain discoverable");
     osiFilter.value = "any";
-    osiFilter.dispatchEvent(new Event("change", { bubbles: true }));
-
+    osiFilter.dispatchEvent(new Event("change",{bubbles:true}));
     const licenseSearch = document.querySelector('[data-action="catalog-search"]');
     licenseSearch.value = "Artistic-2.0";
-    licenseSearch.dispatchEvent(new Event("input", { bubbles: true }));
-    assert(
-      document.querySelector("[data-identity-index]").open &&
-      Array.from(document.querySelectorAll("[data-identity-entry]:not([hidden]) a"))
-        .some((link) => link.textContent === "Artistic-2.0" &&
-          link.href === "https://spdx.org/licenses/Artistic-2.0.html"),
-      "license identity search must show canonical SPDX link",
-    );
-    assert(
-      Array.from(document.querySelectorAll("[data-identity-entry]:not([hidden])"))
-        .some((entry) =>
-          entry.querySelector(".identity-profile")?.dataset.candidateId ===
-            "candidate.license.artistic-2.0" &&
-          entry.textContent?.includes("UNKNOWN") &&
-          entry.querySelector(".identity-profile a")?.href ===
-            "https://spdx.org/licenses/Artistic-2.0.html",
-        ),
-      "license detail must preserve UNKNOWN and pinned SPDX provenance",
-    );
+    licenseSearch.dispatchEvent(new Event("input",{bubbles:true}));
+    const artistic = [...document.querySelectorAll("[data-identity-entry]:not([hidden])")].find(entry=>entry.querySelector(".identity-profile")?.dataset.candidateId==="candidate.license.artistic-2.0");
+    assert(artistic?.textContent.includes("UNKNOWN") && artistic.querySelector(".identity-profile a")?.href==="https://spdx.org/licenses/Artistic-2.0.html","license search must preserve UNKNOWN and canonical pinned SPDX provenance");
     const artisticLink = [...document.querySelectorAll(".identity-profile")]
       .find((entry) => entry.dataset.candidateId === "candidate.license.artistic-2.0")
       ?.querySelector("[data-candidate-permalink]");
@@ -434,7 +484,7 @@ const smokeProbe = `
     );
     const filtered = document.querySelectorAll("#catalog [data-catalog-entry]").length;
     assert(
-      document.querySelector("[data-catalog-visible-count]").textContent.includes(filtered + " licenses shown"),
+      document.querySelector("[data-catalog-visible-count]").textContent.includes(filtered + " licenses found"),
       "license result counter must reflect the structured filter",
     );
 
@@ -518,8 +568,15 @@ async function main(): Promise<void> {
       throw new Error("Loopback server address unavailable");
 
     for (const [width, suffix] of [
+      [1280, "?probe=focus"],
       [1280, ""],
       [390, ""],
+      [1280, "?catalog=licenses"],
+      [390, "?catalog=languages&spdx=yes"],
+      [390, "?profile=language.rust"],
+      [1280, "?profile=license.mit"],
+      [1280, "?catalog=languages&q=Agda&status=unassessed&order=desc"],
+      [390, "?catalog=licenses&q=Artistic-2.0&status=unassessed&order=desc"],
       [1280, "?candidate=candidate.language.61676461"],
       [1280, "?candidate=candidate.license.artistic-2.0"],
     ] as const) {
