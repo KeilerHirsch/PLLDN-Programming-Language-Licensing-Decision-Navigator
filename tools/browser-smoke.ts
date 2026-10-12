@@ -115,7 +115,9 @@ const smokeProbe = `
         const share = new URL(document.querySelector(".catalog-share").href);
         for(const key of ["catalog","q","status","order"]) assert(share.searchParams.get(key)===linked.get(key),"shared state lost "+key);
       } else {
-        assert(document.querySelectorAll("[data-catalog-entry]").length===714,"direct license catalogue must contain all 714 identities");
+        const expected = linked.get("catalog") === "licenses" ? 714 : 194;
+        assert(document.querySelectorAll("[data-catalog-entry]").length===expected,"direct catalogue must contain every pinned identity");
+        assert(visible.length>0,"irrelevant mode-specific URL flags must not hide all results");
       }
       output.textContent = "PASS: direct catalogue, profile and shared filter navigation";
       return;
@@ -570,6 +572,7 @@ async function main(): Promise<void> {
       [1280, ""],
       [390, ""],
       [1280, "?catalog=licenses"],
+      [390, "?catalog=languages&spdx=yes"],
       [390, "?profile=language.rust"],
       [1280, "?profile=license.mit"],
       [1280, "?catalog=languages&q=Agda&status=unassessed&order=desc"],

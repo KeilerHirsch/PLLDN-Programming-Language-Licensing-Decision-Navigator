@@ -53,15 +53,17 @@ export function readCatalogNavigation(search: string): CatalogNavigation {
     const value = p.get(key);
     if (value && options[key].includes(value)) filters[key] = value;
   }
+  const mode = p.get("catalog") === "licenses" ? "licenses" : "languages";
   const status = p.get("status"),
     spdx = p.get("spdx");
   return {
-    mode: p.get("catalog") === "licenses" ? "licenses" : "languages",
+    mode,
     query: (p.get("q") ?? "").trim().slice(0, 200),
     status: status === "editorial" || status === "unassessed" ? status : "all",
     order: p.get("order") === "desc" ? "desc" : "asc",
     view: p.get("view") === "cards" ? "cards" : "list",
-    spdx: spdx === "yes" || spdx === "no" ? spdx : "any",
+    spdx:
+      mode === "licenses" && (spdx === "yes" || spdx === "no") ? spdx : "any",
     filters,
   };
 }
@@ -71,7 +73,8 @@ export function catalogNavigationHref(state: CatalogNavigation): string {
   if (state.status !== "all") p.set("status", state.status);
   if (state.order !== "asc") p.set("order", state.order);
   if (state.view !== "list") p.set("view", state.view);
-  if (state.spdx !== "any") p.set("spdx", state.spdx);
+  if (state.mode === "licenses" && state.spdx !== "any")
+    p.set("spdx", state.spdx);
   for (const key of Object.keys(options) as (keyof ProductFilterState)[]) {
     if (
       state.filters[key] !== "any" &&
