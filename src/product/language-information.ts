@@ -3,10 +3,7 @@
 import raw from "../../catalog/language-information.v1.json" with {
   type: "json",
 };
-import aG from "../../catalog/language-information-a-g.v1.json" with {
-  type: "json",
-};
-import hP from "../../catalog/language-information-h-p.v1.json" with {
+import gP from "../../catalog/language-information-g-p.v1.json" with {
   type: "json",
 };
 import qZ from "../../catalog/language-information-q-z.v1.json" with {
@@ -261,7 +258,7 @@ const expectedNames = [
   ]),
 ];
 export const LANGUAGE_INFORMATION = validateLanguageInformation(
-  { ...raw, records: [...aG, ...hP, ...qZ] },
+  { ...raw, records: [...raw.records, ...gP, ...qZ] },
   expectedNames,
 );
 const byName = new Map(

@@ -1,5 +1,201 @@
 [
   {
+    "name": "GAMS",
+    "summary": "GAMS describes mathematical optimization problems using sets, parameters, variables and equations, then connects the resulting models to selected solvers.",
+    "uses": [
+      "Mathematical optimization models",
+      "Operations-research decision support"
+    ],
+    "links": [
+      {
+        "label": "GAMS language overview",
+        "url": "https://www.gams.com/products/gams-language/"
+      },
+      {
+        "label": "GAMS release documentation",
+        "url": "https://www.gams.com/latest/docs/"
+      },
+      {
+        "label": "GAMS implementation history",
+        "url": "https://www.gams.com/blog/2025/06/gams-under-the-hood-the-delphi-to-c-transition/"
+      }
+    ],
+    "introduced": 1976,
+    "introducedSource": "https://www.gams.com/blog/2025/06/gams-under-the-hood-the-delphi-to-c-transition/",
+    "lifecycle": "maintained",
+    "lifecycleNote": "GAMS lists the September 2026 54.5.0 release in its documentation center.",
+    "lifecycleSource": "https://www.gams.com/latest/docs/"
+  },
+  {
+    "name": "GAP",
+    "summary": "GAP provides a programming language and libraries for computational discrete algebra, with a particular focus on group-theoretic computations.",
+    "uses": ["Computational group theory", "Discrete algebra research"],
+    "links": [
+      {
+        "label": "GAP official repository",
+        "url": "https://github.com/gap-system/gap"
+      },
+      {
+        "label": "GAP system release",
+        "url": "https://github.com/gap-system/gap/releases/tag/v4.16.1"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "GAP system published v4.16.1 on 2026-08-23.",
+    "lifecycleSource": "https://github.com/gap-system/gap/releases/tag/v4.16.1"
+  },
+  {
+    "name": "GDScript",
+    "summary": "GDScript is an indentation-based, gradually typed language built specifically for Godot, integrating object-oriented scripts with the engine's game objects and tools.",
+    "uses": ["Godot game behavior", "Godot content and tool scripts"],
+    "links": [
+      {
+        "label": "Godot GDScript reference",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "GLSL",
+    "summary": "GLSL is OpenGL's shading language for programmable graphics stages, expressing operations that run as shaders rather than ordinary CPU application code.",
+    "uses": ["OpenGL graphics shaders", "GPU rendering effects"],
+    "links": [
+      {
+        "label": "Khronos OpenGL documentation",
+        "url": "https://www.khronos.org/opengl/"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "Gherkin",
+    "summary": "Gherkin describes behavior examples as structured scenarios with Given, When and Then steps; Cucumber connects those steps to executable test definitions.",
+    "uses": [
+      "Executable acceptance specifications",
+      "Behavior-driven test scenarios"
+    ],
+    "links": [
+      {
+        "label": "Cucumber Gherkin reference",
+        "url": "https://cucumber.io/docs/gherkin/reference/"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "Gleam",
+    "summary": "Gleam is a typed functional language that runs on the Erlang virtual machine and also compiles to JavaScript, interoperating with Erlang and Elixir packages.",
+    "uses": [
+      "Concurrent BEAM services",
+      "JavaScript-targeted application code"
+    ],
+    "links": [
+      {
+        "label": "Gleam language project",
+        "url": "https://gleam.run/"
+      },
+      {
+        "label": "Gleam compiler release",
+        "url": "https://github.com/gleam-lang/gleam/releases/tag/v1.19.1"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "Gleam compiler published v1.19.1 on 2026-10-07.",
+    "lifecycleSource": "https://github.com/gleam-lang/gleam/releases/tag/v1.19.1"
+  },
+  {
+    "name": "Gnuplot",
+    "summary": "Gnuplot scripts describe plots of functions and data using commands such as plot and splot, producing two-dimensional charts and three-dimensional views.",
+    "uses": ["Scientific data plotting", "Scripted chart generation"],
+    "links": [
+      {
+        "label": "Gnuplot project and release history",
+        "url": "https://www.gnuplot.info/"
+      }
+    ],
+    "introduced": 1986,
+    "introducedSource": "https://www.gnuplot.info/",
+    "lifecycle": "maintained",
+    "lifecycleNote": "The gnuplot implementation lists version 6.0.5 released in July 2026.",
+    "lifecycleSource": "https://www.gnuplot.info/"
+  },
+  {
+    "name": "Go",
+    "summary": "Go is a statically typed language that compiles to machine code and includes garbage collection, goroutines and channels, with standard libraries for networking and application tooling.",
+    "uses": ["Network services", "Command-line tools"],
+    "links": [
+      {
+        "label": "Go documentation",
+        "url": "https://go.dev/doc/"
+      },
+      {
+        "label": "Go release history",
+        "url": "https://go.dev/doc/devel/release"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "maintained",
+    "lifecycleNote": "The Go project reports Go 1.27.2, including security and runtime fixes, on 8 October 2026.",
+    "lifecycleSource": "https://go.dev/doc/devel/release"
+  },
+  {
+    "name": "Gosu",
+    "summary": "Gosu is a typed JVM language with Java interoperability, an open type system, extension methods, structural typing and script-style program files.",
+    "uses": ["JVM application code", "Java-integrated scripts"],
+    "links": [
+      {
+        "label": "Gosu language project",
+        "url": "https://gosu-lang.github.io/"
+      }
+    ],
+    "introduced": null,
+    "introducedSource": null,
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
+    "name": "Groovy",
+    "summary": "Groovy is a Java-like JVM language supporting static and dynamic typing, closures and metaprogramming, with direct interoperability with Java libraries.",
+    "uses": [
+      "Build and automation scripts",
+      "JVM applications and domain-specific languages"
+    ],
+    "links": [
+      {
+        "label": "Apache Groovy project",
+        "url": "https://groovy-lang.org/"
+      },
+      {
+        "label": "Apache Groovy release chronology",
+        "url": "https://www.groovy-lang.org/changelogs.html"
+      }
+    ],
+    "introduced": 2003,
+    "introducedSource": "https://www.groovy-lang.org/changelogs.html",
+    "lifecycle": "unknown",
+    "lifecycleNote": null,
+    "lifecycleSource": null
+  },
+  {
     "name": "HCL",
     "summary": "HashiCorp Configuration Language provides blocks, attributes and expressions for structured configuration; tools such as Terraform define their own semantics on top.",
     "uses": [
