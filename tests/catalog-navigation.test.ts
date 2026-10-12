@@ -95,3 +95,50 @@ test("A-Z and Z-A order are stable and handle punctuation and Unicode", () => {
     ["Rust", "Élan", "C++", "C#", "Agda"],
   );
 });
+test("language discovery URLs preserve independent usage, era and lifecycle facets", () => {
+  for (const order of ["common", "oldest", "newest", "lifecycle"]) {
+    const state = readCatalogNavigation(
+      "?catalog=languages&usage=ranked&era=classic&lifecycle=maintained&order=" + order,
+    );
+    assert.deepEqual(state.discovery, {
+      usage: "ranked",
+      era: "classic",
+      lifecycle: "maintained",
+    });
+    assert.equal(state.order, order);
+    assert.deepEqual(
+      readCatalogNavigation(catalogNavigationHref(state).replace(/#.*$/u, "")),
+      state,
+    );
+  }
+});
+test("language discovery rejects invented classifications and does not leak into license URLs", () => {
+  const invalid = readCatalogNavigation(
+    "?usage=popular&era=forgotten&lifecycle=extinct&order=downloads",
+  );
+  assert.deepEqual(invalid.discovery, {
+    usage: "any",
+    era: "any",
+    lifecycle: "any",
+  });
+  assert.equal(invalid.order, "asc");
+  for (const order of ["common", "oldest", "newest", "lifecycle"]) {
+    const license = readCatalogNavigation(
+      "?catalog=licenses&usage=ranked&era=classic&lifecycle=retired&order=" + order,
+    );
+    assert.deepEqual(license.discovery, invalid.discovery);
+    assert.equal(license.order, "asc");
+    const href = catalogNavigationHref({
+      ...license,
+      order: order as typeof license.order,
+      discovery: { usage: "ranked", era: "classic", lifecycle: "retired" },
+    });
+    for (const key of ["usage", "era", "lifecycle", "order"]) {
+      assert.equal(new URL(href, "https://example.test/").searchParams.has(key), false);
+    }
+  }
+  assert.equal(
+    readCatalogNavigation("?catalog=licenses&order=desc").order,
+    "desc",
+  );
+});
