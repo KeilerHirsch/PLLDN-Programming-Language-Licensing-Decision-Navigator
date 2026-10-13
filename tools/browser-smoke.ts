@@ -282,6 +282,19 @@ const smokeProbe = `
           "language candidate permalink must open and focus its full reader");
       }
       await checkProfileHistory("candidate", requested);
+      if (expectedMode === "languages") {
+        window.history.back();
+        await waitFor(() => new URLSearchParams(window.location.search).get("candidate") === requested,
+          "candidate restored before changing search");
+        const search = document.querySelector('[data-action="catalog-search"]');
+        search.value = "Rust";
+        search.dispatchEvent(new Event("input", { bubbles: true }));
+        assert(!new URLSearchParams(window.location.search).has("candidate"),
+          "search must release the pinned identity immediately");
+        assert([...document.querySelectorAll("[data-catalog-entry]:not([hidden])")]
+          .some(card => card.dataset.catalogName === "Rust"),
+          "first search input after a permalink must immediately reveal Rust");
+      }
       output.textContent = "PASS: pinned candidate permalink and Back/Forward";
       return;
     }
