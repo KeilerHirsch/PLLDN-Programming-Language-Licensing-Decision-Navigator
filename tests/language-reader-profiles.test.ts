@@ -6,6 +6,8 @@ import {
   type ReaderFact,
   type ReaderSectionKey,
   type ReaderSource,
+  readerDate,
+  readerSafeHttps,
   validateReaderProfiles,
 } from "../src/product/language-reader-validation.ts";
 
@@ -177,4 +179,135 @@ test("component licenses preserve unknown identities and reject malformed expres
   );
   Object.assign(record.licenses[0], { source_ids: ["not-a-license-source"] });
   assert.throws(() => validateReaderProfiles([record], ["Example"]));
+});
+
+test("source primitives reject invalid dates, URLs and excessive values", () => {
+  for (const value of [
+    null,
+    1,
+    "",
+    "not-a-url",
+    `https://${"x".repeat(2050)}`,
+    "https://host/a b",
+  ])
+    assert.equal(readerSafeHttps(value), false);
+  assert.equal(readerSafeHttps("https://docs.example.org/a#section"), true);
+  for (const value of [null, 12, "today", "2026-13-01", "2026-02-29"])
+    assert.equal(readerDate(value), false);
+  assert.equal(readerDate("2024-02-29"), true);
+});
+test("strict descriptive bounds reject partial, empty and malformed records", () => {
+  assert.throws(() => validateReaderProfiles(null, ["Example"]));
+  assert.throws(() => validateReaderProfiles([fixture()], []));
+  assert.throws(() =>
+    validateReaderProfiles([fixture()], ["Example", "Example"]),
+  );
+  const transforms: ((record: ReturnType<typeof fixture>) => void)[] = [
+    (record) => {
+      record.sections.fit.text = "";
+    },
+    (record) => {
+      record.sections.fit.text = "x".repeat(901);
+    },
+    (record) => {
+      record.sections.fit.text = "text\u0000";
+    },
+    (record) => {
+      record.sections.fit.source_ids = ["guide", "guide"];
+    },
+    (record) => {
+      record.sources[0].id = "Bad ID";
+    },
+    (record) => {
+      record.sources[0].label = "";
+    },
+    (record) => {
+      record.implementation.name = "";
+    },
+    (record) => {
+      record.implementation.source_ids = ["unknown"];
+    },
+    (record) => {
+      record.example.kind = "shell-eval";
+    },
+    (record) => {
+      record.example.run_instructions = "";
+    },
+    (record) => {
+      record.example.try_url = "javascript:alert(1)" as never;
+    },
+    (record) => {
+      record.example.code = "";
+    },
+    (record) => {
+      record.example.code = "bad\u0001";
+    },
+    (record) => {
+      record.licenses[0].role = "guessed-role";
+    },
+    (record) => {
+      record.licenses[0].scope = "";
+    },
+    (record) => {
+      Object.assign(record, {
+        licenses: [record.licenses[0], record.licenses[0]],
+      });
+    },
+    (record) => {
+      Object.assign(record, { sources: [] });
+    },
+    (record) => {
+      Object.assign(record, { licenses: [] });
+    },
+  ];
+  for (const transform of transforms) {
+    const record = fixture();
+    transform(record);
+    assert.throws(() => validateReaderProfiles([record], ["Example"]));
+  }
+});
+test("SPDX syntax retains choices and exceptions and rejects incomplete operators", () => {
+  for (const expression of [
+    "MIT OR (Apache-2.0 AND BSD-3-Clause)",
+    "GPL-3.0-or-later WITH GCC-exception-3.1",
+  ]) {
+    const record = fixture();
+    record.licenses[0].spdx_expression = expression;
+    assert.equal(
+      validateReaderProfiles([record], ["Example"])[0]?.licenses[0]
+        ?.spdx_expression,
+      expression,
+    );
+  }
+  for (const expression of [
+    "MIT OR",
+    "AND MIT",
+    "MIT Apache-2.0",
+    "(MIT OR Apache-2.0",
+    "MIT WITH",
+    "MIT OR (Apache-2.0 AND)",
+    "MIT;alert()",
+    "MIT WITH OR",
+    "(MIT) WITH LLVM-exception",
+  ]) {
+    const record = fixture();
+    record.licenses[0].spdx_expression = expression;
+    assert.throws(
+      () => validateReaderProfiles([record], ["Example"]),
+      expression,
+    );
+  }
+});
+
+test("enum fields reject JSON arrays and objects without string coercion", () => {
+  for (const kind of [["program"], ["configuration"], { name: "program" }, null, 1]) {
+    const record = fixture();
+    Object.assign(record.example, { kind });
+    assert.throws(() => validateReaderProfiles([record], ["Example"]));
+  }
+  for (const role of [["runtime"], ["implementation"], { name: "runtime" }, null, 1]) {
+    const record = fixture();
+    Object.assign(record.licenses[0], { role });
+    assert.throws(() => validateReaderProfiles([record], ["Example"]));
+  }
 });
