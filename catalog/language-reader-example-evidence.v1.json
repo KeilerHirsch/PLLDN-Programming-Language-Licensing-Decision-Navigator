@@ -1,4 +1,27 @@
 {
   "schema_version": 1,
-  "records": []
+  "records": [
+    {
+      "name": "JavaScript",
+      "producer": "node-console-v1",
+      "filename": "hello.js",
+      "code": "console.log(\"PLLDN\");\n",
+      "run_instructions": "With Node.js installed, run node hello.js. In a browser, the same statement writes to developer-console output.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "stdout": "PLLDN\n",
+      "toolchain": "Node.js 24.15.0",
+      "checked_on": "2026-10-13"
+    },
+    {
+      "name": "TypeScript",
+      "producer": "typescript-console-v1",
+      "filename": "hello.ts",
+      "code": "const message: string = \"PLLDN\";\nconsole.log(message);\n",
+      "run_instructions": "With TypeScript and Node.js installed, run tsc --strict --target ES2022 hello.ts from a directory without tsconfig.json, then node hello.js. For a standalone file inside a configured project with TypeScript 6 or later, add --ignoreConfig; use tsc -p for the project's own configuration.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "stdout": "PLLDN\n",
+      "toolchain": "Node.js 24.15.0 / TypeScript 7.0.2",
+      "checked_on": "2026-10-13"
+    }
+  ]
 }

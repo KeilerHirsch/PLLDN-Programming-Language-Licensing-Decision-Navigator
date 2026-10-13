@@ -67,13 +67,15 @@ try {
     );
     assert(profile, "Missing example profile");
     assert.equal(profile.example.filename, filename);
+    const code = profile.example.code;
+    assert(typeof code === "string", "Missing trusted example code");
     const text = readFileSync(source, "utf8").replaceAll("\r\n", "\n");
     const header =
       "// SPDX-FileCopyrightText: 2026 PLLDN contributors\n// SPDX-License-Identifier: EUPL-1.2\n";
     assert(text.startsWith(header), "Unexpected trusted example source");
     assert.equal(
       text.slice(header.length),
-      profile.example.code,
+      code,
       "Example data and reviewed executable source differ",
     );
     let stdout: string;
@@ -86,6 +88,7 @@ try {
       assert.equal(
         execute([
           join(root, "node_modules/typescript/bin/tsc"),
+          "--ignoreConfig",
           "--strict",
           "--target",
           "ES2022",
@@ -108,7 +111,7 @@ try {
       producer:
         language === "JavaScript" ? "node-console-v1" : "typescript-console-v1",
       filename,
-      code: profile.example.code,
+      code,
       run_instructions: profile.example.run_instructions,
       expected_result: profile.example.expected_result,
       stdout,

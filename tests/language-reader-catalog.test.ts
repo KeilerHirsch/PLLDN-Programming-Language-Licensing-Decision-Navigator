@@ -52,10 +52,9 @@ test("license routes accept only exact catalog identities", () => {
     assert.equal(licenseCatalogHref(expression), null);
 });
 test("receipts never promote reference or undocumented language examples", () => {
-  assert.equal(
-    readerExampleStatus(readerProfileByName("BASIC")!).status,
-    "documented",
-  );
+  const basic = readerProfileByName("BASIC");
+  assert(basic);
+  assert.equal(readerExampleStatus(basic).status, "documented");
   for (const name of ["JavaScript", "TypeScript"]) {
     const profile = readerProfileByName(name);
     assert(profile);

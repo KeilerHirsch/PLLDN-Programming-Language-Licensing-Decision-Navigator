@@ -227,9 +227,10 @@ export function validateReaderProfiles(
       "verification",
     ]);
     requireValue(
-      ["program", "configuration", "query", "markup", "reference"].includes(
-        String(example.kind),
-      ),
+      typeof example.kind === "string" &&
+        ["program", "configuration", "query", "markup", "reference"].includes(
+          example.kind,
+        ),
       "invalid example kind",
     );
     requireValue(
@@ -291,8 +292,9 @@ export function validateReaderProfiles(
       ]);
       requireValue(
         text(license.component, 200) &&
+          typeof license.role === "string" &&
           ["implementation", "runtime", "standard-library"].includes(
-            String(license.role),
+            license.role,
           ) &&
           (license.spdx_expression === null ||
             expression(license.spdx_expression)) &&

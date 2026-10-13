@@ -1,0 +1,950 @@
+[
+  {
+    "name": "Cython",
+    "implementation": {
+      "name": "Cython 3 Python-extension compiler",
+      "version_scope": "Cython 3 and its documented in-place extension workflow; Python and the native C toolchain are separate prerequisites.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Cython two-stage native extension build",
+        "url": "https://cython.readthedocs.io/en/latest/src/quickstart/build.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "typing",
+        "label": "Cython static types, conversion and overflow behavior",
+        "url": "https://cython.readthedocs.io/en/latest/src/quickstart/cythonize.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Cython Apache licence",
+        "url": "https://raw.githubusercontent.com/cython/cython/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build Python extension modules and add C-level types where measured workload behavior justifies them.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install Cython, Python build support and a compatible C compiler; generated extensions must be importable by the selected Python.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Cython translates .pyx/.py to C, then a native compiler produces a .so or Windows .pyd extension.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "C types change arithmetic semantics: conversion to an int can raise OverflowError, while C arithmetic overflow is not checked.",
+        "source_ids": ["typing"]
+      },
+      "tooling": {
+        "text": "Use setuptools for packaged builds, cythonize -i for a small in-place module or notebook integration for exploration.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Pure-Python typing syntax benefits from Cython 3; preserve both Cython and native build settings when distributing extensions.",
+        "source_ids": ["typing", "guide"]
+      },
+      "costs": {
+        "text": "The compiler is Apache-2.0; Python, native libraries and build-tool dependencies have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "totals.pyx",
+      "code": "def total(int first, int second, int third):\n    return first + second + third",
+      "run_instructions": "With Python, Cython, setuptools and a supported C compiler installed, run cythonize -i totals.pyx. In the same directory run python -c \"from totals import total; print(total(2, 4, 6))\".",
+      "expected_result": "The imported extension function returns 12, which Python prints.",
+      "source_ids": ["guide", "typing"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Cython 3 Python-extension compiler",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "D",
+    "implementation": {
+      "name": "DMD native compiler with Phobos",
+      "version_scope": "DMD's documented compile/link/run workflow and the corresponding Phobos standard library.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "D application/system scope, modules, resource management and contracts",
+        "url": "https://dlang.org/overview.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "compiler",
+        "label": "DMD native compiler and build switches",
+        "url": "https://dlang.org/dmd-windows.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "compiler-license",
+        "label": "DMD Boost Software Licence",
+        "url": "https://raw.githubusercontent.com/dlang/dmd/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "library-license",
+        "label": "Phobos Boost Software Licence",
+        "url": "https://raw.githubusercontent.com/dlang/phobos/master/LICENSE_1_0.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Write native systems and application programs with modules, templates and direct OS interfaces.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install DMD and its linker/runtime environment; imports make module declarations available without a separate header workflow.",
+        "source_ids": ["compiler", "guide"]
+      },
+      "execution": {
+        "text": "dmd -run compiles, links and runs a source for a quick local entry; ordinary builds produce a persistent executable.",
+        "source_ids": ["compiler"]
+      },
+      "behavior": {
+        "text": "Garbage collection coexists with RAII and explicit resource management; contracts express preconditions, postconditions and invariants.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The compiler provides unit-test, documentation, profiling and diagnostic options; the standard-library reference covers Phobos.",
+        "source_ids": ["compiler"]
+      },
+      "maintenance": {
+        "text": "Release switches change checks: documented -release behavior disables contracts/asserts and changes some bounds checking.",
+        "source_ids": ["compiler"]
+      },
+      "costs": {
+        "text": "DMD and Phobos have Boost-1.0 terms; keep distinct compiler and library notices when redistributing their source.",
+        "source_ids": ["compiler-license", "library-license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "sum.d",
+      "code": "import std.stdio;\nvoid main() {\n    writeln(2 + 4 + 6);\n}",
+      "run_instructions": "With DMD and its platform toolchain installed, run dmd -run sum.d.",
+      "expected_result": "The native program prints 12.",
+      "source_ids": ["guide", "compiler"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "DMD compiler",
+        "role": "implementation",
+        "spdx_expression": "BSL-1.0",
+        "source_ids": ["compiler-license"],
+        "scope": "DMD source governed by the repository licence; separately marked components are excluded.",
+        "notice": "Preserve the Boost licence and copyright notices when the licence requires them."
+      },
+      {
+        "component": "Phobos standard library",
+        "role": "standard-library",
+        "spdx_expression": "BSL-1.0",
+        "source_ids": ["library-license"],
+        "scope": "Phobos source governed by LICENSE_1_0.txt; separately marked components are excluded.",
+        "notice": "Review additional component notices; the Boost licence distinguishes source distributions from machine-executable object output."
+      }
+    ]
+  },
+  {
+    "name": "Dafny",
+    "implementation": {
+      "name": "Dafny 4 verifier/compiler",
+      "version_scope": "Dafny 4 syntax; verification requires the Dafny tool and Z3, while compilation depends on the chosen backend.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Dafny methods, specifications and verification tutorial",
+        "url": "https://dafny.org/latest/OnlineTutorial/guide",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "cli",
+        "label": "Dafny verify/build/run command reference",
+        "url": "https://dafny.org/latest/DafnyRef/DafnyRef.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "install",
+        "label": "Dafny tool, Z3 and target-compilation prerequisites",
+        "url": "https://raw.githubusercontent.com/dafny-lang/dafny/master/docs/Installation.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Dafny MIT licence",
+        "url": "https://raw.githubusercontent.com/dafny-lang/dafny/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Specify and verify program properties against explicit annotations; the correctness of the specification remains part of the task.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install Dafny and the bundled compatible Z3; learn assertions, method contracts and loop invariants.",
+        "source_ids": ["guide", "install"]
+      },
+      "execution": {
+        "text": "Verification checks obligations without requiring a generated executable; build/run additionally invoke the chosen target's toolchain.",
+        "source_ids": ["cli", "install"]
+      },
+      "behavior": {
+        "text": "Method contracts and assertions constrain modeled behavior; termination and bounds obligations also matter.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "IDE integrations run verification during editing; target compilation needs the relevant .NET, Java or other backend tools.",
+        "source_ids": ["install"]
+      },
+      "maintenance": {
+        "text": "The tutorial uses Dafny 4 syntax; retain the specification and matching compiler/backend configuration together.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Dafny is MIT-licensed; the solver and backend toolchains retain separate licensing obligations.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "check.dfy",
+      "code": "method Check() {\n    assert 2 + 4 + 6 == 12;\n}",
+      "run_instructions": "With Dafny and its supported Z3 installed, run dafny verify check.dfy.",
+      "expected_result": "The verifier accepts the arithmetic assertion without a counterexample. No local verification run is claimed.",
+      "source_ids": ["guide", "cli"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Dafny 4 verifier/compiler",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Dart",
+    "implementation": {
+      "name": "Dart SDK native CLI runtime",
+      "version_scope": "Dart 3 SDK file execution; native and web compilation are distinct targets.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Dart typing, runtimes, targets and development tools",
+        "url": "https://dart.dev/overview",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tutorial",
+        "label": "Dart CLI tutorial prerequisites and learning path",
+        "url": "https://dart.dev/learn/tutorial",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "run",
+        "label": "Dart file and package execution",
+        "url": "https://dart.dev/tools/dart-run",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "packages",
+        "label": "Dart package SDK compatibility constraints",
+        "url": "https://dart.dev/tools/pub/pubspec",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Dart SDK BSD licence",
+        "url": "https://raw.githubusercontent.com/dart-lang/sdk/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build client applications through frameworks such as Flutter, or write CLI programs with the SDK.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install the Dart SDK; the CLI tutorial assumes familiarity with basic programming concepts.",
+        "source_ids": ["tutorial"]
+      },
+      "execution": {
+        "text": "Native development uses the Dart VM; standalone native executables include a runtime, while web compilation has different outputs.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Static typing and inference include sound null safety; dynamic values can still require runtime checks.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The SDK supports formatting, analysis and testing, and DartPad offers a browser-based learning environment.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Declare package SDK constraints in pubspec.yaml so dependency resolution and language-feature compatibility are explicit.",
+        "source_ids": ["packages"]
+      },
+      "costs": {
+        "text": "The Dart SDK uses BSD-3-Clause terms; Flutter, packages and platform distribution requirements are separate.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "sum.dart",
+      "code": "void main() {\n  print(2 + 4 + 6);\n}",
+      "run_instructions": "With the Dart SDK installed, run dart run sum.dart.",
+      "expected_result": "The CLI program prints 12.",
+      "source_ids": ["guide", "run"],
+      "try_url": "https://dartpad.dev/",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Dart SDK native CLI runtime",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Dhall",
+    "implementation": {
+      "name": "Dhall Haskell dhall-json tools",
+      "version_scope": "Dhall's typed configuration language through dhall-to-json/dhall-to-yaml; the tutorial requires dhall-json 1.2.5 or later.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Dhall typed records, imports and JSON/YAML generation",
+        "url": "https://docs.dhall-lang.org/tutorials/Getting-started_Generate-JSON-or-YAML.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "effects",
+        "label": "Dhall's bounded import effects and security model",
+        "url": "https://docs.dhall-lang.org/discussions/Safety-guarantees.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Dhall configuration and integration scope",
+        "url": "https://dhall-lang.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Dhall Haskell implementation BSD licence",
+        "url": "https://raw.githubusercontent.com/dhall-lang/dhall-haskell/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Generate structured configuration with reusable functions, types and imports; the output can feed JSON/YAML-consuming tools.",
+        "source_ids": ["overview", "guide"]
+      },
+      "prerequisites": {
+        "text": "Install dhall-json and learn records/functions plus basic CLI use; the tutorial documents Windows, macOS and Linux packages.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The tools evaluate a Dhall expression and serialize its result as JSON or YAML.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Dhall rejects mixed-type lists; external effects are limited to importing expressions from files, environment or remote sources.",
+        "source_ids": ["guide", "effects"]
+      },
+      "tooling": {
+        "text": "dhall-to-json supports file input and explanatory errors; dhall-to-yaml shares the documented expression workflow.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep language/package versions aligned: the tutorial explicitly excludes older converters for some of its features.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The selected Haskell implementation has BSD-3-Clause terms; imported configurations and consuming applications have independent licensing.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "app.dhall",
+      "code": "{ app = \"PLLDN\", retries = 3, enabled = True }",
+      "run_instructions": "With dhall-to-json installed, run dhall-to-json --file app.dhall.",
+      "expected_result": "The tool emits a JSON object equivalent to {\"app\":\"PLLDN\",\"retries\":3,\"enabled\":true}; formatting and field order can differ.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Dhall Haskell dhall-json tools",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Dylan",
+    "implementation": {
+      "name": "Open Dylan native compiler with deft",
+      "version_scope": "The current deft workflow; Open Dylan 2024.1 and older used the dylan project-generation command.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Open Dylan project generation, libraries and build outputs",
+        "url": "https://opendylan.org/getting-started-cli/hello-world.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "syntax",
+        "label": "Dylan module headers and top-level execution",
+        "url": "https://opendylan.org/about/examples/hello_world.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "install",
+        "label": "Open Dylan platform tools and native build dependencies",
+        "url": "https://opendylan.org/download/index.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Open Dylan own, CMU-derived and memory-pool licence terms",
+        "url": "https://raw.githubusercontent.com/dylan-lang/opendylan/master/License.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build native applications and libraries organized into Dylan libraries and modules.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install Open Dylan and its platform build tools; deft and dylan-compiler must be available on PATH.",
+        "source_ids": ["install", "guide"]
+      },
+      "execution": {
+        "text": "deft creates an application project and builds it; executables and compiled libraries are placed in _build.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Each source file declares its module; top-level expressions execute in order when the library is loaded.",
+        "source_ids": ["syntax"]
+      },
+      "tooling": {
+        "text": "The project includes library/module definitions, ordered .lid files, source registries and a dependency manifest.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Use documentation matching the release: project generation changed from dylan to deft after Open Dylan 2024.1.",
+        "source_ids": ["syntax"]
+      },
+      "costs": {
+        "text": "The implementation has MIT portions, CMU/Gwydion acknowledgement conditions and a BSD-2-Clause memory pool; retain component notices.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello-world.dylan",
+      "code": "Module: hello-world\n\nformat-out(\"PLLDN\\n\");",
+      "run_instructions": "With the current Open Dylan tools installed, run deft new application --simple hello-world and enter that directory. Replace hello-world.dylan with this code, preserving the generated library/module definitions. Run deft build --all, then _build/bin/hello-world; Windows launch details are linked from the guide.",
+      "expected_result": "The application prints PLLDN.",
+      "source_ids": ["guide", "syntax"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Open Dylan own implementation portions",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "Portions covered by the Functional Objects/Dylan Hackers MIT grant; CMU-derived and memory-pool portions are excluded.",
+        "notice": "Retain the copyright and permission notice in copies or substantial portions."
+      },
+      {
+        "component": "Gwydion/CMU-derived Open Dylan portions",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The CMU-derived portions identified by Open Dylan's License.txt.",
+        "notice": "Retain their full copyright and acknowledge the Gwydion Project in accompanying documentation; no exact SPDX mapping was established."
+      },
+      {
+        "component": "Memory Pool System Kit",
+        "role": "runtime",
+        "spdx_expression": "BSD-2-Clause",
+        "source_ids": ["license"],
+        "scope": "The included MPS covered by the BSD two-clause terms that supersede its older licences.",
+        "notice": "Retain MPS copyright, conditions and disclaimer; do not assume its former Sleepycat licensing still describes this distribution."
+      }
+    ]
+  },
+  {
+    "name": "Eiffel",
+    "implementation": {
+      "name": "EiffelStudio compiler and IDE",
+      "version_scope": "The publisher's single-class ec workflow; exact installed edition and redistribution agreement must be identified separately.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Eiffel language and EiffelStudio development facilities",
+        "url": "https://www.eiffel.com/resources/faqs/eiffel-language/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Eiffel publisher single-class compilation example",
+        "url": "https://www.eiffel.org/article/hello_world",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "contracts",
+        "label": "Eiffel Design by Contract components and runtime checks",
+        "url": "https://www.eiffel.com/values/design-by-contract/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "pricing",
+        "label": "EiffelStudio personal/professional licence categories",
+        "url": "https://account.eiffel.com/licenses/_/buy/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "readme",
+        "label": "EiffelStudio public-mirror GPL statement",
+        "url": "https://raw.githubusercontent.com/EiffelSoftware/EiffelStudio/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "EiffelStudio repository overriding licence notice",
+        "url": "https://raw.githubusercontent.com/EiffelSoftware/EiffelStudio/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Develop object-oriented application systems using classes, reusable components and explicit contracts.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install a selected EiffelStudio edition; learn class creation routines and require/ensure/invariant concepts.",
+        "source_ids": ["example", "contracts"]
+      },
+      "execution": {
+        "text": "The publisher's starter compiles a class file with ec; the installed project/toolchain governs how the application is launched.",
+        "source_ids": ["example"]
+      },
+      "behavior": {
+        "text": "Preconditions, postconditions and invariants express component assumptions and can serve as runtime checks.",
+        "source_ids": ["contracts"]
+      },
+      "tooling": {
+        "text": "EiffelStudio supplies an IDE with code/design browsing, a debugger, metrics and profiling.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Resolve licensing against the selected distribution: the repository README's GPL statement conflicts with an overriding proprietary Root-LICENSE notice.",
+        "source_ids": ["readme", "license"]
+      },
+      "costs": {
+        "text": "The vendor distinguishes non-commercial Personal licences from commercial Professional licences; platform and support choices affect the purchased product.",
+        "source_ids": ["pricing"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello_world.e",
+      "code": "class HELLO_WORLD\ncreate\n    make\nfeature\n    make\n        do\n            print (\"PLLDN%N\")\n        end\nend",
+      "run_instructions": "With an appropriately licensed EiffelStudio installed, save this class as hello_world.e and run ec hello_world.e as documented by the publisher. Launch the resulting application using that installation's build/run output.",
+      "expected_result": "Running the application prints PLLDN followed by a newline.",
+      "source_ids": ["example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "EiffelStudio compiler and IDE",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The selected EiffelStudio distribution; public mirror licence statements are inconsistent and do not establish a confirmed grant for that distribution.",
+        "notice": "The README says GPL v2, while Root LICENSE.txt claims proprietary restrictions and explicitly overrides file notices. Verify the selected release's agreement; an SPDX GPL grant is not asserted here."
+      }
+    ]
+  },
+  {
+    "name": "Elixir",
+    "implementation": {
+      "name": "Elixir on Erlang/OTP",
+      "version_scope": "The current introduction uses Elixir 1.18+ and OTP 27+; the compatibility table specifies which OTP releases a chosen Elixir version supports.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Elixir introduction, IEx and script execution",
+        "url": "https://elixir.hexdocs.pm/introduction.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Elixir application scope and data transformations",
+        "url": "https://elixir-lang.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "projects",
+        "label": "Elixir Mix, OTP and ExUnit project workflow",
+        "url": "https://elixir.hexdocs.pm/introduction-to-mix.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "compatibility",
+        "label": "Elixir support policy, deprecations and OTP version matrix",
+        "url": "https://elixir.hexdocs.pm/compatibility-and-deprecations.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Elixir Apache licence",
+        "url": "https://raw.githubusercontent.com/elixir-lang/elixir/main/LICENSE",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "runtime-license",
+        "label": "Erlang/OTP Apache licence",
+        "url": "https://raw.githubusercontent.com/erlang/otp/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build message-oriented, web and distributed applications on Erlang facilities; the ecosystem also covers embedded and data-processing work.",
+        "source_ids": ["overview", "projects"]
+      },
+      "prerequisites": {
+        "text": "Install a compatible Elixir/Erlang pair; Windows PowerShell users start the interactive shell with iex.bat.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Use IEx to evaluate expressions or elixir to run .exs files; OTP supplies the platform's application facilities.",
+        "source_ids": ["guide", "projects"]
+      },
+      "behavior": {
+        "text": "Data transformations compose around immutable values; larger applications use OTP supervision and process-oriented facilities.",
+        "source_ids": ["overview", "projects"]
+      },
+      "tooling": {
+        "text": "Mix creates/builds projects and manages dependencies; ExUnit provides the bundled testing framework.",
+        "source_ids": ["projects"]
+      },
+      "maintenance": {
+        "text": "Check the OTP compatibility matrix and deprecation policy; bug-fix and security-support coverage differ between minor branches.",
+        "source_ids": ["compatibility"]
+      },
+      "costs": {
+        "text": "Elixir and the Erlang/OTP runtime have separate Apache-2.0 licences; dependency packages still require individual review.",
+        "source_ids": ["license", "runtime-license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.exs",
+      "code": "IO.puts(\"PLLDN\")",
+      "run_instructions": "With a compatible Elixir/Erlang installation, run elixir hello.exs.",
+      "expected_result": "The script prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Elixir implementation",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "Elixir project source governed by LICENSE.",
+        "notice": "Retain the licence and applicable notices when redistributing the implementation."
+      },
+      {
+        "component": "Erlang/OTP runtime",
+        "role": "runtime",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["runtime-license"],
+        "scope": "Erlang/OTP components covered by LICENSE.txt; third-party notices are separate.",
+        "notice": "Retain applicable runtime/component notices in distributions."
+      }
+    ]
+  },
+  {
+    "name": "Elm",
+    "implementation": {
+      "name": "Elm browser application compiler",
+      "version_scope": "The documented Elm project/elm make workflow, with elm.json dependencies and a browser host.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Elm installation, project files and compiler commands",
+        "url": "https://guide.elm-lang.org/install/elm.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "architecture",
+        "label": "Elm model/view/update application structure",
+        "url": "https://guide.elm-lang.org/architecture/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "interop",
+        "label": "Elm JavaScript output and integration mechanisms",
+        "url": "https://guide.elm-lang.org/interop/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Elm publisher minimal HTML view",
+        "url": "https://elm-lang.org/examples/hello",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Elm compiler BSD licence",
+        "url": "https://raw.githubusercontent.com/elm/compiler/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build browser interfaces with state, rendered HTML and updates driven by messages.",
+        "source_ids": ["architecture"]
+      },
+      "prerequisites": {
+        "text": "Install Elm and a suitable editor; elm init creates elm.json plus the source directory.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "elm make produces browser HTML or JavaScript; a JavaScript build exposes a module initialization function.",
+        "source_ids": ["interop"]
+      },
+      "behavior": {
+        "text": "The application model stores state, the view renders it, and update transforms it in response to messages.",
+        "source_ids": ["architecture"]
+      },
+      "tooling": {
+        "text": "Use elm reactor for local examples and elm make for distributable output; elm install adds dependencies.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Check JavaScript requirements against flags, ports and custom elements before embedding existing widgets or unsupported browser APIs.",
+        "source_ids": ["interop"]
+      },
+      "costs": {
+        "text": "The compiler uses BSD-3-Clause; application packages and integrated JavaScript libraries retain their own licences.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Main.elm",
+      "code": "module Main exposing (main)\n\nimport Html exposing (text)\n\nmain =\n    text \"PLLDN\"",
+      "run_instructions": "Run elm init in a project directory and save this file as src/Main.elm. Run elm make src/Main.elm, then open the generated index.html in a browser.",
+      "expected_result": "The browser page displays PLLDN.",
+      "source_ids": ["guide", "example", "interop"],
+      "try_url": "https://elm-lang.org/examples/hello",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Elm browser application compiler",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Emacs Lisp",
+    "implementation": {
+      "name": "GNU Emacs Lisp engine",
+      "version_scope": "GNU Emacs Lisp with source/byte/native loading behavior specific to the selected Emacs build.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GNU Emacs Lisp programming and editor integration",
+        "url": "https://raw.githubusercontent.com/emacs-mirror/emacs/master/doc/lispref/intro.texi",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "cli",
+        "label": "GNU Emacs batch, quick and source-loading options",
+        "url": "https://raw.githubusercontent.com/emacs-mirror/emacs/master/doc/emacs/cmdargs.texi",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "loading",
+        "label": "GNU Emacs source, bytecode and native loading",
+        "url": "https://raw.githubusercontent.com/emacs-mirror/emacs/master/doc/lispref/loading.texi",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "GNU Emacs GPL text",
+        "url": "https://raw.githubusercontent.com/emacs-mirror/emacs/master/COPYING",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "grant",
+        "label": "GNU Emacs executable GPL version grant",
+        "url": "https://raw.githubusercontent.com/emacs-mirror/emacs/master/src/emacs.c",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Extend and automate Emacs, including text scanning, files, buffers, subprocesses and editor commands.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn Lisp forms and basic Emacs editing; the full reference assumes familiarity with using the editor.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Run Lisp in editor buffers or use Emacs batch mode to load and evaluate a file without a display.",
+        "source_ids": ["guide", "cli"]
+      },
+      "behavior": {
+        "text": "Editor commands are callable functions and customization parameters are Lisp variables.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Batch options include -l, -f and --eval; -Q starts with minimal customization.",
+        "source_ids": ["cli"]
+      },
+      "maintenance": {
+        "text": "Loading may prefer .elc or native .eln artifacts; recompile stale code and account for build-specific native support.",
+        "source_ids": ["loading"]
+      },
+      "costs": {
+        "text": "GNU Emacs is GPL-3.0-or-later; distribution of covered extensions and third-party packages needs component-specific review.",
+        "source_ids": ["license", "grant"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.el",
+      "code": "(princ \"PLLDN\\n\")",
+      "run_instructions": "With GNU Emacs installed, run emacs -Q --batch -l hello.el.",
+      "expected_result": "The batch process prints PLLDN to standard output and exits.",
+      "source_ids": ["guide", "cli"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GNU Emacs Lisp engine",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-or-later",
+        "source_ids": ["license"],
+        "scope": "GNU Emacs implementation source; individual package and bundled component notices require separate inspection.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  }
+]

@@ -300,12 +300,24 @@ test("SPDX syntax retains choices and exceptions and rejects incomplete operator
 });
 
 test("enum fields reject JSON arrays and objects without string coercion", () => {
-  for (const kind of [["program"], ["configuration"], { name: "program" }, null, 1]) {
+  for (const kind of [
+    ["program"],
+    ["configuration"],
+    { name: "program" },
+    null,
+    1,
+  ]) {
     const record = fixture();
     Object.assign(record.example, { kind });
     assert.throws(() => validateReaderProfiles([record], ["Example"]));
   }
-  for (const role of [["runtime"], ["implementation"], { name: "runtime" }, null, 1]) {
+  for (const role of [
+    ["runtime"],
+    ["implementation"],
+    { name: "runtime" },
+    null,
+    1,
+  ]) {
     const record = fixture();
     Object.assign(record.licenses[0], { role });
     assert.throws(() => validateReaderProfiles([record], ["Example"]));

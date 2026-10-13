@@ -1,0 +1,902 @@
+[
+  {
+    "name": "Erlang",
+    "implementation": {
+      "name": "Erlang/OTP BEAM runtime",
+      "version_scope": "Erlang/OTP compilation and module loading; the retrieved system documentation is OTP 29.1.1.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Erlang systems, concurrency and OTP libraries",
+        "url": "https://www.erlang.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "prerequisites",
+        "label": "Erlang tutorial prerequisites and scope",
+        "url": "https://www.erlang.org/doc/system/getting_started.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tutorial",
+        "label": "Erlang shell, modules, exports and pattern matching",
+        "url": "https://www.erlang.org/doc/system/seq_prog.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "loading",
+        "label": "Erlang/OTP compilation, BEAM and code replacement",
+        "url": "https://www.erlang.org/doc/system/code_loading.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Erlang/OTP Apache licence",
+        "url": "https://raw.githubusercontent.com/erlang/otp/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build concurrent, distributed systems; OTP adds libraries and design principles for application structure.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install Erlang/OTP and learn modules, function arities and pattern matching; the introductory guide assumes programming basics.",
+        "source_ids": ["prerequisites", "tutorial"]
+      },
+      "execution": {
+        "text": "The compiler produces BEAM object code; the runtime code server loads modules for execution.",
+        "source_ids": ["loading"]
+      },
+      "behavior": {
+        "text": "Module names match .erl filenames, exports identify callable function/arities, and pattern matching directs function clauses.",
+        "source_ids": ["tutorial"]
+      },
+      "tooling": {
+        "text": "The erl shell supports interactive evaluation and c(Module) compilation; erlc compiles files from the OS shell.",
+        "source_ids": ["tutorial", "loading"]
+      },
+      "maintenance": {
+        "text": "Code replacement keeps current and old module variants; a further replacement can terminate processes still running the purged version.",
+        "source_ids": ["loading"]
+      },
+      "costs": {
+        "text": "Erlang/OTP uses Apache-2.0 terms for covered components; bundled third-party and application libraries keep separate notices.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "reader.erl",
+      "code": "-module(reader).\n-export([total/0]).\n\ntotal() ->\n    2 + 4 + 6.",
+      "run_instructions": "From the directory containing reader.erl, start erl. At its prompt enter c(reader). and then reader:total(). including the final full stops.",
+      "expected_result": "Compilation reports {ok,reader}; the function call evaluates to 12.",
+      "source_ids": ["tutorial", "loading"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Erlang/OTP BEAM runtime",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "Erlang/OTP covered source/runtime components; separately marked third-party material is excluded.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "F#",
+    "implementation": {
+      "name": "Microsoft F# compiler in the .NET SDK",
+      "version_scope": "Microsoft F# and .NET CLI documentation checked on 2026-10-13; select a supported SDK for the target project.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "F# language model",
+        "url": "https://learn.microsoft.com/en-us/dotnet/fsharp/what-is-fsharp",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "F# project creation and .NET CLI workflow",
+        "url": "https://learn.microsoft.com/en-us/dotnet/fsharp/get-started/get-started-command-line",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "F# implementation license",
+        "url": "https://raw.githubusercontent.com/dotnet/fsharp/main/License.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "F# builds .NET programs with functional programming and interoperability with other .NET languages and libraries.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install the .NET SDK and learn expressions, immutable bindings, functions and pattern matching.",
+        "source_ids": ["example", "guide"]
+      },
+      "execution": {
+        "text": "The .NET CLI builds F# projects and runs a console application's entry point.",
+        "source_ids": ["example"]
+      },
+      "behavior": {
+        "text": "Type inference and immutable defaults shape ordinary code; .NET types and libraries remain available.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The CLI supports multi-project solutions and references; editor support complements the same SDK toolchain.",
+        "source_ids": ["example"]
+      },
+      "maintenance": {
+        "text": "Keep SDK, target framework and package versions with the project so compilation and runtime requirements are identifiable.",
+        "source_ids": ["example"]
+      },
+      "costs": {
+        "text": "The F# compiler's covered source uses MIT; the .NET distribution and imported packages have independent component notices.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Program.fs",
+      "code": "let total = 2 + 3\nprintfn \"%d\" total\n",
+      "run_instructions": "Create a console project using dotnet new console -lang F# -o PLLDNExample, replace its Program.fs with this code, then run dotnet run --project PLLDNExample.",
+      "expected_result": "Prints 5.",
+      "source_ids": ["guide", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Microsoft F# compiler in the .NET SDK",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The grant covers F# implementation files; preserve the copyright and permission notice and inspect application packages separately."
+      }
+    ]
+  },
+  {
+    "name": "F*",
+    "implementation": {
+      "name": "FStar proof-oriented programming system",
+      "version_scope": "FStar language tutorial and implementation documentation checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "FStar refinement types and modules",
+        "url": "https://fstar-lang.org/tutorial/book/part1/part1_getting_off_the_ground.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Proof-oriented programming in FStar",
+        "url": "https://fstar-lang.org/tutorial/book/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tools",
+        "label": "FStar checking and extraction workflow",
+        "url": "https://raw.githubusercontent.com/FStarLang/FStar/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "FStar implementation license",
+        "url": "https://raw.githubusercontent.com/FStarLang/FStar/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "F* combines a dependently typed language with proof assistance for programs whose properties are expressed alongside their implementation.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Learn functions, refinement types and proof obligations; a module name must match its .fst filename.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The default tool checks source without executing it; extraction to a target language is a separate workflow.",
+        "source_ids": ["tools"]
+      },
+      "behavior": {
+        "text": "A refinement narrows a type to values satisfying a predicate; checked properties remain scoped to the stated definitions and assumptions.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Emacs and VS Code plugins support incremental checking, navigation and editing.",
+        "source_ids": ["guide", "tools"]
+      },
+      "maintenance": {
+        "text": "Keep the checker and supporting toolchain identified; verification and extracted-program execution are distinct evidence.",
+        "source_ids": ["guide", "tools"]
+      },
+      "costs": {
+        "text": "The FStar implementation uses Apache-2.0; extraction targets, solvers and libraries have separate component terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Addition.fst",
+      "code": "module Addition\n\nlet total : x:int { x = 5 } = 2 + 3\n",
+      "run_instructions": "Save Addition.fst and check it with the installed F* compiler through a configured Emacs or VS Code F* plugin, as described in the tutorial.",
+      "expected_result": "The checker should accept the refinement that total equals 5. This checking workflow does not run an application or emit console output.",
+      "source_ids": ["guide", "tools"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "FStar proof-oriented programming system",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The compiler/system source grant is separate from licenses of extracted target libraries and proof dependencies."
+      }
+    ]
+  },
+  {
+    "name": "Factor",
+    "implementation": {
+      "name": "Factor language implementation",
+      "version_scope": "Factor guided tour and first-program documentation checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Factor concatenative language and libraries",
+        "url": "https://factorcode.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Factor first-program listener workflow",
+        "url": "https://docs.factorcode.org/content/article-first-program.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tour",
+        "label": "Factor guided tour",
+        "url": "https://docs.factorcode.org/content/article-tour.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Factor implementation license",
+        "url": "https://raw.githubusercontent.com/factor/factor/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Factor supplies a compiled, dynamically typed concatenative language with libraries for application code and domain-specific languages.",
+        "source_ids": ["guide", "tour"]
+      },
+      "prerequisites": {
+        "text": "Learn the data stack, words and vocabulary imports; the guided tour assumes some previous programming experience.",
+        "source_ids": ["tour"]
+      },
+      "execution": {
+        "text": "Code can be evaluated interactively in the listener or compiled and deployed as an application.",
+        "source_ids": ["guide", "example"]
+      },
+      "behavior": {
+        "text": "Words compose by consuming and producing stack values; dynamic types and garbage collection belong to the selected implementation.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The listener, vocabulary-based development, help browser and testing workflow are documented in the first-program tutorial.",
+        "source_ids": ["example"]
+      },
+      "maintenance": {
+        "text": "Use documentation matching the selected image and library vocabularies; file paths can differ across platforms.",
+        "source_ids": ["example", "tour"]
+      },
+      "costs": {
+        "text": "The selected implementation uses BSD-2-Clause; separately linked native libraries retain their own notices.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.factor",
+      "code": "USING: io ;\n\"PLLDN\" print\n",
+      "run_instructions": "Start the installed Factor language environment and evaluate this snippet in its listener. The same source can be saved as hello.factor for a configured Factor project.",
+      "expected_result": "Prints PLLDN in the Factor listener.",
+      "source_ids": ["guide", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Factor language implementation",
+        "role": "implementation",
+        "spdx_expression": "BSD-2-Clause",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain source and binary notices and the disclaimer. The language executable is distinct from any operating-system command also named factor."
+      }
+    ]
+  },
+  {
+    "name": "Fantom",
+    "implementation": {
+      "name": "Fantom launcher, compiler and pod system",
+      "version_scope": "Fantom introductory documentation, revision 1.0.83, checked on 2026-10-13; selected workflow uses the JVM.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Fantom setup, scripts and pods",
+        "url": "https://fantom.org/doc/docIntro/HelloWorld",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Fantom distribution license",
+        "url": "https://raw.githubusercontent.com/fantom-lang/fantom/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Fantom supplies JVM scripting, reusable pod modules and web-application libraries in one language environment.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "The introductory JVM workflow requires Java 8 or later and the Fantom bin directory on PATH; learn classes and methods.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "fan runs a .fan script containing a class and main method; precompiled applications can be launched from pods.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Arguments need not be parameters of main because the environment also exposes them through Env.args.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "fansh provides interactive evaluation and the build toolkit constructs versioned pod modules.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Identify the Fantom distribution, pods and Java host together; a published tutorial's sample launcher version is not a latest-release claim.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Fantom's covered distribution uses AFL-3.0; the JVM and added libraries have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.fan",
+      "code": "class Hello\n{\n  static Void main() { echo(\"PLLDN\") }\n}\n",
+      "run_instructions": "With Fantom and its configured Java host installed, run fan hello.fan.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Fantom launcher, compiler and pod system",
+        "role": "implementation",
+        "spdx_expression": "AFL-3.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The Academic Free License grant covers the original implementation work under its stated conditions; it does not license the Java VM or every added pod."
+      }
+    ]
+  },
+  {
+    "name": "Faust",
+    "implementation": {
+      "name": "Faust DSP compiler",
+      "version_scope": "Faust quick-start/compiler documentation and distribution grant checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Faust signals and DSP composition",
+        "url": "https://faustdoc.grame.fr/manual/quick-start/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Faust language introduction",
+        "url": "https://faustdoc.grame.fr/manual/introduction/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Faust code generation and architecture files",
+        "url": "https://faustdoc.grame.fr/manual/compiler/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Faust compiler license grant",
+        "url": "https://raw.githubusercontent.com/grame-cncm/faust/master/COPYING.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Faust describes audio signal processing and generates code to embed in an audio application or selected architecture.",
+        "source_ids": ["overview", "example"]
+      },
+      "prerequisites": {
+        "text": "Learn signal inputs, outputs and composition; a generated DSP class needs a host to provide and consume audio buffers.",
+        "source_ids": ["guide", "example"]
+      },
+      "execution": {
+        "text": "The command-line compiler emits C++ by default and supports other targets; architecture files can wrap the generated processing code.",
+        "source_ids": ["example"]
+      },
+      "behavior": {
+        "text": "The process definition determines signal connections; multiplying a signal by a constant scales its samples.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Faust offers compiler options, architecture wrappers and an online editing workflow for DSP experiments.",
+        "source_ids": ["guide", "example"]
+      },
+      "maintenance": {
+        "text": "Keep target backend, compiler and chosen architecture identified; sample rate and host routing affect observed audio behavior.",
+        "source_ids": ["guide", "example"]
+      },
+      "costs": {
+        "text": "The compiler grant is LGPL-2.1-or-later; architecture files, DSP libraries and application hosts require separate review.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "gain.dsp",
+      "code": "process = _ * 0.5;\n",
+      "run_instructions": "Generate the DSP class with faust gain.dsp -o gain.cpp. Use a suitable Faust architecture or audio host to supply one input channel and read one output channel.",
+      "expected_result": "Compilation produces a DSP class; when hosted, an input sample 0.8 produces 0.4. The source itself does not open an audio device.",
+      "source_ids": ["guide", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Faust DSP compiler",
+        "role": "implementation",
+        "spdx_expression": "LGPL-2.1-or-later",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The checked compiler grant states LGPL version 2.1 or later. This expression does not assign the compiler's terms to every generated audio application."
+      }
+    ]
+  },
+  {
+    "name": "Fennel",
+    "implementation": {
+      "name": "Fennel compiler and executable",
+      "version_scope": "Fennel implementation tutorial and setup guide checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Fennel language and Lua relationship",
+        "url": "https://raw.githubusercontent.com/bakpakin/Fennel/main/tutorial.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Fennel compiler and embedding",
+        "url": "https://raw.githubusercontent.com/bakpakin/Fennel/main/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Fennel installation and command workflow",
+        "url": "https://raw.githubusercontent.com/bakpakin/Fennel/main/setup.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Fennel implementation license",
+        "url": "https://raw.githubusercontent.com/bakpakin/Fennel/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Fennel adds Lisp syntax and compile-time macros to Lua, including Lua libraries and embedding in existing applications.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Install the selected Fennel executable with a supported Lua or LuaJIT host; learn Lisp forms and Lua's value model.",
+        "source_ids": ["guide", "example"]
+      },
+      "execution": {
+        "text": "The executable evaluates Fennel or compiles it to Lua; shipping compiled Lua need not include the compiler.",
+        "source_ids": ["overview", "example"]
+      },
+      "behavior": {
+        "text": "Functions and lexical values follow the documented Lua-like semantics, with differences called out in the tutorial.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The project provides a REPL, reference, macro guide and embedding API.",
+        "source_ids": ["overview"]
+      },
+      "maintenance": {
+        "text": "Record the Fennel compiler and Lua host together; packaged compiler versions can lag behind official releases.",
+        "source_ids": ["example"]
+      },
+      "costs": {
+        "text": "Fennel uses MIT; Lua, LuaJIT and imported application libraries have separate licenses.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.fnl",
+      "code": "(print \"PLLDN\")\n",
+      "run_instructions": "With the installed Fennel executable and its Lua host available, run fennel hello.fnl, using the executable's versioned name if required.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["overview", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Fennel compiler and executable",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain the Fennel permission notice; compilation does not transfer that implementation license to all Lua host components."
+      }
+    ]
+  },
+  {
+    "name": "Flix",
+    "implementation": {
+      "name": "Flix compiler and project tools",
+      "version_scope": "Flix effect-oriented language and Java 21+ startup documentation checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Flix startup and CLI",
+        "url": "https://doc.flix.dev/getting-started.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Flix type and effect model",
+        "url": "https://flix.dev/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Flix main function and IO effect",
+        "url": "https://doc.flix.dev/hello-world.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Flix implementation license",
+        "url": "https://raw.githubusercontent.com/flix/flix/master/LICENSE.md",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Flix combines functional, imperative and logic programming with explicit effect types for application code.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "The documented compiler workflow requires Java 21 or later; learn data types, pattern matching and effects.",
+        "source_ids": ["guide", "overview"]
+      },
+      "execution": {
+        "text": "A Flix project can be initialized and compiled/run through flix.jar or its editor integration.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "The main function's IO effect records terminal output, while Unit describes its return value.",
+        "source_ids": ["example"]
+      },
+      "tooling": {
+        "text": "The project documents VS Code, Neovim and Emacs support as well as a standalone CLI.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep compiler and JVM versions with the project; effect annotations and libraries should match that compiler's documentation.",
+        "source_ids": ["guide", "example"]
+      },
+      "costs": {
+        "text": "The compiler repository uses Apache-2.0; the Java runtime and application dependencies have independent terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Main.flix",
+      "code": "def main(): Unit \\ IO =\n    println(\"PLLDN\")\n",
+      "run_instructions": "Initialize a project with java -jar flix.jar init, place this code in its src/Main.flix, then run java -jar flix.jar run from the project directory.",
+      "expected_result": "Compiles the project and prints PLLDN.",
+      "source_ids": ["guide", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Flix compiler and project tools",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The selected implementation's Apache grant does not cover every JVM distribution or independently imported package."
+      }
+    ]
+  },
+  {
+    "name": "Forth",
+    "implementation": {
+      "name": "GNU Gforth interpreter and image",
+      "version_scope": "Current Gforth manual and source grants checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Gforth invocation, images and errors",
+        "url": "https://gforth.org/manual/Invoking-Gforth.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Gforth arithmetic tutorial",
+        "url": "https://gforth.org/manual/Arithmetics-Tutorial.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "files",
+        "label": "Gforth source-file workflow",
+        "url": "https://gforth.org/manual/Using-files-for-Forth-code-Tutorial.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Gforth GPL text",
+        "url": "https://raw.githubusercontent.com/forthy42/gforth/master/COPYING",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "grant",
+        "label": "Gforth engine license grant",
+        "url": "https://raw.githubusercontent.com/forthy42/gforth/master/engine/main.c",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Forth organizes computations as words operating on a data stack; this profile selects Gforth's interpreter and image environment.",
+        "source_ids": ["example", "guide"]
+      },
+      "prerequisites": {
+        "text": "Learn postfix arithmetic and stack effects before composing words; install a matching Gforth engine and image.",
+        "source_ids": ["example", "guide"]
+      },
+      "execution": {
+        "text": "gforth reads source files or enters an interactive session; -e supplies additional Forth code.",
+        "source_ids": ["guide", "files"]
+      },
+      "behavior": {
+        "text": "Arithmetic consumes the top stack values; word order determines evaluation without infix parentheses.",
+        "source_ids": ["example"]
+      },
+      "tooling": {
+        "text": "The manual documents command history, source loading, image options and different diagnostic engine variants.",
+        "source_ids": ["guide", "files"]
+      },
+      "maintenance": {
+        "text": "Keep the engine, image and source libraries matched; loaded state can affect an interactive session's results.",
+        "source_ids": ["guide", "files"]
+      },
+      "costs": {
+        "text": "Gforth's checked engine grant is GPL-3.0-or-later; other Forth systems and foreign libraries have different terms.",
+        "source_ids": ["license", "grant"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "total.fs",
+      "code": "2 3 + .\n",
+      "run_instructions": "Run gforth total.fs -e bye. The -e bye argument exits after loading the source file.",
+      "expected_result": "Prints 5, with the Forth output word's normal spacing.",
+      "source_ids": ["example", "files"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GNU Gforth interpreter and image",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-or-later",
+        "source_ids": ["license", "grant"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The current Gforth engine grant states GPL version 3 or later; this does not characterize every historical release or Forth implementation."
+      }
+    ]
+  },
+  {
+    "name": "Fortran",
+    "implementation": {
+      "name": "GNU Fortran (gfortran) from GCC 15.2.0",
+      "version_scope": "GCC 15.2.0 compiler sources and invocation manual; intrinsic documentation checked on 2026-10-13.",
+      "source_ids": ["guide", "grant"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GNU Fortran manual for GCC 15.2.0",
+        "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/releases/gcc-15.2.0/gcc/fortran/gfortran.texi",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "workflow",
+        "label": "gfortran compiler and checking options",
+        "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/releases/gcc-15.2.0/gcc/fortran/invoke.texi",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "SUM array intrinsic",
+        "url": "https://gcc.gnu.org/onlinedocs/gfortran/SUM.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "GCC GPL text",
+        "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/releases/gcc-15.2.0/COPYING3",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "grant",
+        "label": "GNU Fortran compiler license grant",
+        "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/releases/gcc-15.2.0/gcc/fortran/f95-lang.cc",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "runtime",
+        "label": "libgfortran license and exception grant",
+        "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/releases/gcc-15.2.0/libgfortran/runtime/main.c",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "exception",
+        "label": "GCC Runtime Library Exception 3.1",
+        "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/releases/gcc-15.2.0/COPYING.RUNTIME",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Array arithmetic and numerical procedures are concrete uses of this compiled Fortran implementation; SUM reduces an array to a scalar.",
+        "source_ids": ["example"]
+      },
+      "prerequisites": {
+        "text": "Install gfortran and its matching runtime. Distinguish free-form .f90 input from fixed-form legacy source.",
+        "source_ids": ["workflow", "runtime"]
+      },
+      "execution": {
+        "text": "gfortran compiles and links source into an executable; libgfortran provides language runtime services.",
+        "source_ids": ["workflow", "runtime"]
+      },
+      "behavior": {
+        "text": "Declarations determine element types; array intrinsics express operations across multiple values. Bounds checks are available through compiler options.",
+        "source_ids": ["example", "workflow"]
+      },
+      "tooling": {
+        "text": "The CLI provides dialect selection, warnings and -fcheck runtime diagnostics, including bounds checks.",
+        "source_ids": ["workflow"]
+      },
+      "maintenance": {
+        "text": "Choose source-format and dialect flags deliberately. Foreign-language interfaces must agree on calling conventions as well as symbol names.",
+        "source_ids": ["workflow"]
+      },
+      "costs": {
+        "text": "The compiler is GPL-3.0-or-later; libgfortran adds the GCC Runtime Library Exception. Its conditions matter when distributing linked programs.",
+        "source_ids": ["license", "grant", "runtime", "exception"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "total.f90",
+      "code": "program total\n  implicit none\n  integer :: values(2) = (/ 2, 3 /)\n  print *, sum(values)\nend program total\n",
+      "run_instructions": "Run gfortran total.f90 -o total, then run the produced executable: ./total on a Unix shell or .\\total.exe on Windows.",
+      "expected_result": "Prints the integer 5; list-directed output may include leading spaces.",
+      "source_ids": ["example", "workflow"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GNU Fortran (gfortran) from GCC 15.2.0",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-or-later",
+        "source_ids": ["license", "grant"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The checked GNU Fortran source grant specifies GPL version 3 or later. It is distinct from the runtime's exception-bearing grant."
+      },
+      {
+        "component": "libgfortran",
+        "role": "runtime",
+        "spdx_expression": "GPL-3.0-or-later WITH GCC-exception-3.1",
+        "source_ids": ["license", "runtime", "exception"],
+        "scope": "GNU Fortran runtime library at GCC 15.2.0; unrelated numerical libraries are excluded.",
+        "notice": "The runtime grants additional permissions under GCC Runtime Library Exception 3.1; check its eligible-compilation and independent-module conditions."
+      }
+    ]
+  }
+]

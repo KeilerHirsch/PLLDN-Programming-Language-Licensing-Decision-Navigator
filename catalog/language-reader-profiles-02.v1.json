@@ -1,0 +1,842 @@
+[
+  {
+    "name": "Apex",
+    "implementation": {
+      "name": "Salesforce Platform Apex",
+      "version_scope": "Hosted Apex anonymous execution; organization and API version specific.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Salesforce Apex platform and console tutorial",
+        "url": "https://trailhead.salesforce.com/content/learn/modules/apex_database/apex_database_intro",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Implement business logic around Salesforce records and events; execution is on the Salesforce Platform.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn classes and collections plus the organization data model; try code in a development organization.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Save classes on the server or execute an anonymous block in the Developer Console.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Strong typing and transactional database access coexist with multitenant resource limits.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Developer Console supplies anonymous execution and logs; Apex includes unit testing and coverage facilities.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Custom code targets an API version, which must be considered when changing organization behavior.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The workflow needs an appropriate Salesforce organization; the tutorial does not establish production subscription pricing.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "example.apex",
+      "code": "List<Integer> amounts = new List<Integer>{2, 4, 6};\nInteger total = 0;\nfor (Integer amount : amounts) {\n    total += amount;\n}\nSystem.debug(total);",
+      "run_instructions": "Choose Debug > Open Execute Anonymous Window in a development organization's Developer Console. Execute this block and inspect its log with Debug Only selected.",
+      "expected_result": "The debug log contains 12; timestamps and prefixes vary.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Salesforce Apex service",
+        "role": "runtime",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "Hosted organization service, not a redistributable compiler grant.",
+        "notice": "The instructional page does not establish an SPDX licence; the applicable organization service agreement is separate."
+      }
+    ]
+  },
+  {
+    "name": "AppleScript",
+    "implementation": {
+      "name": "AppleScript 2 on macOS",
+      "version_scope": "Archived language guide and current Script Editor workflow; application dictionaries are version specific.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "AppleScript automation and compatibility overview",
+        "url": "https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/introduction/ASLR_intro.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "commands",
+        "label": "AppleScript standard commands",
+        "url": "https://developer.apple.com/library/archive/documentation/AppleScript/Conceptual/AppleScriptLangGuide/reference/ASLR_cmds.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "editor",
+        "label": "Apple Script Editor guide",
+        "url": "https://support.apple.com/guide/script-editor/welcome/mac",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Apple software agreement applicability",
+        "url": "https://www.apple.com/legal/sla/",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Automate scriptable macOS applications and combine workflows; each application exposes its own command vocabulary.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Use macOS and inspect a target application dictionary before scripting its commands.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Compile and run in Script Editor; the dialog example needs no separately targeted application.",
+        "source_ids": ["editor", "commands"]
+      },
+      "behavior": {
+        "text": "Application-directed commands are Apple events; application support determines the available operations.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Script Editor provides editing, execution and application-dictionary inspection.",
+        "source_ids": ["editor"]
+      },
+      "maintenance": {
+        "text": "Older syntax can remain usable, but newer features and application commands require compatible versions.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Apple product use follows its applicable agreement, which may differ from an online agreement version.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.applescript",
+      "code": "display dialog \"PLLDN\" buttons {\"OK\"} default button \"OK\"",
+      "run_instructions": "Paste into a new macOS Script Editor document, compile and click Run.",
+      "expected_result": "A dialog displays PLLDN and an OK button.",
+      "source_ids": ["commands", "editor"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "AppleScript 2 on macOS",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "AppleScript supplied with the installed macOS product.",
+        "notice": "No open-source SPDX expression is asserted for the installed host; read its applicable Apple agreement."
+      }
+    ]
+  },
+  {
+    "name": "Arc",
+    "implementation": {
+      "name": "Anarki Arc on Racket",
+      "version_scope": "Community Anarki fork; explicitly not guaranteed compatible with upstream Arc.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Anarki runtime, development and compatibility README",
+        "url": "https://github.com/arclanguage/anarki",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tutorial",
+        "label": "Anarki Arc tutorial",
+        "url": "https://arclanguage.github.io/tut-anarki.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Anarki copyright and Artistic-2.0 grant",
+        "url": "https://raw.githubusercontent.com/arclanguage/anarki/master/copyright",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Explore Lisp macros and interactive application code through the Anarki fork.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install the documented Racket prerequisite and sha package; learn prefix expressions and function definitions.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Start arc.sh or the documented Windows launcher, then evaluate expressions at the Arc prompt.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Functions and macros use Lisp expressions; the tutorial shows defining abstractions in the running environment.",
+        "source_ids": ["tutorial"]
+      },
+      "tooling": {
+        "text": "The repository includes built-in help, tests and a News application; Racket interoperation is available.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Anarki explicitly permits upstream incompatibilities; inspect incompatibilities and preserve application data when migrating.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The core copyright file grants Artistic-2.0 use; bundled applications and Racket have their own component scope.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "double.arc",
+      "code": "(def double (x) (* x 2))\n(prn (double 21))",
+      "run_instructions": "Start the Anarki REPL as documented, then enter both forms or load double.arc with (load \"double.arc\").",
+      "expected_result": "The printed result is 42.",
+      "source_ids": ["tutorial", "guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Anarki Arc on Racket",
+        "role": "implementation",
+        "spdx_expression": "Artistic-2.0",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "AspectJ",
+    "implementation": {
+      "name": "Eclipse AspectJ compiler and weaver",
+      "version_scope": "Code-style AspectJ aspects compiled by ajc; Java/runtime compatibility depends on the selected AspectJ release.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "AspectJ adoption and cross-cutting behavior guide",
+        "url": "https://eclipse.dev/aspectj/doc/released/progguide/starting.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "compiler",
+        "label": "AspectJ ajc compiler and runtime options",
+        "url": "https://eclipse.dev/aspectj/doc/latest/devguide/ajc.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "AspectJ EPL-2.0 licence",
+        "url": "https://raw.githubusercontent.com/eclipse-aspectj/aspectj/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Express tracing or other behavior across selected Java join points; broad pointcuts also broaden the affected code.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Know Java before learning pointcuts, advice and weaving.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "ajc compiles or weaves aspects with Java classes; execution requires the documented AspectJ runtime on the Java classpath.",
+        "source_ids": ["compiler"]
+      },
+      "behavior": {
+        "text": "Advice runs at matched join points, so changing a pointcut can change behavior across multiple classes.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "ajc exposes source, classpath and weaving options; preserve compiler messages that explain matched or unmatched code.",
+        "source_ids": ["compiler"]
+      },
+      "maintenance": {
+        "text": "Introduce aspects incrementally and inspect their effects when application structure changes.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The implementation has EPL-2.0 terms; linked Java dependencies and runtime distribution need component review.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Trace.aj",
+      "code": "public aspect Trace {\n  public static void main(String[] args) { work(); }\n  static void work() { System.out.println(\"PLLDN\"); }\n  before(): execution(static void Trace.work()) {\n    System.out.println(\"before\");\n  }\n}",
+      "run_instructions": "Compile Trace.aj with the installed ajc. Run class Trace with the compiled directory and the selected distribution's aspectjrt.jar on the Java classpath.",
+      "expected_result": "The program prints before, then PLLDN.",
+      "source_ids": ["guide", "compiler"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Eclipse AspectJ compiler and weaver",
+        "role": "implementation",
+        "spdx_expression": "EPL-2.0",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Assembly",
+    "implementation": {
+      "name": "NASM x86-64 ELF assembler on Linux",
+      "version_scope": "NASM Intel syntax, ELF64 output and Linux x86-64 syscall ABI; not other CPUs or operating systems.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "NASM assembly syntax and instruction operands",
+        "url": "https://www.nasm.us/doc/nasm03.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "build",
+        "label": "NASM command-line assembly options",
+        "url": "https://www.nasm.us/doc/nasm02.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "format",
+        "label": "NASM output formats",
+        "url": "https://www.nasm.us/doc/nasm09.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "abi",
+        "label": "Linux syscall architecture register conventions",
+        "url": "https://man7.org/linux/man-pages/man2/syscall.2.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "syscalls",
+        "label": "Linux x86-64 syscall number table",
+        "url": "https://raw.githubusercontent.com/torvalds/linux/master/arch/x86/entry/syscalls/syscall_64.tbl",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "NASM BSD-2-Clause licence",
+        "url": "https://raw.githubusercontent.com/netwide-assembler/nasm/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Write processor-specific routines with direct register and memory control; this profile targets only x86-64 Linux.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn instruction operands and registers, then the target object format and calling conventions.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Assemble to an ELF64 object, link it into a Linux executable and execute it on the matching architecture.",
+        "source_ids": ["build", "format", "abi"]
+      },
+      "behavior": {
+        "text": "The example puts syscall number 60 in eax and its exit argument in edi before invoking syscall.",
+        "source_ids": ["abi", "syscalls"]
+      },
+      "tooling": {
+        "text": "NASM selects object formats explicitly; a linker completes this standalone executable.",
+        "source_ids": ["build", "format"]
+      },
+      "maintenance": {
+        "text": "A different OS, object format or CPU changes the interface; retain those target choices with the source.",
+        "source_ids": ["format", "abi"]
+      },
+      "costs": {
+        "text": "NASM has BSD-2-Clause terms; the assembler licence does not determine the licence of your source program.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "exit.asm",
+      "code": "global _start\nsection .text\n_start:\n    mov eax, 60\n    mov edi, 42\n    syscall",
+      "run_instructions": "On x86-64 Linux, assemble with nasm -f elf64 exit.asm -o exit.o, link using ld exit.o -o example, then run ./example and inspect its exit status.",
+      "expected_result": "No text is printed; the process exits with status 42.",
+      "source_ids": ["guide", "build", "format", "abi", "syscalls"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "NASM x86-64 ELF assembler on Linux",
+        "role": "implementation",
+        "spdx_expression": "BSD-2-Clause",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "AutoHotkey",
+    "implementation": {
+      "name": "AutoHotkey v2",
+      "version_scope": "Version 2 Windows scripting; version 1 syntax and migration require separate handling.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "AutoHotkey v2 scripting tutorial",
+        "url": "https://raw.githubusercontent.com/AutoHotkey/AutoHotkeyDocs/v2/docs/Tutorial.htm",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "implementation",
+        "label": "AutoHotkey runtime and build README",
+        "url": "https://raw.githubusercontent.com/AutoHotkey/AutoHotkey/alpha/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "AutoHotkey GPL-2.0 and bundled notices",
+        "url": "https://raw.githubusercontent.com/AutoHotkey/AutoHotkey/alpha/license.txt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "compiler-grant",
+        "label": "AutoHotkey core GPL version grant",
+        "url": "https://raw.githubusercontent.com/AutoHotkey/AutoHotkey/alpha/source/AutoHotkey.cpp",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Create Windows hotkeys and desktop automation; window behavior remains tied to the automated application.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install AutoHotkey v2 and learn function-call syntax before using older script examples.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Run a .ahk file with the v2 interpreter; hotkeys keep scripts available for their trigger.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Hotkey declarations attach script actions to key combinations; ordinary function calls perform the work.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The distribution supports script execution and self-contained compiled-script builds; source builds use native C++ tools.",
+        "source_ids": ["implementation"]
+      },
+      "maintenance": {
+        "text": "Version 1 and version 2 have different script support; preserve the required version when sharing a script.",
+        "source_ids": ["guide", "implementation"]
+      },
+      "costs": {
+        "text": "Core AutoHotkey source permits GPL-2.0-or-later; bundled PCRE and redistributed components require their separate notices.",
+        "source_ids": ["license", "compiler-grant"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.ahk",
+      "code": "#Requires AutoHotkey v2.0\n^!h::MsgBox(\"PLLDN\")",
+      "run_instructions": "Open hello.ahk with AutoHotkey v2, then press Ctrl+Alt+H. Exit the script from its tray menu when finished.",
+      "expected_result": "A message box displays PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "AutoHotkey v2",
+        "role": "implementation",
+        "spdx_expression": "GPL-2.0-or-later",
+        "source_ids": ["license", "compiler-grant"],
+        "scope": "Core implementation covered by the cited source-header grant; separately marked libraries and dependencies are excluded.",
+        "notice": "The core header expressly permits GPL version 2 or later; bundled PCRE has separate notices."
+      }
+    ]
+  },
+  {
+    "name": "AutoIt",
+    "implementation": {
+      "name": "AutoIt v3",
+      "version_scope": "Windows AutoIt v3 scripting and MsgBox function; automation depends on the target application.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "AutoIt Windows automation overview",
+        "url": "https://www.autoitscript.com/site/autoit/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "AutoIt MsgBox function reference",
+        "url": "https://www.autoitscript.com/autoit3/docs/functions/MsgBox.htm",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "AutoIt end-user licence agreement",
+        "url": "https://www.autoitscript.com/autoit3/docs/license.htm",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Automate Windows controls, keystrokes and administrative desktop tasks using BASIC-like syntax.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install AutoIt on Windows and distinguish its scripting syntax from other BASIC dialects.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Run a .au3 script through AutoIt; the toolchain also supports standalone compiled scripts.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "MsgBox displays text and returns a button result; flags choose its buttons and appearance.",
+        "source_ids": ["example"]
+      },
+      "tooling": {
+        "text": "AutoIt includes an interpreter, compiler and tools for inspecting Windows controls.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "UI automation depends on the chosen windows and controls; review identifiers when the application changes.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The EULA allows commercial use and distribution under its conditions, but prohibits reverse engineering the product.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.au3",
+      "code": "MsgBox(0, \"Example\", \"PLLDN\")",
+      "run_instructions": "Save hello.au3 and run it with the installed AutoIt v3 interpreter on Windows.",
+      "expected_result": "A message box titled Example displays PLLDN.",
+      "source_ids": ["example", "guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "AutoIt v3",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "AutoIt software product under its custom EULA; generated scripts have a separately described scope.",
+        "notice": "The EULA permits commercial scripts and specifies product redistribution notices; it is not mapped to an SPDX open-source identifier."
+      }
+    ]
+  },
+  {
+    "name": "Awk",
+    "implementation": {
+      "name": "GNU Awk (gawk)",
+      "version_scope": "Basic pattern-action and field-processing workflow; GNU extensions are not automatically portable to other awk implementations.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GNU Awk official manual excerpts",
+        "url": "https://www.gnu.org/software/gawk/manual/gawk.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "patterns",
+        "label": "GNU Awk pattern-action summary",
+        "url": "https://www.gnu.org/software/gawk/manual/html_node/Pattern-Action-Summary.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "profiling",
+        "label": "GNU Awk profiling guide",
+        "url": "https://www.gnu.org/software/gawk/manual/html_node/Profiling.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Process text records and fields with small pattern-action scripts; field separation must match the input format.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn records, field numbers, regular expressions and shell quoting before combining pipelines.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Run gawk with -f and a source file; ordinary rules execute for each input record.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "BEGIN and END run at startup and termination; an empty pattern applies to every record.",
+        "source_ids": ["patterns"]
+      },
+      "tooling": {
+        "text": "GNU Awk documents execution profiling and counts for patterns, rules and functions.",
+        "source_ids": ["profiling"]
+      },
+      "maintenance": {
+        "text": "GNU-specific directives and extensions need checking before moving code to another awk implementation.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The accessed official manual excerpts establish behavior but not an exact licence expression for a selected compiler distribution.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "sum.awk",
+      "code": "{ total += $2 }\nEND { print total }",
+      "run_instructions": "With gawk installed, save input.txt containing 'apple 2' and 'pear 4' on separate lines. Run gawk -f sum.awk input.txt.",
+      "expected_result": "The program prints 6.",
+      "source_ids": ["guide", "patterns"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GNU Awk distribution",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "Exact gawk distribution licence not established by the accessed manual excerpts.",
+        "notice": "Inspect that release's COPYING and file headers; the manual's own licence is not substituted for the executable licence."
+      }
+    ]
+  },
+  {
+    "name": "BASIC",
+    "implementation": {
+      "name": "FreeBASIC in QB compatibility mode",
+      "version_scope": "A concrete QuickBASIC-compatible learning path; not a specification for every historical BASIC dialect.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "FreeBASIC compiler, toolchain and component licenses",
+        "url": "https://raw.githubusercontent.com/freebasic/fbc/master/readme.txt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "dialects",
+        "label": "FreeBASIC dialect selection and compatibility limits",
+        "url": "https://www.freebasic.net/wiki/compilerdialects",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Small console exercises and revisiting QuickBASIC-style code. Compatibility mode does not accept every dialect or every QB program.",
+        "source_ids": ["dialects"]
+      },
+      "prerequisites": {
+        "text": "Start with expressions, PRINT and control flow; select the QB dialect before importing older examples.",
+        "source_ids": ["dialects"]
+      },
+      "execution": {
+        "text": "fbc compiles .bas files to native executables; select -lang qb for this example.",
+        "source_ids": ["guide", "dialects"]
+      },
+      "behavior": {
+        "text": "QB mode restricts newer FreeBASIC features. Dialect differences matter when moving old code.",
+        "source_ids": ["dialects"]
+      },
+      "tooling": {
+        "text": "Use a text editor and fbc; the compiler relies on separate assembler/linker tooling.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Test old source against the chosen dialect; switch to fb deliberately when adopting newer features.",
+        "source_ids": ["dialects"]
+      },
+      "costs": {
+        "text": "Compiler and linked runtime have different redistribution terms; inspect platform dependencies too.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.bas",
+      "code": "PRINT \"PLLDN\"\nEND\n",
+      "run_instructions": "With FreeBASIC installed, run fbc -lang qb hello.bas; run ./hello on Unix-like systems or .\\hello.exe on Windows.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide", "dialects"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "FreeBASIC compiler",
+        "role": "implementation",
+        "spdx_expression": "GPL-2.0-or-later",
+        "scope": "fbc compiler; distinct from linked runtime components.",
+        "notice": "Distribution must follow the compiler's own license.",
+        "source_ids": ["guide"]
+      },
+      {
+        "component": "FreeBASIC runtime and graphics libraries",
+        "role": "runtime",
+        "spdx_expression": null,
+        "scope": "libfb/libfbmt and libfbgfx/libfbgfxmt: LGPL version 2 or later with a custom static-linking exception.",
+        "notice": "The exception has conditions for independent modules and modified libraries. No exact SPDX exception identifier is established here; inspect the full grant and other linked libraries.",
+        "source_ids": ["guide"]
+      }
+    ]
+  },
+  {
+    "name": "BQN",
+    "implementation": {
+      "name": "CBQN interpreter",
+      "version_scope": "CBQN command-line workflow; selected build flags and architecture affect the resulting interpreter.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "BQN arithmetic and array behavior",
+        "url": "https://mlochbaum.github.io/BQN/doc/arithmetic.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "implementation",
+        "label": "CBQN build, execution and component licensing",
+        "url": "https://raw.githubusercontent.com/dzaima/CBQN/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "CBQN offered MPL-2.0 licence text",
+        "url": "https://raw.githubusercontent.com/dzaima/CBQN/master/licenses/LICENSE-MPL2",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Express arithmetic over arrays with BQN notation; CBQN documents implementation-specific limits separately.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn symbolic function notation; use an installed CBQN or satisfy its C-toolchain build requirements.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Run a .bqn file with CBQN or enter expressions in its REPL.",
+        "source_ids": ["implementation"]
+      },
+      "behavior": {
+        "text": "Arithmetic functions extend to array arguments according to BQN's documented rules.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "CBQN provides a REPL; optional line editing and foreign-function support depend on build configuration.",
+        "source_ids": ["implementation"]
+      },
+      "maintenance": {
+        "text": "Native CPU-specific optimization can reduce portability; rebuilding bootstrap bytecode must track interpreter updates.",
+        "source_ids": ["implementation"]
+      },
+      "costs": {
+        "text": "CBQN offers several core licensing choices; listed sorting, number-formatting and REPL components carry separate terms.",
+        "source_ids": ["implementation", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "sum.bqn",
+      "code": "•Show 2 + 4 + 6",
+      "run_instructions": "Execute ./BQN sum.bqn from an installed or built CBQN distribution.",
+      "expected_result": "The displayed arithmetic result is 12.",
+      "source_ids": ["guide", "implementation"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "CBQN interpreter",
+        "role": "implementation",
+        "spdx_expression": "MPL-2.0",
+        "source_ids": ["license"],
+        "scope": "One offered choice for CBQN core files, excluding third-party exceptions listed in its README.",
+        "notice": "The README offers alternative core licences; review listed MIT, Apache/Boost and optional REPL components separately."
+      }
+    ]
+  }
+]

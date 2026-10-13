@@ -1,0 +1,888 @@
+[
+  {
+    "name": "Clarion",
+    "implementation": {
+      "name": "SoftVelocity Clarion Data Dictionary and AppGen",
+      "version_scope": "The publisher's graphical database-application workflow; licensed product editions and templates affect available features.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Clarion database, dictionary and generated-application workflow",
+        "url": "https://www.softvelocity.com/clarion.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "store",
+        "label": "Clarion vendor licence and subscription categories",
+        "url": "https://store.softvelocity.com/",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build business database applications with SQL or local ISAM data sources.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Start with the data schema and Data Dictionary; the wizard workflow introduces application generation without initial handwritten source.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "AppGen generates Clarion code from templates after the wizard captures the desired application behavior.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Dictionary definitions and selected templates determine the generated application's data and behavior.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The documented workflow centers on Data Dictionary, Wizards and AppGen, with support through the vendor's forums.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Preserve dictionary and template choices when maintaining generated applications; the workflow depends on both.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The vendor sells new licences, subscriptions, upgrades and add-ons; the appropriate product's current terms determine acquisition cost.",
+        "source_ids": ["store"]
+      }
+    },
+    "example": {
+      "kind": "reference",
+      "filename": null,
+      "code": null,
+      "run_instructions": "Use a licensed Clarion installation and its installed tutorial to define a small non-production database in Data Dictionary, then generate an application through Wizards/AppGen. The public vendor overview describes this graphical workflow but supplies no complete compilable textual example.",
+      "expected_result": "A database application is generated from the chosen dictionary and templates; its screens depend on that selection.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "SoftVelocity Clarion Data Dictionary and AppGen",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["store"],
+        "scope": "The selected commercial Clarion product and add-ons; exact vendor agreement not established from the public store overview.",
+        "notice": "No exact SPDX expression or redistribution entitlement is established by the accessed product/store pages. Inspect the purchased product's agreement."
+      }
+    ]
+  },
+  {
+    "name": "Clean",
+    "implementation": {
+      "name": "Clean 3.1 system with clm",
+      "version_scope": "Stable Clean 3.1 and its Unix-like command-line workflow; newer iTask packages use a separately documented package path.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Clean language, iTask/mTask and Cloogle scope",
+        "url": "https://clean.cs.ru.nl/Clean",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tutorial",
+        "label": "Clean function declarations and Start evaluation",
+        "url": "https://clean.cs.ru.nl/Quick_impression",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "run",
+        "label": "Clean clm/cpm command-line build instructions",
+        "url": "https://clean.cs.ru.nl/%2ANIX_Instructions",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "release",
+        "label": "Clean stable distributions and package distinctions",
+        "url": "https://clean.cs.ru.nl/Download_Clean",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Clean 3.1 licence and library exclusions",
+        "url": "https://ftp.cs.ru.nl/Clean/Clean31/CleanLicenseConditions.txt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "identifier",
+        "label": "SPDX BSD two-clause licence with views sentence",
+        "url": "https://spdx.org/licenses/BSD-2-Clause-Views.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Write pure, lazy functional programs; the project also documents iTask workflow and mTask embedded DSLs.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "The introduction assumes programming basics; learn type signatures, pattern alternatives and the Start entry value.",
+        "source_ids": ["tutorial"]
+      },
+      "execution": {
+        "text": "On Linux/macOS, clm compiles a main module and cpm manages projects; the installation guide describes environment setup.",
+        "source_ids": ["run"]
+      },
+      "behavior": {
+        "text": "Program execution computes Start; ordered pattern alternatives determine which matching function equation is used.",
+        "source_ids": ["tutorial"]
+      },
+      "tooling": {
+        "text": "Cloogle searches libraries, syntax and compiler errors; Windows distributions include an IDE.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Stable Clean 3.1 downloads and newer iTask packages have different distribution paths; select the matching documentation.",
+        "source_ids": ["release"]
+      },
+      "costs": {
+        "text": "The core distribution has BSD two-clause terms with a views disclaimer; Platform/Gast libraries and examples have separate licences.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Sum.icl",
+      "code": "module Sum\nimport StdEnv\nStart :: Int\nStart = 2 + 4 + 6",
+      "run_instructions": "After configuring the Clean command-line environment according to its Unix-like installation guide, run clm Sum -o sum and then ./sum.",
+      "expected_result": "Evaluation of Start prints the integer 12.",
+      "source_ids": ["tutorial", "run"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Clean 3.1 system with clm",
+        "role": "implementation",
+        "spdx_expression": "BSD-2-Clause-Views",
+        "source_ids": ["license"],
+        "scope": "Clean 3.1 distribution except the explicitly excluded Platform/Gast libraries and examples.",
+        "notice": "Retain copyright, conditions and disclaimer; review Platform/Gast directories and examples separately."
+      }
+    ]
+  },
+  {
+    "name": "Clojure",
+    "implementation": {
+      "name": "Clojure on the JVM with Clojure CLI",
+      "version_scope": "The JVM implementation; language and CLI versions are selected separately through deps.edn.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Clojure CLI execution and dependency selection",
+        "url": "https://clojure.org/reference/clojure_cli",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "rationale",
+        "label": "Clojure functional/JVM design",
+        "url": "https://clojure.org/about/rationale",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "install",
+        "label": "Clojure supported Java and platform installation paths",
+        "url": "https://clojure.org/guides/install_clojure",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "syntax",
+        "label": "Clojure forms, REPL exploration and printing",
+        "url": "https://clojure.org/guides/learn/syntax",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Clojure Eclipse Public License 1.0",
+        "url": "https://raw.githubusercontent.com/clojure/clojure/master/epl-v10.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build functional Lisp programs that consume JVM libraries; persistent data structures and concurrency facilities shape the design.",
+        "source_ids": ["rationale"]
+      },
+      "prerequisites": {
+        "text": "Install Java and the CLI; learn nested forms and use an editor that supports evaluating them.",
+        "source_ids": ["install", "syntax"]
+      },
+      "execution": {
+        "text": "The CLI constructs a JVM classpath and invokes a REPL, function or main/script entry according to its execution mode.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Prefix forms place the function before its arguments; println writes a human-readable value followed by a newline.",
+        "source_ids": ["syntax"]
+      },
+      "tooling": {
+        "text": "REPL documentation and source commands help explore functions; deps.edn controls project dependencies.",
+        "source_ids": ["syntax", "guide"]
+      },
+      "maintenance": {
+        "text": "The CLI can run independently selected Clojure language versions; record both versions for reproducible projects.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Clojure uses EPL-1.0; the chosen Java distribution and application libraries have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "sum.clj",
+      "code": "(println (+ 2 4 6))",
+      "run_instructions": "Install a supported Java runtime and the Clojure CLI, then run clojure -M sum.clj.",
+      "expected_result": "The script prints 12.",
+      "source_ids": ["guide", "syntax"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Clojure on the JVM with Clojure CLI",
+        "role": "implementation",
+        "spdx_expression": "EPL-1.0",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "CoffeeScript",
+    "implementation": {
+      "name": "CoffeeScript 2 compiler with Node.js",
+      "version_scope": "CoffeeScript 2; browser compatibility depends on the JavaScript emitted and any additional transpilation.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "CoffeeScript language, Node installation and compiler CLI",
+        "url": "https://coffeescript.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "CoffeeScript MIT licence",
+        "url": "https://raw.githubusercontent.com/jashkenas/coffeescript/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Write applications using existing JavaScript libraries while expressing the source in CoffeeScript syntax.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install Node.js and the project-local coffeescript package; learn indentation, function arrows and the generated JavaScript.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The compiler emits JavaScript; coffee can also compile and execute a source through Node.js.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "CoffeeScript 2 emits modern JavaScript constructs, so the target runtime's feature support matters.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The CLI supports a REPL, watch mode and source maps; --transpile adds a separately installed Babel stage.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Track the compiler as a local project dependency; the documentation lists changes when migrating from CoffeeScript 1.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler has MIT terms; Node.js, Babel and imported JavaScript packages remain separate components.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "sum.coffee",
+      "code": "total = 2 + 4 + 6\nconsole.log total",
+      "run_instructions": "In a project with Node.js, install the coffeescript development dependency and run npx coffee sum.coffee. Alternatively compile with npx coffee --compile sum.coffee and run node sum.js.",
+      "expected_result": "The program prints 12.",
+      "source_ids": ["guide"],
+      "try_url": "https://coffeescript.org/#try",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "CoffeeScript 2 compiler with Node.js",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Common Lisp",
+    "implementation": {
+      "name": "Steel Bank Common Lisp (SBCL)",
+      "version_scope": "ANSI Common Lisp through SBCL; implementation extensions and saved images are SBCL-specific.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "SBCL interactive compiler, debugger and supported systems",
+        "url": "https://www.sbcl.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "run",
+        "label": "SBCL REPL, script and saved-image behavior",
+        "url": "https://raw.githubusercontent.com/sbcl/sbcl/master/doc/manual/start-stop.texinfo",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "implementation",
+        "label": "SBCL ANSI conformance, extensions and FFI",
+        "url": "https://raw.githubusercontent.com/sbcl/sbcl/master/doc/manual/intro.texinfo",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "SBCL public-domain and component redistribution terms",
+        "url": "https://raw.githubusercontent.com/sbcl/sbcl/master/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Run ANSI Common Lisp programs in an interactive compiled environment with additional implementation facilities.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install a supported SBCL build and learn Lisp forms through its REPL; --script provides a small file-based entry.",
+        "source_ids": ["run"]
+      },
+      "execution": {
+        "text": "SBCL evaluates interactive expressions or runs a script; applications can also be distributed as saved runtime images.",
+        "source_ids": ["run"]
+      },
+      "behavior": {
+        "text": "Standard Common Lisp semantics and SBCL extensions are separate; foreign interfaces and system-definition tools extend the implementation.",
+        "source_ids": ["implementation"]
+      },
+      "tooling": {
+        "text": "The implementation includes a debugger, statistical profiler and coverage tool.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Saved core images have strict runtime compatibility requirements; rebuild images when changing the runtime.",
+        "source_ids": ["run"]
+      },
+      "costs": {
+        "text": "COPYING describes public-domain contributions, a jurisdictional FreeBSD fallback and separately licensed portions; retain their required notices.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.lisp",
+      "code": "(write-line \"PLLDN\")",
+      "run_instructions": "With SBCL installed, run sbcl --script hello.lisp.",
+      "expected_result": "The script prints PLLDN.",
+      "source_ids": ["run"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Steel Bank Common Lisp (SBCL)",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "SBCL's COPYING describes mixed public-domain, fallback and component terms; no single SPDX expression was established for the whole distribution."
+      }
+    ]
+  },
+  {
+    "name": "Component Pascal",
+    "implementation": {
+      "name": "BlackBox Component Builder Cross-Platform",
+      "version_scope": "The blackbox20 branch's GUI/module environment; extension compatibility and native libraries are package-specific.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "BlackBox Component Pascal modules and development environment",
+        "url": "https://blackbox.oberon.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "run",
+        "label": "BlackBox Cross-Platform build, GUI and interpreter workflow",
+        "url": "https://raw.githubusercontent.com/bbcb/bbcp/blackbox20/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Publisher's Pi2 demonstration extension",
+        "url": "https://blackbox.oberon.org/extension/Pi2",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "packages",
+        "label": "BlackBox packaged module decoding context",
+        "url": "https://blackbox.oberon.org/extension/Pbox",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "BlackBox Cross-Platform BSD licence",
+        "url": "https://raw.githubusercontent.com/bbcb/bbcp/blackbox20/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Develop strongly typed, module-based applications inside BlackBox's component and interface-design environment.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install a matching BlackBox package; some Unix-like builds require 32-bit GTK dependencies.",
+        "source_ids": ["run"]
+      },
+      "execution": {
+        "text": "Each module is a compilation/execution unit; imports cause required modules to be brought into memory.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "The compiler generates exported symbol files, and unreachable data is garbage collected.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The cross-platform repository documents GUI and command-line interpreter launchers for its supported systems.",
+        "source_ids": ["run"]
+      },
+      "maintenance": {
+        "text": "Match extensions to the selected environment; the Pi2 example is explicitly marked 2.0-compatible.",
+        "source_ids": ["example"]
+      },
+      "costs": {
+        "text": "The base cross-platform repository uses BSD-2-Clause; independently authored extension packages keep their own terms.",
+        "source_ids": ["guide", "license"]
+      }
+    },
+    "example": {
+      "kind": "reference",
+      "filename": null,
+      "code": null,
+      "run_instructions": "Launch the matching BlackBox GUI, obtain the linked 2.0-compatible Pi2 demo and follow its packaged installation/command instructions. BlackBox examples use decoded module documents/packages; the public demo page supplies a downloadable package rather than a complete plain-text executable example.",
+      "expected_result": "The demo writes twice pi to BlackBox's Log window; it depends on the installed compatible package.",
+      "source_ids": ["run", "example", "packages"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "BlackBox Component Builder Cross-Platform",
+        "role": "implementation",
+        "spdx_expression": "BSD-2-Clause",
+        "source_ids": ["license"],
+        "scope": "BlackBox Cross-Platform repository; independently published extensions and OS libraries are separate.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Crystal",
+    "implementation": {
+      "name": "Crystal native compiler",
+      "version_scope": "Crystal's documented native build/run workflow; this profile uses the 1.22 manual and the current repository licence.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Crystal language goals and major-version compatibility",
+        "url": "https://raw.githubusercontent.com/crystal-lang/crystal/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "compiler",
+        "label": "Crystal compiler, project, spec and version commands",
+        "url": "https://crystal-lang.org/reference/1.22/man/crystal/index.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tutorial",
+        "label": "Crystal output and standalone source tutorial",
+        "url": "https://crystal-lang.org/reference/1.22/tutorials/basics/10_hello_world.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Current Crystal repository Apache licence",
+        "url": "https://raw.githubusercontent.com/crystal-lang/crystal/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Write native applications with Ruby-like syntax and C bindings; Ruby source compatibility is not a project goal.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install the compiler and learn static typing with inference rather than assuming Ruby runtime behavior.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "crystal run builds a temporary executable and runs it; crystal build produces a reusable native executable.",
+        "source_ids": ["compiler"]
+      },
+      "behavior": {
+        "text": "Types are checked statically; compile-time code evaluation/generation is part of the language's design.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Compiler commands cover project initialization, documentation and specs; crystal version reports the compiler, LLVM and target.",
+        "source_ids": ["compiler"]
+      },
+      "maintenance": {
+        "text": "The project promises language compatibility within a major version; keep its standard library and external dependencies aligned.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The current repository's LICENSE is Apache-2.0; check the licence shipped with an older compiler distribution separately.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.cr",
+      "code": "puts \"PLLDN\"",
+      "run_instructions": "With a Crystal compiler matching the referenced manual, run crystal run hello.cr, or crystal build hello.cr and launch the generated executable.",
+      "expected_result": "The program prints PLLDN.",
+      "source_ids": ["compiler", "tutorial"],
+      "try_url": "https://play.crystal-lang.org/",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Crystal native compiler",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "Current Crystal repository source; licence of historical distributions is not inferred.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Cuda",
+    "implementation": {
+      "name": "NVIDIA CUDA C++ Toolkit with nvcc",
+      "version_scope": "CUDA C++ and the CUDA Runtime API; toolkit, host compiler, GPU and driver compatibility form the execution environment.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "NVIDIA CUDA C++ kernels, memory and compilation",
+        "url": "https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/intro-to-cuda-cpp.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "devices",
+        "label": "NVIDIA CUDA Runtime device enumeration and errors",
+        "url": "https://docs.nvidia.com/cuda/cuda-runtime-api/cuda_runtime_api/group__CUDART__DEVICE.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "NVIDIA CUDA Toolkit EULA and supplement",
+        "url": "https://docs.nvidia.com/cuda/eula/index.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Express GPU computation through C++ kernels launched by host code; data must be available in GPU-accessible memory.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install the CUDA Toolkit, a compatible driver and supported NVIDIA GPU; learn host/device code and thread-grid indexing.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "nvcc coordinates compilation stages; host code launches kernels with an execution configuration.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Many GPU threads execute a kernel; indexing and bounds checks determine each thread's valid memory accesses.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The Toolkit provides build, debugging and optimization tools; Nsight integrates profiling/debugging with the development workflow.",
+        "source_ids": ["license"]
+      },
+      "maintenance": {
+        "text": "Device enumeration can report initialization, insufficient-driver or no-device errors; treat compatibility checks as part of setup.",
+        "source_ids": ["devices"]
+      },
+      "costs": {
+        "text": "Use and redistribution are governed by NVIDIA's SDK agreement and CUDA supplement; hardware and optional services are separate acquisitions.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "devices.cu",
+      "code": "#include <cuda_runtime.h>\n#include <cstdio>\nint main() {\n    int count = 0;\n    cudaError_t status = cudaGetDeviceCount(&count);\n    if (status != cudaSuccess) {\n        std::fprintf(stderr, \"CUDA error: %d\\n\", static_cast<int>(status));\n        return 1;\n    }\n    std::printf(\"CUDA devices: %d\\n\", count);\n}",
+      "run_instructions": "With a compatible CUDA Toolkit and host C++ compiler installed, run nvcc devices.cu -o devices and launch the executable. This entry example probes device availability before developing a kernel.",
+      "expected_result": "On a working runtime, it prints the available CUDA device count. Initialization/driver errors produce a numeric diagnostic and nonzero exit status.",
+      "source_ids": ["guide", "devices"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "NVIDIA CUDA C++ Toolkit with nvcc",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The NVIDIA CUDA Toolkit package governed by the SDK licence and CUDA supplement; separately licensed components retain their notices.",
+        "notice": "These are vendor-specific terms, not a confirmed SPDX open-source expression. Consult the CUDA supplement's permitted redistributable components."
+      }
+    ]
+  },
+  {
+    "name": "Curry",
+    "implementation": {
+      "name": "PAKCS Curry-to-Prolog system",
+      "version_scope": "PAKCS 3.x; the retrieved manual documents 3.10.0 and implementation restrictions relative to the Curry Report.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "PAKCS applications, Prolog compilation and packages",
+        "url": "https://www.curry-lang.org/pakcs/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "manual",
+        "label": "PAKCS loading, evaluation, backtracking and IO",
+        "url": "https://www.curry-lang.org/pakcs/Manual.pdf",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "install",
+        "label": "PAKCS Prolog/Stack prerequisites and encoding",
+        "url": "https://raw.githubusercontent.com/cau-placc/pakcs/main/INSTALL.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "PAKCS BSD-style redistribution terms",
+        "url": "https://raw.githubusercontent.com/cau-placc/pakcs/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Model declarative computations with functional and logic programming; PAKCS documents database, web and analysis applications.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Use a supported Prolog backend; source builds also need Haskell Stack. Configure UTF-8 source encoding.",
+        "source_ids": ["install"]
+      },
+      "execution": {
+        "text": "PAKCS translates Curry to Prolog, loads a module and evaluates expressions interactively or through batch directives.",
+        "source_ids": ["manual"]
+      },
+      "behavior": {
+        "text": "Nondeterministic results are enumerated through backtracking; IO actions and pure expressions have different roles.",
+        "source_ids": ["manual"]
+      },
+      "tooling": {
+        "text": "CPM supplies additional libraries and tools such as analysis, documentation and property testing.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The manual lists implementation restrictions against the Curry Report; verify language extensions against the selected PAKCS version.",
+        "source_ids": ["guide", "manual"]
+      },
+      "costs": {
+        "text": "PAKCS has BSD three-clause terms; the selected Prolog backend and additional packages have independent licensing.",
+        "source_ids": ["license", "install"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Reader.curry",
+      "code": "module Reader where\nmain :: IO ()\nmain = putStrLn \"PLLDN\"",
+      "run_instructions": "With PAKCS and its Prolog backend installed, run pakcs :load Reader.curry :eval main :quit from the source directory.",
+      "expected_result": "The IO action prints PLLDN, then the batch session exits.",
+      "source_ids": ["manual"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "PAKCS Curry-to-Prolog system",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Cypher",
+    "implementation": {
+      "name": "Neo4j Community Cypher engine with Cypher Shell",
+      "version_scope": "Neo4j Community 2026.09 source and the current Cypher 25 manual; older databases may use Cypher 5.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Neo4j Cypher scope and version selection",
+        "url": "https://neo4j.com/docs/cypher-manual/current/introduction/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "rows",
+        "label": "Cypher UNWIND list-to-row clause",
+        "url": "https://neo4j.com/docs/cypher-manual/current/clauses/unwind/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "aggregation",
+        "label": "Cypher sums, null values and grouping",
+        "url": "https://neo4j.com/docs/cypher-manual/current/functions/aggregating/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "shell",
+        "label": "Cypher Shell connections, files and fail-fast behavior",
+        "url": "https://neo4j.com/docs/operations-manual/current/cypher-shell/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Neo4j Community GPL licence",
+        "url": "https://raw.githubusercontent.com/neo4j/neo4j/2026.09/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "grant",
+        "label": "Neo4j Community component GPL version grant",
+        "url": "https://raw.githubusercontent.com/neo4j/neo4j/2026.09/community/common/src/main/java/org/neo4j/internal/helpers/ArrayUtil.java",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Query property graphs declaratively; Neo4j's database engine supplies the execution environment.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install/connect to a Neo4j development database and learn Cypher clauses, graph patterns and result rows.",
+        "source_ids": ["guide", "shell"]
+      },
+      "execution": {
+        "text": "Cypher Shell sends queries through Bolt, either interactively or from a source file.",
+        "source_ids": ["shell"]
+      },
+      "behavior": {
+        "text": "Aggregations collect values into groups; sum ignores null values and can return integers, floats or durations.",
+        "source_ids": ["aggregation"]
+      },
+      "tooling": {
+        "text": "The shell supports explicit connection/database parameters, file execution and fail-fast error handling.",
+        "source_ids": ["shell"]
+      },
+      "maintenance": {
+        "text": "Cypher 25 receives new features while Cypher 5 is frozen; confirm the database's configured query language.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The named Community component permits GPL-3.0-or-later; this does not establish the licensing of other database editions or services.",
+        "source_ids": ["license", "grant"]
+      }
+    },
+    "example": {
+      "kind": "query",
+      "filename": "total.cypher",
+      "code": "UNWIND [2, 4, 6] AS amount\nRETURN sum(amount) AS total;",
+      "run_instructions": "Connect Cypher Shell to your development Neo4j database using its documented address/user options, then execute this query interactively or pass total.cypher with -f. Authenticate through the documented interactive prompt rather than placing a password in a shared example.",
+      "expected_result": "The query returns one row with a total column containing 12; it does not create or modify graph records.",
+      "source_ids": ["shell", "rows", "aggregation"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Neo4j Community Cypher engine with Cypher Shell",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-or-later",
+        "source_ids": ["license"],
+        "scope": "Neo4j Community component source on the 2026.09 branch; independently licensed editions, libraries and services are excluded.",
+        "notice": "Retain GPL licence/notices and meet source-distribution obligations applicable to redistribution of the covered database component."
+      }
+    ]
+  }
+]

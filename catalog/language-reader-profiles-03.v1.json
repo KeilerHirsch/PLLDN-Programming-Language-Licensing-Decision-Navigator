@@ -1,0 +1,848 @@
+[
+  {
+    "name": "Ballerina",
+    "implementation": {
+      "name": "Ballerina distribution",
+      "version_scope": "Documented bal package workflow; compiler and package dependencies are selected together.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Ballerina first package, service and execution tutorial",
+        "url": "https://ballerina.io/learn/get-started/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Ballerina first-program source",
+        "url": "https://raw.githubusercontent.com/ballerina-platform/ballerina-distribution/master/examples/hello-world/hello_world.bal",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Ballerina language implementation LICENSE",
+        "url": "https://raw.githubusercontent.com/ballerina-platform/ballerina-lang/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build service integration and typed network APIs; this first example only demonstrates local execution.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install the Ballerina distribution and learn imports, functions and the package layout.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "bal run compiles and runs the package; bal build can create its executable JAR.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Typed records model service data and resource functions handle network interactions in the tutorial.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The bal tool manages packages; the documented VS Code extension provides editing and service interaction tools.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Ballerina.toml identifies the package root and metadata; keep it with the source and selected dependencies.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The implementation has Apache-2.0 terms; deployed service infrastructure and dependencies have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "main.bal",
+      "code": "import ballerina/io;\npublic function main() {\n    io:println(\"PLLDN\");\n}",
+      "run_instructions": "Create a package with bal new plldn_example, replace its main.bal, then run bal run inside that package.",
+      "expected_result": "The program prints PLLDN.",
+      "source_ids": ["guide", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Ballerina distribution",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Bash",
+    "implementation": {
+      "name": "GNU Bash",
+      "version_scope": "GNU Bash shell scripting; shell features and external utility availability are separate concerns.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GNU Bash features and implementation license",
+        "url": "https://www.gnu.org/s/bash/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "manual",
+        "label": "Bash reference manual",
+        "url": "https://www.gnu.org/s/bash/manual/bash.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Interactive command use and shell automation around existing utilities; external programs have their own dependencies.",
+        "source_ids": ["guide", "manual"]
+      },
+      "prerequisites": {
+        "text": "Learn quoting, expansion, exit status and redirection before building scripts around user-supplied values.",
+        "source_ids": ["manual"]
+      },
+      "execution": {
+        "text": "Bash reads shell commands; builtins and external commands participate in pipelines and redirections.",
+        "source_ids": ["manual"]
+      },
+      "behavior": {
+        "text": "Bash extends sh with arrays and other features; Bash-specific scripts require Bash rather than an arbitrary sh.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The shell supplies history, job control and editing; a terminal and a text editor are enough for a small script.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep the intended shell explicit and test quoting and command failures on the target environment.",
+        "source_ids": ["manual"]
+      },
+      "costs": {
+        "text": "GNU Bash is free software; copying its implementation has GPL obligations distinct from utility licenses.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.sh",
+      "code": "printf '%s\\n' 'PLLDN'\n",
+      "run_instructions": "Save the file as hello.sh and run bash hello.sh from a terminal with GNU Bash installed.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["manual"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GNU Bash",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-or-later",
+        "scope": "GNU Bash implementation, not an automatic license declaration for your script.",
+        "notice": "Inspect licenses of external programs separately.",
+        "source_ids": ["guide"]
+      }
+    ]
+  },
+  {
+    "name": "Bicep",
+    "implementation": {
+      "name": "Microsoft Bicep CLI",
+      "version_scope": "Bicep-to-ARM template build workflow; the example performs no Azure deployment.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Microsoft Bicep infrastructure overview",
+        "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "outputs",
+        "label": "Bicep outputs and types",
+        "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/outputs",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "cli",
+        "label": "Bicep CLI build commands",
+        "url": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-cli",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "pricing",
+        "label": "Azure service pricing",
+        "url": "https://azure.microsoft.com/en-us/pricing/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Bicep compiler MIT licence",
+        "url": "https://raw.githubusercontent.com/Azure/bicep/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Describe Azure resources declaratively; Bicep is infrastructure configuration rather than application request handling.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn Azure resource types and parameters; install the Bicep CLI to build the example locally.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "bicep build translates source into an ARM JSON template; deployment is an independent action.",
+        "source_ids": ["cli"]
+      },
+      "behavior": {
+        "text": "Typed outputs expose values from a template; parameter expressions are evaluated by the deployment system.",
+        "source_ids": ["outputs"]
+      },
+      "tooling": {
+        "text": "The documented editor tooling supplies completion and validation for resource declarations.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Resource API versions and module definitions form part of the deployment contract and should be kept with the source.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler has MIT terms; actual deployed Azure services are priced separately, so a template is not a cost estimate.",
+        "source_ids": ["license", "pricing"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "names.bicep",
+      "code": "param prefix string = 'plldn'\noutput resourceGroupName string = '${prefix}-dev'",
+      "run_instructions": "Run bicep build names.bicep with the installed CLI. Inspect the generated JSON; do not deploy to exercise compilation.",
+      "expected_result": "An ARM template contains a string parameter and an output expression. A deployment with the default parameter would produce plldn-dev.",
+      "source_ids": ["outputs", "cli"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Microsoft Bicep CLI",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Bison",
+    "implementation": {
+      "name": "GNU Bison C parser generator",
+      "version_scope": "Traditional C grammar interface with user-supplied scanner, error handler and main.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GNU Bison generated C parser interface",
+        "url": "https://www.gnu.org/software/bison/manual/html_node/Bison-Parser.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "scanner",
+        "label": "GNU Bison yylex contract",
+        "url": "https://www.gnu.org/s/bison/manual/html_node/Lexical.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "generate",
+        "label": "GNU Bison grammar generation workflow",
+        "url": "https://www.gnu.org/software/bison/manual/html_node/Rpcalc-Generate.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Bison source licence header",
+        "url": "https://raw.githubusercontent.com/akimd/bison/master/src/main.c",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "skeleton",
+        "label": "Bison C skeleton licence and generator source",
+        "url": "https://raw.githubusercontent.com/akimd/bison/master/data/skeletons/yacc.c",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Generate parsers for a specified grammar; a scanner and application code complete the program.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn grammar productions and the generated C interface, then install Bison and a C compiler.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Generate the parser source from a .y file, compile it, and call yyparse from main.",
+        "source_ids": ["generate", "guide"]
+      },
+      "behavior": {
+        "text": "yylex returns tokens; semantic actions run when grammar productions are recognized.",
+        "source_ids": ["scanner", "guide"]
+      },
+      "tooling": {
+        "text": "The generator emits parsing code, but the application supplies yyerror and input handling.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Preserve the parser/scanner interface when changing token definitions; avoid reserving unrelated identifiers with yy or YY prefixes.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The generator source has GPL-3.0-or-later terms; generated-parser licensing requires checking the selected skeleton's output notices.",
+        "source_ids": ["license", "skeleton"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "accept.y",
+      "code": "%{\n#include <stdio.h>\nint yylex(void);\nvoid yyerror(const char *s);\n%}\n%%\nstart: 'a' { puts(\"accepted\"); };\n%%\nint yylex(void) {\n  int c = getchar();\n  return c == '\\n' || c == EOF ? 0 : c;\n}\nvoid yyerror(const char *s) { fprintf(stderr, \"%s\\n\", s); }\nint main(void) { return yyparse(); }",
+      "run_instructions": "Run bison -o accept.c accept.y, compile accept.c with a C compiler, then run the resulting program and supply a followed by Enter.",
+      "expected_result": "The valid input a prints accepted; another token is a syntax error.",
+      "source_ids": ["guide", "scanner", "generate"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GNU Bison C parser generator",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-or-later",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "The source licence header establishes the generator scope. Do not automatically apply that expression to every generated parser."
+      }
+    ]
+  },
+  {
+    "name": "BlitzMax",
+    "implementation": {
+      "name": "BlitzMax NG through MaxIDE",
+      "version_scope": "BlitzMax NG setup and editor workflow; the cited bcc licence covers that named parser component only.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "BlitzMax platform setup and first program",
+        "url": "https://blitzmax.org/docs/en/setup/get_started/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "language",
+        "label": "BlitzMax beginners language tutorial",
+        "url": "https://blitzmax.org/docs/en/tutorials/beginners_guide/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "BlitzMax bcc parser COPYING",
+        "url": "https://raw.githubusercontent.com/bmx-ng/bcc/master/COPYING.md",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build applications and games with native targets and modules for graphics and sound.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Choose a distribution for the intended platform; non-Windows targets may need system development tools.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Use MaxIDE Build and Run to compile and launch a .bmx source file.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "BlitzMax is strongly typed with garbage collection; platform-specific facilities still need their target tools.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The distribution provides MaxIDE and generated documentation; modules extend its available APIs.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Retain the selected target and C toolchain because native output depends on the supported architecture.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The cited bcc component has Zlib terms; the complete NG distribution and added modules require separate licence checks.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.bmx",
+      "code": "Print \"PLLDN\"",
+      "run_instructions": "Open hello.bmx in the installed MaxIDE and choose Program > Build and Run.",
+      "expected_result": "The output displays PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "BlitzMax bcc parser",
+        "role": "implementation",
+        "spdx_expression": "Zlib",
+        "source_ids": ["license"],
+        "scope": "The named bcc parser component in the cited repository, not every component of a BlitzMax NG distribution.",
+        "notice": "Retain the bcc notice and check separately packaged compiler/runtime/modules."
+      }
+    ]
+  },
+  {
+    "name": "Bluespec",
+    "implementation": {
+      "name": "BSC Bluespec SystemVerilog compiler and Bluesim",
+      "version_scope": "BSV source syntax with local simulation; BH syntax and physical synthesis flows are separate.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "BSC hardware language and tools overview",
+        "url": "https://raw.githubusercontent.com/B-Lang-org/bsc/main/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "language",
+        "label": "BSV language reference source",
+        "url": "https://raw.githubusercontent.com/B-Lang-org/bsc/main/doc/BSV_ref_guide/BSV_lang.tex",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tools",
+        "label": "BSC simulation and compilation user guide",
+        "url": "https://raw.githubusercontent.com/B-Lang-org/bsc/main/doc/user_guide/user_guide.tex",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "BSC licence and third-party exceptions",
+        "url": "https://raw.githubusercontent.com/B-Lang-org/bsc/main/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Describe digital hardware with modules and rules; a simulated design is not a fabricated or timing-verified circuit.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn hardware state, clocks and interfaces before relying on guarded atomic actions.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "BSC produces Bluesim simulation models or Verilog for a separately selected synthesis toolchain.",
+        "source_ids": ["guide", "tools"]
+      },
+      "behavior": {
+        "text": "Guarded atomic actions describe rule effects and allow the compiler to choose a scheduler.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "BSC includes the compiler, Bluesim, standard libraries and Bluetcl; waveform tools are available separately.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Review guards, clocks and scheduled rules when a hardware design changes; simulation and synthesis are distinct flows.",
+        "source_ids": ["language", "tools"]
+      },
+      "costs": {
+        "text": "Most BSC-owned source has BSD-3-Clause terms; the COPYING file lists solvers and other components with different licences.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Hello.bsv",
+      "code": "package Hello;\nmodule mkHello(Empty);\n  rule say;\n    $display(\"PLLDN\");\n    $finish(0);\n  endrule\nendmodule\nendpackage",
+      "run_instructions": "With BSC and its simulation dependencies installed, run bsc -u -sim -g mkHello Hello.bsv, then bsc -sim -e mkHello -o hello. Run the resulting simulation executable.",
+      "expected_result": "The simulation displays PLLDN and terminates; no hardware is deployed.",
+      "source_ids": ["language", "tools"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "BSC Bluespec SystemVerilog compiler and Bluesim",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "BSC-owned source files except component-specific exceptions listed in COPYING.",
+        "notice": "Bundled solver, Haskell and other library notices remain separate."
+      }
+    ]
+  },
+  {
+    "name": "Boo",
+    "implementation": {
+      "name": "Boo compiler and script tools",
+      "version_scope": "Current repository .NET SDK build and booi workflow; older Mono/.NET Framework distributions are separate.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Boo build and script execution README",
+        "url": "https://raw.githubusercontent.com/boo-lang/boo/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Boo BSD-3-Clause licence",
+        "url": "https://raw.githubusercontent.com/boo-lang/boo/master/license.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Write .NET-oriented scripts or compile assemblies using Boo's language and runtime tools.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install the SDK required by the chosen repository revision before building its command-line tools.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "booi executes a script; booc produces a .NET assembly rather than a platform-independent native binary.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "The compiler can expose its source transformations and generated IL for inspection.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The repository supplies booc, booi and booish launchers, including Windows command versions.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Current SDK builds and older runtime distributions are different contexts; retain toolchain and configuration details.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Boo has BSD-3-Clause terms; .NET and any included package licensing have separate scopes.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.boo",
+      "code": "print \"PLLDN\"",
+      "run_instructions": "Using the selected Boo distribution or documented SDK-built tools, run booi hello.boo.",
+      "expected_result": "The script prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Boo compiler and script tools",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Boogie",
+    "implementation": {
+      "name": "Boogie .NET verification tool",
+      "version_scope": "Boogie IVL through the documented .NET tool; backend solver selection is part of the verification context.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Boogie installation, solvers and verification model",
+        "url": "https://raw.githubusercontent.com/boogie-org/boogie/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "language",
+        "label": "Boogie IVL reference with currency warning",
+        "url": "https://boogie-docs.readthedocs.io/en/latest/LangRef.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Boogie MIT licence",
+        "url": "https://raw.githubusercontent.com/boogie-org/boogie/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build verification backends or check intermediate models; accepted assertions concern the modeled program.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn specifications and assertions; install .NET and a supported SMT solver such as the documented default Z3.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The tool generates verification conditions and passes them to a selected SMT solver.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Mathematical integer assertions describe properties; assumptions and procedure contracts determine the verification obligation.",
+        "source_ids": ["language"]
+      },
+      "tooling": {
+        "text": "Install the packaged .NET tool; solver executable paths and options can be configured explicitly.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The linked language reference warns that it is dated; match advanced features to the installed tool version.",
+        "source_ids": ["language"]
+      },
+      "costs": {
+        "text": "Boogie has MIT terms; SMT solver and .NET licensing must be considered separately.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "check.bpl",
+      "code": "procedure Main()\n{\n  assert 2 + 4 + 6 == 12;\n}",
+      "run_instructions": "Install Boogie according to its README and provide the selected solver on PATH. Run boogie check.bpl.",
+      "expected_result": "The arithmetic assertion is verified without a counterexample; exact report formatting depends on the tool version.",
+      "source_ids": ["guide", "language"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Boogie .NET verification tool",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "C",
+    "implementation": {
+      "name": "GNU C compiler (GCC)",
+      "version_scope": "A hosted C console example using GCC and the target C library; other compilers and embedded environments differ.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GCC compilation stages and C/C++ invocation",
+        "url": "https://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "GCC driver source license grant",
+        "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/master/gcc/gcc.cc",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "language",
+        "label": "GNU C language introduction and reference",
+        "url": "https://www.gnu.org/software/c-intro-and-ref/manual/c-intro-and-ref.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Native code and interfacing with machine-level data; this hosted example requires a target C library.",
+        "source_ids": ["language", "guide"]
+      },
+      "prerequisites": {
+        "text": "Learn types, arrays and pointers alongside compilation; memory use requires explicit care.",
+        "source_ids": ["language"]
+      },
+      "execution": {
+        "text": "GCC preprocesses, compiles, assembles and links; source and object files are different stages.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Pointers and array access expose memory directly; language constructs do not provide automatic bounds safety.",
+        "source_ids": ["language"]
+      },
+      "tooling": {
+        "text": "Use gcc and a terminal; compiler flags select stages and target behavior.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep target compiler and linked libraries explicit when porting between environments.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Compiler licensing is separate from the target C library and application dependencies.",
+        "source_ids": ["license", "guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.c",
+      "code": "#include <stdio.h>\n\nint main(void) {\n    puts(\"PLLDN\");\n    return 0;\n}\n",
+      "run_instructions": "Run gcc -Wall -Wextra hello.c -o hello, then ./hello on Unix-like systems or .\\hello.exe on Windows with an appropriate GCC toolchain.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide", "language"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GCC compiler",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-or-later",
+        "scope": "GNU compiler implementation; target C libraries are not covered by this entry.",
+        "notice": "The compiler license alone does not establish your program's distribution terms.",
+        "source_ids": ["license"]
+      }
+    ]
+  },
+  {
+    "name": "C#",
+    "implementation": {
+      "name": "Roslyn C# on .NET",
+      "version_scope": "Console-project workflow; platform-specific application workloads have their own requirements.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "C# overview, execution and .NET tools",
+        "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/overview",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "compiler-license",
+        "label": "Roslyn compiler source license",
+        "url": "https://raw.githubusercontent.com/dotnet/roslyn/main/License.txt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "runtime-license",
+        "label": ".NET runtime source license",
+        "url": "https://raw.githubusercontent.com/dotnet/runtime/main/LICENSE.TXT",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Console, server and application workloads on .NET; the selected framework determines platform-specific features.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Start with variables, methods and control flow; use the beginner tutorials for a first programming language.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The .NET SDK provides dotnet build and dotnet run; choose a console project for this example.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "C# checks types at compile time and uses .NET automatic memory management; async/await supports asynchronous operations.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The SDK creates and builds projects; NuGet supplies additional packages beyond runtime libraries.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Application workload and runtime/library choices affect deployment; platform-independent libraries differ from workload-specific ones.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": ".NET is a free cross-platform development environment; optional editor services and operation of the resulting application are separate.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Program.cs",
+      "code": "System.Console.WriteLine(\"PLLDN\");",
+      "run_instructions": "With the .NET SDK installed, create a console project using dotnet new console, replace Program.cs with this code, then run dotnet run.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Roslyn",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["compiler-license"],
+        "scope": "Roslyn source grant; dependencies retain separate notices.",
+        "notice": "The compiler license does not choose your application license."
+      },
+      {
+        "component": ".NET runtime source",
+        "role": "runtime",
+        "spdx_expression": "MIT",
+        "source_ids": ["runtime-license"],
+        "scope": "Source grant in the runtime repository; bundled components can add notices.",
+        "notice": "Check the exact distributed runtime and libraries."
+      }
+    ]
+  }
+]

@@ -1,0 +1,842 @@
+[
+  {
+    "name": "Squirrel",
+    "implementation": {
+      "name": "Squirrel standalone interpreter/embeddable VM",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Squirrel implementation",
+        "url": "https://github.com/albertodemichelis/squirrel",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "reference",
+        "label": "Squirrel API reference",
+        "url": "https://www.squirrel-lang.org/doc/squirrel3.pdf",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Squirrel license",
+        "url": "https://raw.githubusercontent.com/albertodemichelis/squirrel/master/COPYRIGHT",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Application and game scripting embedded in a host VM.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn dynamic values, closures and the host's exposed API.",
+        "source_ids": ["reference"]
+      },
+      "execution": {
+        "text": "The standalone sq interpreter executes scripts; a C API embeds the VM.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Classes and callable values support dynamic application extensions.",
+        "source_ids": ["reference"]
+      },
+      "tooling": {
+        "text": "The distribution supplies a standalone interpreter and an embedding API.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "A host controls exposed functions; standalone scripts do not automatically have game-specific APIs.",
+        "source_ids": ["reference"]
+      },
+      "costs": {
+        "text": "The VM's MIT license is separate from the host application's libraries and content.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.nut",
+      "code": "print(\"PLLDN\\n\");",
+      "run_instructions": "With the standalone Squirrel interpreter installed, run sq hello.nut.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Squirrel standalone interpreter/embeddable VM",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain copyright and permission notices for the VM component."
+      }
+    ]
+  },
+  {
+    "name": "Standard ML",
+    "implementation": {
+      "name": "Standard ML of New Jersey (SML/NJ)",
+      "version_scope": "Standard ML '97 in SML/NJ; interactive guide and release information checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "SML/NJ interactive system",
+        "url": "https://www.smlnj.org/doc/interact.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "SML/NJ project and release information",
+        "url": "https://www.smlnj.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "SML/NJ license",
+        "url": "https://www.smlnj.org/license.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "SML/NJ compiles Standard ML '97 and supplies libraries and development tools; this profile describes that implementation.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Learn declarations, types and expressions, then use the interactive system to inspect their inferred types.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The sml command starts a REPL; use loads a source file, while Compilation Manager organizes larger programs.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Type mismatches are compiler errors; interactive expressions are bound to it and declarations expose their types.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Compilation Manager and source-position diagnostics support work beyond isolated REPL expressions.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "SML/NJ publishes separate development and legacy release information; select the matching distribution and documentation.",
+        "source_ids": ["overview"]
+      },
+      "costs": {
+        "text": "The SML/NJ license permits use and distribution without a fee, with notice and publicity conditions.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "addition.sml",
+      "code": "val total = 2 + 3;\nval _ = print (Int.toString total ^ \"\\n\");\n",
+      "run_instructions": "Save addition.sml, start sml in that directory, and enter use \"addition.sml\"; at the prompt.",
+      "expected_result": "Prints 5, alongside the interactive compiler's binding and loading messages.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Standard ML of New Jersey (SML/NJ)",
+        "role": "implementation",
+        "spdx_expression": "SMLNJ",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Applies to SML/NJ's covered implementation files; retain the required copyright, permission and disclaimer notices."
+      }
+    ]
+  },
+  {
+    "name": "Starlark",
+    "implementation": {
+      "name": "Starlark in Go",
+      "version_scope": "Go interpreter documentation checked on 2026-10-13; embedding hosts can expose different APIs.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Starlark in Go documentation and CLI",
+        "url": "https://github.com/google/starlark-go",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Starlark in Go license",
+        "url": "https://raw.githubusercontent.com/google/starlark-go/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "An embeddable configuration language for structured data and application scripting; Bazel is one host rather than the whole language.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn Python-like expressions, functions and collections, then the particular host's additional built-ins.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The Go implementation provides a standalone interpreter and a Go API for executing files.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Starlark uses dynamic values and lexical functions; host applications decide which domain-specific operations are available.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The starlark CLI offers a REPL; Go applications can call ExecFile and retrieve module globals.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Record the Go interpreter revision and host API together, since host extensions affect portability.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The selected Go interpreter uses BSD-3-Clause; the Bazel host and application dependencies have separate licenses.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "total.star",
+      "code": "total = 2 + 3\nprint(total)\n",
+      "run_instructions": "With the documented starlark CLI installed, run starlark total.star.",
+      "expected_result": "Prints 5; no Bazel-specific built-ins are required.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Starlark in Go",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain the license notices and disclaimer; the grant covers the Go interpreter, not every Starlark host."
+      }
+    ]
+  },
+  {
+    "name": "SuperCollider",
+    "implementation": {
+      "name": "SuperCollider sclang",
+      "version_scope": "SuperCollider 3.14.0 tutorial and development README checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "SuperCollider first steps",
+        "url": "https://doc.sccode.org/Tutorials/Getting-Started/02-First-Steps.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "SuperCollider components, packages and installation",
+        "url": "https://raw.githubusercontent.com/supercollider/supercollider/develop/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "SuperCollider distribution COPYING",
+        "url": "https://raw.githubusercontent.com/supercollider/supercollider/develop/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "sclang controls audio synthesis and algorithmic composition; the audio server is a separate program.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Learn objects, messages and code evaluation before adding audio-server and scheduling concepts.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The IDE sends selected code to sclang; synthesis uses scsynth or supernova communicating through OSC.",
+        "source_ids": ["guide", "overview"]
+      },
+      "behavior": {
+        "text": "Evaluation posts the last expression's result; postln explicitly writes a value to the post window.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The IDE includes help, Quarks manages language extensions, and servers can load separate native plugins.",
+        "source_ids": ["overview"]
+      },
+      "maintenance": {
+        "text": "Match tutorials, language extensions and server plugins to the installed distribution rather than mixing development snapshots.",
+        "source_ids": ["overview"]
+      },
+      "costs": {
+        "text": "The distribution declares GNU GPL version 3; bundled libraries and plugins require their own notices.",
+        "source_ids": ["overview", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.scd",
+      "code": "\"PLLDN\".postln;\n",
+      "run_instructions": "Save hello.scd in the SuperCollider IDE and evaluate the line using the platform's documented evaluation shortcut.",
+      "expected_result": "PLLDN appears in the post window; the IDE may also display the expression's returned string. This example does not start audio synthesis.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "SuperCollider sclang",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The checked COPYING contains GNU GPL version 3, but a complete per-file version-choice and dependency license inventory is not established here."
+      }
+    ]
+  },
+  {
+    "name": "Swift",
+    "implementation": {
+      "name": "Swift compiler and Swift Package Manager",
+      "version_scope": "Swift.org CLI tutorial and language-book sources checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Swift installation and use cases",
+        "url": "https://www.swift.org/getting-started/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "SwiftPM command-line tutorial",
+        "url": "https://www.swift.org/getting-started/cli-swiftpm/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "language",
+        "label": "A Swift Tour source",
+        "url": "https://raw.githubusercontent.com/swiftlang/swift-book/main/TSPL.docc/GuidedTour/GuidedTour.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Swift implementation license and runtime exception",
+        "url": "https://raw.githubusercontent.com/swiftlang/swift/main/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "The project documents command-line tools, libraries, web services and Apple applications; those workflows have different host requirements.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install the platform toolchain and learn constants, variables and type inference; Apple application tutorials additionally require macOS and Xcode.",
+        "source_ids": ["guide", "language"]
+      },
+      "execution": {
+        "text": "SwiftPM creates an executable package and compiles and runs it with swift run.",
+        "source_ids": ["example"]
+      },
+      "behavior": {
+        "text": "Swift checks types and can infer them from initial values; top-level code in main.swift can be an entry point.",
+        "source_ids": ["language"]
+      },
+      "tooling": {
+        "text": "SwiftPM manages package manifests and dependencies; Package.resolved records resolved package versions.",
+        "source_ids": ["example"]
+      },
+      "maintenance": {
+        "text": "Keep the selected toolchain and package versions with the project; application framework availability depends on the target.",
+        "source_ids": ["guide", "example"]
+      },
+      "costs": {
+        "text": "The compiler source has Apache-2.0 with the Swift runtime-library exception; SDKs and packages retain separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "main.swift",
+      "code": "let total = 2 + 3\nprint(total)\n",
+      "run_instructions": "Create an executable package with swift package init --name PLLDNExample --type executable. Put this code in its generated Sources/main.swift and run swift run PLLDNExample.",
+      "expected_result": "After the build messages, prints 5.",
+      "source_ids": ["example", "language"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Swift compiler and Swift Package Manager",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0 WITH Swift-exception",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The runtime-library exception applies to portions embedded by compilation under its stated conditions; external SDKs are outside this component scope."
+      }
+    ]
+  },
+  {
+    "name": "TLA",
+    "implementation": {
+      "name": "TLA+ specification language with TLC and Toolbox",
+      "version_scope": "TLA+ high-level overview and TLC/Toolbox documentation checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "TLA+ high-level overview",
+        "url": "https://lamport.azurewebsites.net/tla/high-level-view.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tools",
+        "label": "TLA+ tools and requirements",
+        "url": "https://github.com/tlaplus/tlaplus",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Toolbox model overview documentation",
+        "url": "https://raw.githubusercontent.com/tlaplus/tlaplus/master/toolbox/org.lamport.tla.toolbox.doc/html/model/overview-page.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "TLA+ tools license",
+        "url": "https://raw.githubusercontent.com/tlaplus/tlaplus/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "TLA+ describes possible system behaviors mathematically and checks models of concurrent algorithms; it is not an application implementation.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn state predicates, next-state relations and temporal formulas; the documented tools require Java 11 or later.",
+        "source_ids": ["example", "tools"]
+      },
+      "execution": {
+        "text": "TLC explores a configured model; the Toolbox accepts either Init and Next or a single temporal behavior formula.",
+        "source_ids": ["example"]
+      },
+      "behavior": {
+        "text": "Invariants are state predicates checked over reachable states; a finite model check is scoped to that model.",
+        "source_ids": ["example"]
+      },
+      "tooling": {
+        "text": "The repository supplies CLI tools and the Toolbox; the proof manager is a separate project.",
+        "source_ids": ["tools"]
+      },
+      "maintenance": {
+        "text": "Preserve the specification, model constants and checking options together so the checked state space is identifiable.",
+        "source_ids": ["example"]
+      },
+      "costs": {
+        "text": "The selected TLA+ tools are MIT-licensed; Java and any separately installed proof tools have their own licenses.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "Toggle.tla",
+      "code": "---- MODULE Toggle ----\nVARIABLE on\nInit == on = FALSE\nNext == on' = ~on\nTypeOK == on \\in BOOLEAN\n====\n",
+      "run_instructions": "Open Toggle.tla as a Toolbox specification, create a model using Init and Next, add TypeOK as an invariant, and run TLC.",
+      "expected_result": "The model alternates between FALSE and TRUE; TLC should explore two distinct states and find TypeOK true for this finite model.",
+      "source_ids": ["example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "TLA+ specification language with TLC and Toolbox",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "This identifies the tlaplus/tlaplus implementation repository's grant; it does not assign a license to all specifications written in TLA+."
+      }
+    ]
+  },
+  {
+    "name": "Tcl",
+    "implementation": {
+      "name": "Tcl core interpreter (tclsh)",
+      "version_scope": "Tcl 9.0 command and shell manuals checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Tcl shell manual",
+        "url": "https://www.tcl-lang.org/man/tcl9.0/UserCmd/tclsh.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Tcl puts command",
+        "url": "https://www.tcl-lang.org/man/tcl9.0/TclCmd/puts.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Tcl core license terms",
+        "url": "https://raw.githubusercontent.com/tcltk/tcl/main/license.terms",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "tclsh evaluates Tcl command scripts and supports interactive use; graphical Tk applications use an additional toolkit.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install a Tcl interpreter matching the manual and learn command arguments, substitutions and channels.",
+        "source_ids": ["guide", "example"]
+      },
+      "execution": {
+        "text": "tclsh reads a script filename or starts interactively when no filename is supplied.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Script arguments appear in argv; puts writes to a channel and defaults to standard output.",
+        "source_ids": ["guide", "example"]
+      },
+      "tooling": {
+        "text": "The shell exposes a REPL and can source other Tcl files; versioned executable names permit multiple installations.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Record the interpreter version and installed packages; a script should not assume every Tcl installation has the same extensions.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The Tcl core grant requires retained notices and no royalty fee for authorized uses; exceptions in individual files remain relevant.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.tcl",
+      "code": "puts \"PLLDN\"\n",
+      "run_instructions": "With Tcl 9.0 installed, run tclsh hello.tcl, using the installed versioned executable name if necessary.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Tcl core interpreter (tclsh)",
+        "role": "implementation",
+        "spdx_expression": "TCL",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The core license explicitly permits per-file exceptions and differently licensed modifications; Tk and external extensions are outside this entry."
+      }
+    ]
+  },
+  {
+    "name": "Terra",
+    "implementation": {
+      "name": "Terra language implementation",
+      "version_scope": "Terra getting-started documentation and release license checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Terra getting started and Lua interaction",
+        "url": "https://terralang.org/getting-started.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Terra release license",
+        "url": "https://raw.githubusercontent.com/terralang/terra/master/release/share/terra/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Terra embeds a statically typed low-level language in Lua for generated native code and C-library integration.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn Lua's top-level execution and Terra's typed function declarations; install a Terra distribution with its compiler dependencies.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Lua runs top-level statements, while called Terra functions are JIT-compiled to machine code.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Terra arguments have declared types and return types may be inferred; a top-level print by itself is Lua code.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The terra executable runs .t files or a Lua-like REPL; bundled examples demonstrate language features.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep the Terra distribution and LLVM/C integration requirements together when reproducing generated code.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The Terra release grant is MIT; LLVM, Lua and linked native libraries require separate license review.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "total.t",
+      "code": "terra total(a : int, b : int)\n    return a + b\nend\nprint(total(2, 3))\n",
+      "run_instructions": "Using the Terra distribution's executable, run terra total.t, or its documented bin/terra path.",
+      "expected_result": "Calls the Terra function from Lua and prints 5.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Terra language implementation",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The release license covers Terra's software; retain its copyright and permission notice and review dependency notices separately."
+      }
+    ]
+  },
+  {
+    "name": "TypeScript",
+    "implementation": {
+      "name": "TypeScript compiler with Node.js",
+      "version_scope": "Compiler-to-JavaScript workflow; runtime and compiler versions are separate choices.",
+      "source_ids": ["guide", "node"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "TypeScript: JavaScript prerequisites and erased types",
+        "url": "https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tools",
+        "label": "TypeScript compiler and strictness settings",
+        "url": "https://www.typescriptlang.org/docs/handbook/2/basic-types.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "node",
+        "label": "Node.js execution environment",
+        "url": "https://nodejs.org/learn/getting-started/introduction-to-nodejs",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "TypeScript compiler license",
+        "url": "https://github.com/microsoft/TypeScript/blob/main/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "runtime-license",
+        "label": "Node.js component licenses",
+        "url": "https://raw.githubusercontent.com/nodejs/node/main/LICENSE",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "cli",
+        "label": "TypeScript compiler CLI and explicit configuration handling",
+        "url": "https://www.typescriptlang.org/docs/handbook/compiler-options.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Typed browser and server application code in the JavaScript ecosystem; the host still determines available APIs.",
+        "source_ids": ["guide", "node"]
+      },
+      "prerequisites": {
+        "text": "Learn JavaScript syntax and runtime behavior alongside static types. Existing JavaScript experience changes the learning path.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The compiler checks .ts files and emits JavaScript; Node.js or a browser executes that output.",
+        "source_ids": ["guide", "node"]
+      },
+      "behavior": {
+        "text": "Type annotations are erased. A declared type alone does not validate incoming data at runtime.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Use tsc and tsconfig settings for compiler checks; strictness controls how much checking is performed.",
+        "source_ids": ["tools"]
+      },
+      "maintenance": {
+        "text": "Keep the JavaScript target and host APIs aligned; compiler type checks can be stricter than valid JavaScript execution.",
+        "source_ids": ["guide", "tools"]
+      },
+      "costs": {
+        "text": "Plan for compiler configuration and the chosen JavaScript deployment host. The compiler license and hosting arrangement are separate.",
+        "source_ids": ["license", "node"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.ts",
+      "code": "const message: string = \"PLLDN\";\nconsole.log(message);\n",
+      "run_instructions": "With TypeScript and Node.js installed, run tsc --strict --target ES2022 hello.ts from a directory without tsconfig.json, then node hello.js. For a standalone file inside a configured project with TypeScript 6 or later, add --ignoreConfig; use tsc -p for the project's own configuration.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["tools", "node", "cli"],
+      "try_url": "https://www.typescriptlang.org/play/",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "TypeScript compiler",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The compiler source covered by its LICENSE.txt.",
+        "notice": "Read Apache-2.0 terms; this is not the license of applications compiled with it."
+      },
+      {
+        "component": "Node.js core",
+        "role": "runtime",
+        "spdx_expression": "MIT",
+        "source_ids": ["runtime-license"],
+        "scope": "Node.js core grant only; bundled components have additional notices in this file.",
+        "notice": "Review the full runtime distribution and each application dependency separately."
+      }
+    ]
+  },
+  {
+    "name": "V",
+    "implementation": {
+      "name": "V compiler",
+      "version_scope": "V documentation on the checked master branch, 2026-10-13; pre-1.0 language-reference rules are documented.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "V language and compiler documentation",
+        "url": "https://raw.githubusercontent.com/vlang/v/master/doc/docs.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "V compiler license",
+        "url": "https://raw.githubusercontent.com/vlang/v/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "V is a statically typed compiled language for application code; its documentation and compiler tests define the current language reference.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install the V compiler and its platform build prerequisites, then learn functions, types and module organization.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "v run compiles and executes a file; v followed by a filename compiles without executing it.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Files in the same module directory can share declarations without importing sibling files.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The compiler provides run, build and help commands; a .vvmrc can select a project-local compiler version.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The documentation states that compiler behavior and tests govern discrepancies before 1.0; pin the compiler for reproducible work.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler repository uses MIT; imported modules and native dependencies can have separate license obligations.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.v",
+      "code": "fn main() {\n    println('PLLDN')\n}\n",
+      "run_instructions": "With the selected V compiler on PATH, run v run hello.v.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "V compiler",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "MIT applies to the selected compiler repository's covered files; preserve its notices and inspect imported packages separately."
+      }
+    ]
+  }
+]

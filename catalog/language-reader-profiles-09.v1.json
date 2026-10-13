@@ -1,0 +1,976 @@
+[
+  {
+    "name": "Go",
+    "implementation": {
+      "name": "Go toolchain",
+      "version_scope": "Official Go command-line tutorial; the example uses only the standard fmt package.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Go: first program, tools and modules",
+        "url": "https://go.dev/doc/tutorial/getting-started",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Go source license",
+        "url": "https://raw.githubusercontent.com/golang/go/master/LICENSE",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "faq",
+        "label": "Go FAQ: resource management and language design",
+        "url": "https://go.dev/doc/faq",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Command-line programs and applications assembled from Go packages; the example needs no external module.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Use a text editor and terminal. Learn package main, imports and the main entry function.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The go command builds and runs source; go run hello.go is the direct path for this single-file example.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Object lifetimes are managed through garbage collection; allocation patterns still affect runtime overhead.",
+        "source_ids": ["faq"]
+      },
+      "tooling": {
+        "text": "The go command and go.mod manage builds and dependencies; pkg.go.dev provides package documentation.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Track external module requirements in go.mod and integrity records in go.sum when dependencies are added.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The tutorial distinguishes free and paid editors; editor and dependency choices are separate from the Go distribution license.",
+        "source_ids": ["guide", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.go",
+      "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n    fmt.Println(\"PLLDN\")\n}",
+      "run_instructions": "With Go installed, run go run hello.go. For a multi-file project, initialize and maintain a module as described in the tutorial.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide"],
+      "try_url": "https://go.dev/play/",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Go toolchain source",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "The Go Authors' source grant; separately incorporated code can have its own notices.",
+        "notice": "Preserve required notices and review added package licenses."
+      }
+    ]
+  },
+  {
+    "name": "Gosu",
+    "implementation": {
+      "name": "Gosu compiler and GosuLab on the JVM",
+      "version_scope": "Current repository and website documentation; the checked quickstart describes a JDK 1.8 workflow.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Gosu program files, typing and interoperability",
+        "url": "https://gosu-lang.github.io/docs.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "setup",
+        "label": "GosuLab quickstart and JDK configuration",
+        "url": "https://gosu-lang.github.io/quickstart.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Gosu JVM language features",
+        "url": "https://gosu-lang.github.io/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "build",
+        "label": "Gosu source-build prerequisites",
+        "url": "https://raw.githubusercontent.com/gosu-lang/gosu-lang/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Gosu implementation license",
+        "url": "https://raw.githubusercontent.com/gosu-lang/gosu-lang/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Gosu provides typed JVM programs with Java-library interoperability, properties, closures and extension methods.",
+        "source_ids": ["guide", "overview"]
+      },
+      "prerequisites": {
+        "text": "The checked GosuLab quickstart uses JDK 1.8 and JAVA_HOME. Verify the chosen distribution's JDK requirements before installation.",
+        "source_ids": ["setup", "build"]
+      },
+      "execution": {
+        "text": "A .gsp program contains executable statements; gosu hello.gsp runs it without a Java-style main wrapper.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Variable types can be inferred; properties and enhancements extend the Java-style object model.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "GosuLab offers an editor and example execution; documented program classpaths can include directories, jars or Maven coordinates.",
+        "source_ids": ["guide", "setup"]
+      },
+      "maintenance": {
+        "text": "Record the JDK and dependencies used. The documentation notes that the IntelliJ plugin can lag newer language features.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The checked Gosu source uses Apache-2.0 terms; the JDK and Maven-resolved libraries carry separate licenses.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.gsp",
+      "code": "print(\"PLLDN\")\n",
+      "run_instructions": "Install and configure the selected Gosu distribution as its quickstart describes, then run gosu hello.gsp from a terminal with Gosu available on PATH.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide", "setup"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Gosu compiler and GosuLab on the JVM",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Apache-2.0 applies to the checked Gosu implementation source; it does not cover the entire Java runtime or every application dependency."
+      }
+    ]
+  },
+  {
+    "name": "Groovy",
+    "implementation": {
+      "name": "Apache Groovy 6.0 on the JVM",
+      "version_scope": "Groovy 6.0 installation prerequisites and the 6.0.0 CLI documentation checked on 2026-10-13; no latest-release claim.",
+      "source_ids": ["guide", "setup", "workflow"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Groovy scripting and Java interoperability overview",
+        "url": "https://groovy-lang.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "setup",
+        "label": "Groovy installation and Java prerequisites",
+        "url": "https://groovy-lang.org/install.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "workflow",
+        "label": "Groovy script CLI",
+        "url": "https://docs.groovy-lang.org/latest/html/documentation/tools-groovy.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Apache Groovy implementation and included notices",
+        "url": "https://raw.githubusercontent.com/apache/groovy/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Groovy supports JVM scripting, domain-specific languages and Java-library integration; object-oriented and functional styles can coexist.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "The checked Groovy 6.0 installation guide requires Java 17 or later. Configure JAVA_HOME and the selected Groovy distribution's bin directory.",
+        "source_ids": ["setup"]
+      },
+      "execution": {
+        "text": "groovy runs a source script by compiling and executing it; applications can also embed Groovy through JVM dependencies.",
+        "source_ids": ["workflow", "setup"]
+      },
+      "behavior": {
+        "text": "The language supports dynamic and static typing, closures and static compilation; select the required checking mode deliberately.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "groovysh provides an interactive shell and groovyConsole a graphical console; the CLI accepts scripts and expressions.",
+        "source_ids": ["setup", "workflow"]
+      },
+      "maintenance": {
+        "text": "Keep Groovy, the JDK and build dependencies compatible; installation prerequisites vary by Groovy release.",
+        "source_ids": ["setup"]
+      },
+      "costs": {
+        "text": "Apache Groovy's primary grant is Apache-2.0; the LICENSE file also records included third-party terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.groovy",
+      "code": "def total = 2 + 3\nprintln total\n",
+      "run_instructions": "With the selected Groovy distribution and a compatible JDK configured, run groovy hello.groovy.",
+      "expected_result": "Prints 5.",
+      "source_ids": ["guide", "workflow"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Apache Groovy 6.0 on the JVM",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "Apache Groovy implementation code covered by its primary Apache grant; separately identified third-party components are excluded.",
+        "notice": "Apache-2.0 covers the Apache Groovy implementation grant; included third-party components and the Java runtime require their own terms."
+      }
+    ]
+  },
+  {
+    "name": "HCL",
+    "implementation": {
+      "name": "HashiCorp HCL 2 parser library",
+      "version_scope": "The HCL syntax/parser library, not a Terraform or other host-product license.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "HCL library architecture and host-defined schemas",
+        "url": "https://raw.githubusercontent.com/hashicorp/hcl/main/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "HCL library license",
+        "url": "https://raw.githubusercontent.com/hashicorp/hcl/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Human-oriented configuration for developer tools and services; the consuming application defines its schema.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn attributes, blocks and expressions, then the particular host application's accepted names and values.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "A host loads HCL and interprets its content. Parsing a file does not deploy infrastructure by itself.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Native HCL and JSON forms share a model; available variables and functions are provided by the host.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "HCL 2 supplies Go libraries for parsing and evaluation, with Go modules required for integration.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "HCL 2's Go API is incompatible with HCL 1; coordinate parser and host migrations.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The HCL parser's terms do not establish the license or price of a product consuming HCL.",
+        "source_ids": ["license", "guide"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "service.hcl",
+      "code": "service \"web\" {\n  port = 8080\n}\n",
+      "run_instructions": "Parse service.hcl using an HCL 2 host that defines a service block with one label and a port attribute. This is illustrative configuration, not a standalone deployment command.",
+      "expected_result": "The parser can represent the web service block and numeric port. A host schema must validate and interpret it; no service is launched.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "HCL parser library",
+        "role": "implementation",
+        "spdx_expression": "MPL-2.0",
+        "scope": "HashiCorp HCL library covered by its repository license.",
+        "notice": "Host tools and their modules need separate license checks.",
+        "source_ids": ["license"]
+      }
+    ]
+  },
+  {
+    "name": "HLSL",
+    "implementation": {
+      "name": "Microsoft DirectX Shader Compiler (DXC)",
+      "version_scope": "DXC shader-model-6 pixel-shader workflow using the documented CLI; compiler, graphics API, driver and shader model are separate version choices.",
+      "source_ids": ["project", "cli"]
+    },
+    "sources": [
+      {
+        "id": "overview",
+        "label": "Microsoft Learn: HLSL and programmable shader stages",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "semantics",
+        "label": "Microsoft Learn: shader input/output semantics",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-semantics",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "project",
+        "label": "Microsoft DXC: compiler outputs and execution requirements",
+        "url": "https://github.com/microsoft/DirectXShaderCompiler",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "cli",
+        "label": "Microsoft DXC: entry-point, target-profile and output flags",
+        "url": "https://github.com/microsoft/DirectXShaderCompiler/wiki/Using-dxc.exe-and-dxcompiler.dll",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Microsoft DXC: University of Illinois/NCSA and component notices",
+        "url": "https://github.com/microsoft/DirectXShaderCompiler/blob/main/LICENSE.TXT",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Write GPU graphics or compute shader stages used by a host application. The shader is one part of a graphics or compute pipeline, not a standalone desktop application.",
+        "source_ids": ["overview", "project"]
+      },
+      "prerequisites": {
+        "text": "Learn shader stages, vector types and input/output semantics. Install DXC for compilation; executing its DXIL output additionally needs a compatible host API and graphics-driver environment.",
+        "source_ids": ["overview", "semantics", "project"]
+      },
+      "execution": {
+        "text": "DXC selects the entry point with -E and shader profile with -T, then writes a compiled object through -Fo. A host application loads and invokes the shader.",
+        "source_ids": ["cli", "project"]
+      },
+      "behavior": {
+        "text": "HLSL has C-like shader syntax. System-value semantics connect values to pipeline stages; SV_Target supplies a pixel shader's render-target output.",
+        "source_ids": ["overview", "semantics"]
+      },
+      "tooling": {
+        "text": "Use dxc for compilation and its help output for flags. DXC also exposes a compiler DLL interface and shader debug/reflection information.",
+        "source_ids": ["cli", "project"]
+      },
+      "maintenance": {
+        "text": "Record the compiler version and target profile with shader artifacts. Driver/runtime support and the host's pipeline bindings must match the compiled shader.",
+        "source_ids": ["cli", "project"]
+      },
+      "costs": {
+        "text": "Plan for the host application and graphics environment as well as shader tooling. DXC's own grant and its bundled component notices need separate review.",
+        "source_ids": ["project", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.hlsl",
+      "code": "float4 main() : SV_Target {\n    return float4(1.0, 0.0, 0.0, 1.0);\n}",
+      "run_instructions": "With DXC installed, save hello.hlsl and run dxc -E main -T ps_6_0 -Fo hello.dxil hello.hlsl. This compiles a pixel shader; displaying a result requires a host graphics application that binds it to a render pipeline.",
+      "expected_result": "Produces hello.dxil containing a compiled pixel shader. When invoked in a correctly configured rendering pipeline, its output is the constant RGBA vector (1, 0, 0, 1); the compilation command does not display an image.",
+      "source_ids": ["semantics", "cli", "project"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "DirectX Shader Compiler's own covered source",
+        "role": "implementation",
+        "spdx_expression": "NCSA",
+        "source_ids": ["project", "license"],
+        "scope": "The University of Illinois/NCSA grant identified by the DXC README and license file; third-party parts have additional notices.",
+        "notice": "Preserve source/binary notices and review the complete LICENSE.TXT and distribution notices rather than treating every bundled component as NCSA."
+      }
+    ]
+  },
+  {
+    "name": "Hack",
+    "implementation": {
+      "name": "Hack typechecker and HHVM runtime",
+      "version_scope": "Modern .hack files with an __EntryPoint function; typechecker, HHVM and Hack Standard Library have separately scoped grants.",
+      "source_ids": ["program", "getting-started", "project"]
+    },
+    "sources": [
+      {
+        "id": "program",
+        "label": "Hack: source files and entry-point structure",
+        "url": "https://docs.hhvm.com/hack/source-code-fundamentals/program-structure/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "getting-started",
+        "label": "Hack: typechecking and HHVM execution workflow",
+        "url": "https://docs.hhvm.com/hack/getting-started/getting-started/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "types",
+        "label": "Hack: static type-system introduction",
+        "url": "https://docs.hhvm.com/hack/types/introduction/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "project",
+        "label": "HHVM project: runtime scope and component licensing",
+        "url": "https://github.com/facebook/hhvm",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "typechecker-license",
+        "label": "Hack typechecker MIT license",
+        "url": "https://github.com/facebook/hhvm/blob/master/hphp/hack/LICENSE",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "hsl-license",
+        "label": "Hack Standard Library MIT license",
+        "url": "https://github.com/facebook/hhvm/blob/master/hphp/hsl/LICENSE",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "php-license",
+        "label": "HHVM PHP-licensed source grant",
+        "url": "https://github.com/facebook/hhvm/blob/master/LICENSE.PHP",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "zend-license",
+        "label": "HHVM Zend-licensed source grant",
+        "url": "https://github.com/facebook/hhvm/blob/master/LICENSE.ZEND",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Typed application and web-server code using HHVM. The runtime executes Hack programs; server deployment also needs the chosen web-server configuration.",
+        "source_ids": ["project", "types"]
+      },
+      "prerequisites": {
+        "text": "Install HHVM and the Hack tools, learn function/type syntax, and use a .hack file with an __EntryPoint function. Project typechecking requires its documented setup.",
+        "source_ids": ["program", "getting-started"]
+      },
+      "execution": {
+        "text": "Run hh_client to check the configured project, then use hhvm hello.hack for command-line execution. Typechecking and execution are separate steps.",
+        "source_ids": ["getting-started", "project"]
+      },
+      "behavior": {
+        "text": "Hack has a static type system with subtyping, nullable types, inference and refinement. EntryPoint identifies the startup function independently of its name.",
+        "source_ids": ["types", "program"]
+      },
+      "tooling": {
+        "text": "Use hh_client for type errors and IDE information, HHVM for running code, and the Hack Standard Library where required by the application.",
+        "source_ids": ["getting-started", "project"]
+      },
+      "maintenance": {
+        "text": "Keep file includes/autoloading and project typechecker configuration consistent. Web-server execution is a different deployment workflow from a standalone .hack file.",
+        "source_ids": ["program", "getting-started", "project"]
+      },
+      "costs": {
+        "text": "Plan for the HHVM host and application dependencies. The MIT typechecker/library grants do not replace the runtime's PHP and Zend notices.",
+        "source_ids": [
+          "project",
+          "typechecker-license",
+          "hsl-license",
+          "php-license",
+          "zend-license"
+        ]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.hack",
+      "code": "<<__EntryPoint>>\nfunction main(): void {\n  print(\"PLLDN\\n\");\n}",
+      "run_instructions": "Save hello.hack and run hhvm hello.hack with HHVM installed. For project analysis, configure the project as described in the getting-started guide and run hh_client from its directory.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["program", "getting-started", "project"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Hack typechecker",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["typechecker-license"],
+        "scope": "The Hack typechecker source covered by hphp/hack/LICENSE, except separately noted code.",
+        "notice": "Preserve the MIT notice and inspect component exceptions."
+      },
+      {
+        "component": "Hack Standard Library",
+        "role": "standard-library",
+        "spdx_expression": "MIT",
+        "source_ids": ["hsl-license"],
+        "scope": "The HSL source covered by hphp/hsl/LICENSE, except separately noted code.",
+        "notice": "Preserve the MIT notice; third-party application packages remain separate."
+      },
+      {
+        "component": "HHVM PHP-licensed source portions",
+        "role": "runtime",
+        "spdx_expression": "PHP-3.01",
+        "source_ids": ["project", "php-license"],
+        "scope": "Source portions covered by HHVM's LICENSE.PHP grant; other parts carry distinct terms.",
+        "notice": "Retain source/binary notices and review naming and acknowledgement terms for covered redistribution."
+      },
+      {
+        "component": "HHVM Zend-licensed source portions",
+        "role": "runtime",
+        "spdx_expression": "Zend-2.0",
+        "source_ids": ["project", "zend-license"],
+        "scope": "Source portions covered by HHVM's LICENSE.ZEND grant, which states Zend Engine License version 2.00.",
+        "notice": "Retain applicable notices and review naming terms; this does not summarize every bundled component."
+      }
+    ]
+  },
+  {
+    "name": "Hare",
+    "implementation": {
+      "name": "Hare macOS port (hshq/harelang)",
+      "version_scope": "The independently maintained macOS port named by the upstream FAQ. Licensing below applies to this inspected port's build driver and standard-library source, not an inferred current SourceHut grant.",
+      "source_ids": ["faq", "port", "driver", "library-license"]
+    },
+    "sources": [
+      {
+        "id": "language",
+        "label": "Hare: language scope, static types and manual memory management",
+        "url": "https://harelang.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tutorial",
+        "label": "Hare tutorial: startup function, error assertion and compile/run workflow",
+        "url": "https://harelang.org/tutorials/introduction/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "faq",
+        "label": "Hare upstream FAQ: independent macOS port and support boundary",
+        "url": "https://harelang.org/documentation/faq.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "port",
+        "label": "hshq Hare macOS port: components and licensing",
+        "url": "https://github.com/hshq/harelang/blob/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "install-port",
+        "label": "hshq Hare port: Darwin build setup",
+        "url": "https://raw.githubusercontent.com/hshq/harelang/master/README.darwin",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "driver",
+        "label": "hshq Hare build driver: CLI commands and GPL-3.0-only identifier",
+        "url": "https://raw.githubusercontent.com/hshq/harelang/master/cmd/hare/main.ha",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "library-license",
+        "label": "hshq Hare standard library: MPL-2.0 text",
+        "url": "https://github.com/hshq/harelang/blob/master/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Systems programs with static types, explicit memory management and a small runtime. This selected implementation is a macOS port, whose support is separate from upstream Hare.",
+        "source_ids": ["language", "faq"]
+      },
+      "prerequisites": {
+        "text": "Learn types, namespaces and explicit error handling. For this macOS port, follow README.darwin and install the required harec/compiler backend and platform build tools.",
+        "source_ids": ["tutorial", "install-port"]
+      },
+      "execution": {
+        "text": "The hare build driver compiles and runs source through its run subcommand; build creates an executable and test runs embedded tests.",
+        "source_ids": ["driver", "tutorial"]
+      },
+      "behavior": {
+        "text": "Memory management is explicit. The starter's ! asserts that printing succeeds and aborts on a reported error; larger programs should handle or propagate errors deliberately.",
+        "source_ids": ["language", "tutorial"]
+      },
+      "tooling": {
+        "text": "The inspected port provides build, run, test, deps and version CLI commands. Its build setup separately selects harec, qbe, assembler and linker tools.",
+        "source_ids": ["driver", "install-port"]
+      },
+      "maintenance": {
+        "text": "Pin the port and toolchain revision. Upstream's tutorial targets a stable Hare release and can differ from master; upstream explicitly separates support for this macOS port.",
+        "source_ids": ["tutorial", "faq"]
+      },
+      "costs": {
+        "text": "Account for the port's build environment and dependencies. Its GPL build-driver source and MPL standard-library source have distinct redistribution terms.",
+        "source_ids": ["install-port", "driver", "library-license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.ha",
+      "code": "use fmt;\n\nexport fn main() void = {\n\tfmt::println(\"PLLDN\")!;\n};",
+      "run_instructions": "After installing a working version of the hshq macOS port and its required toolchain, save hello.ha and run hare run hello.ha. The shared Hare tutorial also documents hare build -o hello hello.ha followed by ./hello. Check the port's compiler/library version if tutorial syntax differs.",
+      "expected_result": "Prints PLLDN followed by a newline when the port's compiler and library accept this starter. A printing error trips the explicit ! assertion.",
+      "source_ids": ["tutorial", "driver", "install-port"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "hshq Hare port build driver",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-only",
+        "source_ids": ["port", "driver"],
+        "scope": "The build-driver source in this inspected port; cmd/hare/main.ha declares GPL-3.0-only.",
+        "notice": "Review GPL obligations for redistribution or modification of covered tools. The separate harec compiler and backend require their own component review."
+      },
+      {
+        "component": "hshq Hare port standard library",
+        "role": "standard-library",
+        "spdx_expression": "MPL-2.0",
+        "source_ids": ["port", "library-license"],
+        "scope": "The standard-library source in this inspected port, whose COPYING contains MPL version 2.0.",
+        "notice": "Review the MPL terms and file-specific notices for covered modifications and redistribution; this is not a license assigned to every Hare application."
+      }
+    ]
+  },
+  {
+    "name": "Haskell",
+    "implementation": {
+      "name": "Glasgow Haskell Compiler (GHC)",
+      "version_scope": "GHC 9.14.1 user-guide workflows; starter uses a Haskell 2010-compatible subset and no external packages.",
+      "source_ids": ["ghc", "runghc", "report"]
+    },
+    "sources": [
+      {
+        "id": "report",
+        "label": "Haskell 2010 report: language structure and semantics",
+        "url": "https://www.haskell.org/onlinereport/haskell2010/haskellch1.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "ghc",
+        "label": "GHC 9.14.1 introduction and compiler license",
+        "url": "https://downloads.haskell.org/ghc/9.14.1/docs/users_guide/intro.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "runghc",
+        "label": "GHC 9.14.1: running source with runghc",
+        "url": "https://downloads.haskell.org/ghc/9.14.1/docs/users_guide/runghc.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "steps",
+        "label": "GHCup: compilation, interpreter, signatures and project tools",
+        "url": "https://www.haskell.org/ghcup/steps/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "GHC's own three-clause BSD license grant",
+        "url": "https://www.haskell.org/ghc/license.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "General-purpose functional programs built from expressions, typed modules and reusable functions. The language specification leaves the concrete compilation environment to implementations such as GHC.",
+        "source_ids": ["report", "ghc"]
+      },
+      "prerequisites": {
+        "text": "Install a GHC toolchain and learn expressions, type signatures, pattern matching and the IO distinction. Begin with runghc or GHCi before adding a package build.",
+        "source_ids": ["report", "steps"]
+      },
+      "execution": {
+        "text": "GHC offers batch compilation and GHCi; runghc interprets a source file without a separate compile-and-run step.",
+        "source_ids": ["ghc", "runghc"]
+      },
+      "behavior": {
+        "text": "Haskell 2010 specifies pure functions, non-strict semantics, static polymorphic types and monadic I/O. GHC adds optional language extensions beyond that baseline.",
+        "source_ids": ["report", "ghc"]
+      },
+      "tooling": {
+        "text": "Use GHCi to inspect types, GHC warnings for source checks, and Cabal or Stack for projects with modules and external packages.",
+        "source_ids": ["steps"]
+      },
+      "maintenance": {
+        "text": "Record compiler and package choices, declared language/extensions and dependencies in the project. GHC's introduction notes that some toolchain updates require recompilation of dependent code.",
+        "source_ids": ["ghc", "steps"]
+      },
+      "costs": {
+        "text": "Plan for build tools, package dependencies and deployment libraries. GHC's own BSD grant does not establish the licenses of every external package.",
+        "source_ids": ["steps", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.hs",
+      "code": "main :: IO ()\nmain = putStrLn \"PLLDN\"",
+      "run_instructions": "Save hello.hs and run runghc hello.hs with GHC installed. Alternatively, compile with ghc hello.hs and run the produced platform-specific executable.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["runghc", "steps"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GHC compiler's own covered source",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["ghc", "license"],
+        "scope": "The GHC compiler grant reproduced in its license and user guide; separately supplied libraries and platform tools require their own review.",
+        "notice": "Preserve required source/binary notices and observe endorsement restrictions for covered distribution."
+      }
+    ]
+  },
+  {
+    "name": "Haxe",
+    "implementation": {
+      "name": "Haxe compiler and standard library",
+      "version_scope": "Haxe manual's Main.hx interpreter workflow; JavaScript, JVM and other targets have separate runtime requirements.",
+      "source_ids": ["manual", "hello"]
+    },
+    "sources": [
+      {
+        "id": "manual",
+        "label": "Haxe manual: language and cross-platform toolkit",
+        "url": "https://haxe.org/manual/introduction.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "hello",
+        "label": "Haxe manual: first program and interpreter command",
+        "url": "https://haxe.org/manual/introduction-hello-world.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "targets",
+        "label": "Haxe language introduction: JavaScript, JVM and interpreter workflows",
+        "url": "https://haxe.org/documentation/introduction/language-introduction.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "licensing",
+        "label": "Haxe Foundation: compiler and library licensing",
+        "url": "https://haxe.org/foundation/open-source.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Cross-platform application code with classes and a shared language; each compilation target still has its own APIs and deployment environment.",
+        "source_ids": ["manual", "targets"]
+      },
+      "prerequisites": {
+        "text": "Install the Haxe compiler, learn class and function syntax, and match a class's name to its .hx filename. The interpreter starter needs no separate target runtime.",
+        "source_ids": ["hello", "targets"]
+      },
+      "execution": {
+        "text": "Haxe can execute the program with --interp or compile it to a chosen target such as JavaScript or JVM bytecode.",
+        "source_ids": ["hello", "targets"]
+      },
+      "behavior": {
+        "text": "The language combines a type system with object-oriented constructs. A common source language does not make all target libraries or runtime behavior interchangeable.",
+        "source_ids": ["manual", "targets"]
+      },
+      "tooling": {
+        "text": "The command-line compiler selects a main class and a target. Start with --interp before adding JavaScript, JVM or another target toolchain.",
+        "source_ids": ["hello", "targets"]
+      },
+      "maintenance": {
+        "text": "Choose and test the target environment deliberately; emitted JavaScript and JVM output need their respective hosts, unlike the compiler's interpreter workflow.",
+        "source_ids": ["targets"]
+      },
+      "costs": {
+        "text": "Budget for the selected target's tools and deployment. The compiler and standard library use different licenses; review shipped dependencies separately.",
+        "source_ids": ["targets", "licensing"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Main.hx",
+      "code": "class Main {\n    static public function main():Void {\n        trace(\"PLLDN\");\n    }\n}",
+      "run_instructions": "Save as Main.hx in a working directory with Haxe installed, then run haxe -main Main --interp. A separate target runtime is unnecessary for this interpreter example.",
+      "expected_result": "Prints PLLDN, usually with a filename and line-number prefix from trace.",
+      "source_ids": ["hello"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Haxe compiler",
+        "role": "implementation",
+        "spdx_expression": "GPL-2.0-or-later",
+        "source_ids": ["licensing"],
+        "scope": "The Haxe compiler itself, as described by the Haxe Foundation licensing page.",
+        "notice": "Compiler redistribution obligations are separate from the licensing of your own Haxe source and generated output."
+      },
+      {
+        "component": "Haxe standard library",
+        "role": "standard-library",
+        "spdx_expression": "MIT",
+        "source_ids": ["licensing"],
+        "scope": "The Haxe standard library grant; additional target libraries and runtimes have their own terms.",
+        "notice": "Retain required notices when distributing covered library material and inspect target dependencies separately."
+      }
+    ]
+  },
+  {
+    "name": "Hy",
+    "implementation": {
+      "name": "Hy compiler on Python",
+      "version_scope": "Hy 1.3.1 manual, Python AST compilation and hy filename.hy workflow; Python compatibility follows the selected Hy release.",
+      "source_ids": ["manual", "cli"]
+    },
+    "sources": [
+      {
+        "id": "manual",
+        "label": "Hy 1.3.1 manual: Python integration and compatibility",
+        "url": "https://hylang.org/hy/doc/v1.3.1",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tutorial",
+        "label": "Hy 1.3.1 tutorial: forms, print and macros",
+        "url": "https://hylang.org/hy/doc/v1.3.1/tutorial",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "cli",
+        "label": "Hy 1.3.1 command-line interface",
+        "url": "https://hylang.org/hy/doc/v1.3.1/cli",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "why",
+        "label": "Hy 1.3.1: language scope and Python interoperability",
+        "url": "https://hylang.org/hy/doc/v1.3.1/whyhy",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Hy compiler license",
+        "url": "https://github.com/hylang/hy/blob/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Lisp-style forms and macros within Python's ecosystem. Python built-ins and third-party libraries remain available through Hy's Python interoperability.",
+        "source_ids": ["why", "manual"]
+      },
+      "prerequisites": {
+        "text": "Use a Python version supported by the installed Hy release and install Hy in that environment. Learn prefix forms and Python's object and library model.",
+        "source_ids": ["manual", "tutorial"]
+      },
+      "execution": {
+        "text": "Hy transforms source into Python AST objects and runs on Python; hy hello.hy executes a file and hy starts a REPL.",
+        "source_ids": ["manual", "cli"]
+      },
+      "behavior": {
+        "text": "Calls use parenthesized prefix forms. Macros transform code at compile time, while ordinary function calls run with Python's semantics.",
+        "source_ids": ["tutorial"]
+      },
+      "tooling": {
+        "text": "Use the hy REPL, hy2py to inspect a Python representation, and hyc for bytecode compilation. These serve different workflows.",
+        "source_ids": ["cli"]
+      },
+      "maintenance": {
+        "text": "Check Hy and Python compatibility together. A Python library's requirements still apply when it is called through Hy.",
+        "source_ids": ["manual", "why"]
+      },
+      "costs": {
+        "text": "Include the Python environment and third-party dependencies in deployment planning. Hy's MIT grant does not establish those dependencies' licenses.",
+        "source_ids": ["manual", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.hy",
+      "code": "(print \"PLLDN\")",
+      "run_instructions": "With Hy installed in a compatible Python environment, save hello.hy and run hy hello.hy. The print call uses Python's built-in function.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["tutorial", "cli"],
+      "try_url": "https://hylang.org/try-hy",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Hy compiler",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "Hy source covered by the repository's MIT license; the Python interpreter and imported packages are separate components.",
+        "notice": "Preserve the MIT notice for covered redistributed material and inspect the selected Python distribution and dependencies separately."
+      }
+    ]
+  }
+]

@@ -1,0 +1,786 @@
+[
+  {
+    "name": "Jolie",
+    "implementation": {
+      "name": "Jolie 1.12 interpreter and console service",
+      "version_scope": "Example follows the official v1.12.x service syntax.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Jolie console/file service tutorial",
+        "url": "https://docs.jolie-lang.org/v1.12.x/tutorials/standard-library/files/index.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "communication",
+        "label": "Jolie communication primitives",
+        "url": "https://docs.jolie-lang.org/v1.12.x/language-tools-and-standard-library/basics/communication-primitives/index.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Jolie distribution license",
+        "url": "https://raw.githubusercontent.com/jolie/jolie/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Service orchestration through input/output operations and explicit interfaces.",
+        "source_ids": ["communication"]
+      },
+      "prerequisites": {
+        "text": "Learn services, embedded components and message request/response semantics.",
+        "source_ids": ["communication"]
+      },
+      "execution": {
+        "text": "The interpreter runs a .ol service using the Jolie runtime.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Solicit-response operations wait for a reply; notifications use one-way operations.",
+        "source_ids": ["communication"]
+      },
+      "tooling": {
+        "text": "The standard console and file services expose reusable operations.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep syntax and standard services aligned with the selected Jolie version.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The distribution license must be checked independently of connected services' terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.ol",
+      "code": "from console import Console\n\nservice Example {\n    embed Console as console\n    main { println@console( \"PLLDN\" )() }\n}",
+      "run_instructions": "With the matching Jolie 1.12 distribution installed, run jolie hello.ol.",
+      "expected_result": "The embedded Console service prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Jolie 1.12 interpreter and console service",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Original distribution license is linked; no SPDX expression is asserted pending component-specific confirmation."
+      }
+    ]
+  },
+  {
+    "name": "Jsonnet",
+    "implementation": {
+      "name": "Google Jsonnet command-line implementation",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Jsonnet tutorial",
+        "url": "https://jsonnet.org/learning/tutorial.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Jsonnet license",
+        "url": "https://raw.githubusercontent.com/google/jsonnet/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Generate reusable JSON configuration with functions and object composition.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Start with JSON objects; then learn locals, imports and inheritance.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The jsonnet evaluator produces JSON output rather than deploying resources.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Every JSON document is valid Jsonnet; computed fields add configuration logic.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The tutorial includes editable examples and explains external variables.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep imported configuration libraries and external inputs versioned with the project.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The Apache-licensed evaluator does not license the generated configuration's dependencies.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "service.jsonnet",
+      "code": "local port = 8080;\n{ service: \"PLLDN\", port: port }",
+      "run_instructions": "With Jsonnet installed, run jsonnet service.jsonnet, or evaluate it in the interactive tutorial.",
+      "expected_result": "Produces a JSON object containing service \"PLLDN\" and port 8080.",
+      "source_ids": ["guide"],
+      "try_url": "https://jsonnet.org/learning/tutorial.html",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Google Jsonnet command-line implementation",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Review attribution and NOTICE requirements in the original Apache-2.0 license."
+      }
+    ]
+  },
+  {
+    "name": "Julia",
+    "implementation": {
+      "name": "Julia language runtime",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Julia getting started",
+        "url": "https://docs.julialang.org/en/v1/manual/getting-started/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Julia source license",
+        "url": "https://raw.githubusercontent.com/JuliaLang/julia/master/LICENSE.md",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Interactive numerical and scientific programs, with general language facilities.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn arrays, functions and the REPL before adding application packages.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The julia command executes .jl files; include loads source into a session.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Interactive evaluation and script execution use the same language runtime.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The REPL provides help, package mode and shell mode.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Track the runtime and project packages together when reproducing calculations.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Julia source is MIT licensed; bundled libraries and project packages have separate licenses.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.jl",
+      "code": "println(\"PLLDN\")",
+      "run_instructions": "With Julia installed, run julia hello.jl.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Julia language runtime",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The source license identifies MIT; inspect bundled dependency notices separately."
+      }
+    ]
+  },
+  {
+    "name": "KCL",
+    "implementation": {
+      "name": "KCL configuration compiler",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "KCL language introduction",
+        "url": "https://www.kcl-lang.io/docs/user_docs/getting-started/intro",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "install",
+        "label": "KCL installation",
+        "url": "https://www.kcl-lang.io/docs/user_docs/getting-started/install",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "KCL license",
+        "url": "https://raw.githubusercontent.com/kcl-lang/kcl/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Configuration validation and infrastructure models using schemas and constraints.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn schema attributes, types and declarative constraints; Python-like syntax is only an entry point.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The KCL tool evaluates configuration source and generates configuration data.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Schemas separate configuration definitions from values, with type and range validation.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Format, lint, test, vet and documentation tools are provided.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Version configuration models together with consumers such as Kubernetes or Terraform integrations.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The Apache-licensed compiler is separate from infrastructure services configured by its output.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "service.k",
+      "code": "schema Service:\n    name: str\n    port: int\n\nservice = Service {\n    name = \"PLLDN\"\n    port = 8080\n}",
+      "run_instructions": "With the documented KCL CLI installed, evaluate service.k using the kcl command.",
+      "expected_result": "Generates configuration with a service name and integer port.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "KCL configuration compiler",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Apache-2.0 covers the named implementation, subject to its original notice requirements."
+      }
+    ]
+  },
+  {
+    "name": "Koka",
+    "implementation": {
+      "name": "Koka compiler",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Koka language book",
+        "url": "https://koka-lang.github.io/koka/doc/book.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Koka license",
+        "url": "https://raw.githubusercontent.com/koka-lang/koka/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Functional programs and experiments with effect types and handlers.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn functions, pattern matching and effects; inferred types reduce annotation needs.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The compiler and interactive environment compile and evaluate Koka modules.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Effect types describe operations such as console I/O, state and exceptions.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The interactive environment can load modules and execute their main function.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep compiler and backend dependencies matched to the documented release.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Koka's Apache-licensed implementation is distinct from foreign libraries used by an application.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.kk",
+      "code": "fun main()\n  println(\"PLLDN\")",
+      "run_instructions": "Start the Koka interactive environment, load hello.kk using :l hello, then evaluate main().",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Koka compiler",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Consult the Apache-2.0 license and accompanying distribution notices."
+      }
+    ]
+  },
+  {
+    "name": "Kotlin",
+    "implementation": {
+      "name": "Kotlin/JVM command-line compiler",
+      "version_scope": "This example targets the JVM; Native and JavaScript toolchains are separate targets.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Kotlin command-line compiler",
+        "url": "https://kotlinlang.org/docs/command-line.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Kotlin compiler license",
+        "url": "https://raw.githubusercontent.com/JetBrains/kotlin/master/license/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Typed JVM applications; other Kotlin targets use their respective compilers.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install the Kotlin compiler and a Java runtime; learn functions and static types.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "kotlinc produces JVM class files or a JAR executed by Java.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "A JAR can include the Kotlin runtime but still runs on the JVM.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Command-line compiler options support applications and libraries.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Libraries compiled without the runtime need that dependency on the consuming classpath.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler's Apache license does not determine the chosen Java distribution's terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.kt",
+      "code": "fun main() { println(\"PLLDN\") }",
+      "run_instructions": "Run kotlinc hello.kt -include-runtime -d hello.jar, then java -jar hello.jar.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Kotlin/JVM command-line compiler",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Compiler scope only; Java runtime, standard library packaging and application dependencies require their own component review."
+      }
+    ]
+  },
+  {
+    "name": "LabVIEW",
+    "implementation": {
+      "name": "NI LabVIEW graphical G environment",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "NI LabVIEW product and dataflow overview",
+        "url": "https://www.ni.com/en/shop/labview.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "NI: reusable graphical VI snippets",
+        "url": "https://knowledge.ni.com/KnowledgeArticleDetails?id=kA03q000000x2PkCAI&l=en-MY",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Instrument control, measurement and automated testing with graphical dataflow.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn block diagrams, wiring and front-panel controls; hardware drivers depend on the equipment.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Programs are graphical VIs run inside the selected LabVIEW environment.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Dataflow defines when nodes receive inputs; visual parallelism affects execution.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The environment integrates development and hardware connectivity.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Match LabVIEW, drivers and optional modules to the measurement system.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Edition and entitlement terms must be checked with NI; no price or open-source SPDX expression is asserted.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "reference",
+      "filename": null,
+      "code": null,
+      "run_instructions": "Follow NI's VI-snippet guide: add a genuine VI snippet to a block diagram. A prose diagram is not an executable .vi file.",
+      "expected_result": "The graphical code becomes editable nodes in LabVIEW; behavior depends on the selected snippet and environment.",
+      "source_ids": ["example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "NI LabVIEW graphical G environment",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "LabVIEW product entitlement is not identified as an SPDX license by the cited page; verify applicable NI agreement and edition."
+      }
+    ]
+  },
+  {
+    "name": "Lean",
+    "implementation": {
+      "name": "Lean 4",
+      "version_scope": "Lean 4 IO execution; this profile does not describe Lean 3 syntax.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Lean: running a program",
+        "url": "https://lean-lang.org/functional_programming_in_lean/Hello___-World___/Running-a-Program/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Lean 4 project",
+        "url": "https://github.com/leanprover/lean4",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Lean 4 license",
+        "url": "https://raw.githubusercontent.com/leanprover/lean4/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Proofs and typed programs; this record chooses Lean 4 explicitly.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Learn typed definitions and IO actions; proof development adds propositions and tactics.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "lean --run invokes the main definition of a .lean program.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "IO Unit describes effects; do notation sequences IO operations.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Official tutorials and the language reference accompany the compiler.",
+        "source_ids": ["overview"]
+      },
+      "maintenance": {
+        "text": "Choose Lean 4-compatible libraries; Lean 3 is a different toolchain.",
+        "source_ids": ["overview"]
+      },
+      "costs": {
+        "text": "The Lean 4 source license is Apache-2.0; third-party notices remain component-specific.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Hello.lean",
+      "code": "def main : IO Unit := IO.println \"PLLDN\"",
+      "run_instructions": "With Lean 4 installed, run lean --run Hello.lean.",
+      "expected_result": "Prints PLLDN and exits.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Lean 4",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The named Lean 4 source is Apache-2.0; see the distribution's LICENSES for separately licensed components."
+      }
+    ]
+  },
+  {
+    "name": "Lean 4",
+    "implementation": {
+      "name": "Lean 4",
+      "version_scope": "Lean 4 IO execution; this profile does not describe Lean 3 syntax.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Lean: running a program",
+        "url": "https://lean-lang.org/functional_programming_in_lean/Hello___-World___/Running-a-Program/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Lean 4 project",
+        "url": "https://github.com/leanprover/lean4",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Lean 4 license",
+        "url": "https://raw.githubusercontent.com/leanprover/lean4/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Executable functional programs alongside machine-checked proofs in Lean 4.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Learn typed definitions and IO actions; proof development adds propositions and tactics.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "lean --run invokes the main definition of a .lean program.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "IO Unit describes effects; do notation sequences IO operations.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Official tutorials and the language reference accompany the compiler.",
+        "source_ids": ["overview"]
+      },
+      "maintenance": {
+        "text": "Choose Lean 4-compatible libraries; Lean 3 is a different toolchain.",
+        "source_ids": ["overview"]
+      },
+      "costs": {
+        "text": "The Lean 4 source license is Apache-2.0; third-party notices remain component-specific.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Hello.lean",
+      "code": "def main : IO Unit := IO.println \"PLLDN\"",
+      "run_instructions": "With Lean 4 installed, run lean --run Hello.lean.",
+      "expected_result": "Prints PLLDN and exits.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Lean 4",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The named Lean 4 source is Apache-2.0; see the distribution's LICENSES for separately licensed components."
+      }
+    ]
+  },
+  {
+    "name": "LilyPond",
+    "implementation": {
+      "name": "GNU LilyPond engraving tool",
+      "version_scope": "Example uses the versioned 2.24 learning manual.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "LilyPond: compiling a notation file",
+        "url": "https://lilypond.org/doc/v2.24/Documentation/learning/compiling-a-file",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "LilyPond COPYING",
+        "url": "https://raw.githubusercontent.com/lilypond/lilypond/master/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Generate engraved musical scores from text notation.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn pitches, durations and braces; input is case-sensitive.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Compiling .ly text produces a score document such as PDF.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Notes are enclosed in braces; notation is distinct from general scripting.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The learning manual covers command-line setup and notation editing.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep the source version declaration compatible with the selected LilyPond tool.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "COPYING contains GPL version 3; exact distribution licensing and output/font terms require separate inspection.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "markup",
+      "filename": "score.ly",
+      "code": "\\version \"2.24.4\"\n{ c'4 d'4 e'4 f'4 }",
+      "run_instructions": "With a compatible LilyPond 2.24 installation, compile score.ly following the platform setup guide.",
+      "expected_result": "Creates an engraved score with four ascending quarter notes.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GNU LilyPond engraving tool",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "COPYING is linked. No single SPDX expression is inferred for all program, font and output components."
+      }
+    ]
+  }
+]
