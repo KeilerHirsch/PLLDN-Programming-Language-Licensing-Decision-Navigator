@@ -70,7 +70,7 @@ npm run evidence
 
 ## Support
 
-PLLDN is community-supported. GitHub's Sponsor button routes to [Ko-fi](https://ko-fi.com/keilerhirsch); [GitHub Sponsors](https://github.com/sponsors/KeilerHirsch) is linked for future availability and is currently inactive.
+PLLDN is community-supported. GitHub's native Sponsor button routes to [Ko-fi](https://ko-fi.com/keilerhirsch); [GitHub Sponsors](https://github.com/sponsors/KeilerHirsch) is linked for future availability and is currently inactive.
 
 Voluntary support creates **no feature entitlement**, ranking influence, approval authority, review priority, or release priority.
 
