@@ -10,25 +10,52 @@ test("mixed and editorial CSV preserve Preview claim IDs and review status along
   const dimension = PRODUCT_COMPARE_DIMENSIONS[0];
   assert(dimension);
   const preview: CatalogPreviewView = {
-    status: "Preview", knowledge_snapshot: "reader-provenance-fixture", licenses: [],
-    languages: [{
-      entity_id: "language.go", label: "Go", entity_type: "language",
-      version_scope: [], target_scope: [],
-      facts: [{
-        dimension_id: dimension, claim_id: "claim.reader-export-provenance",
-        label: "Fixture dimension", state: "UNKNOWN", value: null, conditions: [],
-        review_status: "NOT_REVIEWED",
-        sources: [{ source_id: "source.reader-fixture", title: "Fixture source", reference: "https://example.org/fixture" }],
-      }],
-    }],
+    status: "Preview",
+    knowledge_snapshot: "reader-provenance-fixture",
+    licenses: [],
+    languages: [
+      {
+        entity_id: "language.go",
+        label: "Go",
+        entity_type: "language",
+        version_scope: [],
+        target_scope: [],
+        facts: [
+          {
+            dimension_id: dimension,
+            claim_id: "claim.reader-export-provenance",
+            label: "Fixture dimension",
+            state: "UNKNOWN",
+            value: null,
+            conditions: [],
+            review_status: "NOT_REVIEWED",
+            sources: [
+              {
+                source_id: "source.reader-fixture",
+                title: "Fixture source",
+                reference: "https://example.org/fixture",
+              },
+            ],
+          },
+        ],
+      },
+    ],
   };
   for (const ids of [
     ["language.go", "candidate.language.6261736963"],
     ["language.go", "language.python"],
   ]) {
     const csv = exportCatalogLanguageCompareCsv(ids, preview);
-    assert(csv.includes('"Preview claim ID: Fixture dimension","claim.reader-export-provenance","UNKNOWN"'));
-    assert(csv.includes('"Preview review status: Fixture dimension","NOT_REVIEWED","UNKNOWN"'));
+    assert(
+      csv.includes(
+        '"Preview claim ID: Fixture dimension","claim.reader-export-provenance","UNKNOWN"',
+      ),
+    );
+    assert(
+      csv.includes(
+        '"Preview review status: Fixture dimension","NOT_REVIEWED","UNKNOWN"',
+      ),
+    );
     assert(csv.includes("https://example.org/fixture"));
   }
 });

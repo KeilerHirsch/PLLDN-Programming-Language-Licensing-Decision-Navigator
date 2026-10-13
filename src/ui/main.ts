@@ -15,7 +15,7 @@ import {
   readCatalogNavigation,
 } from "./catalog-navigation.ts";
 import type { UiController } from "./controller.ts";
-import { exportEditorialLanguageCompareCsv } from "./language-compare-export.ts";
+import { exportCatalogLanguageCompareCsv } from "./language-compare-export.ts";
 import { exportEditorialLicenseCompareCsv } from "./license-compare-export.ts";
 import {
   DEFAULT_PRODUCT_UI_STATE,
@@ -107,6 +107,13 @@ function saveNavigation(push = false): void {
 }
 function applyCatalogFilter(): void {
   const query = normalizedSearch(catalogQuery);
+  const route = new URLSearchParams(window.location.search);
+  const linkedTarget =
+    pinnedCandidateById(route.get("candidate"))?.id ??
+    [...PRODUCT_MODEL.languages, ...PRODUCT_MODEL.licenses].find(
+      (profile) => profile.entity_id === route.get("profile"),
+    )?.entity_id ??
+    null;
   let visible = 0;
   let editorial = 0;
   let unassessed = 0;
@@ -130,6 +137,10 @@ function applyCatalogFilter(): void {
   if (grid) for (const entry of entries) grid.append(entry);
   for (const entry of entries) {
     const matches =
+      (!linkedTarget ||
+        entry.dataset.entityId === linkedTarget ||
+        entry.querySelector<HTMLDetailsElement>(".identity-profile")?.dataset
+          .candidateId === linkedTarget) &&
       (productState.mode !== "languages" ||
         languageMatchesDiscovery(
           entry.dataset.catalogName ?? "",
@@ -296,11 +307,13 @@ root.addEventListener("click", (event) => {
   if (action === "export-language-compare") {
     if (!catalogState.view) throw new Error("Preview catalogue not loaded");
     downloadCsv(
-      exportEditorialLanguageCompareCsv(
+      exportCatalogLanguageCompareCsv(
         productState.compareLanguageIds,
         catalogState.view,
       ),
-      "plldn-editorial-language-comparison.csv",
+      productState.compareLanguageIds.every((id) => id.startsWith("language."))
+        ? "plldn-editorial-language-comparison.csv"
+        : "plldn-language-reader-comparison.csv",
     );
     return;
   }
@@ -456,8 +469,8 @@ root.addEventListener("input", (event) => {
   ) {
     catalogQuery = element.value.slice(0, 200);
     identityLimit = identityPageSize;
-    applyCatalogFilter();
     saveNavigation();
+    applyCatalogFilter();
   }
 });
 
@@ -517,8 +530,8 @@ root.addEventListener("change", (event) => {
     if (["any", "yes", "no"].includes(element.value)) {
       identityOsiFilter = element.value as typeof identityOsiFilter;
       identityLimit = identityPageSize;
-      applyCatalogFilter();
       saveNavigation(true);
+      applyCatalogFilter();
     }
   }
   if (action === "product-filter" && element instanceof HTMLSelectElement) {
@@ -638,6 +651,30 @@ async function restoreCatalogLocation(current: UiController): Promise<void> {
       ...root.querySelectorAll<HTMLElement>("[data-catalog-entry]"),
     ].find((el) => el.dataset.entityId === editorial.entity_id);
     card?.scrollIntoView({ block: "nearest" });
+  }
+  const readerId =
+    candidate?.kind === "language"
+      ? candidate.id
+      : editorial &&
+          PRODUCT_MODEL.languages.some(
+            (profile) => profile.entity_id === editorial.entity_id,
+          )
+        ? editorial.entity_id
+        : null;
+  if (readerId) {
+    const reader = [
+      ...root.querySelectorAll<HTMLDetailsElement>(".language-reader-profile"),
+    ].find((details) => details.dataset.readerEntityId === readerId);
+    if (
+      reader &&
+      !reader.closest<HTMLElement>("[data-catalog-entry]")?.hidden
+    ) {
+      reader.open = true;
+      reader.scrollIntoView({ block: "start" });
+      reader
+        .querySelector<HTMLElement>("summary")
+        ?.focus({ preventScroll: true });
+    }
   }
   if (window.location.hash === "#catalog" && !candidate && !editorial)
     root

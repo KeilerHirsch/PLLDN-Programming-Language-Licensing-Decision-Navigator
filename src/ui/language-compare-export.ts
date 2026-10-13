@@ -2,7 +2,12 @@
 // SPDX-License-Identifier: EUPL-1.2
 import { PRODUCT_COMPARE_DIMENSIONS } from "../product/catalog.ts";
 import { exportCsvCell } from "../product/unassessed-export.ts";
-import { languageComparisonRows, selectEditorialLanguages } from "./product.ts";
+import {
+  catalogLanguageComparisonRows,
+  languageComparisonRows,
+  selectCatalogLanguages,
+  selectEditorialLanguages,
+} from "./product.ts";
 import type { CatalogPreviewView } from "./types.ts";
 
 /** Exactly the same editorial and Preview values as the on-screen language table. */
@@ -60,5 +65,53 @@ export function exportEditorialLanguageCompareCsv(
       ],
     );
   }
+  return `${lines.map((row) => row.map(exportCsvCell).join(",")).join("\n")}\n`;
+}
+
+/** Export every mixed-table value and its recorded references through the existing CSV guard. */
+export function exportCatalogLanguageCompareCsv(
+  ids: readonly string[],
+  catalog: CatalogPreviewView,
+): string {
+  if (catalog.status !== "Preview" || !catalog.knowledge_snapshot)
+    throw new Error("Language comparison requires a named Preview snapshot");
+  const selected = selectCatalogLanguages(ids);
+  if (selected.length === 0)
+    throw new Error("Select at least one catalogue language");
+  const rows = catalogLanguageComparisonRows(catalog);
+  const lines = [
+    ["Attribute", ...selected.map((selection) => selection.label)],
+    ...rows.flatMap((row) => [
+      [row.label, ...selected.map((selection) => row.value(selection))],
+      [
+        `Sources: ${row.label}`,
+        ...selected.map(
+          (selection) =>
+            row
+              .sources(selection)
+              .map((source) => source.url)
+              .join(" | ") || "UNKNOWN",
+        ),
+      ],
+      ...(row.previewFact
+        ? [
+            [
+              `Preview claim ID: ${row.label}`,
+              ...selected.map(
+                (selection) =>
+                  row.previewFact?.(selection)?.claim_id ?? "UNKNOWN",
+              ),
+            ],
+            [
+              `Preview review status: ${row.label}`,
+              ...selected.map(
+                (selection) =>
+                  row.previewFact?.(selection)?.review_status ?? "UNKNOWN",
+              ),
+            ],
+          ]
+        : []),
+    ]),
+  ];
   return `${lines.map((row) => row.map(exportCsvCell).join(",")).join("\n")}\n`;
 }

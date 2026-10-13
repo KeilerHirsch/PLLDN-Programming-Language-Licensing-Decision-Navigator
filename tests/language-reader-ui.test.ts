@@ -99,7 +99,11 @@ function fixture(): LanguageReaderProfile {
 }
 const options = {
   licenseHref: (id: string) =>
-    id === "MIT" ? "?profile=license.mit#catalog" : null,
+    id === "MIT"
+      ? "?profile=license.mit#catalog"
+      : id === "Apache-2.0"
+        ? "?profile=license.apache-2.0#catalog"
+        : null,
   exampleStatus: {
     status: "documented" as const,
     toolchain: null,
@@ -164,7 +168,7 @@ test("reader has eight useful sections, adjacent sources and text-only example c
   assert(textOf(brief).includes("Fixture prerequisites text"));
   assert(descendants(brief).filter((node) => node.tagName === "a").length >= 2);
 });
-test("license expressions stay literal; only exact resolved SPDX IDs get a catalogue link", (t) => {
+test("license expressions stay literal while each exact known license token has a catalogue link", (t) => {
   documentFixture(t);
   const profile = fixture();
   const exact = renderLanguageReaderProfile(
@@ -178,21 +182,33 @@ test("license expressions stay literal; only exact resolved SPDX IDs get a catal
   );
   const firstLicense = profile.licenses[0];
   assert(firstLicense);
-  const compound = {
-    ...profile,
-    licenses: [{ ...firstLicense, spdx_expression: "MIT OR Apache-2.0" }],
-  };
-  const expression = renderLanguageReaderProfile(
-    compound,
-    options,
-  ) as unknown as ElementFixture;
-  assert(textOf(expression).includes("MIT OR Apache-2.0"));
-  assert(
-    !descendants(expression).some((node) =>
-      node.href.includes("profile=license"),
-    ),
-  );
-  assert(textOf(expression).includes("no compatibility recommendation"));
+  for (const [literal, expectedLinks] of [
+    [
+      "MIT OR (Apache-2.0 AND MIT)",
+      ["?profile=license.mit#catalog", "?profile=license.apache-2.0#catalog"],
+    ],
+    ["Apache-2.0 WITH LLVM-exception", ["?profile=license.apache-2.0#catalog"]],
+    ["MIT_UNKNOWN OR DocumentRef-fixture:MIT OR LicenseRef-fixture", []],
+  ] as const) {
+    const compound = {
+      ...profile,
+      licenses: [{ ...firstLicense, spdx_expression: literal }],
+    };
+    const expression = renderLanguageReaderProfile(
+      compound,
+      options,
+    ) as unknown as ElementFixture;
+    assert(textOf(expression).includes(literal));
+    const links = descendants(expression).filter(
+      (node) => node.className === "reader-license-catalog",
+    );
+    assert.deepEqual(
+      links.map((node) => node.href),
+      [...expectedLinks],
+      literal,
+    );
+    assert(textOf(expression).includes("no compatibility recommendation"));
+  }
 });
 test("reference-only workflows expose their reason and cannot masquerade as runnable or verified code", (t) => {
   documentFixture(t);

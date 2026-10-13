@@ -31,6 +31,13 @@ import {
   languageInformationByName,
   languageRank,
 } from "../product/language-information.ts";
+import {
+  licenseCatalogHref,
+  readerExampleStatus,
+  readerProfileByName,
+  readerProfileTerms,
+} from "../product/language-reader-profiles.ts";
+import type { LanguageReaderProfile } from "../product/language-reader-validation.ts";
 import { LICENSE_DECISION_PROFILES } from "../product/license-decision-profiles.ts";
 import type {
   LanguageProductProfile,
@@ -46,7 +53,18 @@ import {
   languageDecisionTone,
   licenseDecisionTone,
 } from "./decision-tones.ts";
+import {
+  type CatalogLanguageCompareRow,
+  readerComparisonRows,
+} from "./language-reader-comparison.ts";
+import {
+  renderLanguageReaderBrief,
+  renderLanguageReaderProfile,
+} from "./language-reader-profile.ts";
 import { renderLicenseComparison } from "./license-comparison.ts";
+
+export type { CatalogLanguageCompareRow } from "./language-reader-comparison.ts";
+
 import {
   licenseDisclosureScopeQualifier,
   networkSourceOfferQualifier,
@@ -116,6 +134,24 @@ function button(
   node.dataset.action = action;
   if (className) node.className = className;
   return node;
+}
+
+function requireReaderProfile(name: string): LanguageReaderProfile {
+  const reader = readerProfileByName(name);
+  if (!reader) throw new Error(`Reader profile missing for ${name}`);
+  return reader;
+}
+function languageReaderDisclosure(
+  name: string,
+  id: string,
+): HTMLDetailsElement {
+  const reader = requireReaderProfile(name);
+  const details = renderLanguageReaderProfile(reader, {
+    licenseHref: licenseCatalogHref,
+    exampleStatus: readerExampleStatus(reader),
+  });
+  details.dataset.readerEntityId = id;
+  return details;
 }
 
 function compareButton(
@@ -409,7 +445,12 @@ function productSearchText(
         ];
   return [
     ...base,
-    ...("build_path" in profile ? languageInformationTerms(profile.label) : []),
+    ...("build_path" in profile
+      ? [
+          ...languageInformationTerms(profile.label),
+          ...readerProfileTerms(profile.label),
+        ]
+      : []),
     ...(entry?.facts ?? []).flatMap((fact) => [fact.label, factValue(fact)]),
   ]
     .join(" ")
@@ -445,7 +486,8 @@ function renderHero(catalog: CatalogPreviewView): HTMLElement {
   stats.append(
     badge(`${languageTotal} language identities`),
     badge(`${licenseTotal} license identities`),
-    badge(`${PRODUCT_MODEL.languages.length} detailed languages`),
+    badge(`${languageTotal} reader profiles`),
+    badge(`${PRODUCT_MODEL.languages.length} editorial language previews`),
     badge(`${PRODUCT_MODEL.licenses.length} detailed licenses`),
     badge(`${candidateFacts} Preview facts`),
     badge("Reviewed decision path", "product-badge product-badge-trusted"),
@@ -784,6 +826,7 @@ function renderLanguageCard(
   card.append(
     head,
     renderLanguageInformation(profile.label),
+    renderLanguageReaderBrief(requireReaderProfile(profile.label)),
     paragraph(profile.tagline),
   );
 
@@ -821,6 +864,7 @@ function renderLanguageCard(
   actions.append(compare);
   card.append(
     actions,
+    languageReaderDisclosure(profile.label, profile.entity_id),
     renderDecisionProfile(profile),
     renderPreviewFacts(entry),
   );
@@ -1106,7 +1150,10 @@ function profileLink(id: string, candidate = false): HTMLAnchorElement {
   link.textContent = "Open profile";
   return link;
 }
-function renderIdentityCard(record: UnassessedRecord): HTMLElement {
+function renderIdentityCard(
+  record: UnassessedRecord,
+  state: ProductUiState,
+): HTMLElement {
   const card = document.createElement("article");
   card.className = "product-card identity-card";
   card.dataset.catalogEntry = "true";
@@ -1117,13 +1164,19 @@ function renderIdentityCard(record: UnassessedRecord): HTMLElement {
     card.dataset.catalogName,
     record.name,
     ...(record.kind === "language"
-      ? languageInformationTerms(record.name)
+      ? [
+          ...languageInformationTerms(record.name),
+          ...readerProfileTerms(record.name),
+        ]
       : []),
   ]
     .join(" ")
     .normalize("NFKD")
     .toLocaleLowerCase("en-US");
-  if (record.kind === "language") recordLanguageMetadata(card, record.name);
+  if (record.kind === "language") {
+    recordLanguageMetadata(card, record.name);
+    card.dataset.entityId = record.id;
+  }
   if ("osi_approved_source_flag" in record)
     card.dataset.identityOsiApproved = String(record.osi_approved_source_flag);
   const head = document.createElement("div");
@@ -1142,6 +1195,12 @@ function renderIdentityCard(record: UnassessedRecord): HTMLElement {
     profileLink(record.id, true),
     renderUnassessedProfile(record),
   );
+  if (record.kind === "language")
+    card.append(
+      renderLanguageReaderBrief(requireReaderProfile(record.name)),
+      compareButton(record.id, state),
+      languageReaderDisclosure(record.name, record.id),
+    );
   return card;
 }
 function renderCatalogResults(
@@ -1189,7 +1248,7 @@ function renderCatalogResults(
   ) {
     for (const record of candidates.records) {
       if (record.kind === (state.mode === "languages" ? "language" : "license"))
-        grid.append(renderIdentityCard(record));
+        grid.append(renderIdentityCard(record, state));
     }
   }
   wrapper.append(grid);
@@ -1609,6 +1668,50 @@ export function languageComparisonRows(
   return rows;
 }
 
+export interface CatalogLanguageSelection {
+  entity_id: string;
+  label: string;
+  editorial: LanguageProductProfile | null;
+  reader: LanguageReaderProfile;
+}
+/** Selection is bounded to canonical editorial or pinned language IDs. */
+export function selectCatalogLanguages(
+  ids: readonly string[],
+): CatalogLanguageSelection[] {
+  if (ids.length > 4 || new Set(ids).size !== ids.length)
+    throw new Error(
+      "Language comparison requires up to four distinct catalogue IDs",
+    );
+  return ids.map((id) => {
+    const editorial = PRODUCT_MODEL.languages.find(
+      (profile) => profile.entity_id === id,
+    );
+    if (editorial)
+      return {
+        entity_id: id,
+        label: editorial.label,
+        editorial,
+        reader: requireReaderProfile(editorial.label),
+      };
+    const candidate = pinnedCandidateById(id);
+    if (candidate?.kind !== "language")
+      throw new Error(
+        "Language comparison ID is not a pinned catalogue language",
+      );
+    return {
+      entity_id: id,
+      label: candidate.name,
+      editorial: null,
+      reader: requireReaderProfile(candidate.name),
+    };
+  });
+}
+export function catalogLanguageComparisonRows(
+  catalog: CatalogPreviewView,
+): CatalogLanguageCompareRow[] {
+  return readerComparisonRows(catalog, languageComparisonRows(catalog));
+}
+
 function renderCompareEvidence(
   fact: CatalogPreviewFactView | undefined,
 ): HTMLDetailsElement {
@@ -1663,7 +1766,7 @@ function renderCompare(
   copy.append(
     heading(2, `Compare languages (${state.compareLanguageIds.length}/4)`),
     paragraph(
-      "Pick up to four languages. Editorial summaries and unverified heuristic performance/complexity bands sit beside recorded Preview facts. No measured cross-language ranking is claimed.",
+      "Compare up to four catalogue languages using sourced reader profiles. Unassessed languages keep UNKNOWN ratings; editorial bands remain unverified estimates. No measured cross-language ranking is claimed.",
     ),
   );
   headingRow.append(copy);
@@ -1684,7 +1787,7 @@ function renderCompare(
     return section;
   }
 
-  const selected = selectEditorialLanguages(state.compareLanguageIds);
+  const selected = selectCatalogLanguages(state.compareLanguageIds);
 
   const wrapper = document.createElement("div");
   wrapper.className = "compare-table-wrap";
@@ -1707,7 +1810,7 @@ function renderCompare(
   table.append(head);
 
   const body = document.createElement("tbody");
-  const rows = languageComparisonRows(catalog);
+  const rows = catalogLanguageComparisonRows(catalog);
 
   for (const row of rows) {
     const tr = document.createElement("tr");
@@ -1717,13 +1820,33 @@ function renderCompare(
     tr.append(label);
     for (const profile of selected) {
       const cell = document.createElement("td");
-      cell.textContent = row.value(profile);
+      const value = row.value(profile);
+      if (row.label === "Example code") {
+        const pre = document.createElement("pre");
+        pre.textContent = value;
+        pre.setAttribute("tabindex", "0");
+        pre.setAttribute("aria-label", `${profile.label} comparison example`);
+        cell.append(pre);
+      } else {
+        const text = paragraph(value);
+        text.className = "compare-row-value";
+        cell.append(text);
+      }
+      const references = document.createElement("div");
+      references.className = "compare-reader-sources";
+      for (const source of row.sources(profile)) {
+        const href = safeHttps(source.url);
+        if (href) {
+          const link = document.createElement("a");
+          link.textContent = source.label;
+          link.href = href;
+          link.rel = "noopener noreferrer";
+          references.append(link);
+        } else references.append(paragraph(`Unlinked source: ${source.url}`));
+      }
+      if (references.children.length > 0) cell.append(references);
       if (row.dimensionId) {
-        const fact = catalog.languages
-          .find((entry) => entry.entity_id === profile.entity_id)
-          ?.facts.find(
-            (entryFact) => entryFact.dimension_id === row.dimensionId,
-          );
+        const fact = row.previewFact?.(profile);
         cell.append(renderCompareEvidence(fact));
       }
       tr.append(cell);

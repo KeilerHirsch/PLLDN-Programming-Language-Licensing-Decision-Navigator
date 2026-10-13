@@ -4,14 +4,14 @@ Every language in the catalogue has a short introduction, example use areas and 
 
 ## Finding languages
 
-Search matches names, introductions, use areas and scoped lifecycle notes. Three independent filters and six sorts help explore the catalogue:
+Search matches names, introductions, use areas, scoped lifecycle notes and reader-profile conditions. [Reader profiles](language-reader-profiles.md) add implementation scope, prerequisites, examples and component-license sources. Three independent filters and six sorts help explore the catalogue:
 
 - **Usage:** in or outside the cited GitHub top 10.
 - **Documented origins:** before 1990, 1990 onward, or year unverified.
 - **Implementation lifecycle:** maintained, experimental, retired/deprecated, or unverified.
 - **Sort:** A–Z, Z–A, common first, oldest/newest documented origins, or implementation status.
 
-Combine filters to rediscover classics or find older languages with maintained implementations. Direct profile links clear conflicting discovery filters. View links preserve search, filters and sort; browser Back/Forward restores them. Discovery controls apply only to languages.
+Combine filters to rediscover classics or find older languages with maintained implementations. Direct profile links clear conflicting discovery filters and select the exact identity, including short names such as J, Io and V. View links preserve broader search, filters and sort; browser Back/Forward restores them. Discovery controls apply only to languages.
 
 ## What the labels mean
 

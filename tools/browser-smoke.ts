@@ -351,7 +351,8 @@ const smokeProbe = `
     for (const expected of [
       "194 language identities",
       "714 license identities",
-      "35 detailed languages",
+      "194 reader profiles",
+      "35 editorial language previews",
       "32 detailed licenses",
       "345 Preview facts",
     ]) {

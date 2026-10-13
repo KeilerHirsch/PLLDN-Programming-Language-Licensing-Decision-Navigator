@@ -8,7 +8,7 @@
 
 **Choose a language. Understand the license. Defend the trade-off.**
 
-Explore performance, complexity and deployment trade-offs, and license rights and obligations. Unknown stays unknown.
+Explore language trade-offs and license obligations. Unknown stays unknown.
 
 **Free in your browser. No installation, account, API key, or LLM setup required.**
 
@@ -25,6 +25,7 @@ Explore performance, complexity and deployment trade-offs, and license rights an
 - **Browse** 194 languages and 714 licenses with search, filters, sorting and shareable links.
 - **Explore** task-first shortlists for Windows tools, web apps, embedded software, and more.
 - **Compare** up to four languages side by side.
+- **Profiles:** fit, prerequisites, setup, examples, component licenses and sources.
 - **Inspect licenses** through permissions, obligations, commercial use, SaaS/hosting, and competition.
 - **Follow evidence** through Preview facts and canonical license terms.
 - **Decide** in a separate Reviewed lab that explains fits, failures, and unresolved constraints.
@@ -35,7 +36,7 @@ Explore performance, complexity and deployment trade-offs, and license rights an
 2. Search by name or SPDX identifier; narrow the filters.
 3. Open profiles, compare, or share **Link to this view**.
 
-[Navigation](docs/catalogue.md) · [Language information and discovery](docs/language-information.md).
+[Navigation](docs/catalogue.md) · [Language discovery](docs/language-information.md) · [Reader profiles](docs/language-reader-profiles.md).
 
 ## Scope and confidence
 
@@ -69,7 +70,7 @@ npm run evidence
 
 ## Support
 
-PLLDN is free and community-supported. GitHub's native Sponsor button currently routes to [Ko-fi](https://ko-fi.com/keilerhirsch); [GitHub Sponsors](https://github.com/sponsors/KeilerHirsch) remains linked for future availability but is not currently an active native funding destination.
+PLLDN is community-supported. GitHub's Sponsor button routes to [Ko-fi](https://ko-fi.com/keilerhirsch); [GitHub Sponsors](https://github.com/sponsors/KeilerHirsch) is linked for future availability and is currently inactive.
 
 Voluntary support creates **no feature entitlement**, ranking influence, approval authority, review priority, or release priority.
 
