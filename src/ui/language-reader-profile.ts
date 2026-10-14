@@ -8,6 +8,7 @@ import {
   type ReaderSource,
   readerSafeHttps,
 } from "../product/language-reader-validation.ts";
+import { getUiLocale, tr } from "./ui-locale.ts";
 
 export const READER_SECTION_LABELS: Readonly<Record<ReaderSectionKey, string>> =
   {
@@ -30,7 +31,7 @@ function paragraph(text: string): HTMLParagraphElement {
 }
 function heading(text: string): HTMLHeadingElement {
   const node = document.createElement("h4");
-  node.textContent = text;
+  node.textContent = tr(text);
   return node;
 }
 /** Resolve cited sources exactly; a missing or unsafe reference is a rendering failure. */
@@ -51,7 +52,7 @@ function sourceLink(source: ReaderSource): HTMLAnchorElement {
   link.href = source.url;
   link.rel = "noopener noreferrer";
   link.textContent = source.label;
-  link.title = `Source checked ${source.checked_on}`;
+  link.title = `${tr("Source checked")} ${source.checked_on}`;
   return link;
 }
 function citations(
@@ -84,7 +85,7 @@ export function renderLanguageReaderBrief(
   ] as const) {
     const block = document.createElement("div");
     const title = document.createElement("strong");
-    title.textContent = label;
+    title.textContent = tr(label);
     block.append(title, factBlock(profile, fact));
     brief.append(block);
   }
@@ -94,8 +95,8 @@ export function readerExampleStatusLabel(
   status: ReturnType<typeof readerExampleStatus>,
 ): string {
   return status.status === "executed"
-    ? `Execution recorded · ${status.toolchain} · ${status.checked_on}`
-    : "Documented example · not executed by PLLDN.";
+    ? `${tr("Execution recorded")} · ${status.toolchain} · ${status.checked_on}`
+    : tr("Documented example · not executed by PLLDN.");
 }
 function exampleSection(
   profile: LanguageReaderProfile,
@@ -111,7 +112,7 @@ function exampleSection(
   const status = paragraph(readerExampleStatusLabel(options.exampleStatus));
   status.dataset.readerExampleStatus = options.exampleStatus.status;
   status.className = "reader-example-status";
-  section.append(status, paragraph(`Example type: ${example.kind}`));
+  section.append(status, paragraph(`${tr("Example type")}: ${example.kind}`));
   if (example.filename !== null) {
     const filename = document.createElement("code");
     filename.className = "reader-example-filename";
@@ -141,7 +142,7 @@ function exampleSection(
     tryLink.className = "reader-try-link";
     tryLink.href = example.try_url;
     tryLink.rel = "noopener noreferrer";
-    tryLink.textContent = "Try in the official browser environment";
+    tryLink.textContent = tr("Try in the official browser environment");
     section.append(tryLink);
   }
   return section;
@@ -155,7 +156,9 @@ function licenseBlock(
   block.append(
     heading("Implementation, runtime and standard-library licenses"),
     paragraph(
-      "License scope belongs to each named component and version. Expressions are shown literally; no project-license or compatibility conclusion is inferred.",
+      tr(
+        "License scope belongs to each named component and version. Expressions are shown literally; no project-license or compatibility conclusion is inferred.",
+      ),
     ),
   );
   const list = document.createElement("ul");
@@ -179,7 +182,10 @@ function licenseBlock(
       const link = document.createElement("a");
       link.className = "reader-license-catalog";
       link.href = href;
-      link.textContent = `Open ${token} in the license catalogue`;
+      link.textContent =
+        getUiLocale() === "de"
+          ? `${token} im Lizenzkatalog öffnen`
+          : `Open ${token} in the license catalogue`;
       item.append(link);
     }
     item.append(
@@ -200,11 +206,14 @@ export function renderLanguageReaderProfile(
   details.className = "language-reader-profile";
   details.dataset.readerName = profile.name;
   const title = document.createElement("summary");
-  title.textContent = `Read ${profile.name}: fit, setup and example`;
+  title.textContent =
+    getUiLocale() === "de"
+      ? `${profile.name}: Eignung, Einrichtung und Beispiel lesen`
+      : `Read ${profile.name}: fit, setup and example`;
   details.append(
     title,
-    paragraph(`Implementation: ${profile.implementation.name}`),
-    paragraph(`Scope: ${profile.implementation.version_scope}`),
+    paragraph(`${tr("Implementation")}: ${profile.implementation.name}`),
+    paragraph(`${tr("Scope")}: ${profile.implementation.version_scope}`),
     citations(profile, profile.implementation.source_ids),
   );
   for (const [key, label] of Object.entries(READER_SECTION_LABELS) as [
@@ -226,7 +235,7 @@ export function renderLanguageReaderProfile(
   for (const source of profile.sources) {
     if (!readerSafeHttps(source.url))
       throw new Error("Unsafe reader inventory URL");
-    const row = paragraph(`Checked ${source.checked_on} · `);
+    const row = paragraph(`${tr("Checked")} ${source.checked_on} · `);
     row.append(sourceLink(source));
     inventory.append(row);
   }

@@ -20,3 +20,18 @@ test("German UI labels change, assessment and license tokens remain exact", () =
   }
   assert.equal(tr("Only differences"), "Only differences");
 });
+
+test("reader disclosure labels localize while license identifiers remain exact", () => {
+  setUiLocale("de");
+  try {
+    assert.equal(tr("Fit and limitations"), "Eignung und Grenzen");
+    assert.equal(
+      tr("Implementation, runtime and standard-library licenses"),
+      "Lizenzen von Implementierung, Laufzeit und Standardbibliothek",
+    );
+    assert.equal(tr("UNKNOWN"), "UNKNOWN");
+    assert.equal(tr("MIT"), "MIT");
+  } finally {
+    setUiLocale("en");
+  }
+});
