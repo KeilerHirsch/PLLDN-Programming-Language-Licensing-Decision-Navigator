@@ -186,6 +186,41 @@ const de: Readonly<Record<string, string>> = {
   "not recorded": "nicht erfasst",
   Checked: "Geprüft",
   "Unlinked reference": "Nicht verlinkte Referenz",
+  "Where was the component licence declared?":
+    "Wo wurde die Komponentenlizenz angegeben?",
+  "license file": "Lizenzdatei",
+  "package manifest": "Paketmanifest",
+  sbom: "SBOM",
+  contract: "Vertrag",
+  other: "Sonstige",
+  "Component provenance checks — UNKNOWN":
+    "Komponentennachweise prüfen — UNKNOWN",
+  "Identify the exact component, version and distribution artifact using a reproducible inventory.":
+    "Die genaue Komponente, Version und das verteilte Artefakt anhand einer reproduzierbaren Inventur ermitteln.",
+  "Select the exact licence only after checking the component's declaration.":
+    "Die konkrete Lizenz erst nach Prüfung der Erklärung zur Komponente auswählen.",
+  "Compare the selected licence identity and version with the actual component's declaration; selection alone does not verify applicability.":
+    "Ausgewählte Lizenzkennung und Version mit der tatsächlichen Komponentenerklärung abgleichen; die Auswahl bestätigt keine Geltung.",
+  "Cross-check the component LICENSE file with the shipped artifact and its notices.":
+    "Die LICENSE-Datei der Komponente mit dem ausgelieferten Artefakt und seinen Hinweisen abgleichen.",
+  "Cross-check the package manifest against the shipped artifact and any LICENSE/NOTICE files.":
+    "Das Paketmanifest mit dem ausgelieferten Artefakt und etwaigen LICENSE-/NOTICE-Dateien abgleichen.",
+  "Cross-check the SBOM entry against the component package, version and original licence text.":
+    "Den SBOM-Eintrag mit Paket, Version und ursprünglichem Lizenztext abgleichen.",
+  "Check the actual contract, relevant parties, scope and governing version; do not infer public licence grants.":
+    "Den tatsächlichen Vertrag, die Parteien, den Geltungsbereich und die maßgebliche Fassung prüfen; keine öffentlichen Lizenzrechte daraus ableiten.",
+  "Record the original declaration and check that it actually belongs to this component version.":
+    "Die Originalerklärung dokumentieren und prüfen, ob sie genau zu dieser Komponentenversion gehört.",
+  "Record where the licence was declared (LICENSE file, package manifest, SBOM or contract).":
+    "Die Quelle der Lizenzangabe erfassen (LICENSE-Datei, Paketmanifest, SBOM oder Vertrag).",
+  "Identify the exact SPDX exception ID, the original exception grant and its component scope. WITH syntax alone proves no permission.":
+    "Die genaue SPDX-Ausnahmekennung, den Original-Ausnahmetext und dessen Komponentengeltung prüfen. WITH-Syntax allein belegt keine Berechtigung.",
+  "Resolve each SPDX operand for the actual components and any choice or conjunction; syntax alone proves no compatibility.":
+    "Alle SPDX-Operanden anhand der tatsächlichen Komponenten samt Wahlmöglichkeit oder Verknüpfung prüfen; die Syntax allein belegt keine Kompatibilität.",
+  "Resolve the unknown licence expression from the original component declaration.":
+    "Den unbekannten Lizenzausdruck anhand der ursprünglichen Komponentenangabe klären.",
+  "Unverified or conflicting licence declarations remain UNKNOWN and are not Reviewed conclusions.":
+    "Ungeprüfte oder widersprüchliche Lizenzangaben bleiben UNKNOWN und sind keine Reviewed-Entscheidungen.",
   "Exact licence to investigate (user selection, unverified)":
     "Konkrete Lizenz zur Prüfung (Nutzerauswahl, unbestätigt)",
   "Not confirmed — show conditional examples":

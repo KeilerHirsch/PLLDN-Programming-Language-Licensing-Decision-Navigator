@@ -13,6 +13,7 @@ import {
   worksheetLicenseOptions,
   worksheetPreviewFilterTrace,
   worksheetPrimarySources,
+  worksheetProvenanceQuestions,
   writeWorksheet,
   writeWorksheetLicenseId,
 } from "../src/ui/project-worksheet.ts";
@@ -32,7 +33,7 @@ test("project/licensing worksheet URL round trips allowed nonpersonal selections
     defaultWorksheet(),
   );
   assert.equal(validWorksheetChoice("madeup", "yes"), false);
-  assert.equal(WORKSHEET_KEYS.length, 9);
+  assert.equal(WORKSHEET_KEYS.length, 10);
   const report = exportWorksheetMarkdown(initial, "Server project");
   assert(report.includes("Preview only"));
   assert(report.includes("UNKNOWN"));
@@ -239,4 +240,41 @@ test("explicit pinned licence narrows original-text references without deriving 
   assert(report.includes("MPL-2.0"));
   assert(!report.includes("GNU Affero General Public License v3"));
   assert(report.includes("UNKNOWN"));
+});
+
+test("component licence provenance checklist is transparent and never verifies a declaration", () => {
+  const missing = defaultWorksheet();
+  const absent = worksheetProvenanceQuestions(missing, null);
+  assert.equal(absent.status, "UNKNOWN");
+  assert(absent.questions.some((q) => q.includes("exact licence")));
+  const declared = {
+    ...defaultWorksheet(),
+    evidence: "package-manifest",
+    expression: "WITH",
+    distribution: "binary",
+  };
+  const questions = worksheetProvenanceQuestions(declared, "license.mpl-2.0");
+  assert.equal(questions.status, "UNKNOWN");
+  assert(questions.questions.some((q) => q.includes("package manifest")));
+  assert(questions.questions.some((q) => q.includes("exception")));
+  const report = exportWorksheetMarkdown(
+    declared,
+    null,
+    "de",
+    "license.mpl-2.0",
+  );
+  assert(report.includes("UNKNOWN"));
+  assert(report.includes("package-manifest"));
+  assert(report.includes("NOT_REVIEWED"));
+  assert.equal(
+    readWorksheet("?ws_evidence=package-manifest").evidence,
+    "package-manifest",
+  );
+  assert.equal(
+    readWorksheet("?ws_evidence=%3Cscript%3E").evidence,
+    "unspecified",
+  );
+  const params = new URLSearchParams();
+  writeWorksheet(params, declared);
+  assert.equal(params.get("ws_evidence"), "package-manifest");
 });

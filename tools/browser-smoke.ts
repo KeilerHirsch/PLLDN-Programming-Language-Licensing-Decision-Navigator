@@ -57,6 +57,9 @@ const smokeProbe = `
       let cards = [...document.querySelectorAll("[data-catalog-entry]")];
       const scenario = document.querySelector('#project-worksheet [data-action="worksheet-answer"][data-worksheet-key="hosting"]');
       assert(scenario && document.querySelector('#project-worksheet [data-action="export-worksheet"]'), "project license worksheet is available");
+      assert(document.querySelector('#project-worksheet [data-worksheet-key="evidence"]') &&
+        document.querySelector("#project-worksheet .worksheet-provenance")?.textContent.includes("UNKNOWN"),
+        "component declaration source remains unverified");
       scenario.value = "yes";
       scenario.dispatchEvent(new Event("change", { bubbles: true }));
       await waitFor(() => new URLSearchParams(location.search).get("ws_hosting") === "yes" &&
