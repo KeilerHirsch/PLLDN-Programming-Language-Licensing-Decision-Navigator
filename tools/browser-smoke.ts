@@ -62,6 +62,8 @@ const smokeProbe = `
       await waitFor(() => new URLSearchParams(location.search).get("ws_hosting") === "yes" &&
         document.querySelector("#project-worksheet h3")?.textContent.includes("UNKNOWN") &&
         document.querySelector('#project-worksheet [data-worksheet-key="hosting"]') !== scenario, "scenario URL and abstention");
+      assert(document.querySelector(".worksheet-filter-trace")?.textContent.includes("licenseSaas=yes"),
+        "the applied Preview filter must be visibly disclosed, without a legal verdict");
       const resetScenario = document.querySelector('#project-worksheet [data-action="worksheet-answer"][data-worksheet-key="hosting"]');
       resetScenario.value = "unspecified";
       resetScenario.dispatchEvent(new Event("change", { bubbles: true }));

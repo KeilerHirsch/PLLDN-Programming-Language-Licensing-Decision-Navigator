@@ -85,6 +85,40 @@ export function writeWorksheet(
   }
 }
 
+/** Exact mapping to the two EXISTING Editorial Preview facets; all other answers are context. */
+export function worksheetPreviewFilterTrace(scenario: WorksheetState): {
+  filters: { licenseCommercial: "yes" | "any"; licenseSaas: "yes" | "any" };
+  rows: { key: WorksheetKey; answer: string; description: string }[];
+} {
+  const filters = {
+    licenseCommercial:
+      scenario.commercial === "yes" ? ("yes" as const) : ("any" as const),
+    licenseSaas:
+      scenario.hosting === "yes" ? ("yes" as const) : ("any" as const),
+  };
+  const rows = WORKSHEET_KEYS.filter(
+    (key) => scenario[key] !== "unspecified",
+  ).map((key) => {
+    let description =
+      "Context only — no automatic Reviewed or Preview filter mapping.";
+    if (key === "commercial" && scenario[key] === "yes") {
+      description =
+        "Applies licenseCommercial=yes to Editorial Preview descriptions only; UNKNOWN profiles may be hidden. No license permission is established.";
+    } else if (key === "hosting" && scenario[key] === "yes") {
+      description =
+        "Applies licenseSaas=yes to Editorial Preview descriptions only; UNKNOWN profiles may be hidden. No network-use permission is established.";
+    } else if (
+      (key === "commercial" || key === "hosting") &&
+      scenario[key] === "no"
+    ) {
+      description =
+        "No inverse filter is inferred from 'no'; all values remain visible.";
+    }
+    return { key, answer: scenario[key], description };
+  });
+  return { filters, rows };
+}
+
 /** Always abstain. A scenario is not evidence that a specific license permits it. */
 export function summarizeWorksheet(scenario: WorksheetState): {
   status: "UNKNOWN";
@@ -149,6 +183,35 @@ export function renderProjectWorksheet(worksheet: WorksheetState): HTMLElement {
     grid.append(label);
   }
   section.append(grid);
+  const mapped = worksheetPreviewFilterTrace(worksheet);
+  const mapping = document.createElement("details");
+  mapping.className = "worksheet-filter-trace";
+  const traceTitle = document.createElement("summary");
+  traceTitle.textContent = tr(
+    "How these answers affect existing Preview filters",
+  );
+  mapping.append(traceTitle);
+  const traceNote = document.createElement("p");
+  traceNote.textContent = tr(
+    "Only explicit yes answers for commercial use and SaaS activate existing Editorial Preview filters. Other answers are context, not a Reviewed decision.",
+  );
+  mapping.append(traceNote);
+  if (mapped.rows.length === 0) {
+    const empty = document.createElement("p");
+    empty.textContent = tr("No answers recorded; no scenario filters applied.");
+    mapping.append(empty);
+  } else {
+    const trace = document.createElement("dl");
+    for (const row of mapped.rows) {
+      const key = document.createElement("dt");
+      key.textContent = `${tr(WORKSHEET_FIELDS[row.key].label)}: ${tr(row.answer.replaceAll("-", " "))}`;
+      const description = document.createElement("dd");
+      description.textContent = tr(row.description);
+      trace.append(key, description);
+    }
+    mapping.append(trace);
+  }
+  section.append(mapping);
   const result = document.createElement("section");
   const heading = document.createElement("h3");
   heading.textContent = tr("Licensing result: UNKNOWN — verification required");
@@ -212,6 +275,17 @@ export function exportWorksheetMarkdown(
     lines.push(
       `- ${label(WORKSHEET_FIELDS[key].label)}: ${plain(label(worksheet[key]))}`,
     );
+  lines.push("", `## ${label("Preview filter mapping")}`);
+  const trace = worksheetPreviewFilterTrace(worksheet);
+  if (trace.rows.length === 0)
+    lines.push(
+      `- ${label("No answers recorded; no scenario filters applied.")}`,
+    );
+  for (const row of trace.rows) {
+    lines.push(
+      `- ${label(WORKSHEET_FIELDS[row.key].label)} (${label(row.answer)}): ${label(row.description)}`,
+    );
+  }
   lines.push("", `## ${label("Questions requiring evidence")}`);
   for (const topic of summarizeWorksheet(worksheet).topics)
     lines.push(`- ${label(topic)}`);

@@ -186,6 +186,21 @@ const de: Readonly<Record<string, string>> = {
   "not recorded": "nicht erfasst",
   Checked: "Geprüft",
   "Unlinked reference": "Nicht verlinkte Referenz",
+  "How these answers affect existing Preview filters":
+    "So wirken sich deine Antworten auf vorhandene Vorschaufilter aus",
+  "Only explicit yes answers for commercial use and SaaS activate existing Editorial Preview filters. Other answers are context, not a Reviewed decision.":
+    "Nur ausdrückliches Ja bei kommerzieller Nutzung und SaaS aktiviert vorhandene redaktionelle Vorschaufilter. Andere Antworten sind Kontext und keine Reviewed-Entscheidung.",
+  "No answers recorded; no scenario filters applied.":
+    "Keine Antworten erfasst; keine Szenariofilter angewandt.",
+  "Context only — no automatic Reviewed or Preview filter mapping.":
+    "Nur Kontext — keine automatische Zuordnung zu Reviewed- oder Vorschaufiltern.",
+  "Applies licenseCommercial=yes to Editorial Preview descriptions only; UNKNOWN profiles may be hidden. No license permission is established.":
+    "Nur der redaktionelle Vorschaufilter licenseCommercial=yes wird angewandt; UNKNOWN-Profile können ausgeblendet werden. Eine Lizenzberechtigung ist damit nicht belegt.",
+  "Applies licenseSaas=yes to Editorial Preview descriptions only; UNKNOWN profiles may be hidden. No network-use permission is established.":
+    "Nur der redaktionelle Vorschaufilter licenseSaas=yes wird angewandt; UNKNOWN-Profile können ausgeblendet werden. Eine Netzwerknutzungsberechtigung ist damit nicht belegt.",
+  "No inverse filter is inferred from 'no'; all values remain visible.":
+    "Aus Nein wird kein umgekehrter Filter abgeleitet; alle Werte bleiben sichtbar.",
+  "Preview filter mapping": "Zuordnung zu Vorschaufiltern",
   "Fit and limitations": "Eignung und Grenzen",
   Prerequisites: "Voraussetzungen",
   "Execution workflow": "Ausführungsablauf",

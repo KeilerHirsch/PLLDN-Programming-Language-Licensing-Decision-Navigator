@@ -34,6 +34,7 @@ import {
   exportWorksheetMarkdown,
   readWorksheet,
   validWorksheetChoice,
+  worksheetPreviewFilterTrace,
   writeWorksheet,
 } from "./project-worksheet.ts";
 import {
@@ -468,16 +469,15 @@ root.addEventListener("click", (event) => {
     void publish(() => current.view());
   }
   if (action === "worksheet-browse-license-previews") {
-    const commercial = productState.worksheet.commercial;
-    const saas = productState.worksheet.hosting;
+    const mapped = worksheetPreviewFilterTrace(productState.worksheet).filters;
     productState = {
       ...productState,
       mode: "licenses",
       status: "all",
       filters: {
         ...DEFAULT_PRODUCT_UI_STATE.filters,
-        licenseCommercial: commercial === "yes" ? "yes" : "any",
-        licenseSaas: saas === "yes" ? "yes" : "any",
+        licenseCommercial: mapped.licenseCommercial,
+        licenseSaas: mapped.licenseSaas,
       },
     };
     catalogQuery = "";
