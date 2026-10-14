@@ -54,17 +54,20 @@ const smokeProbe = `
 
     if (new URLSearchParams(window.location.search).get("probe") === "reader") {
       await waitFor(() => document.querySelectorAll(".language-reader-profile").length === 194, "complete reader corpus");
-      const cards = [...document.querySelectorAll("[data-catalog-entry]")];
+      let cards = [...document.querySelectorAll("[data-catalog-entry]")];
       const scenario = document.querySelector('#project-worksheet [data-action="worksheet-answer"][data-worksheet-key="hosting"]');
       assert(scenario && document.querySelector('#project-worksheet [data-action="export-worksheet"]'), "project license worksheet is available");
       scenario.value = "yes";
       scenario.dispatchEvent(new Event("change", { bubbles: true }));
       await waitFor(() => new URLSearchParams(location.search).get("ws_hosting") === "yes" &&
-        document.querySelector("#project-worksheet h3")?.textContent.includes("UNKNOWN"), "scenario URL and abstention");
+        document.querySelector("#project-worksheet h3")?.textContent.includes("UNKNOWN") &&
+        document.querySelector('#project-worksheet [data-worksheet-key="hosting"]') !== scenario, "scenario URL and abstention");
       const resetScenario = document.querySelector('#project-worksheet [data-action="worksheet-answer"][data-worksheet-key="hosting"]');
       resetScenario.value = "unspecified";
       resetScenario.dispatchEvent(new Event("change", { bubbles: true }));
-      await waitFor(() => !new URLSearchParams(location.search).has("ws_hosting"), "scenario reset");
+      await waitFor(() => !new URLSearchParams(location.search).has("ws_hosting") &&
+        document.querySelector('#project-worksheet [data-worksheet-key="hosting"]') !== resetScenario, "scenario reset");
+      cards = [...document.querySelectorAll("[data-catalog-entry]")];
       assert(cards.length === 194 && cards.every(card => card.querySelector(".language-reader-brief") &&
         card.querySelectorAll(".language-reader-profile [data-reader-section]").length === 8),
         "editorial and unassessed identities need the same complete reader shape");
