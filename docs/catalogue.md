@@ -6,9 +6,9 @@ The catalogue contains all 194 pinned language identities and 714 license identi
 
 ## Find a profile
 
-Use the filter sidebar to narrow the catalogue. **Data status** switches between all entries, Editorial profiles and unassessed identities. **View** switches between compact lists and detailed cards. **Open profile** gives each known entry a direct link.
+Use the filter sidebar to narrow the catalogue. **Data status** switches between all entries, Editorial profiles and **Profiles · assessments pending**. Profiles exist even when their assessment values remain UNKNOWN. **View** switches between compact lists and detailed cards. **Open profile** gives each known entry a direct link.
 
-Positive assessment filters apply only to recorded Editorial values. An unassessed identity can match **Any** or **Unknown** assessment filters; it never acquires a positive assessment from its name, source flag or catalogue presence. The 159 additional languages and 682 additional licenses retain UNKNOWN assessments and their pinned source links. Editorial Preview guidance remains distinct from the Reviewed decision lab.
+Positive assessment filters apply only to recorded Editorial values. A profile with pending assessments can match **Any** or **Unknown** assessment filters; it never acquires a positive assessment from its name, source flag or catalogue presence. The 159 additional languages and 682 additional licenses retain UNKNOWN assessments and their pinned source links. Pending language assessments cover performance, complexity and suitability; pending license assessments cover rights, obligations and applicability. Editorial Preview guidance remains distinct from the Reviewed decision lab.
 
 The license catalogue also exposes the **SPDX source flag** from the pinned identity data, including profiled SPDX licenses. This flag reports source metadata; it does not establish project-specific licensing suitability. Entries without a recorded SPDX flag remain visible under **Any flag** and do not match either flag-specific choice.
 
@@ -20,8 +20,8 @@ Examples:
 
 - [Rust Editorial profile](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/?profile=language.rust#catalog)
 - [MIT Editorial profile](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/?profile=license.mit#catalog)
-- [Agda unassessed profile](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/?candidate=candidate.language.61676461#catalog)
-- [Artistic-2.0 unassessed profile](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/?candidate=candidate.license.artistic-2.0#catalog)
+- [Agda profile · assessments pending](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/?candidate=candidate.language.61676461#catalog)
+- [Artistic-2.0 profile · assessments pending](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/?candidate=candidate.license.artistic-2.0#catalog)
 - [Shared Agda search](https://keilerhirsch.github.io/PLLDN-Programming-Language-Licensing-Decision-Navigator/?catalog=languages&q=Agda&status=unassessed#catalog)
 
 Only existing pinned candidate IDs and known Editorial profile IDs resolve. Unknown URL parameters cannot create profiles or assessments.

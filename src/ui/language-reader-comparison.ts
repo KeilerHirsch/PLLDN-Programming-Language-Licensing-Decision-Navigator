@@ -43,7 +43,7 @@ export function readerComparisonRows(
       value: (selection) =>
         selection.editorial
           ? "Editorial Preview (not Reviewed)"
-          : "Unassessed / NOT_REVIEWED; sourced reader information only",
+          : "Assessments pending / NOT_REVIEWED; sourced reader information only",
       sources: noSources,
     },
     {

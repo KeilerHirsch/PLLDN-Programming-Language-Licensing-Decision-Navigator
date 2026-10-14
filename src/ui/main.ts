@@ -171,7 +171,7 @@ function applyCatalogFilter(): void {
         : visible === 1
           ? "license"
           : "licenses";
-    count.textContent = `${visible} ${noun} found · ${Math.min(visible, identityLimit)} shown · ${editorial} editorial · ${unassessed} unassessed.`;
+    count.textContent = `${visible} ${noun} found · ${Math.min(visible, identityLimit)} shown · ${editorial} editorial · ${unassessed} ${unassessed === 1 ? "profile" : "profiles"} with assessments pending.`;
   }
   const more = root.querySelector<HTMLButtonElement>("[data-identity-more]");
   if (more) {
@@ -300,7 +300,7 @@ root.addEventListener("click", (event) => {
   if (action === "export-unassessed-csv") {
     downloadCsv(
       exportUnassessedCandidateCsv(),
-      "plldn-unassessed-candidates-v0.2.csv",
+      "plldn-pending-assessments-v0.2.csv",
     );
     return;
   }

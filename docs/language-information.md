@@ -1,6 +1,6 @@
 # Language information and discovery
 
-Every language in the catalogue has a short introduction, example use areas and links to primary documentation. These descriptions are separate from suitability, performance and complexity assessments. The 159 unassessed identities retain their pinned IDs, UNKNOWN assessments and NOT_REVIEWED status.
+Every language in the catalogue has a short introduction, example use areas and links to primary documentation. These descriptions are separate from suitability, performance and complexity assessments. The 159 profiles with pending assessments retain their pinned IDs, UNKNOWN assessments and NOT_REVIEWED status.
 
 ## Finding languages
 
