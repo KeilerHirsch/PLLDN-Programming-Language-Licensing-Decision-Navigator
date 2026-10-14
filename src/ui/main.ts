@@ -9,6 +9,7 @@ import {
 import { exportUnassessedCandidateCsv } from "../product/unassessed-export.ts";
 import { analyzeText } from "../text/analyze.ts";
 import type { TextAnalysis, TextRuleSet } from "../text/types.ts";
+import { catalogCountLabel, catalogMoreLabel } from "./catalog-count-label.ts";
 import {
   catalogNavigationHref,
   compareCatalogNames,
@@ -216,21 +217,24 @@ function applyCatalogFilter(): void {
   if (input && input.value !== catalogQuery) input.value = catalogQuery;
   const count = root.querySelector<HTMLElement>("[data-catalog-visible-count]");
   if (count) {
-    const noun =
-      productState.mode === "languages"
-        ? visible === 1
-          ? "language"
-          : "languages"
-        : visible === 1
-          ? "license"
-          : "licenses";
-    count.textContent = `${visible} ${noun} found · ${Math.min(visible, identityLimit)} shown · ${editorial} editorial · ${unassessed} ${unassessed === 1 ? "profile" : "profiles"} with assessments pending.`;
+    count.textContent = catalogCountLabel({
+      visible,
+      shown: Math.min(visible, identityLimit),
+      editorial,
+      unassessed,
+      mode: productState.mode,
+      locale: productState.locale,
+    });
   }
   const more = root.querySelector<HTMLButtonElement>("[data-identity-more]");
   if (more) {
     const remaining = Math.max(0, visible - identityLimit);
     more.hidden = remaining === 0;
-    more.textContent = `Show ${Math.min(identityPageSize, remaining)} more (${remaining} remaining)`;
+    more.textContent = catalogMoreLabel(
+      remaining,
+      identityPageSize,
+      productState.locale,
+    );
   }
   const osi = root.querySelector<HTMLSelectElement>(
     '[data-action="identity-osi"]',
