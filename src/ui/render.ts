@@ -9,16 +9,17 @@ import type {
   UiCandidateFactView,
   UiViewModel,
 } from "./types.ts";
+import { tr } from "./ui-locale.ts";
 
 function heading(level: 1 | 2 | 3, text: string): HTMLHeadingElement {
   const node = document.createElement(`h${level}`) as HTMLHeadingElement;
-  node.textContent = text;
+  node.textContent = tr(text);
   return node;
 }
 
 function paragraph(text: string): HTMLParagraphElement {
   const node = document.createElement("p");
-  node.textContent = text;
+  node.textContent = tr(text);
   return node;
 }
 
@@ -55,7 +56,7 @@ function renderChips(model: UiViewModel): HTMLElement {
   const reset = document.createElement("button");
   reset.type = "button";
   reset.dataset.action = "reset";
-  reset.textContent = "Reset all";
+  reset.textContent = tr("Reset all");
   reset.disabled = model.chips.length === 0;
   row.append(reset);
   section.append(row);
@@ -65,7 +66,7 @@ function renderChips(model: UiViewModel): HTMLElement {
 function optionCount(
   option: UiViewModel["facets"][number]["options"][number],
 ): string {
-  return `${option.eligible} eligible · ${option.unresolved} unresolved`;
+  return `${option.eligible} ${tr("eligible")} · ${option.unresolved} ${tr("unresolved")}`;
 }
 function renderFacets(model: UiViewModel): HTMLElement {
   const section = document.createElement("section");
@@ -100,7 +101,7 @@ function renderSort(model: UiViewModel): HTMLElement {
   const wrapper = document.createElement("label");
   wrapper.className = "sort-control";
   const text = document.createElement("span");
-  text.textContent = "Sort";
+  text.textContent = tr("Sort");
   const select = document.createElement("select");
   select.dataset.action = "sort";
   for (const [value, label] of [
@@ -109,7 +110,7 @@ function renderSort(model: UiViewModel): HTMLElement {
   ] as const) {
     const option = document.createElement("option");
     option.value = value;
-    option.textContent = label;
+    option.textContent = tr(label);
     option.selected = model.sort === value;
     select.append(option);
   }
@@ -168,7 +169,7 @@ function renderFact(fact: UiCandidateFactView): HTMLLIElement {
 
   if (fact.conditions.length > 0) {
     const conditions = paragraph(
-      `Conditions: ${fact.conditions.map(formatCondition).join(" · ")}`,
+      `${tr("Conditions")}: ${fact.conditions.map(formatCondition).join(" · ")}`,
     );
     conditions.className = "candidate-conditions";
     item.append(conditions);
@@ -178,7 +179,7 @@ function renderFact(fact: UiCandidateFactView): HTMLLIElement {
     const evidence = document.createElement("div");
     evidence.className = "candidate-evidence";
     const prefix = document.createElement("span");
-    prefix.textContent = "Evidence: ";
+    prefix.textContent = `${tr("Evidence")}: `;
     evidence.append(prefix);
     fact.sources.forEach((source, index) => {
       if (index > 0) evidence.append(document.createTextNode(" · "));
@@ -217,7 +218,7 @@ function renderCandidates(model: UiViewModel): HTMLElement {
     item.append(name, status);
 
     const scope = paragraph(
-      `Snapshot scope: ${candidate.version_scope.join(", ")} · Targets: ${candidate.target_scope.join(", ")}`,
+      `${tr("Snapshot scope")}: ${candidate.version_scope.join(", ")} · ${tr("Targets")}: ${candidate.target_scope.join(", ")}`,
     );
     scope.className = "candidate-meta";
     item.append(scope);
@@ -231,7 +232,7 @@ function renderCandidates(model: UiViewModel): HTMLElement {
 
     const details = document.createElement("details");
     const summary = document.createElement("summary");
-    summary.textContent = "Decision details";
+    summary.textContent = tr("Decision details");
     const pre = document.createElement("pre");
     pre.textContent = JSON.stringify(
       {
@@ -258,9 +259,9 @@ export interface TextAssistanceState {
 }
 
 function proposalStateLabel(proposal: TextProposal): string {
-  if (proposal.state === "PROPOSED") return "Detected";
-  if (proposal.state === "AMBIGUOUS") return "Needs clarification";
-  return "Conflicting statements";
+  if (proposal.state === "PROPOSED") return tr("Detected");
+  if (proposal.state === "AMBIGUOUS") return tr("Needs clarification");
+  return tr("Conflicting statements");
 }
 
 function renderProposal(proposal: TextProposal): HTMLLIElement {
@@ -279,7 +280,7 @@ function renderProposal(proposal: TextProposal): HTMLLIElement {
     confirm.type = "button";
     confirm.dataset.action = "confirm-text";
     confirm.dataset.proposalId = proposal.proposal_id;
-    confirm.textContent = "Confirm";
+    confirm.textContent = tr("Confirm");
     item.append(confirm);
   }
   return item;
@@ -296,7 +297,7 @@ function renderTextAssistance(state: TextAssistanceState): HTMLElement {
   );
   const label = document.createElement("label");
   const labelText = document.createElement("span");
-  labelText.textContent = "Project constraints";
+  labelText.textContent = tr("Project constraints");
   const textarea = document.createElement("textarea");
   textarea.dataset.action = "text-source";
   textarea.rows = 6;
@@ -308,11 +309,11 @@ function renderTextAssistance(state: TextAssistanceState): HTMLElement {
   const analyze = document.createElement("button");
   analyze.type = "button";
   analyze.dataset.action = "analyze-text";
-  analyze.textContent = "Analyze text";
+  analyze.textContent = tr("Analyze text");
   const clear = document.createElement("button");
   clear.type = "button";
   clear.dataset.action = "clear-text-analysis";
-  clear.textContent = "Clear analysis";
+  clear.textContent = tr("Clear analysis");
   actions.append(analyze, clear);
   section.append(actions);
   if (state.diagnostic) section.append(paragraph(state.diagnostic));
@@ -328,7 +329,7 @@ function renderTextAssistance(state: TextAssistanceState): HTMLElement {
     const confirmAll = document.createElement("button");
     confirmAll.type = "button";
     confirmAll.dataset.action = "confirm-all-text";
-    confirmAll.textContent = "Confirm all detected";
+    confirmAll.textContent = tr("Confirm all detected");
     section.append(confirmAll);
   }
   const list = document.createElement("ul");
@@ -346,7 +347,7 @@ export interface CatalogPreviewState {
 
 function renderCatalogFact(fact: CatalogPreviewFactView): HTMLLIElement {
   const item = renderFact(fact);
-  const status = paragraph(`Review status: ${fact.review_status}`);
+  const status = paragraph(`${tr("Review status")}: ${fact.review_status}`);
   status.className = "catalog-review-status";
   item.append(status);
   return item;
@@ -388,12 +389,12 @@ function renderCatalogGroup(
     name.textContent = entry.label;
     const badge = document.createElement("span");
     badge.className = "catalog-preview-badge";
-    badge.textContent = "Preview";
+    badge.textContent = tr("Preview");
     header.append(name, badge);
     item.append(header);
 
     const meta = paragraph(
-      `${entry.entity_id} · Scope: ${entry.version_scope.join(", ")} · Targets: ${entry.target_scope.join(", ")}`,
+      `${entry.entity_id} · ${tr("Scope")}: ${entry.version_scope.join(", ")} · ${tr("Targets")}: ${entry.target_scope.join(", ")}`,
     );
     meta.className = "candidate-meta";
     item.append(meta);
@@ -422,7 +423,9 @@ function renderCatalogPreview(state: CatalogPreviewState): HTMLElement {
     ),
   );
   if (state.diagnostic) {
-    const diagnostic = paragraph(`Preview unavailable: ${state.diagnostic}`);
+    const diagnostic = paragraph(
+      `${tr("Preview unavailable")}: ${state.diagnostic}`,
+    );
     diagnostic.className = "catalog-diagnostic";
     section.append(diagnostic);
     return section;
@@ -441,7 +444,7 @@ function renderCatalogPreview(state: CatalogPreviewState): HTMLElement {
   const searchLabel = document.createElement("label");
   searchLabel.className = "catalog-search";
   const searchText = document.createElement("span");
-  searchText.textContent = "Search catalogue";
+  searchText.textContent = tr("Search catalogue");
   const search = document.createElement("input");
   search.type = "search";
   search.placeholder = "Rust, WebAssembly, copyleft, Cargo…";
@@ -463,7 +466,7 @@ function renderTrace(model: UiViewModel): HTMLElement {
   const details = document.createElement("details");
   details.className = "trace-details";
   const summary = document.createElement("summary");
-  summary.textContent = "Decision trace";
+  summary.textContent = tr("Decision trace");
   const pre = document.createElement("pre");
   pre.textContent = JSON.stringify(model.trace, null, 2);
   details.append(summary, pre);

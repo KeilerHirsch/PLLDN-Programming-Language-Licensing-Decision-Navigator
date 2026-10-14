@@ -49,7 +49,7 @@ import {
 import { type BrowserRuntimeInput, bootstrapUiRuntime } from "./runtime.ts";
 import { confirmProposal, confirmProposals } from "./text-assistance.ts";
 import type { FacetDefinition, SortMode, UiViewModel } from "./types.ts";
-import type { UiLocale } from "./ui-locale.ts";
+import { setUiLocale, tr, type UiLocale } from "./ui-locale.ts";
 
 interface PllDnWindow extends Window {
   PLLDN_RUNTIME?: BrowserRuntimeInput;
@@ -251,7 +251,7 @@ function installProductExperience(model: UiViewModel): void {
   const decision = document.createElement("details");
   decision.className = "decision-lab";
   const summary = document.createElement("summary");
-  summary.textContent = `Reviewed decision lab · ${model.state.state}`;
+  summary.textContent = `${tr("Reviewed decision lab")} · ${model.state.state}`;
   const body = document.createElement("div");
   body.className = "decision-lab-body";
 
@@ -283,6 +283,7 @@ async function publish(action: () => Promise<UiViewModel>): Promise<void> {
       ? { data: { ...active.dataset }, scope: focusScope(active) }
       : null;
     const model = await action();
+    setUiLocale(productState.locale);
     renderApp(root, model, textState, catalogState);
     installProductExperience(model);
     applyCatalogFilter();

@@ -215,6 +215,10 @@ const smokeProbe = `
         document.querySelector(".product-hero h1")?.textContent === "Wähle das Fundament vor dem ersten Commit." &&
         document.querySelector('[data-action="set-ui-language"][data-locale="de"]')?.getAttribute("aria-pressed") === "true", "DE locale changes UI and URL only");
       assert(document.querySelector("#project-worksheet h3")?.textContent.includes("UNKNOWN"), "unresolved assessment marker stays unchanged in DE");
+      assert(document.querySelector(".decision-lab > summary")?.textContent.startsWith("Geprüftes Entscheidungslabor"),
+        "Reviewed lab surface switches to German without translating status data");
+      assert(document.querySelector(".decision-lab .active-filters h2")?.textContent === "Aktive Filter",
+        "Reviewed lab filter controls localize with the main UI");
       assert(document.querySelector(".language-reader-profile [data-reader-section=fit] h4")?.textContent === "Eignung und Grenzen",
         "reader disclosure headings translate without changing sourced facts");
       document.querySelector('[data-action="set-ui-language"][data-locale="en"]').click();
