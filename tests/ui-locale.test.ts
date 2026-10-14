@@ -35,3 +35,18 @@ test("reader disclosure labels localize while license identifiers remain exact",
     setUiLocale("en");
   }
 });
+
+test("Reviewed lab UI copy translates without rewriting decision keys", () => {
+  setUiLocale("de");
+  try {
+    assert.equal(tr("Reviewed decision lab"), "Geprüftes Entscheidungslabor");
+    assert.equal(tr("Active filters"), "Aktive Filter");
+    assert.equal(tr("Decision details"), "Entscheidungsdetails");
+    assert.equal(tr("UNKNOWN"), "UNKNOWN");
+    assert.equal(tr("NOT_REVIEWED"), "NOT_REVIEWED");
+    assert.equal(tr("license.mpl-2.0"), "license.mpl-2.0");
+  } finally {
+    setUiLocale("en");
+  }
+  assert.equal(tr("Decision details"), "Decision details");
+});
