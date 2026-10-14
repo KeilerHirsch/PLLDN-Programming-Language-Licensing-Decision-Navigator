@@ -98,3 +98,40 @@ test("explicit UTC creation time is included without contaminating source checki
     exportLanguageComparisonMarkdown(ids, catalog, true, false, "tomorrow"),
   );
 });
+
+test("German Markdown preserves IDs, UNKNOWN, sources and UTC creation metadata", () => {
+  const ids = ["language.go", "candidate.language.6261736963"];
+  const at = "2026-10-14T18:10:00.000Z";
+  const de = exportLanguageComparisonMarkdown(
+    ids,
+    catalog,
+    true,
+    false,
+    at,
+    "de",
+  );
+  const en = exportLanguageComparisonMarkdown(
+    ids,
+    catalog,
+    true,
+    false,
+    at,
+    "en",
+  );
+  assert(de.includes(`Bericht erstellt am (UTC): ${at}`));
+  assert(de.includes("PLLDN-Sprachvergleich"));
+  for (const literal of [
+    "language\\.go",
+    "candidate\\.language\\.6261736963",
+    "UNKNOWN",
+    "NOT_REVIEWED",
+    "https://",
+  ]) {
+    assert(de.includes(literal), literal);
+    assert(en.includes(literal), literal);
+  }
+  assert.equal(
+    de,
+    exportLanguageComparisonMarkdown(ids, catalog, true, false, at, "de"),
+  );
+});

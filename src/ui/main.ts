@@ -361,7 +361,11 @@ root.addEventListener("click", (event) => {
       (entry) => entry.use_case_id === productState.selectedUseCaseId,
     );
     downloadCsv(
-      exportWorksheetMarkdown(productState.worksheet, guide?.label ?? null),
+      exportWorksheetMarkdown(
+        productState.worksheet,
+        guide?.label ?? null,
+        productState.locale,
+      ),
       "plldn-project-license-preview.md",
       "text/markdown;charset=utf-8",
     );
@@ -389,6 +393,7 @@ root.addEventListener("click", (event) => {
         productState.compareOnlyDifferences,
         productState.compareUnresolvedFirst,
         new Date().toISOString(),
+        productState.locale,
       ),
       "plldn-language-comparison.md",
       "text/markdown;charset=utf-8",
@@ -403,6 +408,7 @@ root.addEventListener("click", (event) => {
       productState.compareOnlyDifferences,
       productState.compareUnresolvedFirst,
       new Date().toISOString(),
+      productState.locale,
     );
     const message = (value: string) => {
       const status = root.querySelector<HTMLElement>(

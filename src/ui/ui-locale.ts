@@ -186,11 +186,42 @@ const de: Readonly<Record<string, string>> = {
   "not recorded": "nicht erfasst",
   Checked: "Geprüft",
   "Unlinked reference": "Nicht verlinkte Referenz",
+  "PLLDN language comparison": "PLLDN-Sprachvergleich",
+  "All attributes": "Alle Eigenschaften",
+  "Row order": "Zeilenreihenfolge",
+  "Original catalogue order": "Ursprüngliche Katalogreihenfolge",
+  "Report created at (UTC)": "Bericht erstellt am (UTC)",
+  Selected: "Ausgewählt",
+  "Evidence: sourced reader information and Editorial Preview; not a Reviewed recommendation.":
+    "Nachweise: Quellengebundene Sprachinformationen und redaktionelle Vorschau; keine Reviewed-Empfehlung.",
+  "UNKNOWN and NOT_REVIEWED are not assessed. No measured cross-language ranking or legal certification is claimed.":
+    "UNKNOWN und NOT_REVIEWED sind nicht bewertet. Es wird weder eine gemessene Sprachenrangliste noch eine rechtliche Freigabe behauptet.",
+  "Preview evidence": "Vorschau-Nachweis",
+  claim: "Aussage",
+  "review status": "Prüfstatus",
+  "PLLDN project and license scenario — Preview only":
+    "PLLDN-Projekt- und Lizenzszenario — nur Vorschau",
+  "Result: UNKNOWN — no reviewed compatibility determination.":
+    "Ergebnis: UNKNOWN — keine geprüfte Kompatibilitätsentscheidung.",
+  "This worksheet records user intent. It is not legal advice or a substitute for checking canonical licenses.":
+    "Dieser Fragebogen dokumentiert das Vorhaben. Er ist keine Rechtsberatung und ersetzt keine Prüfung der maßgeblichen Lizenztexte.",
+  "Project guide": "Projektleitfaden",
+  "Selected context": "Gewählte Rahmenbedingungen",
+  "Questions requiring evidence": "Offene Fragen mit Nachweisbedarf",
+  "Starting sources": "Ausgangsquellen",
+  "SPDX license identities": "SPDX-Lizenzkennungen",
+  "Open the selected license's pinned source in the PLLDN catalogue and inspect version, exceptions, linking, network and distribution obligations.":
+    "Im PLLDN-Katalog die festgehaltene Quelle zur gewählten Lizenz öffnen und Version, Ausnahmen, Linking sowie Netzwerk- und Weitergabepflichten prüfen.",
+  "Review status: NOT_REVIEWED for unassessed candidate identities. Nothing in this report is a Reviewed recommendation.":
+    "Prüfstatus: NOT_REVIEWED für ungeprüfte Kandidateneinträge. Dieser Bericht enthält keine Reviewed-Empfehlung.",
+  "small-team": "Kleines Team",
+  "third-party": "Dritte",
+  "separate-process": "Eigener Prozess",
 };
 
 /** Exact UI text only; no rewriting of source citations, SPDX IDs or UNKNOWN statuses. */
-export function tr(text: string): string {
-  if (activeLocale !== "de") return text;
+export function trForLocale(text: string, locale: UiLocale): string {
+  if (locale !== "de") return text;
   if (text === "UNKNOWN" || text === "NOT_REVIEWED" || text === "SPDX")
     return text;
   const match = /^Compare languages \((\d+)\/4\)$/u.exec(text);
@@ -198,4 +229,8 @@ export function tr(text: string): string {
   const saved = /^Saved profiles \((\d+)\)$/u.exec(text);
   if (saved) return `Gemerkte Profile (${saved[1]})`;
   return de[text] ?? text;
+}
+
+export function tr(text: string): string {
+  return trForLocale(text, activeLocale);
 }
