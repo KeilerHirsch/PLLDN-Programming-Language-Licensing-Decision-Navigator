@@ -219,6 +219,8 @@ const smokeProbe = `
         "Reviewed lab surface switches to German without translating status data");
       assert(document.querySelector(".decision-lab .active-filters h2")?.textContent === "Aktive Filter",
         "Reviewed lab filter controls localize with the main UI");
+      assert(document.querySelector("[data-catalog-visible-count]")?.textContent.includes("gefunden"),
+        "catalogue count localizes while retaining actual counts");
       assert(document.querySelector(".language-reader-profile [data-reader-section=fit] h4")?.textContent === "Eignung und Grenzen",
         "reader disclosure headings translate without changing sourced facts");
       document.querySelector('[data-action="set-ui-language"][data-locale="en"]').click();
