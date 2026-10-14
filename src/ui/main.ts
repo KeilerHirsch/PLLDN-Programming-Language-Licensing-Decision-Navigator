@@ -329,6 +329,7 @@ root.addEventListener("click", (event) => {
         productState.compareLanguageIds,
         catalogState.view,
         productState.compareOnlyDifferences,
+        productState.compareUnresolvedFirst,
       ),
       "plldn-language-comparison.md",
       "text/markdown;charset=utf-8",
@@ -412,6 +413,13 @@ root.addEventListener("click", (event) => {
     productState = {
       ...productState,
       compareOnlyDifferences: !productState.compareOnlyDifferences,
+    };
+    void publish(() => current.view());
+  }
+  if (action === "toggle-compare-unresolved") {
+    productState = {
+      ...productState,
+      compareUnresolvedFirst: !productState.compareUnresolvedFirst,
     };
     void publish(() => current.view());
   }

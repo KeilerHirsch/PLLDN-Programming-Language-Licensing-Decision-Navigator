@@ -2,7 +2,10 @@
 // SPDX-License-Identifier: EUPL-1.2
 import assert from "node:assert/strict";
 import test from "node:test";
-import { filterLanguageComparisonRows } from "../src/ui/language-compare-filter.ts";
+import {
+  filterLanguageComparisonRows,
+  prioritizeUnresolvedComparisonRows,
+} from "../src/ui/language-compare-filter.ts";
 import type { CatalogLanguageCompareRow } from "../src/ui/language-reader-comparison.ts";
 import type { CatalogLanguageSelection } from "../src/ui/product.ts";
 
@@ -63,5 +66,29 @@ test("a single selection retains all rows, including common information", () => 
   assert.deepEqual(
     filterLanguageComparisonRows(rows, selected.slice(0, 1), true),
     rows,
+  );
+});
+
+test("unresolved-first is a stable presentation partition, not a language ranking", () => {
+  const rows = [
+    row("Known A", "Fast", "Fast"),
+    row("Missing A", "UNKNOWN", "Fast"),
+    row("Known B", "Medium", "Low"),
+    row("Not reviewed", "NOT_REVIEWED", "Fast"),
+    row("Missing B", "UNKNOWN", "UNKNOWN"),
+  ];
+  assert.deepEqual(
+    prioritizeUnresolvedComparisonRows(rows, selected, false),
+    rows,
+  );
+  assert.deepEqual(
+    prioritizeUnresolvedComparisonRows(rows, selected, true).map(
+      (entry) => entry.label,
+    ),
+    ["Missing A", "Not reviewed", "Missing B", "Known A", "Known B"],
+  );
+  assert.deepEqual(
+    rows.map((entry) => entry.label),
+    ["Known A", "Missing A", "Known B", "Not reviewed", "Missing B"],
   );
 });

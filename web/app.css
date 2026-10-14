@@ -603,7 +603,9 @@ summary {
 }
 
 .compare-section
-  [data-action="toggle-compare-differences"][aria-pressed="true"] {
+  [data-action="toggle-compare-differences"][aria-pressed="true"],
+.compare-section
+  [data-action="toggle-compare-unresolved"][aria-pressed="true"] {
   border-color: AccentColor;
   background: color-mix(in srgb, AccentColor 16%, Canvas);
   font-weight: 700;

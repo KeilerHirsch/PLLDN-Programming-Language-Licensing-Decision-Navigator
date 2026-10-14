@@ -1,7 +1,10 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
 import { readerSafeHttps } from "../product/language-reader-validation.ts";
-import { filterLanguageComparisonRows } from "./language-compare-filter.ts";
+import {
+  filterLanguageComparisonRows,
+  prioritizeUnresolvedComparisonRows,
+} from "./language-compare-filter.ts";
 import {
   catalogLanguageComparisonRows,
   selectCatalogLanguages,
@@ -13,16 +16,21 @@ export function exportLanguageComparisonMarkdown(
   ids: readonly string[],
   catalog: CatalogPreviewView,
   onlyDifferences: boolean,
+  unresolvedFirst = false,
 ): string {
   if (catalog.status !== "Preview" || !catalog.knowledge_snapshot) {
     throw new Error("Comparison report requires a named Preview snapshot");
   }
   const selected = selectCatalogLanguages(ids);
   if (selected.length === 0) throw new Error("Select a catalogue language");
-  const rows = filterLanguageComparisonRows(
-    catalogLanguageComparisonRows(catalog),
+  const rows = prioritizeUnresolvedComparisonRows(
+    filterLanguageComparisonRows(
+      catalogLanguageComparisonRows(catalog),
+      selected,
+      onlyDifferences,
+    ),
     selected,
-    onlyDifferences,
+    unresolvedFirst,
   );
   const safe = (value: string): string =>
     value.replace(/[\r\n]+/gu, " / ").replace(/[\\`*_{}[\]()#+.!|>]/gu, "\\$&");
@@ -30,6 +38,7 @@ export function exportLanguageComparisonMarkdown(
     "# PLLDN language comparison",
     "",
     `- View: ${onlyDifferences && selected.length > 1 ? "Only differences" : "All attributes"}`,
+    `- Row order: ${unresolvedFirst ? "Unresolved first" : "Original catalogue order"}`,
     `- Preview snapshot: ${safe(catalog.knowledge_snapshot)}`,
     `- Selected: ${selected.map((entry) => safe(entry.label)).join(", ")}`,
     "- Evidence: sourced reader information and Editorial Preview; not a Reviewed recommendation.",

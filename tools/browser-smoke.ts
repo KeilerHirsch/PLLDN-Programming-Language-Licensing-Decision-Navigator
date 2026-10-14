@@ -96,6 +96,13 @@ const smokeProbe = `
       await toggle("language.rust", 2);
       const differencesControl = () => document.querySelector('#compare [data-action="toggle-compare-differences"]');
       assert(differencesControl()?.getAttribute("aria-pressed") === "false", "differences toggle starts inactive");
+      const unresolvedControl = () => document.querySelector('#compare [data-action="toggle-compare-unresolved"]');
+      assert(unresolvedControl()?.getAttribute("aria-pressed") === "false", "unresolved-first toggle starts inactive");
+      unresolvedControl().click();
+      await waitFor(() => unresolvedControl()?.getAttribute("aria-pressed") === "true", "unresolved-first toggle enabled");
+      assert(document.querySelector("#compare tbody tr th")?.textContent === "Evidence tier" || document.querySelector("#compare tbody tr th")?.textContent === "Throughput potential", "unresolved-first keeps evidence explicit");
+      unresolvedControl().click();
+      await waitFor(() => unresolvedControl()?.getAttribute("aria-pressed") === "false", "unresolved-first toggle disabled");
       const fullRowCount = document.querySelectorAll("#compare tbody tr").length;
       differencesControl().click();
       await waitFor(() => differencesControl()?.getAttribute("aria-pressed") === "true", "differences toggle enabled");

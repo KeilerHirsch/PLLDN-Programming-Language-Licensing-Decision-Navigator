@@ -66,3 +66,14 @@ test("Markdown export fails closed on missing snapshot, empty IDs and unknown ID
     ),
   );
 });
+
+test("Markdown report discloses unresolved-first presentation order", () => {
+  const markdown = exportLanguageComparisonMarkdown(
+    ["language.go", "candidate.language.6261736963"],
+    catalog,
+    true,
+    true,
+  );
+  assert(markdown.includes("Row order: Unresolved first"));
+  assert(markdown.includes("UNKNOWN"));
+});

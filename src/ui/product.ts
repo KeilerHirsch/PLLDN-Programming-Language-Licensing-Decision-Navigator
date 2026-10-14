@@ -65,7 +65,10 @@ import { renderLicenseComparison } from "./license-comparison.ts";
 
 export type { CatalogLanguageCompareRow } from "./language-reader-comparison.ts";
 
-import { filterLanguageComparisonRows } from "./language-compare-filter.ts";
+import {
+  filterLanguageComparisonRows,
+  prioritizeUnresolvedComparisonRows,
+} from "./language-compare-filter.ts";
 import {
   licenseDisclosureScopeQualifier,
   networkSourceOfferQualifier,
@@ -91,6 +94,7 @@ export interface ProductUiState {
   selectedUseCaseId: string | null;
   compareLanguageIds: readonly string[];
   compareOnlyDifferences: boolean;
+  compareUnresolvedFirst: boolean;
   compareLicenseIds: readonly string[];
   filters: ProductFilterState;
 }
@@ -104,6 +108,7 @@ export const DEFAULT_PRODUCT_UI_STATE: ProductUiState = {
   selectedUseCaseId: null,
   compareLanguageIds: [],
   compareOnlyDifferences: false,
+  compareUnresolvedFirst: false,
   compareLicenseIds: [],
   filters: { ...DEFAULT_PRODUCT_FILTERS },
 };
@@ -1787,6 +1792,15 @@ function renderCompare(
       const filter = button("Only differences", "toggle-compare-differences");
       filter.setAttribute("aria-pressed", String(state.compareOnlyDifferences));
       headingRow.append(filter);
+      const unresolved = button(
+        "Unresolved first",
+        "toggle-compare-unresolved",
+      );
+      unresolved.setAttribute(
+        "aria-pressed",
+        String(state.compareUnresolvedFirst),
+      );
+      headingRow.append(unresolved);
     }
   }
   section.append(headingRow);
@@ -1824,10 +1838,14 @@ function renderCompare(
 
   const body = document.createElement("tbody");
   const allRows = catalogLanguageComparisonRows(catalog);
-  const rows = filterLanguageComparisonRows(
-    allRows,
+  const rows = prioritizeUnresolvedComparisonRows(
+    filterLanguageComparisonRows(
+      allRows,
+      selected,
+      state.compareOnlyDifferences,
+    ),
     selected,
-    state.compareOnlyDifferences,
+    state.compareUnresolvedFirst,
   );
   if (state.compareOnlyDifferences && selected.length >= 2) {
     const summary = paragraph(

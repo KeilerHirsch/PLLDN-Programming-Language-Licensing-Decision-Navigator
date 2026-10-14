@@ -23,3 +23,17 @@ export function filterLanguageComparisonRows(
     return values.some((value) => value !== values[0]);
   });
 }
+
+/** A stable view-only partition; it never changes profile values or evidence. */
+export function prioritizeUnresolvedComparisonRows(
+  rows: readonly CatalogLanguageCompareRow[],
+  selected: readonly CatalogLanguageSelection[],
+  enabled: boolean,
+): CatalogLanguageCompareRow[] {
+  if (!enabled || selected.length === 0) return [...rows];
+  const missing = (row: CatalogLanguageCompareRow): boolean =>
+    selected.some((candidate) =>
+      /\b(?:UNKNOWN|NOT_REVIEWED)\b/u.test(row.value(candidate)),
+    );
+  return [...rows.filter(missing), ...rows.filter((row) => !missing(row))];
+}
