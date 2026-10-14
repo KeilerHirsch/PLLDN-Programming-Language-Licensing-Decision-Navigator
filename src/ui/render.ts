@@ -127,10 +127,10 @@ export function safeEvidenceHref(reference: string): string | null {
   }
 }
 
-function formatTypedValue(value: TypedValue): string {
+export function formatTypedValue(value: TypedValue): string {
   switch (value.type) {
     case "boolean":
-      return value.value ? "Yes" : "No";
+      return tr(value.value ? "Yes" : "No");
     case "integer":
     case "string":
     case "enum":
@@ -146,12 +146,14 @@ function formatCondition(condition: ConditionRecord): string {
   return `${condition.dimension_id} ${condition.operator} ${formatTypedValue(condition.value)}`;
 }
 
-function formatFactValue(fact: UiCandidateFactView): string {
-  if (fact.state === "UNKNOWN") return "Unknown";
-  if (fact.state === "NOT_APPLICABLE") return "Not applicable";
+export function formatFactValue(fact: UiCandidateFactView): string {
+  if (fact.state === "UNKNOWN") return tr("Unknown");
+  if (fact.state === "NOT_APPLICABLE") return tr("Not applicable");
   if (fact.value === null) return fact.state;
   const value = formatTypedValue(fact.value);
-  return fact.state === "CONDITIONAL" ? `${value} (conditional)` : value;
+  return fact.state === "CONDITIONAL"
+    ? `${value} (${tr("conditional")})`
+    : value;
 }
 
 function renderFact(fact: UiCandidateFactView): HTMLLIElement {
