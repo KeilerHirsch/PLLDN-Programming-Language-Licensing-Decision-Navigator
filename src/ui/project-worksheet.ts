@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
-import { tr } from "./ui-locale.ts";
+import { tr, trForLocale, type UiLocale } from "./ui-locale.ts";
 
 /** Navigation-only project intent. These are NEVER licensing conclusions. */
 export const WORKSHEET_FIELDS = {
@@ -193,29 +193,37 @@ export function renderProjectWorksheet(worksheet: WorksheetState): HTMLElement {
 export function exportWorksheetMarkdown(
   worksheet: WorksheetState,
   guide: string | null,
+  locale: UiLocale = "en",
 ): string {
   const plain = (value: string) => value.replace(/[\r\n|<>]/gu, " ");
+  const label = (value: string) => trForLocale(value, locale);
   const lines = [
-    "# PLLDN project and license scenario — Preview only",
+    `# ${label("PLLDN project and license scenario — Preview only")}`,
     "",
-    "Result: UNKNOWN — no reviewed compatibility determination.",
-    "This worksheet records user intent. It is not legal advice or a substitute for checking canonical licenses.",
-    `Project guide: ${plain(guide ?? "unspecified")}`,
+    label("Result: UNKNOWN — no reviewed compatibility determination."),
+    label(
+      "This worksheet records user intent. It is not legal advice or a substitute for checking canonical licenses.",
+    ),
+    `${label("Project guide")}: ${plain(guide ?? label("unspecified"))}`,
     "",
-    "## Selected context",
+    `## ${label("Selected context")}`,
   ];
   for (const key of WORKSHEET_KEYS)
-    lines.push(`- ${WORKSHEET_FIELDS[key].label}: ${plain(worksheet[key])}`);
-  lines.push("", "## Questions requiring evidence");
+    lines.push(
+      `- ${label(WORKSHEET_FIELDS[key].label)}: ${plain(label(worksheet[key]))}`,
+    );
+  lines.push("", `## ${label("Questions requiring evidence")}`);
   for (const topic of summarizeWorksheet(worksheet).topics)
-    lines.push(`- ${topic}`);
+    lines.push(`- ${label(topic)}`);
   lines.push(
     "",
-    "## Starting sources",
-    "- SPDX license identities: https://spdx.org/licenses/",
-    "- Open the selected license's pinned source in the PLLDN catalogue and inspect version, exceptions, linking, network and distribution obligations.",
+    `## ${label("Starting sources")}`,
+    `- ${label("SPDX license identities")}: https://spdx.org/licenses/`,
+    `- ${label("Open the selected license's pinned source in the PLLDN catalogue and inspect version, exceptions, linking, network and distribution obligations.")}`,
     "",
-    "Review status: NOT_REVIEWED for unassessed candidate identities. Nothing in this report is a Reviewed recommendation.",
+    label(
+      "Review status: NOT_REVIEWED for unassessed candidate identities. Nothing in this report is a Reviewed recommendation.",
+    ),
   );
   return `${lines.join("\n")}\n`;
 }

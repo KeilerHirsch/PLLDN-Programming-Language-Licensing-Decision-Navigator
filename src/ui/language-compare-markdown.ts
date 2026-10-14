@@ -10,6 +10,7 @@ import {
   selectCatalogLanguages,
 } from "./product.ts";
 import type { CatalogPreviewView } from "./types.ts";
+import { trForLocale, type UiLocale } from "./ui-locale.ts";
 
 /** A plain, source-bound record of the displayed comparison, not a new recommendation. */
 export function exportLanguageComparisonMarkdown(
@@ -18,6 +19,7 @@ export function exportLanguageComparisonMarkdown(
   onlyDifferences: boolean,
   unresolvedFirst = false,
   createdAt?: string,
+  locale: UiLocale = "en",
 ): string {
   if (
     createdAt !== undefined &&
@@ -44,19 +46,22 @@ export function exportLanguageComparisonMarkdown(
   );
   const safe = (value: string): string =>
     value.replace(/[\r\n]+/gu, " / ").replace(/[\\`*_{}[\]()#+.!|>]/gu, "\\$&");
+  const label = (value: string): string => trForLocale(value, locale);
   const lines = [
-    "# PLLDN language comparison",
+    `# ${label("PLLDN language comparison")}`,
     "",
-    `- View: ${onlyDifferences && selected.length > 1 ? "Only differences" : "All attributes"}`,
-    `- Row order: ${unresolvedFirst ? "Unresolved first" : "Original catalogue order"}`,
-    `- Preview snapshot: ${safe(catalog.knowledge_snapshot)}`,
-    ...(createdAt ? [`- Report created at (UTC): ${createdAt}`] : []),
-    `- Selected: ${selected.map((entry) => safe(entry.label)).join(", ")}`,
-    "- Evidence: sourced reader information and Editorial Preview; not a Reviewed recommendation.",
-    "- UNKNOWN and NOT_REVIEWED are not assessed. No measured cross-language ranking or legal certification is claimed.",
+    `- ${label("View")}: ${label(onlyDifferences && selected.length > 1 ? "Only differences" : "All attributes")}`,
+    `- ${label("Row order")}: ${label(unresolvedFirst ? "Unresolved first" : "Original catalogue order")}`,
+    `- ${label("Preview snapshot")}: ${safe(catalog.knowledge_snapshot)}`,
+    ...(createdAt
+      ? [`- ${label("Report created at (UTC)")}: ${createdAt}`]
+      : []),
+    `- ${label("Selected")}: ${selected.map((entry) => safe(entry.label)).join(", ")}`,
+    `- ${label("Evidence: sourced reader information and Editorial Preview; not a Reviewed recommendation.")}`,
+    `- ${label("UNKNOWN and NOT_REVIEWED are not assessed. No measured cross-language ranking or legal certification is claimed.")}`,
   ];
   for (const row of rows) {
-    lines.push("", `## ${safe(row.label)}`);
+    lines.push("", `## ${safe(label(row.label))}`);
     for (const profile of selected) {
       lines.push(
         "",
@@ -75,13 +80,13 @@ export function exportLanguageComparisonMarkdown(
           ? source.url
           : "(unlinked reference)";
         lines.push(
-          `- Source: ${safe(source.label)} (Checked: ${safe(matching?.checked_on ?? "UNKNOWN")}): ${uri}`,
+          `- ${label("Source")}: ${safe(source.label)} (${label("Checked")}: ${safe(matching?.checked_on ?? "UNKNOWN")}): ${uri}`,
         );
       }
       if (row.previewFact) {
         const claim = row.previewFact(profile);
         lines.push(
-          `- Preview evidence: claim ${safe(claim?.claim_id ?? "UNKNOWN")}; review status ${safe(claim?.review_status ?? "UNKNOWN")}`,
+          `- ${label("Preview evidence")}: ${label("claim")} ${safe(claim?.claim_id ?? "UNKNOWN")}; ${label("review status")} ${safe(claim?.review_status ?? "UNKNOWN")}`,
         );
       }
     }

@@ -59,3 +59,20 @@ test("no scenario generates a positive licensing verdict, even for SaaS and AND/
       assert(result.topics.some((topic) => topic.includes("SPDX")));
   }
 });
+
+test("German Preview worksheet retains explicit UNKNOWN and original license expressions", () => {
+  const state = {
+    ...defaultWorksheet(),
+    hosting: "yes",
+    distribution: "binary",
+    expression: "WITH",
+  };
+  const de = exportWorksheetMarkdown(state, "A public service", "de");
+  const en = exportWorksheetMarkdown(state, "A public service");
+  assert(de.includes("Lizenzszenario"));
+  assert(de.includes("UNKNOWN"));
+  assert(de.includes("NOT_REVIEWED"));
+  assert(de.includes("WITH"));
+  assert(de.includes("https://spdx.org/licenses/"));
+  assert(en.includes("Project guide:"));
+});
