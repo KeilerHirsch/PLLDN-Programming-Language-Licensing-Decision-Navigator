@@ -6,6 +6,7 @@ import {
   inspectLockedPackages,
   type LockedPackageEntry,
 } from "./locked-package-evidence.ts";
+import { upstreamReferencesForMissingEvidence } from "./upstream-biome-license.ts";
 
 const root = process.cwd();
 const lock = JSON.parse(readFileSync("package-lock.json", "utf8")) as {
@@ -14,6 +15,10 @@ const lock = JSON.parse(readFileSync("package-lock.json", "utf8")) as {
 const components = inspectLockedPackages(lock.packages, (path) =>
   inspectInstalledLockPath(root, path),
 );
+const unresolvedUpstreamReferences = components.flatMap((component) => {
+  const reference = upstreamReferencesForMissingEvidence(component);
+  return reference ? [{ packagePath: component.path, ...reference }] : [];
+});
 const counts = {
   matched: components.filter((x) => x.status === "METADATA_MATCH").length,
   optionalNotInstalled: components.filter(
@@ -30,6 +35,7 @@ process.stdout.write(
         "all package-lock entries including transitive/optional; local installed artifacts only",
       legalConclusion: "UNKNOWN",
       counts,
+      unresolvedUpstreamReferences,
       components,
     },
     null,
