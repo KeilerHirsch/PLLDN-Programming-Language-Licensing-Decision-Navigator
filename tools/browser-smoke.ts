@@ -93,6 +93,14 @@ const smokeProbe = `
         assert(document.activeElement?.dataset.entityId === id, "mixed comparison must retain exact button focus");
       };
       await toggle(basicId, 1);
+      const saveProfile = () => document.querySelector('#catalog [data-action="toggle-shortlist"][data-entity-id="' + basicId + '"]');
+      assert(saveProfile()?.getAttribute("aria-pressed") === "false", "local shortlist starts empty");
+      saveProfile().click();
+      await waitFor(() => saveProfile()?.getAttribute("aria-pressed") === "true" &&
+        document.querySelector("#shortlist a")?.href.includes(encodeURIComponent(basicId)), "local shortlist add");
+      document.querySelector('#shortlist [data-action="clear-shortlist"]').click();
+      await waitFor(() => document.querySelector("#shortlist h2")?.textContent.includes("(0)") &&
+        saveProfile()?.getAttribute("aria-pressed") === "false", "local shortlist clear");
       await toggle("language.rust", 2);
       const differencesControl = () => document.querySelector('#compare [data-action="toggle-compare-differences"]');
       assert(differencesControl()?.getAttribute("aria-pressed") === "false", "differences toggle starts inactive");

@@ -96,6 +96,8 @@ export interface ProductUiState {
   compareOnlyDifferences: boolean;
   compareUnresolvedFirst: boolean;
   compareLicenseIds: readonly string[];
+  shortlistIds: readonly string[];
+  shortlistPersisted: boolean;
   filters: ProductFilterState;
 }
 
@@ -110,6 +112,8 @@ export const DEFAULT_PRODUCT_UI_STATE: ProductUiState = {
   compareOnlyDifferences: false,
   compareUnresolvedFirst: false,
   compareLicenseIds: [],
+  shortlistIds: [],
+  shortlistPersisted: false,
   filters: { ...DEFAULT_PRODUCT_FILTERS },
 };
 
@@ -180,6 +184,68 @@ function compareButton(
     control.title = "Four languages selected. Remove one to add another.";
   }
   return control;
+}
+
+/** Only source-pinned catalogue identities can be saved. */
+export const SHORTLIST_IDENTITIES = new Map<
+  string,
+  { label: string; candidate: boolean }
+>([
+  ...[...PRODUCT_MODEL.languages, ...PRODUCT_MODEL.licenses].map(
+    (entry): [string, { label: string; candidate: boolean }] => [
+      entry.entity_id,
+      { label: entry.label, candidate: false },
+    ],
+  ),
+  ...candidates.records.map(
+    (entry): [string, { label: string; candidate: boolean }] => [
+      entry.id,
+      { label: entry.name, candidate: true },
+    ],
+  ),
+]);
+
+function shortlistButton(
+  entityId: string,
+  state: ProductUiState,
+): HTMLButtonElement {
+  const saved = state.shortlistIds.includes(entityId);
+  const control = button(
+    saved ? "Unsave profile" : "Save profile locally",
+    "toggle-shortlist",
+  );
+  control.dataset.entityId = entityId;
+  control.setAttribute("aria-pressed", String(saved));
+  control.disabled = !saved && state.shortlistIds.length >= 40;
+  return control;
+}
+
+function renderShortlist(state: ProductUiState): HTMLElement {
+  const section = document.createElement("section");
+  section.className = "local-shortlist";
+  section.id = "shortlist";
+  section.append(heading(2, `Saved profiles (${state.shortlistIds.length})`));
+  section.append(
+    paragraph(
+      state.shortlistPersisted
+        ? "Stored only in this browser. No cloud sync or analytics. Clear the list at any time."
+        : "Browser storage unavailable: selections are session-only. No data sent to a server.",
+    ),
+  );
+  if (state.shortlistIds.length > 0) {
+    const list = document.createElement("ul");
+    for (const id of state.shortlistIds) {
+      const info = SHORTLIST_IDENTITIES.get(id);
+      if (!info) continue;
+      const item = document.createElement("li");
+      const link = profileLink(id, info.candidate);
+      link.textContent = info.label;
+      item.append(link, shortlistButton(id, state));
+      list.append(item);
+    }
+    section.append(list, button("Clear saved profiles", "clear-shortlist"));
+  }
+  return section;
 }
 
 function licenseCompareButton(
@@ -870,7 +936,7 @@ function renderLanguageCard(
   const actions = document.createElement("div");
   actions.className = "profile-actions";
   const compare = compareButton(profile.entity_id, state);
-  actions.append(compare);
+  actions.append(compare, shortlistButton(profile.entity_id, state));
   card.append(
     actions,
     languageReaderDisclosure(profile.label, profile.entity_id),
@@ -1095,6 +1161,7 @@ function renderLicenseCard(
     good,
     watch,
     licenseCompareButton(profile.entity_id, state),
+    shortlistButton(profile.entity_id, state),
     renderLicenseDecisionProfile(profile),
     renderPreviewFacts(entry),
     profileLink(profile.entity_id),
@@ -1205,6 +1272,7 @@ function renderIdentityCard(
         : "Profile available: identity and pinned source. Rights, obligations and applicability remain UNKNOWN until assessed; not a Reviewed recommendation.",
     ),
     profileLink(record.id, true),
+    shortlistButton(record.id, state),
     renderUnassessedProfile(record),
   );
   if (record.kind === "language")
@@ -1943,6 +2011,7 @@ export function renderProductExperience(
     renderProductGlossary(),
     renderPreviewEvidenceInventory(catalog),
     renderUseCases(state),
+    renderShortlist(state),
     state.mode === "languages"
       ? renderCompare(catalog, state)
       : renderLicenseComparison(state.compareLicenseIds, catalog),
