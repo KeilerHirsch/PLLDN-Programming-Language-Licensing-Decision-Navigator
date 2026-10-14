@@ -574,6 +574,28 @@ summary {
   opacity: 0.72;
 }
 
+.product-glossary {
+  margin: 1rem 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);
+  border-radius: 0.8rem;
+}
+
+.product-glossary summary {
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.product-glossary dt {
+  margin-top: 0.8rem;
+  font-weight: 700;
+}
+
+.product-glossary dd {
+  margin: 0.2rem 0 0 0;
+  line-height: 1.5;
+}
+
 .compare-empty {
   padding: 1rem;
   border: 1px dashed color-mix(in srgb, CanvasText 22%, transparent);

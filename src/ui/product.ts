@@ -71,6 +71,7 @@ import {
   networkSourceOfferQualifier,
 } from "./license-qualifications.ts";
 import { renderPreviewEvidenceInventory } from "./preview-evidence-inventory.ts";
+import { renderProductGlossary } from "./product-glossary.ts";
 import { factProvenanceDisclosure } from "./source-provenance.ts";
 import type {
   CatalogPreviewEntryView,
@@ -1780,6 +1781,7 @@ function renderCompare(
     headingRow.append(button("Clear comparison", "clear-compare"));
     headingRow.append(
       button("Export selected comparison (CSV)", "export-language-compare"),
+      button("Download report (Markdown)", "export-language-markdown"),
     );
     if (state.compareLanguageIds.length >= 2) {
       const filter = button("Only differences", "toggle-compare-differences");
@@ -1905,6 +1907,7 @@ export function renderProductExperience(
   wrapper.append(nav);
   wrapper.append(
     renderHero(catalog),
+    renderProductGlossary(),
     renderPreviewEvidenceInventory(catalog),
     renderUseCases(state),
     state.mode === "languages"

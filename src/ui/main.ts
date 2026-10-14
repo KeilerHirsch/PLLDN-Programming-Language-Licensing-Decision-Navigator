@@ -16,6 +16,7 @@ import {
 } from "./catalog-navigation.ts";
 import type { UiController } from "./controller.ts";
 import { exportCatalogLanguageCompareCsv } from "./language-compare-export.ts";
+import { exportLanguageComparisonMarkdown } from "./language-compare-markdown.ts";
 import { exportEditorialLicenseCompareCsv } from "./license-compare-export.ts";
 import {
   DEFAULT_PRODUCT_UI_STATE,
@@ -282,8 +283,12 @@ async function analyzeCurrent(current: UiController): Promise<void> {
   await publish(() => current.view());
 }
 
-function downloadCsv(content: string, filename: string): void {
-  const blob = new Blob([content], { type: "text/csv;charset=utf-8" });
+function downloadCsv(
+  content: string,
+  filename: string,
+  mime = "text/csv;charset=utf-8",
+): void {
+  const blob = new Blob([content], { type: mime });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
@@ -314,6 +319,19 @@ root.addEventListener("click", (event) => {
       productState.compareLanguageIds.every((id) => id.startsWith("language."))
         ? "plldn-editorial-language-comparison.csv"
         : "plldn-language-reader-comparison.csv",
+    );
+    return;
+  }
+  if (action === "export-language-markdown") {
+    if (!catalogState.view) throw new Error("Preview catalogue not loaded");
+    downloadCsv(
+      exportLanguageComparisonMarkdown(
+        productState.compareLanguageIds,
+        catalogState.view,
+        productState.compareOnlyDifferences,
+      ),
+      "plldn-language-comparison.md",
+      "text/markdown;charset=utf-8",
     );
     return;
   }

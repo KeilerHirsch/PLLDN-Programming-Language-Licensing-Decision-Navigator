@@ -121,6 +121,10 @@ const smokeProbe = `
           "BASIC rating must remain UNKNOWN in mixed comparison: " + label);
       }
       assert(document.querySelector("#compare [data-action=export-language-compare]"), "mixed CSV action must exist");
+      assert(document.querySelector("#compare [data-action=export-language-markdown]"), "sourced Markdown report download must exist");
+      const glossary = document.querySelector("#glossary");
+      assert(glossary?.tagName === "DETAILS" && glossary.querySelector("summary"), "accessible terminology glossary must exist");
+      assert(glossary.querySelectorAll("dt").length >= 11, "glossary must explain key evidence and license terms");
       await toggle("language.go", 3);
       await toggle("language.python", 4);
       assert(document.querySelector('#catalog [data-action="toggle-compare"][data-entity-id="language.java"]')?.disabled,
