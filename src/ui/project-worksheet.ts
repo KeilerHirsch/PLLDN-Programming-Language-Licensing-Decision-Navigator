@@ -41,6 +41,17 @@ export const WORKSHEET_FIELDS = {
     label: "License expression or exception?",
     options: ["unspecified", "single", "AND", "OR", "WITH", "unconfirmed"],
   },
+  evidence: {
+    label: "Where was the component licence declared?",
+    options: [
+      "unspecified",
+      "license-file",
+      "package-manifest",
+      "sbom",
+      "contract",
+      "other",
+    ],
+  },
 } as const;
 
 export type WorksheetKey = keyof typeof WORKSHEET_FIELDS;
@@ -238,6 +249,57 @@ export function worksheetPrimarySources(
   ];
 }
 
+/** Questions for verifying a user's component declaration; no finding is made. */
+export function worksheetProvenanceQuestions(
+  worksheet: WorksheetState,
+  selectedLicenseId: string | null,
+): { status: "UNKNOWN"; questions: string[] } {
+  const questions = [
+    "Identify the exact component, version and distribution artifact using a reproducible inventory.",
+  ];
+  if (!selectedLicenseId) {
+    questions.push(
+      "Select the exact licence only after checking the component's declaration.",
+    );
+  } else {
+    questions.push(
+      "Compare the selected licence identity and version with the actual component's declaration; selection alone does not verify applicability.",
+    );
+  }
+  const basis: Record<string, string> = {
+    "license-file":
+      "Cross-check the component LICENSE file with the shipped artifact and its notices.",
+    "package-manifest":
+      "Cross-check the package manifest against the shipped artifact and any LICENSE/NOTICE files.",
+    sbom: "Cross-check the SBOM entry against the component package, version and original licence text.",
+    contract:
+      "Check the actual contract, relevant parties, scope and governing version; do not infer public licence grants.",
+    other:
+      "Record the original declaration and check that it actually belongs to this component version.",
+  };
+  questions.push(
+    basis[worksheet.evidence] ??
+      "Record where the licence was declared (LICENSE file, package manifest, SBOM or contract).",
+  );
+  if (worksheet.expression === "WITH") {
+    questions.push(
+      "Identify the exact SPDX exception ID, the original exception grant and its component scope. WITH syntax alone proves no permission.",
+    );
+  } else if (worksheet.expression === "AND" || worksheet.expression === "OR") {
+    questions.push(
+      "Resolve each SPDX operand for the actual components and any choice or conjunction; syntax alone proves no compatibility.",
+    );
+  } else if (worksheet.expression === "unconfirmed") {
+    questions.push(
+      "Resolve the unknown licence expression from the original component declaration.",
+    );
+  }
+  questions.push(
+    "Unverified or conflicting licence declarations remain UNKNOWN and are not Reviewed conclusions.",
+  );
+  return { status: "UNKNOWN", questions };
+}
+
 /** Always abstain. A scenario is not evidence that a specific license permits it. */
 export function summarizeWorksheet(scenario: WorksheetState): {
   status: "UNKNOWN";
@@ -370,6 +432,21 @@ export function renderProjectWorksheet(
     list.append(item);
   }
   result.append(list);
+  const provenance = document.createElement("details");
+  provenance.className = "worksheet-provenance";
+  const provenanceTitle = document.createElement("summary");
+  provenanceTitle.textContent = tr("Component provenance checks — UNKNOWN");
+  const provenanceList = document.createElement("ul");
+  for (const question of worksheetProvenanceQuestions(
+    worksheet,
+    selectedLicenseId,
+  ).questions) {
+    const item = document.createElement("li");
+    item.textContent = tr(question);
+    provenanceList.append(item);
+  }
+  provenance.append(provenanceTitle, provenanceList);
+  result.append(provenance);
   const source = document.createElement("a");
   source.href = "https://spdx.org/licenses/";
   source.rel = "noopener noreferrer";
@@ -455,6 +532,13 @@ export function exportWorksheetMarkdown(
     "",
     `- ${label("Exact licence to investigate (user selection, unverified)")}: ${selectedLicenseId && Object.hasOwn(LICENSE_DECISION_PROFILES, selectedLicenseId) ? LICENSE_DECISION_PROFILES[selectedLicenseId]?.spdx_id : label("Not confirmed")}`,
   );
+  lines.push("", `## ${label("Component provenance checks — UNKNOWN")}`);
+  for (const question of worksheetProvenanceQuestions(
+    worksheet,
+    selectedLicenseId,
+  ).questions) {
+    lines.push(`- ${label(question)}`);
+  }
   lines.push("", `## ${label("Preview filter mapping")}`);
   const trace = worksheetPreviewFilterTrace(worksheet);
   if (trace.rows.length === 0)
