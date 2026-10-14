@@ -1,0 +1,888 @@
+[
+  {
+    "name": "FreeBASIC",
+    "implementation": {
+      "name": "FreeBASIC default fb dialect",
+      "version_scope": "The default fb language mode, distinct from QB compatibility mode.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "FreeBASIC compiler, toolchain and component licenses",
+        "url": "https://raw.githubusercontent.com/freebasic/fbc/master/readme.txt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "dialects",
+        "label": "FreeBASIC dialect selection and compatibility limits",
+        "url": "https://www.freebasic.net/wiki/compilerdialects",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Native BASIC programs using newer language features; old QuickBASIC code may need compatibility mode.",
+        "source_ids": ["dialects"]
+      },
+      "prerequisites": {
+        "text": "Choose fb or qb explicitly when following tutorials; their permitted syntax and features differ.",
+        "source_ids": ["dialects"]
+      },
+      "execution": {
+        "text": "Compile .bas files with fbc and launch the resulting platform-specific executable.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Default fb supports language features that are unavailable in qb mode.",
+        "source_ids": ["dialects"]
+      },
+      "tooling": {
+        "text": "fbc is a command-line compiler, usable from editors and build systems; it is not an IDE.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep dialect choice consistent during migration and verify platform libraries in your build.",
+        "source_ids": ["dialects", "guide"]
+      },
+      "costs": {
+        "text": "Compiler redistribution and static runtime linking are covered by different component grants.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.bas",
+      "code": "Print \"PLLDN\"\n",
+      "run_instructions": "Run fbc hello.bas, then ./hello on Unix-like systems or .\\hello.exe on Windows. Use the compiler binary supplied by your package.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "FreeBASIC compiler",
+        "role": "implementation",
+        "spdx_expression": "GPL-2.0-or-later",
+        "scope": "fbc compiler; distinct from linked runtime components.",
+        "notice": "Distribution must follow the compiler's own license.",
+        "source_ids": ["guide"]
+      },
+      {
+        "component": "FreeBASIC runtime and graphics libraries",
+        "role": "runtime",
+        "spdx_expression": null,
+        "scope": "libfb/libfbmt and libfbgfx/libfbgfxmt: LGPL version 2 or later with a custom static-linking exception.",
+        "notice": "The exception has conditions for independent modules and modified libraries. No exact SPDX exception identifier is established here; inspect the full grant and other linked libraries.",
+        "source_ids": ["guide"]
+      }
+    ]
+  },
+  {
+    "name": "Frege",
+    "implementation": {
+      "name": "Frege compiler and JVM libraries",
+      "version_scope": "Repository documentation and the command-line guide last edited in 2018; no current JDK compatibility claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Frege language and JVM compilation overview",
+        "url": "https://raw.githubusercontent.com/Frege/frege/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "workflow",
+        "label": "Frege command-line compilation and execution",
+        "url": "https://github.com/Frege/frege/wiki/Getting-started",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Frege original and bundled derived-source licenses",
+        "url": "https://raw.githubusercontent.com/Frege/frege/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Frege combines a Haskell-style functional language with Java compilation and access to JVM libraries.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn lazy functional evaluation and algebraic types; use a JDK with java and javac compatible with the selected compiler jar.",
+        "source_ids": ["guide", "workflow"]
+      },
+      "execution": {
+        "text": "The compiler emits Java sources and classes; execution needs the generated class and Frege jar on the JVM classpath.",
+        "source_ids": ["guide", "workflow"]
+      },
+      "behavior": {
+        "text": "Types are inferred statically, evaluation is non-strict, and the IO type distinguishes effectful computations from pure values.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The command-line guide covers compilation, generated documentation and property tests through Frege's QuickCheck tools.",
+        "source_ids": ["workflow"]
+      },
+      "maintenance": {
+        "text": "Record the compiler jar and JDK used for a project. The older getting-started guide does not establish compatibility with every newer JDK.",
+        "source_ids": ["workflow"]
+      },
+      "costs": {
+        "text": "Original Frege code uses a BSD-style grant; included Haskell-derived sources carry additional notices and grants.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Hello.fr",
+      "code": "module Hello where\nmain args = do\n    println \"PLLDN\"\n",
+      "run_instructions": "Use the chosen compiler jar under the guide's name fregec.jar and create a build directory. Run java -Xss1m -jar fregec.jar -d build Hello.fr, then java -Xss1m -cp \"build:fregec.jar\" Hello on Unix or java -Xss1m -cp \"build;fregec.jar\" Hello on Windows.",
+      "expected_result": "The Hello module's main action prints PLLDN.",
+      "source_ids": ["guide", "workflow"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Frege original implementation code",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "Original Frege code covered by The Frege License; excludes the separately identified derived-source components.",
+        "notice": "Retain copyright and redistribution notices; the non-endorsement condition applies."
+      },
+      {
+        "component": "Frege bundled derived-source components",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "GHC-derived and Haskell 2010 Language Report-derived source identified in Frege's license file.",
+        "notice": "The file reproduces separate grants. Their full aggregate SPDX expression and per-file applicability are not verified here."
+      }
+    ]
+  },
+  {
+    "name": "Futhark",
+    "implementation": {
+      "name": "Futhark compiler with the sequential C backend",
+      "version_scope": "Futhark 0.29.0 language reference and C-backend manual checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Futhark sequential C backend",
+        "url": "https://futhark.readthedocs.io/en/latest/man/futhark-c.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Futhark array-computation scope",
+        "url": "https://futhark-lang.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "language",
+        "label": "Futhark functions, types and entry points",
+        "url": "https://futhark.readthedocs.io/en/latest/language-reference.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Futhark map and explicit parallelism",
+        "url": "https://futhark-lang.org/examples/basic-parallelism.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Futhark implementation license",
+        "url": "https://raw.githubusercontent.com/diku-dk/futhark/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Futhark expresses array computations for host applications; its GPU backends target computation rather than graphics. This example uses the sequential C backend.",
+        "source_ids": ["overview", "guide"]
+      },
+      "prerequisites": {
+        "text": "Install Futhark and a C compiler available through CC, which defaults to cc. Learn array shapes and functional transformations.",
+        "source_ids": ["guide", "language"]
+      },
+      "execution": {
+        "text": "futhark c builds an executable or C library. Executables read entry-point arguments from standard input and print returned values in Futhark syntax.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "map applies a function to array elements; explicit combinators describe parallel work, while the C backend executes sequential code.",
+        "source_ids": ["example", "guide"]
+      },
+      "tooling": {
+        "text": "The backend CLI supports library generation, safety checks, diagnostic output and runtime profiling options.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep the chosen backend and entry-point data types explicit; a C-library interface and a standalone executable have different integration workflows.",
+        "source_ids": ["guide", "language"]
+      },
+      "costs": {
+        "text": "The checked compiler source uses ISC terms. C toolchains, GPU runtimes and drivers remain separate components.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "increment.fut",
+      "code": "entry main (xs: []i32) = map (+ 1) xs\n",
+      "run_instructions": "Run futhark c increment.fut. Start the generated increment executable and provide [1i32, 2i32, 3i32] as standard input; send end-of-input for your shell.",
+      "expected_result": "Returns an i32 array containing 2, 3 and 4, printed in Futhark syntax.",
+      "source_ids": ["language", "example", "guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Futhark compiler with the sequential C backend",
+        "role": "implementation",
+        "spdx_expression": "ISC",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "ISC applies to the checked Futhark compiler source; it does not establish the terms of every backend dependency."
+      }
+    ]
+  },
+  {
+    "name": "GAMS",
+    "implementation": {
+      "name": "GAMS modeling system with an LP solver",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GAMS algebraic modeling tutorial",
+        "url": "https://www.gams.com/latest/docs/UG_Tutorial.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "workflow",
+        "label": "GAMS CLI, listing and Studio execution",
+        "url": "https://www.gams.com/latest/docs/UG_GamsCall.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "GAMS licensing and permitted evaluation use",
+        "url": "https://www.gams.com/sales/licensing/",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "GAMS represents optimization problems through variables, algebraic equations and an objective, then delegates solution to a selected solver.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Formulate constraints and objective first; install GAMS with a valid license and an LP solver permitted by that license.",
+        "source_ids": ["guide", "license"]
+      },
+      "execution": {
+        "text": "The gams executable compiles and executes a .gms file; a solve statement generates the model and invokes its solver.",
+        "source_ids": ["guide", "workflow"]
+      },
+      "behavior": {
+        "text": "=g= expresses a lower-bound constraint, =e= an equality, and variable .l values report solution levels after solving.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "GAMS Studio, command-line logs and listing files expose equations, model statistics and solver results.",
+        "source_ids": ["guide", "workflow"]
+      },
+      "maintenance": {
+        "text": "Inspect both model and solver status before using reported values. Validate generated equations against the intended mathematical model.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Demo licenses permit limited initial exploration and exclude commercial or production use; applicable professional and solver entitlements must be checked.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "minimum.gms",
+      "code": "Positive Variable x;\nVariable z;\nEquations lower, objective;\nlower.. x =g= 2;\nobjective.. z =e= x;\nModel minimum /all/;\nSolve minimum using lp minimizing z;\nDisplay x.l, z.l;\n",
+      "run_instructions": "With a valid GAMS license and an available LP solver, run gams minimum.gms. Inspect the listing's solve summary and displayed variable levels.",
+      "expected_result": "For an optimal solve, x.l and z.l are 2. Compilation or solver completion alone does not establish optimality.",
+      "source_ids": ["guide", "workflow", "license"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GAMS modeling system with an LP solver",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "GAMS system entitlement described by its licensing page; selected solvers and edition-specific agreements must be checked separately.",
+        "notice": "GAMS uses vendor licensing with evaluation restrictions; no standard open-source SPDX expression is established by the cited licensing page."
+      }
+    ]
+  },
+  {
+    "name": "GAP",
+    "implementation": {
+      "name": "GAP core computational algebra system",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GAP computational algebra and source overview",
+        "url": "https://raw.githubusercontent.com/gap-system/gap/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "workflow",
+        "label": "GAP first-session and source loading tutorial",
+        "url": "https://gap-system.github.io/gap/doc/tut/chap2_mj.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "GAP permutation groups and Size",
+        "url": "https://gap-system.github.io/gap/doc/tut/chap5_mj.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "GAP core GPL text",
+        "url": "https://raw.githubusercontent.com/gap-system/gap/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "GAP supports computational discrete algebra, particularly group theory, with algebraic objects and algorithms rather than general application frameworks.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install GAP and understand the algebraic objects being modeled; the tutorial starts with interactive commands and source-file loading.",
+        "source_ids": ["guide", "workflow"]
+      },
+      "execution": {
+        "text": "The gap command starts an interpreter; Read loads a source file into the session and quit exits it.",
+        "source_ids": ["workflow"]
+      },
+      "behavior": {
+        "text": "Permutations use cycle notation. Group constructs a generated group and Size counts its elements; double semicolons suppress automatic display.",
+        "source_ids": ["example"]
+      },
+      "tooling": {
+        "text": "The interactive environment includes help, algebraic computations and separately distributed packages.",
+        "source_ids": ["guide", "workflow"]
+      },
+      "maintenance": {
+        "text": "Document the group representation and packages used. Stored attributes and session variables can affect subsequent interactive computations.",
+        "source_ids": ["example", "guide"]
+      },
+      "costs": {
+        "text": "GAP core's source grant is GPL-2.0-or-later; separately distributed packages require their own license checks.",
+        "source_ids": ["guide", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "group.g",
+      "code": "group := Group((1,2), (1,2,3));;\nPrint(Size(group), \"\\n\");\n",
+      "run_instructions": "Start gap in the directory containing group.g, enter Read(\"group.g\"); and finish the session with quit;.",
+      "expected_result": "Prints 6, the order of the permutation group generated by a transposition and a three-cycle.",
+      "source_ids": ["example", "workflow"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GAP core computational algebra system",
+        "role": "implementation",
+        "spdx_expression": "GPL-2.0-or-later",
+        "source_ids": ["license", "guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "GAP's README grants GPL version 2 or later for GAP core. Package-specific and external-library terms are not inferred from that grant."
+      }
+    ]
+  },
+  {
+    "name": "GDScript",
+    "implementation": {
+      "name": "Godot Engine's GDScript implementation",
+      "version_scope": "Godot 4.x stable GDScript and standalone SceneTree script documentation as checked; this is not a Godot 3 workflow.",
+      "source_ids": ["language", "cli"]
+    },
+    "sources": [
+      {
+        "id": "language",
+        "label": "Godot stable GDScript reference",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "cli",
+        "label": "Godot command-line tutorial: standalone scripts and headless execution",
+        "url": "https://docs.godotengine.org/en/stable/tutorials/editor/command_line_tutorial.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Godot: engine licensing and third-party attribution",
+        "url": "https://docs.godotengine.org/en/stable/about/complying_with_licenses.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Script game and interactive application behavior inside Godot's node and scene model. GDScript is integrated with Godot rather than a Python interpreter.",
+        "source_ids": ["language"]
+      },
+      "prerequisites": {
+        "text": "Install a matching Godot 4.x engine/editor and learn nodes, resources, classes and functions. A standalone command-line script must extend SceneTree or MainLoop.",
+        "source_ids": ["language", "cli"]
+      },
+      "execution": {
+        "text": "Godot loads .gd scripts. A SceneTree script can run through --script; --headless supplies a command-line workflow without a graphical window.",
+        "source_ids": ["cli"]
+      },
+      "behavior": {
+        "text": "GDScript uses indentation-based syntax and supports optional type annotations. Its engine objects and built-in types follow Godot's APIs.",
+        "source_ids": ["language"]
+      },
+      "tooling": {
+        "text": "Use Godot's editor and command-line options. --check-only with --script parses for errors; executing a script is a separate operation.",
+        "source_ids": ["cli"]
+      },
+      "maintenance": {
+        "text": "Keep scripts aligned with the Godot version and project resources. Exporting a game also requires the chosen export preset and templates.",
+        "source_ids": ["cli", "language"]
+      },
+      "costs": {
+        "text": "Plan for engine, export and asset requirements. Godot's own MIT notice and third-party engine or asset notices need separate attention.",
+        "source_ids": ["cli", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.gd",
+      "code": "extends SceneTree\n\nfunc _init() -> void:\n    print(\"PLLDN\")\n    quit()",
+      "run_instructions": "Save hello.gd and, using a Godot 4.x executable available as godot, run godot --headless --script hello.gd. The script extends SceneTree and quits after printing.",
+      "expected_result": "The output includes a line containing PLLDN, then the engine exits; startup information may also be printed.",
+      "source_ids": ["language", "cli"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Godot Engine core including GDScript",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "Godot's own code; the engine bundles third-party components with additional notices.",
+        "notice": "Provide the required engine license notice and review the engine distribution's third-party notices and your project's assets separately."
+      }
+    ]
+  },
+  {
+    "name": "GLSL",
+    "implementation": {
+      "name": "Khronos glslang GLSL frontend and SPIR-V generator",
+      "version_scope": "GLSL 4.50 fragment example; glslang source and Khronos language specification checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "glslang shader stages and CLI workflow",
+        "url": "https://raw.githubusercontent.com/KhronosGroup/glslang/main/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "language",
+        "label": "Khronos GLSL types and shader interfaces",
+        "url": "https://raw.githubusercontent.com/KhronosGroup/GLSL/main/chapters/variables.adoc",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "workflow",
+        "label": "glslang Vulkan and output CLI options",
+        "url": "https://raw.githubusercontent.com/KhronosGroup/glslang/main/StandAlone/StandAlone.cpp",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "glslang component license grants",
+        "url": "https://raw.githubusercontent.com/KhronosGroup/glslang/main/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "GLSL defines shader-stage computations for graphics and compute pipelines. This profile uses glslang to validate a fragment shader and generate SPIR-V.",
+        "source_ids": ["guide", "language"]
+      },
+      "prerequisites": {
+        "text": "Install a glslang build with SPIR-V support; understand fragment outputs and the host pipeline that consumes them.",
+        "source_ids": ["guide", "workflow", "language"]
+      },
+      "execution": {
+        "text": "glslang selects stage rules from the file extension; -V generates Vulkan-targeted SPIR-V and -o names its output file.",
+        "source_ids": ["guide", "workflow"]
+      },
+      "behavior": {
+        "text": "Variables have declared types; vector outputs and interface locations connect shader computations to the surrounding pipeline.",
+        "source_ids": ["language"]
+      },
+      "tooling": {
+        "text": "The standalone compiler reports shader errors; its APIs also expose syntax trees and source-level reflection.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Choose the shader version, stage and target semantics explicitly. Compilation validates source without demonstrating rendering in a host application.",
+        "source_ids": ["guide", "workflow", "language"]
+      },
+      "costs": {
+        "text": "glslang's license file identifies multiple grants and external components; redistribution must preserve applicable notices. GPU drivers and host libraries have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "color.frag",
+      "code": "#version 450\nlayout(location = 0) out vec4 color;\nvoid main() {\n    color = vec4(0.0, 0.5, 1.0, 1.0);\n}\n",
+      "run_instructions": "Run glslang -V color.frag -o color.spv with a SPIR-V-enabled build. Rendering additionally requires a host pipeline with a compatible fragment-output attachment; this file alone does not open a window.",
+      "expected_result": "Successful compilation writes color.spv. In a compatible host pipeline, the fragment shader outputs the constant RGBA vector (0.0, 0.5, 1.0, 1.0).",
+      "source_ids": ["language", "guide", "workflow"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Khronos glslang GLSL frontend and SPIR-V generator",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The checked glslang frontend and SPIR-V generator; exact bundled components and optional dependencies require their own grants.",
+        "notice": "The checked license file contains multiple core, preprocessor and optional-component grants; a single aggregate SPDX expression is not verified."
+      }
+    ]
+  },
+  {
+    "name": "Gherkin",
+    "implementation": {
+      "name": "Cucumber Gherkin parser with Cucumber.js runner",
+      "version_scope": "Current Gherkin reference and Cucumber.js main documentation as checked; choose installed-package documentation when runner versions differ.",
+      "source_ids": ["reference", "runner"]
+    },
+    "sources": [
+      {
+        "id": "reference",
+        "label": "Cucumber: Gherkin grammar and step definitions",
+        "url": "https://cucumber.io/docs/gherkin/reference/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "runner",
+        "label": "Cucumber.js: project structure and running features",
+        "url": "https://github.com/cucumber/cucumber-js",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "installation",
+        "label": "Cucumber.js installation and Node.js requirements",
+        "url": "https://github.com/cucumber/cucumber-js/blob/main/docs/installation.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "parser-license",
+        "label": "Cucumber Gherkin parser MIT license",
+        "url": "https://github.com/cucumber/gherkin/blob/main/LICENSE",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "runner-license",
+        "label": "Cucumber.js runner MIT license",
+        "url": "https://github.com/cucumber/cucumber-js/blob/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Describe acceptance scenarios in structured natural language for executable specifications. Gherkin records scenarios; application actions live in separate step-definition code.",
+        "source_ids": ["reference"]
+      },
+      "prerequisites": {
+        "text": "Learn Feature, Scenario and Given/When/Then syntax. Running scenarios requires a chosen Cucumber implementation and step definitions matching the step text.",
+        "source_ids": ["reference", "runner"]
+      },
+      "execution": {
+        "text": "A runner parses .feature files and connects steps to implementation code. Without matching definitions, a feature does not become a passing application test.",
+        "source_ids": ["reference", "runner"]
+      },
+      "behavior": {
+        "text": "Keywords structure scenarios, backgrounds and outlines. Step text is matched to definitions; prose descriptions are documentation rather than executed actions.",
+        "source_ids": ["reference"]
+      },
+      "tooling": {
+        "text": "Cucumber.js uses a Node.js environment and the cucumber-js CLI; its project separates feature files from JavaScript support code.",
+        "source_ids": ["runner", "installation"]
+      },
+      "maintenance": {
+        "text": "Version feature files with the application and keep step definitions aligned with business behavior. Runner main documentation can include unreleased changes.",
+        "source_ids": ["runner", "reference"]
+      },
+      "costs": {
+        "text": "Budget for runner setup, test infrastructure and step-definition maintenance. Parser and runner grants do not cover the application, Node.js or every dependency.",
+        "source_ids": ["runner", "parser-license", "runner-license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "hello.feature",
+      "code": "Feature: Greeting\n  Scenario: A greeting is available\n    When the greeter supplies a message\n    Then the message should be \"PLLDN\"",
+      "run_instructions": "In a Cucumber.js project with a supported Node.js runtime, save this as features/hello.feature and run npx cucumber-js. Implement matching When and Then definitions in features/support before expecting a passing test. The feature alone deliberately contains no application implementation.",
+      "expected_result": "Without matching support code the runner reports undefined steps. With definitions that provide and check the stated message, the scenario can verify that behavior.",
+      "source_ids": ["reference", "runner"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Cucumber Gherkin parser",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["parser-license"],
+        "scope": "The parser source in cucumber/gherkin; this is not a license assigned to your feature files.",
+        "notice": "Retain the MIT notice for redistributed parser material and inspect its dependencies."
+      },
+      {
+        "component": "Cucumber.js runner",
+        "role": "runtime",
+        "spdx_expression": "MIT",
+        "source_ids": ["runner-license"],
+        "scope": "The JavaScript test runner source; Node.js and application dependencies are separate.",
+        "notice": "Retain the MIT notice for covered runner material and review the complete installed test environment."
+      }
+    ]
+  },
+  {
+    "name": "Gleam",
+    "implementation": {
+      "name": "Gleam compiler with the Erlang target",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Gleam project, dependency and execution workflow",
+        "url": "https://gleam.run/writing-gleam/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Gleam compiler and target overview",
+        "url": "https://gleam.run/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Gleam interactive hello-world tour",
+        "url": "https://tour.gleam.run/basics/hello-world/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Gleam compiler license",
+        "url": "https://raw.githubusercontent.com/gleam-lang/gleam/main/LICENCE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Gleam is a typed functional language that targets Erlang or JavaScript. The selected project workflow uses Erlang's runtime and ecosystem.",
+        "source_ids": ["overview", "guide"]
+      },
+      "prerequisites": {
+        "text": "Install Gleam and Erlang for this target. Learn functions, imports and the project's gleam.toml configuration.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "gleam run builds and executes the project's main module; the browser tour instead evaluates a JavaScript target.",
+        "source_ids": ["guide", "example"]
+      },
+      "behavior": {
+        "text": "Static types describe function inputs and outputs; target-specific runtime integration remains part of the application.",
+        "source_ids": ["overview", "guide"]
+      },
+      "tooling": {
+        "text": "The compiler includes build, formatting and editor support; gleam add manages packages and gleam test runs project tests.",
+        "source_ids": ["overview", "guide"]
+      },
+      "maintenance": {
+        "text": "Keep the compiler, target and package versions recorded in the project; changing targets changes runtime prerequisites.",
+        "source_ids": ["guide", "overview"]
+      },
+      "costs": {
+        "text": "The checked compiler uses Apache-2.0 terms; Erlang, JavaScript hosts and imported packages require separate license checks.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "plldn_example.gleam",
+      "code": "import gleam/io\n\npub fn main() {\n  io.println(\"PLLDN\")\n}\n",
+      "run_instructions": "Run gleam new plldn_example, put this file at src/plldn_example.gleam inside that project, then run gleam run from the project directory with Erlang installed.",
+      "expected_result": "The main function prints PLLDN.",
+      "source_ids": ["guide", "example"],
+      "try_url": "https://tour.gleam.run/basics/hello-world/",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Gleam compiler with the Erlang target",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Apache-2.0 applies to the checked Gleam compiler; this profile does not assign it to the host runtime or every Gleam package."
+      }
+    ]
+  },
+  {
+    "name": "Gnuplot",
+    "implementation": {
+      "name": "gnuplot plotting interpreter with the dumb terminal",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "gnuplot manual source and scripting commands",
+        "url": "https://raw.githubusercontent.com/gnuplot/gnuplot/master/docs/gnuplot.doc",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "terminal",
+        "label": "gnuplot dumb text-terminal documentation",
+        "url": "https://raw.githubusercontent.com/gnuplot/gnuplot/master/term/dumb.trm",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "gnuplot software and documentation grant",
+        "url": "https://raw.githubusercontent.com/gnuplot/gnuplot/master/Copyright",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "identifier",
+        "label": "SPDX gnuplot identifier and text",
+        "url": "https://spdx.org/licenses/gnuplot.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "gnuplot plots mathematical functions and data through command scripts; the selected dumb terminal produces a text plot.",
+        "source_ids": ["guide", "terminal"]
+      },
+      "prerequisites": {
+        "text": "Install gnuplot and learn function expressions, plotting ranges and output-terminal selection; this example requires no input data file.",
+        "source_ids": ["guide", "terminal"]
+      },
+      "execution": {
+        "text": "gnuplot can read a command file or evaluate commands supplied on its CLI; a terminal determines the output representation.",
+        "source_ids": ["guide", "terminal"]
+      },
+      "behavior": {
+        "text": "sin uses radians by default. plot samples the selected range; terminal size controls the text block rather than numerical precision.",
+        "source_ids": ["guide", "terminal"]
+      },
+      "tooling": {
+        "text": "Interactive commands, script files and selectable terminals support repeatable plotting workflows.",
+        "source_ids": ["guide", "terminal"]
+      },
+      "maintenance": {
+        "text": "Record ranges, data transforms and terminal choices with the script; output layout depends on the selected terminal.",
+        "source_ids": ["guide", "terminal"]
+      },
+      "costs": {
+        "text": "The gnuplot grant permits use and distribution subject to notices, and imposes specific conditions on distributing modified versions.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "wave.gp",
+      "code": "set terminal dumb size 60,15\nset title \"Sine wave\"\nplot [0:6.28] sin(x) title \"sin(x)\"\n",
+      "run_instructions": "Run gnuplot wave.gp from the directory containing the script; the dumb terminal writes an ASCII plot to the terminal.",
+      "expected_result": "Displays a text plot of approximately one sine-wave period over the interval 0 to 6.28.",
+      "source_ids": ["guide", "terminal"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "gnuplot plotting interpreter with the dumb terminal",
+        "role": "implementation",
+        "spdx_expression": "gnuplot",
+        "source_ids": ["license", "identifier"],
+        "scope": "The checked gnuplot grant for its software and documentation; external libraries retain separate terms.",
+        "notice": "This is the SPDX gnuplot license, not GPL. Modified-source redistribution uses patch requirements and additional identification and support conditions."
+      }
+    ]
+  }
+]

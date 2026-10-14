@@ -1,0 +1,780 @@
+[
+  {
+    "name": "LiveScript",
+    "implementation": {
+      "name": "LiveScript JavaScript compiler",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "LiveScript language and CLI guide",
+        "url": "https://livescript.net/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "LiveScript license",
+        "url": "https://raw.githubusercontent.com/gkz/LiveScript/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "JavaScript applications and concise functional scripting.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install Node.js for the CLI and learn LiveScript's function and operator syntax.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "lsc runs source through Node or emits JavaScript with -c.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Functions, comprehensions and pattern matching compile to JavaScript constructs.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The CLI has REPL, watch mode, source maps and compiler API.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Track generated JavaScript and Node compatibility when upgrading the compiler.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The MIT-licensed compiler is separate from Node and imported JavaScript libraries.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.ls",
+      "code": "console.log \"PLLDN\"",
+      "run_instructions": "With Node and LiveScript installed, run lsc hello.ls.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": "https://livescript.net/",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "LiveScript JavaScript compiler",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain the copyright and permission notices."
+      }
+    ]
+  },
+  {
+    "name": "Logtalk",
+    "implementation": {
+      "name": "Logtalk with a supported Prolog backend",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Logtalk main features",
+        "url": "https://logtalk.org/manuals/userman/features.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Logtalk learning examples",
+        "url": "https://logtalk.org/learning.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "code",
+        "label": "Logtalk hello object",
+        "url": "https://raw.githubusercontent.com/LogtalkDotOrg/logtalk3/master/examples/hello_world/hello_world.lgt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Logtalk license",
+        "url": "https://raw.githubusercontent.com/LogtalkDotOrg/logtalk3/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Organize Prolog applications with objects, protocols and reusable categories.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn Prolog facts and rules before Logtalk message sending and object interfaces.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "A supported Prolog backend executes compiled Logtalk objects.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Objects encapsulate predicates; calls use the object::message notation.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The project includes many runnable examples and portable tools.",
+        "source_ids": ["example"]
+      },
+      "maintenance": {
+        "text": "Backend selection matters; test features against the supported Prolog implementation.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Logtalk's Apache license is separate from the Prolog backend's license.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.lgt",
+      "code": ":- object(hello).\n    :- public(say/0).\n    say :- write('PLLDN'), nl.\n:- end_object.",
+      "run_instructions": "In a Logtalk-enabled Prolog session, load hello.lgt with logtalk_load(hello), then query hello::say.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["code", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Logtalk with a supported Prolog backend",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Logtalk component only; the selected backend has separate terms."
+      }
+    ]
+  },
+  {
+    "name": "Lua",
+    "implementation": {
+      "name": "PUC-Rio Lua 5.4 interpreter",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Lua 5.4 reference manual",
+        "url": "https://www.lua.org/manual/5.4/manual.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Lua license",
+        "url": "https://www.lua.org/license.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Embed scripting and configuration in a host application.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn tables, lexical functions and host-provided APIs.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The standalone lua interpreter executes .lua files; embedding uses the C API.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Dynamic values, garbage collection and coroutines are defined in the reference manual.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The interpreter and reference manual cover standalone and embedded workflows.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Specify the Lua version and host APIs; different hosts expose different facilities.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Lua's MIT license does not cover the application's own extensions or host.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.lua",
+      "code": "print(\"PLLDN\")",
+      "run_instructions": "With Lua 5.4 installed, run lua hello.lua.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "PUC-Rio Lua 5.4 interpreter",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Preserve the Lua copyright and permission notice."
+      }
+    ]
+  },
+  {
+    "name": "Luau",
+    "implementation": {
+      "name": "Luau standalone CLI and analyzer",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Luau introduction and CLI workflow",
+        "url": "https://luau.org/getting-started/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Luau license",
+        "url": "https://raw.githubusercontent.com/luau-lang/luau/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Embedded scripting and Roblox-hosted applications; this example uses the standalone CLI.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Lua-style syntax is the starting point; learn gradual types and analysis modes.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "luau executes scripts; luau-analyze separately checks and lints them.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Strict and non-strict modes report different classes of potential type errors.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "CLI tools and the linked playground support small experiments.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Standalone libraries are distinct from Roblox APIs; verify the host before porting scripts.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The MIT-licensed Luau implementation does not determine Roblox platform terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.luau",
+      "code": "--!strict\nlocal message: string = \"PLLDN\"\nprint(message)",
+      "run_instructions": "Run luau-analyze hello.luau, then luau hello.luau.",
+      "expected_result": "The analyzer accepts the typed string and the interpreter prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": "https://play.luau.org/",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Luau standalone CLI and analyzer",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Runtime/compiler component only; platform services and imported code require separate review."
+      }
+    ]
+  },
+  {
+    "name": "MATLAB",
+    "implementation": {
+      "name": "MathWorks MATLAB desktop",
+      "version_scope": "Desktop guide labeled R2026b.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "MATLAB desktop basics",
+        "url": "https://www.mathworks.com/help/matlab/learn_matlab/desktop.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "pricing",
+        "label": "MathWorks pricing and licensing options",
+        "url": "https://www.mathworks.com/pricing-licensing.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Interactive numerical calculation and data exploration in the MATLAB desktop.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn variables, numeric expressions and the Command Window.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Enter commands interactively or save calculations as MATLAB source.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "A trailing semicolon suppresses displayed output while preserving computation.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The desktop includes files, workspace inspection and a command window.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep toolbox and MATLAB release requirements with the project.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Standard, academic, student and home licenses have different permitted uses and terms.",
+        "source_ids": ["pricing"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "addition.m",
+      "code": "a = 2;\nb = 3;\na + b",
+      "run_instructions": "Enter the statements in the MATLAB Command Window, or run the saved addition script.",
+      "expected_result": "Displays ans with value 5.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "MathWorks MATLAB desktop",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "No SPDX expression is asserted for this proprietary product; verify the selected MathWorks license, toolbox and deployment terms."
+      }
+    ]
+  },
+  {
+    "name": "MQL4",
+    "implementation": {
+      "name": "MetaEditor MQL4 compiler and MetaTrader 4",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "MQL4 event handlers",
+        "url": "https://docs.mql4.com/basis/function/events",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "print",
+        "label": "MQL4 Print reference",
+        "url": "https://docs.mql4.com/common/print",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "compiler",
+        "label": "MetaEditor compilation and executable formats",
+        "url": "https://www.metatrader5.com/en/metaeditor/help/development/compile",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Scripts and event-driven indicators hosted by MetaTrader 4.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn handler signatures and platform APIs; OnStart is a script entry point.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "MetaEditor compiles .mq4 source into .ex4 files run by the platform.",
+        "source_ids": ["compiler"]
+      },
+      "behavior": {
+        "text": "A handler with an incorrect signature is not selected for its event.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "MetaEditor reports compile diagnostics; the Print function writes to the platform log.",
+        "source_ids": ["compiler", "print"]
+      },
+      "maintenance": {
+        "text": "Keep source and executable format tied to MetaTrader 4; MQL4 and MQL5 are separate targets.",
+        "source_ids": ["compiler"]
+      },
+      "costs": {
+        "text": "Compiler/platform entitlement and third-party trading-service charges are not established by these reference pages.",
+        "source_ids": ["compiler"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.mq4",
+      "code": "void OnStart() {\n    Print(\"PLLDN\");\n}",
+      "run_instructions": "Create an MQL4 script in MetaEditor, compile with F7, then run it in a matching MetaTrader 4 terminal. This sample contains no trading-order operation.",
+      "expected_result": "Adds PLLDN to the program log.",
+      "source_ids": ["guide", "print", "compiler"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "MetaEditor MQL4 compiler and MetaTrader 4",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "No open-source license is inferred from language documentation or availability of compiled script distribution."
+      }
+    ]
+  },
+  {
+    "name": "MQL5",
+    "implementation": {
+      "name": "MetaEditor MQL5 compiler and MetaTrader 5",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "MQL5 event handlers",
+        "url": "https://www.mql5.com/en/docs/basis/function/events",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "print",
+        "label": "MQL5 Print reference",
+        "url": "https://www.mql5.com/en/docs/common/print",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "compiler",
+        "label": "MetaEditor compilation and executable formats",
+        "url": "https://www.metatrader5.com/en/metaeditor/help/development/compile",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Scripts and event-driven indicators hosted by MetaTrader 5.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn handler signatures and platform APIs; OnStart is a script entry point.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "MetaEditor compiles .mq5 source into .ex5 files run by the platform.",
+        "source_ids": ["compiler"]
+      },
+      "behavior": {
+        "text": "A handler with an incorrect signature is not selected for its event.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "MetaEditor reports compile diagnostics; the Print function writes to the platform log.",
+        "source_ids": ["compiler", "print"]
+      },
+      "maintenance": {
+        "text": "Keep source and executable format tied to MetaTrader 5; MQL4 and MQL5 are separate targets.",
+        "source_ids": ["compiler"]
+      },
+      "costs": {
+        "text": "Compiler/platform entitlement and third-party trading-service charges are not established by these reference pages.",
+        "source_ids": ["compiler"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.mq5",
+      "code": "void OnStart() {\n    Print(\"PLLDN\");\n}",
+      "run_instructions": "Create an MQL5 script in MetaEditor, compile with F7, then run it in a matching MetaTrader 5 terminal. This sample contains no trading-order operation.",
+      "expected_result": "Adds PLLDN to the program log.",
+      "source_ids": ["guide", "print", "compiler"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "MetaEditor MQL5 compiler and MetaTrader 5",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "No open-source license is inferred from language documentation or availability of compiled script distribution."
+      }
+    ]
+  },
+  {
+    "name": "Mercury",
+    "implementation": {
+      "name": "Mercury compiler with native C backend",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Mercury introductory book",
+        "url": "https://www.mercurylang.org/documentation/papers/book.pdf",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Mercury compiler COPYING",
+        "url": "https://raw.githubusercontent.com/Mercury-Language/mercury/master/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Typed declarative applications combining logic and functional programming.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn predicates, modes and determinism; IO states are explicit.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "mmc --make builds an executable from a named Mercury module.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Modes and uniqueness express data flow, including ordered I/O effects.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The compiler builds module interfaces and intermediate files automatically.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Track the selected backend grade and module dependencies for reproducible builds.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Compiler COPYING contains GPL version 2; runtime and libraries need independent component checks.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.m",
+      "code": ":- module hello.\n:- interface.\n:- import_module io.\n:- pred main(io::di, io::uo) is det.\n:- implementation.\nmain(!IO) :- io.write_string(\"PLLDN\\n\", !IO).",
+      "run_instructions": "With Mercury and its required backend compiler installed, run mmc --make hello, then run hello.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Mercury compiler with native C backend",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "COPYING is linked; exact compiler grant and independently licensed runtime/library components must be reviewed before redistribution."
+      }
+    ]
+  },
+  {
+    "name": "Metal",
+    "implementation": {
+      "name": "Apple Metal shading compiler and host API",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Apple: performing calculations on a GPU",
+        "url": "https://developer.apple.com/documentation/Metal/performing-calculations-on-a-gpu?changes=_10_5%2C_10_5",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "GPU compute and graphics shaders in an Apple Metal host application.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn C++-style shader syntax plus buffers, grids and host command submission.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Xcode compiles .metal files into a library used by the host application.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Each dispatched compute thread operates on its grid index.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The official sample demonstrates device selection, pipeline creation and buffer handling.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Shader execution requires matching device capabilities and correctly sized host buffers.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Toolchain and platform agreement terms are not verified by this technical sample.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "add.metal",
+      "code": "#include <metal_stdlib>\nusing namespace metal;\n\nkernel void add_values(device const float* a [[buffer(0)]],\n                       device const float* b [[buffer(1)]],\n                       device float* result [[buffer(2)]],\n                       uint i [[thread_position_in_grid]]) {\n    result[i] = a[i] + b[i];\n}",
+      "run_instructions": "Use Apple's calculation sample as the host, bind equally sized buffers to slots 0-2, select add_values and dispatch one thread per element. Shader source alone is not a standalone application.",
+      "expected_result": "For one input element 2 and one input element 3, the output buffer contains 5 after GPU completion.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Apple Metal shading compiler and host API",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "No compiler/platform SPDX expression is verified here; the sample code's own terms are not a license for the Metal toolchain."
+      }
+    ]
+  },
+  {
+    "name": "MiniZinc",
+    "implementation": {
+      "name": "libminizinc compiler and configured solver",
+      "version_scope": "Workflow follows the versioned MiniZinc 2.10.0 handbook.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "MiniZinc first steps",
+        "url": "https://docs.minizinc.org/en/2.10.0/basic_steps.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "libminizinc license",
+        "url": "https://raw.githubusercontent.com/MiniZinc/libminizinc/develop/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Scheduling and discrete constraint models solved by a chosen backend solver.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn finite variable domains, constraints and a solve item.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "minizinc compiles a model, calls its solver and formats a solution.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "A satisfy model requests a feasible assignment, rather than a fixed imperative execution order.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The IDE and CLI both accept model and data files.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Solver choice and search behavior matter; keep model and solver versions together.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "libminizinc uses MPL-2.0 except marked files; solver and IDE licensing is separate.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "sum.mzn",
+      "code": "var 1..3: x;\nconstraint x = 2;\nsolve satisfy;",
+      "run_instructions": "With MiniZinc and a compatible configured solver installed, run minizinc sum.mzn.",
+      "expected_result": "Returns x = 2 with a solution separator.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "libminizinc compiler and configured solver",
+        "role": "implementation",
+        "spdx_expression": "MPL-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Compiler default license only; per-file exceptions and separately packaged solvers require inspection."
+      }
+    ]
+  }
+]

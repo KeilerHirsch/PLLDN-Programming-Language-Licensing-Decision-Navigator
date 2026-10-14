@@ -1,0 +1,780 @@
+[
+  {
+    "name": "Nim",
+    "implementation": {
+      "name": "Nim compiler with the C backend",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Nim tutorial",
+        "url": "https://nim-lang.org/docs/tut1.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Nim compiler license",
+        "url": "https://raw.githubusercontent.com/nim-lang/Nim/devel/copying.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Compiled applications using typed modules and C interoperability.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn Nim indentation and static types; the C backend requires a C toolchain.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "nim c generates and compiles C; -r runs the result.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Compile-time typing and language-level procedures differ from dynamic scripting.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The tutorial covers modules, compiler options and standard procedures.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Pin the compiler and backend settings before rebuilding dependencies.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The MIT-licensed compiler does not determine the licenses of imported C libraries.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.nim",
+      "code": "echo \"PLLDN\"",
+      "run_instructions": "With Nim and a supported C compiler installed, run nim c -r hello.nim.",
+      "expected_result": "Builds an executable and prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Nim compiler with the C backend",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain the compiler's copyright and permission notices in covered copies."
+      }
+    ]
+  },
+  {
+    "name": "Nix",
+    "implementation": {
+      "name": "Nix expression evaluator",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Nix language reference",
+        "url": "https://nix.dev/manual/nix/latest/language/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tutorial",
+        "label": "Nix language basics",
+        "url": "https://nix.dev/tutorials/nix-language",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Nix COPYING",
+        "url": "https://raw.githubusercontent.com/NixOS/nix/master/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Declarative build descriptions and configuration composed as expressions.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "The tutorial assumes software-development and Unix-shell familiarity.",
+        "source_ids": ["tutorial"]
+      },
+      "execution": {
+        "text": "The evaluator turns .nix expressions into values; realizing a derivation is a separate build step.",
+        "source_ids": ["tutorial"]
+      },
+      "behavior": {
+        "text": "Evaluation is lazy and dynamically typed; dependencies are expressed through data.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The REPL supports interactive expression evaluation and value inspection.",
+        "source_ids": ["tutorial"]
+      },
+      "maintenance": {
+        "text": "Pin package inputs to reproduce builds; language expressions alone do not pin external sources.",
+        "source_ids": ["tutorial"]
+      },
+      "costs": {
+        "text": "COPYING contains LGPL-2.1; package expressions and built software have separate licensing.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "addition.nix",
+      "code": "let a = 2; b = 3; in a + b",
+      "run_instructions": "Start nix repl and enter this expression.",
+      "expected_result": "Evaluates to 5 without building or installing packages.",
+      "source_ids": ["tutorial"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Nix expression evaluator",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Original COPYING is linked; no exact distribution-wide SPDX expression is asserted from the license text alone."
+      }
+    ]
+  },
+  {
+    "name": "Nushell",
+    "implementation": {
+      "name": "Nushell structured-data shell",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Nushell quick tour",
+        "url": "https://www.nushell.sh/book/quick_tour.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Nushell license",
+        "url": "https://raw.githubusercontent.com/nushell/nushell/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Shell workflows that pass structured values and tables between commands.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn Nushell pipelines and values rather than assuming POSIX shell syntax.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The nu interpreter evaluates commands and .nu scripts.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Pipelines preserve structured data; external commands still have their own interfaces.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The quick tour demonstrates tables, filtering and interactive commands.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Check shell syntax and plugin versions when translating older scripts.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The shell is MIT licensed; external programs and plugins have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "query",
+      "filename": "addition.nu",
+      "code": "2 + 3",
+      "run_instructions": "Start nu and enter this expression.",
+      "expected_result": "Displays the integer 5.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Nushell structured-data shell",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain notices for the shell; separately inspect plugins and invoked programs."
+      }
+    ]
+  },
+  {
+    "name": "OCaml",
+    "implementation": {
+      "name": "OCaml compiler with Dune and opam",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "OCaml first program and project workflow",
+        "url": "https://ocaml.org/docs/your-first-program",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "OCaml core-system license and linking exception",
+        "url": "https://raw.githubusercontent.com/ocaml/ocaml/trunk/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Typed modular applications compiled to native code or bytecode.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install OCaml and Dune; learn typed functions and modules.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Dune builds a project and launches its executable inside an opam switch.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Each source file defines a module; interfaces can hide implementation details.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Dune watch mode and opam packages support iterative project development.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Separate projects into opam switches when their compiler/package requirements differ.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The core system uses LGPL-2.1 with a linking exception; Dune and installed packages are separate.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "main.ml",
+      "code": "let () = print_endline \"PLLDN\"",
+      "run_instructions": "Use opam exec -- dune init proj hello, replace bin/main.ml in that project, then use opam exec -- dune exec hello from the project directory.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "OCaml compiler with Dune and opam",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The exact linking exception is in the original license; no simplified expression is substituted for the core-system scope."
+      }
+    ]
+  },
+  {
+    "name": "Oberon",
+    "implementation": {
+      "name": "OBNC Oberon 2016 compiler",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "OBNC implementation, prerequisites and tools",
+        "url": "https://miasap.se/obnc/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "OBNC source and compilation tutorial",
+        "url": "https://miasap.se/obnc/getting-started.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Compiled modular programs in the final 2016 Oberon dialect.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn modules and typed declarations; OBNC uses a C toolchain underneath.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The obnc build command translates Oberon to C and invokes the host compiler/linker.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Oberon modules occupy a flat name space; OBNC can resolve a local module file before the basic library's module of the same name.",
+        "source_ids": ["example"]
+      },
+      "tooling": {
+        "text": "The distribution includes a build tool, documentation generator and basic library.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Older generated OBNC files can be incompatible with newer releases; rebuild source with the selected version.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler uses GNU GPL and libraries Mozilla licensing; the page does not establish exact version expressions.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Hello.obn",
+      "code": "MODULE Hello;\nIMPORT Out;\nBEGIN\n  Out.String(\"PLLDN\"); Out.Ln\nEND Hello.",
+      "run_instructions": "With OBNC and its dependencies installed, build Hello.obn using the obnc command and run the resulting Hello program.",
+      "expected_result": "Prints PLLDN through the Out library.",
+      "source_ids": ["example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "OBNC Oberon 2016 compiler",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Compiler and library grants are different; confirm their actual versioned license files in the selected OBNC distribution."
+      }
+    ]
+  },
+  {
+    "name": "Objective-C",
+    "implementation": {
+      "name": "Apple Clang Objective-C with Foundation on macOS",
+      "version_scope": "Concepts source is archived Apple documentation; target SDK and Xcode must be selected separately.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Apple Objective-C programming guide",
+        "url": "https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Applications using Cocoa/Foundation APIs and existing Objective-C code.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "C-like syntax and basic object-oriented concepts help with the guide.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Compile source with Xcode/Clang and link the required Apple framework/runtime.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Reference counting manages object lifetimes; ARC automates much of this at compile time.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Xcode provides code, testing and debugging tools.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The guide is archived; confirm SDK availability and deployment targets in current Xcode.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The technical guide does not establish Apple toolchain or SDK licensing terms.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.m",
+      "code": "#import <Foundation/Foundation.h>\n\nint main(void) {\n    @autoreleasepool {\n        NSLog(@\"PLLDN\");\n    }\n    return 0;\n}",
+      "run_instructions": "Create a macOS command-line target using Objective-C and Foundation in a compatible Xcode installation, replace its source and run the target.",
+      "expected_result": "Logs PLLDN with the runtime's log prefix.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Apple Clang Objective-C with Foundation on macOS",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "No SDK/runtime SPDX expression is inferred from Clang's source licensing."
+      }
+    ]
+  },
+  {
+    "name": "Objective-J",
+    "implementation": {
+      "name": "Cappuccino Objective-J compiler and browser host",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Cappuccino Objective-J language guide",
+        "url": "https://www.cappuccino.dev/learn/objective-j.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Cappuccino repository LGPL text",
+        "url": "https://raw.githubusercontent.com/cappuccino/cappuccino/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Browser applications using JavaScript objects and Cappuccino-style classes.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn JavaScript scope, Objective-J message sends and framework imports.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Objective-J source runs through its compiler in the Cappuccino browser environment.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "JavaScript strings can respond to CPString methods through bridging.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The guide covers categories, protocols and synthesized accessors.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Framework APIs and compiler compatibility must be considered together.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The Cappuccino distribution includes LGPL version 2.1 terms; exact per-component grants and the browser host require separate review.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.j",
+      "code": "@import <Foundation/CPString.j>\n\nvar text = \"PLLDN\";\nalert([text uppercaseString]);",
+      "run_instructions": "Load this source through a configured Cappuccino/Objective-J browser project.",
+      "expected_result": "Shows a browser alert with PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Cappuccino Objective-J compiler and browser host",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The checked distribution license contains LGPL version 2.1. A complete compiler/framework version-choice and exception inventory is not established by the tutorial."
+      }
+    ]
+  },
+  {
+    "name": "Odin",
+    "implementation": {
+      "name": "Odin native compiler",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Odin language overview and example",
+        "url": "https://odin-lang.org/docs/overview/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Odin compiler license",
+        "url": "https://raw.githubusercontent.com/odin-lang/Odin/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Native applications with explicit data layout and system-level facilities.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "The tour assumes variables, statements and types are familiar.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "odin run builds and executes a package or selected source file.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Static types and explicit allocation distinguish it from dynamic scripting.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The standard core libraries and compiler commands support native development.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Version the compiler with foreign-library bindings and target requirements.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler uses zlib-style terms; foreign libraries are independent components.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.odin",
+      "code": "package main\n\nimport \"core:fmt\"\n\nmain :: proc() {\n    fmt.println(\"PLLDN\")\n}",
+      "run_instructions": "With Odin installed, run odin run hello.odin -file.",
+      "expected_result": "Builds and prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Odin native compiler",
+        "role": "implementation",
+        "spdx_expression": "Zlib",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Do not misrepresent origin; mark altered sources and retain the notice."
+      }
+    ]
+  },
+  {
+    "name": "OpenCL",
+    "implementation": {
+      "name": "PoCL OpenCL runtime with OpenCL C kernels",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "PoCL implementation and device backends",
+        "url": "https://raw.githubusercontent.com/pocl/pocl/main/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "language",
+        "label": "Khronos OpenCL C specification",
+        "url": "https://registry.khronos.org/OpenCL/specs/unified/html/OpenCL_C.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "PoCL license",
+        "url": "https://raw.githubusercontent.com/pocl/pocl/main/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Parallel kernels called by a host application through OpenCL.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn C-style kernels, address spaces and host buffer/queue handling.",
+        "source_ids": ["language"]
+      },
+      "execution": {
+        "text": "The host compiles OpenCL C for a selected PoCL device and dispatches work items.",
+        "source_ids": ["guide", "language"]
+      },
+      "behavior": {
+        "text": "get_global_id identifies the work item; device pointers access shared buffers.",
+        "source_ids": ["language"]
+      },
+      "tooling": {
+        "text": "PoCL documents distinct CPU and accelerator backends with different maturity.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Check device/compiler capabilities; an OpenCL version label does not make every feature universal.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "PoCL's covered source uses MIT; device drivers, backend dependencies and the host application have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "increment.cl",
+      "code": "__kernel void increment(__global float *values) {\n    size_t i = get_global_id(0);\n    values[i] = values[i] + 1.0f;\n}",
+      "run_instructions": "In an OpenCL host using a compatible PoCL device, compile this kernel, bind a float buffer and dispatch exactly one work item per element. Wait for completion before reading results.",
+      "expected_result": "An input element 2 becomes 3; the host must size the buffer and grid consistently.",
+      "source_ids": ["language"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "PoCL OpenCL runtime with OpenCL C kernels",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "PoCL's covered source uses MIT. Bundled backend components and device drivers retain separate terms."
+      }
+    ]
+  },
+  {
+    "name": "OpenQASM",
+    "implementation": {
+      "name": "OpenQASM 3 Python reference parser",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "OpenQASM Python reference package",
+        "url": "https://raw.githubusercontent.com/openqasm/openqasm/main/source/openqasm/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "language",
+        "label": "OpenQASM 3 introduction",
+        "url": "https://openqasm.com/intro.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "api",
+        "label": "OpenQASM reference parse API",
+        "url": "https://raw.githubusercontent.com/openqasm/openqasm/main/source/openqasm/openqasm3/parser.py",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "OpenQASM repository license",
+        "url": "https://raw.githubusercontent.com/openqasm/openqasm/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Represent quantum programs and construct compiler passes using a reference AST.",
+        "source_ids": ["guide", "language"]
+      },
+      "prerequisites": {
+        "text": "Learn qubits, gates and measurements; parsing also needs the Python parser extra.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The reference package parses source into an AST; it does not execute quantum hardware.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "OpenQASM combines classical control and quantum operations.",
+        "source_ids": ["language"]
+      },
+      "tooling": {
+        "text": "Parser, visitors and transformers expose program structure to Python tooling.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The README warns that reference AST/API compatibility can change; pin the package.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The reference repository is Apache licensed; simulators and quantum providers are separate.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "coin.qasm",
+      "code": "OPENQASM 3.0;\ninclude \"stdgates.inc\";\nqubit q;\nbit outcome;\nh q;\noutcome = measure q;",
+      "run_instructions": "With openqasm3 and its parser extra installed, call openqasm3.parse on the file's text in Python. Execution requires a separately chosen compatible simulator or device.",
+      "expected_result": "Builds an AST describing a one-qubit Hadamard/measurement program; no hardware result is claimed.",
+      "source_ids": ["language", "api"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "OpenQASM 3 Python reference parser",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Reference parser/repository only; ANTLR and simulator/provider terms remain separate."
+      }
+    ]
+  }
+]

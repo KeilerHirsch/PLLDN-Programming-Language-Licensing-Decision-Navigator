@@ -1,0 +1,774 @@
+[
+  {
+    "name": "Red",
+    "implementation": {
+      "name": "Red interpreter/compiler toolchain",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Red usage, dialects and toolchain status",
+        "url": "https://raw.githubusercontent.com/red/red/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Red runtime BSD license",
+        "url": "https://raw.githubusercontent.com/red/red/master/BSD-3-License.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "GUI programs and scripting with domain-specific dialects.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn blocks and Red evaluation; source files start with a Red header.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The distribution includes GUI/CLI consoles, an interpreter and native-code tooling.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Built-in dialects cover tasks including parsing and GUI description.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "A standalone console enables interactive exploration.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The README labels the toolchain alpha and 32-bit; validate target support before use.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The runtime BSD grant does not establish the compiler/toolchain's full component terms.",
+        "source_ids": ["license", "guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.red",
+      "code": "Red []\nprint \"PLLDN\"",
+      "run_instructions": "Open hello.red using the matching Red interpreter or evaluate print in its console.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Red interpreter/compiler toolchain",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Runtime BSD source is linked; compiler and other distribution components must be checked separately."
+      }
+    ]
+  },
+  {
+    "name": "Ring",
+    "implementation": {
+      "name": "Ring 1.27 interpreter",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Ring language introduction",
+        "url": "https://ring-lang.github.io/doc1.27/introduction.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Ring license",
+        "url": "https://raw.githubusercontent.com/ring-lang/ring/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Dynamic programs and applications using Ring's embedded DSL facilities.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn dynamic values, functions and the selected library APIs.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The ring interpreter executes .ring source files.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Flexible syntax and configurable keywords support embedded DSLs.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The documented environment includes application and library integration facilities.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep program libraries compatible with the selected Ring release.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The MIT-licensed interpreter does not determine the terms of application libraries.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.ring",
+      "code": "see \"PLLDN\" + nl",
+      "run_instructions": "With Ring 1.27 installed, run ring hello.ring.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Ring 1.27 interpreter",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain the original notices for covered interpreter code."
+      }
+    ]
+  },
+  {
+    "name": "Roc",
+    "implementation": {
+      "name": "Roc new-compiler nightly",
+      "version_scope": "Current mini-tutorial for the new compiler; no stable-release claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Roc new-compiler mini-tutorial",
+        "url": "https://raw.githubusercontent.com/roc-lang/roc/main/docs/mini-tutorial-new-compiler.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Roc license",
+        "url": "https://raw.githubusercontent.com/roc-lang/roc/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Functional application logic hosted by a separately chosen Roc platform.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn inferred types and expressions; nightly installation is the documented entry point.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "roc repl evaluates expressions without an application platform.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Platform code handles application effects; pure expressions can be explored independently.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The REPL, roc test and compiler diagnostics support small experiments.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The tutorial warns of unfinished features and bugs before a 0.1 release.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Compiler UPL-1.0 terms are separate from the selected platform package.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "query",
+      "filename": "addition.roc",
+      "code": "2 + 3",
+      "run_instructions": "With a matching new-compiler nightly installed, start roc repl and enter the expression.",
+      "expected_result": "Evaluates to 5.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Roc new-compiler nightly",
+        "role": "implementation",
+        "spdx_expression": "UPL-1.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Preserve the copyright notice and UPL notice/reference as specified."
+      }
+    ]
+  },
+  {
+    "name": "Ruby",
+    "implementation": {
+      "name": "CRuby interpreter",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Ruby interactive quickstart",
+        "url": "https://www.ruby-lang.org/en/documentation/quickstart/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "CRuby copying terms",
+        "url": "https://raw.githubusercontent.com/ruby/ruby/master/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Object-oriented scripts and applications using the Ruby ecosystem.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn objects, methods and blocks through interactive Ruby.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The ruby interpreter runs source; irb evaluates expressions interactively.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Objects receive methods, and blocks express reusable behavior.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The quickstart demonstrates IRB and built-in methods.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Record interpreter and gem requirements; alternative Ruby implementations differ.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "CRuby permits BSD-2-Clause or its Ruby terms; gems are separately licensed.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.rb",
+      "code": "puts \"PLLDN\"",
+      "run_instructions": "With CRuby installed, run ruby hello.rb or evaluate the statement in irb.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "CRuby interpreter",
+        "role": "implementation",
+        "spdx_expression": "BSD-2-Clause OR Ruby",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "CRuby grant only; separately review standard-library and gem component notices."
+      }
+    ]
+  },
+  {
+    "name": "Rust",
+    "implementation": {
+      "name": "Rust compiler",
+      "version_scope": "Rust Book native executable workflow; the example uses rustc directly.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Rust Book: first native executable",
+        "url": "https://doc.rust-lang.org/book/ch01-02-hello-world.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Rust source licensing and component notices",
+        "url": "https://raw.githubusercontent.com/rust-lang/rust/master/COPYRIGHT",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "ownership",
+        "label": "Rust ownership and memory management",
+        "url": "https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Native command-line executables; compiled output can run without the Rust compiler installed on the recipient's machine.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn ownership and moves alongside basic syntax; stack and heap lifetimes are part of the learning path.",
+        "source_ids": ["ownership"]
+      },
+      "execution": {
+        "text": "Compile hello.rs using rustc, then run the generated executable for the selected platform.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "The compiler checks ownership rules; owned resources are dropped at the end of their scope. Ownership is not a garbage collector.",
+        "source_ids": ["ownership"]
+      },
+      "tooling": {
+        "text": "rustc compiles the example; rustfmt handles formatting and rust-analyzer supports editor integration.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The compiled executable is platform-specific; keep compiler, dependencies and target platform in your deployment plan.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Compiler distribution has source license choices; IDE products and support arrangements are separate decisions.",
+        "source_ids": ["guide", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.rs",
+      "code": "fn main() {\n    println!(\"PLLDN\");\n}",
+      "run_instructions": "With Rust installed, run rustc hello.rs, then ./hello on Unix-like systems or .\\hello.exe on Windows.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide"],
+      "try_url": "https://play.rust-lang.org/",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Rust project source",
+        "role": "implementation",
+        "spdx_expression": "MIT OR Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "Default source choice except files with their own notices; binary distributions include further component information.",
+        "notice": "Read COPYRIGHT and the distribution's component notices before redistributing."
+      }
+    ]
+  },
+  {
+    "name": "SAS",
+    "implementation": {
+      "name": "Base SAS DATA-step environment",
+      "version_scope": "Example follows SAS 9.4 DATA-step statement documentation.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "SAS 9.4 DATA-step statements",
+        "url": "https://documentation.sas.com/api/docsets/lestmtsref/9.4/content/lestmtsref.pdf?locale=en",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "SAS: output without creating a dataset",
+        "url": "https://support.sas.com/documentation/cdl/en/basess/58133/HTML/default/a002108635.htm",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Dataset processing and report generation with Base SAS DATA steps.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn DATA-step statements and program submission in the selected SAS host.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The SAS environment processes a submitted DATA step.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "DATA _NULL_ executes statements without creating an output dataset.",
+        "source_ids": ["example"]
+      },
+      "tooling": {
+        "text": "PUT writes text or values to the SAS log or a configured output destination.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Select the SAS host/version explicitly; service and library availability differs by product.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The technical manuals do not establish the chosen SAS product entitlement or price.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.sas",
+      "code": "data _null_;\n  put 'PLLDN';\nrun;",
+      "run_instructions": "Submit hello.sas to a compatible Base SAS environment and inspect the SAS log.",
+      "expected_result": "Adds PLLDN to the SAS log without writing observations to a dataset.",
+      "source_ids": ["guide", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Base SAS DATA-step environment",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "No SPDX expression is asserted for the SAS product; verify actual product and service terms."
+      }
+    ]
+  },
+  {
+    "name": "Scala",
+    "implementation": {
+      "name": "Scala 3 JVM compiler and command-line tools",
+      "version_scope": "Scala 3 book workflow; Scala 2 entry-point syntax differs.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Scala 3 hello program",
+        "url": "https://docs.scala-lang.org/scala3/book/taste-hello-world.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Scala 3 compiler license",
+        "url": "https://raw.githubusercontent.com/scala/scala3/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Typed JVM applications using functional and object-oriented constructs.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn Scala 3 syntax and install its documented command-line tooling.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The Scala command compiles/runs a source program on the selected host.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "@main generates an entry point for a named method.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The book links installation, IDE and build-tool workflows.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Distinguish Scala 2 and Scala 3 syntax and library compatibility.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler is Apache licensed; JVM and application libraries have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.scala",
+      "code": "@main def hello(): Unit = println(\"PLLDN\")",
+      "run_instructions": "With the Scala 3 command-line setup from the book, run scala hello.scala.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Scala 3 JVM compiler and command-line tools",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Scala 3 compiler scope; runtime and dependencies must be inspected separately."
+      }
+    ]
+  },
+  {
+    "name": "Scheme",
+    "implementation": {
+      "name": "GNU Guile Scheme",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GNU Guile reference manual",
+        "url": "https://www.gnu.org/s/guile/manual/guile.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "GNU Guile project",
+        "url": "https://www.gnu.org/software/guile/guile.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Scheme applications and extension code hosted by GNU Guile.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn prefix expressions, lexical functions and Scheme data.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The Guile interpreter evaluates expressions and source files.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "First-class procedures and lexical scope support functional programming.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The reference manual covers the REPL, modules and embedding.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Choose the Scheme implementation and module APIs explicitly; Scheme is a family of independent implementations.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Guile and application modules need separate licensing; no exact component SPDX grant was verified here.",
+        "source_ids": ["overview"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.scm",
+      "code": "(display \"PLLDN\")\n(newline)",
+      "run_instructions": "With GNU Guile installed, evaluate the statements in its REPL or run guile hello.scm.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GNU Guile Scheme",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The language standard is not a license for every Scheme implementation; check the selected Guile distribution terms."
+      }
+    ]
+  },
+  {
+    "name": "Smalltalk",
+    "implementation": {
+      "name": "Squeak Smalltalk image and VM",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Squeak live programming environment",
+        "url": "https://squeak.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tutorial",
+        "label": "Squeak documentation and introductory guides",
+        "url": "https://squeak.org/documentation/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Squeak component licensing",
+        "url": "https://squeak.org/license/",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Live application development and interactive object exploration.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn message sends and the image-based development environment.",
+        "source_ids": ["guide", "tutorial"]
+      },
+      "execution": {
+        "text": "A Squeak image runs on its VM; evaluate snippets within the live environment.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Objects and methods can be inspected and changed while the image is running.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Browsers, inspectors and introductory guides support live development.",
+        "source_ids": ["tutorial"]
+      },
+      "maintenance": {
+        "text": "Preserve compatible image and VM versions; added packages become part of the saved image.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The image combines MIT contributions and Apache-licensed original portions.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "query",
+      "filename": "addition.st",
+      "code": "2 + 3",
+      "run_instructions": "Open a Workspace in Squeak, select the expression and use Print It.",
+      "expected_result": "Displays 5.",
+      "source_ids": ["tutorial"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Squeak Smalltalk image and VM",
+        "role": "implementation",
+        "spdx_expression": "MIT AND Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Combined image scope; per-file grants and the VM's own notices should be checked before redistribution."
+      }
+    ]
+  },
+  {
+    "name": "Solidity",
+    "implementation": {
+      "name": "solc compiler targeting an EVM",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Solidity contracts and deployment model",
+        "url": "https://docs.soliditylang.org/en/latest/introduction-to-smart-contracts.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "solc license text",
+        "url": "https://raw.githubusercontent.com/argotorg/solidity/develop/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "EVM contract logic with state and callable functions.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn transactions, ABI, storage and execution costs before deploying contracts.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "solc compiles contract source; an EVM host executes deployed bytecode.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Contract functions can read or update persistent on-chain state.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The guide describes contracts, compilation and interaction concepts.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Pin compiler/target versions and test behavior before any irreversible deployment.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Compiler GPL terms are separate from contract source licensing and network transaction costs.",
+        "source_ids": ["license", "guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Addition.sol",
+      "code": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract Addition {\n    function add(uint256 a, uint256 b) public pure returns (uint256) {\n        return a + b;\n    }\n}",
+      "run_instructions": "Compile with a compatible solc 0.8 toolchain and call add(2, 3) in a local EVM test environment. No public transaction is needed.",
+      "expected_result": "Returns 5 for the local call.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "solc compiler targeting an EVM",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The compiler's GPL text is linked; the example's MIT marker applies only to the original example contract, not the compiler."
+      }
+    ]
+  }
+]

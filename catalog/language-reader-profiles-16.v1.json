@@ -1,0 +1,782 @@
+[
+  {
+    "name": "Prolog",
+    "implementation": {
+      "name": "SWI-Prolog",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "SWI-Prolog getting started",
+        "url": "https://www.swi-prolog.org/pldoc/man?section=quickstart",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "SWI-Prolog component licenses",
+        "url": "https://www.swi-prolog.org/license.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Logic queries over facts and rules using SWI-Prolog.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn terms, unification and query evaluation rather than assignment-based execution.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Load a .pl source file into a SWI-Prolog session and submit goals.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Queries may find multiple solutions; fact databases are different from imperative programs.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The interactive session and manual support loading, debugging and documentation.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Choose the SWI-Prolog version and optional packages with their native dependencies.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The core uses Simplified BSD; GMP and optional readline components have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "family.pl",
+      "code": "parent(ada, bob).\nparent(bob, clara).\ngrandparent(X, Z) :- parent(X, Y), parent(Y, Z).",
+      "run_instructions": "Load family.pl in SWI-Prolog, then query grandparent(ada, Who).",
+      "expected_result": "Binds Who to clara.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "SWI-Prolog",
+        "role": "implementation",
+        "spdx_expression": "BSD-2-Clause",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "SWI core only; the original page separately identifies GMP and readline licensing."
+      }
+    ]
+  },
+  {
+    "name": "Puppet",
+    "implementation": {
+      "name": "Puppet Core language evaluator",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Puppet language reference",
+        "url": "https://help.puppet.com/core/current/content/puppetcore/puppet_language.htm",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Describe desired infrastructure state as resources and manifests.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn resource declarations, attributes and catalog compilation.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Puppet evaluates manifests into catalogs interpreted by its host tooling.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Resources describe desired state rather than a sequence of shell commands.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The language reference links syntax, functions and resource facilities.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Language and resource-type availability depend on the selected Puppet Core release.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The language documentation does not verify the selected product entitlement or third-party module costs.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "hello.pp",
+      "code": "notify { 'PLLDN': }",
+      "run_instructions": "With Puppet Core installed and licensed as applicable, use puppet apply hello.pp in a local test environment.",
+      "expected_result": "Emits a notification containing PLLDN; this manifest declares no file or service changes.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Puppet Core language evaluator",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "No implementation SPDX expression is inferred from older Puppet releases or language documentation."
+      }
+    ]
+  },
+  {
+    "name": "PureScript",
+    "implementation": {
+      "name": "PureScript JavaScript compiler",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "PureScript features and project tooling",
+        "url": "https://www.purescript.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "console",
+        "label": "Effect.Console log API",
+        "url": "https://pursuit.purescript.org/packages/purescript-console/6.1.0/docs/Effect.Console",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "PureScript compiler and bundled dependency licenses",
+        "url": "https://raw.githubusercontent.com/purescript/purescript/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Typed functional applications compiled to JavaScript.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn functions, algebraic data types and Effect; install the compiler and project tools.",
+        "source_ids": ["guide", "console"]
+      },
+      "execution": {
+        "text": "The compiler emits JavaScript executed by the selected JavaScript host.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Effect describes actions; console logging is a library action.",
+        "source_ids": ["console"]
+      },
+      "tooling": {
+        "text": "Spago and Pursuit provide project/package workflows and API discovery.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep package sets, compiler and JavaScript runtime compatible.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Compiler source uses BSD-3-Clause; prebuilt executables can include separately licensed dependencies.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Main.purs",
+      "code": "module Main where\n\nimport Prelude\nimport Effect (Effect)\nimport Effect.Console (log)\n\nmain :: Effect Unit\nmain = log \"PLLDN\"",
+      "run_instructions": "Use a Spago project with Prelude, Effect and Console dependencies, place this in src/Main.purs, then build and run the project's main module.",
+      "expected_result": "Prints PLLDN through the JavaScript host console.",
+      "source_ids": ["console", "guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "PureScript JavaScript compiler",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Compiler source only; the license file explicitly lists bundled dependency terms including GMP."
+      }
+    ]
+  },
+  {
+    "name": "Python",
+    "implementation": {
+      "name": "CPython 3",
+      "version_scope": "Python 3 tutorial and CPython software license; third-party interpreters and packages are separate.",
+      "source_ids": ["guide", "license"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Python 3 tutorial",
+        "url": "https://docs.python.org/3/tutorial/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Python software and documentation license stack",
+        "url": "https://docs.python.org/3/license.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "windows",
+        "label": "Python Windows launcher selection",
+        "url": "https://docs.python.org/3/using/windows.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Scripting, application development and extending existing applications; native extensions provide an integration path.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "The official tutorial expects basic programming knowledge. Start with expressions, control flow and functions before modules.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Install a Python 3 interpreter and run the .py script; the tutorial supports interactive experimentation.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Python is dynamically typed and interpreted; C or C++ extensions can add functions and data types.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Use the interpreter, built-in objects and standard library documentation; third-party modules extend this foundation.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep interpreter and extension dependencies aligned; a Python extension written in C or C++ adds another toolchain.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The interpreter and standard library are freely available; additional modules and external services require their own evaluation.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.py",
+      "code": "print(\"PLLDN\")",
+      "run_instructions": "With Python 3 installed, run python3 hello.py on systems using that command, or py -3 hello.py with the Windows Python launcher.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide", "windows"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "PSF-covered CPython software",
+        "role": "implementation",
+        "spdx_expression": "PSF-2.0",
+        "source_ids": ["license"],
+        "scope": "The PSF License Version 2 grant; the page also retains historical and included-component notices.",
+        "notice": "Inspect the complete distribution license stack, including bundled components."
+      }
+    ]
+  },
+  {
+    "name": "Q#",
+    "implementation": {
+      "name": "Microsoft QDK Q# compiler and local simulation environment",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Q# language overview and execution options",
+        "url": "https://learn.microsoft.com/en-us/azure/quantum/qsharp-overview",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Microsoft QDK license",
+        "url": "https://raw.githubusercontent.com/microsoft/qdk/main/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Quantum algorithms with classical control and local simulation options.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn operations, qubits and measurement; hardware execution is a separate target.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "QDK tools execute Q# in a local simulator or submit to an explicitly chosen provider.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Operations act on allocated qubits; measurements produce Result values.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The official guide links VS Code, Python and browser-based workflows.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Match QDK package and target capabilities; provider execution is distinct from local simulation.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The QDK source uses MIT; cloud provider access and execution costs are separate.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Main.qs",
+      "code": "import Std.Intrinsic.Message;\n\noperation Main() : Unit {\n    Message(\"PLLDN\");\n}",
+      "run_instructions": "Open a matching QDK Q# project or playground, select Main as the entry operation and run locally.",
+      "expected_result": "Emits PLLDN without allocating qubits or submitting a hardware job.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Microsoft QDK Q# compiler and local simulation environment",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "QDK source only; provider and service terms are independent."
+      }
+    ]
+  },
+  {
+    "name": "R",
+    "implementation": {
+      "name": "GNU R interpreter",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "R introductory manual",
+        "url": "https://cran.r-project.org/doc/manuals/r-release/R-intro.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "R project and licensing overview",
+        "url": "https://www.r-project.org/about.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "R project's GPL version 2 text",
+        "url": "https://www.r-project.org/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Statistical calculation, data exploration and graphics.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Learn vectors, functions and data structures; methods depend on package behavior.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The R interpreter evaluates expressions interactively and runs scripts.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Vector operations and statistical functions are part of its interactive model.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The manual covers plotting, packages and scripting.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Record the R version, packages and input data when reproducing analyses.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The R project identifies GNU GPL licensing; installed packages have separate grants and the linked text alone does not establish every component's version choice.",
+        "source_ids": ["overview", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "addition.R",
+      "code": "values <- c(2, 3)\nprint(sum(values))",
+      "run_instructions": "With R installed, run Rscript addition.R or evaluate the source in an R session.",
+      "expected_result": "Displays [1] 5.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GNU R interpreter",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The project's GPL text is linked; exact component version-choice and exceptions are not established here. Installed packages require separate notices."
+      }
+    ]
+  },
+  {
+    "name": "Racket",
+    "implementation": {
+      "name": "Racket with DrRacket",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Racket illustrated introduction",
+        "url": "https://docs.racket-lang.org/quick/index.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Racket source and runtime licenses",
+        "url": "https://raw.githubusercontent.com/racket/racket/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Programs and language experiments through Racket's modular language system.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn expressions and module declarations; DrRacket provides an interactive entry point.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Run a #lang racket module in DrRacket.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "The #lang declaration selects the module's language.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "DrRacket combines source editing with an interactions area.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Select compatible package and runtime variants; CS and BC runtimes have different included components.",
+        "source_ids": ["license"]
+      },
+      "costs": {
+        "text": "Racket offers MIT or Apache-2.0 for its own code; runtime dependencies have additional terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.rkt",
+      "code": "#lang racket\n(displayln \"PLLDN\")",
+      "run_instructions": "Open hello.rkt in DrRacket and select Run.",
+      "expected_result": "Displays PLLDN in the interactions area.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Racket with DrRacket",
+        "role": "implementation",
+        "spdx_expression": "MIT OR Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Racket's own code only; CS/Chez and BC components are explicitly identified separately."
+      }
+    ]
+  },
+  {
+    "name": "Raku",
+    "implementation": {
+      "name": "Rakudo Raku implementation",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Raku by example",
+        "url": "https://docs.raku.org/language/101-basics",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Rakudo license",
+        "url": "https://raw.githubusercontent.com/rakudo/rakudo/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Expressive scripting with Raku's typed and dynamic facilities.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn sigils, collections and Raku syntax; it is a distinct language from Perl 5.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The installed raku interpreter evaluates source files and expressions.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "The guide demonstrates variables, conditionals, functions and object features.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Interactive examples and language documentation support exploration.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Use Raku-compatible modules rather than assuming Perl 5 source compatibility.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Rakudo uses Artistic-2.0; its VM and modules have separate component terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.raku",
+      "code": "say \"PLLDN\";",
+      "run_instructions": "With Rakudo installed, run raku hello.raku.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Rakudo Raku implementation",
+        "role": "implementation",
+        "spdx_expression": "Artistic-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Named Rakudo implementation only; VM/backend components and modules require separate review."
+      }
+    ]
+  },
+  {
+    "name": "ReScript",
+    "implementation": {
+      "name": "ReScript compiler core",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "ReScript compiler and playground",
+        "url": "https://rescript-lang.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "ReScript component license map",
+        "url": "https://raw.githubusercontent.com/rescript-lang/rescript/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Typed applications compiled to JavaScript with interoperable output.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn inferred static types and JavaScript integration.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The compiler generates JavaScript executed by a browser or server runtime.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Static type checks happen during compilation, while the host runs JavaScript.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The project provides compiler tooling and an online playground.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep compiler, runtime package and JavaScript host versions compatible.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Compiler core, syntax and runtime packages carry different licenses.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.res",
+      "code": "Console.log(\"PLLDN\")",
+      "run_instructions": "Evaluate the source in the official ReScript playground; generated JavaScript logs the message.",
+      "expected_result": "Logs PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": "https://rescript-lang.org/try",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "ReScript compiler core",
+        "role": "implementation",
+        "spdx_expression": "LGPL-3.0-or-later",
+        "source_ids": ["license"],
+        "scope": "compiler/ core only; compiler/syntax/ and @rescript/runtime are MIT-licensed components.",
+        "notice": "Do not collapse the repository's component map into one license for all emitted/runtime code."
+      },
+      {
+        "component": "@rescript/runtime",
+        "role": "runtime",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "Runtime package only, as identified in the repository's license map.",
+        "notice": "Retain original copyright and permission notices."
+      }
+    ]
+  },
+  {
+    "name": "Reason",
+    "implementation": {
+      "name": "Reason syntax frontend for OCaml",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Reason language and playground",
+        "url": "https://reasonml.github.io/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Reason frontend license",
+        "url": "https://raw.githubusercontent.com/reasonml/reason/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "OCaml applications written using Reason syntax, with host tooling chosen separately.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn typed expressions and OCaml's programming model behind the syntax.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Reason source is processed by compatible OCaml or JavaScript-targeting tooling.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "The frontend supplies alternative syntax rather than its own independent runtime.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The official playground supports small syntax experiments.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Match frontend and compiler/backend versions; ReScript is a separate toolchain.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The frontend is MIT licensed; OCaml and JavaScript-targeting components have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "query",
+      "filename": "addition.re",
+      "code": "2 + 3;",
+      "run_instructions": "Enter the expression in the official Reason playground.",
+      "expected_result": "Evaluates to integer 5 in a compatible Reason/OCaml environment.",
+      "source_ids": ["guide"],
+      "try_url": "https://reasonml.github.io/en/try",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Reason syntax frontend for OCaml",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Reason frontend only; OCaml linking and backend/runtime licensing are separate."
+      }
+    ]
+  }
+]

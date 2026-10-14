@@ -52,6 +52,89 @@ const smokeProbe = `
 
   try {
 
+    if (new URLSearchParams(window.location.search).get("probe") === "reader") {
+      await waitFor(() => document.querySelectorAll(".language-reader-profile").length === 194, "complete reader corpus");
+      const cards = [...document.querySelectorAll("[data-catalog-entry]")];
+      assert(cards.length === 194 && cards.every(card => card.querySelector(".language-reader-brief") &&
+        card.querySelectorAll(".language-reader-profile [data-reader-section]").length === 8),
+        "editorial and unassessed identities need the same complete reader shape");
+      for (const card of cards) {
+        for (const section of card.querySelectorAll(".language-reader-profile [data-reader-section]")) {
+          assert(section.querySelector(".reader-citation"), "every reader section needs adjacent sources");
+        }
+      }
+      const basicId = "candidate.language.6261736963";
+      const basic = cards.find(card => card.dataset.catalogName === "BASIC");
+      assert(basic?.dataset.catalogStatus === "unassessed" && !basic.querySelector(".decision-profile"),
+        "complete BASIC reader must not inherit an editorial rating");
+      const basicReader = basic.querySelector(".language-reader-profile");
+      basicReader.open = true;
+      basicReader.querySelector("summary").focus();
+      assert(document.activeElement === basicReader.querySelector("summary"), "reader summary is keyboard focusable");
+      assert(basicReader.querySelector("pre code")?.textContent.length > 0,
+        "BASIC needs a concrete documented example");
+      const status = basicReader.querySelector("[data-reader-example-status]");
+      assert(["documented", "executed"].includes(status?.dataset.readerExampleStatus), "example status must be explicit");
+      if (status.dataset.readerExampleStatus === "documented")
+        assert(status.textContent.includes("not executed"), "documented must not claim execution");
+
+      while (document.querySelectorAll("[data-catalog-entry]:not([hidden])").length < 194) {
+        const more = document.querySelector("[data-identity-more]");
+        assert(more && !more.hidden, "all comparison controls must be reachable through pagination");
+        more.click();
+      }
+
+      const toggle = async (id, expected) => {
+        const control = document.querySelector('#catalog [data-action="toggle-compare"][data-entity-id="' + id + '"]');
+        assert(control && !control.disabled, "canonical comparison button missing " + id);
+        control.focus();
+        control.click();
+        await waitFor(() => document.querySelector("#compare h2")?.textContent.includes("(" + expected + "/4)"), "mixed comparison " + expected);
+        assert(document.activeElement?.dataset.entityId === id, "mixed comparison must retain exact button focus");
+      };
+      await toggle(basicId, 1);
+      await toggle("language.rust", 2);
+      const rows = [...document.querySelectorAll("#compare tbody tr")];
+      for (const label of ["Prerequisites", "Execution workflow", "Example code", "Implementation and runtime licenses"]) {
+        const row = rows.find(item => item.querySelector("th")?.textContent === label);
+        assert(row?.querySelectorAll("td").length === 2, "mixed reader row missing " + label);
+        assert([...row.querySelectorAll("td")].every(cell => cell.textContent.length && cell.querySelector(".compare-reader-sources a")),
+          "reader comparison cells must include values and sources");
+      }
+      for (const label of ["Throughput potential", "Learning curve", "Deployment complexity", "Ecosystem breadth"]) {
+        const row = rows.find(item => item.querySelector("th")?.textContent === label);
+        assert(row?.querySelector("td .compare-row-value")?.textContent === "UNKNOWN",
+          "BASIC rating must remain UNKNOWN in mixed comparison: " + label);
+      }
+      assert(document.querySelector("#compare [data-action=export-language-compare]"), "mixed CSV action must exist");
+      await toggle("language.go", 3);
+      await toggle("language.python", 4);
+      assert(document.querySelector('#catalog [data-action="toggle-compare"][data-entity-id="language.java"]')?.disabled,
+        "mixed catalogue comparison still enforces four distinct identities");
+      await toggle(basicId, 3);
+      assert(!document.querySelector('#catalog [data-action="toggle-compare"][data-entity-id="language.java"]')?.disabled,
+        "removing a pinned identity releases its comparison slot");
+
+      const licenseLink = document.querySelector(".reader-license-catalog");
+      assert(licenseLink, "an exact known SPDX component license must link to the catalogue");
+      const href = new URL(licenseLink.href);
+      assert(href.origin === window.location.origin, "reader license link must be internal");
+      window.history.pushState(null, "", href.href);
+      window.dispatchEvent(new PopStateEvent("popstate"));
+      await waitFor(() => document.querySelector('#catalog h2')?.textContent === "License navigator", "component license navigation");
+      const visibleLicenses = [...document.querySelectorAll("[data-catalog-entry]:not([hidden])")];
+      const targetProfile = href.searchParams.get("profile"), targetCandidate = href.searchParams.get("candidate");
+      assert(visibleLicenses.some(card => card.dataset.entityId === targetProfile ||
+        card.querySelector(".identity-profile")?.dataset.candidateId === targetCandidate),
+        "license route must resolve its exact canonical identity");
+      window.history.back();
+      await waitFor(() => document.querySelectorAll(".language-reader-profile").length === 194, "Back restores language reader catalogue");
+      if (window.innerWidth <= 760) assert(document.documentElement.scrollWidth <= window.innerWidth + 2,
+        "full reader and mixed comparison must not overflow mobile horizontally");
+      output.textContent = "PASS: complete readers, sourced examples, mixed UNKNOWN comparison, limits, license routes and mobile";
+      return;
+    }
+
     if (new URLSearchParams(window.location.search).get("probe") === "discovery") {
       await waitFor(() => document.querySelector("[data-catalog-visible-count]")?.textContent.includes("194 languages found"), "language information runtime");
       const cards = [...document.querySelectorAll("[data-catalog-entry]")];
@@ -193,7 +276,25 @@ const smokeProbe = `
       assert([...document.querySelectorAll('[data-action="language-discovery"]')].every(control => control.value === "any") &&
         document.querySelector('[data-action="catalog-order"]')?.value === "asc",
         "candidate permalink must reset discovery facets and ordering");
+      if (expectedMode === "languages") {
+        const reader = selected.closest("[data-catalog-entry]").querySelector(".language-reader-profile");
+        assert(reader?.open && document.activeElement === reader.querySelector("summary"),
+          "language candidate permalink must open and focus its full reader");
+      }
       await checkProfileHistory("candidate", requested);
+      if (expectedMode === "languages") {
+        window.history.back();
+        await waitFor(() => new URLSearchParams(window.location.search).get("candidate") === requested,
+          "candidate restored before changing search");
+        const search = document.querySelector('[data-action="catalog-search"]');
+        search.value = "Rust";
+        search.dispatchEvent(new Event("input", { bubbles: true }));
+        assert(!new URLSearchParams(window.location.search).has("candidate"),
+          "search must release the pinned identity immediately");
+        assert([...document.querySelectorAll("[data-catalog-entry]:not([hidden])")]
+          .some(card => card.dataset.catalogName === "Rust"),
+          "first search input after a permalink must immediately reveal Rust");
+      }
       output.textContent = "PASS: pinned candidate permalink and Back/Forward";
       return;
     }
@@ -207,6 +308,11 @@ const smokeProbe = `
         assert([...document.querySelectorAll('[data-action="language-discovery"]')].every(control => control.value === "any") &&
           document.querySelector('[data-action="catalog-order"]')?.value === "asc",
           "editorial permalink must reset discovery facets and ordering");
+        if (linked.get("profile").startsWith("language.")) {
+          const reader = visible.find(card => card.dataset.entityId === linked.get("profile"))?.querySelector(".language-reader-profile");
+          assert(reader?.open && document.activeElement === reader.querySelector("summary"),
+            "editorial language permalink must open and focus the same full reader");
+        }
         await checkProfileHistory("profile", linked.get("profile"));
       } else if (linked.get("usage") === "ranked" && linked.get("order") === "common") {
         assert(visible.length === 9 && visible[0]?.dataset.catalogName === "TypeScript" &&
@@ -245,7 +351,8 @@ const smokeProbe = `
     for (const expected of [
       "194 language identities",
       "714 license identities",
-      "35 detailed languages",
+      "194 reader profiles",
+      "35 editorial language previews",
       "32 detailed licenses",
       "345 Preview facts",
     ]) {
@@ -675,6 +782,11 @@ async function main(): Promise<void> {
       throw new Error("Loopback server address unavailable");
 
     for (const [width, suffix] of [
+      [1280, "?candidate=candidate.language.6a"],
+      [390, "?candidate=candidate.language.696f"],
+      [390, "?candidate=candidate.language.76"],
+      [1280, "?probe=reader"],
+      [390, "?probe=reader"],
       [1280, "?probe=discovery"],
       [390, "?probe=discovery"],
       [1280, "?catalog=languages&usage=ranked&order=common"],

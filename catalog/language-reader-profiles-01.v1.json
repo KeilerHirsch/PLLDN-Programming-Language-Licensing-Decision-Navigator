@@ -1,0 +1,818 @@
+[
+  {
+    "name": "ABAP",
+    "implementation": {
+      "name": "SAP BTP ABAP Environment",
+      "version_scope": "ABAP Cloud console-class workflow; account and service release specific.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "SAP first ABAP console application",
+        "url": "https://developers.sap.com/tutorials/abap-environment-console-application",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "trial",
+        "label": "SAP BTP trial account setup",
+        "url": "https://developers.sap.com/tutorials/hcp-create-trial-account",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build application classes inside a connected SAP ABAP environment; the example is not an independent desktop executable.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "An ABAP environment user and Eclipse with ABAP Development Tools are required.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Activate a class implementing IF_OO_ADT_CLASSRUN, then run it in the ADT application console.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Classes implement interfaces and methods; out->write sends data to the console.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "ADT supplies project connection, package creation, class activation and console execution.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Packages and transport requests belong to the connected SAP system; retain that context when moving a class.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "SAP documents licensed and trial account paths; trial setup does not establish production pricing.",
+        "source_ids": ["trial"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "zcl_plldn.abap",
+      "code": "CLASS zcl_plldn DEFINITION PUBLIC FINAL CREATE PUBLIC.\n  PUBLIC SECTION.\n    INTERFACES if_oo_adt_classrun.\nENDCLASS.\nCLASS zcl_plldn IMPLEMENTATION.\n  METHOD if_oo_adt_classrun~main.\n    out->write( 'PLLDN' ).\n  ENDMETHOD.\nENDCLASS.",
+      "run_instructions": "Create ZCL_PLLDN in an ADT ABAP Cloud project, paste the class, save and activate. Choose Run As > ABAP Application (Console).",
+      "expected_result": "The ADT console displays PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "SAP BTP ABAP Environment",
+        "role": "runtime",
+        "spdx_expression": null,
+        "source_ids": ["guide", "trial"],
+        "scope": "Hosted SAP service; account-specific contract.",
+        "notice": "The setup distinguishes licensed and trial access; it does not establish a redistributable SPDX software licence."
+      }
+    ]
+  },
+  {
+    "name": "AIDL",
+    "implementation": {
+      "name": "Android SDK AIDL Java Binder backend",
+      "version_scope": "Android application IPC workflow; not all hardware-interface backends.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Android Developers AIDL IPC guide",
+        "url": "https://developer.android.com/develop/background-work/services/aidl",
+        "checked_on": "2026-10-12"
+      },
+      {
+        "id": "license",
+        "label": "AOSP licence and header policy",
+        "url": "https://source.android.com/docs/setup/contribute/licenses",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Describe cross-application Android service interfaces; ordinary local calls can use Binder directly instead.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Understand bound services and Java-style signatures before implementing the generated Stub.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "An Android app build generates Binder bindings from .aidl files; a service and client must still implement the exchange.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Remote calls can arrive concurrently on Binder threads; validate incoming data and synchronize shared state.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Android Studio or Gradle generates bindings; app code supplies onBind and ServiceConnection logic.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Preserve released interface compatibility because separately installed clients carry their own definitions.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Compiler and Android platform licences are component-specific; the AOSP policy alone is not a binary licence audit.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "IAdder.aidl",
+      "code": "package com.example;\ninterface IAdder {\n    int add(int left, int right);\n}",
+      "run_instructions": "Place IAdder.aidl at src/main/aidl/com/example/IAdder.aidl in the documented project layout. Place the file in an Android project's AIDL source directory and build the configured project with Gradle. A bound service must extend IAdder.Stub and implement add before clients can call it.",
+      "expected_result": "The build generates IAdder bindings. The interface alone performs no addition.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Android SDK AIDL Java Binder backend",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "No exact SDK compiler binary licence was established; inspect that distribution's file notices."
+      }
+    ]
+  },
+  {
+    "name": "APL",
+    "implementation": {
+      "name": "Dyalog APL",
+      "version_scope": "Dyalog interactive array notation; licensing is Dyalog-specific.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Dyalog array notation and execution model",
+        "url": "https://www.dyalog.com/what-is-dyalog.htm",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "start",
+        "label": "Dyalog getting started and TryAPL",
+        "url": "https://www.dyalog.com/getting-started.htm",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Dyalog prices and licences",
+        "url": "https://www.dyalog.com/prices-and-licences.htm",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Express array transformations and numerical models interactively; the symbolic notation needs its own learning step.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn array expressions and APL symbol entry through the linked novice lessons or TryAPL.",
+        "source_ids": ["start"]
+      },
+      "execution": {
+        "text": "Evaluate expressions over vectors and matrices directly in the Dyalog session.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Reduction (+/) computes a sum; tally (≢) counts elements, so a mean needs no explicit loop.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Dyalog links manuals, fonts and keyboard resources; TryAPL supports simple expressions online.",
+        "source_ids": ["start"]
+      },
+      "maintenance": {
+        "text": "Multi-user deployment and distributing Dyalog with an application can require separate runtime licensing.",
+        "source_ids": ["license"]
+      },
+      "costs": {
+        "text": "Basic licensing restricts commercial purposes; Commercial development and runtime distribution have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "mean.apl",
+      "code": "data ← 2 4 6\n(+/data) ÷ ≢data",
+      "run_instructions": "Enter both expressions in Dyalog or TryAPL and evaluate the final line.",
+      "expected_result": "The mean is 4.",
+      "source_ids": ["guide", "start"],
+      "try_url": "https://tryapl.org/",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Dyalog APL",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "Dyalog development environment: proprietary Basic, Commercial and runtime agreements.",
+        "notice": "Choose the agreement matching your purpose; a development licence does not itself grant all runtime distribution rights."
+      }
+    ]
+  },
+  {
+    "name": "ATS",
+    "implementation": {
+      "name": "ATS2 / Postiats",
+      "version_scope": "ATS2 native workflow; ATS1 and optional collectors require separate consideration.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "ATS language and learning guidance",
+        "url": "https://www.cs.bu.edu/~hwxi/atslangweb/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "build",
+        "label": "ATS-Postiats build README",
+        "url": "https://raw.githubusercontent.com/githwxi/ATS-Postiats/master/README",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "ATS-Postiats COPYING GPL-3.0 text",
+        "url": "https://raw.githubusercontent.com/githwxi/ATS-Postiats/master/COPYING-gpl-3.0.txt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "compiler-grant",
+        "label": "ATS/Postiats compiler GPL version grant",
+        "url": "https://raw.githubusercontent.com/githwxi/ATS-Postiats/master/src/pats_main.dats",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Combine systems programming with type-level proofs; dependent and linear types extend the learning work beyond syntax.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Study static types and resource-sensitive programming before using the proof and linear-type features.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "ATS2 generates code for a C toolchain; Postiats supplies the compiler and supporting libraries.",
+        "source_ids": ["build"]
+      },
+      "behavior": {
+        "text": "The functional core is call-by-value; linear types track resources that cannot be duplicated freely.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Postiats documents its compiler bootstrap and C compiler build requirements in the source distribution.",
+        "source_ids": ["build"]
+      },
+      "maintenance": {
+        "text": "Rebuilding from source involves the documented bootstrap compiler and selected optional dependencies.",
+        "source_ids": ["build"]
+      },
+      "costs": {
+        "text": "The compiler's source header permits GPL-3.0-or-later; standard-library and generated-application terms must be considered separately.",
+        "source_ids": ["license", "compiler-grant"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.dats",
+      "code": "#include \"share/atspre_staload.hats\"\nimplement main0 () = println!(\"PLLDN\")",
+      "run_instructions": "With ATS2/Postiats installed and its environment configured, compile using patscc -o hello hello.dats, then run hello.",
+      "expected_result": "The executable prints PLLDN.",
+      "source_ids": ["guide", "build"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "ATS2 / Postiats",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-or-later",
+        "source_ids": ["license", "compiler-grant"],
+        "scope": "Core implementation covered by the cited source-header grant; separately marked libraries and dependencies are excluded.",
+        "notice": "The compiler header expressly permits GPL version 3 or later; preserve covered-source licences and notices."
+      }
+    ]
+  },
+  {
+    "name": "ActionScript",
+    "implementation": {
+      "name": "Apache Royale compiler and Express framework",
+      "version_scope": "Royale ActionScript 3 in an MXML browser application; not legacy Flash Player.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Royale build and run a browser application",
+        "url": "https://apache.github.io/royale-docs/get-started/hello-world",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Apache Royale compiler LICENSE",
+        "url": "https://raw.githubusercontent.com/apache/royale-compiler/develop/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Build browser frontends through Royale, combining ActionScript behavior with MXML view declarations.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install the Royale SDK; learn ActionScript data declarations and the MXML component namespaces.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "mxmlc generates browser output; open bin/js-release/index.html after successful compilation.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "ActionScript values provide data while MXML connects the view components and properties.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The SDK supplies a compiler and examples; documentation links formatter, linter and testing guidance.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep the selected SDK and framework with the project so its component namespaces resolve consistently.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler has Apache-2.0 terms; framework and bundled dependency notices must be checked separately.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "markup",
+      "filename": "HelloWorld.mxml",
+      "code": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<js:Application xmlns:fx=\"http://ns.adobe.com/mxml/2009\" xmlns:js=\"library://ns.apache.org/royale/express\">\n  <fx:Script><![CDATA[\n    public const greeting:String = \"PLLDN\";\n  ]]></fx:Script>\n  <js:initialView><js:View><js:Label text=\"{greeting}\"/></js:View></js:initialView>\n</js:Application>",
+      "run_instructions": "Place HelloWorld.mxml at src/HelloWorld.mxml in the documented project layout. Run the installed Royale mxmlc src/HelloWorld.mxml from the project directory. Open the generated bin/js-release/index.html.",
+      "expected_result": "The browser view displays a label reading PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Apache Royale compiler and Express framework",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Ada",
+    "implementation": {
+      "name": "GCC GNAT native Ada compiler",
+      "version_scope": "GNAT console workflow using Ada.Text_IO; target runtimes and proof tooling are separate.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GNAT simple Ada build workflow",
+        "url": "https://gcc.gnu.org/onlinedocs/gnat_ugn/Running-a-Simple-Ada-Program.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "language",
+        "label": "AdaCore imperative Ada introduction",
+        "url": "https://learn.adacore.com/courses/intro-to-ada/chapters/imperative_language.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "GCC compiler COPYING3",
+        "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/master/COPYING3",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "runtime-license",
+        "label": "GNAT Ada.Text_IO runtime licence header",
+        "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/master/gcc/ada/libgnat/a-textio.ads",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "compiler-grant",
+        "label": "GNAT compiler GPL version grant",
+        "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/master/gcc/ada/gnat1drv.adb",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Write native programs with declared types, packages and explicit control flow; compilation alone is not a formal proof.",
+        "source_ids": ["language"]
+      },
+      "prerequisites": {
+        "text": "Install GNAT for a matching native target before compiling the console example.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "gnatmake compiles, binds and links a main procedure into an executable.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Declarations and package interfaces organize code; runtime checks complement static type checking.",
+        "source_ids": ["language"]
+      },
+      "tooling": {
+        "text": "The GNAT guide explains the compiler, binder and linker stages behind gnatmake.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Match source filenames to their library unit names so GNAT can locate dependent units.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "GNAT compiler source has GPL-3.0-or-later terms; the cited Ada.Text_IO runtime header additionally grants GCC Runtime Library Exception 3.1.",
+        "source_ids": ["runtime-license", "compiler-grant"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.adb",
+      "code": "with Ada.Text_IO;\nprocedure Hello is\nbegin\n   Ada.Text_IO.Put_Line (\"PLLDN\");\nend Hello;",
+      "run_instructions": "Run gnatmake hello.adb, then run hello (hello.exe on Windows).",
+      "expected_result": "The program prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GCC GNAT compiler",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-or-later",
+        "source_ids": ["license", "compiler-grant"],
+        "scope": "GNAT compiler components covered by the cited driver grant; runtime libraries and separately marked dependencies are excluded.",
+        "notice": "The compiler header expressly permits GPL version 3 or later; preserve covered-source licences and notices."
+      },
+      {
+        "component": "GNAT Ada.Text_IO implementation",
+        "role": "runtime",
+        "spdx_expression": "GPL-3.0-or-later WITH GCC-exception-3.1",
+        "source_ids": ["runtime-license"],
+        "scope": "The portions covered by the cited runtime header, not all libraries.",
+        "notice": "The header expressly grants the GCC Runtime Library Exception 3.1."
+      }
+    ]
+  },
+  {
+    "name": "Agda",
+    "implementation": {
+      "name": "Agda 2",
+      "version_scope": "Dependent-type checker; built-in language constructs without external libraries.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Agda types and proof assistant overview",
+        "url": "https://agda.readthedocs.io/en/latest/getting-started/what-is-agda.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tutorial",
+        "label": "Agda interactive checking and compilation",
+        "url": "https://agda.readthedocs.io/en/latest/getting-started/hello-world.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Agda implementation LICENSE",
+        "url": "https://raw.githubusercontent.com/agda/agda/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Model properties in types and develop constructive proofs; specifications also have to be written.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn algebraic data types and signatures before attempting dependent proofs.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Use interactive checking or agda on a file; executable compilation is a separate backend workflow.",
+        "source_ids": ["tutorial"]
+      },
+      "behavior": {
+        "text": "Dependent types encode value-indexed constraints; unsafe options and postulates change what is established.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Emacs Agda mode loads definitions and reports type errors; the documented GHC backend supports compilation.",
+        "source_ids": ["tutorial"]
+      },
+      "maintenance": {
+        "text": "Built-in modules provide minimal support; additional standard-library bindings are separately selected dependencies.",
+        "source_ids": ["tutorial"]
+      },
+      "costs": {
+        "text": "Agda has MIT terms; preserve copyright and permission notices when redistributing its implementation.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Flag.agda",
+      "code": "module Flag where\n\ndata Flag : Set where\n  ready : Flag\n\ndefault : Flag\ndefault = ready",
+      "run_instructions": "Load Flag.agda in Emacs Agda mode with C-c C-l, or run agda Flag.agda.",
+      "expected_result": "The checker accepts Flag and default; this example has no console output.",
+      "source_ids": ["tutorial"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Agda 2",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Aiken",
+    "implementation": {
+      "name": "Aiken compiler and test runner",
+      "version_scope": "Documented project and unit-test workflow for Cardano validators; no network deployment.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Aiken validator development and tests",
+        "url": "https://aiken-lang.org/example--hello-world/basics",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Aiken compiler LICENSE",
+        "url": "https://raw.githubusercontent.com/aiken-lang/aiken/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Develop Cardano validator logic and test component functions; a unit test does not submit a transaction.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Understand datum, redeemer and transaction context when progressing from pure functions to validators.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "aiken check compiles project modules and runs tests; on-chain deployment is a separate step.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Tests return Boolean results; ledger validation and test placeholders have different roles.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The workflow supplies dependency resolution, test traces and execution-unit reports for the tested code.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Compiler and library versions affect validator APIs; the tutorial names dependencies explicitly.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler has Apache-2.0 terms; compiler licensing does not account for ledger transaction charges.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "plldn.ak",
+      "code": "pub fn accepts(amount: Int) -> Bool {\n  amount >= 10\n}\n\ntest accepts_minimum() {\n  accepts(10) && !accepts(9)\n}",
+      "run_instructions": "Place plldn.ak at lib/plldn.ak in the documented project layout. Create a project with aiken new, add lib/plldn.ak, and run aiken check. This tests only a pure decision function.",
+      "expected_result": "accepts_minimum passes; no contract is deployed or transaction sent.",
+      "source_ids": ["guide"],
+      "try_url": "https://play.aiken-lang.org/",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Aiken compiler and test runner",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Alloy",
+    "implementation": {
+      "name": "Alloy Analyzer",
+      "version_scope": "Alloy Analyzer 6 family; introductory relational model, not temporal checking.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Alloy relational modeling tutorial",
+        "url": "https://alloytools.org/tutorials/online/maintext-FS-1.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "run",
+        "label": "Alloy Analyzer launch instructions",
+        "url": "https://alloytools.org/download.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Alloy LICENSE with applicability warning",
+        "url": "https://raw.githubusercontent.com/AlloyTools/org.alloytools.alloy/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Search relational designs for instances and counterexamples; bounded analysis applies to the specified search scope.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn sets, relations, quantifiers and constraints before reading generated model instances.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Launch the Analyzer JAR with Java, open a model, and execute run or check.",
+        "source_ids": ["run"]
+      },
+      "behavior": {
+        "text": "Signatures describe sets and fields describe relations; facts constrain every explored instance.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The Analyzer bundles model finding, SAT solvers, libraries and examples; temporal tools can be additional dependencies.",
+        "source_ids": ["run"]
+      },
+      "maintenance": {
+        "text": "Adding a fact can exclude a counterexample an assertion was supposed to reveal.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The root licence contains an applicability warning; no unambiguous whole-bundle SPDX expression is asserted.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "items.als",
+      "code": "sig Item {}\none sig Chosen { value: one Item }\nrun { some Item } for 3",
+      "run_instructions": "Launch the Analyzer JAR with java -jar, open items.als and execute its run command.",
+      "expected_result": "An instance contains at least one Item and a single Chosen atom related to exactly one Item.",
+      "source_ids": ["guide", "run"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Alloy Analyzer",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "The root file says its Apache text is not yet valid and labels current code MIT. Audit the selected release and bundled solvers before redistribution."
+      }
+    ]
+  },
+  {
+    "name": "AngelScript",
+    "implementation": {
+      "name": "AngelCode Scripting Library",
+      "version_scope": "Embedded engine with documented C++ host registrations; not a standalone executable.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "AngelScript first script and host integration",
+        "url": "https://www.angelcode.com/angelscript/sdk/docs/manual/doc_hello_world.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "AngelScript library licence",
+        "url": "https://www.angelcode.com/angelscript/sdk/docs/manual/doc_license.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Embed typed scripts in C++ applications; the host chooses which native facilities scripts may access.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Understand C++ integration and registration before expecting scripts to perform host operations.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "A host creates the engine, builds a module and executes a function through a context.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "String support and print are registered facilities; scripts cannot assume every embedding supplies them.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "SDK add-ons and examples demonstrate integration; message callbacks explain errors alongside API return codes.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Preserve the exposed native interface when changing the host; scripts depend on registered signatures.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Commercial use is allowed subject to origin, modification and licence-notice restrictions.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.as",
+      "code": "void main()\n{\n    print(\"PLLDN\");\n}",
+      "run_instructions": "Configure the first-script guide's host with the standard-string add-on and void print(const string &in). Build this script module and execute void main().",
+      "expected_result": "The host print callback receives PLLDN; no standalone interpreter is assumed.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "AngelCode Scripting Library",
+        "role": "implementation",
+        "spdx_expression": "Zlib",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Do not misrepresent origin, mark altered source versions and retain the notice in source distributions."
+      }
+    ]
+  }
+]

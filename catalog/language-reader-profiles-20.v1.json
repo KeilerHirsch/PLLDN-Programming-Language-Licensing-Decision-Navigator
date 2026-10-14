@@ -1,0 +1,324 @@
+[
+  {
+    "name": "Yacc",
+    "implementation": {
+      "name": "GNU Bison in its Yacc-compatible C workflow",
+      "version_scope": "Bison manual and generator source checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GNU Bison Yacc-compatible manual",
+        "url": "https://raw.githubusercontent.com/akimd/bison/master/doc/bison.texi",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Bison GPL license text",
+        "url": "https://raw.githubusercontent.com/akimd/bison/master/COPYING",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "grant",
+        "label": "Bison generator license grant",
+        "url": "https://raw.githubusercontent.com/akimd/bison/master/src/main.c",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Yacc-style grammars describe syntax and semantic actions for generated parsers; this profile selects GNU Bison.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn grammar rules, tokens and a lexer/parser interface; this C workflow also needs a C compiler.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Bison generates C parser source, which is compiled with the supplied lexer and driver.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "yyparse consumes tokens from yylex and executes actions when grammar rules reduce.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Bison provides conflict diagnostics and parser tracing; a lexer can be handwritten or generated separately.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep grammar, lexer, generator version and chosen skeleton together to reproduce parser behavior.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The generator is GPL-3.0-or-later; the manual explains a separate generated-parser exception whose applicability is visible in output notices.",
+        "source_ids": ["license", "grant", "guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "marker.y",
+      "code": "%{\n#include <stdio.h>\nint yylex(void);\nvoid yyerror(const char *s);\n%}\n%%\ninput: 'p' '\\n' { puts(\"accepted\"); };\n%%\nint yylex(void) { return getchar(); }\nvoid yyerror(const char *s) { fprintf(stderr, \"%s\\n\", s); }\nint main(void) { return yyparse(); }\n",
+      "run_instructions": "Generate with bison -o marker.c marker.y, compile with cc marker.c -o marker, and run marker with input p followed by a newline and end-of-input.",
+      "expected_result": "Accepts that input and prints accepted; other characters cause a parser error.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GNU Bison in its Yacc-compatible C workflow",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-or-later",
+        "source_ids": ["license", "grant"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "This expression covers the generator. Inspect the selected skeleton's generated output for the documented parser exception rather than assigning generator terms to every generated application."
+      }
+    ]
+  },
+  {
+    "name": "Yul",
+    "implementation": {
+      "name": "solc standalone Yul compiler, EVM dialect",
+      "version_scope": "Solidity 0.8.38-develop Yul documentation checked on 2026-10-13; no latest stable-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Yul syntax, EVM dialect and standalone compilation",
+        "url": "https://docs.soliditylang.org/en/latest/yul.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "solc implementation license text",
+        "url": "https://raw.githubusercontent.com/argotorg/solidity/develop/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Yul is compiler intermediate code and a standalone low-level EVM language; it also appears in Solidity inline assembly.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn EVM values, memory, storage and return-data conventions before relying on low-level code.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "solc --strict-assembly compiles standalone Yul; a separate EVM host executes the emitted bytecode.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Built-ins such as add, mstore and return operate on EVM values and memory; they do not provide console printing.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The command-line compiler and standard-JSON interface accept Yul, with explicit optimizer and EVM-target settings.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The manual describes active development and fully implemented bytecode generation for the EVM dialect; pin compiler and target settings.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler's GPL text is separate from Yul program licensing and any host or network execution costs.",
+        "source_ids": ["license", "guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "total.yul",
+      "code": "object \"Total\" {\n    code {\n        let total := add(2, 3)\n        mstore(0, total)\n        return(0, 32)\n    }\n}\n",
+      "run_instructions": "Compile locally with solc --strict-assembly --bin total.yul. To inspect the return value, execute that code in a local EVM harness; no public deployment is required.",
+      "expected_result": "Compilation emits EVM bytecode. Executing this code returns a 32-byte word encoding 5; it is a return-data demonstration, not a persistent callable deployed contract.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "solc standalone Yul compiler, EVM dialect",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The linked compiler GPL text does not establish a complete component-and-exception expression here. No license is inferred for all Yul code or EVM hosts."
+      }
+    ]
+  },
+  {
+    "name": "Zeek",
+    "implementation": {
+      "name": "Zeek scripting engine",
+      "version_scope": "Book of Zeek 9.0.0 scripting documentation checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Zeek scripting events and data types",
+        "url": "https://docs.zeek.org/en/current/tutorial/scripting/basics.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Zeek bare-mode script testing",
+        "url": "https://docs.zeek.org/en/current/advanced/devel/btest.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Zeek source license",
+        "url": "https://raw.githubusercontent.com/zeek/zeek/master/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Zeek scripts react to analysis events and shape network logs and detections within the Zeek host.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn event handlers and native address, subnet and port types; packet analysis additionally needs an appropriate input source.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The host invokes startup and protocol handlers; this small script runs in bare mode without packet input.",
+        "source_ids": ["guide", "example"]
+      },
+      "behavior": {
+        "text": "Queued events run subsequently rather than returning values like immediate function calls.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "ZeekControl manages deployment configuration, while BTest supports focused script and trace-based tests.",
+        "source_ids": ["guide", "example"]
+      },
+      "maintenance": {
+        "text": "Keep scripts matched to the Zeek event APIs and deployed configuration; handler ordering can use explicit priorities.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Zeek's implementation uses BSD-3-Clause; separately loaded packages and deployment services retain their own terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "port.zeek",
+      "code": "event zeek_init()\n    {\n    local service: port = 443/tcp;\n    print service;\n    }\n",
+      "run_instructions": "With Zeek installed, run zeek -b port.zeek in an empty working directory.",
+      "expected_result": "Prints the port value 443/tcp at startup without requiring a traffic capture.",
+      "source_ids": ["guide", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Zeek scripting engine",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain the required notices and disclaimer; the source license does not cover every external Zeek package."
+      }
+    ]
+  },
+  {
+    "name": "Zig",
+    "implementation": {
+      "name": "Zig 0.15.2 compiler",
+      "version_scope": "Zig 0.15.2 language reference and tagged license; installation guidance checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Zig 0.15.2 language reference",
+        "url": "https://ziglang.org/documentation/0.15.2/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "workflow",
+        "label": "Zig installation and project workflow",
+        "url": "https://ziglang.org/learn/getting-started/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Zig 0.15.2 license",
+        "url": "https://raw.githubusercontent.com/ziglang/zig/0.15.2/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Zig compiles typed programs and provides low-level control, compile-time expressions and C integration.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install the selected Zig bundle; learn explicit types, optionals, errors and allocator ownership when allocating memory.",
+        "source_ids": ["guide", "workflow"]
+      },
+      "execution": {
+        "text": "zig build-exe compiles an executable; projects can instead use the generated build.zig workflow.",
+        "source_ids": ["guide", "workflow"]
+      },
+      "behavior": {
+        "text": "Compile-time evaluation and runtime checks have different rules; undefined does not initialize a meaningful value.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The compiler supports tests and build commands, and the getting-started guide links editor integration through ZLS.",
+        "source_ids": ["guide", "workflow"]
+      },
+      "maintenance": {
+        "text": "Use documentation for the exact compiler version; the project distinguishes tagged releases from development builds.",
+        "source_ids": ["workflow"]
+      },
+      "costs": {
+        "text": "The selected compiler uses MIT; bundled third-party code and linked C libraries require their own notices.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "total.zig",
+      "code": "const std = @import(\"std\");\n\npub fn main() void {\n    const total: i32 = 2 + 3;\n    std.debug.print(\"{d}\\n\", .{total});\n}\n",
+      "run_instructions": "Using Zig 0.15.2, run zig build-exe total.zig, then run the generated total executable.",
+      "expected_result": "Displays 5 through the standard library's debug output.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Zig 0.15.2 compiler",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The tagged compiler license grants MIT for covered files; bundled dependencies and target runtime components may differ."
+      }
+    ]
+  }
+]

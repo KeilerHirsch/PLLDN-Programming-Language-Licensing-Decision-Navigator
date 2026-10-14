@@ -1,0 +1,904 @@
+[
+  {
+    "name": "VBA",
+    "implementation": {
+      "name": "Microsoft Office Visual Basic for Applications",
+      "version_scope": "Office VBA getting-started and MsgBox documentation checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Getting started with VBA in Office",
+        "url": "https://learn.microsoft.com/en-us/office/vba/library-reference/concepts/getting-started-with-vba-in-office",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "VBA MsgBox function",
+        "url": "https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/msgbox-function",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "VBA automates an Office host's object model, such as workbook or document operations; capabilities depend on that application.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Use an Office host with VBA and learn its objects, methods and properties; its macro policy governs execution.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Procedures run inside the Office application rather than as independent console executables.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Object-model calls act on the host's documents; MsgBox waits for a button and returns the selected button value.",
+        "source_ids": ["guide", "example"]
+      },
+      "tooling": {
+        "text": "The Visual Basic Editor and macro recorder help inspect procedures and discover host operations.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep the Office application and its object-model reference identified; APIs are not interchangeable across hosts.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The cited language documentation establishes no implementation SPDX grant or current Office price; host licensing remains separate.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Hello.bas",
+      "code": "Sub Hello()\n    MsgBox \"PLLDN\"\nEnd Sub\n",
+      "run_instructions": "In an Office host whose macro policy permits this code, insert a standard module in the Visual Basic Editor, paste the procedure and run Hello.",
+      "expected_result": "A message dialog displays PLLDN; closing it returns control to the Office host.",
+      "source_ids": ["guide", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Microsoft Office Visual Basic for Applications",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Microsoft Office's VBA implementation is governed by the installed host's product terms; no SPDX expression is proven by these language reference pages."
+      }
+    ]
+  },
+  {
+    "name": "VBScript",
+    "implementation": {
+      "name": "Microsoft VBScript in Windows Script Host",
+      "version_scope": "Archived VBScript reference and current Windows cscript/deprecation documentation checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Microsoft VBScript language reference",
+        "url": "https://learn.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/d1wf56tt(v=vs.84)",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Windows cscript command",
+        "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cscript",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "lifecycle",
+        "label": "Deprecated Windows features",
+        "url": "https://learn.microsoft.com/en-us/windows/whats-new/deprecated-features",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "VBScript can maintain existing Windows Script Host automation; the engine's availability depends on the Windows installation.",
+        "source_ids": ["example"]
+      },
+      "prerequisites": {
+        "text": "Understand VBScript syntax and the host's exposed objects; cscript requires an installed script engine.",
+        "source_ids": ["guide", "example"]
+      },
+      "execution": {
+        "text": "cscript runs .vbs files in a command-line host; wscript is a distinct Windows host.",
+        "source_ids": ["example"]
+      },
+      "behavior": {
+        "text": "The host supplies WScript rather than VBScript providing every operating-system function itself.",
+        "source_ids": ["guide", "example"]
+      },
+      "tooling": {
+        "text": "cscript supports engine selection, arguments and diagnostics; the language reference is archived documentation.",
+        "source_ids": ["example"]
+      },
+      "maintenance": {
+        "text": "Microsoft lists VBScript as deprecated and describes a feature-on-demand stage before removal; verify the target Windows image.",
+        "source_ids": ["lifecycle"]
+      },
+      "costs": {
+        "text": "No implementation SPDX grant or independent engine price is established here; Windows product terms govern the installed component.",
+        "source_ids": ["example"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.vbs",
+      "code": "WScript.Echo \"PLLDN\"\n",
+      "run_instructions": "On Windows with the VBScript engine installed and execution allowed, run cscript //nologo hello.vbs.",
+      "expected_result": "Prints PLLDN in the console.",
+      "source_ids": ["example", "guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Microsoft VBScript in Windows Script Host",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The Windows VBScript engine's product license is not established by these scripting references; do not infer .NET or another Visual Basic implementation's license."
+      }
+    ]
+  },
+  {
+    "name": "VHDL",
+    "implementation": {
+      "name": "GHDL VHDL analyzer and simulator",
+      "version_scope": "GHDL 7.0.0-dev documentation checked on 2026-10-13; example uses basic VHDL simulation constructs.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GHDL and VHDL execution model",
+        "url": "https://ghdl.github.io/ghdl/about.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "GHDL design and testbench tutorial",
+        "url": "https://ghdl.github.io/ghdl/quick_start/simulation/adder/index.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "workflow",
+        "label": "GHDL analyze, elaborate and run workflow",
+        "url": "https://ghdl.github.io/ghdl/quick_start/simulation/hello/index.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "GHDL compiler license",
+        "url": "https://raw.githubusercontent.com/ghdl/ghdl/master/COPYING.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "grant",
+        "label": "GHDL driver license grant",
+        "url": "https://raw.githubusercontent.com/ghdl/ghdl/master/src/ghdldrv/ghdlmain.adb",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "VHDL models logic circuits and electronic systems; this profile uses GHDL for behavioral simulation.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn entities, architectures, concurrent signals and testbenches; simulation and physical synthesis are different workflows.",
+        "source_ids": ["guide", "example"]
+      },
+      "execution": {
+        "text": "GHDL analyzes sources, elaborates a top-level entity and runs the resulting simulation.",
+        "source_ids": ["workflow"]
+      },
+      "behavior": {
+        "text": "Concurrent assignments react to signal changes; testbench assertions can check outputs after simulated time has advanced.",
+        "source_ids": ["example"]
+      },
+      "tooling": {
+        "text": "GHDL provides analysis, simulation and synthesis-related tooling; the tutorial separates a design from its input-generating testbench.",
+        "source_ids": ["guide", "example"]
+      },
+      "maintenance": {
+        "text": "Pin the VHDL standard mode, backend and simulator version; a behavioral check does not establish hardware timing closure.",
+        "source_ids": ["guide", "example"]
+      },
+      "costs": {
+        "text": "GHDL's compiler grant is GPL-2.0-or-later; runtime libraries and external synthesis tools can have different terms.",
+        "source_ids": ["grant", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "inverter_test.vhdl",
+      "code": "entity inverter_test is\nend inverter_test;\n\narchitecture test of inverter_test is\n  signal input_bit : bit := '0';\n  signal output_bit : bit;\nbegin\n  output_bit <= not input_bit;\n  process\n  begin\n    wait for 1 ns;\n    assert output_bit = '1' report \"zero case failed\" severity failure;\n    input_bit <= '1';\n    wait for 1 ns;\n    assert output_bit = '0' report \"one case failed\" severity failure;\n    report \"two cases passed\" severity note;\n    wait;\n  end process;\nend test;\n",
+      "run_instructions": "Run ghdl -a inverter_test.vhdl, then ghdl -e inverter_test, then ghdl -r inverter_test. This is a simulation testbench, not a hardware programming image.",
+      "expected_result": "Checks both Boolean inversion cases and reports two cases passed at simulated time 2 ns.",
+      "source_ids": ["example", "workflow"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GHDL VHDL analyzer and simulator",
+        "role": "implementation",
+        "spdx_expression": "GPL-2.0-or-later",
+        "source_ids": ["license", "grant"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The driver states the version-2-or-later grant; GHDL explicitly warns that some runtime libraries have different terms."
+      }
+    ]
+  },
+  {
+    "name": "Vala",
+    "implementation": {
+      "name": "GNOME valac compiler",
+      "version_scope": "GNOME Vala compiler and Vala.dev samples checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Vala compiler and C/GObject integration",
+        "url": "https://raw.githubusercontent.com/GNOME/vala/main/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Vala applications and language features",
+        "url": "https://vala.dev/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Vala basic programs and compile workflow",
+        "url": "https://docs.vala.dev/sample-code/language-features-and-introductory-samples/basic-samples.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Vala distribution COPYING",
+        "url": "https://raw.githubusercontent.com/GNOME/vala/main/COPYING",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "grant",
+        "label": "valac compiler license grant",
+        "url": "https://raw.githubusercontent.com/GNOME/vala/main/compiler/valacompiler.vala",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Vala targets native applications and libraries, with direct access to C APIs and the GObject type system.",
+        "source_ids": ["guide", "overview"]
+      },
+      "prerequisites": {
+        "text": "Install valac and the C/GLib development environment; learn the binding packages needed by the intended library.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "valac translates Vala to C and uses native compilation; GTK applications additionally depend on their GTK package.",
+        "source_ids": ["guide", "overview"]
+      },
+      "behavior": {
+        "text": "Classes and interfaces integrate with GObject; procedural functions and type inference are also available.",
+        "source_ids": ["guide", "overview"]
+      },
+      "tooling": {
+        "text": "API binding files describe accessible C libraries; the compiler accepts package selections such as --pkg gtk4.",
+        "source_ids": ["guide", "overview"]
+      },
+      "maintenance": {
+        "text": "Keep compiler, GLib and binding package versions identified; generated C still depends on the linked native libraries.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler grant is LGPL-2.1-or-later; GLib, GTK and other libraries require separate component-level review.",
+        "source_ids": ["grant", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "total.vala",
+      "code": "void main () {\n    int total = 2 + 3;\n    stdout.printf (\"%d\\n\", total);\n}\n",
+      "run_instructions": "Compile with valac total.vala, then run the generated total executable using the platform's executable path syntax.",
+      "expected_result": "Prints 5.",
+      "source_ids": ["example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GNOME valac compiler",
+        "role": "implementation",
+        "spdx_expression": "LGPL-2.1-or-later",
+        "source_ids": ["license", "grant"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The valac driver explicitly grants LGPL version 2.1 or later; application code and linked libraries are outside this compiler-source scope."
+      }
+    ]
+  },
+  {
+    "name": "Verilog",
+    "implementation": {
+      "name": "Icarus Verilog compiler and vvp simulator",
+      "version_scope": "Icarus Verilog getting-started documentation checked on 2026-10-13; this example uses basic Verilog constructs.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Icarus Verilog simulation workflow",
+        "url": "https://steveicarus.github.io/iverilog/usage/getting_started.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Icarus supported language scope",
+        "url": "https://raw.githubusercontent.com/steveicarus/iverilog/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Icarus Verilog COPYING",
+        "url": "https://raw.githubusercontent.com/steveicarus/iverilog/master/COPYING",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "grant",
+        "label": "Icarus compiler license grant",
+        "url": "https://raw.githubusercontent.com/steveicarus/iverilog/master/main.cc",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "runtime",
+        "label": "vvp simulator license grant",
+        "url": "https://raw.githubusercontent.com/steveicarus/iverilog/master/vvp/main.cc",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Verilog describes hardware modules; Icarus compiles designs for backends and supports a subset of SystemVerilog.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Learn modules, signals and simulated delays; an input-driving testbench is needed to observe circuit behavior.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "iverilog normally generates vvp format, which the separate vvp runtime executes as a simulation.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Modules form a hierarchy; concurrent signal logic and timed procedural stimulus model different parts of the design.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The compiler accepts multiple source files or command files, and -s selects the simulation's root module.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep the language mode and Icarus version with the design; its README explicitly documents incomplete language coverage.",
+        "source_ids": ["overview"]
+      },
+      "costs": {
+        "text": "The selected compiler and vvp grants are GPL-2.0-or-later; vendor tools and device libraries have separate terms.",
+        "source_ids": ["license", "grant", "runtime"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "inverter_test.v",
+      "code": "module inverter_test;\n  reg input_bit;\n  wire output_bit;\n  assign output_bit = ~input_bit;\n  initial begin\n    input_bit = 0;\n    #1;\n    $display(\"input=%b output=%b\", input_bit, output_bit);\n    input_bit = 1;\n    #1;\n    $display(\"input=%b output=%b\", input_bit, output_bit);\n    $finish;\n  end\nendmodule\n",
+      "run_instructions": "Compile with iverilog -o inverter_test.vvp inverter_test.v, then run vvp inverter_test.vvp.",
+      "expected_result": "Displays input=0 output=1 and input=1 output=0 in simulation. This does not establish a synthesized circuit or physical timing.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Icarus Verilog compiler and vvp simulator",
+        "role": "implementation",
+        "spdx_expression": "GPL-2.0-or-later",
+        "source_ids": ["license", "grant"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The compiler and simulator source grants permit GPL version 2 or later; this is not a license for all Verilog implementations."
+      },
+      {
+        "component": "Icarus vvp simulator",
+        "role": "runtime",
+        "spdx_expression": "GPL-2.0-or-later",
+        "source_ids": ["runtime"],
+        "scope": "The vvp implementation only.",
+        "notice": "The simulator's own source grant states GPL version 2 or later; separately loaded modules retain their own terms."
+      }
+    ]
+  },
+  {
+    "name": "Visual Basic .NET",
+    "implementation": {
+      "name": "Visual Basic compiler on .NET",
+      "version_scope": "Visual Basic .NET, not classic VB6; selected .NET SDK and supported project templates determine the workflow.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Visual Basic language features",
+        "url": "https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "strategy",
+        "label": "Visual Basic language maintenance strategy",
+        "url": "https://learn.microsoft.com/en-us/dotnet/visual-basic/getting-started/strategy",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "cli",
+        "label": ".NET project templates and language option",
+        "url": "https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-new",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Microsoft .NET console tutorial with Visual Basic example",
+        "url": "https://learn.microsoft.com/en-us/dotnet/core/tutorials/with-visual-studio",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Roslyn compiler license",
+        "url": "https://raw.githubusercontent.com/dotnet/roslyn/main/License.txt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "runtime-license",
+        "label": ".NET runtime license",
+        "url": "https://raw.githubusercontent.com/dotnet/runtime/main/LICENSE.TXT",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Existing .NET code, Windows Forms and libraries. The language strategy does not extend VB into new workloads.",
+        "source_ids": ["strategy"]
+      },
+      "prerequisites": {
+        "text": "Learn .NET objects, modules and event handling; classic BASIC familiarity helps syntax but does not replace these concepts.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Create a Visual Basic .NET project and execute it with the selected .NET runtime.",
+        "source_ids": ["cli", "example"]
+      },
+      "behavior": {
+        "text": "Visual Basic provides object-oriented and event-oriented language features within .NET.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The .NET CLI offers a VB language option for supported templates; Visual Studio is another documented workflow.",
+        "source_ids": ["cli", "example"]
+      },
+      "maintenance": {
+        "text": "VB syntax remains stable; new runtime features generally receive consumption support without new VB syntax.",
+        "source_ids": ["strategy"]
+      },
+      "costs": {
+        "text": "Covered Roslyn compiler and .NET runtime code use MIT terms; project dependencies and IDE products are separate choices.",
+        "source_ids": ["license", "runtime-license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Program.vb",
+      "code": "Module Program\n    Sub Main()\n        System.Console.WriteLine(\"PLLDN\")\n    End Sub\nEnd Module\n",
+      "run_instructions": "Run dotnet new console -lang VB -o HelloVb. Replace that project's Program.vb with this example, then run dotnet run --project HelloVb.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["cli", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Roslyn Visual Basic compiler",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "scope": "Roslyn compiler code covered by its MIT grant.",
+        "notice": "Compiler terms do not cover every IDE extension or package.",
+        "source_ids": ["license"]
+      },
+      {
+        "component": ".NET runtime covered code",
+        "role": "runtime",
+        "spdx_expression": "MIT",
+        "scope": "Runtime code covered by the repository's MIT grant.",
+        "notice": "Check bundled component notices separately.",
+        "source_ids": ["runtime-license"]
+      }
+    ]
+  },
+  {
+    "name": "WebAssembly",
+    "implementation": {
+      "name": "WebAssembly Binary Toolkit (WABT)",
+      "version_scope": "WABT and core text-format documentation checked on 2026-10-13; example uses baseline i32 instructions.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "WABT tools and feature support",
+        "url": "https://github.com/WebAssembly/wabt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "WABT interpreter command manual",
+        "url": "https://webassembly.github.io/wabt/doc/wasm-interp.1.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "language",
+        "label": "WebAssembly text instruction syntax",
+        "url": "https://webassembly.github.io/spec/core/text/instructions.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "WABT license",
+        "url": "https://raw.githubusercontent.com/WebAssembly/wabt/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "WebAssembly modules are a low-level compilation format; WABT inspects, converts, validates and interprets them.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn module exports, typed instructions and host imports; install WABT for the text-to-binary workflow.",
+        "source_ids": ["guide", "language"]
+      },
+      "execution": {
+        "text": "wat2wasm creates a binary module and wasm-interp runs exported functions in its interpreter.",
+        "source_ids": ["guide", "example"]
+      },
+      "behavior": {
+        "text": "The example uses an i32 operand stack; operating-system services require a host interface rather than implicit availability.",
+        "source_ids": ["language", "example"]
+      },
+      "tooling": {
+        "text": "WABT includes wasm-objdump, wasm-validate and conversions between text and binary representations.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Match enabled WebAssembly features to the intended runtime; experimental proposals are selected through explicit tool options.",
+        "source_ids": ["guide", "example"]
+      },
+      "costs": {
+        "text": "WABT uses Apache-2.0; browser engines, WASI hosts and compiled application libraries have separate licenses.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "total.wat",
+      "code": "(module\n  (func (export \"total\") (result i32)\n    i32.const 2\n    i32.const 3\n    i32.add))\n",
+      "run_instructions": "Run wat2wasm total.wat -o total.wasm, then wasm-interp total.wasm --run-all-exports.",
+      "expected_result": "The exported total function returns the i32 value 5; the interpreter displays that result.",
+      "source_ids": ["guide", "example", "language"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "WebAssembly Binary Toolkit (WABT)",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "This grant covers the selected toolkit; it does not assign a license to the WebAssembly standard or every runtime."
+      }
+    ]
+  },
+  {
+    "name": "Wolfram Language",
+    "implementation": {
+      "name": "Wolfram Engine for Developers with WolframScript",
+      "version_scope": "Wolfram Engine FAQ, scripting documentation and developer terms checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Wolfram Engine FAQ and workflow",
+        "url": "https://www.wolfram.com/engine/faq/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "WolframScript command reference",
+        "url": "https://reference.wolfram.com/language/ref/program/wolframscript.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "print",
+        "label": "Wolfram Language Print",
+        "url": "https://reference.wolfram.com/language/ref/Print.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Free Wolfram Engine developer terms",
+        "url": "https://www.wolfram.com/legal/terms/wolfram-engine.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "The Engine runs Wolfram Language computation for development; deployment scope depends on the applicable product license.",
+        "source_ids": ["guide", "license"]
+      },
+      "prerequisites": {
+        "text": "Install and activate a suitable Engine and WolframScript; learn expression syntax and the distinction between local and cloud execution.",
+        "source_ids": ["guide", "example"]
+      },
+      "execution": {
+        "text": "WolframScript executes supplied code or .wls files using a local Engine or selected cloud environment.",
+        "source_ids": ["example"]
+      },
+      "behavior": {
+        "text": "Print emits expression output; notebook hosts display it in a Print cell rather than a console stream.",
+        "source_ids": ["print"]
+      },
+      "tooling": {
+        "text": "The CLI exposes code, file and execution-environment options; a notebook interface belongs to a separate product workflow.",
+        "source_ids": ["guide", "example"]
+      },
+      "maintenance": {
+        "text": "Identify the installed Engine and required online services; the terms allow changes or restrictions to supplied data access.",
+        "source_ids": ["license"]
+      },
+      "costs": {
+        "text": "The developer terms permit specified development uses and exclude production without appropriate licensing; no production price is established here.",
+        "source_ids": ["license", "guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.wls",
+      "code": "Print[\"PLLDN\"]\n",
+      "run_instructions": "With an activated Engine licensed for this development use, run wolframscript -file hello.wls in the local environment.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["example", "print"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Wolfram Engine for Developers with WolframScript",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The linked developer terms are a proprietary, restricted-use grant. No SPDX expression is assigned, and these terms must not be generalized to Mathematica or a production agreement."
+      }
+    ]
+  },
+  {
+    "name": "XQuery",
+    "implementation": {
+      "name": "BaseX XQuery processor",
+      "version_scope": "BaseX documentation and XQuery 3.1 feature reference checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "BaseX startup and execution environments",
+        "url": "https://docs.basex.org/main/Startup",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "BaseX XML and XQuery applications",
+        "url": "https://basex.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "BaseX command-line query execution",
+        "url": "https://docs.basex.org/main/Command-Line_Options",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "language",
+        "label": "BaseX XQuery 3.1 features",
+        "url": "https://docs.basex.org/main/XQuery_3.1",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "BaseX license",
+        "url": "https://raw.githubusercontent.com/BaseXdb/basex/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "XQuery queries and transforms structured data; BaseX adds an XML database, updates, full-text and web-application facilities.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Install BaseX and Java 17 or later for the documented distribution; learn sequences and query expressions.",
+        "source_ids": ["guide", "language"]
+      },
+      "execution": {
+        "text": "The standalone basex command evaluates a query file or string; server and HTTP modes serve different deployment needs.",
+        "source_ids": ["guide", "example"]
+      },
+      "behavior": {
+        "text": "XQuery expressions return sequences; the 3.1 feature set also includes maps with atomic keys and sequence values.",
+        "source_ids": ["language"]
+      },
+      "tooling": {
+        "text": "BaseX provides a desktop GUI, CLI, Java embedding and server interfaces.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Record the BaseX version and extension modules; processor-specific database or Java APIs affect query portability.",
+        "source_ids": ["guide", "language"]
+      },
+      "costs": {
+        "text": "BaseX uses BSD-3-Clause; Java, third-party modules and professional support have separate terms.",
+        "source_ids": ["license", "overview"]
+      }
+    },
+    "example": {
+      "kind": "query",
+      "filename": "squares.xq",
+      "code": "for $n in (1, 2, 3)\nreturn $n * $n\n",
+      "run_instructions": "With BaseX installed, run basex squares.xq.",
+      "expected_result": "Returns the sequence 1, 4, 9, serialized by the CLI as separate values.",
+      "source_ids": ["language", "example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "BaseX XQuery processor",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain the BaseX notices and disclaimer; the language standard and other XQuery processors are outside this implementation scope."
+      }
+    ]
+  },
+  {
+    "name": "Xtend",
+    "implementation": {
+      "name": "Eclipse Xtend compiler",
+      "version_scope": "Eclipse Xtend getting-started documentation and Xtext license checked on 2026-10-13.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Eclipse Xtend getting started",
+        "url": "https://help.eclipse.org/latest/topic/org.eclipse.xtend.doc/contents/101_gettingstarted.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Eclipse Xtext/Xtend repository license",
+        "url": "https://raw.githubusercontent.com/eclipse-xtext/xtext/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Xtend writes JVM application classes that are translated into Java source, with access to Java projects and libraries.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Use an Eclipse Java project with the Xtend SDK and xtend.lib on its classpath; learn classes and method declarations.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Eclipse generates Java into xtend-gen; the resulting class runs through the Java application workflow.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "A class with a static main method supplies the entry point; utility calls can depend on the Xtend runtime library.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The IDE adds missing runtime libraries through a quick fix and provides introductory example projects.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Preserve the Xtend compiler and runtime versions alongside the Java toolchain and build configuration.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The selected Xtext/Xtend repository uses EPL-2.0; the JDK and project libraries retain separate licenses.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Hello.xtend",
+      "code": "class Hello {\n    def static void main(String[] args) {\n        println(\"PLLDN\")\n    }\n}\n",
+      "run_instructions": "Place Hello.xtend in an Eclipse Java project's source folder with the Xtend SDK and xtend.lib configured. Build the project and run the generated Hello class as a Java application.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Eclipse Xtend compiler",
+        "role": "implementation",
+        "spdx_expression": "EPL-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The repository's EPL grant applies to its covered implementation files; the example also needs the runtime library and a separately licensed Java environment."
+      }
+    ]
+  }
+]

@@ -1,0 +1,788 @@
+[
+  {
+    "name": "OpenSCAD",
+    "implementation": {
+      "name": "OpenSCAD solid-model renderer",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "OpenSCAD language cheat sheet",
+        "url": "https://openscad.org/cheatsheet/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "OpenSCAD COPYING and CGAL exception",
+        "url": "https://raw.githubusercontent.com/openscad/openscad/master/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Parametric solid models constructed from geometric primitives.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn dimensions, transformations and boolean operations.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "OpenSCAD evaluates .scad source into a model for preview/rendering.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Primitives and operations describe geometry; the source is not a general UI program.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The built-in editor and documented language operations support iterative modeling.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Check render/export behavior and library versions before reusing models.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "COPYING includes GPL terms and a CGAL linking exception; external model libraries are separate.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "block.scad",
+      "code": "cube([20, 10, 5], center=true);",
+      "run_instructions": "Open block.scad in OpenSCAD and preview/render the model.",
+      "expected_result": "Shows a centered rectangular solid measuring 20 by 10 by 5 model units.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "OpenSCAD solid-model renderer",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Original GPL/CGAL exception is linked; no bare GPL identifier replaces the exception or licenses the user's model."
+      }
+    ]
+  },
+  {
+    "name": "Oz",
+    "implementation": {
+      "name": "Mozart 2 Oz programming system",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Mozart 2 implementation and build guide",
+        "url": "https://raw.githubusercontent.com/mozart/mozart2/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Mozart 2 license",
+        "url": "https://raw.githubusercontent.com/mozart/mozart2/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "output",
+        "label": "Mozart System output API implementation",
+        "url": "https://raw.githubusercontent.com/mozart/mozart2/master/lib/main/sys/System.oz",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "process",
+        "label": "Mozart Application process API implementation",
+        "url": "https://raw.githubusercontent.com/mozart/mozart2/master/lib/main/ap/Application.oz",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Oz programs run through the Mozart programming system.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install Mozart's matching runtime/compiler; building requires its documented dependencies.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The compiler creates code executed by the Mozart runtime.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Module functors import capabilities such as System for output and Application for process lifecycle.",
+        "source_ids": ["output", "process"]
+      },
+      "tooling": {
+        "text": "The distribution includes runtime, compiler and an interactive programming environment.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Choose a release for the target system rather than assuming an older Oz tutorial matches every tool.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Mozart 2 source uses a two-clause BSD grant; optional components have independent notices.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.oz",
+      "code": "functor\nimport\n    System\n    Application\n define\n    {System.showInfo \"PLLDN\"}\n    {Application.exit 0}\nend",
+      "run_instructions": "With Mozart 2 installed, compile using ozc -c hello.oz -o hello.ozf, then run ozengine hello.ozf.",
+      "expected_result": "Prints PLLDN and exits.",
+      "source_ids": ["guide", "output", "process"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Mozart 2 Oz programming system",
+        "role": "implementation",
+        "spdx_expression": "BSD-2-Clause",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain source/binary notices; the grant does not identify all separately packaged components."
+      }
+    ]
+  },
+  {
+    "name": "P4",
+    "implementation": {
+      "name": "p4c P4_16 compiler frontend",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "p4c reference compiler and backends",
+        "url": "https://github.com/p4lang/p4c",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "p4c Apache license text",
+        "url": "https://raw.githubusercontent.com/p4lang/p4c/main/LICENSES/Apache-2.0.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Packet-processing programs for a specified switch architecture.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn packet headers, parser states and the chosen target's architecture interfaces.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "p4c frontends check P4 source; target backends generate target-specific output.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Parser states extract header fields and transition to accept or reject.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The distribution includes p4test and target-specific compiler drivers.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Target architecture and backend support must be checked before deploying a compiled program.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The cited Apache license is part of p4c licensing; individual file notices and target SDK terms remain separate.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "parser.p4",
+      "code": "#include <core.p4>\nheader ByteHeader { bit<8> value; }\nstruct Headers { ByteHeader first; }\nparser ParseByte(packet_in packet, out Headers headers) {\n    state start {\n        packet.extract(headers.first);\n        transition accept;\n    }\n}",
+      "run_instructions": "Use the p4test frontend with P4_16 mode to check the parser unit. A complete deployment also needs a target architecture, controls and a main package.",
+      "expected_result": "Defines a parser extracting one byte; checking this unit is not a network deployment.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "p4c P4_16 compiler frontend",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Inspect per-file SPDX declarations; a license-text directory alone is not evidence for every target SDK component."
+      }
+    ]
+  },
+  {
+    "name": "PHP",
+    "implementation": {
+      "name": "PHP 8.4 interpreter",
+      "version_scope": "PHP 8.4 source-license scope and a command-line example; other releases must use their own distribution terms.",
+      "source_ids": ["guide", "license"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "PHP: server and command-line applications",
+        "url": "https://www.php.net/manual/en/introduction.php",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "PHP 8.4 distribution license",
+        "url": "https://raw.githubusercontent.com/php/php-src/PHP-8.4/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Server-generated web content and command-line scripts; browser-side execution is a separate JavaScript context.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Begin with PHP syntax and variables; web applications additionally need HTTP, HTML and a web-server setup.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The CLI needs a PHP interpreter; server-side use adds a web server and a PHP handler such as CGI or a server module.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "PHP code produces output on its host; procedural and object-oriented styles are available.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The manual documents CLI use, database extensions, debugging extensions and the function library.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Check the selected interpreter, server integration and installed extensions together before moving between deployments.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Hosting and extensions are deployment choices; PHP distribution terms also include acknowledgement and naming conditions.",
+        "source_ids": ["guide", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.php",
+      "code": "<?php\necho \"PLLDN\\n\";",
+      "run_instructions": "With a PHP CLI interpreter installed, run php hello.php. This example does not need a web server.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "PHP 8.4 interpreter",
+        "role": "implementation",
+        "spdx_expression": "PHP-3.01",
+        "source_ids": ["license"],
+        "scope": "The PHP-8.4 branch's distribution grant; bundled extensions can have their own notices.",
+        "notice": "Review acknowledgement and naming clauses; use the actual installed release's license."
+      }
+    ]
+  },
+  {
+    "name": "Pascal",
+    "implementation": {
+      "name": "Free Pascal compiler",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Free Pascal user guide",
+        "url": "https://www.freepascal.org/docs-html/user/user.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Free Pascal compiler and runtime license FAQ",
+        "url": "https://www.freepascal.org/faq.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Compiled Pascal and Object Pascal applications using Free Pascal.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn typed declarations and units; select a dialect compatible with existing source.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "fpc builds a native executable from a .pas program.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Dialect modes and unit interfaces affect compatibility with older Pascal code.",
+        "source_ids": ["guide", "license"]
+      },
+      "tooling": {
+        "text": "Compiler diagnostics and debug options support native development.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Prefer a release and record target/dialect settings rather than relying on development snapshots.",
+        "source_ids": ["license"]
+      },
+      "costs": {
+        "text": "Compiler GPL terms and the runtime's modified LGPL linking exception are different grants.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.pas",
+      "code": "program Hello;\nbegin\n  WriteLn('PLLDN');\nend.",
+      "run_instructions": "With Free Pascal installed, run fpc hello.pas, then run the generated hello executable.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Free Pascal compiler",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Original compiler and runtime terms are linked; exact version/exceptions must be checked in the selected distribution."
+      }
+    ]
+  },
+  {
+    "name": "Perl",
+    "implementation": {
+      "name": "Perl 5 interpreter",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Perl 5 introduction",
+        "url": "https://perldoc.perl.org/perlintro",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Perl 5 licensing",
+        "url": "https://dev.perl.org/licenses/",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Text processing, automation and general-purpose scripts.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn scalars, arrays, hashes and regular expressions; enable strict and warnings.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "perl executes .pl source files.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "strict rejects certain errors; warnings reports potential problems without necessarily stopping execution.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "perldoc and modules support discovery and reusable code.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "State the supported Perl version and review CPAN dependencies separately.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Perl 5 offers GPL version 1 or later, or the Artistic License.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.pl",
+      "code": "use strict;\nuse warnings;\nprint \"PLLDN\\n\";",
+      "run_instructions": "With Perl 5 installed, run perl hello.pl.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Perl 5 interpreter",
+        "role": "implementation",
+        "spdx_expression": "GPL-1.0-or-later OR Artistic-1.0-Perl",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Interpreter grant only; modules and bundled libraries may have independent licenses."
+      }
+    ]
+  },
+  {
+    "name": "PicoLisp",
+    "implementation": {
+      "name": "PicoLisp interpreter",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "PicoLisp tutorial",
+        "url": "https://software-lab.de/doc/tut.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "PicoLisp license",
+        "url": "https://software-lab.de/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Lisp programs with interactive scripting and persistent-data facilities.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn symbols, lists and evaluation through the tutorial's REPL exercises.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The interpreter evaluates expressions interactively or loads source files.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Symbols and lists are central runtime objects; evaluation is dynamic.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The tutorial includes editor, database and application examples.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep implementation and application libraries together when reproducing saved data/program behavior.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The implementation's MIT grant is separate from the application's data and libraries.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "query",
+      "filename": "addition.l",
+      "code": "(+ 2 3)",
+      "run_instructions": "Start the PicoLisp REPL and enter the expression.",
+      "expected_result": "Returns 5.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "PicoLisp interpreter",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain the copyright and permission notices."
+      }
+    ]
+  },
+  {
+    "name": "Pony",
+    "implementation": {
+      "name": "ponyc compiler",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Pony first program",
+        "url": "https://tutorial.ponylang.io/getting-started/hello-world.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tutorial",
+        "label": "Pony language tutorial",
+        "url": "https://tutorial.ponylang.io/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "ponyc license",
+        "url": "https://raw.githubusercontent.com/ponylang/ponyc/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Actor-based applications with typed concurrent behavior.",
+        "source_ids": ["tutorial"]
+      },
+      "prerequisites": {
+        "text": "Learn actors and reference capabilities; the compiler/runtime form a native toolchain.",
+        "source_ids": ["tutorial"]
+      },
+      "execution": {
+        "text": "ponyc compiles a package directory into an executable.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "The Main actor receives an Env containing standard input/output and arguments.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The tutorial provides installation, compilation and language chapters.",
+        "source_ids": ["tutorial"]
+      },
+      "maintenance": {
+        "text": "Keep runtime and foreign-library requirements aligned with the target platform.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler's BSD-2-Clause grant is separate from native application dependencies.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "main.pony",
+      "code": "actor Main\n  new create(env: Env) =>\n    env.out.print(\"PLLDN\")",
+      "run_instructions": "Place main.pony in a hello package directory, run ponyc from that directory, then run the resulting executable.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "ponyc compiler",
+        "role": "implementation",
+        "spdx_expression": "BSD-2-Clause",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain copyright, license conditions and disclaimer in covered distributions."
+      }
+    ]
+  },
+  {
+    "name": "PowerShell",
+    "implementation": {
+      "name": "PowerShell 7 on .NET",
+      "version_scope": "Cross-platform PowerShell 7; Windows PowerShell 5.1 and OS-specific modules are different scopes.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "PowerShell overview and object pipelines",
+        "url": "https://learn.microsoft.com/en-us/powershell/scripting/overview",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "PowerShell implementation license",
+        "url": "https://raw.githubusercontent.com/PowerShell/PowerShell/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "runtime-license",
+        "label": ".NET runtime license",
+        "url": "https://raw.githubusercontent.com/dotnet/runtime/main/LICENSE.TXT",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Automation and administration using structured objects; each operating system and installed module determines available operations.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn cmdlets, objects and pipelines rather than assuming a Unix text-only shell model.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "pwsh runs PowerShell code on .NET across supported Windows, Linux and macOS environments.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "The pipeline passes .NET objects, preserving properties for filtering and composition.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Use cmdlets, modules and scripting support; module installation and target-service access are separate requirements.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Check module and operating-system support when moving automation between hosts.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "PowerShell and the covered .NET runtime have MIT terms; external modules and hosted services need separate review.",
+        "source_ids": ["license", "runtime-license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.ps1",
+      "code": "Write-Output 'PLLDN'\n",
+      "run_instructions": "With PowerShell 7 installed, run pwsh -File hello.ps1 where script execution is permitted by your administrator's policy. Do not change that policy for this example.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "PowerShell",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "scope": "PowerShell source implementation.",
+        "notice": "Retain applicable notices when distributing covered software; modules may differ.",
+        "source_ids": ["license"]
+      },
+      {
+        "component": ".NET runtime covered code",
+        "role": "runtime",
+        "spdx_expression": "MIT",
+        "scope": "Runtime code covered by the repository's MIT grant.",
+        "notice": "Check bundled third-party notices separately.",
+        "source_ids": ["runtime-license"]
+      }
+    ]
+  },
+  {
+    "name": "Processing",
+    "implementation": {
+      "name": "Processing Java-mode sketch environment",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Processing getting started",
+        "url": "https://processing.org/tutorials/gettingstarted/",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Visual sketches and interactive graphics using Processing's Java mode.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn coordinate systems and drawing functions before adding interactivity.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The Processing editor runs .pde sketches in its selected mode.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Drawing calls operate on a sketch canvas with dimensions set by size.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The editor includes examples and Run for quick visual feedback.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "A sketch's selected mode and imported libraries are part of its execution requirements.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Core, editor, Java runtime and contributed-library licenses are distinct; this tutorial does not verify their SPDX expressions.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "block.pde",
+      "code": "size(200, 200);\nbackground(240);\nrect(50, 50, 100, 100);",
+      "run_instructions": "Paste into a new Processing Java-mode sketch and press Run.",
+      "expected_result": "Shows a 200 by 200 window with a rectangle on a light background.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Processing Java-mode sketch environment",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "No uniform license is inferred for the environment from its freely available tutorial."
+      }
+    ]
+  }
+]

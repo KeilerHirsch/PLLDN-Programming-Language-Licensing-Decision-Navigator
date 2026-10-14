@@ -1,0 +1,792 @@
+[
+  {
+    "name": "Idris",
+    "implementation": {
+      "name": "Idris 2",
+      "version_scope": "Idris 2 tutorial using the Chez Scheme backend.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Idris 2: getting started",
+        "url": "https://idris2.readthedocs.io/en/latest/tutorial/starting.html",
+        "checked_on": "2026-10-12"
+      },
+      {
+        "id": "license",
+        "label": "Idris 2 license",
+        "url": "https://raw.githubusercontent.com/idris-lang/Idris2/main/LICENSE",
+        "checked_on": "2026-10-12"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Type-driven programs and proofs; this profile covers Idris 2 rather than Idris 1.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn typed functions and modules; the tutorial explains the IO type.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The default compiler generates an executable using the Chez Scheme backend.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "The REPL checks types and evaluates expressions before an executable is built.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The REPL, --check and package options support iterative development.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep the selected backend and package dependencies aligned with the compiler.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler license permits redistribution under its stated conditions; backend dependencies need separate review.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.idr",
+      "code": "module Main\n\nmain : IO ()\nmain = putStrLn \"PLLDN\"",
+      "run_instructions": "With Idris 2 and its Chez backend installed, run idris2 hello.idr -o hello, then run build/exec/hello.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Idris 2",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain the license notices; the license also contains a non-endorsement condition."
+      }
+    ]
+  },
+  {
+    "name": "Imba",
+    "implementation": {
+      "name": "Imba compiler and bundler",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Imba implementation guide",
+        "url": "https://raw.githubusercontent.com/imba/imba/main/packages/imba/readme.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Imba license",
+        "url": "https://raw.githubusercontent.com/imba/imba/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Web interfaces with DOM tags and embedded styles; Node.js applications can use npm libraries.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn JavaScript host APIs together with Imba's indentation, tags and styling syntax.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The imba command bundles source into JavaScript for browser or Node execution.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Language-level DOM objects integrate UI markup, logic and styling.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "A TypeScript-server plugin provides editor diagnostics and cross-file refactoring.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The guide labels language and tooling alpha; validate the selected release on existing projects.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The MIT-licensed implementation is separate from the Node host and imported npm packages.",
+        "source_ids": ["license", "guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "app.imba",
+      "code": "tag App\n    <self> \"PLLDN\"\nimba.mount <App>",
+      "run_instructions": "Paste this into the official Imba browser playground and run it.",
+      "expected_result": "Renders PLLDN in the browser.",
+      "source_ids": ["guide"],
+      "try_url": "https://imba.io/try/examples/apps/playground/app.imba",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Imba compiler and bundler",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain the copyright and permission notice when distributing covered code."
+      }
+    ]
+  },
+  {
+    "name": "Inform 7",
+    "implementation": {
+      "name": "Core Inform 7 compiler",
+      "version_scope": "Inform 7 authoring model; graphical apps and interpreters are separate components.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Inform: writing and running a story",
+        "url": "https://ganelson.github.io/inform-website/book/WI_1_4.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Inform compiler and tools",
+        "url": "https://raw.githubusercontent.com/ganelson/inform/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Core Inform licensing policy",
+        "url": "https://raw.githubusercontent.com/ganelson/inform/master/notes/copyright.md",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Interactive fiction, narrative prototypes and teaching; Inform 7 is distinct from Inform 6.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Learn rooms, objects and rules rather than assuming unrestricted English is accepted.",
+        "source_ids": ["overview"]
+      },
+      "execution": {
+        "text": "The authoring app compiles a story when Go is selected and opens its interpreter.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Source declarations describe a world explored through player commands.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The app supplies source, results and replay tools; core command-line tools have separate manuals.",
+        "source_ids": ["guide", "overview"]
+      },
+      "maintenance": {
+        "text": "Choose a released compiler; the repository's main branch explicitly contains unstable work.",
+        "source_ids": ["overview"]
+      },
+      "costs": {
+        "text": "Core Inform uses Artistic-2.0; graphical apps and included interpreters have their own terms.",
+        "source_ids": ["license", "overview"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "story.ni",
+      "code": "\"PLLDN Room\"\n\nThe Workshop is a room. \"A small room with a desk.\"",
+      "run_instructions": "Create an Inform 7 project, paste the source, and select Go.",
+      "expected_result": "Opens a playable story in the Workshop; LOOK describes the room.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Core Inform 7 compiler",
+        "role": "implementation",
+        "spdx_expression": "Artistic-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Core compiler scope only; follow the repository's exceptions and separately licensed app/interpreter components."
+      }
+    ]
+  },
+  {
+    "name": "Io",
+    "implementation": {
+      "name": "Io WASM/WASI VM",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Io language and execution guide",
+        "url": "https://iolanguage.org/docs/Guide/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Io VM license",
+        "url": "https://raw.githubusercontent.com/IoLanguage/io/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Dynamic embedded scripting with prototypes and runtime introspection.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn message sending and cloning; assignment and control flow are messages too.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The default WASI build runs in wasmtime, Node or the supplied browser REPL.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Objects can change slots and inheritance at runtime; coroutines implement concurrency.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "A REPL, doFile and slot inspection support interactive exploration.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "WASM host integration replaces the earlier native-addon model in this documented build.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The VM's BSD license is separate from the selected WASM host.",
+        "source_ids": ["license", "guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.io",
+      "code": "\"PLLDN\" println",
+      "run_instructions": "Enter the source in the supplied browser REPL, or run wasmtime --dir=. build/bin/io_static hello.io after the documented build.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Io WASM/WASI VM",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain copyright, conditions and disclaimer; the non-endorsement condition also applies."
+      }
+    ]
+  },
+  {
+    "name": "J",
+    "implementation": {
+      "name": "Jsoftware J engine",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "J system components",
+        "url": "https://www.jsoftware.com/help/user/overview.htm",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "J primer: get started",
+        "url": "https://www.jsoftware.com/docs/help806/primer/get_started.htm",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "J source licensing",
+        "url": "https://raw.githubusercontent.com/jsoftware/jsource/master/license.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Array computation and mathematical exploration through an interactive engine.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn verbs and nouns with the primer; the notation differs from C-like expressions.",
+        "source_ids": ["example"]
+      },
+      "execution": {
+        "text": "Jconsole sends sentences to the J engine and displays their results.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Script definitions use .ijs files; the engine retains values and execution state.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The supplied script library includes IDE tools, tutorials and demos.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Distinguish engine changes from frontend and script-library compatibility.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "J source offers GPL version 3 or a separate commercial license from Jsoftware.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "query",
+      "filename": "addition.ijs",
+      "code": "2 + 3",
+      "run_instructions": "Start Jconsole or the J execution window and enter this sentence.",
+      "expected_result": "Displays 5.",
+      "source_ids": ["example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Jsoftware J engine",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-only",
+        "source_ids": ["license"],
+        "scope": "GPL option for files in the jsource folder; commercial-license terms are an alternative outside this SPDX expression.",
+        "notice": "The source license lists GPL version 3 or a separate commercial agreement."
+      }
+    ]
+  },
+  {
+    "name": "JSONiq",
+    "implementation": {
+      "name": "RumbleDB JSONiq engine",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "RumbleDB JSONiq engine overview",
+        "url": "https://docs.rumbledb.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "RumbleDB CLI parameters",
+        "url": "https://docs.rumbledb.org/reference/cli",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "RumbleDB license",
+        "url": "https://raw.githubusercontent.com/RumbleDB/rumble/master/LICENSE.txt",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Queries and transformations of JSON-like datasets; RumbleDB also supports XQuery.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn JSON values and declarative FLWOR expressions; this is a query engine.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Queries execute locally or on Spark according to the selected distribution.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Tree-shaped data and sequences are queried without exposing Spark transformations directly.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "CLI, Java API and Python configuration interfaces are documented.",
+        "source_ids": ["example"]
+      },
+      "maintenance": {
+        "text": "The documentation warns of a RumbleDB 3 rollout and pages still referring to version 2.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The engine's Apache license is separate from cluster infrastructure and dependencies.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "query",
+      "filename": "addition.jq",
+      "code": "2 + 3",
+      "run_instructions": "With the documented Spark distribution installed, run spark-submit rumbledb.jar run addition.jq.",
+      "expected_result": "Returns the number 5.",
+      "source_ids": ["example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "RumbleDB JSONiq engine",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The source license includes Apache-2.0 and notices for bundled third-party code."
+      }
+    ]
+  },
+  {
+    "name": "Jai",
+    "implementation": {
+      "name": "Creator-demonstrated Jai compiler",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Creator's language presentation",
+        "url": "https://www.youtube.com/watch?v=TH9VCN6UkyQ",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Creator presentation is the available project reference; no reviewed project-fit recommendation is recorded.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Installation prerequisites could not be verified from accessible primary documentation.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "A current public compiler installation and supported targets remain unverified here.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "No current normative language reference was retrieved for this profile.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Use the creator's presentation as background; editor and package-tool availability is unknown.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Do not infer current release status from historical demonstrations.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Compiler licensing and acquisition costs remain unknown in the available primary material.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "reference",
+      "filename": null,
+      "code": null,
+      "run_instructions": "Open the creator's presentation. Primary video content could not be fetched for a reproducible installation workflow.",
+      "expected_result": "No executable sample is claimed; current compiler access and syntax must be verified first.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Creator-demonstrated Jai compiler",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "No verified compiler license or redistribution terms were retrieved."
+      }
+    ]
+  },
+  {
+    "name": "Janet",
+    "implementation": {
+      "name": "Janet interpreter and core",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Janet features and script execution",
+        "url": "https://janet-lang.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "install",
+        "label": "Janet installation guide",
+        "url": "https://janet-lang.org/docs/index.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Janet license",
+        "url": "https://raw.githubusercontent.com/janet-lang/janet/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "System scripts or an embedded C application extension.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn Lisp-style forms, immutable and mutable collections, and host I/O.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Run .janet files with the janet interpreter or embed janet.c and janet.h.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Garbage collection, closures, fibers and an event loop support dynamic programs.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The REPL and debugger complement jpm project building and package installation.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Native extensions require the appropriate C toolchain, including Visual Studio on Windows.",
+        "source_ids": ["install"]
+      },
+      "costs": {
+        "text": "The MIT-licensed core does not determine the terms of installed jpm packages.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.janet",
+      "code": "(print \"PLLDN\")",
+      "run_instructions": "With Janet installed, run janet hello.janet.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Janet interpreter and core",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain copyright and permission notices in covered redistributions."
+      }
+    ]
+  },
+  {
+    "name": "Java",
+    "implementation": {
+      "name": "OpenJDK",
+      "version_scope": "Conventional Java class and javac/java workflow; JDK distribution and version must be selected independently.",
+      "source_ids": ["guide", "overview"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "First Java program",
+        "url": "https://dev.java/learn/first-steps/first-java-code/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "JDK language, runtime and deployment learning paths",
+        "url": "https://dev.java/learn/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "OpenJDK GPL and Classpath exception",
+        "url": "https://raw.githubusercontent.com/openjdk/jdk/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Java applications using JVM APIs; JavaFX desktop applications and runtime images have dedicated learning paths.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Install a JDK and learn classes, methods and the main entry point; an IDE is optional for the first program.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Compile Hello.java with javac, then execute the class with java Hello in a compatible runtime.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "The language learning path covers types, objects, exceptions and modules; the JVM has its own garbage collection and security tools.",
+        "source_ids": ["overview"]
+      },
+      "tooling": {
+        "text": "Use JDK build and diagnostic tools; JFR and jlink support observing applications and creating runtime images.",
+        "source_ids": ["overview"]
+      },
+      "maintenance": {
+        "text": "Select a concrete JDK distribution and check its update policy; a generic Java label does not identify the runtime being shipped.",
+        "source_ids": ["overview", "license"]
+      },
+      "costs": {
+        "text": "OpenJDK source licensing and a vendor's subscription/support offering are different scopes; the learning site links these separately.",
+        "source_ids": ["overview", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Hello.java",
+      "code": "class Hello {\n    public static void main(String[] args) {\n        System.out.println(\"PLLDN\");\n    }\n}",
+      "run_instructions": "With a JDK installed, run javac Hello.java followed by java Hello.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "OpenJDK covered source",
+        "role": "implementation",
+        "spdx_expression": "GPL-2.0-only WITH Classpath-exception-2.0",
+        "source_ids": ["license"],
+        "scope": "The exception applies only to files carrying the applicable notice; the JDK distribution includes other component notices.",
+        "notice": "Inspect the chosen distribution and per-file applicability; this is not a blanket license for Java applications."
+      }
+    ]
+  },
+  {
+    "name": "JavaScript",
+    "implementation": {
+      "name": "JavaScript on Node.js",
+      "version_scope": "Server/command-line path; browser host APIs are a different deployment context.",
+      "source_ids": ["guide", "node"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "MDN JavaScript language and host environments",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "node",
+        "label": "Node.js runtime introduction",
+        "url": "https://nodejs.org/learn/getting-started/introduction-to-nodejs",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Node.js component licenses",
+        "url": "https://raw.githubusercontent.com/nodejs/node/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Browser interaction and server programs; browser DOM APIs and Node.js server APIs belong to their respective hosts.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Start with variables, functions and objects; web work additionally needs the browser document model.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Node.js runs JavaScript outside a browser. This example uses its command-line environment.",
+        "source_ids": ["node"]
+      },
+      "behavior": {
+        "text": "Types are dynamic and inheritance is prototype-based; Node.js offers asynchronous I/O in its runtime.",
+        "source_ids": ["guide", "node"]
+      },
+      "tooling": {
+        "text": "Node.js documentation covers npm, debugging, profiling and its built-in test runner.",
+        "source_ids": ["node"]
+      },
+      "maintenance": {
+        "text": "Choose a Node.js version and its supported ECMAScript features; browser support must be evaluated separately.",
+        "source_ids": ["node", "guide"]
+      },
+      "costs": {
+        "text": "Node.js is open source; budget server operation and any externally selected services separately.",
+        "source_ids": ["node", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.js",
+      "code": "console.log(\"PLLDN\");\n",
+      "run_instructions": "With Node.js installed, run node hello.js. In a browser, the same statement writes to developer-console output.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide", "node"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Node.js core",
+        "role": "runtime",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "Core runtime grant; included third-party components retain their own notices.",
+        "notice": "Read the complete distribution license file; JavaScript itself does not assign a license to your application."
+      }
+    ]
+  }
+]

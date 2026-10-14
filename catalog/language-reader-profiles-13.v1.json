@@ -1,0 +1,812 @@
+[
+  {
+    "name": "Modelica",
+    "implementation": {
+      "name": "OpenModelica OMEdit simulation environment",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "OpenModelica OMEdit user guide",
+        "url": "https://openmodelica.org/doc/OpenModelicaUsersGuide/latest/omedit.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "OpenModelica compiler licensing",
+        "url": "https://raw.githubusercontent.com/OpenModelica/OpenModelica/master/OMCompiler/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Equation-based models of connected physical systems.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn equations, continuous variables and simulation setup.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "OMEdit checks and simulates a selected Modelica model.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Equations describe relationships; the tool produces a numerical simulation.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The environment supplies model browsing, a text editor and result plotting.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Check the selected tool and library version when sharing simulation models.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "OpenModelica uses OSMC licensing with component-specific terms; Modelica libraries have separate licenses.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "Ramp.mo",
+      "code": "model Ramp\n  Real x(start=0, fixed=true);\nequation\n  der(x) = 1;\nend Ramp;",
+      "run_instructions": "Load Ramp.mo in OMEdit, select Ramp, check the model and simulate from time 0 to 1; plot x.",
+      "expected_result": "The modeled x rises from 0 to approximately 1; numerical output depends on solver settings.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "OpenModelica OMEdit simulation environment",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Original OSMC/component licensing is linked; no single SPDX expression is inferred for the full environment or Modelica libraries."
+      }
+    ]
+  },
+  {
+    "name": "Modula-2",
+    "implementation": {
+      "name": "GNU Modula-2 (GCC 15.2 documented workflow)",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GNU Modula-2 compile and link example",
+        "url": "https://gcc.gnu.org/onlinedocs/gcc-15.2.0/gm2/Example-usage.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "GNU compiler copying terms",
+        "url": "https://gcc.gnu.org/onlinedocs/gcc/Copying.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Modular compiled applications using the GNU Modula-2 frontend.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn module definitions and imports; install a GCC build with gm2.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "gm2 compiles and links .mod files into a native executable.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Definition and implementation modules control interfaces and dependencies.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "GCC-style -g and -v flags provide debugging and build diagnostics.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Select a dialect and matching runtime modules before porting older code.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Compiler copying terms are separate from the runtime library exception and application output.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.mod",
+      "code": "MODULE hello;\nFROM StrIO IMPORT WriteString, WriteLn;\nBEGIN\n  WriteString('PLLDN'); WriteLn\nEND hello.",
+      "run_instructions": "With the documented GNU Modula-2 toolchain installed, run gm2 -g hello.mod, then execute its a.out result.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GNU Modula-2 (GCC 15.2 documented workflow)",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "See GCC component and runtime-library terms; the documentation's own copying license is not automatically the compiler license."
+      }
+    ]
+  },
+  {
+    "name": "Modula-3",
+    "implementation": {
+      "name": "Critical Mass Modula-3 (CM3)",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "CM3 distribution and installation",
+        "url": "https://github.com/modula3/cm3",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "CM3 official hello example",
+        "url": "https://raw.githubusercontent.com/modula3/cm3/master/examples/hello/src/Hello.m3",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "build",
+        "label": "CM3 hello build definition",
+        "url": "https://raw.githubusercontent.com/modula3/cm3/master/examples/hello/src/m3makefile",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "CM3 component copyright overview",
+        "url": "https://raw.githubusercontent.com/modula3/cm3/master/COPYRIGHTS",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Modular native applications using the CM3 compiler and libraries.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install a compiler release for the target architecture; learn modules and imported interfaces.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "CM3 builds a package described by its m3makefile.",
+        "source_ids": ["build"]
+      },
+      "behavior": {
+        "text": "The base distribution separates system packages from optional libraries.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The distribution contains build scripts and HTML documentation.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Review platform packages and imported interfaces when upgrading the compiler.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "CM3 explicitly uses several component copyright grants; there is no uniform distribution license.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "Hello.m3",
+      "code": "MODULE Hello EXPORTS Main;\nIMPORT IO;\nBEGIN\n  IO.Put(\"PLLDN\\n\");\nEND Hello.",
+      "run_instructions": "Use the official hello package's m3makefile with Hello.m3 as the source, then build it with CM3 and run the resulting hello executable.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["example", "build"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Critical Mass Modula-3 (CM3)",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Consult the COPYRIGHT-* grants and each package's notices; no single SPDX expression is asserted."
+      }
+    ]
+  },
+  {
+    "name": "Mojo",
+    "implementation": {
+      "name": "Mojo compiler from the Modular toolchain",
+      "version_scope": "Current tutorial labels version 1.1.0; example follows its def main syntax.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Mojo getting started tutorial",
+        "url": "https://mojolang.org/docs/manual/get-started/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Modular repository license",
+        "url": "https://raw.githubusercontent.com/modular/modular/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Compiled computational programs with explicit ownership and compile-time features.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Python or C++ familiarity helps, but transfer operators and compile-time variables add new concepts.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The mojo command builds and runs a .mojo program.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Runtime variables and comptime declarations have distinct evaluation phases.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The manual links compilation targets, debugging, testing and packaging tools.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Pin the compiler for examples; syntax in older Mojo tutorials can differ.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The cited repository uses Apache-2.0 with LLVM exceptions; installed bundles and services need component review.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.mojo",
+      "code": "def main():\n    print(\"PLLDN\")",
+      "run_instructions": "With a matching Mojo toolchain installed, run mojo hello.mojo.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Mojo compiler from the Modular toolchain",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0 WITH LLVM-exception",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Applies to the cited Modular repository; do not extend this grant to unrelated services or distributions."
+      }
+    ]
+  },
+  {
+    "name": "MoonBit",
+    "implementation": {
+      "name": "MoonBit compiler and moon build tool",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "MoonBit language introduction",
+        "url": "https://docs.moonbitlang.com/en/latest/language/introduction.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tour",
+        "label": "MoonBit beginner tour",
+        "url": "https://docs.moonbitlang.com/en/latest/tutorial/tour.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "MoonBit Public Source License version 1",
+        "url": "https://www.moonbitlang.com/licenses/moonbit-public-source-license-v1",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "project",
+        "label": "MoonBit compiler license explanation",
+        "url": "https://github.com/moonbitlang/moonbit-compiler",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "moon-license",
+        "label": "moon build system license",
+        "url": "https://raw.githubusercontent.com/moonbitlang/moon/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Typed applications compiled through the MoonBit toolchain.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn typed functions, pattern matching and package structure.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "A main package executes its fn main after initialization.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Immutable and mutable bindings are distinct; main has no parameter list.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The moon build tool handles executable packages and inline tests.",
+        "source_ids": ["tour", "guide"]
+      },
+      "maintenance": {
+        "text": "Use configuration syntax matching the installed toolchain; current docs describe moon.pkg.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler has a custom public-source license; generated artifacts are explicitly treated separately.",
+        "source_ids": ["license", "project"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "main.mbt",
+      "code": "fn main {\n  println(\"PLLDN\")\n}",
+      "run_instructions": "Create an executable package using the beginner tour, replace its main source with this code, then run it using the moon tool.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide", "tour"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "MoonBit compiler",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Read the custom compiler grant's conditions and version-specific notices. The moon build system has separate terms."
+      },
+      {
+        "component": "moon build system",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["moon-license"],
+        "scope": "moon build system source covered by its repository license; distinct from the MoonBit compiler.",
+        "notice": "Retain applicable notices when distributing the covered build tool; inspect dependency terms separately."
+      }
+    ]
+  },
+  {
+    "name": "MoonScript",
+    "implementation": {
+      "name": "MoonScript compiler and moon CLI",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "MoonScript installation and tools",
+        "url": "https://moonscript.org/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "reference",
+        "label": "MoonScript language guide",
+        "url": "https://moonscript.org/reference/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "MoonScript MIT license",
+        "url": "https://moonscript.org/reference/#license-mit",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Lua-hosted applications with concise syntax and classes.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Lua familiarity is assumed by the reference guide; indentation defines blocks.",
+        "source_ids": ["reference"]
+      },
+      "execution": {
+        "text": "moon runs .moon source and moonc emits Lua.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Implicit returns, comprehensions and classes compile into Lua constructs.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "LuaRocks installs the compiler tools and their required Lua modules.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep Lua or LuaJIT and compiler dependencies compatible with the host.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler is MIT licensed; LPeg, LuaFileSystem and the host have separate terms.",
+        "source_ids": ["license", "guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.moon",
+      "code": "print \"PLLDN\"",
+      "run_instructions": "With MoonScript installed, run moon hello.moon.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": "https://moonscript.org/compiler/",
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "MoonScript compiler and moon CLI",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Retain copyright and permission notices; dependencies are not covered by this component grant."
+      }
+    ]
+  },
+  {
+    "name": "Motoko",
+    "implementation": {
+      "name": "Motoko compiler for Internet Computer canisters",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Motoko actors and current core library",
+        "url": "https://docs.internetcomputer.org/languages/motoko/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Motoko compiler license",
+        "url": "https://raw.githubusercontent.com/caffeinelabs/motoko/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Internet Computer application backends expressed as actors.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn async calls, query/update methods and stable-state behavior.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "The compiler emits WebAssembly canisters for the ICP host.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Persistent actors retain state across upgrades; inter-actor calls are asynchronous.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Mops manages packages and compiler versions; core supersedes older base APIs.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Plan canister upgrades and package migration explicitly; old base code can coexist with core.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The compiler is Apache licensed; canister hosting and platform resource costs are separate.",
+        "source_ids": ["license", "guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "main.mo",
+      "code": "persistent actor {\n  public query func greet() : async Text {\n    \"PLLDN\"\n  };\n}",
+      "run_instructions": "Place this in a Motoko canister project and call greet using a local ICP development environment, following the linked hello project workflow.",
+      "expected_result": "The query returns the text \"PLLDN\"; public network deployment is not required for the local example.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Motoko compiler for Internet Computer canisters",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Motoko compiler scope; ICP services and third-party packages are distinct components."
+      }
+    ]
+  },
+  {
+    "name": "Move",
+    "implementation": {
+      "name": "Upstream Move compiler and VM language model",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Move modules and scripts",
+        "url": "https://move-language.github.io/move/modules-and-scripts.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Move language introduction",
+        "url": "https://move-language.github.io/move/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Upstream Move source license",
+        "url": "https://raw.githubusercontent.com/move-language/move/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Modules for resource-oriented application logic; blockchain forks define their own hosting APIs.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Learn modules, addresses, types and ownership before platform-specific packages.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "A compatible Move compiler builds modules for a Move VM.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Modules publish named functions and data types; scripts invoke functions.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Use the selected platform's package workflow; there is no universal chain deployment command.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The upstream model does not guarantee compatibility with Aptos or Sui dialect releases.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The upstream compiler source is Apache licensed; chain services and forked packages have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "addition.move",
+      "code": "module 0x1::addition {\n    public fun add(a: u64, b: u64): u64 {\n        a + b\n    }\n}",
+      "run_instructions": "Add the module to an upstream-compatible Move package and compile it using that toolchain's documented package build. This example builds a module; it does not publish a transaction.",
+      "expected_result": "Defines a typed add function; calling add(2, 3) in its VM returns 5.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Upstream Move compiler and VM language model",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Upstream Move repository only; do not inherit this label for platform packages."
+      }
+    ]
+  },
+  {
+    "name": "Nemerle",
+    "implementation": {
+      "name": "Nemerle ncc compiler for the documented .NET/Mono workflow",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Nemerle project, examples and installation",
+        "url": "https://github.com/rsdn/nemerle",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Statically typed .NET applications with functional features and macros.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn .NET APIs and C#-like syntax; variants and pattern matching add functional constructs.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "ncc compiles .n source into a .NET executable.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Type inference, generics and compiler extensibility are documented features.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The repository lists Visual Studio integrations and editor syntax files.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The guide refers to older .NET and Visual Studio versions; verify the chosen installation before porting.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "A component-level SPDX expression was not verified; .NET/Mono hosts require separate licensing.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.n",
+      "code": "using System.Console;\n\nWriteLine(\"PLLDN\")",
+      "run_instructions": "With the documented Nemerle/.NET setup, compile hello.n with ncc.exe hello.n /out:hello.exe, then run hello.exe.",
+      "expected_result": "Prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Nemerle ncc compiler for the documented .NET/Mono workflow",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "The repository links License.rtf; no SPDX expression is guessed from the language family."
+      }
+    ]
+  },
+  {
+    "name": "Nextflow",
+    "implementation": {
+      "name": "Nextflow workflow engine",
+      "version_scope": "Documentation as checked on 2026-10-13; no latest-version claim.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Nextflow first workflow",
+        "url": "https://docs.seqera.io/nextflow/your-first-script",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "install",
+        "label": "Nextflow installation requirements",
+        "url": "https://docs.seqera.io/nextflow/install",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Nextflow license",
+        "url": "https://raw.githubusercontent.com/nextflow-io/nextflow/master/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Data-processing pipelines built from processes and channels.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn workflow DSL, process inputs/outputs and the selected execution environment.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "nextflow run schedules process scripts through an executor.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Channels connect tasks; process scripts run outside the DSL interpreter.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The engine tracks task output and provides workflow execution tooling.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep workflow, external programs and execution configuration versioned together.",
+        "source_ids": ["install", "guide"]
+      },
+      "costs": {
+        "text": "The engine is Apache licensed; container images, cloud execution and platform services have separate terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "main.nf",
+      "code": "process greet {\n    output:\n    stdout\n    script:\n    \"\"\"\n    echo PLLDN\n    \"\"\"\n}\n\nworkflow {\n    greet().view()\n}",
+      "run_instructions": "With Nextflow and its documented runtime prerequisites installed, run nextflow run main.nf using the local executor.",
+      "expected_result": "A local process emits PLLDN and the workflow displays it.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Nextflow workflow engine",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "The named implementation only; dependencies and host runtimes have separate terms.",
+        "notice": "Nextflow engine component only; pipeline tools and services are independent."
+      }
+    ]
+  }
+]

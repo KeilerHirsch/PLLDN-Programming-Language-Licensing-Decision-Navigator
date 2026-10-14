@@ -1,0 +1,842 @@
+[
+  {
+    "name": "C++",
+    "implementation": {
+      "name": "GNU C++ compiler with libstdc++",
+      "version_scope": "A hosted native console example using g++ and libstdc++; other standard libraries have their own terms.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GCC compilation stages and C/C++ invocation",
+        "url": "https://gcc.gnu.org/onlinedocs/gcc/Invoking-GCC.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "GCC driver source license grant",
+        "url": "https://raw.githubusercontent.com/gcc-mirror/gcc/master/gcc/gcc.cc",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "runtime",
+        "label": "libstdc++ license and runtime exception scope",
+        "url": "https://gcc.gnu.org/onlinedocs/libstdc++/manual/license.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "resources",
+        "label": "C++ Core Guidelines: resource management and RAII",
+        "url": "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Native applications using C++ and its standard library; platform and linked-library choices remain explicit.",
+        "source_ids": ["guide", "runtime"]
+      },
+      "prerequisites": {
+        "text": "Learn compilation and object lifetimes together; raw pointers, owning handles and library resources need explicit distinctions.",
+        "source_ids": ["guide", "resources"]
+      },
+      "execution": {
+        "text": "Invoke g++ for C++ source so the expected C++ library linkage is supplied.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Constructors and destructors support resource lifetime management. The Core Guidelines recommend RAII handles and explicit ownership instead of manual cleanup paths.",
+        "source_ids": ["resources"]
+      },
+      "tooling": {
+        "text": "g++ accepts source files and options; separate object generation and final linking when builds grow.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Choose a target compiler and compatible standard library together; inspect the notices shipped with that combination.",
+        "source_ids": ["guide", "runtime"]
+      },
+      "costs": {
+        "text": "libstdc++ has a scoped runtime exception. Conditions depend on eligible compilation and the covered files.",
+        "source_ids": ["runtime"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.cpp",
+      "code": "#include <iostream>\n\nint main() {\n    std::cout << \"PLLDN\\n\";\n}\n",
+      "run_instructions": "Run g++ -Wall -Wextra hello.cpp -o hello, then ./hello on Unix-like systems or .\\hello.exe on Windows with an appropriate GCC toolchain.",
+      "expected_result": "Prints PLLDN followed by a newline.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GCC compiler",
+        "role": "implementation",
+        "spdx_expression": "GPL-3.0-or-later",
+        "scope": "GNU C++ compiler implementation.",
+        "notice": "Distinct from licenses applying to runtime libraries and application dependencies.",
+        "source_ids": ["license"]
+      },
+      {
+        "component": "libstdc++ covered files",
+        "role": "standard-library",
+        "spdx_expression": "GPL-3.0-or-later WITH GCC-exception-3.1",
+        "scope": "Files carrying the applicable libstdc++ license and runtime-exception notices.",
+        "notice": "Read exception eligibility and other component notices; this is not a blanket compatibility conclusion.",
+        "source_ids": ["runtime"]
+      }
+    ]
+  },
+  {
+    "name": "C3",
+    "implementation": {
+      "name": "C3 compiler (c3c)",
+      "version_scope": "The documented native compiler and current tutorial syntax; no binary has been executed for this profile.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "C3 compiler targets and application scope",
+        "url": "https://raw.githubusercontent.com/c3lang/c3c/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "tutorial",
+        "label": "C3 compile-and-run tutorial",
+        "url": "https://c3-lang.org/getting-started/hello-world/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "C3 compiler MIT licence",
+        "url": "https://raw.githubusercontent.com/c3lang/c3c/master/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "C3 targets native applications, libraries and systems software, including games and command-line tools.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "The tutorial assumes an installed c3c compiler and introduces modules, fn declarations and the standard I/O module.",
+        "source_ids": ["tutorial"]
+      },
+      "execution": {
+        "text": "Compile a .c3 source to an executable, or use compile-run for the same local workflow.",
+        "source_ids": ["tutorial"]
+      },
+      "behavior": {
+        "text": "Module imports make library names available; printn writes a value followed by a newline.",
+        "source_ids": ["tutorial"]
+      },
+      "tooling": {
+        "text": "The project publishes Windows, macOS and Linux compiler packages; the tutorial provides a direct CLI starting point.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep the compiler and its standard-library documentation together when reproducing an example.",
+        "source_ids": ["tutorial"]
+      },
+      "costs": {
+        "text": "The compiler carries MIT terms; retain its copyright and licence when redistributing the implementation.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.c3",
+      "code": "import std::io;\nfn void main() {\n    io::printn(\"PLLDN\");\n}",
+      "run_instructions": "With c3c installed, run c3c compile-run hello.c3. Alternatively run c3c compile hello.c3 and launch the generated executable.",
+      "expected_result": "The program prints PLLDN followed by a newline.",
+      "source_ids": ["tutorial"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "C3 compiler (c3c)",
+        "role": "implementation",
+        "spdx_expression": "MIT",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "CLIPS",
+    "implementation": {
+      "name": "CLIPS 6.4 rule engine",
+      "version_scope": "CLIPS 6.4 syntax and the publisher's v6.4.2 user-guide distribution.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "CLIPS applications and public-domain declaration",
+        "url": "https://www.clipsrules.net/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "manual",
+        "label": "CLIPS 6.4 rules, facts and console commands",
+        "url": "https://www.clipsrules.net/documentation/v642/ug642.pdf",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Model heuristic expert-system decisions with facts and rules; the publisher also provides procedural and object facilities.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn asserted facts, rule conditions and the agenda before adding rule priorities.",
+        "source_ids": ["manual"]
+      },
+      "execution": {
+        "text": "Load constructs into the engine, assert facts and run the agenda to fire matching rules.",
+        "source_ids": ["manual"]
+      },
+      "behavior": {
+        "text": "A rule's actions run when its conditions match facts; priority and reactivation affect which actions execute.",
+        "source_ids": ["manual"]
+      },
+      "tooling": {
+        "text": "CLIPS provides a portable C implementation and documentation for embedding the engine in host applications.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Resetting facts and agenda state is part of reproducing a rule session; saved constructs and saved facts are distinct.",
+        "source_ids": ["manual"]
+      },
+      "costs": {
+        "text": "The publisher declares CLIPS public-domain software. This declaration has not been mapped to an SPDX dedication licence.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "decision.clp",
+      "code": "(defrule approved\n  (choice approved)\n  =>\n  (printout t \"PLLDN\" crlf))",
+      "run_instructions": "In the CLIPS console, enter (load \"decision.clp\"), then (reset), (assert (choice approved)) and (run).",
+      "expected_result": "The asserted fact activates the rule, which prints PLLDN.",
+      "source_ids": ["manual"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "CLIPS 6.4 rule engine",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "The publisher declares public-domain status, but an exact SPDX dedication instrument was not established; do not substitute Unlicense or CC0."
+      }
+    ]
+  },
+  {
+    "name": "CMake",
+    "implementation": {
+      "name": "Kitware CMake script interpreter",
+      "version_scope": "CMake script mode; the example declares a CMake 3.20 minimum.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "CMake language and script execution",
+        "url": "https://cmake.org/cmake/help/latest/manual/cmake-language.7.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "messages",
+        "label": "CMake STATUS message behavior",
+        "url": "https://cmake.org/cmake/help/latest/command/message.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "policies",
+        "label": "CMake version and policy declaration",
+        "url": "https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "CMake redistribution licence",
+        "url": "https://raw.githubusercontent.com/Kitware/CMake/master/LICENSE.rst",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Describe build configuration and reusable modules, or automate tasks with standalone .cmake scripts.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "An installed CMake suffices for this script; compiling a project requires its separately selected build tools.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "cmake -P executes a script without creating a build system; script mode cannot define build targets.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Command arguments expand variables and lists; quoted arguments preserve a single argument's structure.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Project files, included modules and script files share the CMake language and command interface.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Declare a minimum version and policy baseline so interpretation changes are explicit.",
+        "source_ids": ["policies"]
+      },
+      "costs": {
+        "text": "CMake's licence has BSD three-clause redistribution conditions; project dependencies have their own terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "hello.cmake",
+      "code": "cmake_minimum_required(VERSION 3.20)\nset(reader_name \"PLLDN\")\nmessage(STATUS \"${reader_name}\")",
+      "run_instructions": "With CMake 3.20 or newer installed, run cmake -P hello.cmake.",
+      "expected_result": "The STATUS message prints -- PLLDN to standard output.",
+      "source_ids": ["guide", "messages", "policies"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Kitware CMake script interpreter",
+        "role": "implementation",
+        "spdx_expression": "BSD-3-Clause",
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "COBOL",
+    "implementation": {
+      "name": "GnuCOBOL compiler (cobc)",
+      "version_scope": "GnuCOBOL 3.2 and its documented free-format executable workflow.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "GnuCOBOL targets, dialects and compatibility notes",
+        "url": "https://gnucobol.sourceforge.io/",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "manual",
+        "label": "GnuCOBOL executable compilation and runtime interfaces",
+        "url": "https://gnucobol.sourceforge.io/doc/gnucobol.html",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Compile COBOL programs to native executables or modules, including projects integrating COBOL and C.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn COBOL divisions and source-format rules; free-format compilation is selected explicitly in this example.",
+        "source_ids": ["manual"]
+      },
+      "execution": {
+        "text": "cobc -x builds an executable; COBOL modules and calls can instead use the libcob runtime.",
+        "source_ids": ["manual"]
+      },
+      "behavior": {
+        "text": "CALL behavior and module loading depend on compiler options and runtime configuration.",
+        "source_ids": ["manual"]
+      },
+      "tooling": {
+        "text": "The project documents source-level debugging and native targets on Windows, macOS and Unix-like platforms.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Specify the intended dialect: GnuCOBOL 3.2 documents dialect and line-sequential compatibility changes.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Compiler, runtime and generated modules are distinct distribution components; their exact licence grants were not established from the accessed guide.",
+        "source_ids": ["manual"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello.cob",
+      "code": "identification division.\nprogram-id. readerdemo.\nprocedure division.\n    display \"PLLDN\"\n    goback.",
+      "run_instructions": "With GnuCOBOL installed, run cobc -x -free -o readerdemo hello.cob. Launch ./readerdemo on Unix-like systems or readerdemo.exe on Windows.",
+      "expected_result": "The executable prints PLLDN.",
+      "source_ids": ["manual"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "GnuCOBOL compiler (cobc)",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["guide"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "The accessed project overview and manual do not establish the exact compiler/runtime distribution expression. Verify the selected package's COPYING and file headers."
+      }
+    ]
+  },
+  {
+    "name": "Cairo",
+    "implementation": {
+      "name": "Cairo local executable through Scarb",
+      "version_scope": "The Cairo book's local executable workflow with matching Scarb and cairo_execute versions; this is not a deployed contract.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "overview",
+        "label": "Cairo computational-integrity and application scope",
+        "url": "https://www.starknet.io/cairo-book/ch00-00-introduction.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "guide",
+        "label": "Cairo Scarb executable project tutorial",
+        "url": "https://www.starknet.io/cairo-book/ch01-02-hello-world.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Cairo compiler Apache licence",
+        "url": "https://raw.githubusercontent.com/starkware-libs/cairo/main/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Cairo expresses provable computations; Starknet contracts are one application, while local programs have a separate workflow.",
+        "source_ids": ["overview"]
+      },
+      "prerequisites": {
+        "text": "Install Scarb and match the executable dependency to its Cairo version; the tutorial also introduces the project manifest.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Scarb builds an executable target and executes its annotated entry function locally.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "An executable function uses #[executable]; println! is a macro and statements end with semicolons.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Scarb provides project creation, build, execution and formatting; source modules reside beneath src.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Keep the edition, executable target and cairo_execute dependency consistent with the selected Scarb toolchain.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The Cairo compiler is Apache-2.0; Scarb packages and contract deployment have separate components and terms.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "hello_world.cairo",
+      "code": "#[executable]\nfn main() {\n    println!(\"PLLDN\");\n}",
+      "run_instructions": "Place hello_world.cairo at src/hello_world.cairo in the documented project layout. Create a hello_world project with scarb new hello_world. Use the linked tutorial's local-executable Scarb.toml, including cairo_execute matching the selected toolchain and function hello_world::hello_world::main. Set src/lib.cairo to mod hello_world; and save this file. From the project directory run scarb build, then scarb execute.",
+      "expected_result": "The local executable prints PLLDN; this workflow does not deploy a contract or produce an on-chain transaction.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Cairo local executable through Scarb",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "Cairo compiler repository; Scarb and additional packages are separate.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Carbon",
+    "implementation": {
+      "name": "Experimental Carbon nightly compiler",
+      "version_scope": "The current repository's compile/link workflow, distinct from its archived Explorer prototype.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Carbon experimental status and nightly compiler workflow",
+        "url": "https://raw.githubusercontent.com/carbon-language/carbon-lang/trunk/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Carbon Apache licence with LLVM exception",
+        "url": "https://raw.githubusercontent.com/carbon-language/carbon-lang/trunk/LICENSE",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Explore the project's experimental language and C++-migration goals; the compiler remains under development.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Use a supported nightly environment; the README documents recent Ubuntu/Debian and WSL-oriented setup.",
+        "source_ids": ["guide"]
+      },
+      "execution": {
+        "text": "Compile a Carbon source into an object, link it with the Carbon driver and launch the resulting program.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "C++ interoperability is a project goal; the README does not promise complete compatibility for the current compiler.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "Nightly compiler packages support the documented command line; the earlier Explorer represents an older design.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "The project explicitly excludes stable ABI and perfect backward/forward compatibility from its goals.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Core source carries Apache-2.0 with LLVM-exception; separately marked third-party directories retain their own licences.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "number.carbon",
+      "code": "import Core library \"io\";\nfn Run() {\n  Core.Print(12);\n}",
+      "run_instructions": "In the documented supported nightly environment, run bin/carbon compile --output=number.o number.carbon, then bin/carbon link --output=number number.o, then ./number.",
+      "expected_result": "The compiled program prints 12.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Experimental Carbon nightly compiler",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0 WITH LLVM-exception",
+        "source_ids": ["license"],
+        "scope": "Carbon project source except separately marked third-party code.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Ceylon",
+    "implementation": {
+      "name": "Archived Eclipse Ceylon command-line distribution",
+      "version_scope": "Historical 1.3.x distribution workflow; the repository documents 1.3.4-SNAPSHOT and historically tested JDKs.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Ceylon distribution and module workflow",
+        "url": "https://raw.githubusercontent.com/eclipse-archived/ceylon/master/dist/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "overview",
+        "label": "Ceylon language and historical JDK context",
+        "url": "https://raw.githubusercontent.com/eclipse-archived/ceylon/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "status",
+        "label": "Eclipse Ceylon archived project record",
+        "url": "https://projects.eclipse.org/projects/technology.ceylon",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Ceylon Apache-licensed component terms",
+        "url": "https://raw.githubusercontent.com/eclipse-archived/ceylon/master/LICENSE-ASL",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Maintain or study modular JVM and JavaScript programs; Eclipse marks the Ceylon project archived.",
+        "source_ids": ["overview", "status"]
+      },
+      "prerequisites": {
+        "text": "Use the archived distribution's compatible JDK context; its historical test list is not evidence for modern JDK compatibility.",
+        "source_ids": ["overview"]
+      },
+      "execution": {
+        "text": "Compile a named module for the Java backend and run its versioned entry; JavaScript has separate commands.",
+        "source_ids": ["guide"]
+      },
+      "behavior": {
+        "text": "Module descriptors and versioned repositories form part of how Ceylon programs resolve their dependencies.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The distribution includes commands for module generation, compilation, documentation and tests.",
+        "source_ids": ["guide"]
+      },
+      "maintenance": {
+        "text": "Eclipse reports archived status and warns of broken links; retain a reproducible distribution and dependency set.",
+        "source_ids": ["status"]
+      },
+      "costs": {
+        "text": "The distribution lists Apache, GPL/ClassPath and LGPL licence files plus third-party notices; one expression does not describe the whole bundle.",
+        "source_ids": ["guide"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "run.ceylon",
+      "code": "shared void run() {\n    print(\"PLLDN\");\n}",
+      "run_instructions": "Place run.ceylon at source/my/first/module/run.ceylon in the documented project layout. With a compatible historical Ceylon distribution, run ceylon new hello-world in an empty directory. Select module my.first.module, version 1.0.0 and the current project directory. Replace its generated run.ceylon with this code, then run ceylon compile my.first.module and ceylon run my.first.module/1.0.0.",
+      "expected_result": "The module's default run entry prints PLLDN.",
+      "source_ids": ["guide"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Archived Eclipse Ceylon command-line distribution",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "Components governed by LICENSE-ASL; GPL/ClassPath, LGPL and third-party distribution components are excluded.",
+        "notice": "Retain the Apache licence and applicable notices; inspect component headers and distribution NOTICE files before redistributing the bundle."
+      }
+    ]
+  },
+  {
+    "name": "Chapel",
+    "implementation": {
+      "name": "Chapel native compiler (chpl)",
+      "version_scope": "Documented base-language workflow; parallel and communication configuration depend on the selected Chapel build.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Chapel base, task-parallel and data-parallel language guide",
+        "url": "https://chapel-lang.org/docs/users-guide/index.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "example",
+        "label": "Chapel standalone compilation and writeln tutorial",
+        "url": "https://chapel-lang.org/docs/users-guide/base/hello.html",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "scope",
+        "label": "Chapel component and dependency licence scope",
+        "url": "https://raw.githubusercontent.com/chapel-lang/chapel/main/LICENSE",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Chapel core Apache licence",
+        "url": "https://raw.githubusercontent.com/chapel-lang/chapel/main/LICENSE.chapel",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Express parallel computation with explicit tasks, data-parallel constructs and locality-aware data placement.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Install a working Chapel compiler; small programs can start with top-level statements and library output.",
+        "source_ids": ["example"]
+      },
+      "execution": {
+        "text": "chpl compiles a source file to an executable which is launched directly.",
+        "source_ids": ["example"]
+      },
+      "behavior": {
+        "text": "Task creation/synchronization and data-parallel iteration are distinct parts of Chapel's programming model.",
+        "source_ids": ["guide"]
+      },
+      "tooling": {
+        "text": "The base-language tutorial provides compiler commands; larger programs add parallel constructs and locality concepts.",
+        "source_ids": ["guide", "example"]
+      },
+      "maintenance": {
+        "text": "The user guide is work in progress and may describe development code; choose documentation matching the compiler release.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "Core compiler, runtime and standard modules have Apache terms; communication and other third-party dependencies vary by build.",
+        "source_ids": ["scope", "license"]
+      }
+    },
+    "example": {
+      "kind": "program",
+      "filename": "sum.chpl",
+      "code": "writeln(2 + 4 + 6);",
+      "run_instructions": "With chpl installed, run chpl sum.chpl -o sum, then launch ./sum.",
+      "expected_result": "The executable prints 12.",
+      "source_ids": ["example"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Chapel native compiler (chpl)",
+        "role": "implementation",
+        "spdx_expression": "Apache-2.0",
+        "source_ids": ["license"],
+        "scope": "Chapel core compiler, runtime and standard/internal modules; third-party dependencies follow the distribution's component notices.",
+        "notice": "Retain the implementation license and relevant notices when redistributing it."
+      }
+    ]
+  },
+  {
+    "name": "Circom",
+    "implementation": {
+      "name": "Circom 2 Rust compiler",
+      "version_scope": "Circom 2 circuit syntax; constraint compilation is separate from witness generation and proving.",
+      "source_ids": ["guide"]
+    },
+    "sources": [
+      {
+        "id": "guide",
+        "label": "Circom circuit/compiler scope and Circom 1 deprecation",
+        "url": "https://raw.githubusercontent.com/iden3/circom/master/README.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "syntax",
+        "label": "Circom signals and circuit templates",
+        "url": "https://raw.githubusercontent.com/iden3/circom/master/mkdocs/docs/getting-started/writing-circuits.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "compile",
+        "label": "Circom constraints, witness targets and inspection options",
+        "url": "https://raw.githubusercontent.com/iden3/circom/master/mkdocs/docs/getting-started/compiling-circuits.md",
+        "checked_on": "2026-10-13"
+      },
+      {
+        "id": "license",
+        "label": "Circom distribution COPYING",
+        "url": "https://raw.githubusercontent.com/iden3/circom/master/COPYING",
+        "checked_on": "2026-10-13"
+      }
+    ],
+    "sections": {
+      "fit": {
+        "text": "Describe arithmetic circuits for zero-knowledge workflows; proving systems are provided by separate tools.",
+        "source_ids": ["guide"]
+      },
+      "prerequisites": {
+        "text": "Learn signals and constraints, then install the Circom 2 compiler; a conventional assignment is not automatically a constraint.",
+        "source_ids": ["syntax"]
+      },
+      "execution": {
+        "text": "Compilation produces R1CS constraints and optionally WebAssembly or C++ witness-generation code.",
+        "source_ids": ["compile"]
+      },
+      "behavior": {
+        "text": "<== both assigns a signal expression and adds its constraint; the top-level main component instantiates a circuit.",
+        "source_ids": ["syntax", "compile"]
+      },
+      "tooling": {
+        "text": "Compiler options produce symbols and inspection checks; the project links syntax highlighters and circuit-analysis tools.",
+        "source_ids": ["compile", "guide"]
+      },
+      "maintenance": {
+        "text": "The JavaScript Circom 1 compiler is deprecated; distinguish its syntax and tooling from Circom 2.",
+        "source_ids": ["guide"]
+      },
+      "costs": {
+        "text": "The distribution contains GPLv3 COPYING text; generated circuits and proving-tool packages require their own licence review.",
+        "source_ids": ["license"]
+      }
+    },
+    "example": {
+      "kind": "configuration",
+      "filename": "sum.circom",
+      "code": "pragma circom 2.0.0;\ntemplate SumPair() {\n    signal input left;\n    signal input right;\n    signal output total;\n    total <== left + right;\n}\ncomponent main = SumPair();",
+      "run_instructions": "With Circom 2 installed, run circom sum.circom --r1cs --wasm --sym. Witness generation and proof generation are subsequent steps documented separately.",
+      "expected_result": "The compiler produces sum.r1cs, sum.sym and the WebAssembly witness-generator directory. The circuit constrains total to left + right.",
+      "source_ids": ["syntax", "compile"],
+      "try_url": null,
+      "verification": {
+        "status": "documented",
+        "toolchain": null,
+        "checked_on": null
+      }
+    },
+    "licenses": [
+      {
+        "component": "Circom 2 Rust compiler",
+        "role": "implementation",
+        "spdx_expression": null,
+        "source_ids": ["license"],
+        "scope": "Named implementation only; dependencies and generated applications require separate review.",
+        "notice": "COPYING supplies GPLv3 text, but a component-level grant establishing only-versus-or-later was not confirmed. Do not apply compiler terms automatically to generated circuits."
+      }
+    ]
+  }
+]
