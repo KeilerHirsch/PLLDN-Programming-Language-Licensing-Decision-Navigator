@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
+import { tr } from "./ui-locale.ts";
 
 /** Explanatory vocabulary only: these entries are never decision inputs. */
 export const GLOSSARY_TERMS = [
@@ -65,18 +66,19 @@ export function renderProductGlossary(): HTMLDetailsElement {
   details.className = "product-glossary";
   details.id = "glossary";
   const summary = document.createElement("summary");
-  summary.textContent = "Explain terms: licenses, evidence and complexity";
+  summary.textContent = tr("Explain terms: licenses, evidence and complexity");
   details.append(summary);
   const caution = document.createElement("p");
-  caution.textContent =
-    "Reference only. This glossary does not create licensing conclusions or Reviewed assessments.";
+  caution.textContent = tr(
+    "Reference only. This glossary does not create licensing conclusions or Reviewed assessments.",
+  );
   details.append(caution);
   const list = document.createElement("dl");
   for (const entry of GLOSSARY_TERMS) {
     const title = document.createElement("dt");
     title.textContent = entry.term;
     const description = document.createElement("dd");
-    description.textContent = entry.definition;
+    description.textContent = tr(entry.definition);
     list.append(title, description);
   }
   details.append(list);

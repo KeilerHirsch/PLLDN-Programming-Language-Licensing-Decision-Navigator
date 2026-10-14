@@ -46,6 +46,7 @@ import {
 import { type BrowserRuntimeInput, bootstrapUiRuntime } from "./runtime.ts";
 import { confirmProposal, confirmProposals } from "./text-assistance.ts";
 import type { FacetDefinition, SortMode, UiViewModel } from "./types.ts";
+import type { UiLocale } from "./ui-locale.ts";
 
 interface PllDnWindow extends Window {
   PLLDN_RUNTIME?: BrowserRuntimeInput;
@@ -84,6 +85,10 @@ productState = {
   filters: initialNavigation.filters,
   discovery: initialNavigation.discovery,
   worksheet: readWorksheet(window.location.search),
+  locale:
+    new URLSearchParams(window.location.search).get("lang") === "de"
+      ? "de"
+      : "en",
   selectedUseCaseId:
     PRODUCT_MODEL.use_cases.find(
       (guide) =>
@@ -136,6 +141,7 @@ function worksheetNavigationHref(): string {
   const base = catalogNavigationHref(navigationState());
   const query = new URLSearchParams(base.slice(1).split("#")[0]);
   writeWorksheet(query, productState.worksheet);
+  if (productState.locale === "de") query.set("lang", "de");
   if (productState.selectedUseCaseId)
     query.set("guide", productState.selectedUseCaseId);
   return `?${query.toString()}#catalog`;
@@ -428,6 +434,15 @@ root.addEventListener("click", (event) => {
       ),
       "plldn-editorial-license-comparison.csv",
     );
+    return;
+  }
+  if (action === "set-ui-language") {
+    const locale = element.dataset.locale;
+    if (locale === "en" || locale === "de") {
+      productState = { ...productState, locale: locale as UiLocale };
+      saveNavigation(true);
+      void publish(() => current.view());
+    }
     return;
   }
   if (action === "select-use-case") {
@@ -765,6 +780,10 @@ async function restoreCatalogLocation(current: UiController): Promise<void> {
     filters: nav.filters,
     discovery: nav.discovery,
     worksheet: readWorksheet(window.location.search),
+    locale:
+      new URLSearchParams(window.location.search).get("lang") === "de"
+        ? "de"
+        : "en",
     selectedUseCaseId:
       PRODUCT_MODEL.use_cases.find(
         (guide) =>
