@@ -31,6 +31,12 @@ import {
   SHORTLIST_IDENTITIES,
 } from "./product.ts";
 import {
+  exportWorksheetMarkdown,
+  readWorksheet,
+  validWorksheetChoice,
+  writeWorksheet,
+} from "./project-worksheet.ts";
+import {
   type CatalogPreviewState,
   renderApp,
   renderDiagnostic,
@@ -77,6 +83,13 @@ productState = {
   view: initialNavigation.view,
   filters: initialNavigation.filters,
   discovery: initialNavigation.discovery,
+  worksheet: readWorksheet(window.location.search),
+  selectedUseCaseId:
+    PRODUCT_MODEL.use_cases.find(
+      (guide) =>
+        guide.use_case_id ===
+        new URLSearchParams(window.location.search).get("guide"),
+    )?.use_case_id ?? null,
 };
 const allowedShortlistIds = new Set(SHORTLIST_IDENTITIES.keys());
 const shortlistStorage: Storage | null = (() => {
@@ -119,11 +132,19 @@ function navigationState() {
     discovery: productState.discovery,
   };
 }
+function worksheetNavigationHref(): string {
+  const base = catalogNavigationHref(navigationState());
+  const query = new URLSearchParams(base.slice(1).split("#")[0]);
+  writeWorksheet(query, productState.worksheet);
+  if (productState.selectedUseCaseId)
+    query.set("guide", productState.selectedUseCaseId);
+  return `?${query.toString()}#catalog`;
+}
 function saveNavigation(push = false): void {
   window.history[push ? "pushState" : "replaceState"](
     null,
     "",
-    catalogNavigationHref(navigationState()),
+    worksheetNavigationHref(),
   );
 }
 function applyCatalogFilter(): void {
@@ -207,7 +228,7 @@ function applyCatalogFilter(): void {
   const empty = root.querySelector<HTMLElement>("[data-catalog-search-empty]");
   if (empty) empty.hidden = visible > 0;
   const share = root.querySelector<HTMLAnchorElement>(".catalog-share");
-  if (share) share.href = catalogNavigationHref(navigationState());
+  if (share) share.href = worksheetNavigationHref();
 }
 
 function installProductExperience(model: UiViewModel): void {
@@ -329,6 +350,17 @@ root.addEventListener("click", (event) => {
     );
     return;
   }
+  if (action === "export-worksheet") {
+    const guide = PRODUCT_MODEL.use_cases.find(
+      (entry) => entry.use_case_id === productState.selectedUseCaseId,
+    );
+    downloadCsv(
+      exportWorksheetMarkdown(productState.worksheet, guide?.label ?? null),
+      "plldn-project-license-preview.md",
+      "text/markdown;charset=utf-8",
+    );
+    return;
+  }
   if (action === "export-language-compare") {
     if (!catalogState.view) throw new Error("Preview catalogue not loaded");
     downloadCsv(
@@ -403,10 +435,31 @@ root.addEventListener("click", (event) => {
       ...productState,
       selectedUseCaseId: element.dataset.useCaseId ?? null,
     };
+    saveNavigation(true);
     void publish(() => current.view());
+  }
+  if (action === "worksheet-browse-license-previews") {
+    const commercial = productState.worksheet.commercial;
+    const saas = productState.worksheet.hosting;
+    productState = {
+      ...productState,
+      mode: "licenses",
+      status: "all",
+      filters: {
+        ...DEFAULT_PRODUCT_UI_STATE.filters,
+        licenseCommercial: commercial === "yes" ? "yes" : "any",
+        licenseSaas: saas === "yes" ? "yes" : "any",
+      },
+    };
+    catalogQuery = "";
+    identityLimit = identityPageSize;
+    saveNavigation(true);
+    void publish(() => current.view());
+    return;
   }
   if (action === "clear-use-case") {
     productState = { ...productState, selectedUseCaseId: null };
+    saveNavigation(true);
     void publish(() => current.view());
   }
   if (action === "catalog-mode") {
@@ -589,6 +642,18 @@ root.addEventListener("change", (event) => {
   const current = controller;
   if (!element || !current) return;
   const action = element.dataset.action;
+  if (action === "worksheet-answer" && element instanceof HTMLSelectElement) {
+    const key = element.dataset.worksheetKey;
+    if (key && validWorksheetChoice(key, element.value)) {
+      productState = {
+        ...productState,
+        worksheet: { ...productState.worksheet, [key]: element.value },
+      };
+      saveNavigation(true);
+      void publish(() => current.view());
+    }
+    return;
+  }
   if (action === "select-facet") {
     const facetId = element.dataset.facetId;
     const optionId = element.dataset.optionId;
@@ -699,6 +764,13 @@ async function restoreCatalogLocation(current: UiController): Promise<void> {
     view: nav.view,
     filters: nav.filters,
     discovery: nav.discovery,
+    worksheet: readWorksheet(window.location.search),
+    selectedUseCaseId:
+      PRODUCT_MODEL.use_cases.find(
+        (guide) =>
+          guide.use_case_id ===
+          new URLSearchParams(window.location.search).get("guide"),
+      )?.use_case_id ?? null,
   };
   catalogQuery = nav.query;
   identityOsiFilter = nav.spdx;

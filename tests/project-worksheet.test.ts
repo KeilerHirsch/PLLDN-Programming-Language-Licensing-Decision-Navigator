@@ -1,0 +1,61 @@
+// SPDX-FileCopyrightText: 2026 PLLDN contributors
+// SPDX-License-Identifier: EUPL-1.2
+import assert from "node:assert/strict";
+import test from "node:test";
+import {
+  defaultWorksheet,
+  exportWorksheetMarkdown,
+  readWorksheet,
+  summarizeWorksheet,
+  validWorksheetChoice,
+  WORKSHEET_KEYS,
+  writeWorksheet,
+} from "../src/ui/project-worksheet.ts";
+
+test("project/licensing worksheet URL round trips allowed nonpersonal selections only", () => {
+  const initial = readWorksheet(
+    "?ws_platform=server&ws_hosting=yes&ws_linking=dynamic&ws_commercial=yes&ws_expression=WITH&ws_team=small-team&ws_distribution=binary",
+  );
+  assert.equal(initial.platform, "server");
+  assert.equal(initial.hosting, "yes");
+  assert.equal(initial.expression, "WITH");
+  const params = new URLSearchParams();
+  writeWorksheet(params, initial);
+  assert.deepEqual(readWorksheet(params.toString()), initial);
+  assert.deepEqual(
+    readWorksheet("?ws_hosting=YES&ws_platform=%3Cscript%3E"),
+    defaultWorksheet(),
+  );
+  assert.equal(validWorksheetChoice("madeup", "yes"), false);
+  assert.equal(WORKSHEET_KEYS.length, 9);
+  const report = exportWorksheetMarkdown(initial, "Server project");
+  assert(report.includes("Preview only"));
+  assert(report.includes("UNKNOWN"));
+  assert(report.includes("NOT_REVIEWED"));
+  assert(report.includes("Server project"));
+  assert(report.includes("https://spdx.org/licenses/"));
+});
+
+test("no scenario generates a positive licensing verdict, even for SaaS and AND/OR/WITH", () => {
+  for (const expression of [
+    "AND",
+    "OR",
+    "WITH",
+    "unconfirmed",
+    "single",
+  ] as const) {
+    const worksheet = {
+      ...defaultWorksheet(),
+      hosting: "yes",
+      distribution: "both",
+      linking: "static",
+      commercial: "yes",
+      expression,
+    };
+    const result = summarizeWorksheet(worksheet);
+    assert.equal(result.status, "UNKNOWN");
+    assert(result.topics.some((topic) => topic.includes("network-use")));
+    if (expression !== "single")
+      assert(result.topics.some((topic) => topic.includes("SPDX")));
+  }
+});

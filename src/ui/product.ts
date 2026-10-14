@@ -75,6 +75,11 @@ import {
 } from "./license-qualifications.ts";
 import { renderPreviewEvidenceInventory } from "./preview-evidence-inventory.ts";
 import { renderProductGlossary } from "./product-glossary.ts";
+import {
+  defaultWorksheet,
+  renderProjectWorksheet,
+  type WorksheetState,
+} from "./project-worksheet.ts";
 import { factProvenanceDisclosure } from "./source-provenance.ts";
 import type {
   CatalogPreviewEntryView,
@@ -98,6 +103,7 @@ export interface ProductUiState {
   compareLicenseIds: readonly string[];
   shortlistIds: readonly string[];
   shortlistPersisted: boolean;
+  worksheet: WorksheetState;
   filters: ProductFilterState;
 }
 
@@ -114,6 +120,7 @@ export const DEFAULT_PRODUCT_UI_STATE: ProductUiState = {
   compareLicenseIds: [],
   shortlistIds: [],
   shortlistPersisted: false,
+  worksheet: defaultWorksheet(),
   filters: { ...DEFAULT_PRODUCT_FILTERS },
 };
 
@@ -2011,6 +2018,7 @@ export function renderProductExperience(
     renderProductGlossary(),
     renderPreviewEvidenceInventory(catalog),
     renderUseCases(state),
+    renderProjectWorksheet(state.worksheet),
     renderShortlist(state),
     state.mode === "languages"
       ? renderCompare(catalog, state)
