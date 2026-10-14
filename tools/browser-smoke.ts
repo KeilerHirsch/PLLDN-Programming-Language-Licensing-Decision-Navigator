@@ -184,6 +184,16 @@ const smokeProbe = `
         "license route must resolve its exact canonical identity");
       window.history.back();
       await waitFor(() => document.querySelectorAll(".language-reader-profile").length === 194, "Back restores language reader catalogue");
+      const deutsch = document.querySelector('[data-action="set-ui-language"][data-locale="de"]');
+      assert(deutsch && deutsch.getAttribute("aria-pressed") === "false", "English is initial UI locale");
+      deutsch.click();
+      await waitFor(() => new URLSearchParams(location.search).get("lang") === "de" &&
+        document.querySelector(".product-hero h1")?.textContent === "Wähle das Fundament vor dem ersten Commit." &&
+        document.querySelector('[data-action="set-ui-language"][data-locale="de"]')?.getAttribute("aria-pressed") === "true", "DE locale changes UI and URL only");
+      assert(document.querySelector("#project-worksheet h3")?.textContent.includes("UNKNOWN"), "unresolved assessment marker stays unchanged in DE");
+      document.querySelector('[data-action="set-ui-language"][data-locale="en"]').click();
+      await waitFor(() => !new URLSearchParams(location.search).has("lang") &&
+        document.querySelector(".product-hero h1")?.textContent === "Choose the foundation before the first commit.", "English locale restored");
       if (window.innerWidth <= 760) assert(document.documentElement.scrollWidth <= window.innerWidth + 2,
         "full reader and mixed comparison must not overflow mobile horizontally");
       output.textContent = "PASS: complete readers, sourced examples, mixed UNKNOWN comparison, limits, license routes and mobile";

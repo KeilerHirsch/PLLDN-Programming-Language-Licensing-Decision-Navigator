@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
+import { tr } from "./ui-locale.ts";
 
 /** Navigation-only project intent. These are NEVER licensing conclusions. */
 export const WORKSHEET_FIELDS = {
@@ -121,10 +122,11 @@ export function renderProjectWorksheet(worksheet: WorksheetState): HTMLElement {
   section.className = "project-worksheet";
   section.id = "project-worksheet";
   const title = document.createElement("h2");
-  title.textContent = "Project and licensing worksheet";
+  title.textContent = tr("Project and licensing worksheet");
   const intro = document.createElement("p");
-  intro.textContent =
-    "Record your scenario; share the URL to revisit it. These answers are navigation context only, not Reviewed evidence or legal advice.";
+  intro.textContent = tr(
+    "Record your scenario; share the URL to revisit it. These answers are navigation context only, not Reviewed evidence or legal advice.",
+  );
   section.append(title, intro);
   const grid = document.createElement("div");
   grid.className = "catalog-filter-grid";
@@ -132,14 +134,14 @@ export function renderProjectWorksheet(worksheet: WorksheetState): HTMLElement {
     const label = document.createElement("label");
     label.className = "catalog-filter";
     const name = document.createElement("span");
-    name.textContent = WORKSHEET_FIELDS[key].label;
+    name.textContent = tr(WORKSHEET_FIELDS[key].label);
     const select = document.createElement("select");
     select.dataset.action = "worksheet-answer";
     select.dataset.worksheetKey = key;
     for (const value of WORKSHEET_FIELDS[key].options) {
       const option = document.createElement("option");
       option.value = value;
-      option.textContent = value.replaceAll("-", " ");
+      option.textContent = tr(value.replaceAll("-", " "));
       option.selected = worksheet[key] === value;
       select.append(option);
     }
@@ -149,37 +151,39 @@ export function renderProjectWorksheet(worksheet: WorksheetState): HTMLElement {
   section.append(grid);
   const result = document.createElement("section");
   const heading = document.createElement("h3");
-  heading.textContent = "Licensing result: UNKNOWN — verification required";
+  heading.textContent = tr("Licensing result: UNKNOWN — verification required");
   result.append(heading);
   const list = document.createElement("ul");
   for (const topic of summarizeWorksheet(worksheet).topics) {
     const item = document.createElement("li");
-    item.textContent = topic;
+    item.textContent = tr(topic);
     list.append(item);
   }
   result.append(list);
   const source = document.createElement("a");
   source.href = "https://spdx.org/licenses/";
   source.rel = "noopener noreferrer";
-  source.textContent = "SPDX license identities and canonical source links";
+  source.textContent = tr("SPDX license identities and canonical source links");
   result.append(source);
   const note = document.createElement("p");
-  note.textContent =
-    "No automatic license-pair compatibility verdict. Candidate identities may have NOT_REVIEWED assessments; consult their exact terms and qualified advice where needed.";
+  note.textContent = tr(
+    "No automatic license-pair compatibility verdict. Candidate identities may have NOT_REVIEWED assessments; consult their exact terms and qualified advice where needed.",
+  );
   result.append(note);
   const exportButton = document.createElement("button");
   exportButton.type = "button";
   exportButton.dataset.action = "export-worksheet";
-  exportButton.textContent = "Download Preview worksheet (Markdown)";
+  exportButton.textContent = tr("Download Preview worksheet (Markdown)");
   result.append(exportButton);
   const browse = document.createElement("button");
   browse.type = "button";
   browse.dataset.action = "worksheet-browse-license-previews";
-  browse.textContent = "Browse license Preview filters for this scenario";
+  browse.textContent = tr("Browse license Preview filters for this scenario");
   result.append(browse);
   const qualifier = document.createElement("p");
-  qualifier.textContent =
-    "Preview filters narrow descriptions only; they are not compatibility checks. Unknown identities may be excluded by a selected filter.";
+  qualifier.textContent = tr(
+    "Preview filters narrow descriptions only; they are not compatibility checks. Unknown identities may be excluded by a selected filter.",
+  );
   result.append(qualifier);
   section.append(result);
   return section;

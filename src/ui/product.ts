@@ -90,6 +90,7 @@ import type {
   CatalogPreviewFactView,
   CatalogPreviewView,
 } from "./types.ts";
+import { getUiLocale, setUiLocale, tr, type UiLocale } from "./ui-locale.ts";
 import { renderWorkloadEvidence } from "./workload-evidence.ts";
 
 export type ProductCatalogMode = "languages" | "licenses";
@@ -108,6 +109,7 @@ export interface ProductUiState {
   shortlistIds: readonly string[];
   shortlistPersisted: boolean;
   worksheet: WorksheetState;
+  locale: UiLocale;
   filters: ProductFilterState;
 }
 
@@ -125,18 +127,19 @@ export const DEFAULT_PRODUCT_UI_STATE: ProductUiState = {
   shortlistIds: [],
   shortlistPersisted: false,
   worksheet: defaultWorksheet(),
+  locale: "en",
   filters: { ...DEFAULT_PRODUCT_FILTERS },
 };
 
 function heading(level: 1 | 2 | 3, text: string): HTMLHeadingElement {
   const node = document.createElement(`h${level}`) as HTMLHeadingElement;
-  node.textContent = text;
+  node.textContent = tr(text);
   return node;
 }
 
 function paragraph(text: string): HTMLParagraphElement {
   const node = document.createElement("p");
-  node.textContent = text;
+  node.textContent = tr(text);
   return node;
 }
 
@@ -154,7 +157,7 @@ function button(
 ): HTMLButtonElement {
   const node = document.createElement("button");
   node.type = "button";
-  node.textContent = label;
+  node.textContent = tr(label);
   node.dataset.action = action;
   if (className) node.className = className;
   return node;
@@ -286,7 +289,7 @@ function selectControl(
   const label = document.createElement("label");
   label.className = "catalog-filter";
   const title = document.createElement("span");
-  title.textContent = labelText;
+  title.textContent = tr(labelText);
   const select = document.createElement("select");
   select.dataset.action = "product-filter";
   select.dataset.filterKey = filterKey;
@@ -296,7 +299,7 @@ function selectControl(
   for (const [optionValue, optionLabel] of choices) {
     const option = document.createElement("option");
     option.value = optionValue;
-    option.textContent = optionLabel;
+    option.textContent = tr(optionLabel);
     option.selected = optionValue === value;
     select.append(option);
   }
@@ -1247,13 +1250,15 @@ function renderUnassessedProfile(record: UnassessedRecord): HTMLElement {
   const provenance = paragraph(`ID: ${record.id} · Source commit: ${pin}`);
   const reference = document.createElement("a");
   reference.href = record.reference;
-  reference.textContent = "Pinned source";
+  reference.textContent = tr("Pinned source");
   reference.rel = "noopener noreferrer";
   const permalink = document.createElement("a");
   permalink.className = "candidate-permalink";
   permalink.dataset.candidatePermalink = "true";
   permalink.href = `?candidate=${encodeURIComponent(record.id)}#catalog`;
-  permalink.textContent = "Direct link to this profile";
+  if (getUiLocale() === "de")
+    permalink.href = permalink.href.replace("#catalog", "&lang=de#catalog");
+  permalink.textContent = tr("Direct link to this profile");
   details.append(summary, values, provenance, reference, permalink);
   return details;
 }
@@ -1261,10 +1266,11 @@ function renderUnassessedProfile(record: UnassessedRecord): HTMLElement {
 function profileLink(id: string, candidate = false): HTMLAnchorElement {
   const link = document.createElement("a");
   link.className = "catalog-profile-link";
+  const lang = getUiLocale() === "de" ? "&lang=de" : "";
   link.href = candidate
-    ? `?candidate=${encodeURIComponent(id)}#catalog`
-    : `?profile=${encodeURIComponent(id)}#catalog`;
-  link.textContent = "Open profile";
+    ? `?candidate=${encodeURIComponent(id)}${lang}#catalog`
+    : `?profile=${encodeURIComponent(id)}${lang}#catalog`;
+  link.textContent = tr("Open profile");
   return link;
 }
 function renderIdentityCard(
@@ -2034,7 +2040,9 @@ export function renderProductExperience(
   catalog: CatalogPreviewView,
   state: ProductUiState,
 ): HTMLElement {
+  setUiLocale(state.locale);
   const wrapper = document.createElement("div");
+  wrapper.lang = state.locale;
   wrapper.className = "product-experience";
   const nav = document.createElement("nav");
   nav.className = "catalog-navigation";
@@ -2046,10 +2054,25 @@ export function renderProductExperience(
     ["#explore", "Project guides"],
   ] as const) {
     const link = document.createElement("a");
-    link.href = href;
-    link.textContent = label;
+    link.href =
+      state.locale === "de" && href.startsWith("?")
+        ? href.replace("#catalog", "&lang=de#catalog")
+        : href;
+    link.textContent = tr(label);
     nav.append(link);
   }
+  const languageSwitch = document.createElement("div");
+  languageSwitch.className = "ui-language-switch";
+  for (const locale of ["en", "de"] as const) {
+    const control = button(
+      locale === "de" ? "Deutsch" : "English",
+      "set-ui-language",
+    );
+    control.dataset.locale = locale;
+    control.setAttribute("aria-pressed", String(state.locale === locale));
+    languageSwitch.append(control);
+  }
+  nav.append(languageSwitch);
   wrapper.append(nav);
   wrapper.append(
     renderHero(catalog),

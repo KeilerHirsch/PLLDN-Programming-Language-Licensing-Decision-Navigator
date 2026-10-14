@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
 import { readerSafeHttps } from "../product/language-reader-validation.ts";
+import { tr } from "./ui-locale.ts";
 
 export interface ProfileEvidenceLink {
   label: string;
@@ -43,12 +44,13 @@ export function renderProfileEvidence(
   const details = document.createElement("details");
   details.className = "profile-evidence-overview";
   const summary = document.createElement("summary");
-  summary.textContent = "Sources, checking dates & assessment status";
+  summary.textContent = tr("Sources, checking dates & assessment status");
   const notice = document.createElement("p");
-  notice.textContent =
+  notice.textContent = tr(
     status === "NOT_REVIEWED"
       ? "NOT_REVIEWED / UNKNOWN: identity exists, but rights and suitability assessments have not been reviewed."
-      : "Editorial Preview: descriptive claims are not automatically Reviewed assessments or measured benchmarks.";
+      : "Editorial Preview: descriptive claims are not automatically Reviewed assessments or measured benchmarks.",
+  );
   details.append(summary, notice);
 
   const list = document.createElement("ul");
@@ -57,7 +59,7 @@ export function renderProfileEvidence(
     if (seen.has(source.url)) continue;
     seen.add(source.url);
     const item = document.createElement("li");
-    const date = source.checkedOn ?? "not recorded";
+    const date = source.checkedOn ?? tr("not recorded");
     if (readerSafeHttps(source.url)) {
       const link = document.createElement("a");
       link.href = source.url;
@@ -65,17 +67,18 @@ export function renderProfileEvidence(
       link.textContent = source.label;
       item.append(link);
     } else {
-      item.textContent = `Unlinked reference: ${source.label}`;
+      item.textContent = `${tr("Unlinked reference")}: ${source.label}`;
     }
     const checked = document.createElement("span");
-    checked.textContent = ` · Checked: ${date}`;
+    checked.textContent = ` · ${tr("Checked")}: ${date}`;
     item.append(checked);
     list.append(item);
   }
   if (list.children.length === 0) {
     const absent = document.createElement("li");
-    absent.textContent =
-      "No recorded source in this view; independent verification is UNKNOWN.";
+    absent.textContent = tr(
+      "No recorded source in this view; independent verification is UNKNOWN.",
+    );
     list.append(absent);
   }
   details.append(list);
@@ -83,8 +86,9 @@ export function renderProfileEvidence(
   report.href = sourceFeedbackUrl(entityId);
   report.target = "_blank";
   report.rel = "noopener noreferrer";
-  report.textContent =
-    "Suggest a source correction on GitHub (review draft before submitting)";
+  report.textContent = tr(
+    "Suggest a source correction on GitHub (review draft before submitting)",
+  );
   details.append(report);
   return details;
 }
