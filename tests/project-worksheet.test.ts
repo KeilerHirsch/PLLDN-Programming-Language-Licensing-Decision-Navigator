@@ -9,6 +9,7 @@ import {
   summarizeWorksheet,
   validWorksheetChoice,
   WORKSHEET_KEYS,
+  worksheetPreviewFilterTrace,
   writeWorksheet,
 } from "../src/ui/project-worksheet.ts";
 
@@ -75,4 +76,44 @@ test("German Preview worksheet retains explicit UNKNOWN and original license exp
   assert(de.includes("WITH"));
   assert(de.includes("https://spdx.org/licenses/"));
   assert(en.includes("Project guide:"));
+});
+
+test("worksheet maps only two affirmative Preview facets and explains every other answer", () => {
+  const yes = {
+    ...defaultWorksheet(),
+    commercial: "yes",
+    hosting: "yes",
+    platform: "web",
+    distribution: "binary",
+  };
+  const trace = worksheetPreviewFilterTrace(yes);
+  assert.deepEqual(trace.filters, {
+    licenseCommercial: "yes",
+    licenseSaas: "yes",
+  });
+  assert(
+    trace.rows
+      .find((row) => row.key === "distribution")
+      ?.description.includes("Context only"),
+  );
+  assert(
+    trace.rows
+      .find((row) => row.key === "hosting")
+      ?.description.includes("UNKNOWN"),
+  );
+  assert(exportWorksheetMarkdown(yes, null, "de").includes("licenseSaas=yes"));
+  const no = worksheetPreviewFilterTrace({
+    ...yes,
+    commercial: "no",
+    hosting: "no",
+  });
+  assert.deepEqual(no.filters, {
+    licenseCommercial: "any",
+    licenseSaas: "any",
+  });
+  assert(
+    no.rows
+      .find((row) => row.key === "commercial")
+      ?.description.includes("No inverse filter"),
+  );
 });
