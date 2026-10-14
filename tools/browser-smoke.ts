@@ -51,6 +51,41 @@ const smokeProbe = `
   }
 
   try {
+    if (new URLSearchParams(window.location.search).get("probe") === "locale-license") {
+      await waitFor(
+        () => document.querySelector("#catalog .license-decision-profile > summary"),
+        "pinned licence cards rendered in DE",
+      );
+      const lic = document.querySelector("#catalog .license-decision-profile > summary");
+      assert(lic.textContent === "Rechte, Einschränkungen und Pflichten",
+        "German licence disclosure caption");
+      assert(document.querySelector("#catalog .license-decision-group h3")?.textContent === "Rechte",
+        "German licence rights headings");
+      assert(document.querySelector("#catalog .license-decision-group dt")?.textContent === "Nutzung",
+        "German rights labels are UI-only");
+      assert(document.querySelector("#catalog .license-good")?.textContent.startsWith("Geeignet, wenn:"),
+        "the sourced good-when statement has only its UI prefix translated");
+      assert(document.querySelector("#catalog .canonical-license-link")?.textContent === "Maßgeblicher Lizenztext",
+        "canonical terms links remain visible");
+      const languageSwitch = document.querySelector('[data-action="set-ui-language"][data-locale="en"]');
+      languageSwitch.click();
+      await waitFor(() => !new URLSearchParams(location.search).has("lang") &&
+        document.querySelector("#catalog .license-decision-profile > summary")?.textContent ===
+          "Rights, restrictions & compliance", "EN roundtrip");
+      window.history.back();
+      await waitFor(() => new URLSearchParams(location.search).get("lang") === "de" &&
+        document.querySelector("#catalog .license-decision-profile > summary")?.textContent ===
+          "Rechte, Einschränkungen und Pflichten", "Back restores German labels");
+      const bg = getComputedStyle(document.body).backgroundColor;
+      const color = getComputedStyle(document.body).color;
+      assert(bg !== color, "dark-mode system colours retain readable foreground/background");
+      if (window.innerWidth <= 760) {
+        assert(document.documentElement.scrollWidth <= window.innerWidth + 2,
+          "German licence labels must not overflow 390px document");
+      }
+      output.textContent = "PASS: German licence controls, EN/DE history, dark system colour and 390px layout";
+      return;
+    }
 
     if (new URLSearchParams(window.location.search).get("probe") === "reader") {
       await waitFor(() => document.querySelectorAll(".language-reader-profile").length === 194, "complete reader corpus");
@@ -883,6 +918,7 @@ async function main(): Promise<void> {
       [390, "?candidate=candidate.language.696f"],
       [390, "?candidate=candidate.language.76"],
       [1280, "?probe=reader"],
+      [390, "?probe=locale-license&catalog=licenses&lang=de"],
       [390, "?probe=reader"],
       [1280, "?probe=discovery"],
       [390, "?probe=discovery"],
@@ -916,6 +952,9 @@ async function main(): Promise<void> {
           "--disable-gpu",
           "--disable-dev-shm-usage",
           "--disable-background-networking",
+          ...(suffix.includes("probe=locale-license")
+            ? ["--force-dark-mode"]
+            : []),
           "--no-first-run",
           `--user-data-dir=${join(root, "chrome-profile")}`,
           "--force-device-scale-factor=1",

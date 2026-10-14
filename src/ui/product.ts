@@ -197,7 +197,7 @@ function compareButton(
   control.dataset.entityId = entityId;
   if (!selected && state.compareLanguageIds.length >= 4) {
     control.disabled = true;
-    control.title = "Four languages selected. Remove one to add another.";
+    control.title = tr("Four languages selected. Remove one to add another.");
   }
   return control;
 }
@@ -276,7 +276,7 @@ function licenseCompareButton(
   control.dataset.entityId = entityId;
   if (!selected && state.compareLicenseIds.length >= 4) {
     control.disabled = true;
-    control.title = "Four licenses selected. Remove one to add another.";
+    control.title = tr("Four licenses selected. Remove one to add another.");
   }
   return control;
 }
@@ -458,7 +458,7 @@ function quickFact(
   item.className = "decision-quick-fact";
   const label = document.createElement("span");
   label.className = "decision-quick-label";
-  label.textContent = labelText;
+  label.textContent = tr(labelText);
   item.append(label, metricBadge(value, tone));
   return item;
 }
@@ -1003,7 +1003,7 @@ function renderLicenseAxis(): HTMLElement {
   for (const [label, copy] of models) {
     const step = document.createElement("div");
     step.className = "license-axis-step";
-    step.append(badge(label), paragraph(copy));
+    step.append(badge(tr(label)), paragraph(copy));
     axis.append(step);
   }
   const note = paragraph(
@@ -1021,7 +1021,7 @@ function renderLicenseDecisionProfile(
   const details = document.createElement("details");
   details.className = "license-decision-profile";
   const summary = document.createElement("summary");
-  summary.textContent = "Rights, restrictions & compliance";
+  summary.textContent = tr("Rights, restrictions & compliance");
   details.append(summary);
 
   if (!decision) {
@@ -1044,7 +1044,7 @@ function renderLicenseDecisionProfile(
     const source = document.createElement("a");
     source.href = sourceHref;
     source.rel = "noopener noreferrer";
-    source.textContent = "Canonical terms";
+    source.textContent = tr("Canonical terms");
     source.className = "canonical-license-link";
     metadata.append(source);
   }
@@ -1089,7 +1089,7 @@ function renderLicenseDecisionProfile(
     const list = document.createElement("dl");
     for (const [label, value] of rows) {
       const term = document.createElement("dt");
-      term.textContent = label;
+      term.textContent = tr(label);
       const description = document.createElement("dd");
       description.textContent = humanizeDecisionValue(value);
       list.append(term, description);
@@ -1191,9 +1191,9 @@ function renderLicenseCard(
     renderLicenseQuickFacts(profile),
   );
 
-  const good = paragraph(`Good when: ${profile.good_when}`);
+  const good = paragraph(`${tr("Good when")}: ${profile.good_when}`);
   good.className = "license-good";
-  const watch = paragraph(`Watch for: ${profile.watch_for}`);
+  const watch = paragraph(`${tr("Watch for")}: ${profile.watch_for}`);
   watch.className = "license-watch";
   const canonical =
     LICENSE_DECISION_PROFILES[profile.entity_id]?.canonical_source;
@@ -1953,7 +1953,8 @@ function renderCompare(
   wrapper.className = "compare-table-wrap";
   wrapper.setAttribute("tabindex", "0");
   wrapper.setAttribute("role", "region");
-  wrapper.setAttribute("aria-label", "Scrollable language comparison matrix");
+  const comparisonAriaLabel = tr("Scrollable language comparison matrix");
+  wrapper.setAttribute("aria-label", comparisonAriaLabel);
   const table = document.createElement("table");
   table.className = "compare-table";
 
@@ -1985,7 +1986,9 @@ function renderCompare(
   );
   if (state.compareOnlyDifferences && selected.length >= 2) {
     const summary = paragraph(
-      `Showing ${rows.length} of ${allRows.length} attributes. UNKNOWN and NOT_REVIEWED remain visible; equal displayed values can have different sources.`,
+      getUiLocale() === "de"
+        ? `${rows.length} von ${allRows.length} Eigenschaften angezeigt. UNKNOWN und NOT_REVIEWED bleiben sichtbar; gleiche Anzeigewerte können unterschiedliche Quellen haben.`
+        : `Showing ${rows.length} of ${allRows.length} attributes. UNKNOWN and NOT_REVIEWED remain visible; equal displayed values can have different sources.`,
     );
     summary.className = "compare-filter-summary";
     section.append(summary);
