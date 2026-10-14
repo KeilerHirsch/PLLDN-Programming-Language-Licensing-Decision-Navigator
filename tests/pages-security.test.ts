@@ -276,6 +276,7 @@ const allowedUrlHosts = new Set([
   "polyformproject.org",
   "raw.githubusercontent.com",
   "spdx.org",
+  "spdx.github.io", // Official SPDX specification pages; static links only.
   "spec.openapis.org",
   "stackoverflow.com",
   "tools.ietf.org",

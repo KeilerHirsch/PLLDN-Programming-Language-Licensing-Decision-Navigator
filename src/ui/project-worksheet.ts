@@ -119,6 +119,72 @@ export function worksheetPreviewFilterTrace(scenario: WorksheetState): {
   return { filters, rows };
 }
 
+/** Authoritative texts to inspect only IF the exact license/version governs a component.
+ * Nothing here decides whether a license applies or any permission is granted. */
+export interface WorksheetPrimarySource {
+  id: string;
+  title: string;
+  section: string;
+  url: string;
+  why: string;
+}
+
+export function worksheetPrimarySources(
+  scenario: WorksheetState,
+): WorksheetPrimarySource[] {
+  const sources: WorksheetPrimarySource[] = [];
+  if (
+    scenario.expression !== "unspecified" &&
+    scenario.expression !== "single"
+  ) {
+    sources.push({
+      id: "spdx-expression-3.0.1",
+      title: "SPDX Specification 3.0.1",
+      section: "Annex B — license expressions AND / OR / WITH",
+      url: "https://spdx.github.io/spdx-spec/v3.0.1/annexes/spdx-license-expressions/",
+      why: "If your component has a compound SPDX expression, read the exact operator/exception grammar. Syntax is not a compatibility verdict.",
+    });
+  }
+  if (scenario.hosting === "yes") {
+    sources.push({
+      id: "agpl-3.0-section-13",
+      title: "GNU Affero General Public License v3",
+      section: "Section 13 — Remote Network Interaction",
+      url: "https://www.gnu.org/licenses/agpl-3.0.html",
+      why: "If your component is actually under AGPL-3.0, inspect section 13 and the exact modification/network interaction conditions. SaaS by itself proves nothing.",
+    });
+  }
+  if (["source", "binary", "both"].includes(scenario.distribution)) {
+    sources.push({
+      id: "mpl-2.0-section-3",
+      title: "Mozilla Public License 2.0",
+      section: "Sections 3.1 and 3.2 — Source / Executable Form distribution",
+      url: "https://www.mozilla.org/en-US/MPL/2.0/",
+      why: "If your component is actually MPL-2.0-covered software, inspect section 3 for the particular form of distribution. Do not generalize to other licenses.",
+    });
+  }
+  if (scenario.commercial === "yes" || scenario.commercial === "no") {
+    sources.push({
+      id: "polyform-noncommercial-1.0.0",
+      title: "PolyForm Noncommercial License 1.0.0",
+      section:
+        "Copyright License; Noncommercial Purposes; Distribution License",
+      url: "https://polyformproject.org/licenses/noncommercial/1.0.0",
+      why: "If your component actually uses this exact PolyForm variant, inspect its defined permitted purposes. Other PolyForm variants have different grants.",
+    });
+  }
+  if (scenario.usage === "internal") {
+    sources.push({
+      id: "polyform-internal-use-1.0.0",
+      title: "PolyForm Internal Use License 1.0.0",
+      section: "Copyright License; Internal Business Use",
+      url: "https://polyformproject.org/licenses/internal-use/1.0.0",
+      why: "If your component actually uses PolyForm Internal Use 1.0.0, inspect the internal-use definition and distribution restriction; do not apply those terms to other variants.",
+    });
+  }
+  return sources;
+}
+
 /** Always abstain. A scenario is not evidence that a specific license permits it. */
 export function summarizeWorksheet(scenario: WorksheetState): {
   status: "UNKNOWN";
@@ -248,6 +314,34 @@ export function renderProjectWorksheet(worksheet: WorksheetState): HTMLElement {
     "Preview filters narrow descriptions only; they are not compatibility checks. Unknown identities may be excluded by a selected filter.",
   );
   result.append(qualifier);
+  const primary = worksheetPrimarySources(worksheet);
+  if (primary.length > 0) {
+    const details = document.createElement("details");
+    details.className = "worksheet-primary-sources";
+    const summary = document.createElement("summary");
+    summary.textContent = tr("Official texts to check — examples only");
+    const caution = document.createElement("p");
+    caution.textContent = tr(
+      "These links are conditional examples, not proof that any named license governs your project. Verify actual component, version and exception before applying any term.",
+    );
+    details.append(summary, caution);
+    const sources = document.createElement("ul");
+    for (const entry of primary) {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = entry.url;
+      link.rel = "noopener noreferrer";
+      link.textContent = entry.title;
+      const scope = document.createElement("p");
+      scope.textContent = entry.section;
+      const reason = document.createElement("p");
+      reason.textContent = tr(entry.why);
+      item.append(link, scope, reason);
+      sources.append(item);
+    }
+    details.append(sources);
+    result.append(details);
+  }
   section.append(result);
   return section;
 }
@@ -289,6 +383,19 @@ export function exportWorksheetMarkdown(
   lines.push("", `## ${label("Questions requiring evidence")}`);
   for (const topic of summarizeWorksheet(worksheet).topics)
     lines.push(`- ${label(topic)}`);
+  const primary = worksheetPrimarySources(worksheet);
+  if (primary.length > 0) {
+    lines.push("", `## ${label("Official texts to check — examples only")}`);
+    lines.push(
+      label(
+        "These links are conditional examples, not proof that any named license governs your project. Verify actual component, version and exception before applying any term.",
+      ),
+    );
+    for (const source of primary) {
+      lines.push(`- ${source.title} — ${source.section}: ${source.url}`);
+      lines.push(`  - ${label(source.why)}`);
+    }
+  }
   lines.push(
     "",
     `## ${label("Starting sources")}`,
