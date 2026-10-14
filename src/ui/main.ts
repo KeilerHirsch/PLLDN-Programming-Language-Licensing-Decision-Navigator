@@ -388,6 +388,7 @@ root.addEventListener("click", (event) => {
         catalogState.view,
         productState.compareOnlyDifferences,
         productState.compareUnresolvedFirst,
+        new Date().toISOString(),
       ),
       "plldn-language-comparison.md",
       "text/markdown;charset=utf-8",
@@ -401,6 +402,7 @@ root.addEventListener("click", (event) => {
       catalogState.view,
       productState.compareOnlyDifferences,
       productState.compareUnresolvedFirst,
+      new Date().toISOString(),
     );
     const message = (value: string) => {
       const status = root.querySelector<HTMLElement>(
@@ -421,6 +423,12 @@ root.addEventListener("click", (event) => {
   if (action === "print-language-compare") {
     if (!catalogState.view || productState.compareLanguageIds.length === 0) {
       throw new Error("Select a language before printing a comparison");
+    }
+    const printNote = root.querySelector<HTMLElement>(
+      "#compare .compare-print-note",
+    );
+    if (printNote) {
+      printNote.textContent = `${printNote.textContent?.replace(/ · Report created at \(UTC\):.*$/u, "") ?? ""} · Report created at (UTC): ${new Date().toISOString()}`;
     }
     window.print();
     return;

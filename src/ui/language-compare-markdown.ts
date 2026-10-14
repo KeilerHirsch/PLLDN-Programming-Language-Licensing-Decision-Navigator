@@ -17,7 +17,17 @@ export function exportLanguageComparisonMarkdown(
   catalog: CatalogPreviewView,
   onlyDifferences: boolean,
   unresolvedFirst = false,
+  createdAt?: string,
 ): string {
+  if (
+    createdAt !== undefined &&
+    (Number.isNaN(Date.parse(createdAt)) ||
+      new Date(createdAt).toISOString() !== createdAt)
+  ) {
+    throw new Error(
+      "Report creation time must be an explicit ISO 8601 UTC timestamp",
+    );
+  }
   if (catalog.status !== "Preview" || !catalog.knowledge_snapshot) {
     throw new Error("Comparison report requires a named Preview snapshot");
   }
@@ -40,6 +50,7 @@ export function exportLanguageComparisonMarkdown(
     `- View: ${onlyDifferences && selected.length > 1 ? "Only differences" : "All attributes"}`,
     `- Row order: ${unresolvedFirst ? "Unresolved first" : "Original catalogue order"}`,
     `- Preview snapshot: ${safe(catalog.knowledge_snapshot)}`,
+    ...(createdAt ? [`- Report created at (UTC): ${createdAt}`] : []),
     `- Selected: ${selected.map((entry) => safe(entry.label)).join(", ")}`,
     "- Evidence: sourced reader information and Editorial Preview; not a Reviewed recommendation.",
     "- UNKNOWN and NOT_REVIEWED are not assessed. No measured cross-language ranking or legal certification is claimed.",

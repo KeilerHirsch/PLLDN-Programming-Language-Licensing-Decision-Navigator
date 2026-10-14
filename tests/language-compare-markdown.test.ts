@@ -77,3 +77,24 @@ test("Markdown report discloses unresolved-first presentation order", () => {
   assert(markdown.includes("Row order: Unresolved first"));
   assert(markdown.includes("UNKNOWN"));
 });
+
+test("explicit UTC creation time is included without contaminating source checking dates", () => {
+  const ids = ["language.go", "candidate.language.6261736963"];
+  const timestamp = "2026-10-14T17:42:00.000Z";
+  const report = exportLanguageComparisonMarkdown(
+    ids,
+    catalog,
+    true,
+    false,
+    timestamp,
+  );
+  assert(report.includes(`Report created at (UTC): ${timestamp}`));
+  assert(report.includes("Checked:"));
+  assert.equal(
+    report,
+    exportLanguageComparisonMarkdown(ids, catalog, true, false, timestamp),
+  );
+  assert.throws(() =>
+    exportLanguageComparisonMarkdown(ids, catalog, true, false, "tomorrow"),
+  );
+});
