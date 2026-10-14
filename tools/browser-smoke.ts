@@ -94,6 +94,27 @@ const smokeProbe = `
       };
       await toggle(basicId, 1);
       await toggle("language.rust", 2);
+      const differencesControl = () => document.querySelector('#compare [data-action="toggle-compare-differences"]');
+      assert(differencesControl()?.getAttribute("aria-pressed") === "false", "differences toggle starts inactive");
+      const unresolvedControl = () => document.querySelector('#compare [data-action="toggle-compare-unresolved"]');
+      assert(unresolvedControl()?.getAttribute("aria-pressed") === "false", "unresolved-first toggle starts inactive");
+      unresolvedControl().click();
+      await waitFor(() => unresolvedControl()?.getAttribute("aria-pressed") === "true", "unresolved-first toggle enabled");
+      assert(document.querySelector("#compare tbody tr th")?.textContent === "Evidence tier" || document.querySelector("#compare tbody tr th")?.textContent === "Throughput potential", "unresolved-first keeps evidence explicit");
+      unresolvedControl().click();
+      await waitFor(() => unresolvedControl()?.getAttribute("aria-pressed") === "false", "unresolved-first toggle disabled");
+      const fullRowCount = document.querySelectorAll("#compare tbody tr").length;
+      differencesControl().click();
+      await waitFor(() => differencesControl()?.getAttribute("aria-pressed") === "true", "differences toggle enabled");
+      const differenceRows = [...document.querySelectorAll("#compare tbody tr")];
+      assert(differenceRows.length < fullRowCount, "only differences must omit equal known rows");
+      assert(differenceRows.some(item => item.querySelector("th")?.textContent === "Throughput potential" &&
+        item.querySelector("td .compare-row-value")?.textContent === "UNKNOWN"),
+        "unassessed values remain visible in differences mode");
+      differencesControl().click();
+      await waitFor(() => differencesControl()?.getAttribute("aria-pressed") === "false" &&
+        document.querySelectorAll("#compare tbody tr").length === fullRowCount,
+        "differences toggle restores all comparison rows");
       const rows = [...document.querySelectorAll("#compare tbody tr")];
       for (const label of ["Prerequisites", "Execution workflow", "Example code", "Implementation and runtime licenses"]) {
         const row = rows.find(item => item.querySelector("th")?.textContent === label);
@@ -107,6 +128,15 @@ const smokeProbe = `
           "BASIC rating must remain UNKNOWN in mixed comparison: " + label);
       }
       assert(document.querySelector("#compare [data-action=export-language-compare]"), "mixed CSV action must exist");
+      assert(document.querySelector("#compare [data-action=export-language-markdown]"), "sourced Markdown report download must exist");
+      assert(document.querySelector("#compare [data-action=copy-language-compare]"), "clipboard report control must exist");
+      assert(document.querySelector("#compare [data-action=print-language-compare]"), "browser print control must exist");
+      const matrix = document.querySelector("#compare .compare-table-wrap");
+      assert(matrix?.getAttribute("tabindex") === "0" && matrix?.getAttribute("role") === "region",
+        "scrolling matrix must be accessible by keyboard");
+      const glossary = document.querySelector("#glossary");
+      assert(glossary?.tagName === "DETAILS" && glossary.querySelector("summary"), "accessible terminology glossary must exist");
+      assert(glossary.querySelectorAll("dt").length >= 11, "glossary must explain key evidence and license terms");
       await toggle("language.go", 3);
       await toggle("language.python", 4);
       assert(document.querySelector('#catalog [data-action="toggle-compare"][data-entity-id="language.java"]')?.disabled,
@@ -845,7 +875,12 @@ async function main(): Promise<void> {
         server?.close((error) => (error ? reject(error) : resolve()));
       });
     }
-    await rm(root, { recursive: true, force: true });
+    await rm(root, {
+      recursive: true,
+      force: true,
+      maxRetries: 12,
+      retryDelay: 150,
+    });
   }
 }
 

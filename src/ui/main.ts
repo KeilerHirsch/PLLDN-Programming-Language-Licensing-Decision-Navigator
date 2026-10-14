@@ -16,6 +16,7 @@ import {
 } from "./catalog-navigation.ts";
 import type { UiController } from "./controller.ts";
 import { exportCatalogLanguageCompareCsv } from "./language-compare-export.ts";
+import { exportLanguageComparisonMarkdown } from "./language-compare-markdown.ts";
 import { exportEditorialLicenseCompareCsv } from "./license-compare-export.ts";
 import {
   DEFAULT_PRODUCT_UI_STATE,
@@ -282,8 +283,12 @@ async function analyzeCurrent(current: UiController): Promise<void> {
   await publish(() => current.view());
 }
 
-function downloadCsv(content: string, filename: string): void {
-  const blob = new Blob([content], { type: "text/csv;charset=utf-8" });
+function downloadCsv(
+  content: string,
+  filename: string,
+  mime = "text/csv;charset=utf-8",
+): void {
+  const blob = new Blob([content], { type: mime });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
@@ -315,6 +320,51 @@ root.addEventListener("click", (event) => {
         ? "plldn-editorial-language-comparison.csv"
         : "plldn-language-reader-comparison.csv",
     );
+    return;
+  }
+  if (action === "export-language-markdown") {
+    if (!catalogState.view) throw new Error("Preview catalogue not loaded");
+    downloadCsv(
+      exportLanguageComparisonMarkdown(
+        productState.compareLanguageIds,
+        catalogState.view,
+        productState.compareOnlyDifferences,
+        productState.compareUnresolvedFirst,
+      ),
+      "plldn-language-comparison.md",
+      "text/markdown;charset=utf-8",
+    );
+    return;
+  }
+  if (action === "copy-language-compare") {
+    if (!catalogState.view) throw new Error("Preview catalogue not loaded");
+    const content = exportLanguageComparisonMarkdown(
+      productState.compareLanguageIds,
+      catalogState.view,
+      productState.compareOnlyDifferences,
+      productState.compareUnresolvedFirst,
+    );
+    const message = (value: string) => {
+      const status = root.querySelector<HTMLElement>(
+        "#compare .compare-action-status",
+      );
+      if (status) status.textContent = value;
+    };
+    if (!navigator.clipboard?.writeText) {
+      message("Clipboard unavailable. Use Download report (Markdown).");
+      return;
+    }
+    void navigator.clipboard.writeText(content).then(
+      () => message("Comparison report copied to clipboard."),
+      () => message("Clipboard access denied. Use Download report (Markdown)."),
+    );
+    return;
+  }
+  if (action === "print-language-compare") {
+    if (!catalogState.view || productState.compareLanguageIds.length === 0) {
+      throw new Error("Select a language before printing a comparison");
+    }
+    window.print();
     return;
   }
   if (action === "export-license-compare") {
@@ -388,6 +438,20 @@ root.addEventListener("click", (event) => {
   }
   if (action === "clear-compare") {
     productState = { ...productState, compareLanguageIds: [] };
+    void publish(() => current.view());
+  }
+  if (action === "toggle-compare-differences") {
+    productState = {
+      ...productState,
+      compareOnlyDifferences: !productState.compareOnlyDifferences,
+    };
+    void publish(() => current.view());
+  }
+  if (action === "toggle-compare-unresolved") {
+    productState = {
+      ...productState,
+      compareUnresolvedFirst: !productState.compareUnresolvedFirst,
+    };
     void publish(() => current.view());
   }
   if (action === "toggle-license-compare") {

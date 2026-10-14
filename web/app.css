@@ -574,15 +574,61 @@ summary {
   opacity: 0.72;
 }
 
+.product-glossary {
+  margin: 1rem 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid color-mix(in srgb, CanvasText 18%, transparent);
+  border-radius: 0.8rem;
+}
+
+.product-glossary summary {
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.product-glossary dt {
+  margin-top: 0.8rem;
+  font-weight: 700;
+}
+
+.product-glossary dd {
+  margin: 0.2rem 0 0 0;
+  line-height: 1.5;
+}
+
 .compare-empty {
   padding: 1rem;
   border: 1px dashed color-mix(in srgb, CanvasText 22%, transparent);
   border-radius: 0.8rem;
 }
 
+.compare-section
+  [data-action="toggle-compare-differences"][aria-pressed="true"],
+.compare-section
+  [data-action="toggle-compare-unresolved"][aria-pressed="true"] {
+  border-color: AccentColor;
+  background: color-mix(in srgb, AccentColor 16%, Canvas);
+  font-weight: 700;
+}
+
+.compare-filter-summary {
+  margin: 0.7rem 0 0;
+  color: CanvasText;
+}
+
+.compare-print-note {
+  display: none;
+}
+
+.compare-table-wrap:focus-visible {
+  outline: 3px solid AccentColor;
+  outline-offset: 2px;
+}
+
 .compare-table-wrap {
   max-width: 100%;
-  overflow-x: auto;
+  max-height: min(72vh, 44rem);
+  overflow: auto;
   margin-top: 1rem;
   border: 1px solid color-mix(in srgb, CanvasText 16%, transparent);
   border-radius: 0.85rem;
@@ -606,13 +652,22 @@ summary {
 .compare-table thead th {
   position: sticky;
   top: 0;
+  z-index: 2;
   background: Canvas;
 }
 
+.compare-table thead th:first-child {
+  left: 0;
+  z-index: 3;
+}
+
 .compare-table tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: Canvas;
   width: 12rem;
   font-weight: 650;
-  opacity: 0.78;
 }
 
 .license-axis {
@@ -1333,4 +1388,71 @@ button[data-action="toggle-compare"]:disabled {
 .compare-row-value {
   margin: 0 0 0.5rem;
   white-space: pre-wrap;
+}
+
+/* Comparison-only browser printout: hide catalogue and Reviewed lab without
+   changing the visible app or making any network/export requests. */
+@media print {
+  @page {
+    margin: 12mm;
+  }
+  body {
+    background: white;
+    color: black;
+  }
+  #app .app-shell,
+  #app .product-experience,
+  #app #compare {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    background: white;
+    color: black;
+    box-shadow: none;
+  }
+  #app .app-shell > .decision-lab,
+  #app .product-experience > :not(#compare),
+  #compare .section-heading-row button {
+    display: none;
+  }
+  #compare .compare-print-note {
+    display: block;
+  }
+  #compare .compare-table-wrap {
+    overflow: visible;
+    max-height: none;
+    border: 0;
+  }
+  #compare .compare-table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+    font-size: 9pt;
+  }
+  #compare .compare-table thead {
+    display: table-header-group;
+  }
+  #compare .compare-table th,
+  #compare .compare-table td {
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    padding: 5pt;
+    border-bottom: 1px solid #bbb;
+  }
+  #compare .compare-table thead th,
+  #compare .compare-table tbody th {
+    position: static;
+    background: white;
+    color: black;
+  }
+  #compare .compare-table tr {
+    break-inside: avoid;
+  }
+  #compare .compare-table a {
+    color: black;
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+  }
 }

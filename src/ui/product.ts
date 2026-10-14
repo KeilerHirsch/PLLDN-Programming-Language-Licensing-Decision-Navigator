@@ -66,10 +66,15 @@ import { renderLicenseComparison } from "./license-comparison.ts";
 export type { CatalogLanguageCompareRow } from "./language-reader-comparison.ts";
 
 import {
+  filterLanguageComparisonRows,
+  prioritizeUnresolvedComparisonRows,
+} from "./language-compare-filter.ts";
+import {
   licenseDisclosureScopeQualifier,
   networkSourceOfferQualifier,
 } from "./license-qualifications.ts";
 import { renderPreviewEvidenceInventory } from "./preview-evidence-inventory.ts";
+import { renderProductGlossary } from "./product-glossary.ts";
 import { factProvenanceDisclosure } from "./source-provenance.ts";
 import type {
   CatalogPreviewEntryView,
@@ -88,6 +93,8 @@ export interface ProductUiState {
   view: "cards" | "list";
   selectedUseCaseId: string | null;
   compareLanguageIds: readonly string[];
+  compareOnlyDifferences: boolean;
+  compareUnresolvedFirst: boolean;
   compareLicenseIds: readonly string[];
   filters: ProductFilterState;
 }
@@ -100,6 +107,8 @@ export const DEFAULT_PRODUCT_UI_STATE: ProductUiState = {
   view: "list",
   selectedUseCaseId: null,
   compareLanguageIds: [],
+  compareOnlyDifferences: false,
+  compareUnresolvedFirst: false,
   compareLicenseIds: [],
   filters: { ...DEFAULT_PRODUCT_FILTERS },
 };
@@ -1777,9 +1786,31 @@ function renderCompare(
     headingRow.append(button("Clear comparison", "clear-compare"));
     headingRow.append(
       button("Export selected comparison (CSV)", "export-language-compare"),
+      button("Download report (Markdown)", "export-language-markdown"),
+      button("Copy report (Markdown)", "copy-language-compare"),
+      button("Print comparison", "print-language-compare"),
     );
+    if (state.compareLanguageIds.length >= 2) {
+      const filter = button("Only differences", "toggle-compare-differences");
+      filter.setAttribute("aria-pressed", String(state.compareOnlyDifferences));
+      headingRow.append(filter);
+      const unresolved = button(
+        "Unresolved first",
+        "toggle-compare-unresolved",
+      );
+      unresolved.setAttribute(
+        "aria-pressed",
+        String(state.compareUnresolvedFirst),
+      );
+      headingRow.append(unresolved);
+    }
   }
   section.append(headingRow);
+  const printNote = paragraph(
+    `PLLDN comparison · Snapshot: ${catalog.knowledge_snapshot} · Preview information, not a Reviewed recommendation. UNKNOWN and NOT_REVIEWED remain unassessed.`,
+  );
+  printNote.className = "compare-print-note";
+  section.append(printNote);
 
   if (state.compareLanguageIds.length === 0) {
     const empty = paragraph(
@@ -1791,9 +1822,17 @@ function renderCompare(
   }
 
   const selected = selectCatalogLanguages(state.compareLanguageIds);
+  const status = paragraph("");
+  status.className = "compare-action-status";
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+  section.append(status);
 
   const wrapper = document.createElement("div");
   wrapper.className = "compare-table-wrap";
+  wrapper.setAttribute("tabindex", "0");
+  wrapper.setAttribute("role", "region");
+  wrapper.setAttribute("aria-label", "Scrollable language comparison matrix");
   const table = document.createElement("table");
   table.className = "compare-table";
 
@@ -1813,7 +1852,23 @@ function renderCompare(
   table.append(head);
 
   const body = document.createElement("tbody");
-  const rows = catalogLanguageComparisonRows(catalog);
+  const allRows = catalogLanguageComparisonRows(catalog);
+  const rows = prioritizeUnresolvedComparisonRows(
+    filterLanguageComparisonRows(
+      allRows,
+      selected,
+      state.compareOnlyDifferences,
+    ),
+    selected,
+    state.compareUnresolvedFirst,
+  );
+  if (state.compareOnlyDifferences && selected.length >= 2) {
+    const summary = paragraph(
+      `Showing ${rows.length} of ${allRows.length} attributes. UNKNOWN and NOT_REVIEWED remain visible; equal displayed values can have different sources.`,
+    );
+    summary.className = "compare-filter-summary";
+    section.append(summary);
+  }
 
   for (const row of rows) {
     const tr = document.createElement("tr");
@@ -1885,6 +1940,7 @@ export function renderProductExperience(
   wrapper.append(nav);
   wrapper.append(
     renderHero(catalog),
+    renderProductGlossary(),
     renderPreviewEvidenceInventory(catalog),
     renderUseCases(state),
     state.mode === "languages"
