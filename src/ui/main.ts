@@ -33,9 +33,11 @@ import {
 import {
   exportWorksheetMarkdown,
   readWorksheet,
+  readWorksheetLicenseId,
   validWorksheetChoice,
   worksheetPreviewFilterTrace,
   writeWorksheet,
+  writeWorksheetLicenseId,
 } from "./project-worksheet.ts";
 import {
   type CatalogPreviewState,
@@ -86,6 +88,7 @@ productState = {
   filters: initialNavigation.filters,
   discovery: initialNavigation.discovery,
   worksheet: readWorksheet(window.location.search),
+  worksheetLicenseId: readWorksheetLicenseId(window.location.search),
   locale:
     new URLSearchParams(window.location.search).get("lang") === "de"
       ? "de"
@@ -142,6 +145,7 @@ function worksheetNavigationHref(): string {
   const base = catalogNavigationHref(navigationState());
   const query = new URLSearchParams(base.slice(1).split("#")[0]);
   writeWorksheet(query, productState.worksheet);
+  writeWorksheetLicenseId(query, productState.worksheetLicenseId);
   if (productState.locale === "de") query.set("lang", "de");
   if (productState.selectedUseCaseId)
     query.set("guide", productState.selectedUseCaseId);
@@ -366,6 +370,7 @@ root.addEventListener("click", (event) => {
         productState.worksheet,
         guide?.label ?? null,
         productState.locale,
+        productState.worksheetLicenseId,
       ),
       "plldn-project-license-preview.md",
       "text/markdown;charset=utf-8",
@@ -671,6 +676,15 @@ root.addEventListener("change", (event) => {
   const current = controller;
   if (!element || !current) return;
   const action = element.dataset.action;
+  if (action === "worksheet-license" && element instanceof HTMLSelectElement) {
+    const id = readWorksheetLicenseId(
+      `?ws_license=${encodeURIComponent(element.value)}`,
+    );
+    productState = { ...productState, worksheetLicenseId: id };
+    saveNavigation(true);
+    void publish(() => current.view());
+    return;
+  }
   if (action === "worksheet-answer" && element instanceof HTMLSelectElement) {
     const key = element.dataset.worksheetKey;
     if (key && validWorksheetChoice(key, element.value)) {
@@ -794,6 +808,7 @@ async function restoreCatalogLocation(current: UiController): Promise<void> {
     filters: nav.filters,
     discovery: nav.discovery,
     worksheet: readWorksheet(window.location.search),
+    worksheetLicenseId: readWorksheetLicenseId(window.location.search),
     locale:
       new URLSearchParams(window.location.search).get("lang") === "de"
         ? "de"

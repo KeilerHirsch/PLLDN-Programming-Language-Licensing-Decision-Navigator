@@ -109,6 +109,7 @@ export interface ProductUiState {
   shortlistIds: readonly string[];
   shortlistPersisted: boolean;
   worksheet: WorksheetState;
+  worksheetLicenseId: string | null;
   locale: UiLocale;
   filters: ProductFilterState;
 }
@@ -127,6 +128,7 @@ export const DEFAULT_PRODUCT_UI_STATE: ProductUiState = {
   shortlistIds: [],
   shortlistPersisted: false,
   worksheet: defaultWorksheet(),
+  worksheetLicenseId: null,
   locale: "en",
   filters: { ...DEFAULT_PRODUCT_FILTERS },
 };
@@ -2079,7 +2081,7 @@ export function renderProductExperience(
     renderProductGlossary(),
     renderPreviewEvidenceInventory(catalog),
     renderUseCases(state),
-    renderProjectWorksheet(state.worksheet),
+    renderProjectWorksheet(state.worksheet, state.worksheetLicenseId),
     renderShortlist(state),
     state.mode === "languages"
       ? renderCompare(catalog, state)

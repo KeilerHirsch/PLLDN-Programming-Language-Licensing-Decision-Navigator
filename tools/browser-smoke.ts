@@ -66,6 +66,23 @@ const smokeProbe = `
         "the applied Preview filter must be visibly disclosed, without a legal verdict");
       assert(document.querySelector('#project-worksheet .worksheet-primary-sources a[href="https://www.gnu.org/licenses/agpl-3.0.html"]'),
         "SaaS scenario provides scoped primary-source reading link without licensing permission");
+      const exactSelect = document.querySelector('#project-worksheet [data-action="worksheet-license"]');
+      assert(exactSelect, "known exact licence selection control exists");
+      exactSelect.value = "license.mpl-2.0";
+      exactSelect.dispatchEvent(new Event("change", { bubbles: true }));
+      await waitFor(() => new URLSearchParams(location.search).get("ws_license") === "license.mpl-2.0" &&
+        document.querySelector('#project-worksheet [data-action="worksheet-license"]') !== exactSelect,
+        "exact licence selection saved to shareable URL");
+      assert(document.querySelector('#project-worksheet .worksheet-primary-sources a[href="https://www.mozilla.org/en-US/MPL/2.0/"]'),
+        "exact MPL source is shown");
+      assert(!document.querySelector('#project-worksheet .worksheet-primary-sources a[href="https://www.gnu.org/licenses/agpl-3.0.html"]'),
+        "unrelated AGPL text is excluded for explicitly selected MPL");
+      const clearLicense = document.querySelector('#project-worksheet [data-action="worksheet-license"]');
+      clearLicense.value = "";
+      clearLicense.dispatchEvent(new Event("change", { bubbles: true }));
+      await waitFor(() => !new URLSearchParams(location.search).has("ws_license") &&
+        document.querySelector('#project-worksheet [data-action="worksheet-license"]') !== clearLicense,
+        "unverified selection can be cleared");
       const resetScenario = document.querySelector('#project-worksheet [data-action="worksheet-answer"][data-worksheet-key="hosting"]');
       resetScenario.value = "unspecified";
       resetScenario.dispatchEvent(new Event("change", { bubbles: true }));

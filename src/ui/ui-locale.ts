@@ -186,6 +186,15 @@ const de: Readonly<Record<string, string>> = {
   "not recorded": "nicht erfasst",
   Checked: "Geprüft",
   "Unlinked reference": "Nicht verlinkte Referenz",
+  "Exact licence to investigate (user selection, unverified)":
+    "Konkrete Lizenz zur Prüfung (Nutzerauswahl, unbestätigt)",
+  "Not confirmed — show conditional examples":
+    "Nicht bestätigt — bedingte Beispiele anzeigen",
+  "Not confirmed": "Nicht bestätigt",
+  "Selecting a licence documents your assumption; it does not verify any component or establish permission.":
+    "Die Auswahl dokumentiert nur deine Annahme. Sie prüft weder die Komponente noch erteilt sie eine Berechtigung.",
+  "This is a user-selected licence version, not a verified component licence. Confirm the actual component, exact terms and any exception before relying on this text.":
+    "Dies ist eine vom Nutzer ausgewählte Lizenzversion, keine verifizierte Komponentenlizenz. Vor einer Anwendung Komponente, genaue Bedingungen und Ausnahmen prüfen.",
   "Official texts to check — examples only":
     "Offizielle Texte zur Prüfung — nur Beispiele",
   "These links are conditional examples, not proof that any named license governs your project. Verify actual component, version and exception before applying any term.":

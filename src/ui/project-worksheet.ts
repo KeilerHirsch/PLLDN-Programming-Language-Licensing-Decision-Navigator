@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2026 PLLDN contributors
 // SPDX-License-Identifier: EUPL-1.2
+import { LICENSE_DECISION_PROFILES } from "../product/license-decision-profiles.ts";
 import { tr, trForLocale, type UiLocale } from "./ui-locale.ts";
 
 /** Navigation-only project intent. These are NEVER licensing conclusions. */
@@ -85,6 +86,30 @@ export function writeWorksheet(
   }
 }
 
+/** User-selected pinned identity; this never confirms the component's actual license. */
+export function worksheetLicenseOptions(): { id: string; label: string }[] {
+  return Object.entries(LICENSE_DECISION_PROFILES)
+    .filter(([, profile]) =>
+      Boolean(profile.spdx_id && profile.canonical_source),
+    )
+    .map(([id, profile]) => ({ id, label: profile.spdx_id ?? id }))
+    .sort((a, b) => a.label.localeCompare(b.label, "en"));
+}
+
+export function readWorksheetLicenseId(query: string): string | null {
+  const id = new URLSearchParams(query).get("ws_license");
+  return id && Object.hasOwn(LICENSE_DECISION_PROFILES, id) ? id : null;
+}
+
+export function writeWorksheetLicenseId(
+  params: URLSearchParams,
+  id: string | null,
+): void {
+  params.delete("ws_license");
+  if (id && Object.hasOwn(LICENSE_DECISION_PROFILES, id))
+    params.set("ws_license", id);
+}
+
 /** Exact mapping to the two EXISTING Editorial Preview facets; all other answers are context. */
 export function worksheetPreviewFilterTrace(scenario: WorksheetState): {
   filters: { licenseCommercial: "yes" | "any"; licenseSaas: "yes" | "any" };
@@ -131,6 +156,7 @@ export interface WorksheetPrimarySource {
 
 export function worksheetPrimarySources(
   scenario: WorksheetState,
+  selectedLicenseId: string | null = null,
 ): WorksheetPrimarySource[] {
   const sources: WorksheetPrimarySource[] = [];
   if (
@@ -182,7 +208,34 @@ export function worksheetPrimarySources(
       why: "If your component actually uses PolyForm Internal Use 1.0.0, inspect the internal-use definition and distribution restriction; do not apply those terms to other variants.",
     });
   }
-  return sources;
+  if (!selectedLicenseId) return sources;
+  if (!Object.hasOwn(LICENSE_DECISION_PROFILES, selectedLicenseId)) return [];
+  const license = LICENSE_DECISION_PROFILES[selectedLicenseId];
+  if (!license) return [];
+  const exactSource: WorksheetPrimarySource = {
+    id: "selected-license",
+    title: license.spdx_id ?? selectedLicenseId,
+    section:
+      "User-selected pinned license identity — applicability not independently verified",
+    url: license.canonical_source,
+    why: "This is a user-selected licence version, not a verified component licence. Confirm the actual component, exact terms and any exception before relying on this text.",
+  };
+  const supplementalId = selectedLicenseId.startsWith("license.agpl-3.0-")
+    ? "agpl-3.0-section-13"
+    : selectedLicenseId === "license.mpl-2.0"
+      ? "mpl-2.0-section-3"
+      : selectedLicenseId === "license.polyform-noncommercial-1.0.0"
+        ? "polyform-noncommercial-1.0.0"
+        : selectedLicenseId === "license.polyform-internal-use-1.0.0"
+          ? "polyform-internal-use-1.0.0"
+          : null;
+  return [
+    exactSource,
+    ...sources.filter(
+      (source) =>
+        source.id === "spdx-expression-3.0.1" || source.id === supplementalId,
+    ),
+  ];
 }
 
 /** Always abstain. A scenario is not evidence that a specific license permits it. */
@@ -217,7 +270,10 @@ export function summarizeWorksheet(scenario: WorksheetState): {
   return { status: "UNKNOWN", topics };
 }
 
-export function renderProjectWorksheet(worksheet: WorksheetState): HTMLElement {
+export function renderProjectWorksheet(
+  worksheet: WorksheetState,
+  selectedLicenseId: string | null = null,
+): HTMLElement {
   const section = document.createElement("section");
   section.className = "project-worksheet";
   section.id = "project-worksheet";
@@ -228,6 +284,31 @@ export function renderProjectWorksheet(worksheet: WorksheetState): HTMLElement {
     "Record your scenario; share the URL to revisit it. These answers are navigation context only, not Reviewed evidence or legal advice.",
   );
   section.append(title, intro);
+  const licenseLabel = document.createElement("label");
+  licenseLabel.className = "catalog-filter";
+  const licenseName = document.createElement("span");
+  licenseName.textContent = tr(
+    "Exact licence to investigate (user selection, unverified)",
+  );
+  const licenseSelect = document.createElement("select");
+  licenseSelect.dataset.action = "worksheet-license";
+  const blank = document.createElement("option");
+  blank.value = "";
+  blank.textContent = tr("Not confirmed — show conditional examples");
+  licenseSelect.append(blank);
+  for (const entry of worksheetLicenseOptions()) {
+    const option = document.createElement("option");
+    option.value = entry.id;
+    option.textContent = entry.label;
+    option.selected = entry.id === selectedLicenseId;
+    licenseSelect.append(option);
+  }
+  const notice = document.createElement("p");
+  notice.textContent = tr(
+    "Selecting a licence documents your assumption; it does not verify any component or establish permission.",
+  );
+  licenseLabel.append(licenseName, licenseSelect, notice);
+  section.append(licenseLabel);
   const grid = document.createElement("div");
   grid.className = "catalog-filter-grid";
   for (const key of WORKSHEET_KEYS) {
@@ -314,7 +395,7 @@ export function renderProjectWorksheet(worksheet: WorksheetState): HTMLElement {
     "Preview filters narrow descriptions only; they are not compatibility checks. Unknown identities may be excluded by a selected filter.",
   );
   result.append(qualifier);
-  const primary = worksheetPrimarySources(worksheet);
+  const primary = worksheetPrimarySources(worksheet, selectedLicenseId);
   if (primary.length > 0) {
     const details = document.createElement("details");
     details.className = "worksheet-primary-sources";
@@ -351,6 +432,7 @@ export function exportWorksheetMarkdown(
   worksheet: WorksheetState,
   guide: string | null,
   locale: UiLocale = "en",
+  selectedLicenseId: string | null = null,
 ): string {
   const plain = (value: string) => value.replace(/[\r\n|<>]/gu, " ");
   const label = (value: string) => trForLocale(value, locale);
@@ -369,6 +451,10 @@ export function exportWorksheetMarkdown(
     lines.push(
       `- ${label(WORKSHEET_FIELDS[key].label)}: ${plain(label(worksheet[key]))}`,
     );
+  lines.push(
+    "",
+    `- ${label("Exact licence to investigate (user selection, unverified)")}: ${selectedLicenseId && Object.hasOwn(LICENSE_DECISION_PROFILES, selectedLicenseId) ? LICENSE_DECISION_PROFILES[selectedLicenseId]?.spdx_id : label("Not confirmed")}`,
+  );
   lines.push("", `## ${label("Preview filter mapping")}`);
   const trace = worksheetPreviewFilterTrace(worksheet);
   if (trace.rows.length === 0)
@@ -383,7 +469,7 @@ export function exportWorksheetMarkdown(
   lines.push("", `## ${label("Questions requiring evidence")}`);
   for (const topic of summarizeWorksheet(worksheet).topics)
     lines.push(`- ${label(topic)}`);
-  const primary = worksheetPrimarySources(worksheet);
+  const primary = worksheetPrimarySources(worksheet, selectedLicenseId);
   if (primary.length > 0) {
     lines.push("", `## ${label("Official texts to check — examples only")}`);
     lines.push(

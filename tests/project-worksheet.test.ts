@@ -6,12 +6,15 @@ import {
   defaultWorksheet,
   exportWorksheetMarkdown,
   readWorksheet,
+  readWorksheetLicenseId,
   summarizeWorksheet,
   validWorksheetChoice,
   WORKSHEET_KEYS,
+  worksheetLicenseOptions,
   worksheetPreviewFilterTrace,
   worksheetPrimarySources,
   writeWorksheet,
+  writeWorksheetLicenseId,
 } from "../src/ui/project-worksheet.ts";
 
 test("project/licensing worksheet URL round trips allowed nonpersonal selections only", () => {
@@ -160,4 +163,80 @@ test("scenario source guide cites exact texts without inventing permissions", ()
   assert(!md.includes("Reviewed compatibility: yes"));
   const empty = worksheetPrimarySources(defaultWorksheet());
   assert.deepEqual(empty, []);
+});
+
+test("explicit licence identity URL selection fails closed against pinned known profiles", () => {
+  const options = worksheetLicenseOptions();
+  assert(
+    options.some(
+      (entry) =>
+        entry.id === "license.agpl-3.0-only" && entry.label === "AGPL-3.0-only",
+    ),
+  );
+  assert(options.some((entry) => entry.id === "license.mpl-2.0"));
+  assert.equal(
+    readWorksheetLicenseId("?ws_license=license.agpl-3.0-only"),
+    "license.agpl-3.0-only",
+  );
+  assert.equal(readWorksheetLicenseId("?ws_license=license.fake"), null);
+  assert.equal(readWorksheetLicenseId("?ws_license=__proto__"), null);
+  const params = new URLSearchParams("?ws_license=license.fake");
+  writeWorksheetLicenseId(params, "license.mpl-2.0");
+  assert.equal(params.get("ws_license"), "license.mpl-2.0");
+  writeWorksheetLicenseId(params, "license.fake");
+  assert.equal(params.has("ws_license"), false);
+});
+
+test("explicit pinned licence narrows original-text references without deriving compatibility", () => {
+  const scenario = {
+    ...defaultWorksheet(),
+    hosting: "yes",
+    distribution: "both",
+    commercial: "yes",
+    usage: "internal",
+    expression: "WITH",
+  };
+  const agpl = worksheetPrimarySources(scenario, "license.agpl-3.0-only");
+  assert(
+    agpl.some(
+      (source) =>
+        source.id === "selected-license" &&
+        source.url.endsWith("/AGPL-3.0-only.html"),
+    ),
+  );
+  assert(agpl.some((source) => source.id === "agpl-3.0-section-13"));
+  assert(agpl.some((source) => source.id === "spdx-expression-3.0.1"));
+  assert(
+    !agpl.some(
+      (source) =>
+        source.id.includes("polyform") || source.id.includes("mpl-2.0"),
+    ),
+  );
+  const mpl = worksheetPrimarySources(scenario, "license.mpl-2.0");
+  assert(mpl.some((source) => source.id === "mpl-2.0-section-3"));
+  assert(!mpl.some((source) => source.id === "agpl-3.0-section-13"));
+  const polyform = worksheetPrimarySources(
+    scenario,
+    "license.polyform-internal-use-1.0.0",
+  );
+  assert(
+    polyform.some((source) => source.id === "polyform-internal-use-1.0.0"),
+  );
+  assert(
+    !polyform.some((source) => source.id === "polyform-noncommercial-1.0.0"),
+  );
+  const other = worksheetPrimarySources(scenario, "license.apache-2.0");
+  assert(other.some((source) => source.id === "selected-license"));
+  assert(!other.some((source) => source.id === "agpl-3.0-section-13"));
+  assert(!other.some((source) => source.id === "mpl-2.0-section-3"));
+  assert.equal(summarizeWorksheet(scenario).status, "UNKNOWN");
+  const report = exportWorksheetMarkdown(
+    scenario,
+    null,
+    "de",
+    "license.mpl-2.0",
+  );
+  assert(report.includes("MPL-2.0"));
+  assert(!report.includes("GNU Affero General Public License v3"));
+  assert(report.includes("UNKNOWN"));
 });
