@@ -80,6 +80,10 @@ const smokeProbe = `
       const basic = cards.find(card => card.dataset.catalogName === "BASIC");
       assert(basic?.dataset.catalogStatus === "unassessed" && !basic.querySelector(".decision-profile"),
         "complete BASIC reader must not inherit an editorial rating");
+      const evidence = basic.querySelector(".profile-evidence-overview");
+      assert(evidence?.textContent.includes("NOT_REVIEWED") &&
+        evidence.querySelector("a[href*='issues/new']")?.href.includes("candidate.language"),
+        "pending reader evidence and reviewable public feedback link");
       const basicReader = basic.querySelector(".language-reader-profile");
       basicReader.open = true;
       basicReader.querySelector("summary").focus();

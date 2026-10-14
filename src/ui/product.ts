@@ -76,6 +76,10 @@ import {
 import { renderPreviewEvidenceInventory } from "./preview-evidence-inventory.ts";
 import { renderProductGlossary } from "./product-glossary.ts";
 import {
+  type ProfileEvidenceLink,
+  renderProfileEvidence,
+} from "./profile-evidence.ts";
+import {
   defaultWorksheet,
   renderProjectWorksheet,
   type WorksheetState,
@@ -949,6 +953,10 @@ function renderLanguageCard(
     languageReaderDisclosure(profile.label, profile.entity_id),
     renderDecisionProfile(profile),
     renderPreviewFacts(entry),
+    renderProfileEvidence(profile.entity_id, "Editorial Preview", [
+      ...readerEvidenceLinks(profile.label),
+      ...previewEvidenceLinks(entry),
+    ]),
   );
   const measuredEvidence = renderWorkloadEvidence(profile.entity_id);
   if (measuredEvidence) card.append(measuredEvidence);
@@ -1132,6 +1140,24 @@ function renderLicenseQuickFacts(profile: LicenseProductProfile): HTMLElement {
   return strip;
 }
 
+function previewEvidenceLinks(
+  entry: CatalogPreviewEntryView | undefined,
+): ProfileEvidenceLink[] {
+  return (entry?.facts ?? []).flatMap((fact) =>
+    fact.sources.map((source) => ({
+      label: `${fact.label}: ${source.title}`,
+      url: source.reference,
+    })),
+  );
+}
+function readerEvidenceLinks(name: string): ProfileEvidenceLink[] {
+  return (readerProfileByName(name)?.sources ?? []).map((source) => ({
+    label: source.label,
+    url: source.url,
+    checkedOn: source.checked_on,
+  }));
+}
+
 function renderLicenseCard(
   profile: LicenseProductProfile,
   entry: CatalogPreviewEntryView | undefined,
@@ -1164,6 +1190,8 @@ function renderLicenseCard(
   good.className = "license-good";
   const watch = paragraph(`Watch for: ${profile.watch_for}`);
   watch.className = "license-watch";
+  const canonical =
+    LICENSE_DECISION_PROFILES[profile.entity_id]?.canonical_source;
   card.append(
     good,
     watch,
@@ -1171,6 +1199,12 @@ function renderLicenseCard(
     shortlistButton(profile.entity_id, state),
     renderLicenseDecisionProfile(profile),
     renderPreviewFacts(entry),
+    renderProfileEvidence(profile.entity_id, "Editorial Preview", [
+      ...(canonical
+        ? [{ label: "Canonical license terms", url: canonical }]
+        : []),
+      ...previewEvidenceLinks(entry),
+    ]),
     profileLink(profile.entity_id),
   );
   return card;
@@ -1281,6 +1315,10 @@ function renderIdentityCard(
     profileLink(record.id, true),
     shortlistButton(record.id, state),
     renderUnassessedProfile(record),
+    renderProfileEvidence(record.id, "NOT_REVIEWED", [
+      { label: "Pinned identity source", url: record.reference },
+      ...(record.kind === "language" ? readerEvidenceLinks(record.name) : []),
+    ]),
   );
   if (record.kind === "language")
     card.append(
