@@ -10,6 +10,7 @@ import {
   validWorksheetChoice,
   WORKSHEET_KEYS,
   worksheetPreviewFilterTrace,
+  worksheetPrimarySources,
   writeWorksheet,
 } from "../src/ui/project-worksheet.ts";
 
@@ -116,4 +117,47 @@ test("worksheet maps only two affirmative Preview facets and explains every othe
       .find((row) => row.key === "commercial")
       ?.description.includes("No inverse filter"),
   );
+});
+
+// Primary-source pointers are examples for investigation, never permission results.
+test("scenario source guide cites exact texts without inventing permissions", () => {
+  const scenario = {
+    ...defaultWorksheet(),
+    hosting: "yes",
+    distribution: "binary",
+    expression: "WITH",
+    commercial: "yes",
+    usage: "internal",
+  };
+  const sources = worksheetPrimarySources(scenario);
+  const ids = sources.map((entry) => entry.id);
+  for (const key of [
+    "spdx-expression-3.0.1",
+    "agpl-3.0-section-13",
+    "mpl-2.0-section-3",
+    "polyform-noncommercial-1.0.0",
+    "polyform-internal-use-1.0.0",
+  ]) {
+    assert(ids.includes(key), key);
+  }
+  assert(
+    sources.every(
+      (entry) =>
+        entry.url.startsWith("https://") &&
+        entry.why.includes("If your component"),
+    ),
+  );
+  assert.equal(summarizeWorksheet(scenario).status, "UNKNOWN");
+  const md = exportWorksheetMarkdown(scenario, null, "de");
+  assert(
+    md.includes(
+      "https://spdx.github.io/spdx-spec/v3.0.1/annexes/spdx-license-expressions/",
+    ),
+  );
+  assert(md.includes("https://www.gnu.org/licenses/agpl-3.0.html"));
+  assert(md.includes("UNKNOWN"));
+  assert(md.includes("NOT_REVIEWED"));
+  assert(!md.includes("Reviewed compatibility: yes"));
+  const empty = worksheetPrimarySources(defaultWorksheet());
+  assert.deepEqual(empty, []);
 });

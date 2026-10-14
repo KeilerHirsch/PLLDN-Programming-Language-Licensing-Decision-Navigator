@@ -186,6 +186,20 @@ const de: Readonly<Record<string, string>> = {
   "not recorded": "nicht erfasst",
   Checked: "Geprüft",
   "Unlinked reference": "Nicht verlinkte Referenz",
+  "Official texts to check — examples only":
+    "Offizielle Texte zur Prüfung — nur Beispiele",
+  "These links are conditional examples, not proof that any named license governs your project. Verify actual component, version and exception before applying any term.":
+    "Diese Links sind bedingte Beispiele, kein Nachweis für die Geltung einer bestimmten Lizenz. Vor einer Anwendung Komponente, Version und Ausnahmen prüfen.",
+  "If your component has a compound SPDX expression, read the exact operator/exception grammar. Syntax is not a compatibility verdict.":
+    "Falls eine Komponente einen zusammengesetzten SPDX-Ausdruck verwendet, die genaue Syntax von Operatoren und Ausnahmen prüfen. Syntax ist kein Kompatibilitätsurteil.",
+  "If your component is actually under AGPL-3.0, inspect section 13 and the exact modification/network interaction conditions. SaaS by itself proves nothing.":
+    "Falls eine Komponente tatsächlich AGPL-3.0 unterliegt, §13 und die Bedingungen für Änderungen und Netzwerkinteraktion prüfen. SaaS allein belegt nichts.",
+  "If your component is actually MPL-2.0-covered software, inspect section 3 for the particular form of distribution. Do not generalize to other licenses.":
+    "Falls eine Komponente tatsächlich MPL-2.0 unterliegt, §3 zur jeweiligen Weitergabeform prüfen. Nicht auf andere Lizenzen übertragen.",
+  "If your component actually uses this exact PolyForm variant, inspect its defined permitted purposes. Other PolyForm variants have different grants.":
+    "Falls eine Komponente genau diese PolyForm-Variante verwendet, die definierten erlaubten Nutzungszwecke prüfen. Andere Varianten gewähren andere Rechte.",
+  "If your component actually uses PolyForm Internal Use 1.0.0, inspect the internal-use definition and distribution restriction; do not apply those terms to other variants.":
+    "Falls eine Komponente PolyForm Internal Use 1.0.0 verwendet, die Definition interner Nutzung und die Weitergabebeschränkung prüfen; nicht auf andere Varianten übertragen.",
   "How these answers affect existing Preview filters":
     "So wirken sich deine Antworten auf vorhandene Vorschaufilter aus",
   "Only explicit yes answers for commercial use and SaaS activate existing Editorial Preview filters. Other answers are context, not a Reviewed decision.":

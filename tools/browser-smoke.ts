@@ -64,6 +64,8 @@ const smokeProbe = `
         document.querySelector('#project-worksheet [data-worksheet-key="hosting"]') !== scenario, "scenario URL and abstention");
       assert(document.querySelector(".worksheet-filter-trace")?.textContent.includes("licenseSaas=yes"),
         "the applied Preview filter must be visibly disclosed, without a legal verdict");
+      assert(document.querySelector('#project-worksheet .worksheet-primary-sources a[href="https://www.gnu.org/licenses/agpl-3.0.html"]'),
+        "SaaS scenario provides scoped primary-source reading link without licensing permission");
       const resetScenario = document.querySelector('#project-worksheet [data-action="worksheet-answer"][data-worksheet-key="hosting"]');
       resetScenario.value = "unspecified";
       resetScenario.dispatchEvent(new Event("change", { bubbles: true }));
