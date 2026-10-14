@@ -18,6 +18,7 @@
     "test:browser": "node tools/browser-smoke.ts",
     "audit:preview-provenance": "node tools/preview-provenance-audit.ts",
     "audit:direct-packages": "node tools/direct-package-evidence.ts",
+    "audit:locked-packages": "node tools/audit-locked-packages.ts",
     "audit:language-bands": "node tools/audit-language-bands.ts",
     "audit:language-observations": "node tools/audit-language-observations.ts",
     "catalog:import": "node tools/import-identity-sources.ts",
