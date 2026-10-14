@@ -65,7 +65,9 @@ test("browser offers comparison without DOM HTML injection or Reviewed promotion
   ])
     assert((ui + events).includes(token), token);
   assert(logic.includes("Editorial Preview only: not legal advice"));
-  assert(logic.includes("Index-only identities have no assessed rights"));
+  assert(
+    logic.includes("Profiles with pending assessments have no assessed rights"),
+  );
   assert(!logic.includes("innerHTML"));
   assert(!logic.includes("insertAdjacentHTML"));
   assert(!logic.includes("eval("));

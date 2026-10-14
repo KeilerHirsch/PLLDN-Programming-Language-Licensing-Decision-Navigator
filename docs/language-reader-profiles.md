@@ -24,7 +24,7 @@ SPDX expressions are displayed literally. Individual known license identifiers l
 
 ## Comparison and discovery
 
-Any catalogue language can join the same comparison, up to four at a time. The table and CSV export share the same row definitions and source references. Unassessed identities keep UNKNOWN assessment values. Descriptive reader data does not promote a language to a Reviewed recommendation, create benchmark results or change the decision engine.
+Any catalogue language can join the same comparison, up to four at a time. The table and CSV export share the same row definitions and source references. Profiles with pending assessments keep UNKNOWN assessment values. Descriptive reader data does not promote a language to a Reviewed recommendation, create benchmark results or change the decision engine.
 
 Search includes reader prerequisites, implementation names and license scope as well as the existing introductions and discovery metadata. Usage ranking, documented origins and implementation lifecycle remain independent facets.
 

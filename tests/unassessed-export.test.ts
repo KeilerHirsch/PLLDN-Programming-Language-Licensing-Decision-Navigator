@@ -32,7 +32,9 @@ test("CSV encoding resists spreadsheet formulas and preserves delimiters", () =>
 test("browser makes neutral catalogue export discoverable", () => {
   const product = readFileSync("src/ui/product.ts", "utf8");
   const runtime = readFileSync("src/ui/main.ts", "utf8");
-  assert(product.includes("Export all 841 unassessed identities (CSV)"));
+  assert(
+    product.includes("Export all 841 profiles with pending assessments (CSV)"),
+  );
   assert(product.includes('"export-unassessed-csv"'));
   assert(runtime.includes('action === "export-unassessed-csv"'));
   assert(runtime.includes("exportUnassessedCandidateCsv()"));

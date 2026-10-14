@@ -1117,7 +1117,7 @@ function renderUnassessedProfile(record: UnassessedRecord): HTMLElement {
   details.className = "identity-profile";
   details.dataset.candidateId = record.id;
   const summary = document.createElement("summary");
-  summary.textContent = "Profile v0.2 · unassessed";
+  summary.textContent = "Assessment details · pending";
   const values = paragraph(
     Object.entries(record.assessments)
       .map(([key, value]) => `${key.replaceAll("_", " ")}: ${value}`)
@@ -1136,7 +1136,7 @@ function renderUnassessedProfile(record: UnassessedRecord): HTMLElement {
   permalink.className = "candidate-permalink";
   permalink.dataset.candidatePermalink = "true";
   permalink.href = `?candidate=${encodeURIComponent(record.id)}#catalog`;
-  permalink.textContent = "Direct link to this unassessed profile";
+  permalink.textContent = "Direct link to this profile";
   details.append(summary, values, provenance, reference, permalink);
   return details;
 }
@@ -1181,7 +1181,10 @@ function renderIdentityCard(
     card.dataset.identityOsiApproved = String(record.osi_approved_source_flag);
   const head = document.createElement("div");
   head.className = "product-card-head";
-  head.append(heading(3, card.dataset.catalogName), badge("Unassessed"));
+  head.append(
+    heading(3, card.dataset.catalogName),
+    badge("Assessments pending"),
+  );
   card.append(
     head,
     record.kind === "language"
@@ -1190,7 +1193,7 @@ function renderIdentityCard(
     paragraph(
       record.kind === "language"
         ? "Performance, complexity and suitability assessments pending · UNKNOWN. Descriptive sources do not make this a Reviewed recommendation."
-        : "Assessment pending · UNKNOWN. Identity and pinned source only; not a Reviewed recommendation.",
+        : "Profile available: identity and pinned source. Rights, obligations and applicability remain UNKNOWN until assessed; not a Reviewed recommendation.",
     ),
     profileLink(record.id, true),
     renderUnassessedProfile(record),
@@ -1327,7 +1330,7 @@ function renderCatalog(
       [
         ["all", "All identities"],
         ["editorial", "Editorial profiles"],
-        ["unassessed", "Unassessed identities"],
+        ["unassessed", "Profiles · assessments pending"],
       ],
     ],
     ["Sort", "catalog-order", state.order, sortChoices],
@@ -1529,7 +1532,7 @@ function renderCatalog(
     filters.append(discoveryNote, rankingLink);
   }
   const note = paragraph(
-    "Assessment filters match known editorial values or explicit Unknown. Unassessed entries never inherit ratings.",
+    "Assessment filters match known editorial values or explicit Unknown. Profiles with pending assessments keep UNKNOWN values; profile availability does not imply a rating.",
   );
   note.className = "catalog-filter-note";
   filters.append(note);
@@ -1538,7 +1541,7 @@ function renderCatalog(
   layout.append(filters, renderCatalogResults(catalog, state));
   section.append(layout);
   const exportControl = button(
-    "Export all 841 unassessed identities (CSV)",
+    "Export all 841 profiles with pending assessments (CSV)",
     "export-unassessed-csv",
     "catalog-filter-reset",
   );
@@ -1766,7 +1769,7 @@ function renderCompare(
   copy.append(
     heading(2, `Compare languages (${state.compareLanguageIds.length}/4)`),
     paragraph(
-      "Compare up to four catalogue languages using sourced reader profiles. Unassessed languages keep UNKNOWN ratings; editorial bands remain unverified estimates. No measured cross-language ranking is claimed.",
+      "Compare up to four catalogue languages using sourced reader profiles. Profiles with pending assessments keep UNKNOWN ratings; editorial bands remain unverified estimates. No measured cross-language ranking is claimed.",
     ),
   );
   headingRow.append(copy);
