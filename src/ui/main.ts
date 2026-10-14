@@ -19,10 +19,16 @@ import { exportCatalogLanguageCompareCsv } from "./language-compare-export.ts";
 import { exportLanguageComparisonMarkdown } from "./language-compare-markdown.ts";
 import { exportEditorialLicenseCompareCsv } from "./license-compare-export.ts";
 import {
+  clearShortlist,
+  readShortlist,
+  saveShortlist,
+} from "./local-shortlist.ts";
+import {
   DEFAULT_PRODUCT_UI_STATE,
   type ProductUiState,
   pinnedCandidateById,
   renderProductExperience,
+  SHORTLIST_IDENTITIES,
 } from "./product.ts";
 import {
   type CatalogPreviewState,
@@ -71,6 +77,20 @@ productState = {
   view: initialNavigation.view,
   filters: initialNavigation.filters,
   discovery: initialNavigation.discovery,
+};
+const allowedShortlistIds = new Set(SHORTLIST_IDENTITIES.keys());
+const shortlistStorage: Storage | null = (() => {
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+})();
+const initialShortlist = readShortlist(shortlistStorage, allowedShortlistIds);
+productState = {
+  ...productState,
+  shortlistIds: initialShortlist.ids,
+  shortlistPersisted: initialShortlist.persisted,
 };
 let catalogQuery = initialNavigation.query;
 const identityPageSize = 60;
@@ -419,6 +439,32 @@ root.addEventListener("click", (event) => {
       ".catalog-profile-link",
     );
     link?.focus({ preventScroll: true });
+  }
+  if (action === "toggle-shortlist") {
+    const id = element.dataset.entityId;
+    if (!id || !allowedShortlistIds.has(id)) return;
+    const previous = new Set(productState.shortlistIds);
+    if (previous.has(id)) previous.delete(id);
+    else if (previous.size < 40) previous.add(id);
+    const ids = [...previous];
+    const persisted = saveShortlist(shortlistStorage, ids, allowedShortlistIds);
+    productState = {
+      ...productState,
+      shortlistIds: ids,
+      shortlistPersisted: persisted,
+    };
+    void publish(() => current.view());
+    return;
+  }
+  if (action === "clear-shortlist") {
+    const persisted = clearShortlist(shortlistStorage);
+    productState = {
+      ...productState,
+      shortlistIds: [],
+      shortlistPersisted: persisted,
+    };
+    void publish(() => current.view());
+    return;
   }
   if (action === "toggle-compare") {
     const entityId = element.dataset.entityId;
