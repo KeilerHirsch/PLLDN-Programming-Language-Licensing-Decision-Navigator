@@ -50,3 +50,42 @@ test("Reviewed lab UI copy translates without rewriting decision keys", () => {
   }
   assert.equal(tr("Decision details"), "Decision details");
 });
+
+test("German licence UI controls translate without changing canonical licence identifiers", () => {
+  setUiLocale("de");
+  try {
+    assert.equal(
+      tr("Rights, restrictions & compliance"),
+      "Rechte, Einschränkungen und Pflichten",
+    );
+    assert.equal(tr("Canonical terms"), "Maßgeblicher Lizenztext");
+    assert.equal(tr("Rights"), "Rechte");
+    assert.equal(tr("Use"), "Nutzung");
+    assert.equal(tr("Good when"), "Geeignet, wenn");
+    assert.equal(
+      tr("Scrollable language comparison matrix"),
+      "Scrollbare Sprachvergleichstabelle",
+    );
+    assert.equal(
+      tr("Four licenses selected. Remove one to add another."),
+      "Vier Lizenzen ausgewählt. Entferne eine, um eine weitere hinzuzufügen.",
+    );
+    for (const literal of [
+      "UNKNOWN",
+      "NOT_REVIEWED",
+      "MIT",
+      "Apache-2.0",
+      "AGPL-3.0-only",
+      "WITH",
+    ]) {
+      assert.equal(tr(literal), literal);
+    }
+  } finally {
+    setUiLocale("en");
+  }
+  assert.equal(
+    tr("Rights, restrictions & compliance"),
+    "Rights, restrictions & compliance",
+  );
+  assert.equal(tr("Canonical terms"), "Canonical terms");
+});
