@@ -336,6 +336,37 @@ root.addEventListener("click", (event) => {
     );
     return;
   }
+  if (action === "copy-language-compare") {
+    if (!catalogState.view) throw new Error("Preview catalogue not loaded");
+    const content = exportLanguageComparisonMarkdown(
+      productState.compareLanguageIds,
+      catalogState.view,
+      productState.compareOnlyDifferences,
+      productState.compareUnresolvedFirst,
+    );
+    const message = (value: string) => {
+      const status = root.querySelector<HTMLElement>(
+        "#compare .compare-action-status",
+      );
+      if (status) status.textContent = value;
+    };
+    if (!navigator.clipboard?.writeText) {
+      message("Clipboard unavailable. Use Download report (Markdown).");
+      return;
+    }
+    void navigator.clipboard.writeText(content).then(
+      () => message("Comparison report copied to clipboard."),
+      () => message("Clipboard access denied. Use Download report (Markdown)."),
+    );
+    return;
+  }
+  if (action === "print-language-compare") {
+    if (!catalogState.view || productState.compareLanguageIds.length === 0) {
+      throw new Error("Select a language before printing a comparison");
+    }
+    window.print();
+    return;
+  }
   if (action === "export-license-compare") {
     if (!catalogState.view) throw new Error("Preview catalogue not loaded");
     downloadCsv(

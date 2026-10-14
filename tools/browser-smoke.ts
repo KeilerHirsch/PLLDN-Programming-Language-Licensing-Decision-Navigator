@@ -129,6 +129,11 @@ const smokeProbe = `
       }
       assert(document.querySelector("#compare [data-action=export-language-compare]"), "mixed CSV action must exist");
       assert(document.querySelector("#compare [data-action=export-language-markdown]"), "sourced Markdown report download must exist");
+      assert(document.querySelector("#compare [data-action=copy-language-compare]"), "clipboard report control must exist");
+      assert(document.querySelector("#compare [data-action=print-language-compare]"), "browser print control must exist");
+      const matrix = document.querySelector("#compare .compare-table-wrap");
+      assert(matrix?.getAttribute("tabindex") === "0" && matrix?.getAttribute("role") === "region",
+        "scrolling matrix must be accessible by keyboard");
       const glossary = document.querySelector("#glossary");
       assert(glossary?.tagName === "DETAILS" && glossary.querySelector("summary"), "accessible terminology glossary must exist");
       assert(glossary.querySelectorAll("dt").length >= 11, "glossary must explain key evidence and license terms");

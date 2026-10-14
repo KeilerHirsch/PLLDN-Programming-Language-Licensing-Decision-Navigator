@@ -1787,6 +1787,8 @@ function renderCompare(
     headingRow.append(
       button("Export selected comparison (CSV)", "export-language-compare"),
       button("Download report (Markdown)", "export-language-markdown"),
+      button("Copy report (Markdown)", "copy-language-compare"),
+      button("Print comparison", "print-language-compare"),
     );
     if (state.compareLanguageIds.length >= 2) {
       const filter = button("Only differences", "toggle-compare-differences");
@@ -1804,6 +1806,11 @@ function renderCompare(
     }
   }
   section.append(headingRow);
+  const printNote = paragraph(
+    `PLLDN comparison · Snapshot: ${catalog.knowledge_snapshot} · Preview information, not a Reviewed recommendation. UNKNOWN and NOT_REVIEWED remain unassessed.`,
+  );
+  printNote.className = "compare-print-note";
+  section.append(printNote);
 
   if (state.compareLanguageIds.length === 0) {
     const empty = paragraph(
@@ -1815,9 +1822,17 @@ function renderCompare(
   }
 
   const selected = selectCatalogLanguages(state.compareLanguageIds);
+  const status = paragraph("");
+  status.className = "compare-action-status";
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+  section.append(status);
 
   const wrapper = document.createElement("div");
   wrapper.className = "compare-table-wrap";
+  wrapper.setAttribute("tabindex", "0");
+  wrapper.setAttribute("role", "region");
+  wrapper.setAttribute("aria-label", "Scrollable language comparison matrix");
   const table = document.createElement("table");
   table.className = "compare-table";
 
