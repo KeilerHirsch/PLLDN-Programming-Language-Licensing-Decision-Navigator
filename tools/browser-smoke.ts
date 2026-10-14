@@ -94,6 +94,20 @@ const smokeProbe = `
       };
       await toggle(basicId, 1);
       await toggle("language.rust", 2);
+      const differencesControl = () => document.querySelector('#compare [data-action="toggle-compare-differences"]');
+      assert(differencesControl()?.getAttribute("aria-pressed") === "false", "differences toggle starts inactive");
+      const fullRowCount = document.querySelectorAll("#compare tbody tr").length;
+      differencesControl().click();
+      await waitFor(() => differencesControl()?.getAttribute("aria-pressed") === "true", "differences toggle enabled");
+      const differenceRows = [...document.querySelectorAll("#compare tbody tr")];
+      assert(differenceRows.length < fullRowCount, "only differences must omit equal known rows");
+      assert(differenceRows.some(item => item.querySelector("th")?.textContent === "Throughput potential" &&
+        item.querySelector("td .compare-row-value")?.textContent === "UNKNOWN"),
+        "unassessed values remain visible in differences mode");
+      differencesControl().click();
+      await waitFor(() => differencesControl()?.getAttribute("aria-pressed") === "false" &&
+        document.querySelectorAll("#compare tbody tr").length === fullRowCount,
+        "differences toggle restores all comparison rows");
       const rows = [...document.querySelectorAll("#compare tbody tr")];
       for (const label of ["Prerequisites", "Execution workflow", "Example code", "Implementation and runtime licenses"]) {
         const row = rows.find(item => item.querySelector("th")?.textContent === label);
@@ -845,7 +859,12 @@ async function main(): Promise<void> {
         server?.close((error) => (error ? reject(error) : resolve()));
       });
     }
-    await rm(root, { recursive: true, force: true });
+    await rm(root, {
+      recursive: true,
+      force: true,
+      maxRetries: 12,
+      retryDelay: 150,
+    });
   }
 }
 

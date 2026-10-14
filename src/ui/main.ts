@@ -390,6 +390,13 @@ root.addEventListener("click", (event) => {
     productState = { ...productState, compareLanguageIds: [] };
     void publish(() => current.view());
   }
+  if (action === "toggle-compare-differences") {
+    productState = {
+      ...productState,
+      compareOnlyDifferences: !productState.compareOnlyDifferences,
+    };
+    void publish(() => current.view());
+  }
   if (action === "toggle-license-compare") {
     const entityId = element.dataset.entityId;
     if (entityId) {

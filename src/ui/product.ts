@@ -65,6 +65,7 @@ import { renderLicenseComparison } from "./license-comparison.ts";
 
 export type { CatalogLanguageCompareRow } from "./language-reader-comparison.ts";
 
+import { filterLanguageComparisonRows } from "./language-compare-filter.ts";
 import {
   licenseDisclosureScopeQualifier,
   networkSourceOfferQualifier,
@@ -88,6 +89,7 @@ export interface ProductUiState {
   view: "cards" | "list";
   selectedUseCaseId: string | null;
   compareLanguageIds: readonly string[];
+  compareOnlyDifferences: boolean;
   compareLicenseIds: readonly string[];
   filters: ProductFilterState;
 }
@@ -100,6 +102,7 @@ export const DEFAULT_PRODUCT_UI_STATE: ProductUiState = {
   view: "list",
   selectedUseCaseId: null,
   compareLanguageIds: [],
+  compareOnlyDifferences: false,
   compareLicenseIds: [],
   filters: { ...DEFAULT_PRODUCT_FILTERS },
 };
@@ -1778,6 +1781,11 @@ function renderCompare(
     headingRow.append(
       button("Export selected comparison (CSV)", "export-language-compare"),
     );
+    if (state.compareLanguageIds.length >= 2) {
+      const filter = button("Only differences", "toggle-compare-differences");
+      filter.setAttribute("aria-pressed", String(state.compareOnlyDifferences));
+      headingRow.append(filter);
+    }
   }
   section.append(headingRow);
 
@@ -1813,7 +1821,19 @@ function renderCompare(
   table.append(head);
 
   const body = document.createElement("tbody");
-  const rows = catalogLanguageComparisonRows(catalog);
+  const allRows = catalogLanguageComparisonRows(catalog);
+  const rows = filterLanguageComparisonRows(
+    allRows,
+    selected,
+    state.compareOnlyDifferences,
+  );
+  if (state.compareOnlyDifferences && selected.length >= 2) {
+    const summary = paragraph(
+      `Showing ${rows.length} of ${allRows.length} attributes. UNKNOWN and NOT_REVIEWED remain visible; equal displayed values can have different sources.`,
+    );
+    summary.className = "compare-filter-summary";
+    section.append(summary);
+  }
 
   for (const row of rows) {
     const tr = document.createElement("tr");

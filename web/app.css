@@ -580,6 +580,18 @@ summary {
   border-radius: 0.8rem;
 }
 
+.compare-section
+  [data-action="toggle-compare-differences"][aria-pressed="true"] {
+  border-color: AccentColor;
+  background: color-mix(in srgb, AccentColor 16%, Canvas);
+  font-weight: 700;
+}
+
+.compare-filter-summary {
+  margin: 0.7rem 0 0;
+  color: CanvasText;
+}
+
 .compare-table-wrap {
   max-width: 100%;
   overflow-x: auto;
