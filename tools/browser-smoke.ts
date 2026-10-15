@@ -256,6 +256,14 @@ const smokeProbe = `
         "Reviewed lab filter controls localize with the main UI");
       assert(document.querySelector("[data-catalog-visible-count]")?.textContent.includes("gefunden"),
         "catalogue count localizes while retaining actual counts");
+      assert(document.querySelector("#catalog .catalog-share")?.textContent === "Link zu dieser Ansicht",
+        "catalogue permalink helper is localized");
+      assert(document.querySelector("#catalog .language-information-sources summary")?.textContent === "Sprachinformationen und Quellen",
+        "reader information disclosure is localized");
+      assert(document.querySelector("#catalog .profile-facts summary")?.textContent.startsWith("Vorschauangaben ("),
+        "dynamic preview count is localized without modifying its facts");
+      assert(document.querySelector('#catalog [data-catalog-name="BASIC"] .profile-evidence-overview')?.textContent.includes("NOT_REVIEWED"),
+        "unassessed BASIC evidence status remains NOT_REVIEWED in the German UI");
       assert(document.querySelector(".language-reader-profile [data-reader-section=fit] h4")?.textContent === "Eignung und Grenzen",
         "reader disclosure headings translate without changing sourced facts");
       document.querySelector('[data-action="set-ui-language"][data-locale="en"]').click();

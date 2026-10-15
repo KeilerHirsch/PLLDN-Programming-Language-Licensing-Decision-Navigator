@@ -186,6 +186,18 @@ const de: Readonly<Record<string, string>> = {
   "not recorded": "nicht erfasst",
   Checked: "Geprüft",
   "Unlinked reference": "Nicht verlinkte Referenz",
+  "Language information & sources": "Sprachinformationen und Quellen",
+  "Performance & complexity": "Leistung und Komplexität",
+  "Assessment details · pending": "Bewertungsdetails · ausstehend",
+  "Link to this view": "Link zu dieser Ansicht",
+  "Copy or bookmark this link to preserve search, filters and sort.":
+    "Speichere diesen Link, um Suche, Filter und Sortierung wiederherzustellen.",
+  "All pinned v0.2 candidates, independent of active search filters. UNKNOWN remains unknown.":
+    "Alle festgelegten v0.2-Kandidaten unabhängig von Suchfiltern. UNKNOWN bleibt ungeprüft.",
+  "No Preview claim recorded": "Keine Vorschauaussage erfasst",
+  "No sources recorded for this Preview dimension.":
+    "Für diese Vorschau-Eigenschaft sind keine Quellen erfasst.",
+  "Unlinked source": "Nicht verlinkte Quelle",
   "Four languages selected. Remove one to add another.":
     "Vier Sprachen ausgewählt. Entferne eine, um eine weitere hinzuzufügen.",
   "Four licenses selected. Remove one to add another.":
@@ -425,6 +437,16 @@ export function trForLocale(text: string, locale: UiLocale): string {
   if (match) return `Sprachen vergleichen (${match[1]}/4)`;
   const saved = /^Saved profiles \((\d+)\)$/u.exec(text);
   if (saved) return `Gemerkte Profile (${saved[1]})`;
+  const projectTypes = /^Explore (\d+) more project types$/u.exec(text);
+  if (projectTypes) return `Weitere ${projectTypes[1]} Projektarten entdecken`;
+  const previewFacts = /^Preview facts \((\d+)\)$/u.exec(text);
+  if (previewFacts) return `Vorschauangaben (${previewFacts[1]})`;
+  const previewEvidence =
+    /^Preview evidence · (UNKNOWN|NOT_REVIEWED|[A-Z_]+) · (\d+) source\(s\)$/u.exec(
+      text,
+    );
+  if (previewEvidence)
+    return `Vorschau-Nachweise · ${previewEvidence[1]} · ${previewEvidence[2]} Quellen`;
   return de[text] ?? text;
 }
 
