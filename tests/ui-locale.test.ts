@@ -89,3 +89,42 @@ test("German licence UI controls translate without changing canonical licence id
   );
   assert.equal(tr("Canonical terms"), "Canonical terms");
 });
+
+test("dynamic DE UI messages use stable counts without altering original evidence tokens", () => {
+  const cases: Array<[string, string]> = [
+    ["Language information & sources", "Sprachinformationen und Quellen"],
+    ["Performance & complexity", "Leistung und Komplexität"],
+    ["Assessment details · pending", "Bewertungsdetails · ausstehend"],
+    ["Explore 5 more project types", "Weitere 5 Projektarten entdecken"],
+    ["Preview facts (0)", "Vorschauangaben (0)"],
+    ["Preview facts (27)", "Vorschauangaben (27)"],
+    [
+      "Preview evidence · UNKNOWN · 0 source(s)",
+      "Vorschau-Nachweise · UNKNOWN · 0 Quellen",
+    ],
+    [
+      "Preview evidence · NOT_REVIEWED · 2 source(s)",
+      "Vorschau-Nachweise · NOT_REVIEWED · 2 Quellen",
+    ],
+    ["Link to this view", "Link zu dieser Ansicht"],
+    ["No Preview claim recorded", "Keine Vorschauaussage erfasst"],
+    ["Quick navigation", "Schnellnavigation"],
+  ];
+  setUiLocale("de");
+  try {
+    for (const [original, expected] of cases)
+      assert.equal(tr(original), expected);
+    for (const unchanged of [
+      "SPDX",
+      "UNKNOWN",
+      "NOT_REVIEWED",
+      "MIT OR Apache-2.0",
+      "source-id",
+    ]) {
+      assert.equal(tr(unchanged), unchanged);
+    }
+  } finally {
+    setUiLocale("en");
+  }
+  for (const [original] of cases) assert.equal(tr(original), original);
+});

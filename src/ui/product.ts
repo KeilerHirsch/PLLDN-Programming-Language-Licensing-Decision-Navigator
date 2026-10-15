@@ -394,7 +394,7 @@ function renderLanguageInformation(name: string): HTMLElement {
   const details = document.createElement("details");
   details.className = "language-information-sources";
   const title = document.createElement("summary");
-  title.textContent = "Language information & sources";
+  title.textContent = tr("Language information & sources");
   details.append(
     title,
     paragraph(
@@ -641,7 +641,9 @@ function renderUseCases(state: ProductUiState): HTMLElement {
       (guide) => guide.use_case_id === state.selectedUseCaseId,
     );
     const summary = document.createElement("summary");
-    summary.textContent = `Explore ${additionalGuides.length} more project types`;
+    summary.textContent = tr(
+      `Explore ${additionalGuides.length} more project types`,
+    );
     const extraGrid = document.createElement("div");
     extraGrid.className = "use-case-grid";
     for (const guide of additionalGuides) {
@@ -750,7 +752,7 @@ function renderDecisionProfile(profile: LanguageProductProfile): HTMLElement {
   const details = document.createElement("details");
   details.className = "decision-profile";
   const summary = document.createElement("summary");
-  summary.textContent = "Performance & complexity";
+  summary.textContent = tr("Performance & complexity");
   details.append(summary);
 
   if (!decision) {
@@ -832,7 +834,7 @@ function renderDecisionProfile(profile: LanguageProductProfile): HTMLElement {
       row.className = "metric-row";
       const term = document.createElement("span");
       term.className = "metric-row-label";
-      term.textContent = label;
+      term.textContent = tr(label);
       row.append(term, metricBadge(value, languageDecisionTone(metric, value)));
       list.append(row);
     }
@@ -854,7 +856,7 @@ function renderPreviewFacts(
   const details = document.createElement("details");
   details.className = "profile-facts";
   const summary = document.createElement("summary");
-  summary.textContent = `Preview facts (${entry?.facts.length ?? 0})`;
+  summary.textContent = tr(`Preview facts (${entry?.facts.length ?? 0})`);
   details.append(summary);
 
   if (!entry || entry.facts.length === 0) {
@@ -1239,7 +1241,7 @@ function renderUnassessedProfile(record: UnassessedRecord): HTMLElement {
   details.className = "identity-profile";
   details.dataset.candidateId = record.id;
   const summary = document.createElement("summary");
-  summary.textContent = "Assessment details · pending";
+  summary.textContent = tr("Assessment details · pending");
   const values = paragraph(
     Object.entries(record.assessments)
       .map(([key, value]) => `${key.replaceAll("_", " ")}: ${value}`)
@@ -1428,7 +1430,7 @@ function renderCatalog(
   const searchLabel = document.createElement("label");
   searchLabel.className = "catalog-search";
   const searchTitle = document.createElement("span");
-  searchTitle.textContent = "Search";
+  searchTitle.textContent = tr("Search");
   const search = document.createElement("input");
   search.type = "search";
   search.placeholder =
@@ -1486,9 +1488,10 @@ function renderCatalog(
   }
   const share = document.createElement("a");
   share.className = "catalog-share";
-  share.textContent = "Link to this view";
-  share.title =
-    "Copy or bookmark this link to preserve search, filters and sort.";
+  share.textContent = tr("Link to this view");
+  share.title = tr(
+    "Copy or bookmark this link to preserve search, filters and sort.",
+  );
   share.href = `?catalog=${state.mode}#catalog`;
   controls.append(share);
   section.append(controls);
@@ -1675,8 +1678,9 @@ function renderCatalog(
     "export-unassessed-csv",
     "catalog-filter-reset",
   );
-  exportControl.title =
-    "All pinned v0.2 candidates, independent of active search filters. UNKNOWN remains unknown.";
+  exportControl.title = tr(
+    "All pinned v0.2 candidates, independent of active search filters. UNKNOWN remains unknown.",
+  );
   section.append(exportControl);
   const searchEmpty = paragraph(
     "No matches for that search. Try a different keyword or reset the filters.",
@@ -1852,14 +1856,16 @@ function renderCompareEvidence(
   details.className = "compare-evidence";
   details.dataset.compareEvidence = "true";
   const summary = document.createElement("summary");
-  summary.textContent = `Preview evidence · ${fact?.review_status ?? "UNKNOWN"} · ${fact?.sources.length ?? 0} source(s)`;
+  summary.textContent = tr(
+    `Preview evidence · ${fact?.review_status ?? "UNKNOWN"} · ${fact?.sources.length ?? 0} source(s)`,
+  );
   details.append(summary);
   const disclosure = document.createElement("p");
   disclosure.className = "preview-provenance-disclosure";
   disclosure.textContent = factProvenanceDisclosure(fact);
   details.append(disclosure);
   const claim = document.createElement("code");
-  claim.textContent = fact?.claim_id ?? "No Preview claim recorded";
+  claim.textContent = fact?.claim_id ?? tr("No Preview claim recorded");
   details.append(claim);
   if (!fact || fact.sources.length === 0) {
     details.append(
@@ -2051,7 +2057,7 @@ export function renderProductExperience(
   wrapper.className = "product-experience";
   const nav = document.createElement("nav");
   nav.className = "catalog-navigation";
-  nav.setAttribute("aria-label", "Quick navigation");
+  nav.setAttribute("aria-label", tr("Quick navigation"));
   for (const [href, label] of [
     ["#catalog", "Skip to catalogue"],
     ["?catalog=languages#catalog", "Browse languages"],
