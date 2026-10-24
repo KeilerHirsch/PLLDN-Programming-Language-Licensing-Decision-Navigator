@@ -5,7 +5,7 @@ Include stable record IDs, a minimal non-sensitive example and primary sources.
 
 ## Development
 
-Use the pinned Node/npm versions in README.md. Run `npm ci --ignore-scripts`,
+Use the pinned Node/npm versions in [the getting-started guide](docs/getting-started.md). Run `npm ci --ignore-scripts`,
 then `npm run verify`. Change the schema before its consumers.
 Add a positive case and a negative regression for each material invariant.
 Keep extraction, decision, browser and end-to-end corpus categories distinct.
