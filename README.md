@@ -20,7 +20,7 @@ Programming-language trade-offs and software-licence obligations are easier to i
 
 **The Mission:** go beyond popularity rankings. Follow sources, compare options and keep **Preview**, **Reviewed** and **UNKNOWN** clearly separate.
 
-The Preview navigator covers **35 languages, 32 licenses, and 30 use-case guides**. The larger catalogue contains unassessed entries; the Reviewed decision lab has narrower coverage. [Understand the scope](docs/getting-started.md).
+The Preview navigator covers **35 languages, 32 licenses, and 30 use-case guides**. Additional catalogue entries remain **UNKNOWN**. In **v0.0.1 Beta 1**, Reviewed coverage was **Go, Python, Rust, TypeScript**, **four** boolean capabilities and **eight** license identities — **not a complete licensing workflow**. Missing evidence means **abstention**. [Scope and limitations](docs/getting-started.md).
 
 ## Quick start
 
