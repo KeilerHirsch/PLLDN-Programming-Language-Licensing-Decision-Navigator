@@ -45,7 +45,7 @@ Default rules:
 - <TECHNICAL_PRINCIPLE_2>
 - <TECHNICAL_PRINCIPLE_3>
 
-**Deep docs:** [Architecture ](<ARCHITECTURE_URL>) · [Verification ](<VERIFICATION_URL>) · [Security](<SECURITY_URL>)
+**Deep docs:** [Architecture](<ARCHITECTURE_URL>) · [Verification](<VERIFICATION_URL>) · [Security](<SECURITY_URL>)
 
 ## Support
 
