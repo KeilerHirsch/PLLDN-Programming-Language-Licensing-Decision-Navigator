@@ -35,9 +35,7 @@ export function mostRecentVerifyRun(
       Number.isFinite(Date.parse(run.created_at))
     );
   });
-  matches.sort(
-    (a, b) => Date.parse(b.created_at!) - Date.parse(a.created_at!),
-  );
+  matches.sort((a, b) => Date.parse(b.created_at ?? "") - Date.parse(a.created_at ?? ""));
   return matches[0];
 }
 
@@ -76,14 +74,20 @@ async function requireVerifiedPushRun(): Promise<void> {
     },
     signal: AbortSignal.timeout(15_000),
   });
-  if (!response.ok) throw new Error(`Cannot read Verify runs: HTTP ${response.status}`);
+  if (!response.ok)
+    throw new Error(`Cannot read Verify runs: HTTP ${response.status}`);
   const payload: unknown = await response.json();
   if (!hasCompletedFullVerify(payload, sha, repository)) {
-    throw new Error("Manual Pages publish blocked: no successful full Verify for HEAD");
+    throw new Error(
+      "Manual Pages publish blocked: no successful full Verify for HEAD",
+    );
   }
   console.log("Full Verify workflow success confirmed for exact main commit.");
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(resolve(process.argv[1])).href
+) {
   await requireVerifiedPushRun();
 }
