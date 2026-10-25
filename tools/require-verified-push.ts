@@ -35,7 +35,9 @@ export function mostRecentVerifyRun(
       Number.isFinite(Date.parse(run.created_at))
     );
   });
-  matches.sort((a, b) => Date.parse(b.created_at ?? "") - Date.parse(a.created_at ?? ""));
+  matches.sort(
+    (a, b) => Date.parse(b.created_at ?? "") - Date.parse(a.created_at ?? ""),
+  );
   return matches[0];
 }
 
