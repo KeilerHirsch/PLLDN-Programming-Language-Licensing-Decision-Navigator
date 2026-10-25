@@ -8,7 +8,8 @@ import {
 } from "../tools/require-verified-push.ts";
 
 const sha = "a".repeat(40);
-const repository = "KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator";
+const repository =
+  "KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator";
 const successful = {
   head_sha: sha,
   head_branch: "main",
@@ -27,7 +28,12 @@ test("manual Pages requires a successful full Verify for the exact commit", () =
 });
 
 test("manual Pages fails closed without trustworthy workflow-run data", () => {
-  for (const payload of [null, {}, { workflow_runs: null }, { workflow_runs: [] }]) {
+  for (const payload of [
+    null,
+    {},
+    { workflow_runs: null },
+    { workflow_runs: [] },
+  ]) {
     assert.equal(hasCompletedFullVerify(payload, sha, repository), false);
   }
 });
@@ -71,6 +77,9 @@ test("latest failing or pending run supersedes an older successful Verify", () =
     conclusion: "failure",
   };
   const payload = { workflow_runs: [successful, newest] };
-  assert.equal(mostRecentVerifyRun(payload, sha, repository)?.conclusion, "failure");
+  assert.equal(
+    mostRecentVerifyRun(payload, sha, repository)?.conclusion,
+    "failure",
+  );
   assert.equal(hasCompletedFullVerify(payload, sha, repository), false);
 });
