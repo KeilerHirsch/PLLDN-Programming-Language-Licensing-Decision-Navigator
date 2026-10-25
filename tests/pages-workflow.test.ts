@@ -55,6 +55,7 @@ test("Pages build repeats supply-chain gates before artifact upload", async () =
   const yaml = await workflow();
   assert.match(yaml, /npm install --global npm@11\.12\.1 --ignore-scripts/);
   assert.match(yaml, /npm ci --ignore-scripts/);
+  assert.match(yaml, /npm run verify/);
   assert.match(yaml, /npm audit --audit-level=low/);
   assert.match(yaml, /gitleaks\/gitleaks\/releases\/download\/v8\.30\.1/);
   assert(yaml.includes(gitleaksSha256));
@@ -70,6 +71,19 @@ test("Pages build repeats supply-chain gates before artifact upload", async () =
   );
   assert.match(yaml, /path: \.build\/pages/);
 });
+test("manual Pages dispatch cannot skip project verification", async () => {
+  const yaml = await workflow();
+  assert.match(yaml, /workflow_dispatch:/);
+  const verify = yaml.indexOf("      - run: npm run verify");
+  const upload = yaml.indexOf("      - name: Upload verified Pages artifact");
+  assert(verify > 0, "the full Verify command must run inside the build job");
+  assert(upload > verify, "verification must precede the published artifact");
+  assert.equal(
+    yaml.slice(verify, upload).includes("continue-on-error: true"),
+    false,
+  );
+});
+
 test("only the deploy job receives Pages write and OIDC permissions", async () => {
   const yaml = await workflow();
   const deployIndex = yaml.indexOf("\n  deploy:\n");
