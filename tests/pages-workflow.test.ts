@@ -71,6 +71,25 @@ test("Pages build repeats supply-chain gates before artifact upload", async () =
   );
   assert.match(yaml, /path: \.build\/pages/);
 });
+test("manual Pages dispatch requires full successful Verify, not just local tests", async () => {
+  const yaml = await workflow();
+  assert.match(yaml, /workflow_dispatch:/);
+  assert.match(yaml, /actions: read/);
+  const fullVerify = yaml.indexOf(
+    "      - name: Require full successful Verify for manual deployments",
+  );
+  const localVerify = yaml.indexOf("      - run: npm run verify");
+  const upload = yaml.indexOf("      - name: Upload verified Pages artifact");
+  assert(fullVerify > 0, "full Verify gate missing");
+  assert(localVerify > fullVerify, "local checks must follow full Verify gate");
+  assert(upload > localVerify, "artifact upload must follow both gates");
+  const step = yaml.slice(fullVerify, localVerify);
+  assert.match(step, /if: github.event_name == 'workflow_dispatch'/);
+  assert.match(step, /run: node tools\/require-verified-push\.ts/);
+  assert.match(step, /GITHUB_TOKEN:/);
+  assert.equal(step.includes("continue-on-error: true"), false);
+});
+
 test("manual Pages dispatch cannot skip project verification", async () => {
   const yaml = await workflow();
   assert.match(yaml, /workflow_dispatch:/);
