@@ -25,6 +25,7 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: read
+      actions: read
     env:
       TARGET_SHA: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
     steps:
@@ -40,12 +41,17 @@ jobs:
           git fetch --no-tags --depth=1 origin +refs/heads/main:refs/remotes/origin/main
           actual="$(git rev-parse refs/remotes/origin/main)"
           test "$actual" = "$TARGET_SHA"
+      - name: Require full successful Verify for manual deployments
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node tools/require-verified-push.ts
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .node-version
       - run: npm install --global npm@11.12.1 --ignore-scripts
       - run: npm ci --ignore-scripts
-      # Manual dispatch has no upstream Verify run; enforce the same project gate here.
+      # Repeat the source-tree gates regardless of the upstream full Verify result.
       - run: npm run verify
       - run: npm audit --audit-level=low
       - name: Run pinned Gitleaks
