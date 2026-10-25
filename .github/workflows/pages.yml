@@ -45,6 +45,8 @@ jobs:
           node-version-file: .node-version
       - run: npm install --global npm@11.12.1 --ignore-scripts
       - run: npm ci --ignore-scripts
+      # Manual dispatch has no upstream Verify run; enforce the same project gate here.
+      - run: npm run verify
       - run: npm audit --audit-level=low
       - name: Run pinned Gitleaks
         shell: bash
