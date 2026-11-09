@@ -32,7 +32,7 @@ Deterministic evaluations keep assumptions and evidence visible. **No LLM owns r
 
 [Data contracts](docs/data-contracts.md) · [Governance](GOVERNANCE.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md)
 
-The [v0.0.1 Beta 1 release](https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/releases/tag/v0.0.1-beta.1) is historical; it does not describe every feature of the current live application.
+The [v0.0.1 Beta 1 release](https://github.com/KeilerHirschLabs/PLLDN-Programming-Language-Licensing-Decision-Navigator/releases/tag/v0.0.1-beta.1) is historical; it does not describe every feature of the current live application.
 
 ## Support
 

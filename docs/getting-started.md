@@ -38,7 +38,7 @@ Run verification on your actual checkout; the existence of these commands does n
 
 ## Releases and support
 
-- [v0.0.1 Beta 1](https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/releases/tag/v0.0.1-beta.1) (historical release; not necessarily the current live application state)
+- [v0.0.1 Beta 1](https://github.com/KeilerHirschLabs/PLLDN-Programming-Language-Licensing-Decision-Navigator/releases/tag/v0.0.1-beta.1) (historical release; not necessarily the current live application state)
 - [Changelog](../CHANGELOG.md)
 - [Security reporting](../SECURITY.md)
 

@@ -3,7 +3,7 @@
 PLLDN v0.0.1 Beta 1 is the first supported public prerelease. Security fixes target the main branch and published immutable corrections use a superseding release identity.
 
 Report vulnerabilities through GitHub's private vulnerability reporting:
-https://github.com/KeilerHirsch/PLLDN-Programming-Language-Licensing-Decision-Navigator/security/advisories/new
+https://github.com/KeilerHirschLabs/PLLDN-Programming-Language-Licensing-Decision-Navigator/security/advisories/new
 
 Do not disclose secrets or an unpatched vulnerability in a public issue.
 If the private form is unavailable, wait for a private reporting channel to be restored.
